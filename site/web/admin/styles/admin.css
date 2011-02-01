@@ -1,0 +1,50 @@
+.icon-save {
+	background-image: url("../images/icons/disk.png") !important;
+	background-repeat: no-repeat; 
+	background-position: center;
+}
+.icon-saveclose {
+	background-image: url("../images/icons/disk.png") !important;
+	background-repeat: no-repeat; 
+	background-position: center;
+}
+.icon-close {
+	background-image: url("../images/icons/application_go.png") !important;
+	background-repeat: no-repeat; 
+	background-position: center;
+}
+.icon-delete {
+	background-image: url("../images/icons/delete.png") !important;
+	background-repeat: no-repeat; 
+	background-position: center;
+}
+
+.icon-user-add {
+	background-image: url("../images/icons/user_add.png") !important;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.icon-user-edit {
+	background-image: url("../images/icons/user_edit.png") !important;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.icon-user-delete {
+	background-image: url("../images/icons/user_delete.png") !important;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.icon-logout {
+	background-image: url("../images/icons/application_side_expand.png") !important;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.application-header h1 {
+    float:left;
+    line-height:73px;
+    margin-left:10px;
+    font-size:18px;
+    font-style:italic;
+    font-family:tahoma,arial,helvetica,sans-serif
+}
