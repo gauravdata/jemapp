@@ -1,0 +1,78 @@
+/* navigation */
+.nav-container 		{ background: #330000; }
+
+#nav li a:hover 	{ background: #673333; }
+#nav li.over a,
+#nav li.active a 	{ background: #673333; }
+
+#nav ul li a 		{ background: url(../images/menuSubitemBorder.gif) no-repeat center top #673333 !important; }
+#nav ul li a:hover 	{ background: url(../images/menuSubitemBorder.gif) no-repeat center top #330000 !important; }
+#nav ul li.active > a,
+#nav ul li.over > a { background: #330000; }
+
+/* headers */
+h1            		{ color: #330000; }
+h2.pointer			{ background: url(../images/pointerDown.gif) no-repeat bottom; }
+h2.pointer span		{ background: #663435; }
+h3, h4            	{ color: #330000; }
+
+/* basic */
+.light 			{ background: #b3999a; }
+.mediocre		{ background: #663332; }
+.dark			{ background: #330000; }
+a           	{ color:#330000; text-decoration:underline; }
+.links a 		{ color: #330000; }
+.links a:hover 	{ color: #B3999A; }
+.color span		{ color: #330000; }
+.imagelink .opacity { 
+	background-color: #330000;
+	opacity: 0.5;
+	border-radius: 8px;
+	filter: alpha(opacity=80);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+}
+.cat-logo 		{ height: 60px; background: #7f7f7f url(../images/logoUgg.gif) no-repeat 50% 50%; margin: 0 0 10px; }
+.links li 		{ border-right: 1px solid #330000; }
+
+/* products */
+.product-view .box-reviews dd { border-bottom: 1px dashed #8c6666; }
+.block-layered-nav .actions, .hproduct a.button, .actions a, .add-to-cart button.submit, .checkout-types button.button, .crosssell a.button, #checkout-step-review button.button {
+	color: #FFF;
+	background: #330000;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#643130), to(#330000));
+	background: -moz-linear-gradient(#643130, #330000);
+	background: linear-gradient(#643130, #330000);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#643130', endColorstr='#330000');
+	border: 1px solid #330000;
+}
+.hproduct a.button:hover, .actions a:hover, .add-to-cart input.submit:hover, .checkout-types button.button:hover, .crosssell a.button:hover, #checkout-step-review button.button:hover {
+	color: #330000;
+	background: #FFF;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#FFF), to(#8a6666));
+	background: -moz-linear-gradient(#FFF, #8a6666);
+	background: linear-gradient(#FFF, #8a6666);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#8a6666');
+	border: 1px solid #8a6666;
+}
+
+/* lists & forms */
+.block-layered-nav .block-subtitle,
+#narrow-by-list2 dt,
+#narrow-by-list dt { background: #663333; border-top: 1px solid #804d4d; border-bottom: 1px solid #330000; margin-bottom: 0px; }
+#narrow-by-list2 dd, ol.currently,
+#narrow-by-list dd, ol.currently {
+	background: #774949;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#774949), to(#663333));
+	background: -moz-linear-gradient(#774949, #663333);
+	background: linear-gradient(#774949, #663333);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#774949', endColorstr='#663333');
+}
+
+.pager { border-top: 1px solid #d5d5cb; border-bottom: 1px solid #d5d5cb; color: #330000; }
+
+.block-account ul { border-bottom: 1px solid #673333; }
+.block-account li { border-top: 1px solid #673333; }
+.block-account li.current, .block-account a:hover { background: #673333; }
+
+/* footer */
+.footer 		{ background: #330000; }

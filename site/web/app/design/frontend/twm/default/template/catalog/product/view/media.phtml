@@ -1,0 +1,102 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if (!$this->getGalleryImages() && $_product->getImage()): ?>
+	<?php
+        $_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" width="338" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';
+        echo $_helper->productAttribute($_product, $_img, 'image');
+    ?>
+<?php endif; ?>
+<?php if (count($this->getGalleryImages()) > 0): ?>
+	<script src="<?php echo $this->getSkinUrl('scripts/mz-packed.js') ?>" type="text/javascript"></script>
+	<ul id="product-image-gallery">
+		<?php $i=0; foreach ($this->getGalleryImages() as $_image): ?>
+			<li id="product-image-gallery-item<?php echo $i++; ?>" style="<?php echo ($i!=1)?'display:none':''; ?>">
+				<?php $_ext = pathinfo($_image->getFile(), PATHINFO_EXTENSION);?>
+				<?php if ($_ext == 'swf'): ?>
+					<div class="view3d-wrap">
+						<div id="media<?=$_image->getId()?>"></div>
+					</div>
+					<script type="text/javascript">
+						var params = { menu: "false", scale: "default", allowFullscreen: "false", allowScriptAccess: "always",bgcolor: "#FFFFFF"};
+						swfobject.embedSWF("<?=$_image->getUrl()?>", "media<?=$_image->getId();?>", "538px", "338px", "9.0.0", "expressInstall.swf", {}, params, {'class': 'view3d'});
+					</script>
+				<?php else : ?>
+					<?php $big = $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->resize(640);	?>
+					<a href="<?php echo $big ?>" class="product-image MagicZoom" rel="zoom-width: 250px; zoom-height: 338px;">
+						<?php
+							$_img = '<img class="photo fn" src="'.$this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->resize(338).'" alt="'.$this->htmlEscape($_image->getLabel()).'" title="'.$this->htmlEscape($_image->getLabel()).'" />';
+							echo $_helper->productAttribute($_product, $_img, 'image');
+						?>
+					   <span class="product-zoom-icon">&nbsp;</span>
+					</a>
+				<?php endif; ?>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+	<script type="text/javascript">decorateGeneric($('product-image-gallery').select('li'),['first', 'last'])</script>
+<?php endif; ?>
+<?php if (count($this->getGalleryImages()) > 0): ?>
+	<div class="more-views">
+		<h2><?php echo $_product->getName().' '.$this->__('More Views') ?></h2>
+		<ul id="product-image-gallery-list">
+		<?php $i = 0; foreach ($this->getGalleryImages() as $_image): ?>
+			<li>
+				<a href="#product-image-gallery-item<?php echo $i++; ?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>">
+					<?php $_ext = pathinfo($_image->getFile(), PATHINFO_EXTENSION);?>
+					<?php if ($_ext == 'swf'): ?>
+						<img src="<?php echo $this->getSkinUrl('images/view360.gif')?>" alt="360 graden afbeelding" title="360 graden afbeelding" />
+					<?php else : ?>
+						<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(null, 63); ?>" height="63" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+					<?php endif; ?>
+				</a>
+			</li>
+		<?php endforeach; ?>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		$('product-image-gallery-list').select('a').each(function(item){
+			Event.observe(item, 'click', function(e) {
+				e.stop();
+				$('product-image-gallery').select('li').each(function(item){
+					$(item).hide();
+				});
+				var id = this.href.substr(this.href.indexOf('#')+1);
+				$(id).show();
+			});
+		});
+	</script>
+<?php endif; ?>
