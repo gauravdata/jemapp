@@ -1,0 +1,2760 @@
+"&lt;!--@subject  {{var order.getStoreGroupName()}}: Invoice # {{var invoice.increment_id}} for Order # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Hello {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Thank you for your order from {{var order.getStoreGroupName()}}.
+                        You can check the status of your order by &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;logging into your account&lt;/a&gt;.
+                        If you have any questions about your order please contact us at &lt;a href=&quot;mailto:dummyemail@magentocommerce.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or call us at &lt;span class=&quot;nobr&quot;&gt;(555) 555-0123&lt;/span&gt; Monday - Friday, 8am - 5pm PST.
+                    &lt;/p&gt;
+                    &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Your Invoice #{{var invoice.increment_id}} for Order #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Billing Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Payment Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}&amp;nbsp;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+
+                    {{layout area=&quot;frontend&quot; handle=&quot;sales_email_order_invoice_items&quot; invoice=$invoice order=$order}}
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+                    &lt;p&gt;
+                        Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;
+                    &lt;/p&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject  {{var order.getStoreGroupName()}}: Factuur # {{var invoice.increment_id}} voor Bestelnr # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Beste {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Bedankt voor uw bestelling op {{var order.getStoreGroupName()}}.
+                        Uw kunt de status van uw order controleren door  &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;in te loggen op uw account&lt;/a&gt;.
+                        Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Uw factuur #{{var invoice.increment_id}} voor bestelling #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Factuurgegevens:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Betaalmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendinformatie:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+
+                    {{layout area=&quot;frontend&quot; handle=&quot;sales_email_order_invoice_items&quot; invoice=$invoice order=$order}}
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+                    &lt;p&gt;Nogmaals bedankt,&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+                &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/invoice_new.html"
+"&lt;!--@subject  {{var order.getStoreGroupName()}}: Invoice # {{var invoice.increment_id}} for Order # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Hello {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Thank you for your order from {{var order.getStoreGroupName()}}.
+                        If you have any questions about your order please contact us at &lt;a href=&quot;mailto:dummyemail@magentocommerce.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or call us at &lt;span class=&quot;nobr&quot;&gt;(555) 555-0123&lt;/span&gt; Monday - Friday, 8am - 5pm PST.
+                    &lt;/p&gt;
+                    &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Your Invoice #{{var invoice.increment_id}} for Order #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Billing Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Payment Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+
+                    {{layout handle=&quot;sales_email_order_invoice_items&quot; invoice=$invoice order=$order}}
+
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+                    &lt;p&gt;
+                        Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;
+                    &lt;/p&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject  {{var order.getStoreGroupName()}}: Factuur # {{var invoice.increment_id}} voor Bestelnr # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Beste {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Bedankt voor uw bestelling op {{var order.getStoreGroupName()}}.
+                        Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Uw factuur #{{var invoice.increment_id}} voor bestelling #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Factuurgegevens:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Betaalmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendinformatie:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+
+                    {{layout handle=&quot;sales_email_order_invoice_items&quot; invoice=$invoice order=$order}}
+
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+										   &lt;p&gt;Nogmaals bedankt,&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+                &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/invoice_new_guest.html"
+"&lt;!--@subject Amazonpayments ASP notification error @--&gt;
+&lt;div&gt;
+    &lt;div&gt;&lt;b&gt;Amazon Simple Pay notification message&lt;/b&gt;&lt;/div&gt;
+    &lt;div&gt;Request:&lt;/div&gt;
+    &lt;div style=&quot;border:1px solid #000;&quot;&gt;{{var request}}&lt;/div&gt;
+    &lt;div&gt;Error:&lt;/div&gt;
+    &lt;div style=&quot;border:1px solid #000;&quot;&gt;{{var error}}&lt;/div&gt;
+&lt;/div&gt;","&lt;!--@subject Amazonpayments ASP foutrapport @--&gt;
+&lt;div&gt;
+    &lt;div&gt;&lt;b&gt;Amazon Simple Pay notificatie bericht&lt;/b&gt;&lt;/div&gt;
+    &lt;div&gt;Verzoek:&lt;/div&gt;
+    &lt;div style=&quot;border:1px solid #000;&quot;&gt;{{var request}}&lt;/div&gt;
+    &lt;div&gt;Fout:&lt;/div&gt;
+    &lt;div style=&quot;border:1px solid #000;&quot;&gt;{{var error}}&lt;/div&gt;
+&lt;/div&gt;","/template/email/amazonpayments_asp_notification_error.html"
+"&lt;!--@subject Welcome, {{var customer.name}}! @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;strong&gt;Dear {{var customer.name}}&lt;/strong&gt;,&lt;br/&gt;
+                            Welcome to Demo Store. To log in when visiting our site just click &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Login&lt;/a&gt; or &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;My Account&lt;/a&gt; at the top of every page, and then enter your e-mail address and password.&lt;/p&gt;
+
+                            &lt;p style=&quot;border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; &quot;&gt;
+                                Use the following values when prompted to log in:&lt;br/&gt;
+                                E-mail: {{var customer.email}}&lt;br/&gt;
+                                Password: {{var customer.password}}&lt;p&gt;
+
+                            &lt;p&gt;When you log in to your account, you will be able to do the following:&lt;/p&gt;
+
+                            &lt;ul&gt;
+                                &lt;li&gt;Proceed through checkout faster when making a purchase&lt;/li&gt;
+                                &lt;li&gt; Check the status of orders&lt;/li&gt;
+                                &lt;li&gt;View past orders&lt;/li&gt;
+                                &lt;li&gt; Make changes to your account information&lt;/li&gt;
+                                &lt;li&gt;Change your password&lt;/li&gt;
+                                &lt;li&gt;Store alternative addresses (for shipping to multiple family members and friends!)&lt;/li&gt;
+                            &lt;/ul&gt;
+
+                            &lt;p&gt;If you have any questions about your account or any other matter, please feel free to contact us at &lt;a href=&quot;mailto:magento@varien.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or by phone at (555) 555-0123.&lt;/p&gt;
+                            &lt;p&gt;Thanks again!&lt;/p&gt;
+
+
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+","&lt;!--@subject Beste {{var customer.firstname}}, welkom bij {{var customer.store.website.name}}! @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var customer.store.website.name}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;strong&gt;Beste {{var customer.firstname}},&lt;/strong&gt;,&lt;br/&gt;
+                            Dank u voor uw aanmelding bij onze webshop. Om uw gegevens te bekijken kunt u bovenaan iedere pagina op onze webiste klikken op &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Inloggen&lt;/a&gt; of &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Mijn rekening&lt;/a&gt;. U hoeft dan alleen uw emailadres en wachtwoord in te vullen.&lt;/p&gt;
+
+                            &lt;p&gt;Nadat u bent ingelogt kunt het volgende doen:&lt;/p&gt;
+
+                            &lt;ul&gt;
+                                &lt;li&gt;Sneller door de kassa heen bij het afrekenen.&lt;/li&gt;
+                                &lt;li&gt;De status van bestellingen bekijken.&lt;/li&gt;
+                                &lt;li&gt;Uw eerdere bestelllingen bekijken.&lt;/li&gt;
+                                &lt;li&gt;Wijzigingen aanbrengen in uw adresgegevens.&lt;/li&gt;
+																&lt;li&gt;U opgeven voor de nieuwsbrief en andere productberichten.&lt;/li&gt;
+                                &lt;li&gt;Uw wachtwoord wijzigen.&lt;/li&gt;
+                                &lt;li&gt;Verschillende verzendadressen opslaan om een bestelling naar verschillende adressen te versturen. Handig voor familie en vrienden!&lt;/li&gt;
+                            &lt;/ul&gt;
+
+                            &lt;p&gt;Wanneer u vragen heeft, neem dan gerust contact met ons op. &lt;a style=&quot;color: rgb(30, 126, 200);&quot; href=&quot;mailto:contact@vul_uw_email_in.com&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of natuurlijk telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;Met vriendelijke groet,&lt;/p&gt;
+														&lt;p&gt;&lt;strong&gt;{{var customer.store.website.name}}&lt;/strong&gt;&lt;/p&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+","/template/email/account_new.html"
+"&lt;!--@subject Account confirmation for {{var customer.name}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;strong&gt;Dear {{var customer.name}}&lt;/strong&gt;, &lt;br/&gt; Welcome to Demo Store.&lt;/p&gt;
+
+                            &lt;p&gt;Your e-mail {{var customer.email}} must be confirmed before using it to log in to our store.&lt;/p&gt;
+
+                            &lt;p&gt;To confirm the e-mail and instantly log in, please, use &lt;a href=&quot;{{store url=&quot;customer/account/confirm/&quot; _query_id=$customer.id _query_key=$customer.confirmation _query_back_url=$back_url}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;this confirmation link&lt;/a&gt;. This link is valid only once.&lt;/p&gt;
+
+                            &lt;p style=&quot;border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; &quot;&gt;
+                                Use the following values when prompted to log in:&lt;br/&gt;
+                                E-mail: {{var customer.email}}&lt;br/&gt;
+                                Password: {{var customer.password}}&lt;p&gt;
+
+                            &lt;p&gt;If you have any questions about your account or any other matter, please feel free to contact us at &lt;a href=&quot;mailto:dummyemail@magentocommerce.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or by phone at (555) 555-0123.&lt;/p&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+","&lt;!--@subject Bevestig uw account {{var customer.name}}  @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var customer.store.website.name}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;strong&gt;Beste {{var customer.firstname}}&lt;/strong&gt;, &lt;br/&gt; Dank u voor uw aanmelding.&lt;/p&gt;
+
+                            &lt;p&gt;Uw emailadres {{var customer.email}} moet worden bevestigd om op de website te kunnen inloggen.&lt;/p&gt;
+
+                            &lt;p&gt;Om te bevestigen klikt u &lt;a href=&quot;{{store url=&quot;customer/account/confirm/&quot; _query_id=$customer.id _query_key=$customer.confirmation _query_back_url=$back_url}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;deze bevestigingslink&lt;/a&gt;. U wordt direct ingelogt op de website. De link kan maar een keer gebruikt worden.&lt;/p&gt;
+
+														&lt;p&gt;Wanneer u vragen heeft, neem dan gerust contact met ons op. &lt;a style=&quot;color: rgb(30, 126, 200);&quot; href=&quot;mailto:contact@vul_uw_email_in.com&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of natuurlijk telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;Met vriendelijke groet,&lt;/p&gt;
+														&lt;p&gt;&lt;strong&gt;{{var customer.store.website.name}}&lt;/strong&gt;&lt;/p
+														&lt;p&gt;&lt;i&gt;Heeft u zichzelf niet aangemeld? Geen paniek, u kunt deze email gewoon als niet verzonden beschouwen.&lt;/i&gt;&lt;/p&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+","/template/email/account_new_confirmation.html"
+"&lt;!--@subject Contact Form@--&gt;
+Name: {{var data.name}}
+E-mail: {{var data.email}}
+Telephone: {{var data.telephone}}
+
+Comment: {{var data.comment}}","&lt;!--@subject Contact via website formulier @--&gt;
+Naam: {{var data.name}}
+E-mail: {{var data.email}}
+Telefoon: {{var data.telephone}}
+
+Bericht: {{var data.comment}}","/template/email/contact_form.html"
+"&lt;!--@subject Log Cleanup Warnings @--&gt;
+Log Cleanup Warnings:
+
+{{var warnings}}","&lt;!--@subject Log opruimings waarschuwingen @--&gt;
+Log opruimings waarschuwingen:
+
+{{var warnings}}","/template/email/log_clean_warning.html"
+"&lt;!--@subject New password for {{var customer.name}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Dear, {{var customer.name}}&lt;/strong&gt;,&lt;br/&gt;
+Your new password is: {{var customer.password}}&lt;/p&gt;
+&lt;p&gt;You can change your password at any time by logging into &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;your account&lt;/a&gt;.&lt;p&gt;
+&lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;Demo Store&lt;/strong&gt;&lt;/p&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+","&lt;!--@subject Nieuw wachtwoord voor {{var customer.name}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var customer.store.website.name}}&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Beste {{var customer.firstname}}&lt;/strong&gt;,&lt;br/&gt;
+Uw nieuwe wachtwoord is: {{var customer.password}}&lt;/p&gt;
+&lt;p&gt;U kunt uw wachtwoord op ieder moment wijzigen via &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Mijn account&lt;/a&gt;.
+&lt;p&gt;
+                           &lt;p&gt;Met vriendelijke groet,&lt;/p&gt;
+														&lt;p&gt;&lt;strong&gt;{{var customer.store.website.name}}&lt;/strong&gt;&lt;/p&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+","/template/email/password_new.html"
+"&lt;!--@subject New password for {{var user.name}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+           body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+      &lt;/style&gt;
+
+        &lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+         &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+             &lt;tr&gt;
+                    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                    &lt;!-- [ header starts here] --&gt;
+                      &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                          &lt;tr&gt;
+                                &lt;td valign=&quot;top&quot;&gt;
+                                 &lt;p&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+                            &lt;/tr&gt;
+                       &lt;/table&gt;
+
+                    &lt;!-- [ middle starts here] --&gt;
+                      &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                          &lt;tr&gt;
+                                &lt;td valign=&quot;top&quot;&gt;
+                             &lt;p&gt;&lt;strong&gt;Dear, {{var user.name}}&lt;/strong&gt;,&lt;br/&gt;
+                               Your new password is: {{var password}}&lt;/p&gt;
+                                                               &lt;p&gt;You can change your password at any time by logging into &lt;a href=&quot;{{store url=&quot;adminhtml/system_account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;your account&lt;/a&gt;.&lt;p&gt;
+
+                                &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;Demo Store&lt;/strong&gt;&lt;/p&gt;
+
+
+                             &lt;/td&gt;
+                           &lt;/tr&gt;
+                       &lt;/table&gt;
+
+                    &lt;/td&gt;
+               &lt;/tr&gt;
+           &lt;/table&gt;
+            &lt;/div&gt;
+","&lt;!--@subject Nieuw wachtwoord voor {{var user.name}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+           body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+      &lt;/style&gt;
+
+        &lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+         &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+             &lt;tr&gt;
+                    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                    &lt;!-- [ header starts here] --&gt;
+                      &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                          &lt;tr&gt;
+                                &lt;td valign=&quot;top&quot;&gt;
+                                 &lt;p&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var customer.store.website.name}}&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+                            &lt;/tr&gt;
+                       &lt;/table&gt;
+
+                    &lt;!-- [ middle starts here] --&gt;
+                      &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                          &lt;tr&gt;
+                                &lt;td valign=&quot;top&quot;&gt;
+                             &lt;p&gt;&lt;strong&gt;Beste {{var user.name}}&lt;/strong&gt;,&lt;br/&gt;
+                               Uw nieuwe wachtwoord is: {{var password}}&lt;/p&gt;
+                                                               &lt;p&gt;U kunt uw wachtwoord op ieder moment wijzigen via  &lt;a href=&quot;{{store url=&quot;adminhtml/system_account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Mijn account&lt;/a&gt;.&lt;p&gt;
+
+&lt;p&gt;Wanneer u vragen heeft, neem dan gerust contact met ons op. &lt;a style=&quot;color: rgb(30, 126, 200);&quot; href=&quot;mailto:contact@vul_uw_email_in.com&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of natuurlijk telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;Met vriendelijke groet,&lt;/p&gt;
+														&lt;p&gt;&lt;strong&gt;{{var customer.store.website.name}}&lt;/strong&gt;&lt;/p
+
+                             &lt;/td&gt;
+                           &lt;/tr&gt;
+                       &lt;/table&gt;
+
+                    &lt;/td&gt;
+               &lt;/tr&gt;
+           &lt;/table&gt;
+            &lt;/div&gt;
+","/template/email/admin_password_new.html"
+"&lt;!--@subject Newsletter subscription confirmation @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;strong&gt;Dear {{var customer.name}},&lt;/strong&gt;,&lt;br/&gt;
+                            Thank you for subscribing to our newsletter.&lt;/p&gt;
+                            &lt;p style=&quot;border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; &quot;&gt;To begin receiving the newsletter, you must first confirm your subscription by clicking on the following link:&lt;br /&gt;
+                            &lt;a href=&quot;{{var subscriber.getConfirmationLink()}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;{{var subscriber.getConfirmationLink()}}&lt;/a&gt;&lt;p&gt;
+
+                            &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;Demo Store&lt;/strong&gt;&lt;/p&gt;
+
+
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+","&lt;!--@subject Nieuwsbrief aanmelding bevestiging @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var customer.store.website.name}}&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;strong&gt;Beste {{var customer.firstname}}&lt;/strong&gt;,&lt;br/&gt;
+                            Bedankt voor uw interesse in onze nieuwsbrief.&lt;/p&gt;
+                            &lt;p style=&quot;border:1px solid #BEBCB7; padding:13px 18px; background:#F8F7F5; &quot;&gt;Om de nieuwsbrief te ontvangen, dient u het abonnement te bevestigen door op de onderstaande link te klikken:&lt;br /&gt;
+                            &lt;a href=&quot;{{var subscriber.getConfirmationLink()}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;{{var subscriber.getConfirmationLink()}}&lt;/a&gt;&lt;p&gt;
+
+                            &lt;p&gt;Met vriendelijke groet,&lt;/p&gt;
+														&lt;p&gt;&lt;strong&gt;{{var customer.store.website.name}}&lt;/strong&gt;&lt;/p&gt;
+
+
+                      &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+","/template/email/newsletter_subscr_confirm.html"
+"&lt;!--@subject Newsletter subscription success @--&gt;
+Newsletter subscription success","&lt;!--@subject Nieuwsbrief aanmelding gelukt @--&gt;
+U bent succesvol aangemeld voor de nieuwsbrief. Dank u voor uw interesse.","/template/email/newsletter_subscr_success.html"
+"&lt;!--@subject Newsletter unsubscription success @--&gt;
+Newsletter unsubscription success","&lt;!--@subject Nieuwsbrief uitschrijving succesvol @--&gt;
+ U bent succesvol uitgeschreven van onze nieuwsbrief. Wellicht tot ziens!
+","/template/email/newsletter_unsub_success.html"
+"&lt;!--@subject Products price changed alert @--&gt;
+Hello {{var customerName}},
+
+{{var alertGrid}}","&lt;!--@subject Prijswijzigingen @--&gt;
+Beste {{var customer.firstname}},
+
+Het is ons een genoegen de volgende prijswijzigingen aan u door te geven:
+
+{{var alertGrid}}","/template/email/product_price_alert.html"
+"&lt;!--@subject Product alerts Cron error @--&gt;
+Product alerts cron warnings:
+
+{{var warnings}}","&lt;!--@subject Product waarschuwing Cron fout @--&gt;
+Product / cron waarschuwingen:
+
+{{var warnings}}","/template/email/product_alert_cron_error.html"
+"&lt;!--@subject Products back in stock alert @--&gt;
+Hello {{var customerName}},
+
+{{var alertGrid}}","&lt;!--@subject Producten weer op voorraad @--&gt;
+Beste {{var customer.firstname}},
+
+De volgende producten zijn weer op voorraad:
+
+{{var alertGrid}}","/template/email/product_stock_alert.html"
+"&lt;!--@subject Sitemap generate Warnings @--&gt;
+Sitemap generate warnings:
+
+
+{{var warnings}}","&lt;!--@subject Sitemap waarschuwingen @--&gt;
+
+Het aanmaken van de sitemap gaf de volgende waarschuwingen:
+
+
+{{var warnings}}","/template/email/sitemap_generate_warning.html"
+"&lt;!--@subject Currency Update Warnings @--&gt;
+Currency update warnings:
+
+
+{{var warnings}}","&lt;!--@subject Valuta update waarschuwingen @--&gt;
+Valuta update waarschuwingen:
+
+
+{{var warnings}}","/template/email/currency_update_warning.html"
+"&lt;!--@subject Welcome, {{var customer.name}}! @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;strong&gt;Dear {{var customer.name}}&lt;/strong&gt;,&lt;br/&gt;
+                            Welcome to Demo Store. To log in when visiting our site just click &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Login&lt;/a&gt; or &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;My Account&lt;/a&gt; at the top of every page, and then enter your e-mail address and password.&lt;/p&gt;
+
+                            &lt;p&gt;When you log in to your account, you will be able to do the following:&lt;/p&gt;
+
+                            &lt;ul&gt;
+                                &lt;li&gt;Proceed through checkout faster when making a purchase&lt;/li&gt;
+                                &lt;li&gt; Check the status of orders&lt;/li&gt;
+                                &lt;li&gt;View past orders&lt;/li&gt;
+                                &lt;li&gt; Make changes to your account information&lt;/li&gt;
+                                &lt;li&gt;Change your password&lt;/li&gt;
+                                &lt;li&gt;Store alternative addresses (for shipping to multiple family members and friends!)&lt;/li&gt;
+                            &lt;/ul&gt;
+
+                            &lt;p&gt;If you have any questions about your account or any other matter, please feel free to contact us at &lt;a href=&quot;mailto:magento@varien.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or by phone at (555) 555-0123.&lt;/p&gt;
+                            &lt;p&gt;Thanks again!&lt;/p&gt;
+
+
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+","&lt;!--@subject Welkom {{var customer.firstname}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+                &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var customer.store.website.name}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+                &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;strong&gt;Beste {{var customer.firstname}}&lt;/strong&gt;,&lt;br/&gt;
+                            Dank u voor uw aanmelding bij onze online winkel. Om uw gegevens te bekijken kunt u bovenaan iedere pagina op onze webiste klikken op &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Inloggen&lt;/a&gt; of &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Mijn rekening&lt;/a&gt;. U hoeft dan alleen uw emailadres en wachtwoord in te vullen.&lt;/p&gt;
+
+                            &lt;p&gt;Nadat u bent ingelogt kunt het volgende doen:&lt;/p&gt;
+
+                            &lt;ul&gt;
+                                &lt;li&gt;Sneller door de kassa heen bij het afrekenen.&lt;/li&gt;
+                                &lt;li&gt;De status van bestellingen bekijken.&lt;/li&gt;
+                                &lt;li&gt;Uw eerdere bestelllingen bekijken.&lt;/li&gt;
+                                &lt;li&gt;Wijzigingen aanbrengen in uw adresgegevens.&lt;/li&gt;
+																&lt;li&gt;U opgeven voor de nieuwsbrief en andere productberichten.&lt;/li&gt;
+                                &lt;li&gt;Uw wachtwoord wijzigen.&lt;/li&gt;
+                                &lt;li&gt;Verschillende verzendadressen opslaan om een bestelling naar verschillende adressen te versturen. Handig voor familie en vrienden!&lt;/li&gt;
+                            &lt;/ul&gt;
+
+														&lt;p&gt;Wanneer u vragen heeft, neem dan gerust contact met ons op. &lt;a style=&quot;color: rgb(30, 126, 200);&quot; href=&quot;mailto:contact@vul_uw_email_in.com&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of natuurlijk telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000&lt;/span&gt;&lt;/p&gt;
+                            &lt;p&gt;Met vriendelijke groet,&lt;/p&gt;
+														&lt;p&gt;&lt;strong&gt;{{var customer.store.website.name}}&lt;/strong&gt;&lt;/p
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+","/template/email/account_new_confirmed.html"
+"&lt;!--@subject Take a look at {{var customer.name}}'s wishlist @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+            &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                        &lt;p&gt;Hey,&lt;br/&gt;
+                        Take a look at my wishlist from Demo Store.&lt;/p&gt;
+
+&lt;p&gt;{{var message}}&lt;/p&gt;
+
+                        {{var items}}
+
+                        &lt;br/&gt;
+
+{{depend salable}}&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;{{var addAllLink}}&quot; style=&quot;color:#DC6809;&quot;&gt;Add all items to shopping cart&lt;/a&gt;&lt;/strong&gt; |{{/depend}} &lt;strong&gt;&lt;a href=&quot;{{var viewOnSiteLink}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;View all wishlist items&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+                        &lt;p&gt;Thank you,&lt;br/&gt;&lt;strong&gt;{{var customer.name}}&lt;/strong&gt;&lt;/p&gt;
+
+
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;/div&gt;","&lt;!--@subject {{var customer.name}} heeft u uitnodigd zijn/haar verlanglijst te bekijken @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+            &lt;!-- [ header starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                            &lt;p&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var customer.store.website.name}}&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;!-- [ middle starts here] --&gt;
+                &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td valign=&quot;top&quot;&gt;
+                        &lt;p&gt;Hoi,&lt;br/&gt;
+                        Deze producten heb ik op mijn verlanglijstje staan. &lt;/p&gt;
+
+&lt;p&gt;{{var message}}&lt;/p&gt;
+
+                        {{var items}}
+
+                        &lt;br/&gt;
+
+{{depend salable}}&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;{{var addAllLink}}&quot; style=&quot;color:#DC6809;&quot;&gt;Alle producten aan winkelwagen toevoegen.&lt;/a&gt;&lt;/strong&gt; |{{/depend}} &lt;strong&gt;&lt;a href=&quot;{{var viewOnSiteLink}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Alle producten van de verlanglijst bekijken.&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+                        &lt;p&gt;Bedankt,&lt;br/&gt;&lt;strong&gt;{{var customer.name}}&lt;/strong&gt;&lt;/p&gt;
+
+
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;/div&gt;","/template/email/wishlist_share.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Order # {{var order.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Dear {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Your order # {{var order.increment_id}} has been &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;
+                    If you have any questions, please feel free to contact us at
+                    &lt;a href=&quot;mailto:magento@varien.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; 
+                    or by phone at (555) 555-0123.
+                &lt;/p&gt;
+                &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Bestelnr # {{var order.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Beste {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Uw bestelling # {{var order.increment_id}} is &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;&lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              &lt;p&gt;Met vriendelijke groet,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/order_update_guest.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Order # {{var order.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Dear {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Your order # {{var order.increment_id}} has been &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;You can check the status of your order by &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;logging into your account&lt;/a&gt;.&lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;
+                    If you have any questions, please feel free to contact us at
+                    &lt;a href=&quot;mailto:magento@varien.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; 
+                    or by phone at (555) 555-0123.
+                &lt;/p&gt;
+                &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Bestelnr # {{var order.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                &lt;strong&gt;Beste {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Uw bestelling # {{var order.increment_id}} is&lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;U kunt de status van uw bestelling controleren door  &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;in te loggen op uw account&lt;/a&gt;.&lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;&lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+                &lt;p&gt;Met vriendelijke groet,&lt;br/&gt;
+                  &lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/order_update.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Credit Memo # {{var creditmemo.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Dear {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Your order # {{var order.increment_id}} has been &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;
+                    If you have any questions, please feel free to contact us at
+                    &lt;a href=&quot;mailto:magento@varien.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt;
+                    or by phone at (555) 555-0123.
+                &lt;/p&gt;
+                &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Creditnota # {{var creditmemo.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Beste {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                  Uw bestelling # {{var order.increment_id}} is &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              &lt;p&gt;Met vriendelijke groet,&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/creditmemo_update_guest.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Credit Memo # {{var creditmemo.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Dear {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Your order # {{var order.increment_id}} has been &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;You can check the status of your order by &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;logging into your account&lt;/a&gt;.&lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;
+                    If you have any questions, please feel free to contact us at
+                    &lt;a href=&quot;mailto:magento@varien.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; 
+                    or by phone at (555) 555-0123.
+                &lt;/p&gt;
+                &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Creditnota # {{var creditmemo.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Beste {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+&lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;U kunt de status van uw order controleren door &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;in te loggen op uw account&lt;/a&gt;.&lt;/p&gt;
+              &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              		&lt;p&gt;Met vriendelijke groet,&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/creditmemo_update.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Credit Memo # {{var creditmemo.increment_id}} for Order # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Hello {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Thank you for your order from {{var order.getStoreGroupName()}}.
+                        If you have any questions about your order please contact us at &lt;a href=&quot;mailto:dummyemail@magentocommerce.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or call us at &lt;span class=&quot;nobr&quot;&gt;(555) 555-0123&lt;/span&gt; Monday - Friday, 8am - 5pm PST.
+                    &lt;/p&gt;
+                    &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Your Credit Memo #{{var creditmemo.increment_id}} for Order #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Billing Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Payment Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+
+                    {{layout handle=&quot;sales_email_order_creditmemo_items&quot; creditmemo=$creditmemo order=$order}}
+
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+                    &lt;p&gt;
+                        Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;
+                    &lt;/p&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Creditnota # {{var creditmemo.increment_id}} voor Bestelling # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Beste {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Bedankt voor uw bestelling via {{var order.getStoreGroupName()}}.
+                        Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Uw credit factuur #{{var creditmemo.increment_id}} voor bestelling #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Factuurgegevens:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Betaalmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendinformatie:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+
+                    {{layout handle=&quot;sales_email_order_creditmemo_items&quot; creditmemo=$creditmemo order=$order}}
+
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+								&lt;p&gt;Met vriendelijke groet,&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+                &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/creditmemo_new_guest.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Credit Memo # {{var creditmemo.increment_id}} for Order # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Hello {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Thank you for your order from {{var order.getStoreGroupName()}}.
+                        You can check the status of your order by &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;logging into your account&lt;/a&gt;.
+                        If you have any questions about your order please contact us at &lt;a href=&quot;mailto:dummyemail@magentocommerce.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or call us at &lt;span class=&quot;nobr&quot;&gt;(555) 555-0123&lt;/span&gt; Monday - Friday, 8am - 5pm PST.
+                    &lt;/p&gt;
+                    &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Your Credit Memo #{{var creditmemo.increment_id}} for Order #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Billing Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Payment Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+
+                    {{layout handle=&quot;sales_email_order_creditmemo_items&quot; creditmemo=$creditmemo order=$order}}
+
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+                    &lt;p&gt;
+                        Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;
+                    &lt;/p&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Creditnota # {{var creditmemo.increment_id}} voor Bestelling # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Beste {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Bedankt voor uw bestelling op {{var order.getStoreGroupName()}}.
+                        U kunt de status van uw bestelling controleren door  &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;in te loggen op uw account&lt;/a&gt;.
+                        Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Uw credit factuur #{{var creditmemo.increment_id}} voor bestelling #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Factuurgegevens:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Betaalmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendinformatie:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+
+                    {{layout handle=&quot;sales_email_order_creditmemo_items&quot; creditmemo=$creditmemo order=$order}}
+
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+                    &lt;p&gt;Met vriendelijke groet,&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+                &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/creditmemo_new.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Invoice # {{var invoice.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Dear {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Your order # {{var order.increment_id}} has been &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;You can check the status of your order by &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;logging into your account&lt;/a&gt;.&lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;
+                    If you have any questions, please feel free to contact us at
+                    &lt;a href=&quot;mailto:magento@varien.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; 
+                    or by phone at (555) 555-0123.
+                &lt;/p&gt;
+                &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Factuur # {{var invoice.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Beste {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                Uw bestelling # {{var order.increment_id}} is &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;U kunt de status van uw bestelling controleren door  &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;in te loggen op uw account&lt;/a&gt;.&lt;/p&gt;
+              &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+										   &lt;p&gt;Nogmaals bedankt,&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/invoice_update.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Invoice # {{var invoice.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Dear {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Your order # {{var order.increment_id}} has been &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;
+                    If you have any questions, please feel free to contact us at
+                    &lt;a href=&quot;mailto:magento@varien.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; 
+                    or by phone at (555) 555-0123.
+                &lt;/p&gt;
+                &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Factuur # {{var invoice.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Beste {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                  Uw bestelling # {{var order.increment_id}} is &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+										   &lt;p&gt;Nogmaals bedankt,&lt;/p&gt;
+                    &lt;p&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/invoice_update_guest.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: New Order # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Hello {{var order.getBillingAddress().getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Thank you for your order from {{var order.getStoreGroupName()}}.
+                        Once your package ships we will send an email with a link to track your order.
+                        If you have any questions about your order please contact us at &lt;a href=&quot;mailto:dummyemail@magentocommerce.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or call us at &lt;span class=&quot;nobr&quot;&gt;(555) 555-0123&lt;/span&gt; Monday - Friday, 8am - 5pm PST.
+                    &lt;/p&gt;
+                    &lt;p&gt;Your order confirmation is below. Thank you again for your business.&lt;/p&gt;
+
+                    &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;Your Order #{{var order.increment_id}} &lt;small&gt;(placed on {{var order.getCreatedAtFormated('long')}})&lt;/small&gt;&lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Billing Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Payment Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getBillingAddress().format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getShippingAddress().format('html')}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getShippingDescription()}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+                    {{layout handle=&quot;sales_email_order_items&quot; order=$order}}
+                    &lt;br/&gt;
+                    {{var order.getEmailCustomerNote()}}
+                    &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Nieuwe bestelling # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Telescoop.nl&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Beste {{var order.getBillingAddress().getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Bedankt voor uw bestelling via {{var order.getStoreGroupName()}}.
+                        Zodra uw pakket verzonden is, sturen wij u een email met een link om uw bestelling te volgen. Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+                  &lt;p&gt;Orderbevestiging: &lt;/p&gt;
+
+                  &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;Uw bestelling #{{var order.increment_id}} &lt;small&gt;(geplaatst op {{var order.getCreatedAtFormated('long')}})&lt;/small&gt;&lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Factuurgegevens:&lt;/th&gt;
+                          &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Betaalmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getBillingAddress().format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendinformatie:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getShippingAddress().format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getShippingDescription()}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+                    {{layout handle=&quot;sales_email_order_items&quot; order=$order}}
+                    &lt;br/&gt;
+                    {{var order.getEmailCustomerNote()}}
+                    &lt;p&gt;Dank u voor uw vertrouwen,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+                &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/order_new_guest.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: New Order # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Hello {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Thank you for your order from {{var order.getStoreGroupName()}}.
+                        Once your package ships we will send an email with a link to track your order.
+                        You can check the status of your order by &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;logging into your account&lt;/a&gt;.
+                        If you have any questions about your order please contact us at &lt;a href=&quot;mailto:dummyemail@magentocommerce.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or call us at &lt;span class=&quot;nobr&quot;&gt;(555) 555-0123&lt;/span&gt; Monday - Friday, 8am - 5pm PST.
+                    &lt;/p&gt;
+                    &lt;p&gt;Your order confirmation is below. Thank you again for your business.&lt;/p&gt;
+
+                    &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;Your Order #{{var order.increment_id}} &lt;small&gt;(placed on {{var order.getCreatedAtFormated('long')}})&lt;/small&gt;&lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Billing Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Payment Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getBillingAddress().format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getShippingAddress().format('html')}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getShippingDescription()}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+                    {{layout handle=&quot;sales_email_order_items&quot; order=$order}}
+
+                    {{var items_html}}
+                    &lt;br/&gt;
+                    {{var order.getEmailCustomerNote()}}
+                    &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Nieuwe bestelling # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Beste {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Bedankt voor uw bestelling via {{var order.getStoreGroupName()}}.
+                        Zodra uw pakket verzonden is, sturen wij u een email met een link om uw bestelling te volgen.
+                        U kunt de status van uw bestelling controleren door  &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;in te loggen op uw account&lt;/a&gt;.
+                        Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+                  &lt;p&gt;Orderbevestiging:&lt;/p&gt;
+
+                    &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;Uw bestelling #{{var order.increment_id}} &lt;small&gt;(geplaatst op {{var order.getCreatedAtFormated('long')}})&lt;/small&gt;&lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Factuurgegevens:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Betaalmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getBillingAddress().format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{depend order.getIsNotVirtual()}}
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendinformatie:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getShippingAddress().format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.getShippingDescription()}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    {{/depend}}
+                    {{layout handle=&quot;sales_email_order_items&quot; order=$order}}
+
+                    {{var items_html}}
+                    &lt;br/&gt;
+                    {{var order.getEmailCustomerNote()}}
+                    &lt;p&gt;Dank u voor uw vertrouwen,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+                &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/order_new.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Shipment # {{var shipment.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Dear {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Your order # {{var order.increment_id}} has been &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;
+                    If you have any questions, please feel free to contact us at
+                    &lt;a href=&quot;mailto:magento@varien.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; 
+                    or by phone at (555) 555-0123.
+                &lt;/p&gt;
+                &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Verzend # {{var shipment.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Beste {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Uw bestelling # {{var order.increment_id}} is &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;Indien u vragen heeft, neem dan contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              &lt;p&gt;Met vriendelijke groet,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/shipment_update_guest.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Shipment # {{var shipment.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Dear {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Your order # {{var order.increment_id}} has been &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;You can check the status of your order by &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;logging into your account&lt;/a&gt;.&lt;/p&gt;
+                &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;
+                    If you have any questions, please feel free to contact us at
+                    &lt;a href=&quot;mailto:magento@varien.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; 
+                    or by phone at (555) 555-0123.
+                &lt;/p&gt;
+                &lt;p&gt;Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Verzend # {{var shipment.increment_id}} update @--&gt;
+&lt;style type=&quot;text/css&quot;&gt;body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }&lt;/style&gt;
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+        &lt;tr&gt;
+            &lt;td valign=&quot;top&quot;&gt;
+                &lt;p&gt;
+                    &lt;strong&gt;Beste {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                    Uw bestelling # {{var order.increment_id}} is &lt;br/&gt;
+                    &lt;strong&gt;{{var order.getStatusLabel()}}&lt;/strong&gt;.
+                &lt;/p&gt;
+                &lt;p&gt;U kunt de status van uw order controleren door  &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;op uw account in te loggen&lt;/a&gt;.&lt;/p&gt;
+              &lt;p&gt;{{var comment}}&lt;/p&gt;
+                &lt;p&gt;Indien u vragen heeft, neem dan gerust contact op via &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              &lt;p&gt;Met vriendelijke groet,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/shipment_update.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Shipment # {{var shipment.increment_id}} for Order # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Hello {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Thank you for your order from {{var order.getStoreGroupName()}}.
+                        You can check the status of your order by &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;logging into your account&lt;/a&gt;.
+                        If you have any questions about your order please contact us at &lt;a href=&quot;mailto:dummyemail@magentocommerce.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or call us at &lt;span class=&quot;nobr&quot;&gt;(555) 555-0123&lt;/span&gt; Monday - Friday, 8am - 5pm PST.
+                    &lt;/p&gt;
+                    &lt;p&gt;
+                        Your shipping confirmation is below. Thank you again for your business.
+                    &lt;/p&gt;
+
+                    &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Your Shipment #{{var shipment.increment_id}} for Order #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Billing Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Payment Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+
+                    {{layout handle=&quot;sales_email_order_shipment_items&quot; shipment=$shipment order=$order}}
+
+                    &lt;br/&gt;
+                    {{block type='core/template' area='frontend' template='email/order/shipment/track.phtml' shipment=$shipment order=$order}}
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+                    &lt;p&gt;
+                        Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;
+                    &lt;/p&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Verzend # {{var shipment.increment_id}} voor Bestelling # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Beste {{var order.getCustomerName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Bedankt voor uw bestelling op {{var order.getStoreGroupName()}}.
+                        U kunt de status van uw order controleren door  &lt;a href=&quot;{{store url=&quot;customer/account/&quot;}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;in te loggen op uw account&lt;/a&gt;.
+                        Indien u vragen heeft, neem dan gerust contact op via 
+                        &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              &lt;p&gt;Orderbevestiging:&lt;/p&gt;
+
+              &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Uw verzending #{{var shipment.increment_id}} voor bestelling #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Factuurgegevens:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Betaalmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendinformatie:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendmethode&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+
+                    {{layout handle=&quot;sales_email_order_shipment_items&quot; shipment=$shipment order=$order}}
+
+                    &lt;br/&gt;
+                    {{block type='core/template' area='frontend' template='email/order/shipment/track.phtml' shipment=$shipment order=$order}}
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+                    &lt;p&gt;
+                        Dank u voor uw vertrouwen,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;
+                    &lt;/p&gt;
+                &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/shipment_new.html"
+"&lt;!--@subject {{var order.getStoreGroupName()}}: Shipment # {{var shipment.increment_id}} for Order # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;Magento&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Hello {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Thank you for your order from {{var order.getStoreGroupName()}}.
+                        If you have any questions about your order please contact us at &lt;a href=&quot;mailto:dummyemail@magentocommerce.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;dummyemail@magentocommerce.com&lt;/a&gt; or call us at &lt;span class=&quot;nobr&quot;&gt;(555) 555-0123&lt;/span&gt; Monday - Friday, 8am - 5pm PST.
+                    &lt;/p&gt;
+                    &lt;p&gt;
+                        Your shipping confirmation is below. Thank you again for your business.
+                    &lt;/p&gt;
+
+                    &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Your Shipment #{{var shipment.increment_id}} for Order #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Billing Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Payment Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Information:&lt;/th&gt;
+                            &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Shipping Method:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                                &amp;nbsp;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+
+                    {{layout handle=&quot;sales_email_order_shipment_items&quot; shipment=$shipment order=$order}}
+
+                    &lt;br/&gt;
+                    {{block type='core/template' area='frontend' template='email/order/shipment/track.phtml' shipment=$shipment order=$order}}
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+                    &lt;p&gt;
+                        Thank you again,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;
+                    &lt;/p&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","&lt;!--@subject {{var order.getStoreGroupName()}}: Verzend # {{var shipment.increment_id}} voor Bestelling # {{var order.increment_id}} @--&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+&lt;/style&gt;
+
+&lt;div style=&quot;font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;&quot;&gt;
+&lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;98%&quot; style=&quot;margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;&quot;&gt;
+&lt;tr&gt;
+    &lt;td align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        &lt;!-- [ header starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;&lt;a href=&quot;{{store url=&quot;&quot;}}&quot;&gt;&lt;img src=&quot;{{skin url=&quot;images/logo_email.gif&quot; _area='frontend'}}&quot; alt=&quot;{{var order.getStoreGroupName()}}&quot;  style=&quot;margin-bottom:10px;&quot; border=&quot;0&quot;/&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;
+        &lt;!-- [ middle starts here] --&gt;
+        &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;650&quot;&gt;
+            &lt;tr&gt;
+                &lt;td valign=&quot;top&quot;&gt;
+                    &lt;p&gt;
+                        &lt;strong&gt;Hallo {{var billing.getName()}}&lt;/strong&gt;,&lt;br/&gt;
+                        Bedankt voor uw bestelling op {{var order.getStoreGroupName()}}.
+                        Indien u vragen heeft, neem dan gerust contact op via 
+                        &lt;a href=&quot;mailto:contact@vul_uw_email_in.com&quot; style=&quot;color:#1E7EC8;&quot;&gt;contact@vul_uw_email_in.com&lt;/a&gt; of telefonisch &lt;span class=&quot;nobr&quot;&gt;0031 000 000000.&lt;/span&gt;&lt;/p&gt;
+              &lt;p&gt;
+                        Orderbevestiging:
+                    &lt;/p&gt;
+
+                    &lt;h3 style=&quot;border-bottom:2px solid #eee; font-size:1.05em; padding-bottom:1px; &quot;&gt;
+                        Your Shipment #{{var shipment.increment_id}} for Order #{{var order.increment_id}}
+                    &lt;/h3&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Factuurgegevens:&lt;/th&gt;
+                          &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Betaalmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.billing_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var payment_html}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+                    &lt;table cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot;&gt;
+                        &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendinformatie:&lt;/th&gt;
+                          &lt;th width=&quot;3%&quot;&gt;&lt;/th&gt;
+                            &lt;th align=&quot;left&quot; width=&quot;48.5%&quot; bgcolor=&quot;#d9e5ee&quot; style=&quot;padding:5px 9px 6px 9px; border:1px solid #bebcb7; border-bottom:none; line-height:1em;&quot;&gt;Verzendmethode:&lt;/th&gt;
+                        &lt;/tr&gt;
+                        &lt;/thead&gt;
+                        &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_address.format('html')}}
+                            &lt;/td&gt;
+                            &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+                            &lt;td valign=&quot;top&quot; style=&quot;padding:7px 9px 9px 9px; border:1px solid #bebcb7; border-top:0; background:#f8f7f5;&quot;&gt;
+                                {{var order.shipping_description}}
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;/tbody&gt;
+                    &lt;/table&gt;
+                    &lt;br/&gt;
+
+                    {{layout handle=&quot;sales_email_order_shipment_items&quot; shipment=$shipment order=$order}}
+
+                    &lt;br/&gt;
+                    {{block type='core/template' area='frontend' template='email/order/shipment/track.phtml' shipment=$shipment order=$order}}
+                    &lt;p&gt;{{var comment}}&lt;/p&gt;
+                    &lt;p&gt;
+                        Dank u voor uw vertrouwen,&lt;br/&gt;&lt;strong&gt;{{var order.getStoreGroupName()}}&lt;/strong&gt;
+                    &lt;/p&gt;
+                &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;","/template/email/sales/shipment_new_guest.html"
+"{* This is a comment block
+
+Use vars: {{var var_name}}
+*}&lt;!--@subject Payment Transaction Failed Reminder @--&gt;
+
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Payment transaction failed.&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Reason&lt;/b&gt;&lt;br /&gt;
+                    {{var reason}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Checkout Type&lt;/b&gt;&lt;br /&gt;
+                    {{var checkoutType}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Customer:&lt;/b&gt;&lt;br /&gt;
+                    &lt;a href=&quot;mailto:{{var customerEmail}}&quot;&gt;{{var customer}}&lt;/a&gt; &amp;lt;{{var customerEmail}}&amp;gt;
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Items&lt;/b&gt;&lt;br /&gt;
+                    {{var items}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Total:&lt;/b&gt;&lt;br /&gt;
+                    {{var total}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Billing Address:&lt;/b&gt;&lt;br /&gt;
+                    {{var billingAddress.format('html')}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Shipping Address:&lt;/b&gt;&lt;br /&gt;
+                    {{var shippingAddress.format('html')}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Shipping Method:&lt;/b&gt;&lt;br /&gt;
+                    {{var shippingMethod}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Payment Method:&lt;/b&gt;&lt;br /&gt;
+                    {{var paymentMethod}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Date &amp; Time:&lt;/b&gt;&lt;br /&gt;
+                    {{var dateAndTime}}
+                &lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;","{* This is a comment block
+
+Available vars in this template:
+  - name            Recipient name
+  - email           Recipient Email address
+  - product_name    Product name
+  - product_url     Url for product
+  - product_image   Url for product small image (75 px)
+  - message         Sender custom message
+  - sender_name     Sender name
+  - sender_email    Sender email
+
+Use vars: {{var var_name}}
+*}&lt;!--@subject Herinnering: Een betalingstransactie is mislukt @--&gt;
+
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;De volgende betaling is mislukt.&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Reden:&lt;/b&gt;&lt;br /&gt;
+                    {{var reason}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Klant:&lt;/b&gt;&lt;br /&gt;
+                    &lt;a href=&quot;mailto:{{var customerEmail}}&quot;&gt;{{var customer}}&lt;/a&gt; &amp;lt;{{var customerEmail}}&amp;gt;
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Producten&lt;/b&gt;&lt;br /&gt;
+                    {{var items}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Totaal:&lt;/b&gt;&lt;br /&gt;
+                    {{var total}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Factuuradres:&lt;/b&gt;&lt;br /&gt;
+                    {{var billingAddress.format('html')}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Verzendadres:&lt;/b&gt;&lt;br /&gt;
+                    {{var shippingAddress.format('html')}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Verzendmethode:&lt;/b&gt;&lt;br /&gt;
+                    {{var shippingMethod}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Betaalmethode:&lt;/b&gt;&lt;br /&gt;
+                    {{var paymentMethod}}
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;b&gt;Datum en Tijd:&lt;/b&gt;&lt;br /&gt;
+                    {{var dateAndTime}}
+                &lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;","/template/email/payment_failed.html"
+"{* This is a comment block
+
+Available vars in this template:
+  - name            Recipient name
+  - email           Recipient Email address
+  - product_name    Product name
+  - product_url     Url for product
+  - product_image   Url for product small image (75 px)
+  - message         Sender custom message
+  - sender_name     Sender name
+  - sender_email    Sender email
+
+Use vars: {{var var_name}}
+*}&lt;!--@subject Welcome, {{var name}} @--&gt;
+
+Welcome, {{var name}}&lt;br /&gt;&lt;br /&gt;Please look at &lt;a href=&quot;{{var product_url}}&quot;&gt;{{var product_name}}&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;Here is message: &lt;br /&gt;{{var message}}&lt;br /&gt;&lt;br /&gt;","{* This is a comment block
+
+Available vars in this template:
+  - name            Recipient name
+  - email           Recipient Email address
+  - product_name    Product name
+  - product_url     Url for product
+  - product_image   Url for product small image (75 px)
+  - message         Sender custom message
+  - sender_name     Sender name
+  - sender_email    Sender email
+
+Use vars: {{var var_name}}
+*}&lt;!--@subject {{var sender_name}} selecteerde {{var product_name}} voor u. @--&gt;
+
+Beste {{var name}},&lt;br /&gt;&lt;br /&gt;
+Het volgende product is door een vriend van u speciaal voor u geselecteerd. U kunt de link volgen voor meer informatie over dit artikel&lt;br /&gt;&lt;br /&gt;{{var product_image}} &lt;a href=&quot;{{var product_url}}&quot;&gt;{{var product_name}}&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+Bericht van {{var sender_name}}:&lt;br /&gt;{{var message}}&lt;br /&gt;&lt;br /&gt;","/template/email/product_share.html"
