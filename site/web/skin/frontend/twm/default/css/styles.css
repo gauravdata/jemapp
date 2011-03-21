@@ -66,7 +66,7 @@ h2.pointer span {
 	border-radius: 8px 8px 0 0;
 	
 }
-h2.squared	{ background: #663333; padding: 12px 0; border-top: 1px solid #804d4d; border-bottom: 1px solid #330000; margin: 0; }
+h2.squared	{ background: #663333; padding: 12px 0; border-top: 1px solid #804d4d; border-bottom: 1px solid #003366; margin: 0; }
 .rounded {
 	padding: 12px 0;
 	margin: 0 0 10px;
@@ -80,7 +80,7 @@ h2.squared	{ background: #663333; padding: 12px 0; border-top: 1px solid #804d4d
 .f-fix h2	  { text-align: left; margin: 0; padding: 0; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.85em; }
 .box-description h2, .more-views h2 { color: #000; text-align: left; text-transform: none; font-weight: bold; margin: 5px 0; }
 .box-description h2 { display: none; }
-h2.squared	  { background: #663333; padding: 12px 0; border-top: 1px solid #804d4d; border-bottom: 1px solid #330000; margin: 0; }
+h2.squared	  { background: #663333; padding: 12px 0; border-top: 1px solid #804d4d; border-bottom: 1px solid #003366; margin: 0; }
 h3, h4            { margin: 0 0 5px; font-size: 1.2em; }
 h3.product-name	  	{ margin: 0; }
 h3 a 		  { text-decoration: none; color: #000; }
@@ -576,7 +576,7 @@ p.required { font-size:10px; text-align:right; color:#f00; }
 .pager .pages .current { }
 
 /* Sorter */
-.sorter { border-top: 1px solid #d5d5cb; border-bottom: 1px solid #d5d5cb; padding: 10px 0; margin: 0 0 15px; color: #330000; text-transform: uppercase; }
+.sorter { border-top: 1px solid #d5d5cb; border-bottom: 1px solid #d5d5cb; padding: 10px 0; margin: 0 0 15px; color: #003366; text-transform: uppercase; }
 .sorter .view-mode { float:left; }
 .sorter .sort-by { float:right; }
 .sorter .link-feed {}
@@ -902,7 +902,7 @@ li.hproduct .meta, li.item .meta	{ border-left: 1px solid #d5d5cb; padding-botto
 .block-banner .block-content { text-align:center; }
 
 /* Block: Login */
-.block-login label { font-weight:bold; color:#666; }
+.block-login label { font-weight:bold; color:#333; }
 .block-login input.input-text { display:block; width:167px; margin:3px 0; }
 /* ======================================================================================= */
 
