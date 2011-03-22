@@ -48,11 +48,7 @@
         </div>
 
         <div class="product-shop hreview-aggregate">
-            <div class="product-name corners">
-				<div class="corner clt">&nbsp;</div>
-				<div class="corner crt">&nbsp;</div>
-				<div class="corner crb">&nbsp;</div>
-				<div class="corner clb">&nbsp;</div>
+            <div class="product-name">
                 <h1 class="item name fn rounded dark"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
             </div>
 
@@ -108,13 +104,7 @@
 			<?php if ($alias == 'description') continue; ?>
 			<div class="box-collateral <?php echo "box-{$alias}"?>">
 				<?php if ($title = $this->getChildData($alias, 'title')):?>
-					<div class="corners">
-						<div class="corner clt">&nbsp;</div>
-						<div class="corner crt">&nbsp;</div>
-						<div class="corner crb">&nbsp;</div>
-						<div class="corner clb">&nbsp;</div>
-						<h2 class="rounded dark"><?php echo $this->escapeHtml($title); ?></h2>
-					</div>
+					<h2 class="rounded dark"><?php echo $this->escapeHtml($title); ?></h2>
 				<?php endif;?>
 				<?php echo $html; ?>
 			</div>

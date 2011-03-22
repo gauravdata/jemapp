@@ -1,6 +1,0 @@
-.corners 	{ position: relative; }
-.corner 	{ width: 8px; height: 8px; font-size: 1px; line-height: 1px; position: absolute; background-repeat: no-repeat; z-index: 100000; display: inline-block; }
-.clt		{ top: 0; left: 0; background-image: url(../images/cornerLeftTop.png); }
-.crt		{ top: 0; right: 0; background-image: url(../images/cornerRightTop.png); }
-.crb		{ bottom: 0; right: 0; background-image: url(../images/cornerRightBottom.png); }
-.clb		{ bottom: 0; left: 0; background-image: url(../images/cornerLeftBottom.png); }

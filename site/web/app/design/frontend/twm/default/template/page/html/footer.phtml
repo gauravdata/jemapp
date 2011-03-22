@@ -29,9 +29,11 @@
     <div class="footer">
 		<div class="container_12">
 			<div class="grid_2">
+				<p class="title">Vragen?</p>
 				<?php echo $this->getChildHtml('cms_footer_links') ?>
 			</div>
-			<div class="grid_2">
+			<div class="grid_3">
+				<p class="title">Meer No Tomatoes</p>
 				<?php echo $this->getChildHtml('footer_links') ?>
 				<div class="clear">&nbsp;</div>
 				<p style="color: #FFF;">
@@ -39,11 +41,9 @@
 					BTW NL 8118.47.196.B01
 				</p>
 			</div>
-			<div class="grid_2">
-				<?php echo $this->getChildHtml('social_media') ?>
-			</div>
-			<div class="grid_6">
-				<div class="block payment">
+			<div class="grid_7 omega">
+				<p class="title">Social Media</p>
+				<div class="payment">
 					<a href="http://www.buckaroo.nl/safe_payments_en.asp" target="_blank"><img src="<?=$this->getSkinUrl('images/buckaroo.gif');?>" alt="Safe payment with Buckaroo Online Payment Services"></a>
 					<a href="http://www.mastercard.com/" target="_blank"><img src="<?=$this->getSkinUrl('images/logoMastercard.gif');?>" alt="Mastercard" /></a>
 					<a href="http://www.visa.com/" target="_blank"><img src="<?=$this->getSkinUrl('images/logoVisa.gif');?>" alt="Verified by VISA" /></a>
@@ -53,6 +53,7 @@
 					<a href="http://www.giropay.de/" target="_blank"><img src="<?=$this->getSkinUrl('images/logoGiropay.gif');?>" alt="giropay" /></a>
 					<a href="http://www.tnt.nl/" target="_blank"><img src="<?=$this->getSkinUrl('images/tnt.gif');?>" alt="TNT post" /></a>
 				</div>
+				<?php echo $this->getChildHtml('social_media') ?>
 			</div>
 			<div class="clear">&nbsp;</div>
 		</div>

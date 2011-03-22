@@ -27,22 +27,13 @@
 <div class="header-container">
     <div class="header">
 		<div class="container_12">
-			<div id="sites">
-				<a href="http://www.oxenerschoenen.nl/" class="oxener <?=($this->getBaseUrl()=='http://www.oxenerschoenen.nl/')?'oxenerActive':''?>"><span>Oxener sinds 1905 &amp; tassen</span></a>
-				<a <?=($this->getBaseUrl()=='http://www.vanbommel-shop.nl/')?'':'href="http://www.oxenerschoenen.nl/uggstore/"'?> class="ugg <?=($this->getBaseUrl()=='http://www.oxenerschoenen.nl/uggstore/')?'uggActive':''?>"><span>Ugg australia</span></a>
-				<a href="http://www.oxenerschoenen.nl/shoebox/" class="shoebox <?=($this->getBaseUrl()=='http://www.oxenerschoenen.nl/shoebox/')?'shoeboxActive':''?>"><span>Shoebox by Oxener</span></a>
-				<a href="http://www.oxenerschoenen.nl/oxener/" class="oxenershop <?=($this->getBaseUrl()=='http://www.oxenerschoenen.nl/oxener/')?'oxenershopActive':''?>"><span>Oxener sinds 1905 (shop)</span></a>
-				<a <?=($this->getBaseUrl()=='http://www.vanbommel-shop.nl/')?'':'href="http://www.oxenerschoenen.nl/ugg/"'?> class="logo uggshop <?=($this->getBaseUrl()=='http://www.oxenerschoenen.nl/ugg/')?'uggshopActive':''?>"><span>Ugg Australia Webshop</span></a>
-				<a href="http://www.oxenerschoenen.nl/kinder/" class="kindershop <?=($this->getBaseUrl()=='http://www.oxenerschoenen.nl/kinder/')?'kindershopActive':''?>"><span>Kinderschoenen (shop)</span></a>
-				<a href="http://www.oxenerschoenen.nl/vanbommel/" class="bommelshop <?=($this->getBaseUrl()=='http://www.vanbommel-shop.nl/')?'bommelshopActive':''?>"><span>Van Bommel Moergestel Holland (shop)</span></a>
-				<a href="http://www.oxenerschoenen.nl/tassen/" class="tassenshop <?=($this->getBaseUrl()=='http://www.oxenerschoenen.nl/tassen/')?'tassenshopActive':''?>"><span>Tassen (shop)</span></a>
-			</div>
-			<div class="quick-access">
-				<!--<p class="welcome-msg"><?php echo $this->getWelcome()?></p>-->
-				<?php echo $this->getChildHtml('topLinks') ?>
-				<?php echo $this->getChildHtml('store_language') ?>
-			</div>
+			<a href="<?php echo $this->getUrl('') ?>"><img src="<?=$this->getSkinUrl('images/logo.jpg');?>" alt="No Tomatoes - Life is good by" class="logo" /></a>
+			<img src="<?=$this->getSkinUrl('images/zevende_hemel.gif');?>" alt="de Zevende Hemel" class="text" />
+			<?php echo $this->getChildHtml('topLinks') ?>
+			<?php echo $this->getChildHtml('store_language') ?>
 			<?php echo $this->getChildHtml('topContainer'); ?>
+			<div class="clear">&nbsp;</div>
+			<p class="title">Welkom in de officiele no tomatoes webstore</p>
 		</div>
     </div>
 </div>

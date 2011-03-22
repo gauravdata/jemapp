@@ -27,11 +27,7 @@
 <div class="box-account box-recent">
 <?php $_orders = $this->getOrders(); ?>
     <div class="box-head">
-        <div class="block dark corners">
-			<div class="corner clt">&nbsp;</div>
-			<div class="corner crt">&nbsp;</div>
-			<div class="corner crb">&nbsp;</div>
-			<div class="corner clb">&nbsp;</div>
+        <div class="block dark">
 			<h2><?php echo $this->__('Recent Orders') ?></h2>
 		</div>
         <p><?php if( sizeof($_orders->getItems()) > 0 ): ?><a href="<?php echo $this->getUrl('sales/order/history') ?>"><?php echo $this->__('View All') ?></a><?php endif; ?></p>

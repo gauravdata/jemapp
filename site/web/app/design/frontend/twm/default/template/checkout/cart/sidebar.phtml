@@ -32,11 +32,7 @@
 
 ?>
 <?php if ($this->getIsNeedToDisplaySideBar()):?>
-<div class="block dark block-cart corners">
-	<div class="corner clt">&nbsp;</div>
-	<div class="corner crt">&nbsp;</div>
-	<div class="corner crb">&nbsp;</div>
-	<div class="corner clb">&nbsp;</div>
+<div class="block dark block-cart">
     <?php $_cartQty = $this->getSummaryCount() ?>
     <h2><?php echo $this->__('My Cart') ?></h2>
     <div class="block-content">

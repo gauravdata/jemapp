@@ -38,11 +38,7 @@
 			<h1><?php echo $this->__('Shopping Cart') ?></h1>
 		</div>
 		<div class="grid_4">
-			<div class="block light wrapped corners">
-				<div class="corner clt">&nbsp;</div>
-				<div class="corner crt">&nbsp;</div>
-				<div class="corner crb">&nbsp;</div>
-				<div class="corner clb">&nbsp;</div>
+			<div class="block light wrapped">
 				<?php if(!$this->hasError()): ?>
 				<ul class="checkout-types">
 				<?php foreach ($this->getMethods('top_methods') as $method): ?>
@@ -135,11 +131,7 @@
 			<?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
 		</div>
         <div class="totals grid_4">
-			<div class="block light wrapped corners">
-				<div class="corner clt">&nbsp;</div>
-				<div class="corner crt">&nbsp;</div>
-				<div class="corner crb">&nbsp;</div>
-				<div class="corner clb">&nbsp;</div>
+			<div class="block light wrapped">
 				<?php echo $this->getChildHtml('totals'); ?>
 				<?php if(!$this->hasError()): ?>
 				<ul class="checkout-types">

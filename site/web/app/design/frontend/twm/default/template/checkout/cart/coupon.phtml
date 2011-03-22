@@ -25,11 +25,7 @@
  */
 ?>
 <form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
-    <div class="discount block dark corners">
-		<div class="corner clt">&nbsp;</div>
-		<div class="corner crt">&nbsp;</div>
-		<div class="corner crb">&nbsp;</div>
-		<div class="corner clb">&nbsp;</div>
+    <div class="discount block dark">
         <h2><?php echo $this->__('Discount Codes') ?></h2>
         <div class="discount-form">
             <label for="coupon_code"><?php echo $this->__('Enter your coupon code if you have one.') ?></label>
