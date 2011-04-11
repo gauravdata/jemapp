@@ -32,9 +32,10 @@
 
 ?>
 <?php if ($this->getIsNeedToDisplaySideBar()):?>
-<div class="block dark block-cart">
+<div class="block block-cart">
+	<img src="<?php echo $this->getSkinUrl('images/no_tomatoes-bag-left.png') ?>" alt="cart" />
     <?php $_cartQty = $this->getSummaryCount() ?>
-    <h2><?php echo $this->__('My Cart') ?></h2>
+    <p class="title"><?php echo $this->__('My Cart') ?></p>
     <div class="block-content">
     <?php if ($_cartQty>0): ?>
         <div class="summary">
@@ -54,7 +55,7 @@
     <?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
     <div class="actions">
         <?php echo $this->getChildHtml('extra_actions') ?>
-        <button type="button" title="<?php echo $this->__('Checkout') ?>" class="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+        <button type="button" title="<?php echo $this->__('Checkout') ?>" class="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span>&gt;&gt;</span></span></button>
     </div>
     <?php endif ?>
     <?php $_items = $this->getRecentItems() ?>
@@ -63,6 +64,7 @@
     <?php else: ?>
         <p class="empty"><?php echo $this->__('You have no items in your shopping cart.') ?></p>
     <?php endif ?>
+		<div class="clear">&nbsp;</div>
     </div>
 </div>
 <?php endif;?>

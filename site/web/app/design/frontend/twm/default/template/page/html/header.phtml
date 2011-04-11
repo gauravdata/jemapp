@@ -27,13 +27,18 @@
 <div class="header-container">
     <div class="header">
 		<div class="container_12">
-			<a href="<?php echo $this->getUrl('') ?>"><img src="<?=$this->getSkinUrl('images/logo.jpg');?>" alt="No Tomatoes - Life is good by" class="logo" /></a>
-			<img src="<?=$this->getSkinUrl('images/zevende_hemel.gif');?>" alt="de Zevende Hemel" class="text" />
-			<?php echo $this->getChildHtml('topLinks') ?>
-			<?php echo $this->getChildHtml('store_language') ?>
-			<?php echo $this->getChildHtml('topContainer'); ?>
-			<div class="clear">&nbsp;</div>
-			<p class="title">Welkom in de officiele no tomatoes webstore</p>
+			<div class="grid_12">
+				<a href="<?php echo $this->getUrl('') ?>"><img src="<?=$this->getSkinUrl('images/logo.jpg');?>" alt="No Tomatoes - Life is good by" class="logo" /></a>
+				<img src="<?=$this->getSkinUrl('images/zevende_hemel.gif');?>" alt="de Zevende Hemel" class="text" />
+				<div class="options-menu">
+					<?php echo $this->getChildHtml('topLinks') ?>
+					<?php echo $this->getChildHtml('store_language') ?>
+				</div>
+				<?php echo $this->getChildHtml('topContainer'); ?>
+				<div class="clear">&nbsp;</div>
+				<p class="title">Welkom in de officiele no tomatoes webstore</p>
+				<?php echo $this->getChildHtml('breadcrumbs') ?>
+			</div>
 		</div>
     </div>
 </div>

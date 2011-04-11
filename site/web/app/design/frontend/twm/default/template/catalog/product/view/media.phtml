@@ -71,7 +71,7 @@
 <?php endif; ?>
 <?php if (count($this->getGalleryImages()) > 0): ?>
 	<div class="more-views">
-		<h2><?php echo $_product->getName().' '.$this->__('More Views') ?></h2>
+		<p class="more"><?php echo $_product->getName().' '.$this->__('More Views') ?></p>
 		<ul id="product-image-gallery-list">
 		<?php $i = 0; foreach ($this->getGalleryImages() as $_image): ?>
 			<li>
@@ -86,6 +86,7 @@
 			</li>
 		<?php endforeach; ?>
 		</ul>
+		<div class="clear">&nbsp;</div>
 	</div>
 	<script type="text/javascript">
 		$('product-image-gallery-list').select('a').each(function(item){

@@ -78,9 +78,8 @@ Default layout, loads most of the pages
                     <label>Page Header</label>
                     <action method="setElementClass"><value>top-container</value></action>
                 </block>
+				<block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
             </block>
-
-            <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
 
             <block type="core/text_list" name="left" as="left" translate="label">
                 <label>Left Column</label>

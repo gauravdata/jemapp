@@ -26,16 +26,16 @@
 ?>
 <?php $_item = $this->getItem()?>
 <tr>
-    <td class="a-center white"><a href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove item')?>" class="btn-remove2"><?php echo $this->__('Remove item')?></a></td>
+    <td class="a-center white"><a href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo $this->__('Remove item')?>" class="btn-remove2"><img src="<?=$this->getSkinUrl('images/btn_trash.gif');?>" alt="<?php echo $this->__('Remove item')?>" /></a></td>
     <td class="white"><?php if ($this->hasProductUrl()):?><a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>"><?php endif;?><img src="<?php echo $this->getProductThumbnail()->resize(75); ?>" width="75" height="75" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /><?php if ($this->hasProductUrl()):?></a><?php endif;?></td>
     <td>
-        <h2 class="product-name">
+        <p class="product-name">
         <?php if ($this->hasProductUrl()):?>
             <a href="<?php echo $this->getProductUrl() ?>"><?php echo $this->htmlEscape($this->getProductName()) ?></a>
         <?php else: ?>
             <?php echo $this->htmlEscape($this->getProductName()) ?>
         <?php endif; ?>
-        </h2>
+        </p>
         <?php if ($_options = $this->getOptionList()):?>
         <dl class="item-options">
             <?php foreach ($_options as $_option) : ?>

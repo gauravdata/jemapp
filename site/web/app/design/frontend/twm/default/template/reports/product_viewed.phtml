@@ -27,7 +27,7 @@
 ?>
 <?php if ($_products = $this->getRecentlyViewedProducts()): ?>
 <div class="block dark block-viewed">
-    <h2><?php echo $this->__('Recently Viewed Products') ?></h2>
+    <p class="title"><?php echo $this->__('Recently Viewed Products') ?></p>
     <div class="block-content">
         <ol id="recently-viewed-items">
         <?php foreach ($_products as $_item): ?>
