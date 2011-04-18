@@ -31,7 +31,17 @@ body, textarea, button	{ font-family: Arial, Helvetica, sans-serif; font-size: 1
 
 .wrapper	{ min-height: 100%; position: relative; }
 
-h1, h2, p.title, .block-account .block-title	{
+#site-title {
+	text-transform: uppercase;
+	color: #023e75;
+	font-size: 40px;
+	font-family: "Letter Gothic Std";
+	margin-top: 65px;
+	padding-left: 20px;
+	line-height: 1em;
+	float: left;
+}
+h2, p.title, .block-account .block-title	{
 	font-family: "Letter Gothic Std";
 	font-size: 1.65em;
 	line-height: 1em;
@@ -41,6 +51,7 @@ h1, h2, p.title, .block-account .block-title	{
 	font-weight: normal;
 	padding: 8px 15px 6px;
 	margin-bottom: 20px;
+	text-align: center;
 }
 h3, h4	{ font-size: 1.2em; color: #1a2548; margin-bottom: 15px; }
 h4		{ margin: 15px 0; }
@@ -65,16 +76,16 @@ label.required em	{ color: #FF0000; margin-right: 5px; }
 .header .logo		{ float: left; margin-top: 30px; }
 .header .text		{ float: left; margin: 60px 0 0 30px; }
 
-.header .options-menu		{ float: right; margin-top: 45px; }
+.header .options-menu		{ float: right; margin-top: 40px; }
 .header ul.links, .header .form-language	{ float: left; margin-left: 10px; }
 .header .links li			{ float: left; border-right: 1px solid #000; padding: 0 7px; }
 .header .links a			{ color: #444; }
-.header .links a:hover		{ color: #f1b829; }
+.header .links a:hover		{ color: #7f7f7f; }
 .header .links li.last		{ border: none; padding-right: 0; }
 .header .form-language li	{ float: left; margin: 2px 0 0 5px; }
 
 .header p.title		{ display: none; }
-.cms-home .header p.title		{ display: block; text-align: center; margin: 25px 0 0; }
+.cms-home .header p.title		{ display: block; text-align: center; margin: 10px 0 0px; }
 
 .nav-container		{ width: 100%; position: absolute; top: 200px; display: none; }
 
@@ -108,7 +119,7 @@ col-main .block-content		{ margin-bottom: 20px; }
 
 /*- Paging -*/
 .toolbar			{ background: url(../images/footerBorder.gif) repeat-x top; text-transform: uppercase; margin-bottom: 20px; }
-.category-products .pager				{ background: url(../images/footerBorder.gif) repeat-x bottom; padding: 10px 0; }
+.category-products .pager				{ background: url(../images/footerBorder.gif) repeat-x bottom; padding: 10px 0; color: #7f7f7f; }
 .pager input, .pager select		{ margin: 0; }
 
 /*- Account -*/
@@ -153,7 +164,7 @@ p.category-image	{ margin-bottom: 25px; float: left; }
 .products-grid .item .actions	{ font-family: "Letter Gothic Std"; text-align: center; font-size: 1.25em; }
 .products-grid .item p			{ margin: 0; }
 .products-grid .item a			{ color: #023e75; }
-.products-grid .item a:hover	{ color: #e4b233; }
+.products-grid .item a:hover	{ color: #7f7f7f; }
 
 /*- Detail -*/
 .product-img-box 	{ width: 340px; float: left; margin-right: 20px; }
@@ -233,7 +244,7 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 .sidebar .block .submit:hover, .block-cart button.button:hover	{ color: #f1b829; }
 
 /* sortering */
-.sidebar .block-layered-nav	{ color: #023e75; padding: 0; background: none; }
+.sidebar .block-layered-nav	{ color: #023e75; padding: 0; background: none; text-transform: uppercase; }
 .sidebar .block-layered-nav dd		{ margin: 20px 0 10px; }
 .sidebar .block-layered-nav dd li	{ width: 150px; float: left; font-family: "Letter Gothic Std"; font-size: 2em; line-height: 1em; font-weight: bold; }
 .sidebar .block-layered-nav dd a		{ color: #023e75; }
@@ -377,7 +388,9 @@ tr.tax-details-first td 		{ border-top:1px solid #d2d8db; }
 .footer .container_12	{ width: 950px; border-right: 10px solid #fff; background: url(../images/footerBorder.gif) repeat-x left top; padding-top: 19px; }
 
 .footer a	{ color: #444; }
-.footer a:hover	{ color: #f1b829; }
+.footer a:hover	{ color: #7f7f7f; }
+
+.footer p.title { text-align: left; }
 
 .payment	{ width: 380px; float: right; }
 .payment a	{ display: inline; padding: 0 2px; }

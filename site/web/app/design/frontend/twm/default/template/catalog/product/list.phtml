@@ -100,7 +100,7 @@
 						<div class="new">&nbsp;</div>
 					<?php endif; ?>
 					<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" class="url product-image"><img class="photo fn" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(180,180); ?>" width="180" height="180" alt="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" /></a>
-					<p class="title item fn product-name"><?php echo $this->htmlEscape($_product->getName()) ?></h2>
+					<p class="title item fn product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->htmlEscape($this->getImageLabel($_product, 'small_image')) ?>" class="url product-image"><?php echo $this->htmlEscape($_product->getName()) ?></a></p>
 					<?php if($_product->getRatingSummary()): ?>
 					<?php endif; ?>
 				</div>
