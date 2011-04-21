@@ -56,7 +56,7 @@
 					</script>
 				<?php else : ?>
 					<?php $big = $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->resize(640);	?>
-					<a href="<?php echo $big ?>" class="product-image MagicZoom" rel="zoom-width: 250px; zoom-height: 338px;">
+					<a href="<?php echo $big ?>" class="product-image MagicZoom" rel="zoom-width: 267px; zoom-height: 338px;">
 						<?php
 							$_img = '<img class="photo fn" src="'.$this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->resize(338).'" alt="'.$this->htmlEscape($_image->getLabel()).'" title="'.$this->htmlEscape($_image->getLabel()).'" />';
 							echo $_helper->productAttribute($_product, $_img, 'image');

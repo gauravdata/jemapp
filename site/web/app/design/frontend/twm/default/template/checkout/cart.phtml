@@ -121,7 +121,7 @@
 	</div>
 	<div class="clear">&nbsp;</div>
     <div class="cart-collaterals">
-		<div class="col-1 grid_4 alpha">
+		<div class="col-1 grid_3 alpha">
 			<?php echo $this->getChildHtml('crosssell') ?>
 			&nbsp;
 		</div>
@@ -129,14 +129,14 @@
 			<?php echo $this->getChildHtml('coupon') ?>
 			<?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
 		</div>
-        <div class="totals grid_4 omega">
+        <div class="totals grid_5 omega">
 			<div class="block light wrapped">
 				<?php echo $this->getChildHtml('totals'); ?>
 				<?php if(!$this->hasError()): ?>
 				<ul class="checkout-types">
 				<?php foreach ($this->getMethods('methods') as $method): ?>
 					<?php if ($methodHtml = $this->getMethodHtml($method)): ?>
-					<li><?php echo $methodHtml; ?></li>
+					<li><?php echo $methodHtml; ?><div class="clear">&nbsp;</div></li>
 					<?php endif; ?>
 				<?php endforeach; ?>
 				</ul>

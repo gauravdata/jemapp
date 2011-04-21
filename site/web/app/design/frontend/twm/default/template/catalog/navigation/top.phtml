@@ -41,13 +41,12 @@
 ?>
 <?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top') ?>
 <div class="nav-container">
-	<div class="container_12">
-		<ul id="nav">
-			<li class=""><a href="<?php echo $this->getUrl('') ?>">Home</a></li>
-			<?php if($_menu): ?>
-				<?php echo $_menu ?>
-			<?php endif ?>
-		</ul>
-		<?php echo $this->getChildHtml('topSearch') ?>
-	</div>
+	<img src="<?=$this->getSkinUrl('images/menu-image.jpg');?>" alt="No Tomatoes Surfing" />
+	<ul id="nav">
+		<!--<li class=""><a href="<?php echo $this->getUrl('') ?>">Home</a></li>-->
+		<?php if($_menu): ?>
+			<?php echo $_menu ?>
+		<?php endif ?>
+	</ul>
+	<?php //echo $this->getChildHtml('topSearch') ?>
 </div>
