@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Total_BuckarooPaysafecard>
+          <version>0.3.20</version>
+       </Total_BuckarooPaysafecard>
+    </modules>
+
+    <global>
+    <blocks>
+        <buckaroopaysafecard>
+            <class>Total_BuckarooPaysafecard_Block</class>
+        </buckaroopaysafecard>
+    </blocks>
+
+        <models>
+            <buckaroopaysafecard>
+                <class>Total_BuckarooPaysafecard_Model</class>
+            </buckaroopaysafecard>
+        </models>
+	    <helpers>
+            <buckaroopaysafecard>
+                <class>Total_BuckarooPaysafecard_Helper</class>
+			</buckaroopaysafecard>  
+        </helpers>
+        <resources>
+            <buckaroopaysafecard_setup>
+                <setup>
+                    <module>Total_BuckarooPaysafecard</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </buckaroopaysafecard_setup>
+            <buckaroopaysafecard_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </buckaroopaysafecard_write>
+            <buckaroopaysafecard_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </buckaroopaysafecard_read>
+        </resources>
+
+    </global>
+
+    <frontend>
+	    <routers>
+	        <buckaroopaysafecard>
+	            <use>standard</use>
+	            <args>
+	                <module>Total_BuckarooPaysafecard</module>
+	                <frontName>buckaroopaysafecard</frontName>
+	            </args>
+	        </buckaroopaysafecard>
+	    </routers>
+	    <translate>
+            <modules>
+                <Total_BuckarooPaysafecard>
+                    <files>
+                        <default>Total_BuckarooPaysafecard.csv</default>
+                    </files>
+                </Total_BuckarooPaysafecard>
+            </modules>
+        </translate>
+    </frontend>
+    
+    <default>
+        <payment>
+            <buckaroopaysafecard>
+                <active>0</active>
+                <model>buckaroopaysafecard/paymentMethod</model>
+                <title>Buckaroo PaySafeCard</title>
+                <order_status>pending</order_status>				
+                <allowspecific>0</allowspecific>
+                <gateway>https://payment.buckaroo.nl/gateway/paysafecard_payment.asp</gateway>
+            </buckaroopaysafecard>
+         </payment>
+    </default>
+</config>

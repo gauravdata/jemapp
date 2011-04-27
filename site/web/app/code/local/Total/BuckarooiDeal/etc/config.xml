@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Total_BuckarooiDeal>
+          <version>0.3.20</version>
+       </Total_BuckarooiDeal>
+    </modules>
+
+    <global>
+    <blocks>
+        <buckarooideal>
+            <class>Total_BuckarooiDeal_Block</class>
+        </buckarooideal>
+    </blocks>
+
+        <models>
+            <buckarooideal>
+                <class>Total_BuckarooiDeal_Model</class>
+            </buckarooideal>
+        </models>
+	    <helpers>
+            <buckarooideal>
+                <class>Total_BuckarooiDeal_Helper</class>
+			</buckarooideal>  
+        </helpers>
+        <resources>
+            <buckarooideal_setup>
+                <setup>
+                    <module>Total_BuckarooiDeal</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </buckarooideal_setup>
+            <buckarooideal_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </buckarooideal_write>
+            <buckarooideal_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </buckarooideal_read>
+        </resources>
+
+    </global>
+
+    <frontend>
+	    <routers>
+	        <buckarooideal>
+	            <use>standard</use>
+	            <args>
+	                <module>Total_BuckarooiDeal</module>
+	                <frontName>buckarooideal</frontName>
+	            </args>
+	        </buckarooideal>
+	    </routers>
+	    <translate>
+            <modules>
+                <Total_BuckarooiDeal>
+                    <files>
+                        <default>Total_BuckarooiDeal.csv</default>
+                    </files>
+                </Total_BuckarooiDeal>
+            </modules>
+        </translate>
+    </frontend>
+
+    <default>
+        <payment>
+            <buckarooideal>
+                <active>0</active>
+                <model>buckarooideal/paymentMethod</model>
+                <title>Buckaroo iDeal</title>
+                <order_status>pending</order_status>				
+                <allowspecific>0</allowspecific>
+                <gateway>https://payment.buckaroo.nl/gateway/ideal_payment.asp</gateway>
+            </buckarooideal>
+         </payment>
+    </default>
+</config>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Total_BuckarooPayperemail>
+          <version>0.3.20</version>
+       </Total_BuckarooPayperemail>
+    </modules>
+
+    <global>
+    <blocks>
+        <buckaroopayperemail>
+            <class>Total_BuckarooPayperemail_Block</class>
+        </buckaroopayperemail>
+    </blocks>
+
+        <models>
+            <buckaroopayperemail>
+                <class>Total_BuckarooPayperemail_Model</class>
+            </buckaroopayperemail>
+        </models>
+	    <helpers>
+            <buckaroopayperemail>
+                <class>Total_BuckarooPayperemail_Helper</class>
+			</buckaroopayperemail>  
+        </helpers>
+        <resources>
+            <buckaroopayperemail_setup>
+                <setup>
+                    <module>Total_BuckarooPayperemail</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </buckaroopayperemail_setup>
+            <buckaroopayperemail_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </buckaroopayperemail_write>
+            <buckaroopayperemail_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </buckaroopayperemail_read>
+        </resources>
+
+    </global>
+
+    <frontend>
+	    <routers>
+	        <buckaroopayperemail>
+	            <use>standard</use>
+	            <args>
+	                <module>Total_BuckarooPayperemail</module>
+	                <frontName>buckaroopayperemail</frontName>
+	            </args>
+	        </buckaroopayperemail>
+	    </routers>
+	    <translate>
+            <modules>
+                <Total_BuckarooPayperemail>
+                    <files>
+                        <default>Total_BuckarooPayperemail.csv</default>
+                    </files>
+                </Total_BuckarooPayperemail>
+            </modules>
+        </translate>
+    </frontend>
+
+    <default>
+        <payment>
+            <buckaroopayperemail>
+                <active>0</active>
+                <model>buckaroopayperemail/paymentMethod</model>
+                <title>Buckaroo PayPerEmail</title>
+                <order_status>pending</order_status>				
+                <allowspecific>0</allowspecific>
+                <gateway>https://payment.buckaroo.nl/gateway/paypermail_form.asp</gateway>
+                <allowed_methods>creditcard ideal collect transfer giropay</allowed_methods>
+            </buckaroopayperemail>
+         </payment>
+    </default>
+</config>

@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Total_Buckaroo>
+          <version>0.3.20</version>
+       </Total_Buckaroo>
+    </modules>
+
+    <global>
+    <blocks>
+        <buckaroo>
+            <class>Total_Buckaroo_Block</class>
+        </buckaroo>
+    </blocks>
+
+        <models>
+            <buckaroo>
+                <class>Total_Buckaroo_Model</class>
+            </buckaroo>
+        </models>
+	    <helpers>
+            <buckaroo>
+                <class>Total_Buckaroo_Helper</class>
+			</buckaroo>  
+        </helpers>
+        <resources>
+            <buckaroo_setup>
+                <setup>
+                    <module>Total_Buckaroo</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </buckaroo_setup>
+            <buckaroo_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </buckaroo_write>
+            <buckaroo_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </buckaroo_read>
+        </resources>
+   		<sales>
+            <order>
+                <statuses>
+                    <buckaroo_success translate="label"><label>Buckaroo (success)</label></buckaroo_success>
+                    <buckaroo_failed translate="label"><label>Buckaroo (failed)</label></buckaroo_failed>
+                    <buckaroo_too_much translate="label"><label>Buckaroo (too much)</label></buckaroo_too_much>
+                    <buckaroo_too_less translate="label"><label>Buckaroo (too less)</label></buckaroo_too_less>
+                </statuses>
+                <states>
+                    <processing>
+                        <statuses>
+                            <buckaroo_success />
+                            <buckaroo_failed />
+                            <buckaroo_too_less />
+                            <buckaroo_too_much />
+                        </statuses>
+                    </processing>
+                    <!--<buckaroo_success>
+                        <label>Buckaroo (success)</label>
+                        <statuses>
+                            <buckaroo_success default="1"/>
+                        </statuses>
+                        <visible_on_front /> 
+                    </buckaroo_success>                
+                    <buckaroo_failed>
+                        <label>Buckaroo (failed)</label>
+                        <statuses>
+                            <buckaroo_failed default="1"/>
+                        </statuses>
+                        <visible_on_front /> 
+                    </buckaroo_failed>                
+                    <buckaroo_too_much>
+                    	<label>Buckaroo (too much)</label>
+                        <statuses>
+                            <buckaroo_too_much default="1"/>
+                        </statuses>
+                        <visible_on_front /> 
+                    </buckaroo_too_much>
+                    <buckaroo_too_less>
+                    	<label>Buckaroo (too less)</label>
+                        <statuses>
+                            <buckaroo_too_less default="1"/>
+                        </statuses>
+                        <visible_on_front /> 
+                    </buckaroo_too_less>
+                --></states>
+            </order>
+        </sales>                               
+
+
+    </global>
+    <admin>
+        <routers>
+            <admin_buckaroo>
+                <use>admin</use>
+                <args>
+                    <module>Total_Buckaroo</module>
+                    <frontName>admin_buckaroo</frontName>
+                </args>
+            </admin_buckaroo>
+        </routers>
+    </admin>
+    <frontend>
+	    <routers>
+	        <buckaroo>
+	            <use>standard</use>
+	            <args>
+	                <module>Total_Buckaroo</module>
+	                <frontName>buckaroo</frontName>
+	            </args>
+	        </buckaroo>
+	    </routers>
+	    <translate>
+            <modules>
+                <Total_Buckaroo>
+                    <files>
+                        <default>Total_Buckaroo.csv</default>
+                    </files>
+                </Total_Buckaroo>
+            </modules>
+        </translate>
+    </frontend>
+    <default>
+        <payment>
+            <buckaroo>
+                <active>1</active>
+                <allowed_methods>creditcard ideal collect transfer giropay</allowed_methods>
+                <allowed_methods_cm></allowed_methods_cm>
+                <cm_invoice_minutes>10</cm_invoice_minutes>
+                <cm_due_minutes>10</cm_due_minutes>
+                <auto_invoice>0</auto_invoice>
+                <payment_description>Payment to the webshop</payment_description>
+                <mode>1</mode>
+                <model>buckaroo/paymentMethod</model>
+                <order_status>pending</order_status>
+                <title>Buckaroo</title>
+                <allowspecific>0</allowspecific>
+                <gateway>https://payment.buckaroo.nl/gateway/payment.asp</gateway>
+                <success_redirect>checkout/onepage/success/</success_redirect>
+                <failure_redirect>checkout/</failure_redirect>
+                <order_state_success></order_state_success>
+                <order_status_success></order_status_success>
+                <order_state_failed></order_state_failed>
+                <order_status_failed></order_status_failed>
+                <show_form>1</show_form>
+            </buckaroo>
+         </payment>
+    </default>
+</config>

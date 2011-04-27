@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Total_BuckarooCC>
+          <version>0.3.20</version>
+       </Total_BuckarooCC>
+    </modules>
+
+    <global>
+    <blocks>
+        <buckaroocc>
+            <class>Total_BuckarooCC_Block</class>
+        </buckaroocc>
+    </blocks>
+
+        <models>
+            <buckaroocc>
+                <class>Total_BuckarooCC_Model</class>
+            </buckaroocc>
+        </models>
+	    <helpers>
+            <buckaroocc>
+                <class>Total_BuckarooCC_Helper</class>
+			</buckaroocc>  
+        </helpers>
+        <resources>
+            <buckaroocc_setup>
+                <setup>
+                    <module>Total_BuckarooCC</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </buckaroocc_setup>
+            <buckaroocc_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </buckaroocc_write>
+            <buckaroocc_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </buckaroocc_read>
+        </resources>
+
+    </global>
+
+    <frontend>
+	    <routers>
+	        <buckaroocc>
+	            <use>standard</use>
+	            <args>
+	                <module>Total_BuckarooCC</module>
+	                <frontName>buckaroocc</frontName>
+	            </args>
+	        </buckaroocc>
+	    </routers>
+	    <translate>
+            <modules>
+                <Total_BuckarooCC>
+                    <files>
+                        <default>Total_BuckarooCC.csv</default>
+                    </files>
+                </Total_BuckarooCC>
+            </modules>
+        </translate>
+    </frontend>
+<!-- <frontend>
+        <translate>
+            <modules>
+                <Total_BuckarooCC>
+                    <files>
+                        <default>Total_BuckarooCC.csv</default>
+                    </files>
+                </Total_BuckarooCC>
+            </modules>
+        </translate>
+    </frontend> -->
+
+    <default>
+        <payment>
+            <buckaroocc>
+                <active>0</active>
+                <model>buckaroocc/paymentMethod</model>
+                <title>Buckaroo Credit Card</title>
+                <order_status>pending</order_status>				
+                <allowspecific>0</allowspecific>
+                <gateway>https://payment.buckaroo.nl/sslplus/request_for_authorization.asp</gateway>
+                <request_for_authorization>0</request_for_authorization>
+                <request_for_authorization_mode>1</request_for_authorization_mode>
+                <request_for_authorization_url>https://payment.buckaroo.nl/xml/request_for_authorization.asp</request_for_authorization_url>
+            </buckaroocc>
+         </payment>
+    </default>
+</config>

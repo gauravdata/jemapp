@@ -995,7 +995,7 @@ body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;
 
                         &lt;br/&gt;
 
-{{depend salable}}&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;{{var addAllLink}}&quot; style=&quot;color:#DC6809;&quot;&gt;Alle producten aan winkelwagen toevoegen.&lt;/a&gt;&lt;/strong&gt; |{{/depend}} &lt;strong&gt;&lt;a href=&quot;{{var viewOnSiteLink}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Alle producten van de verlanglijst bekijken.&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+{{depend salable}}&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;{{var addAllLink}}&quot; style=&quot;color:#DC6809;&quot;&gt;Alle producten aan shoppingbag toevoegen.&lt;/a&gt;&lt;/strong&gt; |{{/depend}} &lt;strong&gt;&lt;a href=&quot;{{var viewOnSiteLink}}&quot; style=&quot;color:#1E7EC8;&quot;&gt;Alle producten van de verlanglijst bekijken.&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
                         &lt;p&gt;Bedankt,&lt;br/&gt;&lt;strong&gt;{{var customer.name}}&lt;/strong&gt;&lt;/p&gt;
 

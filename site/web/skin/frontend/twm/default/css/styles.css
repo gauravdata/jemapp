@@ -32,12 +32,12 @@ body, textarea, button	{ font-family: Arial, Helvetica, sans-serif; font-size: 1
 .wrapper	{ min-height: 100%; position: relative; }
 
 @font-face {
-    font-family: 'LetterGothicLineMonospace';
-    src: url('../fonts/letgothl-webfont.eot');
-    src: url('../fonts/letgothl-webfont.eot?iefix') format('eot'),
-         url('../fonts/letgothl-webfont.woff') format('woff'),
-         url('../fonts/letgothl-webfont.ttf') format('truetype'),
-         url('../fonts/letgothl-webfont.svg#webfontEX1qtn1x') format('svg');
+    font-family: 'LetterGothicMTStdRegular';
+    src: url('../fonts/lettergothicmtstd-webfont.eot');
+    src: url('../fonts/lettergothicmtstd-webfont.eot?#iefix') format('eot'),
+         url('../fonts/lettergothicmtstd-webfont.woff') format('woff'),
+         url('../fonts/lettergothicmtstd-webfont.ttf') format('truetype'),
+         url('../fonts/lettergothicmtstd-webfont.svg#webfont9Uli7UaI') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -46,14 +46,14 @@ body, textarea, button	{ font-family: Arial, Helvetica, sans-serif; font-size: 1
 	text-transform: uppercase;
 	color: #023e75;
 	font-size: 40px;
-	font-family: "Letter Gothic Std";
+	font-family: "LetterGothicMTStdRegular";
 	margin-top: 65px;
 	padding-left: 20px;
 	line-height: 1em;
 	float: left;
 }
 h1, h2, p.title, .block-account .block-title	{
-	font-family: "Letter Gothic Std";
+	font-family: "LetterGothicMTStdRegular";
 	font-size: 1.65em;
 	line-height: 1em;
 	color: #fff;
@@ -66,13 +66,13 @@ h1, h2, p.title, .block-account .block-title	{
 h3, h4	{ font-size: 1.2em; color: #1a2548; margin-bottom: 15px; }
 h4		{ margin: 15px 0; }
 p.title, .checkout-cart-index h1, .checkout-onepage-index h1, .block-account .block-title {
-	color: #023e75; background: none; padding: 0; font-weight: bold;
+	color: #023e75; background: none; padding: 0;
 }
 .cms-home .col-main .std	{ display: none; }
 
 p		{ margin: 0 0 15px; }
 
-a		{ color: #f1b829; text-decoration: none; }
+a		{ color: #000; text-decoration: none; }
 a:hover	{ color: #000; }
 
 input, input[type=text], select	{ border: 1px solid #00427b; padding: 3px; color: #666; margin-bottom: 5px; }
@@ -88,6 +88,7 @@ label.required em	{ color: #FF0000; margin-right: 5px; }
 
 .header .options-menu		{ float: right; margin-top: 40px; }
 .header ul.links, .header .form-language	{ float: left; margin-left: 10px; }
+.header .form-language		{ display: none; }
 .header .links li			{ float: left; border-right: 1px solid #000; padding: 0 7px; }
 .header .links a			{ color: #444; }
 .header .links a:hover		{ color: #7f7f7f; }
@@ -103,9 +104,9 @@ label.required em	{ color: #FF0000; margin-right: 5px; }
 #nav ul				{ display: none; }
 
 #nav		{ margin: 20px 0; }
-#nav li		{ font-size: 1.65em; font-family: "Letter Gothic Std"; line-height: 1em; text-transform: uppercase; }
+#nav li		{ font-size: 1.65em; font-family: "LetterGothicMTStdRegular"; line-height: 1em; text-transform: uppercase; }
 #nav a		{ color: #023E75; }
-#nav a:hover		{ color: #c10e22; }
+#nav a:hover, #nav .active a		{ color: #c10e22; }
 
 /*- Breadcrumbs -*/
 .breadcrumbs		{ }
@@ -127,7 +128,7 @@ col-main .block-content		{ margin-bottom: 20px; }
 .collection-image		{ position: relative; margin-bottom: 20px; }
 .collection-image img	{ display: block; }
 
-.collection-image span			{ position: absolute; right: 10px; font-family: "Letter Gothic Std"; color: #fff; font-size: 4.75em; line-height: 0.65em; text-align: right; text-transform: uppercase; }
+.collection-image span			{ position: absolute; right: 10px; font-family: "LetterGothicMTStdRegular"; color: #fff; font-size: 4.75em; line-height: 0.65em; text-align: right; text-transform: uppercase; }
 .collection-image span.top		{ top: 15px; }
 .collection-image span.bottom	{ bottom: 0; }
 .collection-image strong		{ display: block; color: #000; font-size: 0.4em; }
@@ -189,7 +190,7 @@ p.category-image	{ margin-bottom: 25px; float: left; }
 .products-grid .item 			{ margin-bottom: 20px; text-align: center; }
 .products-grid .item img		{ margin-bottom: 15px; }
 .products-grid .item p.title	{ text-align: center; font-size: 1.25em; font-weight: normal; margin-bottom: 5px; }
-.products-grid .item .actions	{ font-family: "Letter Gothic Std"; text-align: center; font-size: 1.25em; }
+.products-grid .item .actions	{ font-family: "LetterGothicMTStdRegular"; text-align: center; font-size: 1.25em; }
 .products-grid .item p			{ margin: 0; }
 .products-grid .item a			{ color: #023e75; }
 .products-grid .item a:hover	{ color: #7f7f7f; }
@@ -220,7 +221,7 @@ p.availability				{ margin: 0; border-top: 1px solid #d5d5cb; padding-top: 15px;
 
 .add-to-cart .submit img { position: absolute; top: -30px; left: -90px; }
 .add-to-cart .submit {
-	font-family: "Letter Gothic Std";
+	font-family: "LetterGothicMTStdRegular";
 	position: relative;
 	font-size: 1.65em;
 	line-height: 1em;
@@ -237,7 +238,7 @@ p.availability				{ margin: 0; border-top: 1px solid #d5d5cb; padding-top: 15px;
 }
 .add-to-cart .submit:hover {
 	color: #000;
-	background: #f1b829;
+	background: #000;
 }
 
 /*- Prices -*/
@@ -254,13 +255,13 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 }
 .sidebar .block	p		{ margin: 10px 0; }
 .sidebar .block p.subtotal, .sidebar .block p.empty	{ margin-bottom: 0; }
-.sidebar .block a		{ color: #f1b829;}
+.sidebar .block a		{ color: #000;}
 .sidebar .block a:hover	{ color: #c10e22;}
 
 .sidebar .block-viewed	{ background: none; padding: 0; }
 .sidebar .block-viewed p.title, .bestsellers p.title	{ margin-top: 0; padding: 10px 0 5px; margin: 0; color: #023e75; }
 .sidebar .block-viewed a		{ color: #444; }
-.sidebar .block-viewed a:hover	{ color: #f1b829; }
+.sidebar .block-viewed a:hover	{ color: #000; }
 
 .sidebar .block-cart img		{ position: absolute; right: 12px; top: -18px; }
 .sidebar .block-cart p			{ margin-right: 75px; }
@@ -268,16 +269,16 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 .sidebar .block form			{ margin-top: 10px; }
 .sidebar .block .input-text		{ width: 215px; color: #023e75; border: none; background: #fff; padding: 5px; }
 .sidebar .block .submit, .block-cart button.button {
-	font-family: "Letter Gothic Std"; font-size: 2.1em; background: none; padding: 0; float: right; border: none; color: #fff; margin: 0;
+	font-family: "LetterGothicMTStdRegular"; font-size: 2.1em; background: none; padding: 0; float: right; border: none; color: #fff; margin: 0;
 }
 .block-cart button.button	{ height: 25px; text-align: right; }
-.sidebar .block .submit:hover, .block-cart button.button:hover	{ color: #f1b829; }
+.sidebar .block .submit:hover, .block-cart button.button:hover	{ color: #000; }
 
 /* sortering */
 #narrow-by-list				{ }
 .sidebar .block-layered-nav	{ color: #023e75; padding: 0; background: none; text-transform: uppercase; }
 .sidebar .block-layered-nav dd		{ margin: 20px 0 10px; }
-.sidebar .block-layered-nav dd li	{ /*width: 150px; float: left;*/ font-family: "Letter Gothic Std"; font-size: 1.65em; line-height: 1em;  }
+.sidebar .block-layered-nav dd li	{ /*width: 150px; float: left;*/ font-family: "LetterGothicMTStdRegular"; font-size: 1.65em; line-height: 1em;  }
 .sidebar .block-layered-nav dd a		{ color: #023e75; }
 .sidebar .block-layered-nav dd a:hover	{ color: #c10e22; }
 .block-layered-nav .block-title		{ display: none; }
@@ -295,21 +296,21 @@ ul.messages .success-msg	{ padding-left: 28px; background: url(../images/i_msg-s
 ul.messages .error-msg		{ padding-left: 28px; background: url(../images/i_msg-error.gif) no-repeat left; }
 ul.messages .note-msg		{ padding-left: 28px; background: url(../images/i_msg-note.gif) no-repeat left; }
 button.btn-checkout {
-	font-family: "Letter Gothic Std"; font-size: 1.6em; background: #023e75; padding: 10px; float: right; border: none; color: #fff; margin: 0 0 20px;
+	font-family: "LetterGothicMTStdRegular"; font-size: 1.6em; background: #023e75; padding: 10px 10px 8px; float: right; border: none; color: #fff; margin: 0 0 20px; text-transform: uppercase;
 }
 button.btn-checkout:hover {
-	background: #f1b829; color: #000;
+	background: #000; color: #000;
 }
 
 .data-table 				{ width:100%; margin-bottom: 20px; }
 .data-table thead 			{ background-color: #023e75; }
-.data-table th 				{ font-family: "Letter Gothic Std"; padding: 12px 15px 10px; border: 1px solid #023e75; font-weight: normal; color: #fff; text-align: left; font-size: 1.3em; text-transform: uppercase; white-space: nowrap; }
+.data-table th 				{ font-family: "LetterGothicMTStdRegular"; padding: 12px 15px 10px; border: 1px solid #023e75; font-weight: normal; color: #fff; text-align: left; font-size: 1.3em; text-transform: uppercase; white-space: nowrap; }
 
 .data-table td 					{ padding: 10px; font-size: 1.2em; border: 1px solid #023e75; vertical-align: top; }
 .data-table td .product-name	{ margin: 0; }
 .data-table td .product-name a	{ text-decoration: underline; color: #000; }
 .data-table td .item-options dt	{ font-weight: bold; }
-.data-table td .item-options dd	{ padding: 0 10px; }
+.data-table td .item-options dd	{ padding: 0; }
 
 .opc .data-table tfoot td 	{ background: #D7DBE6; border: 1px solid #9aa3c0; border-top: none; }
 .data-table tfoot td 		{ border: none; padding: 12px; text-align: right; }
@@ -330,21 +331,24 @@ button.btn-checkout:hover {
 .cart .input-box		{ float: left; margin-right: 10px; }
 .cart .buttons-set		{ float: left; }
 
-.totals .block			{ font-family: "Letter Gothic Std"; border: 1px solid #023e75; padding: 12px 15px; text-align: right; color: #023e75; margin-bottom: 20px; }
+.totals .block			{ font-family: "LetterGothicMTStdRegular"; border: 1px solid #023e75; padding: 12px 15px; text-align: right; color: #023e75; margin-bottom: 20px; }
 .totals table			{ width: 100%; text-align: right; font-size: 1.4em; margin-bottom: 15px; }
 .totals table td		{ padding: 0 0 15px 5px; }
 .totals button.btn-checkout	{ margin-bottom: 10px; }
 
 .checkout-types a		{ color: #023e75; }
-.checkout-types a:hover	{ color: #F1B829; }
+.checkout-types a:hover	{ color: #000; }
 
 /*- Checkout -*/
 .opc 			{ position:relative; }
 .opc li.section { margin: 0 0 20px; color: #1A2548; }
 .opc li.section ul.form-list { border: none; background: none; padding: 0; }
 
+.opc .step a		{ color: #023e75; }
+.opc .step a:hover	{ color: #000; }
+
 .opc .active .step-title 	{ cursor: default; }
-.opc .step-title h2 		{ margin: 0; font-size: 1.25em; padding: 14px 17px; }
+.opc .step-title h2 		{ margin: 0; font-size: 1.25em; padding: 14px 17px 12px; }
 
 .opc .buttons-set.disabled button.button 	{ display:none; }
 .opc .buttons-set .please-wait 				{ height:21px; line-height:21px; }
@@ -482,3 +486,47 @@ tr.tax-details-first td 		{ border-top:1px solid #d2d8db; }
 .advanced-search-summary:after,
 .gift-messages-form .item:after,
 .send-friend .form-list li p:after { display:block; content:"."; clear:both; font-size:0; line-height:0; height:0; overflow:hidden; }
+
+/* Amasty ShopBy Extension */
+div.amshopby-column {
+    float:left; width:83px;
+}
+
+select.amshopby-select {
+    width:170px;
+}
+
+.amshopby-logo{
+padding: 0pt 10px 10px 0pt; float: left;
+}
+
+.amshopby-featured {
+    padding: 5px 5px 5px 5px; 
+}
+
+.amshopby-link{
+    float:left;
+    padding-left:5px; 
+    padding-top:5px;
+}
+
+div.block-layered-nav dd a {padding:0px 5px 0px 0px; display:block; float: left;}  
+div.block-layered-nav dd a.amshopby-attr {padding-left:15px; background:transparent url(../images/amshopby-cb1.gif) no-repeat; background-position: 0px 3px;} 
+div.block-layered-nav dd a.amshopby-attr-selected {font-weight: bold; padding-left:15px; background:transparent url(../images/amshopby-cb2.gif) no-repeat; background-position: 0px 3px;} 
+div.block-layered-nav dd a img {padding: 0 5px 5px 5px; float:left;} 
+
+div.block-layered-nav dd li.amshopby-cat-level-2 {padding-left:20px;}
+div.block-layered-nav dd a.amshopby-cat-selected {font-weight: bold;
+color:black; text-decoration: none; cursor:text;}
+
+div.block-layered-nav dd li span.amshopby-plusminus {float:left;
+display:block; width:15px; height:15px; cursor:pointer;
+background:transparent url(../images/amshopby-plus.gif)  no-repeat;}
+div.block-layered-nav dd li span.minus {background:transparent
+url(../images/amshopby-minus.gif) no-repeat;}
+div.block-layered-nav dd li:after {display:block; content:".";
+clear:both; font-size:0; line-height:0; height:0; overflow:hidden; }
+
+div.block-layered-nav dt {cursor:pointer;}
+div.block-layered-nav dt.amshopby-collapsed
+{background:url(../images/amshopby-collapsed.gif) 9px 11px no-repeat;}

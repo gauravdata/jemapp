@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <amshopby translate="label" module="amshopby">
+            <label>Improved Layered Navigation</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>500</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <title_separator translate="label">
+                            <label>Title Tag Separator</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title_separator>                   
+                        <descr_separator translate="label">
+                            <label>Description Tag Separator</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </descr_separator>                   
+                         <exclude translate="label">
+                            <label>Exclude from Homepage</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[List comma-separated attribute codes like: category, price, color.]]></comment>
+                        </exclude> 
+                        <!--  needed for 1.3 only
+                        <show_in_stock translate="label">
+                            <label>Show In Stock Products Only</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Please refresh Product Attributes index to apply the changes.]]></comment>
+                        </show_in_stock>  
+                        -->                   
+                        <use_custom_ranges translate="label">
+                            <label>Use Custom Price Ranges</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </use_custom_ranges> 
+                        <categories_type translate="label">
+                            <label>Show Categories As</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amshopby/source_category</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </categories_type>  
+                        <price_type translate="label">
+                            <label>Show Price As</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>amshopby/source_price</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </price_type> 
+                        <price_from_to translate="label">
+                            <label>Show From-To Price Widget</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </price_from_to> 
+                        <enable_collapsing translate="label">
+                            <label>Enable Filters Collapsing</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_collapsing>
+                        <categories_collapsed translate="label">
+                            <label>Collapse Categories Filter</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </categories_collapsed>
+                        <price_collapsed translate="label">
+                            <label>Collapse Price Filter</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </price_collapsed>
+                        <hide_one_value translate="label">
+                            <label>Hide Filters with One Value Only</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </hide_one_value>                                                   
+                    </fields>
+                </general>
+                
+                <seo translate="label">
+                    <label>SEO</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <urls translate="label">
+                            <label>Use SEO URLs</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </urls>
+                        <hide_attributes translate="label">
+                            <label>Hide Attrubte Names</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Show /shopby/canon/black instead of /shopby/brand-canon/color-black.]]></comment>
+                        </hide_attributes>      
+                         <key translate="label">
+                            <label>URL Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Can not be empty. Only letters and digits are allowed]]></comment>
+                        </key>                         
+                    </fields>
+                </seo>                
+                
+            </groups>
+        </amshopby>
+    </sections>
+</config>

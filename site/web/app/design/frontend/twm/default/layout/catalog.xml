@@ -66,9 +66,7 @@ Default layout, loads most of the pages
             <action method="addLink" translate="label title" module="catalog" ifconfig="catalog/seo/site_map"><label>Site Map</label><url helper="catalog/map/getCategoryUrl" /><title>Site Map</title></action>
         </reference>
         <block type="catalog/product_price_template" name="catalog_product_price_template" />
-		<reference name="right">
-            <block type="bestsellers/list" name="home.bestsellers.list" alias="product_homepage" template="catalog/product/bestsellers.phtml"></block>
-        </reference>
+		
     </default>
 
 
@@ -91,28 +89,27 @@ Category default layout
         </reference>
         <reference name="content">
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
-			<block type="bestsellers/list" name="bestseller" alias="product_homepage" template="catalog/bestsellers/list.phtml"/>
-                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
-                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
-                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
-                        <!-- The following code shows how to set your own pager increments -->
-                        <!--
-                            <action method="setDefaultListPerPage"><limit>4</limit></action>
-                            <action method="setDefaultGridPerPage"><limit>9</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
-                            <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
-                            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
-                        -->
-                    </block>
-                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
-                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
-                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
-                </block>
+			<block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+				<block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+					<block type="page/html_pager" name="product_list_toolbar_pager"/>
+					<!-- The following code shows how to set your own pager increments -->
+					<!--
+						<action method="setDefaultListPerPage"><limit>4</limit></action>
+						<action method="setDefaultGridPerPage"><limit>9</limit></action>
+						<action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
+						<action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
+						<action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
+						<action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
+						<action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+					-->
+				</block>
+				<action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+				<action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+				<action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+				<action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+				<action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+				<action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+			</block>
             </block>
         </reference>
     </catalog_category_default>

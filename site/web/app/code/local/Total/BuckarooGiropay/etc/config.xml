@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       <Total_BuckarooGiropay>
+          <version>0.3.20</version>
+       </Total_BuckarooGiropay>
+    </modules>
+
+    <global>
+    <blocks>
+        <buckaroogiropay>
+            <class>Total_BuckarooGiropay_Block</class>
+        </buckaroogiropay>
+    </blocks>
+
+        <models>
+            <buckaroogiropay>
+                <class>Total_BuckarooGiropay_Model</class>
+            </buckaroogiropay>
+        </models>
+	    <helpers>
+            <buckaroogiropay>
+                <class>Total_BuckarooGiropay_Helper</class>
+			</buckaroogiropay>  
+        </helpers>
+        <resources>
+            <buckaroogiropay_setup>
+                <setup>
+                    <module>Total_BuckarooGiropay</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </buckaroogiropay_setup>
+            <buckaroogiropay_write>
+                <connection>
+                  <use>core_write</use>
+                </connection>
+            </buckaroogiropay_write>
+            <buckaroogiropay_read>
+               <connection>
+                <use>core_read</use>
+              </connection>
+            </buckaroogiropay_read>
+        </resources>
+
+    </global>
+
+    <frontend>
+	    <routers>
+	        <buckaroogiropay>
+	            <use>standard</use>
+	            <args>
+	                <module>Total_BuckarooGiropay</module>
+	                <frontName>buckaroogiropay</frontName>
+	            </args>
+	        </buckaroogiropay>
+	    </routers>
+	    <translate>
+            <modules>
+                <Total_BuckarooGiropay>
+                    <files>
+                        <default>Total_BuckarooGiropay.csv</default>
+                    </files>
+                </Total_BuckarooGiropay>
+            </modules>
+        </translate>
+    </frontend>
+    
+    <default>
+        <payment>
+            <buckaroogiropay>
+                <active>0</active>
+                <model>buckaroogiropay/paymentMethod</model>
+                <title>Buckaroo Giropay</title>
+                <order_status>pending</order_status>				
+                <allowspecific>0</allowspecific>
+                <gateway>https://payment.buckaroo.nl/gateway/giropay.asp</gateway>
+            </buckaroogiropay>
+         </payment>
+    </default>
+</config>
