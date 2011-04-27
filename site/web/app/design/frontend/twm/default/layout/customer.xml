@@ -54,7 +54,7 @@ Default layout, loads most of the pages
             	<label>Help</label>
             	<url>help</url>
             	<title>Help</title>
-            	<prepare/>
+            	<prepare>true</prepare>
             	<urlParams/>
             	<position>2</position>
             </action>
@@ -62,7 +62,7 @@ Default layout, loads most of the pages
             	<label>Contact</label>
             	<url>contacts</url>
             	<title>Contact</title>
-            	<prepare/>
+            	<prepare>true</prepare>
             	<urlParams/>
             	<position>1</position>
             </action>

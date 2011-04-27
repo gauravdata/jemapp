@@ -38,7 +38,7 @@
 	</div>
     <ul id="crosssell-products-list">
     <?php $i = 1; foreach ($this->getItems() as $_item): ?>
-        <li class="item grid_2 <?=($i % 2)?'alpha':'omega';?>">
+        <li class="item grid_3 alpha omega">
 			<div class="meta">
 	            <a class="product-image" href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(126); ?>" width="126" height="126" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" /></a>
 				<h3 class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->htmlEscape($_item->getName()) ?></a></h3>

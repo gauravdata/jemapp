@@ -52,7 +52,7 @@ body, textarea, button	{ font-family: Arial, Helvetica, sans-serif; font-size: 1
 	line-height: 1em;
 	float: left;
 }
-h1, h2, p.title, .block-account .block-title	{
+h1, h2, p.title, .block-account .block-title, .sidebar .block-title	{
 	font-family: "LetterGothicMTStdRegular";
 	font-size: 1.65em;
 	line-height: 1em;
@@ -65,7 +65,7 @@ h1, h2, p.title, .block-account .block-title	{
 }
 h3, h4	{ font-size: 1.2em; color: #1a2548; margin-bottom: 15px; }
 h4		{ margin: 15px 0; }
-p.title, .checkout-cart-index h1, .checkout-onepage-index h1, .block-account .block-title {
+p.title, .checkout-cart-index h1, .checkout-onepage-index h1, .block-account .block-title, .sidebar .block-title {
 	color: #023e75; background: none; padding: 0;
 }
 .cms-home .col-main .std	{ display: none; }
@@ -75,7 +75,7 @@ p		{ margin: 0 0 15px; }
 a		{ color: #000; text-decoration: none; }
 a:hover	{ color: #000; }
 
-input, input[type=text], select	{ border: 1px solid #00427b; padding: 3px; color: #666; margin-bottom: 5px; }
+input, input[type=text], select, textarea	{ border: 1px solid #00427b; padding: 3px; color: #666; margin-bottom: 5px; }
 input.submit, input[type=submit], button.button	{ cursor: pointer; }
 label.required em	{ color: #FF0000; margin-right: 5px; }
 
@@ -182,7 +182,7 @@ p.category-image	{ margin-bottom: 25px; float: left; }
 /*.bestsellers	{ float: left; }*/
 .bestsellers .hproduct 	{ background: url(../images/footerBorder.gif) repeat-x right bottom; padding: 10px 0; font-size: 0.85em; }
 .bestsellers img	{ float: left; margin-right: 5px; }
-.bestsellers p		{ margin: 0; line-height: 1em; }
+.bestsellers p, .sidebar .block-title		{ margin: 0; line-height: 1em; }
 .bestsellers a		{ color: #000; }
 .bestsellers a:hover	{ color: #023e75; }
 
@@ -237,7 +237,6 @@ p.availability				{ margin: 0; border-top: 1px solid #d5d5cb; padding-top: 15px;
 	float: right;
 }
 .add-to-cart .submit:hover {
-	color: #000;
 	background: #000;
 }
 
@@ -249,6 +248,11 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 #recently-viewed-items li	{ background: url(../images/footerBorder.gif) repeat-x bottom right; }
 #recently-viewed-items p	{ margin: 0; padding: 5px 0; }
 
+.sidebar .block-border	{ margin-bottom: 20px; background: url("../images/footerBorder.gif") repeat-x scroll right bottom transparent; }
+.sidebar .meta p.product-name	{ text-align: center; margin: 0; white-space: nowrap; }
+.sidebar .product-details .pricerange	{ text-align: center; margin-bottom: 10px; }
+.sidebar .product-details .pricerange p	{ display: inline; margin: 0 3px; }
+
 .sidebar .block			{ background: #023e75; padding: 12px 17px; color: #fff; margin-bottom: 20px; position: relative; }
 .sidebar .block p.title, .block-account .block-title {
 	color: #fff; font-weight: normal; margin: 0;
@@ -259,7 +263,7 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 .sidebar .block a:hover	{ color: #c10e22;}
 
 .sidebar .block-viewed	{ background: none; padding: 0; }
-.sidebar .block-viewed p.title, .bestsellers p.title	{ margin-top: 0; padding: 10px 0 5px; margin: 0; color: #023e75; }
+.sidebar .block-viewed p.title, .bestsellers p.title, .sidebar .block-title	{ margin-top: 0; padding: 10px 0 5px; margin: 0; color: #023e75; }
 .sidebar .block-viewed a		{ color: #444; }
 .sidebar .block-viewed a:hover	{ color: #000; }
 
@@ -299,8 +303,13 @@ button.btn-checkout {
 	font-family: "LetterGothicMTStdRegular"; font-size: 1.6em; background: #023e75; padding: 10px 10px 8px; float: right; border: none; color: #fff; margin: 0 0 20px; text-transform: uppercase;
 }
 button.btn-checkout:hover {
-	background: #000; color: #000;
+	background: #000;
 }
+
+#crosssell-products-list .meta		{ text-align: center; }
+#crosssell-products-list .meta h3	{ font-weight: normal; font-size: 1em; margin: 0; }
+#crosssell-products-list .product-details .pricerange	{ text-align: center; margin-bottom: 10px; }
+#crosssell-products-list .product-details .pricerange p	{ display: inline; margin: 0 3px; }
 
 .data-table 				{ width:100%; margin-bottom: 20px; }
 .data-table thead 			{ background-color: #023e75; }

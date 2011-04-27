@@ -25,13 +25,13 @@
  */
 ?>
 <?php if($this->getItems()->getSize()): ?>
-<div class="block mediocre block-related">
+<div class="block-related">
     <div class="block-title">
         <span><?php echo $this->__('Related Products') ?></span>
     </div>
 </div>
 
-<div class="block-content">
+<div class="block-content block-border">
 	<ol class="mini-products-list" id="block-related">
 	<?php $i = 0; foreach($this->getItems() as $_item): ?>
 		<li class="item grid_2 <?php echo ($i++ % 2 == 0)?'alpha':'omega'; ?>">
