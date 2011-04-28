@@ -436,7 +436,7 @@ tr.tax-details-first td 		{ border-top:1px solid #d2d8db; }
 .cart-tax-total-expanded { background-position:100% -53px; }
 
 /* socialLinks */
-#socialLinks		{ position: absolute; right: 0; top: 50%; margin-top: -120px; }
+#socialLinks		{ position: absolute; right: 0; top: 195px; }
 #socialLinks img	{ display: block; margin: 5px 0; }
 
 /***--- FOOTER ---***/
