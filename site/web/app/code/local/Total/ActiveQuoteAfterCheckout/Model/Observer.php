@@ -18,7 +18,7 @@ class Total_ActiveQuoteAfterCheckout_Model_Observer extends Mage_Core_Model_Abst
        
        $method=$observer->getQuote()->getPayment()->getMethod();
        
-       if(in_array($method, $_allowed_methods))
+       if(in_array($method, $this->_allowed_methods))
        {
            // Activate the quote 
            $observer->getQuote()->setIsActive(true);
