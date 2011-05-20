@@ -43,6 +43,7 @@ body, textarea, button	{ font-family: Arial, Helvetica, sans-serif; font-size: 1
 }
 
 #site-title {
+	width: 675px;
 	text-transform: uppercase;
 	color: #023e75;
 	font-size: 40px;
