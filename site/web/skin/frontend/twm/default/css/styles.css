@@ -441,7 +441,8 @@ tr.tax-details-first td 		{ border-top:1px solid #d2d8db; }
 
 .addthis_toolbox	{ margin-top: 10px; }
 .addthis_toolbox a	{ display: block; float: none !important; }
-.addthis_toolbox iframe	{ height: 22px !important; }
+.addthis_toolbox iframe	{ width: 125px !important; height: 22px !important; }
+.connect_widget_button_count_count	{ padding: 2px 2px 0; color: #023E75; }
 
 /***--- FOOTER ---***/
 .footer-container		{ width: 100%; height: 170px; position: absolute; bottom: 0; }
