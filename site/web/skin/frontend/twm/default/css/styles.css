@@ -552,3 +552,5 @@ clear:both; font-size:0; line-height:0; height:0; overflow:hidden; }
 div.block-layered-nav dt {cursor:pointer;}
 div.block-layered-nav dt.amshopby-collapsed
 {background:url(../images/amshopby-collapsed.gif) 9px 11px no-repeat;}
+
+.MagicZoomBigImageCont { left: 353px !important; }
