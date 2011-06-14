@@ -238,6 +238,7 @@ p.availability				{ margin: 0; border-top: 1px solid #d5d5cb; padding-top: 15px;
 	text-align: left;
 	cursor: pointer;
 	float: right;
+	overflow: visible;
 }
 .add-to-cart .submit:hover {
 	background: #000;
