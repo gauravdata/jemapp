@@ -243,7 +243,7 @@ p.availability				{ margin: 0; border-top: 1px solid #d5d5cb; padding-top: 15px;
 	background: #000;
 }
 .add-to-cart .submit span { float: right; padding: 5px 20px 3px 110px; }
-.add-to-cart .submit img { position: absolute; top: -30px; left: 30px; }
+.add-to-cart .submit img { position: absolute; top: -30px; left: 20px; }
 
 /*- Prices -*/
 p.old-price	{ text-decoration: line-through; color: #FF0000; }
