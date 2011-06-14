@@ -224,7 +224,6 @@ p.availability				{ margin: 0; border-top: 1px solid #d5d5cb; padding-top: 15px;
 
 .product-options .validation-advice	{ padding: 5px 0; color: #FF0000; }
 
-.add-to-cart .submit img { position: absolute; top: -30px; left: -90px; }
 .add-to-cart .submit {
 	font-family: "LetterGothicMTStdRegular";
 	position: relative;
@@ -234,7 +233,6 @@ p.availability				{ margin: 0; border-top: 1px solid #d5d5cb; padding-top: 15px;
 	background: #023e75;
 	text-transform: uppercase;
 	font-weight: normal;
-	padding: 5px 20px 3px 110px;
 	border: none;
 	margin: 35px 0 15px;
 	text-align: left;
@@ -244,6 +242,8 @@ p.availability				{ margin: 0; border-top: 1px solid #d5d5cb; padding-top: 15px;
 .add-to-cart .submit:hover {
 	background: #000;
 }
+.add-to-cart .submit span { padding: 5px 20px 3px 110px; }
+.add-to-cart .submit img { position: absolute; top: -30px; left: -90px; }
 
 /*- Prices -*/
 p.old-price	{ text-decoration: line-through; color: #FF0000; }
