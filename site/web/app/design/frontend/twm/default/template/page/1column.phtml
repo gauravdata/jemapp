@@ -33,7 +33,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
 	<head>
 		<?php echo $this->getChildHtml('head') ?>
-		<link rel="image_src" type="image/png" href="<?=$this->getSkinUrl('images/logo.gif');?>" />
 	</head>
 	<?php $store = Mage::app()->getStore()->getCode(); ?>
 	<body class="<?php echo $store; ?> <?php echo $this->getBodyClass(); ?>">
@@ -61,5 +60,54 @@
 			<a href="http://www.facebook.com/notomatoesjeans" target="_blank"><img src="<?=$this->getSkinUrl('images/facebook.gif');?>" alt="Bekijk No Tomatoes op Facebook" class="logo" /></a>
 			<a href="http://twitter.com/#!/no_tomatoes" target="_blank"><img src="<?=$this->getSkinUrl('images/twitter.gif');?>" alt="Volg No Tomatoes op Twitter" /></a>
 		</div>
+		<!-- PAP4 -->
+		<?php/*
+    if (isset($_COOKIE['PAPVisitorId'])) {
+      require_once("/home/notomatoes/domains/webstore.no-tomatoes.com/public_html/affiliate/api/PapApi.class.php");
+      try {
+        // login to API
+        $session = new Gpf_Api_Session("http://webstore.no-tomatoes.com/affiliate/scripts/server.php");
+        if(!$session->login("maurice@no-tomatoes.com", "n0t0mat0es")) {
+          //die("Cannot login. Message: ".$session->getMessage());
+        }
+
+        $visitorId = $_COOKIE['PAPVisitorId'];
+        $request = new Gpf_Rpc_GridRequest('Pap_Merchants_Tools_VisitorAffiliatesGrid', "getRows", $session);
+        $request->addFilter("visitorid", "=", $visitorId);
+        try {
+          $request->sendNow();
+        } catch(Exception $e) {
+          //die("API call error: ".$e->getMessage());
+        }
+
+        $grid = $request->getGrid();
+        $recordset = $grid->getRecordset();
+        foreach($recordset as $rec) {
+          if ($rec->get('rtype') == "A") {
+            $affiliate = new Pap_Api_Affiliate($session);
+            $affiliate->setUserid($rec->get('userid')); // load aff
+            try {
+              $affiliate->load();
+            } catch (Exception $e) {
+              //die("Cannot load record: ".$affiliate->getMessage());
+            }
+
+            echo '<div style="display: block; margin: 0 auto 20px; width: 940px;">'."\n";
+            echo $affiliate->getData(2)."<br />\n";
+            echo $affiliate->getData(3)."<br />\n";
+            echo $affiliate->getData(7)." ".$affiliate->getData(4)."<br />\n";
+          }
+        }
+      } catch(Exception $e) {
+          $pap_res = "official store 1";
+      }
+    }
+    else {
+      $pap_res = "official store 2";
+    }
+*/
+?>
+  webstore@no-tomatoes.com
+  </div>
 	</body>
 </html>
