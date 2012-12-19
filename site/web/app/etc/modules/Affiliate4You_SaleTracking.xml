@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Affiliate4You_SaleTracking>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Affiliate4You_SaleTracking>
+    </modules>
+</config> 

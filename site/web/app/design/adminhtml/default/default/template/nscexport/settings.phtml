@@ -1,0 +1,75 @@
+<?php
+/**
+ * Magento
+ */
+?>
+
+<div class="entry-edit">
+    <form id="edit_form" action="" method="post"><div><input name="form_key" type="hidden" value="" />
+<script type="text/javascript">
+    editForm = new varienForm('edit_form', '');
+</script>
+
+<div id="profile-generator" class="entry-edit profile-generator">
+    <div class="entry-edit-head">
+    	<h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__("Select store") ?></h4>
+    </div>
+    <fieldset>   	    	    	
+    	<legend><?php echo $this->__("Store") ?></legend>                
+        <span class="field-row">
+            <label for="profile_store_id"><?php echo $this->__("Store:") ?></label>
+            <span class="with-tip">
+                <select id="profile_store_id" name="store_id" onchange="nscexportUrlField();">
+                <optgroup value="0"><?php echo $this->__('Default (Admin) Values') ?></option>
+                    <?php foreach ($this->getWebsiteCollection() as $_website): ?>
+                        <?php $_websiteShow=false; ?>
+                        <?php foreach ($this->getGroupCollection() as $_group): ?>
+                            <?php if ($_website->getId() != $_group->getWebsiteId()) continue; ?>
+                            <?php $_groupShow=false; ?>
+                            <?php foreach ($this->getStoreCollection() as $_store): ?>
+                                <?php if ($_group->getId() != $_store->getGroupId()) continue; ?>
+                                <?php if (!$_websiteShow): ?>
+                                    <?php $_websiteShow=true; ?>
+                                    <optgroup label="<?php echo $_website->getName() ?>"></optgroup>
+                                <?php endif; ?>
+                                <?php if (!$_groupShow): ?>
+                                    <?php $_groupShow=true; ?>
+                                    <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_group->getName() ?>">
+                                <?php endif; ?>
+                                <option value="<?php echo $_store->getId() ?>" <?php echo $this->getSelected('store_id', $_store->getId()) ?>>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_store->getName() ?></option>
+                            <?php endforeach; ?>
+                            <?php if ($_groupShow): ?>
+                                </optgroup>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </select>
+                
+            </span>
+        </span>
+        <br>  
+        <span class="field-row">
+            <label for="continue_button"><?php echo $this->__("") ?></label>
+			<span class="with-tip">
+	            <button id="continue_button" onclick="continueCreate(profile_store_id)" id="continue_button" type="button" class="scalable" style="right"><span><?php echo $this->__('Continue')?></span></button>				
+			</span>
+        </span>        	
+    </fieldset>
+</div>
+</div></form></div>
+
+<script type="text/javascript">
+	var productTemplateSyntax = /(^|.|\r|\n)({{(\w+)}})/;
+
+    function continueCreate(select)    
+    {
+		var str = '<?php echo $this->getUrl('*/*/edit',array('store' => '{{profile_store_id}}'))?>';
+    	setLocation(str.replace(/{{profile_store_id}}/, select.options[select.selectedIndex].value));    			
+    }
+        	    
+    function setSettings(urlTemplate, setElement) 
+    {
+    	var template = new Template(urlTemplate, productTemplateSyntax);
+        setLocation(template.evaluate({attribute_set:$F(setElement)}));
+    }
+</script>

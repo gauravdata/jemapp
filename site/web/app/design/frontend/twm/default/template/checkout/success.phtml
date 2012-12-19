@@ -63,4 +63,11 @@
     <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
 </div>
 
-<img src='http://ds1.nl/t/?si=5631&ti=[transactie_id]&oa=[omschrijving_affiliate]&om=[description_advertiser]&bd=[bedrag]&ln=[land]&pc=[postcode]&gs=[geslacht]&gb=[geboortedatum]&rv=[omzet]&e1=[extra_1]&e2=[extra_2]&e3=[extra_3]&e4=[extra_4]&e5=[extra_5]' style='border: 0px; height: 1px; width: 1px;' alt='Adverteren via Daisycon' />
+<?php if ($this->getOrderId()):?>
+	<?php $_order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId()); ?>
+	<?php $_customer = Mage::getSingleton('customer/session')->getCustomer(); ?>
+	<?php $billing_address_data = $_order->getBillingAddress(); ?>
+	<?php $_text = '';?>
+	<?php foreach($_order->getAllItems() as $item) { $_text .= $item->getName() . ' '; } ?>
+	<img src='http://ds1.nl/t/?si=5631&ti=<?=$this->getOrderId()?>&oa=<?=$_text?>&om=<?=$_text?>&bd=<?=$_order->subtotal?>&ln=<?=$billing_address_data['country_id']?>&pc=<?=$billing_address_data['postcode']?>&gs=[geslacht]&gb=[geboortedatum]&rv=[omzet]&e1=[extra_1]&e2=[extra_2]&e3=[extra_3]&e4=[extra_4]&e5=[extra_5]' style='border: 0px; height: 1px; width: 1px;' alt='Adverteren via Daisycon' />
+<?php endif;?>
