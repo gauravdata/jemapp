@@ -1,0 +1,1 @@
+ALTER TABLE  `qu_g_mails` ADD  `reply_to` VARCHAR( 255 ) NULL DEFAULT NULL

@@ -1,0 +1,9 @@
+##Dear## {$firstname} {$lastname},
+
+<br><br>##You are invited to campaign## {$campaignname}.
+<br>
+##Campaign description##: <span style="font-weight: bold;">{$campaigndescription}</span>
+
+<br><br>##Sincerely,##
+
+<br>##Your Affiliate manager##

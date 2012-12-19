@@ -1,0 +1,14 @@
+<font size="2">
+<span style="font-family: Arial;">##You have been contacted by your affiliate##</span>
+<span style="font-family: Arial;"> ##at## {$date}.<br></span></font><font size="2">
+<span style="font-family: Arial;"></span><strong style="font-family: Arial;">{$firstname} {$lastname}</strong></font><font size="2">
+<span style="font-family: Arial;"> <span style="font-style: italic;">(</span></span><span style="font-family: Arial; font-style: italic;">##Referrer:## {$refid}{*Affiliate RefId*})</span></font> <font size="2">
+<span style="font-family: Arial;">##filled "Contact us" form.##</span><br/><br/>
+<strong style="font-family: Arial;"></strong></font><hr style="font-family: Arial; height: 2px;"><font size="2">
+<span style="font-family: Arial;"><font size="3"><span style="font-weight: bold;">{$emailsubject}</span></font></span><br/>
+<span style="font-family: Arial; color: rgb(42, 42, 42);">{$emailtext}</span><br/></font>
+<hr style="font-family: Arial; height: 2px;">
+<font size="2"><br/><span style="font-family: Arial;">
+--</span><br/><span style="font-family: Arial;">
+##Regards,##</span><br/><br/><span style="font-family: Arial;">
+##Your## {$postAffiliatePro}</span><br/></font>

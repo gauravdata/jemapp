@@ -1,0 +1,1 @@
+UPDATE qu_pap_banners b INNER JOIN qu_pap_campaigns c ON c.campaignid=b.campaignid SET b.accountid = c.accountid WHERE b.campaignid != ''

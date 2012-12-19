@@ -1,0 +1,23 @@
+<font size="2">
+<span style="font-family: Arial;">##Dear merchant,##</span><br/><br/>
+<span style="font-family: Arial;">##Affiliate## {$firstname} {$lastname} ##signed-up to your affiliate program at## {$date}.</span><br/><br/>
+<span style="font-family: Arial;">##Affiliate name##: <span style="font-weight: bold;">{$firstname} {$lastname}</span></span><br/>
+<span style="font-family: Arial;">##Affiliate email##: <span style="font-weight: bold;">{$username}{*Username*}</span></span><br/>
+<span style="font-family: Arial;">##Affiliate ID##: <span style="font-weight: bold;">{$userid}{*Affiliate ID*}</span></span><br/>
+<br/>
+
+{if $new_user_signup_status ne 'A'}
+<span style="font-family: Arial;">##If you want to APPROVE new affiliate click here##: </span><br/>
+<span style="font-family: Arial;"><a href="{$new_user_signup_approve_link}">{$new_user_signup_approve_link}</a></span>
+<br/><br/>
+{/if}
+
+{if $new_user_signup_status ne 'D'}
+<span style="font-family: Arial;">##If you want to DECLINE new affiliate click here##: </span><br/>
+<span style="font-family: Arial;"><a href="{$new_user_signup_decline_link}">{$new_user_signup_decline_link}</a></span>
+<br/><br/>
+{/if}
+
+<span style="font-family: Arial;">##Regards##,</span><br/><br/>
+<span style="font-family: Arial;">##Your## {$postAffiliatePro}.</span>
+</font>

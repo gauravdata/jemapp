@@ -1,0 +1,15 @@
+<!-- account_header -->
+
+<div class="Header">
+
+<div class="HeaderInfo">
+	<strong><a class="Logo" title="{$programName}" href="index.php"/>
+	           <img src="{$programLogo}" class="LogoImage"></a></strong>
+	<strong class="Title">{$programName}</strong>
+	<p class="Text"></p>
+</div>
+
+
+{include file='account_topmenu.stpl'}
+ 
+</div>

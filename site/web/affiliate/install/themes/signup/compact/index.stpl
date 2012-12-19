@@ -1,0 +1,46 @@
+<!-- index -->
+<div class="MainPanel">
+<div class="ContentLeft">
+<div class="ContentRight">
+<div class="MainInfoContent">
+	<p>
+	<strong>Welcome To Our Affiliate Program!</strong>
+	Our program is free to join, it's easy to sign-up and requires no technical knowledge. 
+	Affiliate programs are common throughout the Internet and offer website owners an additional 
+	way to profit from their websites. Affiliates generate traffic and sales for commercial 
+	websites and in return receive a commission payment.
+	</p>
+	
+	<p>
+	<strong>How Does It Work?</strong>
+	When you join our affiliate program, you will be supplied with a range of banners 
+	and textual links that you place within your site. When a user clicks on one of your links, 
+	they will be brought to our website and their activity will be tracked by our affiliate software. 
+	You will earn a commission based on your commission type.
+	</p>
+	
+	<p>
+	<strong>Real-Time Statistics and Reporting!</strong>
+	Login 24 hours a day to check your sales, traffic, account balance and see how your banners are performing.
+	</p>
+	
+	<p>Program Details</p>
+	<table class="AffSignUpTable" width="100%">
+	<tr class="TableHeader">
+	  <td class="FirstCol">Commission Type</td><td class="NextCol">Choose from the following payout options!</td>
+	</tr><tr>
+	  <td class="FirstCol">Pay-Per-Sale:</td><td class="NextCol">30% for each sale you deliver</td>
+	</tr><tr>
+	  <td class="FirstCol">Pay-Per-Click:</td><td class="NextCol">$0.01 USD for each click you deliver.</td>
+	</tr><tr>
+	  <td class="TableDelimiter" colspan="2">&nbsp;</td>
+	</tr><tr>
+	  <td class="FirstCol">Payout Requirements</td><td class="NextCol">$10.00 USD - Minimum balance required for payout.</td>
+	</tr><tr>
+	  <td class="FirstCol">Payout Duration</td><td class="NextCol">Payments are made once per month, for the previous month</td>
+	</tr>
+	</table>
+</div>
+</div>
+</div>
+</div>

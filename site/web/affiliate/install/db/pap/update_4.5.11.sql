@@ -1,0 +1,2 @@
+ALTER TABLE qu_pap_rawclicks CHANGE cdata1 cdata1 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE qu_pap_rawclicks CHANGE cdata2 cdata2 VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;

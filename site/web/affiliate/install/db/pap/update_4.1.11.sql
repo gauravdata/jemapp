@@ -1,0 +1,1 @@
+ALTER TABLE `qu_pap_commissiongroups` ADD `cookielifetime` SMALLINT NOT NULL DEFAULT '-1' COMMENT '-1 - same as campaign';

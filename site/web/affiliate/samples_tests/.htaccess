@@ -1,0 +1,12 @@
+# This is example .htaccess code only for sample purpose. Don't use it, it will not work in normal environment.
+# If you want to use SEO links with mod_rewrite, generate your .htaccess code in merchant panel
+# Start Post Affiliate SEO Code
+
+<ifModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^ref([a-zA-Z0-9]+)/([a-zA-Z0-9]+).html$ ../scripts/click.php?a_aid=$1&a_bid=$2 [L]
+RewriteRule ^ref([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+).html$ ../scripts/click.php?a_aid=$1&a_bid=$2&chan=$3 [L]
+RewriteRule ^ref([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/([a-zA-Z0-9]+).html$ ../scripts/click.php?a_aid=$1&a_bid=$2&chan=$3&data1=$4 [L]
+</ifModule>
+
+# End of Post Affiliate SEO Code

@@ -1,0 +1,15 @@
+<b>Invoice Number:</b> {$invoicenumber}<br/>
+    <b>Invoice date:</b> {$date}<br/>
+    <br/>
+    <b>Affiliate Details:</b><br/>
+    {$firstname} {$lastname} ({$username})<br/>
+    {$data2}{*##Company name##*}<br/>
+    {$data3}{*##Street##*}<br/>
+    {$data7}{*##Zipcode##*} {$data4}{*##City##*}<br/>
+    {$data5}{*##State##*} {$data6}{*##Country##*}<br/>
+    <br/>
+    <b>Payment Details:</b> Affiliate commissions<br/>
+    Amount: {$payment|currency_span}<br/>
+    <br/>
+    <b>Note:</b><br/>
+    {$affiliate_note}<br/>

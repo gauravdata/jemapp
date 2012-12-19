@@ -1,0 +1,1 @@
+CREATE INDEX `IDX_qu_pap_rawclicks_5` ON `qu_pap_rawclicks` (`ip` ASC);

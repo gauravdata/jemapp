@@ -1,0 +1,2 @@
+ALTER TABLE `qu_g_countries`  ADD `countryid` VARCHAR( 8 ) NOT NULL FIRST, ADD `status` VARCHAR( 1 ) NOT NULL DEFAULT 'E' COMMENT 'E - enabled, D - disabled',
+ADD `rorder` INT NOT NULL DEFAULT '0',  ADD `accountid` VARCHAR( 8 ) NOT NULL;

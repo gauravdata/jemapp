@@ -1,0 +1,9 @@
+<!-- header -->
+<div class="Container">
+	<div class="Header">
+		<a title="{$programName}" href="index.php"/><img src="{$programLogo}" class="LogoImage"></a>
+	</div>
+
+
+
+

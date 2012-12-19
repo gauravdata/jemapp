@@ -1,0 +1,1 @@
+ALTER TABLE  `qu_g_accounts` CHANGE  `agreement`  `agreement` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL

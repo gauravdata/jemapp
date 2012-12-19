@@ -1,0 +1,6 @@
+<!-- footer -->
+<div class="cleaner"></div>
+<div class="Footer">
+	
+			<div class="Copyright">{$papCopyrightText}<div>
+		</div>

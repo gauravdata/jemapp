@@ -1,0 +1,1 @@
+ALTER TABLE  `qu_pap_cachedbanners` ADD  `dynamiclink` TEXT NULL

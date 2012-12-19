@@ -1,0 +1,1 @@
+ALTER TABLE `qu_pap_transactions` ADD `split` FLOAT NOT NULL DEFAULT '1'

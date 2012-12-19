@@ -1,0 +1,11 @@
+<font size="2"><span style="font-family: Arial;">##Dear## {$parent_firstname} {$parent_lastname},</span><br>
+<br>
+<span style="font-family: Arial;">##You just signed up a new sub-affiliate for our Affiliate Program.##</span><br>
+<span style="font-family: Arial;">##The name of the affiliate is## <span style="font-weight: bold;">{$firstname} {$lastname}</span>. </span><br>
+<br>
+<span style="font-family: Arial;">##Keep up the good work!##</span><br>
+<br>
+<span style="font-family: Arial;">##You can check your stats here:## {$affiliateLoginUrl}{*Affiliate Login Url*}</span><br>
+<br>
+<span style="font-family: Arial;">##Sincerely##,</span><br style="font-family: Arial;"><span style="font-family: Arial;">##The Quality Unit Affiliate Program team##</span><br>
+</font>

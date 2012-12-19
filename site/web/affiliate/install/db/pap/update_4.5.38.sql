@@ -1,0 +1,1 @@
+ALTER TABLE qu_pap_transactions ADD INDEX IDX_qu_pap_transactions_dateinserted (dateinserted);

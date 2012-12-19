@@ -1,0 +1,4 @@
+<!-- join_now -->
+<h2>Affiliate Login</h2>
+<a class="JoinButton" href="./signup.php"></a>
+<a class="LoginLink" href="./panel.php">&raquo; Current affiliates can login here.</a>  

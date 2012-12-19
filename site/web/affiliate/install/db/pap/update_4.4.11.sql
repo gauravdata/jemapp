@@ -1,0 +1,1 @@
+ALTER TABLE qu_pap_transactions ADD loggroupid VARCHAR(16) AFTER saleid;

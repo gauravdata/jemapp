@@ -1,0 +1,39 @@
+<font size="2">
+<span style="font-family: Arial;">Dear {$firstname} {$lastname}</span> <br/><br/>
+
+{if not empty($directlinks_approved)}
+<span style="font-family: Arial;">These DirectLinks have been approved:</span><br/>
+{foreach from=$directlinks_approved item=approvedLink}
+    <span style="font-family: Arial;">{$approvedLink}</span><br/>
+{/foreach}
+<br/><br/>
+{/if}
+
+{if not empty($directlinks_declined)}
+<span style="font-family: Arial;">These DirectLinks have been declined:</span><br/>
+{foreach from=$directlinks_declined item=declinedLink}
+    <span style="font-family: Arial;">{$declinedLink}</span><br/>
+{/foreach}
+<br/><br/>
+{/if}
+
+{if not empty($directlinks_pending)}
+<span style="font-family: Arial;">These DirectLinks are pending:</span><br/>
+{foreach from=$directlinks_pending item=pendingLink}
+    <span style="font-family: Arial;">{$pendingLink}</span><br/>
+{/foreach}
+<br/><br/>
+{/if}
+
+{if not empty($directlinks_deleted)}
+<span style="font-family: Arial;">These DirectLinks have been deleted:</span><br/>
+{foreach from=$directlinks_deleted item=deletedLink}
+    <span style="font-family: Arial;">{$deletedLink}</span><br/>
+{/foreach}
+<br/><br/>
+{/if}
+
+<br />
+<span style="font-family: Arial;">Sincerely,</span><br/><br/>
+<span style="font-family: Arial;">Your Affiliate manager</span><br/>
+</font>

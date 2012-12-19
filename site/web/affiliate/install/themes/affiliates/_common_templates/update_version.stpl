@@ -1,0 +1,6 @@
+<!-- update_version -->
+<p>##You are going to update## {$applicationName} ##from version## 
+{$installedVersion}(GPF:{$gpfInstalledVersion}) ##to## {$newVersion}(GPF:{$gpfNewVersion}).</p>
+<div>##NOTE: Make sure that you backup your database and application files.##</div>
+
+{widget id="Progress"}

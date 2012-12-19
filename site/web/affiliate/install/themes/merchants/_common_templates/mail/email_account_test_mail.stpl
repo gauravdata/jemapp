@@ -1,0 +1,55 @@
+<h1 style="font-family: Arial;"><font size="4">##Congratulations##</font></h1>
+<p style="font-family: Arial;"><font size="2">##Your mail account is configured correctly and your installation is capable to send mails.##</font></p>
+<div style="font-family: Arial;">
+    <fieldset>
+        <legend><font size="2">##Mail account setup##</font></legend>
+        <table>
+            <tbody><tr>
+                <td style="font-weight: bold;"><font size="2">##Mail Account Name##</font></td>
+
+                <td><font size="2">{$account_name}</font></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;"><font size="2">##From Name##</font></td>
+                <td><font size="2">{$from_name}</font></td>
+            </tr>
+            <tr>
+
+                <td style="font-weight: bold;"><font size="2">##From Email##</font></td>
+                <td><font size="2">{$account_email}</font></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;"><font size="2">##Use SMTP protocol##</font></td>
+                <td><font size="2">{$use_smtp}</font></td>
+            </tr>
+
+            <tr>
+                <td style="font-weight: bold;"><font size="2">##SMTP Server##</font></td>
+                <td><font size="2">{$smtp_server}</font></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;"><font size="2">##SMTP Port##</font></td>
+                <td><font size="2">{$smtp_port}</font></td>
+
+            </tr>
+            <tr>
+                <td style="font-weight: bold;"><font size="2">##SMTP Authentication##</font></td>
+                <td><font size="2">{$smtp_auth}</font></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;"><font size="2">##Use SSL connection##</font></td>
+
+                <td><font size="2">{$smtp_ssl}</font></td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold;"><font size="2">##SMTP Username##</font></td>
+                <td><font size="2">{$smtp_username}</font></td>
+            </tr>
+            <tr>
+
+                <td style="font-weight: bold;"><font size="2">##Is default mail account##</font></td>
+                <td><font size="2">{$is_default}</font></td>
+            </tr>
+        </tbody></table>
+    </fieldset>
+</div>

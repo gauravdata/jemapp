@@ -1,0 +1,12 @@
+<font size="2">
+<span style="font-family: Arial;">##Dear## {$firstname} {$lastname},</span><br/><br/>
+<span style="font-family: Arial;">##Status of sale / lead was changed to:## {$status}.</span><br/><br/>
+<font size="4"><strong style="font-family: Arial;">##Sale details##:</strong></font><br/>
+<span style="font-family: Arial;">##Order ID##: </span><strong style="font-family: Arial;">{$orderid}</strong><br/>
+<span style="font-family: Arial;">##Product ID##: </span><strong style="font-family: Arial;">{$productid}</strong><br/>
+<span style="font-family: Arial;">##IP address##: </span><strong style="font-family: Arial;">{$ip}</strong><br/>
+<span style="font-family: Arial;">##Referrer Url##: </span><strong style="font-family: Arial;">{$refererurl}</strong><br/>
+<span style="font-family: Arial;">##Commission from this sale##: </span><strong style="font-family: Arial;">{$commission|currency}</strong><br/><br/>
+</span><br/><br/><br/><span style="font-family: Arial;">##Sincerely,##</span><br/><br/>
+<span style="font-family: Arial;">##Your Affiliate manager##</span><br/>
+</font>

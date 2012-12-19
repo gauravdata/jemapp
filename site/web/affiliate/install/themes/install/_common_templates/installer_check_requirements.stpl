@@ -1,0 +1,20 @@
+<!-- installer_check_requirements -->
+<fieldset>
+ <legend>##System Requirements##</legend>
+<p>
+##If any of these items are not supported, your system does not meet the minimum requirements for installation. 
+Please take appropriate actions to correct the errors. Failure to do so could lead to your PAP installation 
+not functioning properly##
+</p>
+
+<table class="Requirements">
+	{foreach from=$requirements item=requirement}
+        <tr class="Row Row{if $requirement->isValid()}Ok{else}Failed{/if}">
+            <td class="Cell{if $requirement->isValid()}Ok{else}Failed{/if}"><div class="CellText">{if $requirement->isValid()}OK{else}FAILED{/if}</div></td>
+            <td class="CellName">{$requirement->getName()}</td>
+            <td>{if not $requirement->isValid()}{$requirement->getFixDescription()}{/if}</td>
+        </tr>
+	{/foreach}
+</table>
+
+</fieldset>

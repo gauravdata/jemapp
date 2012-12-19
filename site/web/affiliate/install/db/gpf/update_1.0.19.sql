@@ -1,0 +1,1 @@
+ALTER TABLE qu_g_tasks ADD is_executing CHAR(1) NOT NULL DEFAULT 'N';

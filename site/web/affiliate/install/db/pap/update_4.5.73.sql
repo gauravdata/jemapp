@@ -1,0 +1,1 @@
+ALTER TABLE  `qu_pap_cachedbanners` CHANGE  `userid`  `userid` CHAR( 128 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;

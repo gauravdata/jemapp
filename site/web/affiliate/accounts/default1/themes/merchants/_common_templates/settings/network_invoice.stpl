@@ -1,0 +1,214 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body><TABLE CELLSPACING=0>
+    <COLGROUP><COL WIDTH=80><COL WIDTH=165><COL WIDTH=28><COL WIDTH=60><COL WIDTH=160><COL WIDTH=71><COL WIDTH=88></COLGROUP>
+    <TBODY>
+        <TR>
+            <TD WIDTH=80 HEIGHT=17 ALIGN=LEFT><B><FONT FACE="Tahoma">INVOICE</FONT></B></TD>
+            <TD WIDTH=165 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD WIDTH=28 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD WIDTH=60 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD WIDTH=160 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD WIDTH=71 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD WIDTH=88 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+        </TR>
+        <TR>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000" HEIGHT=18 ALIGN=LEFT><B><FONT FACE="Tahoma">TAX ID:</FONT></B></TD>
+            <TD STYLE="border-top: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma">123456789</FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma">Invoice Nr:</FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-right: 3px solid #000000" COLSPAN=2 ALIGN=LEFT><FONT FACE="Tahoma">{$invoicenumber}</FONT></TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=18 ALIGN=LEFT><B><FONT FACE="Tahoma"><BR></FONT></B></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma">Constant symbol:</FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000" COLSPAN=2 ALIGN=LEFT><FONT FACE="Tahoma">1324</FONT></TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=17 ALIGN=LEFT><B><FONT FACE="Tahoma"><BR></FONT></B></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><B><FONT FACE="Tahoma"><BR></FONT></B></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000; border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000; border-right: 3px solid #000000" ALIGN=RIGHT><FONT FACE="Tahoma"><BR></FONT></TD>
+        </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=7 ALIGN=LEFT><B><FONT FACE="Tahoma"><BR></FONT></B></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><B><FONT FACE="Tahoma"><BR></FONT></B></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+        </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" COLSPAN=3 HEIGHT=18 ALIGN=LEFT><FONT FACE="Tahoma">Quality Unit, s.r.o.</FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000;" ALIGN=LEFT><B><FONT FACE="Tahoma">Buyer:</FONT></B></TD>
+            <TD STYLE="border-top: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000" ALIGN=LEFT><B><FONT FACE="Tahoma"><BR></FONT></B></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-right: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+        </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000;" COLSPAN=3 HEIGHT=18 ALIGN=LEFT><FONT FACE="Tahoma">Tomanova 80/C</FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000;" COLSPAN=3 ALIGN=LEFT>{$accountName}</TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" COLSPAN=3 HEIGHT=18 ALIGN=LEFT><FONT FACE="Tahoma">83107 Bratislava, Slovakia</FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000" COLSPAN=3 ALIGN=LEFT>{$data2}{*Bill street*}</TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000;" HEIGHT=18 ALIGN=LEFT><B><FONT FACE="Tahoma"><BR></FONT></B></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000;" COLSPAN=3 ALIGN=LEFT>{$data3}{*Bill city*}, {$data4}{*ZIP*}</TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000;" HEIGHT=18 ALIGN=LEFT><B><FONT FACE="Tahoma">IBAN:</FONT></B></TD>
+            <TD COLSPAN=2 ALIGN=LEFT><FONT FACE="Tahoma">123456789</FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000;" COLSPAN=3 ALIGN=LEFT>{$data1}{*Country*}</TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=18 ALIGN=LEFT><B><FONT FACE="Tahoma">SWIFT:</FONT></B></TD>
+            <TD COLSPAN=2 ALIGN=LEFT><FONT FACE="Tahoma">SWIFTCODE</FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000" COLSPAN=3 ALIGN=LEFT><BR></TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" COLSPAN=3 HEIGHT=17 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><B><BR></B></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+        </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=17 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000; border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000; border-right: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+        </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=17 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+        </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" COLSPAN=3 HEIGHT=16 ALIGN=LEFT><BR></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-right: 3px solid #000000" COLSPAN=3 ALIGN=LEFT><FONT FACE="Tahoma">Delivery terms and terms of payment:</FONT></TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" COLSPAN=3 HEIGHT=18 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma">Payment date:</FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000" COLSPAN=2 ALIGN=LEFT><FONT FACE="Tahoma">{$date} {$time} </FONT></TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" COLSPAN=3 HEIGHT=18 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000; border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma">Invoice date:</FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000; border-right: 3px solid #000000" COLSPAN=2 ALIGN=LEFT><FONT FACE="Tahoma">{$date} {$time} </FONT></TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=17 ALIGN=LEFT><BR></TD>
+            <TD ALIGN=LEFT><BR></TD>
+            <TD ALIGN=LEFT><BR></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+        </TR>
+        <TR>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000;" HEIGHT=18 ALIGN=CENTER><B><FONT FACE="Tahoma">Item ID</FONT></B></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000" ALIGN=LEFT><B><FONT FACE="Tahoma">Name</FONT></B></TD>
+            <TD STYLE="border-top: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000;" ALIGN=CENTER><B><FONT FACE="Tahoma">Amount</FONT></B></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000" ALIGN=CENTER><B><FONT FACE="Tahoma">Unit price</FONT></B></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000; border-right: 3px solid #000000" COLSPAN=2 ALIGN=LEFT><B><FONT FACE="Tahoma">Price</FONT></B></TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000;" HEIGHT=18 ALIGN=RIGHT><FONT FACE="Tahoma">1</FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000;" COLSPAN=2 ALIGN=LEFT>Affiliate network service</TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000;" ALIGN=RIGHT><FONT FACE="Tahoma">1</FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000;" ALIGN=RIGHT>{$amount|currency_span}</TD>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000; border-right: 3px solid #000000" COLSPAN=2 ALIGN=RIGHT>{$amount|currency_span}</TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=17 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000; border-right: 3px solid #000000" COLSPAN=2 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=17 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-left: 3px solid #000000; border-right: 3px solid #000000" COLSPAN=2 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000;" HEIGHT=18 ALIGN=LEFT BGCOLOR="#C0C0C0"><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000;" ALIGN=LEFT BGCOLOR="#C0C0C0"><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000;" ALIGN=LEFT BGCOLOR="#C0C0C0"><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000" ALIGN=LEFT BGCOLOR="#C0C0C0"><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000" ALIGN=LEFT BGCOLOR="#C0C0C0"><B><FONT FACE="Tahoma">Total:</FONT></B></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-right: 3px solid #000000" COLSPAN=2 ALIGN=RIGHT BGCOLOR="#C0C0C0">{$amount|currency_span}</TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-top: 3px solid #000000; border-left: 3px solid #000000" HEIGHT=17 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000;" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 3px solid #000000; border-right: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+        </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=17 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-right: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+        </TR>
+        <TR>
+            <TD STYLE="border-left: 3px solid #000000" HEIGHT=18 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD ALIGN=LEFT><BR></TD>
+            <TD STYLE="border-bottom: 1px solid #000000; border-right: 3px solid #000000" COLSPAN=2 ALIGN=LEFT><FONT FACE="Tahoma">Your name</FONT></TD>
+            </TR>
+        <TR>
+            <TD STYLE="border-bottom: 3px solid #000000; border-left: 3px solid #000000" HEIGHT=18 ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-bottom: 3px solid #000000" ALIGN=LEFT><FONT FACE="Tahoma"><BR></FONT></TD>
+            <TD STYLE="border-top: 1px solid #000000; border-bottom: 3px solid #000000; border-right: 3px solid #000000" COLSPAN=2 ALIGN=LEFT><FONT FACE="Tahoma">Your company name</FONT></TD>
+            </TR>
+    </TBODY>
+</TABLE>
+</body>
+</html>

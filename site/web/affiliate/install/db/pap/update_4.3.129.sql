@@ -1,0 +1,3 @@
+ALTER TABLE qu_pap_visits0 CHANGE accountid accountid CHAR(8) ASCII NOT NULL AFTER visitid, ADD rstatus CHAR(1) ASCII DEFAULT 'U' AFTER accountid;
+ALTER TABLE qu_pap_visits1 CHANGE accountid accountid CHAR(8) ASCII NOT NULL AFTER visitid, ADD rstatus CHAR(1) ASCII DEFAULT 'U' AFTER accountid;
+ALTER TABLE qu_pap_visits2 CHANGE accountid accountid CHAR(8) ASCII NOT NULL AFTER visitid, ADD rstatus CHAR(1) ASCII DEFAULT 'U' AFTER accountid;

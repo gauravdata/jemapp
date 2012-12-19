@@ -1,0 +1,2 @@
+<!-- main -->
+{widget id="ScreenContainer"}

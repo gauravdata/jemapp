@@ -1,0 +1,2 @@
+UPDATE qu_g_settings SET name = 'affiliate_cannot_change_his_username' WHERE name = 'affiliate_can_change_his_username';
+UPDATE qu_g_settings SET value = IF (value = 'Y', 'N', 'Y') WHERE name = 'affiliate_cannot_change_his_username';

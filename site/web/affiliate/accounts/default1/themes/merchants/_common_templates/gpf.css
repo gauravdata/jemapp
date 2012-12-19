@@ -1,0 +1,2244 @@
+/* ******************************************* */
+/*                    GENERAL                  */
+/* ******************************************* */
+body,html,input,select {margin:0; padding:0;}   
+tr,th,td {margin:0; padding:0; border:0;}
+table {position:relative;}
+a {text-decoration:none;}
+img a {border:0;}
+:focus {outline:0;}
+.rtl {direction:RTL;} 
+
+
+body {position:relative; font:normal 11px Arial, Verdana, Helvetica, Geneva, sans-serif; color:#202020;}
+body.DesktopMode {overflow:hidden;}	
+.Desktop {position:relative; width:100%; height:100%; overflow:hidden;}
+.DesktopMode .Body {width:100%;	height:100%;}	
+.DesktopMode .Container {position:relative;	width:100%;}
+.DesktopMode .MainPanel {position:relative; width:750px; height:100%; overflow:auto;}
+
+
+/* ******************************************* */
+/*                   UNIVERSAL                 */
+/* ******************************************* */
+.FloatLeft {float:left;}
+.FloatRight {float:right;}
+.FloatNone {float:none;}
+
+.ClearLeft {clear:left;}
+.ClearRight {clear:right;}
+.ClearBoth {clear:both;}
+.ClearNone {clear:none;}
+
+.MarginLeft {margin:0 0 0 5px;}
+.MarginRight {margin: 0 5px 0 0;}
+.MarginBoth {margin:0 5px;}
+.MarginNone {margin:0;}
+
+.PaddingLeft {padding:0 0 0 5px;}
+.PaddingRight {padding:0 5px 0 0;}
+.PaddingBoth {padding:0 5px;}
+.PaddingNone {padding:0;}
+
+.Bold {font-weight: bold;}
+
+
+/* ******************************************* */
+/*                    HEADER                   */
+/* ******************************************* */
+#Container {position:relative; margin:0 auto; width:900px; text-align:left;}
+#Content {height:100%;}
+#Header {position:relative; height:75px;}
+#LoginHeader {height:102px;}
+#Logo {position:absolute; top:8px; left:10px; width:314px; height:57px; display:block; border:none;}
+
+
+/* ******************************************* */
+/*                    FOOTER                   */
+/* ******************************************* */
+#Footer {position:absolute; bottom:0; width:100%; height:46px; background:url('img/footer.background.jpg') repeat-x; color:#606060;}
+#Footer {position:fixed; bottom:0; width:900px; height:46px; margin:0; padding:0; z-index:1;}
+#FooterMenuItems {float:left; margin:8px 0 0;}
+#FooterMenuItems li {float:left; display:inline;}
+.FooterMenuItem {margin:0 0 0 20px; color:#606060;}
+.FooterMenuItem:hover {color:#305478; text-decoration:none;}
+.FooterLink {color:#606060;}
+.FooterLink:hover {color:#305478; text-decoration:none;}
+#Copyright {margin:0 0 0 20px; padding:5px 0 0; font-size:10px; color:#606060;}
+
+
+/* ******************************************* */
+/*               ROUNDED CORNERS               */
+/* ******************************************* */
+/* TODO: check if exists in any template */
+.BoxTop, .BoxTopLeft, .BoxTopRight, .BoxBottom, .BoxBottomLeft, .BoxBottomRight 
+	{position:relative; margin:0; padding:0; font-size:1px; line-height:1px;}
+		
+.BoxTop {margin:0 4px; height:4px;}
+.BoxTopLeft {height:4px;}
+.BoxTopRight {height:4px;}
+.BoxBottom {margin:0 4px; height:4px;}
+.BoxBottomLeft {margin:0 0 5px; height:4px;}
+.BoxBottomRight {height:4px;}
+.BoxIn {position:relative; margin:0;}
+.BoxInIE6 {position:relative; margin:0; padding:0 15px;}
+
+
+/* ******************************************* */
+/*                     INPUT                   */
+/* ******************************************* */
+input {position:relative; margin:0; padding:0; height:17px; font:normal 11px Arial, Verdana, Helvetica, Geneva, sans-serif !important;}
+* html input {height:15px;}
+* :first-child+html input {margin:2px 0 0; height:15px;}
+
+
+/* ******************************************* */
+/*                TEXT BOX                     */
+/* ******************************************* */
+.TextBoxContainer {position:relative; background:url('img/input.png') #fff repeat-x 0 0; border:1px solid #949494; font:normal 11px Arial !important;}
+.TextBox {margin:0;	width:100%; height:100%; background:transparent; border:none; font:normal 11px Arial !important;}
+.TextBoxContainer-focus {background:url('img/input.png') #fff repeat-x 0 -2000px; border:1px solid #7799cb;}	
+.TextBoxContainer-TemplateEdit {width:600px; position: absolute; top: 25px; bottom: 10px;}
+textarea.TextBox {height:100%;min-height:100%;padding:0px;_height:100%;}
+
+/* ******************************************* */
+/*                   BUTTON                    */
+/* ******************************************* */
+.Button {position:relative; margin:0 5px 0 0;}
+.ButtonContent {}
+
+.ButtonText {padding:0 5px 0 5px; font:bold 11px/21px Arial; color:#0e1c29; cursor:pointer;}
+.Button, .Button-over {background:none; white-space:nowrap; cursor:pointer;}
+
+.ButtonMain {min-width:75px; margin:0 5px 5px 0; float:left;}
+
+.Button-over .ButtonLeft {background-position:0px -46px;}
+.Button-over .ButtonRight {background-position:-4px -46px;}
+.Button-over .ButtonIn {width:auto; background-repeat:repeat-x;  background-position:0px -69px;}
+
+.Button td {position:relative; padding:0; height:23px; border:0;}
+.Button i {position:relative; width:4px; height:21px; display:block;}
+
+.ButtonMain {min-width:75px; margin:0 5px 0 0; float:left;}
+
+html>body .InlineBlock { display:-moz-inline-box; display:inline-block;word-wrap: break-word;}
+.InlineBlock { position:relative; display:inline-block; word-wrap: break-word;}
+* html .InlineBlock { display:inline; word-wrap: break-word;}
+*:first-child+html .InlineBlock { display:inline; word-wrap: break-word;}
+
+html>body .Button { display:-moz-inline-box; display:inline-block;word-wrap: break-word;}
+.Button { position:relative; display:inline-block; word-wrap: break-word;}
+* html .Button { display:inline; word-wrap: break-word;}
+*:first-child+html .Button { display:inline; word-wrap: break-word;}
+
+html>body .ButtonContent { display:-moz-inline-box; display:inline-block;word-wrap: break-word;}
+.ButtonContent { position:relative; display:inline-block; word-wrap: break-word;}
+* html .ButtonContent { display:inline; word-wrap: break-word;}
+*:first-child+html .ButtonContent { display:inline; word-wrap: break-word;}
+
+html>body .ThinButton { display:-moz-inline-box; display:inline-block;word-wrap: break-word;}
+.ThinButton { position:relative; display:inline-block; word-wrap: break-word;}
+* html .ThinButton { display:inline; word-wrap: break-word;}
+*:first-child+html .ThinButton { display:inline; word-wrap: break-word;}
+
+html>body .SelectButton { display:-moz-inline-box; display:inline-block;word-wrap: break-word;}
+.SelectButton { position:relative; display:inline-block; word-wrap: break-word;}
+* html .SelectButton { display:inline; word-wrap: break-word;}
+*:first-child+html .SelectButton { display:inline; word-wrap: break-word;}
+
+/* ******************************************* */
+/*            IMAGE LESS BUTTON                */
+/* ******************************************* */
+.ImLeButtonMainOut {border:0 none; cursor:default; list-style-image:none; list-style-position:outside; list-style-type:none;
+outline-color:-moz-use-text-color; outline-style:none; outline-width:medium; padding:0; text-decoration:none; vertical-align:middle; position:relative;}
+.ImLeButtonMain {border-color:#b8cfeb; border-width:1px 0; margin:0; border-style:solid; padding:0; position:relative;}
+.ImLeButtonMainInnerBox {background:#D9E9F8 none repeat scroll 0 0; border-color:#b8cfeb; border-width:0 1px; margin:0 -1px; border-style:solid; padding:0; position:relative;}
+* html .ImLeButtonMainInnerBox {left:-1px;}
+*+html .ImLeButtonMainInnerBox {left:-1px;}
+.ImLeButtonMainInner {font-family:arial,sans-serif; font-size:70%; font-size-adjust:none; font-style:normal; font-variant:normal; font-weight:normal; line-height:normal; text-decoration:none;}
+.ImLeButtonMainShadow {background:#ECF5FD none repeat scroll 0 0; border-bottom:0.3em solid #EEEEEE; height:1.3em; left:0; overflow:hidden; position:absolute; right:0; top:0;}
+.ImLeButtonMainContent {position:relative;}
+html>body .ImLeButtonMainInner {position:relative;}
+
+.Button-over .ImLeButtonMain,
+.Button-over .ImLeButtonMainInner,
+.Button-over .ImLeButtonMainInnerBox {border-color:#79a4d4;}
+.Button-over .ImLeButtonMainShadow {background:#d9e9f8; border-bottom:0.3em solid #c7daf2;}
+.Button-over .ImLeButtonMainInnerBox {background:#b5ccea;}
+
+.ToggleButton-down .ImLeButtonMainInnerBox {background-color:#B8CFEB;}
+.ToggleButton-down .ImLeButtonMainShadow {border-bottom:0.3em solid #D9E9F8; background-color:#D9E9F8;}
+.ToggleButton-downOver .ImLeButtonMainInnerBox {background-color:#B8CFEB;}
+.ToggleButton-downOver .ImLeButtonMainShadow {border-bottom:0.3em solid #D9E9F8; background-color:#D9E9F8;}
+.ToggleButton-downOver .ButtonText, .ToggleButton-down .ButtonText{color:#214571;}
+
+
+/* ******************************************* */
+/*                LINK BUTTON                  */
+/* ******************************************* */
+.LinkButton {position:relative; display:inline; cursor:pointer;}
+.LinkButton div, .LinkButton button {display:inline;}
+.LinkButton .ButtonText {padding:0 5px; height:auto; /*line-height:auto;*/ text-decoration:underline; display:inline; cursor:pointer;}
+.LinkButton-over .ButtonText {color:#0a558c;}
+
+/* ******************************************* */
+/*             LINK TOGGLE BUTTON              */
+/* ******************************************* */
+.LinkToggleButton {margin:0 0 0 10px; padding:0 10px 0 0; background:url('img/link.toggle.button.png') no-repeat top right; cursor:pointer;}
+.LinkToggleButton .ButtonContent {padding:2px 0 0;}
+
+* html .LinkToggleButton .ButtonContent, * :first-child+html .LinkToggleButton .ButtonContent {padding:1px 0 0;}
+
+.LinkToggleButton-down, .LinkToggleButton-downOver {background:url('img/link.toggle.button.png') no-repeat right -18px;}
+.LinkToggleButton .ButtonText {padding:0 5px; height:15px; line-height:15px; display:inline; cursor:pointer;}
+
+.LinkToggleButton-over .ButtonText, .LinkToggleButton-downOver .ButtonText {text-decoration:underline;}
+
+
+/* ******************************************* */
+/*             CHART LINK TOGGLE BUTTONS       */
+/* ******************************************* */
+.LinkGroupByDay, .LinkGroupByWeek, .LinkGroupByMonth, .LinkChartTypeArea, .LinkChartTypeLine, .LinkChartTypeBar 
+	{margin:0 0 0 5px; padding:0 0 0 15px; white-space:nowrap; cursor:pointer; background:url('img/link.chart.png') no-repeat 0 0;}
+	
+.LinkGroupByWeek {background-position:0 -22px;}
+.LinkGroupByMonth {background-position:0 -44px;}
+.LinkChartTypeArea {background-position:0 -66px;}
+.LinkChartTypeLine {background-position:0 -88px;}
+.LinkChartTypeBar {background-position:0 -110px;}
+
+.LinkGroupByDay .ButtonText, .LinkGroupByWeek .ButtonText, .LinkGroupByMonth .ButtonText, .LinkChartTypeArea .ButtonText, .LinkChartTypeLine .ButtonText, .LinkChartTypeBar .ButtonText 
+	{padding:0 0 0 5px; color:#0568ad; text-decoration:underline;}
+
+.LinkChartTypeArea-down .ButtonText, .LinkChartTypeArea-downOver .ButtonText,
+.LinkChartTypeLine-down .ButtonText, .LinkChartTypeLine-downOver .ButtonText,
+.LinkChartTypeBar-down .ButtonText, .LinkChartTypeBar-downOver .ButtonText,
+.LinkGroupByDay-down .ButtonText, .LinkGroupByDay-downOver .ButtonText,
+.LinkGroupByWeek-down .ButtonText, .LinkGroupByWeek-downOver .ButtonText,
+.LinkGroupByMonth-down .ButtonText, .LinkGroupByMonth-downOver .ButtonText 
+	{color:#2c2c2c; text-decoration:none;}
+
+.login_box {float:right; text-align:right;}
+.header .Button {clear:right; float:right;}
+
+.link_blue {font-weight:bold; color:#4b77d1;}
+.link_blue:hover {text-decoration:underline;}
+.link_normal {color:#000; text-decoration:underline;}
+.link_normal:hover {color:#4b77d1;}
+.link_path {color:#000; text-decoration:none;}
+.link_path:hover {text-decoration:underline;}
+
+
+/* ******************************************* */
+/*                  THIN BUTTON                */
+/* ******************************************* */
+.ThinButton {position:relative; margin:0px 5px 0 0;}
+.ThinButton .ButtonText {padding:1px 5px; line-height:17px; text-align:center !important;}
+.ThinButton .ImLeButtonMainOut {margin:0 2px 4px;}
+.ThinButton .ImLeButtonMainShadow {background:#ECF5FD none repeat scroll 0 0; border-bottom:0.3em solid #EEEEEE; height:1.1em; left:0; overflow:hidden; position:absolute; right:0; top:0;}
+.ThinButton-over .ImLeButtonMain,
+.ThinButton-over .ImLeButtonMainInner,
+.ThinButton-over .ImLeButtonMainInnerBox {border-color:#79a4d4;}
+.ThinButton-over .ImLeButtonMainShadow {background:#d9e9f8; border-bottom:0.3em solid #c7daf2;}
+.ThinButton-over .ImLeButtonMainInnerBox {background:#b5ccea;}
+
+/* ******************************************* */
+/*          THIN BUTTON - ICON TYPES           */
+/* ******************************************* */
+.ButtonSearch .ButtonText, .ButtonAdd .ButtonText, .ButtonDelete .ButtonText, .ButtonCSV .ButtonText
+	{padding:1px 3px 2px 25px; background:url('img/button.icon.png') no-repeat 3px 2px;}
+.ButtonSearch .ButtonText {background-position:3px 0px;}
+.ButtonAdd .ButtonText {background-position:3px -18px;}
+.ButtonDelete .ButtonText {background-position:3px -35px;}
+.ButtonCSV .ButtonText {background-position:3px -52px;}
+
+/* ******************************************* */
+/*                TOGGLE BUTTON                */
+/* ******************************************* */
+.ToggleButton {float:left;}
+.ToggleButton td {padding:0; height:19px; border:0;}
+.ToggleButton .ButtonText {margin:0; padding:0 5px; width:auto; height:17px; background:transparent; border:0; overflow:visible; font:bold 11px/17px Arial !important; text-align:center !important; cursor:pointer;}
+.ToggleButton i {width:4px; height:19px; display:block;}
+
+.ToggleButton .ButtonLeft, .ToggleButton-over .ButtonLeft, .ToggleButton-downOver .ButtonLeft, .ToggleButton-down .ButtonLeft,
+.ToggleButton .ButtonRight, .ToggleButton-over .ButtonRight, .ToggleButton-downOver .ButtonRight, .ToggleButton-down .ButtonRight
+	{width:4px; background:url('img/toogle.button.png') no-repeat;}
+	
+.ToggleButton .ButtonIn, .ToggleButton-over .ButtonIn, .ToggleButton-downOver .ButtonIn, .ToggleButton-down .ButtonIn
+	{background:url('img/toogle.button.png') repeat-x; text-align:center !important;}
+
+.ToggleButton .ButtonLeft {background-position:0 0;}
+.ToggleButton-over .ButtonLeft {background-position:0 -57px;}
+.ToggleButton-downOver .ButtonLeft {background-position:0 -114px;}
+.ToggleButton-down .ButtonLeft {background-position:0 -171px;}
+
+.ToggleButton .ButtonRight {background-position:0 -19px;}
+.ToggleButton-over .ButtonRight {background-position:0 -76px;}
+.ToggleButton-downOver .ButtonRight {background-position:0 -133px;}
+.ToggleButton-down .ButtonRight {background-position:0 -190px;}
+
+.ToggleButton .ButtonIn {background-position:0 -38px;}
+.ToggleButton-over .ButtonIn {background-position:0 -95px;}
+.ToggleButton-downOver .ButtonIn {background-position:0 -152px;}
+.ToggleButton-down .ButtonIn {background-position:0 -209px;}
+
+.ToggleButton-downOver .ButtonText {text-decoration: underline;}
+.ToggleButton-over .ButtonText {text-decoration: underline;}
+
+/* ******************************************* */
+/*                 RADIO BUTTON                */
+/* ******************************************* */ 
+.RadioButton {position:relative; float:left; padding:2px 5px 2px 21px; height:15px; background:url('img/radio.button.png') no-repeat 0 1px; font:normal 11px Arial !important; color:#5b5b5b; outline:none; cursor:pointer;}
+
+.RadioButton-over, .RadioButton-focus {background:url('img/radio.button.png') no-repeat 0 -119px;}
+.RadioButton-focus {color:#2a5fae;}
+.RadioButton-down {background:url('img/radio.button.png') no-repeat 0 -239px;}
+.RadioButton-downOver {background:url('img/radio.button.png') no-repeat 0 -359px;}
+ 
+.RadioButtonGroup {position:relative;}
+* html .RadioButtonGroup {height:1px;}
+ 
+.RadioButtonGroup-horizontal .RadioButton {float:left;}
+.RadioButtonGroup-vertical .RadioButton {float:none;}
+
+
+/* ******************************************* */
+/*                SELECT BUTTON                */
+/* ******************************************* */
+.SelectButton {position:relative; margin:0 5px 0 0;}
+.SelectButton .ButtonText {margin:0; padding:1px 15px 0 5px; width:auto; height:17px; background:transparent; border:0; overflow:visible; font:bold 11px/17px Arial !important; text-align:center !important; cursor:pointer;
+background:transparent url(img/link.toggle.button.png) no-repeat scroll right -1px;}
+.SelectButton .ImLeButtonMainOut {margin:0 2px 4px;}
+
+.SelectButton-down .ButtonText,
+.SelectButton-downOver .ButtonText {background-position:right -20px;}
+	
+.SelectButton-over .ImLeButtonMain,
+.SelectButton-over .ImLeButtonMainInner,
+.SelectButton-over .ImLeButtonMainInnerBox {border-color:#79a4d4;}
+.SelectButton-over .ImLeButtonMainShadow {background:#d9e9f8; border-bottom:0.3em solid #c7daf2;}
+.SelectButton-over .ImLeButtonMainInnerBox {background:#b5ccea;}
+
+.SelectButton-down .ImLeButtonMain,
+.SelectButton-down .ImLeButtonMainInner,
+.SelectButton-down .ImLeButtonMainInnerBox {border-color:#b8cfeb;}
+.SelectButton-down .ImLeButtonMainShadow {background:#D9E9F8; border-bottom:0.3em solid #EEEEEE;}
+.SelectButton-down .ImLeButtonMainInnerBox {background:#ECF5FD;}
+
+.SelectButton-downOver .ImLeButtonMain,
+.SelectButton-downOver .ImLeButtonMainInner,
+.SelectButton-downOver .ImLeButtonMainInnerBox {border-color:#79a4d4;}
+.SelectButton-downOver .ImLeButtonMainShadow {background:#b5ccea; border-bottom:0.3em solid #c7daf2;}
+.SelectButton-downOver .ImLeButtonMainInnerBox {background:#d9e9f8;}
+
+.SelectButtonOptions {background:#fff; border:1px solid #98c0f4; overflow:hidden; width: auto; max-width: 300px; min-width: 180px;}
+.SelectButtonOption {padding:0 0 0 10px; min-height:16px; border-bottom:1px solid #e3e3e3; vertical-align:middle; cursor:pointer;}
+* html .SelectButtonOption {height:16px;}
+.SelectButtonOption-over {background:#e0ebf8;}
+
+
+/* ******************************************* */
+/*                  LIST BOX                   */
+/* ******************************************* */
+.ListBox {position:relative; float:left; width:100px;}
+.ListBox table {margin:0; padding:0; border-collapse:collapse;}
+.ListBoxInput {position:relative; margin:0; padding:0; font:normal 11px Arial, Verdana, Helvetica, Geneva, sans-serif; overflow: hidden;}/* width:100%;}*/
+.ListBoxInput input {position:relative; height:15px; font:normal 11px Arial, Verdana, Helvetica, Geneva, sans-serif;}
+* html .ListBoxInput input {position:relative; height:13px; font:normal 11px Arial, Verdana, Helvetica, Geneva, sans-serif;}
+.ListBoxInput .TextBoxContainer {overflow: hidden;}
+.ListBoxInput .TextBoxContainer-focus {position:relative; background:url('img/input.png') repeat-x 0 -2000px; border:1px solid #b2c1d7;}
+
+.DownIcon {width:18px; height:19px; display:block; background:transparent url('img/listbox.png') no-repeat 0 0; cursor:pointer;}
+.DownIconCell {position:relative; float:left; width:18px; height:19px;}
+
+.ListBoxPanel {position:relative; background:#fff; border:1px solid #98c0f4; overflow:hidden; z-index:99999;}
+.ListBoxPanel div {position:relative; z-index:99999; display:block;}
+
+.ListBox .TextBox {width:100%;}
+.ListBox table {width:100%;}
+
+.ListBoxPopup table {border-collapse:collapse; margin:0; padding:0;}
+.ListBoxPopup .GridPager {background:#e5eff9; border:1px solid #98c0f4; width:auto;}
+
+.ListBox-TemplateConstants {width:300px}
+
+.RichListBoxPopup {background:#F2F7FB; border:1px solid #98c0f4;}
+.RichListBoxPopup .ListBoxPanel {border-left:none; border-right:none;}
+.RichListBoxCachedLabel {float:left; padding:4px 3px; color:#686868;}
+.RichListBoxReset {float:right; text-decoration:underline;}
+.RichListBoxReset-focus,
+.RichListBoxReset-over {text-decoration:none;}
+.RichListBoxPopupFooter {min-width:150px; padding:3px 0;}
+
+
+/* ******************************************* */
+/*                 ListBox2                    */
+/* ******************************************* */
+
+.g-ListBoxPopup .g-TableRow-selected {
+    background: #DFE8F6 none repeat scroll 0 0 !important;
+    border:1px dotted #A3BAE9;
+}
+.g-ListBoxPopup .g-TableRow {overflow:hidden; height:18px !important;}
+.g-ListBoxPopup table {position:static;}
+.g-ListBoxPopup td {white-space:nowrap; word-wrap:normal; height:18px !important; position:static;}
+
+.g-ListBox {
+    left: 0;
+    display:inline;
+    position: relative;
+    top: 0;
+    white-space: nowrap;
+}
+
+.g-ListBoxInput {
+    padding: 2px 3px 0 3px;
+    height: 15px;
+    background:url('img/input.png') #fff repeat-x 0 0;
+    border:1px solid #949494;
+}
+
+.g-ListBoxButton {
+    height:19px;
+    width:18px;
+    top:0;
+    cursor:pointer;
+    background-image:url(img/listbox.png);
+    border-style:none none solid;
+    border-width:0 0 0px;
+}
+
+.g-ListBoxPopup {
+    border: 1px solid black;   
+    background: #ffffff url('img/resizecorner.gif') no-repeat bottom right;
+}
+
+.g-ListBox-focus .g-ListBoxButton {background-position: 0 -19px;}
+.g-ListBox-focus .g-ListBoxInput {background:url('img/input.png') repeat-x 0 -2000px; border:1px solid #b2c1d7;}
+.g-ListBox-error .g-ListBoxInput {border:1px solid #e21212;}
+
+
+/* ******************************************* */
+/*                 CHECK BOX                   */
+/* ******************************************* */
+.CheckBox, .CheckBox-checked 
+	{float:left; width:18px; height:18px; background:url('img/checkbox.png') no-repeat top left; outline-style:none;}
+	
+.CheckBox-checked {background-position:top right;}
+.CheckBoxContainer {float:left; display:block;}
+.CheckBoxContainer .CheckBox {float:left;}
+.CheckBoxContainer .Label {float:left; margin:0 0 0 5px;}
+
+.CheckBoxInput {float:left; display:inline;}
+.CheckBoxLabelPart {float:left; padding:2px 5px;}
+.CheckBoxLabel {display:inline; float:left;}
+.CheckBoxLabel .Label {display:inline;}
+* html .CheckBoxLabel {margin-right:5px;}
+*+html .CheckBoxLabel {margin-right:5px;}
+.CheckBoxHelp {display:inline;}
+.CheckBoxHelp .IconButton {display:inline-block;}
+.CheckBoxError {display:inline;}
+.CheckBoxError .IconButton {display:inline-block;}
+.CheckBoxDescription {color:#808080; float:left; padding-left:23px;}
+.CheckBoxFormField .FormFieldLabel .Label {margin:0 0 0 5px;} 
+.CheckBoxFormField .FormFieldInputContainer {float:right; width:auto;}
+
+
+/* ******************************************* */
+/*            RICH TEXT - WYSIWYG              */
+/* ******************************************* */
+.RichTextToolbar {width:584px; margin-top:3px;}
+.RichTextToolbar .IconButton {float:left; margin:0; width:20px; cursor:pointer; height:20px;}
+.RichTextToolbar .ButtonGroup {float:left; margin:0 5px 3px 0; height:22px; border:1px solid #949494; background:url('img/input.png') #fff repeat-x 0 0; position:relative;}
+.RichTextToolbar .ButtonGroup .ListBox {margin:1px; width:200px;}
+.RichTextToolbar .RowActionIconButton {float:left; width:20px; height:20px;}
+
+.gwt-RichTextArea {float:left; width:100%; height:100%; min-height:100%; background:url('img/input.png') #fff repeat-x 0 0; border:1px solid #949494; position:relative; }
+
+.RichTextEditor .WindowResizerS {position: relative; width:100%; height:9px; background:url('img/resizer.png') no-repeat center center; float:left; margin:10px 0;}
+.EmailBody .FormFieldInput {width:100%; height:100%;}
+.EmailForm .FormFieldInput {width: 600px;}
+.EmailFormControlTextBody {margin-left: 120px;}
+
+.RichTextEditor {min-height:250px; width: 100%;}
+* html .RichTextEditor {height:250px;}
+#templateVariables {float:left; height:10px;}
+
+/* ******************************************* */
+/*             WYSIWYG - ICONS                 */
+/* ******************************************* */
+.IconBold, .IconItalic, .IconUnderline, .IconStrikeThrough, .IconSubscript, .IconSuperscript,
+.IconJustifyLeft, .IconJustifyCenter, .IconJustifyRight, .IconTextLeftToRight, .IconBackgroundColor, .IconForegroundColor,
+.IconIndent, .IconOutdent, .IconHr, .IconOrderedList, .IconUnorderedList, .IconInsertImage, .IconInsertAttachedImage,
+.IconCreateLink, .IconRemoveLink, .IconRemoveFormat, .IconFontList, .IconFontSize, .IconStyle,
+.IconAddTemplateVariable
+	{background:url('img/wysiwyg.gif') no-repeat 0 0; border:1px solid transparent;}
+	
+.IconItalic {background-position:0 -20px;}
+.IconUnderline {background-position:0 -40px;}
+.IconStrikeThrough {background-position:0 -60px;}
+.IconSubscript {background-position:0 -80px;}
+.IconSuperscript {background-position:0 -100px;}
+.IconJustifyLeft {background-position:0 -120px;}
+.IconJustifyCenter {background-position:0 -140px;}
+.IconJustifyRight {background-position:0 -160px;}
+.IconTextLeftToRight {background-position:0 -500px;}
+.IconBackgroundColor {background-position:0 -180px;}
+.IconForegroundColor {background-position:0 -200px;}
+.IconIndent {background-position:0 -220px;}
+.IconOutdent {background-position:0 -240px;}
+.IconHr {background-position:0 -260px;}
+.IconOrderedList {background-position:0 -280px;}
+.IconUnorderedList {background-position:0 -300px;}
+.IconInsertImage {background-position:0 -320px;}
+.IconInsertAttachedImage {background-position:0 -320px;}
+.IconCreateLink {background-position:0 -340px;}
+.IconRemoveLink {background-position:0 -360px;}
+.IconRemoveFormat {background-position:0 -380px;}
+.IconFontList {background-position:0 -400px;}
+.IconFontSize {background-position:0 -420px;}
+.IconStyle {background-position:0 -440px;}
+.IconAddTemplateVariable {background-position:0 -460px;}
+
+.IconBold-over, .IconItalic-over, .IconUnderline-over, .IconStrikeThrough-over, .IconSubscript-over, .IconSuperscript-over,
+.IconJustifyLeft-over, .IconJustifyCenter-over, .IconJustifyRight-over, .IconTextLeftToRight-over, .IconBackgroundColor-over, .IconForegroundColor-over,
+.IconIndent-over, .IconOutdent-over, .IconHr-over, .IconOrderedList-over, .IconUnorderedList-over, .IconInsertImage-over,.IconInsertAttachedImage-over,
+.IconCreateLink-over, .IconRemoveLink-over, .IconRemoveFormat-over, .IconFontList-over, .IconFontSize-over, .IconStyle-over,
+.IconAddTemplateVariable-over
+	{background-color:#E3E3E3; border:1px solid #AAAAAA;}
+
+.IconBold-down, .IconItalic-down, .IconUnderline-down, .IconStrikeThrough-down, .IconSubscript-down, .IconSuperscript-down,
+.IconJustifyLeft-down, .IconJustifyCenter-down, .IconJustifyRight-down, .IconTextLeftToRight-down, .IconBackgroundColor-down, .IconForegroundColor-down,
+.IconIndent-down, .IconOutdent-down, .IconHr-down, .IconOrderedList-down, .IconUnorderedList-down, .IconInsertImage-down,.IconInsertAttachedImage-down,
+.IconCreateLink-down, .IconRemoveLink-down, .IconRemoveFormat-down, .IconFontList-down, .IconFontSize-down, .IconStyle-down,
+.IconAddTemplateVariable-down
+    {background-color:#A3A3A3; border:1px solid #ffffff;}
+    
+.IconBold-downOver, .IconItalic-downOver, .IconUnderline-downOver, .IconStrikeThrough-downOver, .IconSubscript-downOver, .IconSuperscript-downOver,
+.IconJustifyLeft-downOver, .IconJustifyCenter-downOver, .IconJustifyRight-downOver, .IconTextLeftToRight-downOver, .IconBackgroundColor-downOver, .IconForegroundColor-downOver,
+.IconIndent-downOver, .IconOutdent-downOver, .IconHr-downOver, .IconOrderedList-downOver, .IconUnorderedList-downOver, .IconInsertImage-downOver,.IconInsertAttachedImage-downOver,
+.IconCreateLink-downOver, .IconRemoveLink-downOver, .IconRemoveFormat-downOver, .IconFontList-downOver, .IconFontSize-downOver, .IconStyle-downOver,
+.IconAddTemplateVariable-downOver
+    {background-color:#E3E3E3; border:1px solid #AAAAAA;}    
+
+/* ******************************************* */
+/*                MULTI EDITOR                 */
+/* ******************************************* */
+.MultiEditor .WindowResizerS {width:100%; height:9px; background:url('img/resizer.png') no-repeat center center; float:left;}
+.MultiEditor .Editor {bottom:0px;position:absolute;top:20px;width:100%;}
+
+.MultiEditor .RichTextEditor {min-height: 100%; height: 100%; width: 100%;}
+.MultiEditor .ResizableTextArea {min-height: 100%; height: 100%; width: 100%;}
+.MultiEditor .ResizableTextArea .TextBoxContainer {width: 100%;}
+.ResizableTextArea .WindowResizerS {width:100%; height:9px; background:url('img/resizer.png') no-repeat center center; float:left;}
+
+/* ******************************************* */
+/*                 GRID ICONS                  */
+/* ******************************************* */
+.IconButton {margin:0 0 0 5px; width:15px; height:15px; cursor:pointer;}
+
+.IconEdit {background:url('img/icon.grid.png') no-repeat 0 0;}
+.IconDelete {background:url('img/icon.grid.png') no-repeat 0 -20px;}
+.IconCopy {background:url('img/icon.grid.png') no-repeat 0 -39px;}
+.IconDetail {background:url('img/icon.grid.png') no-repeat 0 -219px;}
+.IconHelp {background:url('img/icon.grid.png') no-repeat 0 -60px;}
+.IconOptimize {background:url('img/icon.grid.png') no-repeat 0 -81px;}
+.IconRepair {background:url('img/icon.grid.png') no-repeat 0 -101px;}
+.IconAnalyze {background:url('img/icon.grid.png') no-repeat 0 -121px;}
+.IconDownload {background:url('img/icon.grid.png') no-repeat 0 -142px;}
+.IconImport {background:url('img/icon.grid.png') no-repeat 0 -161px;}
+.IconExport {background:url('img/icon.grid.png') no-repeat 0 -179px;}
+.IconLoadIpDetails {background:url('img/icon.grid.png') no-repeat 0 -219px; float:left;}
+.IconSetAsDefault {background:url('img/icon.grid.png') no-repeat 0 -198px;}
+.IconSetDefault {background:url('img/icon.grid.png') no-repeat 0 -198px;}
+
+.RefreshIcon {background:url('img/icon.grid.png') no-repeat 0 -297px;}
+.IconExtendableText {width:20px; height:17px; background:url('img/icon.grid.png') no-repeat 0 -237px; cursor:pointer; float: left;}
+
+.IconApproved, .IconPending, .IconDeclined, .IconSuspended
+	{float:left; padding:0 4px 0 0; width:10px; height:16px;}
+	
+.IconApproved {background:url('img/icon.grid.png') no-repeat 0 -346px;}
+.IconPending {background:url('img/icon.grid.png') no-repeat 0 -365px;}
+.IconDeclined {background:url('img/icon.grid.png') no-repeat 0 -384px;}
+.IconSuspended {background:url('img/icon.grid.png') no-repeat 0 -400px;}
+.StatusText {float:left; margin:2px 0 0;}
+
+/* ******************************************* */
+/*                 GRID BOX                    */
+/* ******************************************* */
+.Grid {position:relative; margin:0; background:transparent; display:block; font-family:Arial, Helvetica, sans-serif;}
+.GridPanel {position:relative;}
+.GridNoData {text-align:center;}
+
+.Grid .BoxTop {background:#dfdfdf;}
+.Grid .BoxTopLeft {background:url('img/grid.png') no-repeat 0 0;}
+.Grid .BoxTopRight {background:url('img/grid.png') no-repeat right -4px;}
+.Grid .BoxBottom {background:#dfdfdf;}
+.Grid .BoxBottomLeft {background:url('img/grid.png') no-repeat 0 -8px;}
+.Grid .BoxBottomRight {background:url('img/grid.png') no-repeat 0 -12px;}
+.Grid .BoxIn {position:relative; padding:3px 0; background:transparent;}
+.Grid .BoxInIE6 {position:relative;}
+
+.Grid .TopButtons {height:auto;}
+* html .Grid .TopButtons {height:10px;}
+.Grid .TopLeftButtons {display:block; margin:0 250px 0 0; padding:1px; position:relative; float:none;}
+
+.Grid .BottomButtons {height:25px; position:relative;}
+.Grid .BottomLeftButtons {display:block; padding:1px; margin:3px 100px 0 0; position:relative;}
+
+.Grid .Button .Span {color:#0054ff;}
+
+.GridLine {position:relative; height:21px;	background:url('img/grid.png') repeat-x 0 -16px; text-align:center;}
+* html .GridLine {height:19px;}
+
+.GridTop {position:relative; margin:5px 0 1px;}
+.GridTop td {height:19px;}
+.GridTop .GridLine {border:1px solid #cacaca; border-bottom:0;}
+.GridTop .ListBox {width:100px;}
+
+.GridBottom {position:relative; margin:1px 0 0;}
+.GridBottom td {height:19px;}
+.GridBottom .GridLine {border-bottom:0;}
+.GridBottom .ListBox {width:100px;}
+
+.GridRow td {height:19px; overflow:hidden;}
+.GridRow .Data {overflow:hidden;}
+.GridRow .gwt-Label {height:15px; overflow:hidden;}
+
+
+/* ******************************************* */
+/*                 GRID TABLE                  */
+/* ******************************************* */
+.GridTableContent {position:relative; padding:1px 0 0; border:1px solid #8e9fb7; text-align:left;}
+.GridTable {position:relative; width:100%; text-align:left; border-collapse:collapse;}
+
+.GridCell {border-bottom:1px solid #e3e3e3; height:22px;}
+.GridCell .Button {float:left;}
+.GridTable .GridHeader {background:#ddebf8;}
+.GridHeader {border-bottom:1px solid #989898; overflow:hidden; background:url('img/grid.png') repeat-x 0 -37px;}
+.GridHeader td {border-bottom:1px solid #fff; border-right:1px solid #fff; padding:0;}
+
+.grid-header-cell {padding:3px 5px 0; height:16px; font:bold 11px Arial; color:#323232; cursor:default; border:1px solid #c6d8f1;}
+.grid-header-cell-sortable {text-decoration:underline; cursor:pointer;}
+.grid-header-cell-sortUp {background:url('img/grid.png') #e1e1e1 no-repeat 2px -61px; padding-left:15px; border:1px solid #c5c5c5;}
+.grid-header-cell-sortDown {padding-left:15px; background:url('img/grid.png') #e1e1e1 no-repeat 2px -76px; border:1px solid #c5c5c5;}
+
+.BoxPanel .GridRow-mouseOver {background:#8b8b8b;}
+
+.GridRow {background:#fff;}
+.GridRow-Even {background:#fbfbfb;}
+.GridRow-Odd {background:#fff;}
+
+.GridRow-checked {background:#f0f0f0;}
+.GridRow-mouseOver {background:#e0ebf8;}
+.GridRowNotActive {color:#666;}
+.GridRowHighlighted {font-weight: bold;}
+
+.GridSelector {position:absolute; top:0; left:0; padding:0 0 0 5px; }
+.GridSelector div,button {display:inline;}
+.GridSelector button {padding:0; background:inherit; border:0; color:#335080; text-decoration:underline; cursor:pointer;}
+.GridSelector .LinkButton-Selected {border:1px solid black;}
+.GridSelector .LinkButton-Selected .ButtonText {text-decoration: none;}
+
+.GridPager {margin-left:auto; margin-right:auto;}
+.GridPagerContent {border-collapse:collapse; margin:0 auto;}
+.GridPagerInfo {margin:0;}
+.GridPager button {padding:0; background:#fff; border:0; color:#335080; text-decoration:underline; cursor:pointer;}
+.button.gwt-button {margin:0 3px; background:#fff;}
+.GridPager div {margin:0 5px;}
+
+.GridRefresh {position:absolute; top:0; right:0; padding:2px 5px 0 0;}
+
+.GridTable .clickable {text-decoration:underline; cursor:pointer;}
+
+.Data {position:relative; width:100%; height:100%;}
+.Data-modified {background:url('img/dirty.gif') transparent no-repeat left top fixed;}
+.DataText {padding:2px; display:block; cursor:pointer;}
+
+.Data .Ip {float:left;}
+.DataText .Ip {float:left;}
+.IpDetailContent {float:left; padding:5px}
+.IpLocationFlag {float:left;}
+
+.DataEdit {background:#fff;}
+.DataEdit .ListBox {width:100%;}
+
+.ViewColumn-move {cursor:e-resize;}
+.ViewColumn-move .grid-header-cell {cursor:e-resize;}
+.ViewColumn {overflow:hidden;}
+
+.TopButtons {height:auto; position:relative;}
+.TopRightButtons {position:absolute; margin:0 0 0 10px; bottom:0; right:0;}
+
+.ViewsPanel {position:relative;}
+.ViewsPanel-visible {float:left; height:25px; background:url('img/grid.views.png') no-repeat 0 0; border-right:1px solid #cacaca;}
+
+.ModifyView {padding:1px 0 0 5px; cursor:pointer; top:-2px;}
+.SelectView {margin:0 0 0 40px; top:3px;}
+* html .SelectView {margin:3px 0 0 20px;}
+
+.TopActionButtons, .TopMassActionButtons, .BottomActionButtons, .BottomMassActionButtons 
+	{display:inline; position:relative;}
+
+.TopActionButtons .Button, .TopMassActionButtons .Button, .BottomActionButtons .Button, .BottomMassActionButtons .Button 
+	{float:left;}
+	
+.RowActionIconButton {float:left;}
+
+.BottomButtons {position:relative; padding:1px 0 0; height:25px;}
+
+
+/* ******************************************* */
+/*                GRID - NO DATA               */
+/* ******************************************* */
+.NoData {padding:15px 0; text-align:center;}
+.NoDataContent {font:bold 15px Arial; color:#8e9fb7;}
+.NoDataMessage {padding:4px 10px 10px 30px; line-height:30px; background:url('img/grid.no.data.png') no-repeat; display:inline;}
+
+
+/* ******************************************* */
+/*             SIMPLE FILTERS                  */
+/* ******************************************* */
+.SimpleFilter {position:relative; margin:5px 0; min-height:21px; background:url('img/filter.background.png') repeat-x top; border:2px solid #cedbea; text-align:left;}
+* html .SimpleFilter {height:19px;}
+.SimpleFilterContent {position:relative; width:100%; height:21px;}
+.SimpleFilterAdvanced {position:relative;}
+
+
+/* ******************************************* */
+/*              SEARCH & FILTER                */
+/* ******************************************* */
+.SearchAndFilter {margin:10px 0 20px; min-height:21px; background:url('img/filter.background.png') repeat-x top; border:2px solid #cedbea; text-align:left;}
+.SearchAndFilter-open {margin:10px 0 5px;}
+.SearchAndFilter .ListBox {width:100px;}
+.SearchAndFilterContent {position:relative; width:100%; height:21px;}
+.SearchTextFloat {position:relative; float:left; padding:4px 5px 0;}
+.SearchElementFloat {position:relative; float:left; padding:0 5px 0 0; margin:1px 0 0;}
+.SearchAndFilter .ThinButton {margin:1px 0 0;}
+.SearchInputTextBox {position:relative; height:17px; background:#fff; border:1px solid #949494; font:normal 11px Arial !important;}
+.SearchInputTextBox-focus {background:url('img/input.png') repeat-x 0 -2000px; border:1px solid #b2c1d7;}
+
+
+/* ******************************************* */
+/*                   FILTERS                   */
+/* ******************************************* */
+.FilterBoxIn {position:relative; margin:0; padding:0; background:#eef4fa;border-top:2px solid #dae2eb;}
+.FilterBoxInIE6 {position:static; margin:0; padding:0; background:#eef4fa;}
+
+.FilterNavigationTop {position:relative; padding:3px 0 5px;	height:22px;}
+.FilterContent {margin:0 5px;}
+.FilterContent strong {font-weight:bold;}
+.FilterNavigationBottom {position:relative; margin:10px 0 0; padding:10px 0 0 10px; height:30px; background:#dceaf8;}
+.FilterNavigationTopRight {float:right;}
+
+.FilterSelect {position:relative; float:left;}
+.FilterLinkButton {position:relative; float:left; margin:0 0 0 30px;}
+.FilterShowHideButton {float:left; margin:0 0 0 10px; display:inline;}
+.FilterLabel {float:left; margin:0 10px 0 0; font:bold 13px Arial;}
+
+.FilterBoxIn .content_box {padding:0; border-top:1px solid #eaeff4;}
+.FilterBoxIn .gwt-Label {font:bold 11px Arial; margin:2px 0 0;}
+.FilterBoxIn input {width:10em;}
+
+.FilterBoxIn .FilterShowHideButton {font-weight:bold; margin:0 0 0 40px;}
+.FilterBoxIn .FilterShowHideButton .ButtonSmall {padding:0 0 0 20px; background:url('img/checkbox.png') no-repeat top left;}
+.FilterBoxIn .FilterShowHideButton-disabled .ButtonSmall {background:url('img/checkbox.png') no-repeat top right;}
+.FilterBoxIn option {padding:0 20px 0 0;}
+
+@media all and (min-width:0px) {.FilterBoxIn .gwt-ListBox {padding:0 20px 0 0;}}
+
+.SearchInput {float:left; margin:0 10px 0 0; font-weight:bold;}
+.SearchInputTextBox {width:100px; font-size:13px;}
+.SearchButton {float:left; margin:0 10px 0 0; font-size:13px;}
+
+.filter-banner {float:left;	padding:0 0 0 20px;	border-left:1px dotted #fff;}
+
+.banner_manager {margin:10px 0 0; height:0px;}
+.ReportFilter {margin:0; padding:0;}
+
+
+/* ******************************************* */
+/*                POPUP WINDOW                 */
+/* ******************************************* */
+.PopupWinTop, .PopupWinTopLeft, .PopupWinTopRight, .PopupWinBottom, .PopupWinBottomLeft, .PopupWinBottomRight {
+	position:relative; margin:0; padding:0; line-height:1px; font-size:1px; display:block;}
+	
+.PopupWinTopLeft {width:100%; height:4px; background:url('img/popupwin.png') no-repeat top left;}
+.PopupWinTopRight {margin:0 0 0 4px; height:4px; background:url('img/popupwin.png') no-repeat right -4px;}
+.PopupWinTop {margin:0 4px 0 0; height:4px; background:url('img/popupwin.png') repeat-x 0 -8px;}
+.PopupWinBottomLeft {width:100%; height:4px; background:url('img/popupwin.png') no-repeat 0 -16px;}
+.PopupWinBottomRight {margin:0 0 0 4px; height:4px; background:url('img/popupwin.png') no-repeat bottom right;}
+.PopupWinBottom {margin:0 4px 0 0; height:4px; background:url('img/popupwin.png') repeat-x 0 -12px;}
+.PopupWinLeft {bottom:4px; top:4px; height:100%; left:0; background:url('img/popupwin.vertical.png') repeat-y;}
+.PopupWinRight {position:relative; margin:0 0 0 4px; height:100%; background:url('img/popupwin.vertical.png') repeat-y right; display:block;}
+.PopupWinMain {position:relative; margin:0 4px 0 0; height:100%; background:#a1c0e4; display:block;}
+
+
+/* ******************************************* */
+/*            POPUP WINDOW EXTENDABLE          */
+/* ******************************************* */
+.PopupWinTopExtendable, .PopupWinTopLeftExtendable, .PopupWinTopRightExtendable, .PopupWinBottomExtendable, .PopupWinBottomLeftExtendable, .PopupWinBottomRightExtendable {
+	position:relative; margin:0; padding:0; line-height:1px; font-size:1px;}
+
+.PopupWinExtendableTable {border-collapse:collapse; width: 100%; height: 100%;}
+.PopupWinTopLeftExtendable {width:4px; height:4px; background:url('img/popupwinextendable.png') no-repeat top left;}
+.PopupWinTopRightExtendable {width:4px; height:4px; background:url('img/popupwinextendable.png') no-repeat right -4px;}
+.PopupWinTopExtendable {margin:0 4px 0 0; height:4px; background:url('img/popupwinextendable.png') repeat-x 0 -8px;}
+.PopupWinBottomLeftExtendable {width:4px; height:4px; background:url('img/popupwinextendable.png') no-repeat 0 -16px;}
+.PopupWinBottomRightExtendable {width:4px; height:4px; background:url('img/popupwinextendable.png') no-repeat bottom right;}
+.PopupWinBottomExtendable { height:4px; background:url('img/popupwinextendable.png') repeat-x 0 -12px;}
+.PopupWinLeftExtendable {bottom:4px; top:4px; left:0; height:100%; background:url('img/popupwinextendable.vertical.png') repeat-y}
+.PopupWinRightExtendable {position:relative; width:4px; height:100%; background:url('img/popupwinextendable.vertical.png') repeat-y right;}
+.PopupWinMainExtendable {position:relative; height:100%; background:#e2e8f2; vertical-align: top;}
+
+
+/* ******************************************* */
+/*        POPUP WINDOW EXTENDABLE TEXT         */
+/* ******************************************* */
+
+.Extendable {overflow: hidden;}
+.Extendable .PopupWinMain {background:#b3ccE9;}
+.Extendable .TextBox {font-size:10px; color:#000;}
+.Extendable .gwt-Label {padding:0 5px 0 0; font:bold 10px Arial; color:#000;}
+.Extendable .gwt-Button {cursor:pointer;}
+.Extendable .CloseButton {float:right; padding:0 0 0 12px; background:url('img/icon.grid.png') no-repeat 0 -254px; cursor:pointer;}
+.Extendable .CloseButton .ButtonText {text-decoration:underline;}
+.Extendable .CloseButton-over .ButtonText {color:#00418d;}
+.ExtendableText {width:10px; background:url('img/button.icon.png') no-repeat 3px -16px; cursor:pointer;}
+.Extendable .Draggable {overflow: auto; background-color: #F8FAFD;}
+
+
+/* ******************************************* */
+/*            EDITABLE TEXTAREA POPUP          */
+/* ******************************************* */
+
+.EditableTextAreaWidget .PopupWinLeft, .EditableTextAreaWidget .PopupWinRight, .EditableTextAreaWidget .PopupWinMain 
+    {height:100%}
+.DataEdit .popupContent {height:100%;}
+.EditableTextAreaWidget .PopupWinLeft .PopupWinRight .PopupWinMain .TextBoxContainer {height: 100%;}
+
+
+/* ******************************************* */
+/*                  CALENDAR                   */
+/* ******************************************* */
+.Calendar {width:160px;}
+.Calendar .PopupWinMain {padding:5px 10px 10px; background:#b3cce9;}
+
+.Calendar .gwt-Button {float:none; margin:0 3px; background:none; border:none; display:inline; color:#fff; cursor:pointer;}
+.Calendar .gwt-Label {display:inline; font-weight:bold; color:#000;}
+.CalendarNavigation {text-align:center;}
+.CalendarDisplay {margin:0 auto; text-align:center;}
+.CalendarDisplay table {margin:0 auto; background:#fff; border-collapse:collapse; cell-spacing:0; border-spacing:0;}
+.CalendarDisplay cols,.CalendarDisplay td {margin:0; border:0;}
+.CalendarDisplay td {padding:1px 3px; cursor:pointer;}
+
+.Calendar .DaysNameHeader {background:#8e8e8e; color:#fff;}
+.Calendar .DaysNameHeader td {cursor:text;}
+.Calendar .WeekendColumn {background:#eee;}
+.Calendar .ThisMonth {color:#000;}
+.Calendar .Selected {background:#3561ba; color:#fff;}
+.Calendar .Today {border:1px solid #555}
+
+
+/* ******************************************* */
+/*                COLOR PICKER                 */
+/* ******************************************* */
+.Colorpicker {width:311px; color:#aaa;}
+.Colorpicker .PopupWinMain {background:#b3cce9; text-align:center;}
+.Colorpicker .TextBox {font-size:10px; color:#000;}
+.Colorpicker .gwt-Label {padding:0 5px 0 0; font:bold 10px Arial; color:#000;}
+.Colorpicker .gwt-Button {cursor:pointer;}
+
+
+/* ******************************************* */
+/*                IMAGE PICKER                 */
+/* ******************************************* */
+.Imagepicker {width:350px;}
+.Imagepicker .PopupWinMain {padding:3px 5px 3px; background:#b3cce9; text-align:center;}
+.Imagepicker .TextBox {font-size:10px; color:#000;}
+.Imagepicker .gwt-Label {padding:0 5px 0 0; font:bold 10px Arial; color:#000;}
+.Imagepicker .gwt-Button {cursor:pointer;}
+
+
+/* ******************************************* */
+/*               DATE RANGE POPUP              */
+/* ******************************************* */
+.DateRange {width:310px;}
+.DateRange .PopupWinMain {padding:3px 5px; background:#b3cce9; text-align:center;}
+.DateRange .gwt-TextBox {font-size:10px; color:#000000;}
+.DateRange .gwt-Label {padding:0 5px 0 0; font:bold 10px Arial; color:#000;}
+.DateRange .RadioButton {color:#000;}
+.DateRange .gwt-Button {cursor:pointer;}
+
+
+/* ******************************************* */
+/*            CHART DATATYPE POPUP             */
+/* ******************************************* */
+.ChartDatatypePopup {width:300px;}
+.ChartDatatypePopup .PopupWinMain {padding:3px 5px; background:#b3cce9; text-align:left;}
+.ChartDatatypePopup .gwt-TextBox {font-size:10px; color:#000;}
+.ChartDatatypePopup .gwt-Label {padding:0 5px 0 0; font:bold 10px Arial; color:#000;}
+.ChartDatatypePopup .gwt-Button {cursor:pointer;}
+.ChartDatatypePopup .RadioButton {color:#000;}
+.ChartDatatypePopup .ListBox {width:150px;}
+
+
+/* ******************************************* */
+/*       WINDOW - COMMON and INACTIVE          */
+/* ******************************************* */
+.Window {background:transparent; color:#8b8b8b;}
+.WindowContainer {width:400px;}
+
+.WindowContent {position:relative; padding:0 10px;}
+* html .WindowContent {position:static;}
+.WindowLoading {float:right; margin:3px 6px 0 0; width:96px; height:16px;	background:url('img/loading_window.gif') no-repeat;}
+
+.WindowLeft {position:relative; margin:0; padding:0; background:url('img/window.inactive.vertical.png') repeat-y;}
+.WindowRight {position:relative; height:100%; background:url('img/window.inactive.vertical.png') repeat-y right;}
+* html .WindowRight {width:100%;}
+
+.WindowHeader {margin:0 9px; padding:0;	height:26px; background:url('img/window.inactive.png') repeat-x 0 -55px;}
+.WindowHeaderLeft {position:relative; margin:0; padding:0; height:26px; background:url('img/window.inactive.png') no-repeat;}
+.WindowHeaderRight {margin:0; padding:0; height:26px; background:url('img/window.inactive.png') no-repeat right -26px;}
+
+.WindowBottom {position:relative; margin:0 9px; height:9px; display:block; background:url('img/window.inactive.png') repeat-x 0 -81px;}
+.WindowBottomLeft {position:relative; margin:0; padding:0; height:9px; background:url('img/window.inactive.png') no-repeat 0 -282px; font-size:1px;}
+.WindowBottomRight {position:relative; margin:0; padding:0; height:9px; background:url('img/window.inactive.png') no-repeat right -291px;}
+
+.WindowIn {position:relative; margin:0 7px; padding:0; height:100%; overflow:auto; display:block; background:#fff;}
+.WindowIn .screen {padding:0 6px 0 0; height:100%;}
+
+.WindowHeaderTitle {float:left; padding:6px 30px 0 7px;	font:bold 12px Arial, Helvetica, sans-serif; color:#707070;}
+.WindowHeaderButtons {padding:4px 0 0; font:bold 12px Arial, Helvetica, sans-serif; color:#1e1e1e;}	
+	
+.WindowHeaderRefreshMenu {float:right;}
+.WindowHeaderRefreshMenuLeft, .WindowHeaderRefreshMenuRight, .WindowHeaderRefreshMenuContent {
+	float:left; width:5px; height:16px; background:url('img/window.inactive.png') no-repeat;}
+
+.WindowHeaderRefreshMenuLeft {background-position:0 -90px;}
+.WindowHeaderRefreshMenuRight {background-position:-5px -90px;}
+.WindowHeaderRefreshMenuContent {padding:0; margin:0; width:37px; background-repeat:repeat-x; background-position:0 -106px;}
+
+.WindowButtonClose, .WindowButtonMax, .WindowButtonMin, .WindowButtonRestore, .WindowRefreshButton, .WindowAutoRefreshMenu {
+	float:right; margin:0 0 0 5px; width:16px; height:16px; cursor:pointer; background:url('img/window.inactive.png') no-repeat;}
+
+.WindowButtonClose {background-position:0 -123px;}
+.WindowButtonClose-over {background-position:-17px -123px;}
+.WindowButtonMax {background-position:0 -157px;}
+.WindowButtonMax-over {background-position:-17px -157px;}
+.WindowButtonRestore {background-position:0 -140px;}
+.WindowButtonRestore-over {background-position:-17px -140px;}
+.WindowButtonMin {background-position:0 -174px;}
+.WindowButtonMin-over {background-position:-17px -174px;}
+.WindowRefreshButton {margin:0; background-position:0 -208px;}
+.WindowRefreshButton-over {background-position:-17px -208px;}
+.WindowAutoRefreshMenu {background-position:0 -191px;}
+.WindowAutoRefreshMenu-over {background-position:-17px -191px;}
+
+.WindowActionButtons table {margin:0 auto; text-align:center;}
+.WindowActionButtons .Button, .WindowActionButtons .LinkButton {float:left;}
+
+.WindowResizer {position:absolute;}
+
+.WindowResizerN, .WindowResizerS, .WindowResizerE, .WindowResizerW, .WindowResizerNE, .WindowResizerNW, .WindowResizerSE, .WindowResizerSW {
+	line-height:1px; font-size:1px;}	
+	
+.WindowResizerN {left:0; top:0; width:100%; height:6px; cursor:n-resize;}
+.WindowResizerS {left:0; bottom:0; width:100%;  height:8px; cursor:n-resize;}
+.WindowResizerE {right:0; top:0; width:8px; height:100%; cursor:e-resize;}
+.WindowResizerW {left:0; top:0; width:8px; height:100%; cursor:e-resize;}
+.WindowResizerNE {right:0; top:0; width:8px; height:8px; cursor:ne-resize;}
+.WindowResizerNW {left:0; top:0; width:8px; height:8px; cursor:nw-resize;}
+.WindowResizerSE {right:0; bottom:0; width:8px;	height:8px;	cursor:se-resize;}
+.WindowResizerSW {left:0; bottom:0; width:8px; height:8px; cursor:sw-resize;}
+
+.WindowEmptyContent {height:100%; width:100%; vertical-align:middle; text-align:center;}
+.WindowMoveFrame {position:absolute;}
+
+.WindowMoveFrameContent {position:absolute;	left:0;	top:0; right:0; bottom:0; color:#fff; background:url('img/window.move.png') transparent repeat; border:2px solid #a2a2a2; cursor:move;}
+
+.SingleRefreshPanel {height:16px;}
+
+
+/* ******************************************* */
+/*                WINDOW - ACTIVE              */
+/* ******************************************* */
+.Window-active {color:#000000}
+.Window-active .WindowHeader {background:url('img/window.active.png') repeat-x 0 -55px;}
+.Window-active .WindowHeaderLeft {background:url('img/window.active.png') no-repeat;}
+.Window-active .WindowHeaderRight {background:url('img/window.active.png') no-repeat right -26px;}
+.Window-active .WindowHeaderTitle {color:#1e1e1e;}
+.Window-active .WindowLeft {background:url('img/window.active.vertical.png') repeat-y;}
+.Window-active .WindowRight {background:url('img/window.active.vertical.png') repeat-y right;}
+.Window-active .WindowIn {margin:0 7px; background:#fff;}
+.Window-active .WindowBottom {background:url('img/window.active.png') repeat-x 0 -81px;}
+.Window-active .WindowBottomLeft {background:url('img/window.active.png') no-repeat 0 -282px;}
+.Window-active .WindowBottomRight {background:url('img/window.active.png') no-repeat right -291px;}
+
+.Window-active .WindowButtonClose {background: url('img/window.active.png') no-repeat 0 -123px;}
+.Window-active .WindowButtonClose-over {background:url('img/window.active.png') no-repeat -17px -123px;}
+.Window-active .WindowButtonMax {background:url('img/window.active.png') no-repeat 0 -157px;}
+.Window-active .WindowButtonMax-over {background:url('img/window.active.png') no-repeat -17px -157px;}
+.Window-active .WindowButtonRestore {background:url('img/window.active.png') no-repeat 0 -140px;}
+.Window-active .WindowButtonRestore-over {background:url('img/window.active.png') no-repeat -17px -140px;}
+.Window-active .WindowButtonMin {background:url('img/window.active.png') no-repeat 0 -174px;}
+.Window-active .WindowButtonMin-over {background:url('img/window.active.png') no-repeat -17px -174px;}
+.Window-active .WindowRefreshButton {background:url('img/window.active.png') no-repeat 0 -208px;}
+.Window-active .WindowRefreshButton-over {background:url('img/window.active.png') no-repeat -17px -208px;}
+.Window-active .WindowAutoRefreshMenu {background:url('img/window.active.png') no-repeat 0 -191px;}
+.Window-active .WindowAutoRefreshMenu-over {background:url('img/window.active.png') no-repeat -17px -191px;}
+
+.Window-active .WindowHeaderRefreshMenu {float:right;}
+.Window-active .WindowHeaderRefreshMenuLeft {background:url('img/window.active.png') no-repeat 0 -90px;}
+.Window-active .WindowHeaderRefreshMenuRight {background:url('img/window.active.png') no-repeat -5px -90px;}
+.Window-active .WindowHeaderRefreshMenuContent {background:url('img/window.active.png') repeat-x 0 -106px;}
+
+
+/* ******************************************* */
+/*                    TABS                     */
+/* ******************************************* */
+.TabsHeaderLine,.TabItem,.TabItem-over,.TabItem-actual {margin:0 0 -1px;}
+.TabItem,.TabItem-actual,.TabItem-over,.TabEdge {float:left; margin:0 0 0 2px;}
+.TabItem {display:block}
+.TabEdge {float:left; margin:0 !important; padding:0 !important; width:1px; line-height:1px !important; background:transparent none repeat scroll 0% !important; border:0pt none !important; overflow:hidden; font-size:1px !important;}
+
+.TabItemLeft,.TabItemRight,.TabItemIn,.TabItemText {display:block;}
+
+.TabItemLeft {position:relative; top:0; left:0; padding:0 0 0 15px; background:transparent url('img/tabs.png') no-repeat scroll 0pt -50px; text-decoration:none !important; outline-width:medium; outline-style:none; outline-color:invert; cursor:pointer;}
+.TabItem-actual .TabItemLeft {background-position:0 0;}
+.TabItem-over .TabItemLeft {background-position:0px -25px;}
+
+.TabItemRight {background:transparent url('img/tabs.png') no-repeat scroll right -200px; padding:0 15px 0 0;}
+.TabItem-actual .TabItemRight {background-position:right -150px;}
+.TabItem-over .TabItemRight {background-position:right -175px;}
+
+.TabItemIn {background:transparent url('img/tabs.png') repeat-x scroll 0 -125px; overflow:hidden;}
+.TabItem-actual .TabItemIn {background-position:0 -75px;}
+.TabItem-over .TabItemIn {background-position:0 -100px;}
+
+.TabItemText {padding:8px 0 2px;  font:normal normal normal 12px/normal tahoma, arial, helvetica; color:#656565; /*font-size-adjust:none; font-stretch:normal;*/ white-space:nowrap; cursor:pointer;}
+.TabItem-actual .TabItemText {padding:4px 0 5px;  font:bold 13px Arial; color:#323232; cursor:default;}
+
+.TabsClear {clear:both; height:0pt; line-height:0pt; font-size:0pt; overflow:hidden;}
+.TabsSpacer {height:1px; line-height:1px; font-size:1px;}
+.TabContent {padding:0 15px; background:#fff; border:1px solid #bdbdbd; border-top:0;}
+
+.TabPanelTabs {position:relative; z-index:1;}
+.TabPanelTabs .ItemPanelItems {margin:0 55px 0 15px; height:27px;}
+.TabPanelTabs .ItemPanelInnerContent>div {float:left;}
+.TabPanelTabs .ItemPanelRight {right:40px; top:6px;}
+.TabPanelTabs .ItemPanelLeft {left:2px; top:6px;}
+.TabPanelTabs .ItemPanelMenuOpen {top:4px;}
+
+.TabPanelContent {position:relative; margin:-2px 0 0; padding:5px; background:#fff; border:1px solid #bdbdbd;}
+* .TabPanelContent {margin:-3px 0 0; height:auto;}
+
+@media all and (min-width:0px) {.TabPanelContent {margin:-3px 0 0;}}
+
+
+/* ******************************************* */
+/*                    FORM                     */
+/* ******************************************* */
+label {display:block;}
+.FormMessage-error {font-weight:bold; color:#e60101;}
+.FormMessage-info {font-weight:bold; color:#327505; padding: 0 0 10px;}
+.FormPanelBlocker .gwt-Label {background:#fff; text-align:center;}
+.FormContainer {padding:5px 0;}
+.Form {position:relative;}
+.FormItem {display:block; margin:0 0 4px; font:normal normal normal 12px/normal tahoma, arial, helvetica, sans-serif;}
+.FormItemLabel {position:relative; clear:both; float:left; padding:5px 3px 3px 0; width:100px; display:block; z-index:2;}
+.FormElement {padding:3px 0 0;}
+.FormClearLeft {clear:both; font-size:0pt; height:0pt; line-height:0pt;}
+.FormColumn {float:left;}
+.FormPanel {position:relative; height:auto;}
+* html fieldset .FormPanel {float:left;}
+.FormPanelBlocker {position:absolute !important; top:0; left:0; width:100%; height:100%; border:1px solid #808080; background:#808080; cursor:default; opacity:0.6; filter:alpha(opacity = 60);}
+.DynamicFields {position:relative;}
+
+/* ******************************************* */
+/*                  FORMFIELD                  */
+/* ******************************************* */
+.FormField {position:relative; clear:both; margin:1px 0 3px; padding:0; min-height:19px; _height:19px; display:block;}
+*+html .FormField {padding:0; margin:1px 0 2px;}
+* html .FormField {width:auto;}
+
+.FormFieldLabel {position:relative; float:left; width:100px;}
+.FormFieldLabel .Label-mandatory {font-weight:bold;}
+
+.FormField .Label {position:relative; color:#000;}
+.FormField-focus .Label {color:#295183;}
+.FormField-error .Label {color:#e60101;}
+
+.FormFieldInputContainer {position:relative; float:left;}
+
+.FormFieldInput {position:relative; float:left; width:150px;}
+* html .FormFieldInput, *+html .FormFieldInput {width:150px;}
+
+.FormFieldInput .FormFieldInput .ListBox {width:100%;}
+.FormFieldError, .FormFieldHelp {position:relative; float:left; padding:2px 0 0;}
+
+.FormFieldDescription {clear:left; color:#808080;}
+
+.TextBoxContainer-error {border:1px solid #e21212;}
+.CurrencyTextBox-error {color: #e21212;}
+.CurrencyTextBox-error .TextBoxContainer {border:1px solid #e21212;}
+.FormField-error .TextBoxContainer-focus {background:url('img/input.png') #fff repeat-x 0 -4000px; border:1px solid #e21212;}
+.FormField-error .TextBoxContainer {border:1px solid #e21212;}
+
+.FormField-focus .DownIcon {width:18px; height:19px; background:url('img/listbox.png') no-repeat 0 -19px;}
+.FormField-error .DownIcon {width:18px; height:19px; background:url('img/listbox.png') no-repeat 0 -38px;}
+
+
+/* ******************************************* */
+/*                  FIELDSET                   */
+/* ******************************************* */
+legend {margin:0; padding:0 10px; font:normal 18px Arial; color:#000;}
+*+html legend {position:relative; top:-0.7em; padding:6px 6px -0.7em;}
+fieldset {position:relative; margin:10px 0; padding:10px; background: url('img/fieldset.background.png') repeat 0 0; border:1px solid #8B8B8B;}
+*+html fieldset {position:relative; background-position:0 10px;}
+* html fieldset {background-position:0 50px;}
+body>legend {position:relative;	top:-0.7em;	margin:0 0 -0.7em;}
+body>fieldset {position:relative; float:left;}
+.ColumnFieldset {position:relative; float:left;}
+
+
+/* ******************************************* */
+/*                ITEM PANEL                   */
+/* ******************************************* */
+.ItemPanelContent {position:relative; margin:0 0 0 65px;}
+.Window .ItemPanelContent {margin:0;}
+
+.ItemPanelItems {position:relative; right:0; left:0; margin:0 50px 0 12px; height:12px; overflow:hidden;}
+* html .ItemPanelItems {padding:0 12px;}
+
+.ItemPanelMenuOpen {position:absolute; top:0; right:0; width:33px; height:15px; background:url('img/task.menu.png') no-repeat 0 -67px;}
+.ItemPanelMenuOpen-over {background-position:0 -81px;}
+
+.ItemPanel {position:absolute; left:0; width:20000px; height:2px;}
+.ItemPanelInnerContent {position:absolute; left:0; top:0;}
+* html .ItemPanelInnerContent {padding:0 12px;}
+.MenuItem {display:block;}
+
+
+/* ******************************************* */
+/*                  TASKBAR                    */
+/* ******************************************* */
+.TaskBar {position:absolute; left:0; top:0; width:100%; height:29px; background:url('img/task.png') repeat-x 0 -200px;}	
+
+.TaskBarStart {position:absolute; top:3px; left:7px; width:54px; height:22px; background:url('img/panel.top.start.gif') no-repeat;}
+.TaskBarStart .ButtonContent {display:block; padding:0 0 0 10px;}
+.TaskBarStart .ButtonText {color:#ffffff; display:block;}
+
+.ItemPanel .Task {float:left; cursor:pointer;}
+* html .ItemPanel .Task {width:150px;}
+.Task {margin:2px 5px 0 0; background:transparent; font:bold 11px Arial;}
+
+.Task .TaskLeft {margin:1px 0 0;padding:0 0 0 4px; background:url('img/task.png') no-repeat 0 0;}
+.Task .TaskRight {margin:0; padding:0 4px 0 0; background:url('img/task.png') no-repeat right -27px;}
+.Task .TaskIn {height:22px; padding:3px 4px 2px; background:url('img/task.png') repeat-x 0 -54px;}
+
+.Task-active .TaskLeft, .Task-over .TaskLeft {background:url('img/task.png') no-repeat 0 -81px;}
+.Task-active .TaskRight, .Task-over .TaskRight {background:url('img/task.png') no-repeat right -108px;}
+.Task-active .TaskIn, .Task-over .TaskIn {height:26px; background:url('img/task.png') repeat-x 0 -135px;}
+
+.Task-active .TaskTitle, .Task-over .TaskTitle {color:#fff;}
+
+.Task .TaskTitle { float:left; padding:1px 0 0; height:15px; overflow:hidden;}
+.TaskIn .SmallIcon {float:left; padding:0 5px 0 2px;}
+
+.TaskIn .TaskClose, .TaskIn .TaskClose-over {float:left; width:11px; height:14px; background:url('img/task.png') no-repeat; margin:0 0 0 3px;}
+.TaskIn .TaskClose {background-position:0 -159px;}
+.TaskIn .TaskClose-over {background-position:0 -175px;}
+
+.TaskBar .ItemPanelItems {position:relative; right:0; left:0; margin:0 15px; height:26px; overflow:hidden;}
+* html .TaskBar .ItemPanelItems {padding:0 33px 0 15px;}
+
+.TaskBar .ItemPanelInnerContent>div {float:left}
+
+.TaskBar .ItemPanelMenuOpen {position:absolute;	top:0; right:0;	width:20px;	height:29px; background:url('img/task.png') no-repeat 0 -234px; cursor:pointer;}
+.TaskBar .ItemPanelMenuOpen-over {background-position:0 -268px;}
+
+
+/* ******************************************* */
+/*                  TASK MENU                  */
+/* ******************************************* */
+.TaskMenu {width:200px; background:#8b8b8b;}
+.TaskMenu .MenuItem {float:none; display:block;}
+.TaskMenu .Task {display:block; cursor:pointer;}
+.TaskMenu .TaskcheckTitle {width:2000px;}
+.TaskMenu .TaskIn {overflow:hidden;}
+
+* html .TaskMenu .TaskTitle, * html .TaskMenu .TaskLeft, * html .TaskMenu .TaskRight, * html .TaskMenu .TaskIn {float:none; display:block;}
+
+.TaskMenu {width:204px; padding:4px 0 0; background:transparent url(img/task.menu.png) no-repeat;}
+.TaskMenu .ContextPanel {width:204px; padding:0 0 4px; background: transparent url(img/task.menu.png) no-repeat bottom; border:0;}
+.TaskMenu .ContextPanel .MenuItems {width:202px; padding:0 0 5px; background:#eee; border-left:1px solid #7f7f7f; border-right:1px solid #7f7f7f;}
+.TaskMenu .ContextPanel .MenuItems div {background:transparent !important; border:none;}
+
+* .TaskMenu .ContextPanel .MenuItems .TaskIn {width:186px !important; background:transparent; overflow:hidden;}
+
+.ContextPanel .MenuItems .TaskIn {padding:4px 5px 2px; height:18px;}
+.TaskMenu .ContextPanel .MenuItems .Task.Task-over {/*background: url(img/task.menu.png repeat-x 0 -5px;) !important;*/}
+	
+.TaskMenu .Task-active .TaskTitle {color:#000;}
+.TaskMenu .Task-over .TaskTitle {color:#000;}
+.TaskMenu .TaskTitle {color:#304a7b;}
+
+.ContextPanel .MenuItems .Task .Task-active {font-weight:bold;}
+
+
+/* ******************************************* */
+/*                 MAIN MENU                   */
+/* ******************************************* */
+.MainMenuPanel {position:relative; margin:0 0 0 5px; width:350px;}
+
+.MainMenuTopLeft, .MainMenuTopRight, .MainMenuTop, .MainMenuBottomLeft, .MainMenuBottomRight, .MainMenuBottom 
+	{position:relative; margin:0; padding:0; height:4px; line-height:1px; font-size:1px; background:url('img/main.menu.png') no-repeat 0 0;}
+
+.MainMenuTopRight {background-position:right -4px;}
+.MainMenuTop  {margin:0 4px; background-position:0 -8px; background-repeat:repeat-x;}
+.MainMenuBottomLeft {background-position:0 -16px;}
+.MainMenuBottomRight {background-position:right -20px;}
+.MainMenuBottom {margin:0 4px; background-position:0 -12px; background-repeat:repeat-x;}
+.MainMenuLeft {position:relative; margin:0; padding:0; background:url('img/main.menu.vertical.png') no-repeat bottom left; }
+.MainMenuRight {position:relative; margin:0; padding:0; background:url('img/main.menu.vertical.png') no-repeat bottom right;}
+.MainMenuContent {position:relative; margin:0 4px; padding:3px; background:#42597e url('img/main.menu.background.png') repeat-x bottom center;}
+
+.MainMenuCommon {position:absolute; right:0px; bottom:0px; width:135px;}
+.MainMenuApplication {position:relative; width:195px;}
+
+.MainMenuApplicationTopLeft, .MainMenuApplicationTopRight, .MainMenuApplicationTop, .MainMenuApplicationBottomLeft, .MainMenuApplicationBottomRight, .MainMenuApplicationBottom 
+	{position:relative; margin:0; padding:0; height:5px; line-height:1px; font-size:1px; background:url('img/main.menu.app.png') no-repeat 0 0;}
+
+.MainMenuApplicationTopRight {background-position:right -5px;}
+.MainMenuApplicationTop {margin:0 5px; background-position:0 -10px; background-repeat:repeat-x;}
+.MainMenuApplicationBottomLeft {background-position:0 -20px; clear:both;}
+.MainMenuApplicationBottomRight {background-position:right -25px;}
+.MainMenuApplicationBottom {margin:0 5px; background-position:0 -15px; background-repeat:repeat-x;}
+.MainMenuApplicationLeft {position:relative; margin:0; padding:0; background:url('img/main.menu.app.vertical.png') no-repeat bottom left;}
+.MainMenuApplicationRight {position:relative; margin:0; padding:0; background:url('img/main.menu.app.vertical.png') no-repeat bottom right;}
+.MainMenu {position:relative; margin:0 4px;	background:#5b78a0 url('img/main.menu.app.background.png') repeat-x bottom center;}
+
+.MenuSectionHideButton {position:relative; float:right; margin:0 5px 0 0; width:15px; height:17px; background:url('img/main.menu.item.png') no-repeat 0 0; cursor:pointer;}
+.MenuSectionHideButton-hide {background:url('img/main.menu.item.png') no-repeat 0 -230px;}
+.MenuSectionHideButton-show {background:url('img/main.menu.item.png') no-repeat 0 -460px;}
+
+.MenuBox {position:relative; margin:0 3px;}
+
+.MenuBoxTopLeft, .MenuBoxTopRight, .MenuBoxTop, .MenuBoxBottomLeft, .MenuBoxBottomRight, .MenuBoxBottom 
+	{position:relative; margin:0; padding:0; height:5px; line-height:1px; font-size:1px;}
+	
+.MenuBoxLeft, .MenuBoxRight, .MenuBoxContent {position:relative;}
+.MenuBox-open .MenuBoxTopLeft {background:url('img/main.menu.sub.png') no-repeat 0 0;}
+.MenuBox-open .MenuBoxTopRight {background:url('img/main.menu.sub.png') no-repeat right -5px;}
+.MenuBox-open .MenuBoxTop {margin:0 6px; background:url('img/main.menu.sub.png') repeat-x 0 -10px;}
+.MenuBox-open .MenuBoxBottomLeft {background:url('img/main.menu.sub.png') no-repeat 0 -20px;}
+.MenuBox-open .MenuBoxBottomRight {background:url('img/main.menu.sub.png') no-repeat right -25px;}
+.MenuBox-open .MenuBoxBottom {margin:0 6px; background:url('img/main.menu.sub.png') repeat-x 0 -15px;}
+.MenuBox-open .MenuBoxContent {background:#42597e;}
+
+.MenuBoxLabel {position:relative; margin:0 20px 0 0; padding:0 0 5px;}
+.MainMenuCommon .MenuBoxLabel {margin:0;}
+.MenuBox .MiddleIcon {position:relative; float:left; padding:0 3px;}
+.MainMenuDivider {position:relative; margin:4px 0; padding:0; height:2px; line-height:1px; background:url('img/main.menu.divider.png') repeat-x; font-size:1px;}	
+.MainMenuCommon .MainMenuDivider {width:120px;}
+.MenuBox .MainMenuDivider {margin:0 25px 2px 30px; background:url('img/main.menu.sub.divider.png') repeat-x;}
+.MenuEntryLabel {font-size:12px; position:relative;}
+.MenuEntry {position:relative; color:#fff; display:block; cursor:pointer;}
+* html .MenuEntry {height:1px;}
+
+.SectionMenuEntry {position:relative;}
+.SectionMenuEntry .MenuEntryLabel {position:relative; padding:5px 0 0; font:bold 13px Arial, Verdana, Helvetica, Geneva, sans-serif; color:#fff; cursor:pointer;}
+
+.UserProfile {padding:0 0 0 25px; height:5px; font-weight:bold; background:url('img/icon-user-middle.png') no-repeat; color:#fff;}
+.MerchantProfile .MenuEntryLabel {position:relative; padding:8px 0 0; font:normal 11px Arial, Verdana, Helvetica, Geneva, sans-serif; text-decoration:underline; color:#fff; cursor:pointer;}
+
+.SubMenuSection {position:relative;}
+.SubMenuEntries {padding:0 0 0 30px;}
+
+
+/* ******************************************* */
+/*                    TOOLTIP                  */
+/* ******************************************* */
+.TooltipPopup {position:absolute;}
+.TooltipPopup,.TooltipPopupContent {margin:0; padding:0;}
+.TooltipPopupContent {padding:0 9px 0 0; background:#ffffff; font:normal 10px "Arial CE", Arial, Helvetica, Verdana, sans-serif;}
+.TooltipTopRight {position:absolute; bottom:8px; left:11px;}
+.TooltipTopLeft {position:absolute;	bottom:8px;	right:11px;}
+.TooltipBottomLeft {position:absolute; top:8px;	right:11px;}
+.TooltipBottomRight {position:absolute; top:8px; left:11px;}
+.TooltipArrow {position:absolute; width:20px; height:17px; font-size:1px;}
+.TooltipTopRight .TooltipArrow {bottom:-8px; left:-11px; background-position:20px 0;}
+.TooltipTopLeft .TooltipArrow {bottom:-8px;	right:-11px; background-position:40px 0;}
+.TooltipBottomLeft .TooltipArrow {top:-8px; right:-11px; background-position:0 0;}
+.TooltipBottomRight .TooltipArrow {top:-8px; left:-11px; background-position:60px 0;}
+
+* html .TooltipTopRight .TooltipArrow, * html .TooltipTopLeft .TooltipArrow{bottom: -9px; left:-11px;}
+* html .TooltipBottomLeft .TooltipArrow, * html .TooltipBottomRight .TooltipArrow {top:-8px; right:-11px;}
+
+.TooltipTopRight {min-width:160px;}
+* html .TooltipTopRight, *+html .TooltipTopRight {position:absolute; width:160px;}
+
+.TooltipTopLeft {min-width:160px;}
+* html .TooltipTopLeft, *+html .TooltipTopLeft {position:absolute; width:160px;}
+
+.TooltipBottomLeft {min-width:160px;}
+* html .TooltipBottomLeft, *+html .TooltipBottomLeft {position:absolute; width:160px;}
+
+.TooltipBottomRight {min-width:160px;}
+* html .TooltipBottomRight, *+html .TooltipBottomRight {position:absolute; width:160px;}
+
+.TooltipPopupTopLeft {width:100%; height:9px; background:no-repeat left top;}
+.TooltipPopupTopRight {padding:0 9px; height:9px; background:no-repeat right -9px;}
+.TooltipPopupTop {height:9px; background:repeat-x 0 -18px; font-size:1px;}
+.TooltipPopupLeft {padding:0 0 0 9px; background:repeat-y left;}
+.TooltipPopupRight {padding:0 9px 0 0; background:repeat-y top right;}
+.TooltipPopupBottomLeft {height:9px; width:100%; background:no-repeat left -36px;}
+.TooltipPopupBottomRight {height:9px; padding:0 9px; background:no-repeat right -45px;}
+.TooltipPopupBottom {font-size:1px; height:9px;	background:repeat-x left -27px;}
+
+.InfoTooltip {background: url('img/balloon.help.png') no-repeat 0 -54px;}
+.InfoTooltipPopup .TooltipArrow {background-image:url('img/balloon.help.arrow.png');}
+
+.InfoTooltipPopup .TooltipPopupTopLeft, .InfoTooltipPopup .TooltipPopupTopRight, .InfoTooltipPopup .TooltipPopupTop, 
+.InfoTooltipPopup .TooltipPopupBottomLeft, .InfoTooltipPopup .TooltipPopupBottomRight, .InfoTooltipPopup .TooltipPopupBottom 
+	{background-image:url('img/balloon.help.png');}
+
+.InfoTooltipPopup .TooltipPopupLeft, .InfoTooltipPopup .TooltipPopupRight {background-image:url('img/balloon.help.vertical.png');}
+
+.ErrorTooltip {background:url('img/balloon.error.png') no-repeat 0 -54px;}
+.ErrorTooltipPopup .TooltipArrow {background-image:url('img/balloon.error.arrow.png');}
+
+.ErrorTooltipPopup .TooltipPopupTopLeft, .ErrorTooltipPopup .TooltipPopupTopRight, .ErrorTooltipPopup .TooltipPopupTop, 
+.ErrorTooltipPopup .TooltipPopupBottomLeft, .ErrorTooltipPopup .TooltipPopupBottomRight, .ErrorTooltipPopup .TooltipPopupBottom
+	{background-image:url('img/balloon.error.png');}
+
+.ErrorTooltipPopup .TooltipPopupLeft, .ErrorTooltipPopup .TooltipPopupRight {background-image:url('img/balloon.error.vertical.png');}
+
+
+/* ******************************************* */
+/*                WINDOW MODE                  */
+/* ******************************************* */
+.SingleWindowModeImage, .WindowManagerModeImage {float:left; width:203px; height:132px;  border:1px solid #000;}
+.Frame {width:100%; height:100%; border:none;}
+.FramePanel {width:100%; height:100%;}
+.PagePanel {width:100%;	height:100%;}
+
+
+/* ******************************************* */
+/*    SMALL POP-UP MENU   CONTEXT MENU         */
+/* ******************************************* */
+.ContextPanel {background:url(img/task.menu.png) no-repeat 0 -37px; border:1px solid #363636;}
+.ContextPanel .MenuItems {background:url(img/task.menu.png) no-repeat 0 -41px;}
+
+.ContextPanel .MenuItems .MenuItem,
+.ContextPanel .MenuItems .MenuItem * {margin:0; border:none;}
+
+.ContextPanel #Icon	{display:none;}
+.ContextPanel .MenuItems .MenuItem {padding:3px 2px 1px; background:#8b8c8d; cursor:pointer;}
+.ContextPanel .MenuItems .MenuItem-Hover {background:#333; color:#fff;}
+.ContextPanel .MenuItems .TabItem {list-style-type:none;}
+.ContextPanel .MenuItems .gwt-Label {margin:0; padding:0;}
+.ContextPanel .MenuItem .TabItemText {margin:0; padding:0;}
+
+
+/* ******************************************* */
+/*              AUTO REFRESH MENU              */
+/* ******************************************* */
+.AutoRefresh {width:40px; background:url(img/task.menu.png) no-repeat 0 -37px; border:1px solid #363636;}
+.AutoRefresh .MenuItems {width:38px; background:url(img/task.menu.png) no-repeat 0 -41px;}
+.AutoRefresh .MenuItems .MenuItem,
+.AutoRefresh .MenuItems .MenuItem * {margin:0; width:100%; border:none;}
+.AutoRefresh #Icon {display:none;}
+.AutoRefresh .MenuItems .MenuItem {padding:2px 1px 1px; background:#666666; cursor:pointer;}
+.AutoRefresh .MenuItems .MenuItem-Hover {background:#333333; color:#fff;}
+.AutoRefresh .MenuItems .MenuItem-Selected {background:#333333; color:#ffa500;}
+.AutoRefresh .MenuItems .TabItem {list-style-type:none;}
+.AutoRefresh .MenuItems .gwt-Label {margin:0; padding:0;}
+.AutoRefresh .MenuItem .TabItemText {margin:0; padding:0;}
+
+
+/* ******************************************* */
+/*           ALT TEXT		                   */
+/* ******************************************* */
+.AltTextPanel {padding:4px 0 0; width:104px; background:url(img/alt.png) no-repeat left top; z-index:10000; overflow:hidden;}
+.AltTextPanel .AltText {padding:0 0 4px; width:104px; background:url(img/alt.png) no-repeat left bottom;}
+.AltTextPanel .AltText div {padding:0 2px; background:#fafa81; border-left:1px solid #979784; border-right:1px solid #979784; text-align:left;}
+.AltTextPanel .AltText .gwt-Label {border:none;}
+
+
+/***********************************************/
+/*             CAMPAIGNES CHARTS               */
+/***********************************************/
+.StatsChartHolder {margin:0;}
+table.StatsChart  {position:relative; width:100%; height:200px; border:0;}
+.StatsTable {margin:0 0 0 35px;}
+.StatsChart * {position:relative;}
+.StatsChart .ListBox {width:auto;}
+.StatsChart .ButtonText {padding:0 0 0 5px;}
+.StatsDataType {padding:0 5px 0 0;}
+
+.StatsSummaries {width: 100%;}
+.StatsSummaries td {padding:5px 10px; border-bottom:1px solid #d3e2f1; color:#525252; font-size:12px;}
+.StatsSummaries .white {background: transparent; border-bottom:0;}
+.StatsSummaries tr.gray {color:blue; font-weight:bold; background:#e5eef7;}
+.StatsSummaries tr.dark {background:#e5eef7;}
+.StatsSummaries tr.light {background:#edf3f9;}
+
+.ChartDateLabel {position:relative; padding:1px 1px 1px 3px; width:200px; height:15px; font:bold 12px Arial; border:solid 1px #777; border-right:0; color:#2c2c2c; white-space:nowrap;}
+.ChartDataTypeLabel {position:relative;	padding:1px 1px 1px 3px; width:120px; font:bold 12px Arial; border:solid 1px #777; border-right:0; color:#2c2c2c; white-space:nowrap;overflow: hidden;}
+
+
+/* ****************************************** */
+/*       LOADING / BLOCKING INDICATOR         */
+/* ****************************************** */
+.LoadingBox {position:relative;/*top:40%; left:45%;*/ margin-top:25%; margin-left:42%; height:60px; background:url('img/loading.gif') #fff no-repeat 3px 0;}
+* html .LoadingBox {height:60px;}
+.LoadingInfo {padding:17px 0 0 65px; color:#888; font-size:11px; font-weight:bold;}
+.WindowLoadingBox {min-height:60px; position:absolute; top:50%; left:0px; width:100%;}
+* html .WindowLoadingBox {height:60px;}
+.WindowLoadingBox .LoadingInfo {margin:0 auto; padding:30px 0 0; text-align:center;}
+.LoadingIndicatorPopupPanel {position:absolute; left:0; margin:0 auto; width:100%; height:100%;}
+.Loading {position:relative; margin:0; width:100%; height:100%; background-color:#fff; opacity:0.6; filter:alpha(opacity = 60); zoom:1; cursor:wait;}
+.Loading-image {background-image:url('img/loading.gif'); background-repeat:no-repeat; background-position:50% center;}
+.Blocking {width:100%; height:100%; background-color:#fff; opacity:0.4; filter:alpha(opacity = 40); cursor:default; zoom:1;}
+.EventBlocking {width:100%; height:100%; cursor:default; zoom:1;}
+
+.LoadingScreen {position:absolute; top:40%; width:100%; height:100%; margin-top:300px;}
+
+/* ******************************************* */
+/*            FILTER USED ELEMENTS             */
+/* ******************************************* */
+.CustomDatePanel-used, .DatePresetPanel-used, .ValueWidget-used, .FilterField-used, .ListBox-used {border:1px dotted #009400;}
+.CustomDatePanel .FilterField-used, .DatePresetPanel .FilterField-used {border:0;}
+
+
+/* ******************************************* */
+/*                    PAGER                    */
+/* ******************************************* */
+.PagerFirst, .PagerLeft, .PagerRight, .PagerLast {float:left; margin:2px 0 0; width:13px; height:13px;}
+
+.PagerFirst {background:url('img/pager.png') no-repeat 0 0;}
+.PagerFirst-over {background:url('img/pager.png') no-repeat -13px 0;}
+.PagerFirst-disabled {background:url('img/pager.png') no-repeat -26px 0;}
+.PagerLeft {background:url('img/pager.png') no-repeat 0 -13px;}
+.PagerLeft-over {background:url('img/pager.png') no-repeat -13px -13px;}
+.PagerLeft-disabled {background:url('img/pager.png') no-repeat -26px -13px;}
+.PagerRight {background:url('img/pager.png') no-repeat 0 -26px;}
+.PagerRight-over {background:url('img/pager.png') no-repeat -13px -26px;}
+.PagerRight-disabled {background:url('img/pager.png') no-repeat -26px -26px;}
+.PagerLast {background:url('img/pager.png') no-repeat 0 -39px;}
+.PagerLast-over {background:url('img/pager.png') no-repeat -13px -39px;}
+.PagerLast-disabled {background:url('img/pager.png') no-repeat -26px -39px;}
+
+
+/* ******************************************* */
+/*                PAGE EDITOR                  */
+/* ******************************************* */
+.PreviewContainer {width:100%; border:1px dashed #000;}
+.EditableHighLighted {border:2px dotted #008000;}
+.PostSignupType .FormFieldInput {width:100%;}
+.MandatoryVariable {font-weight:bold;}
+.TemplateVariable {clear:left; cursor:pointer;}
+.TVCode {float:left; margin:3px; width:120px; white-space:nowrap;}
+.TVName {float:left; margin:3px; width:150px; white-space:nowrap;}
+.TVButton {float:left; margin:3px; width:25px; height:15px; background:url('img/insert.png') no-repeat top left;}
+
+
+/* ******************************************* */
+/*                   ICONS                     */
+/* ******************************************* */
+.SmallIcon {height:16px; width:16px;}
+.MiddleIcon {height:22px; width:22px;}
+.BigIcon img {height:48px; width:48px;}
+
+.WindowHeader .SmallIcon {float:left; margin:5px 0 0; cursor:pointer;}
+.IconPickerPanel {width:200px; height:200px; border:1px solid #000; background:#fff; overflow:scroll;}
+.IconPickerPanelIcons .MiddleIcon {float:left;}
+.IconPicker .SmallIcon {margin:0 0 0 5px;}
+
+
+/* ******************************************* */
+/*                SCREEN HEADER                */
+/* ******************************************* */
+.ScreenHeader {position:relative; margin:0 0 15px; padding:10px 0 0;}
+.ScreenHeader .BigIcon {float:left;}
+.ScreenTitle {position:relative; margin:0 0 0 60px; border-bottom:1px solid #cccccc; font-size:24px;}
+.ScreenDescription {position: relative; margin:3px 0 0 61px;}
+.ScreenDescriptionLeft {float:left; position:relative;}
+.ScreenDescriptionRight {float:right; position:relative;}
+.RefreshButton {position:relative; float:right; width:32px; height:32px; background:url('img/icon.refresh.png') no-repeat top left;}
+.RefreshButton.IconButton {margin:0px;}
+.ScreenHeader-withRefresh .ScreenTitle {margin:0 60px;}
+.ScreenHeader-withRefresh .ScreenDescription {margin:3px 60px 0 61px;}
+.ScreenTabHeader {position:relative; margin:0 15px 5px; padding:10px 0 0; font-size:16px;}
+.ScreenTabDescription {position:relative; margin:0 15px 10px;}
+
+
+/* ******************************************* */
+/*                  QUICKLAUNCH                */
+/* ******************************************* */
+.QuickLaunch {height:90px; position:relative;}
+* html .QuickLaunch {float:left;}
+
+.QuickLaunchLeft, .QuickLaunchRight, .QuickLaunchCenter 
+	{position:relative; float:left; margin:64px 0 0; width:40px; height:26px; background:url('img/quicklaunch.png') no-repeat;}
+
+.QuickLaunchRight {background-position:-40px 0;}
+.QuickLaunchCenter {min-width:56px; background-repeat:repeat-x; background-position:0 -26px;}
+
+.QuickLaunchDraggable-Disabled {border:1px solid #ff0000;}
+.QuickLaunchIcon {position:absolute; bottom:20px; padding:0 2px; cursor:pointer;}
+.QuickLaunchLabel {position:absolute; top:72px; left:0; width:100%; font-weight:bold; color:#fff; text-align:center;}
+* html .QuickLaunchLabel {text-align:left; margin-left:40px;}
+.QuickLaunchIcon-InsertRight, .QuickLaunchIcon-InsertLeft {border-right:2px dotted #808080;}
+
+
+/* ******************************************* */
+/*                  DATAELEMENTS               */
+/* ******************************************* */
+.NumberData, .CurrencyData, .TextData {display:inline; white-space:nowrap;}
+.NumberData-link, .CurrencyData-link, .TextData-link {cursor:pointer; text-decoration:underline;}
+
+
+/* ******************************************* */
+/*                GADGET CONTAINER             */
+/* ******************************************* */
+.GadgetContainer .PopupWinTopLeft, .GadgetContainer .PopupWinTopRight, .GadgetContainer .PopupWinTop,
+.GadgetContainer .PopupWinBottomLeft, .GadgetContainer .PopupWinBottomRight, .GadgetContainer .PopupWinBottom  
+	{padding:0; line-height:1px; font-size:1px; margin:0; position:relative; display:block; background:url('img/gadget.png') no-repeat; height:5px;}
+
+.GadgetContainer .PopupWinTopLeft {width:100%; position:absolute; top:0; left:0; right:0;}
+.GadgetContainer .PopupWinTopRight {background-position:right -5px; margin:0 0 0 5px;}
+.GadgetContainer .PopupWinTop {background-position:0 -10px; background-repeat:repeat-x; margin:0 5px 0 0;}
+.GadgetContainer .PopupWinBottomLeft {background-position:0 -190px; width:100%; position:absolute; bottom:0; left:0px; right:0px;}
+.GadgetContainer .PopupWinBottomRight {background-position:bottom right; margin:0 0 0 5px;}
+.GadgetContainer .PopupWinBottom {background-position:0 -15px; background-repeat:repeat-x; margin:0 5px 0 0;}
+.GadgetContainer .PopupWinLeft {background:url('img/gadget.vertical.png') repeat-y top left; height:auto; position:absolute; top:5px; bottom:5px; left:0; right:0; margin:0;}
+.GadgetContainer .PopupWinRight {background:url('img/gadget.vertical.png') repeat-y right; height:100%; width:100%; display:block; position:absolute; top:0; bottom:0px; left:0; right:0; margin:0;}
+.GadgetContainer .PopupWinMain {background:url('img/gadget.background.png') repeat top left; height:auto; display:block; position:absolute; top:0; bottom:0; left:1px; right:1px; margin:0 4px;}
+
+* html .GadgetContainer .PopupWinMain {margin:0;}
+
+.GadgetWin {height:100%; width:100%;}
+.GadgetFrameContainer {position:absolute; top:25px; left:5px; overflow:hidden; background:transparent;}
+.GadgetFrame {position:static; width:100%; height:100%; background:transparent; border:none; overflow:hidden;}
+.GadgetFrame html {width:100%; height:100%; overflow:hidden;}
+.GadgetName {padding:0 0 0 20px; background:url('img/gadget.png') no-repeat 0 -118px; cursor:move;}
+
+.GadgetRefreshMenuLeft, .GadgetRefreshMenuRight, .GadgetRefreshMenuContent 
+	{float:left; background:url('img/gadget.png') no-repeat; padding:0; margin:0; height:16px; width:5px;}
+
+.GadgetRefreshMenuLeft {background-position:0 -20px;}
+.GadgetRefreshMenuRight {background-position:-5px -20px;}
+.GadgetRefreshMenuContent {background-position:0 -36px; background-repeat:repeat-x; width:36px;}
+
+.GadgetButtonClose, .GadgetButtonClose-over, .GadgetButtonMenu, .GadgetButtonMenu-over, .GadgetRefreshButton, .GadgetRefreshButton-over, .GadgetAutoRefreshMenu, .GadgetAutoRefreshMenu-over
+	{float:right; margin:0 0 0 3px; width:16px; height:16px; background:url('img/gadget.png') no-repeat; cursor:pointer;}
+
+.GadgetButtonClose {background-position:0 -52px;}
+.GadgetButtonClose-over {background-position:-16px -52px;}
+.GadgetButtonMenu {background-position:0 -68px;}
+.GadgetButtonMenu-over {background-position:-16px -68px;}
+.GadgetRefreshButton {background-position:0 -84px; margin:0 1px 0;}
+.GadgetRefreshButton-over {background-position:-16px -84px; margin:0 1px;}
+.GadgetAutoRefreshMenu {background-position:0 -100px; margin:0 1px 0;}
+.GadgetAutoRefreshMenu-over {background-position:-16px -100px; margin:0 1px;}
+
+* html .GadgetButtonClose, * html .GadgetButtonMenu {background:#ffffff; margin:0 5px 0 0;}
+.GadgetHeaderLeft {height:20px; font:normal 12px Arial, Helvetica, sans-serif; color:#fff;}	
+html>body .GadgetHeaderLeft {overflow:hidden;}
+* html .GadgetName { background-position:3px 0;}
+.GadgetRefreshPanel {float:right;}
+* html .GadgetRefreshPanel {width:50px; height:16px;}
+*+html .GadgetRefreshPanel {width:50px; height:16px;}
+
+
+/* ******************************************* */
+/*               MESSAGE WINDOW                */
+/* ******************************************* */
+.MessageWindow {width:330px;}
+
+.MessageWindowTopLeft, .MessageWindowTopRight, .MessageWindowTop, .MessageWindowBottomLeft, .MessageWindowBottomRight, .MessageWindowBottom {
+	position:relative; margin:0; padding:0; height:4px; line-height:1px; font-size:1px;}
+
+.MessageWindowTop {margin:0 4px;}
+.MessageWindowBottomLeft {clear:both;}
+.MessageWindowBottom {margin:0 4px;}
+.MessageWindowLeft {position:relative;}
+.MessageWindowRight {position:relative;}
+
+.MessageWindowContent {position:relative; margin:0 4px; height:100%; overflow:hidden;}
+.MessageWindowHeaderButtons {float:right; padding:5px 5px 5px 0; width:20px;}
+.MessageWindowButtonClose {float:right; margin:0 0 0 5px; width:16px; height:16px; cursor:pointer;}
+.MessageInformation {float:left; padding:6px 0 6px 6px; width:285px;}
+.MessageWindowIcon {float:left; margin:0 5px 0 0; width:14px; height:14px; cursor:move;}
+.MessageInformationText {float:left; width:220px; height:14px; font:bold 11px Arial; color:#fff; overflow:hidden;}
+.MessageInformationText-details {height:361px; overflow:auto; width: 380px; margin-top: 5px;}
+.MessageInformationMore {float:right; height:14px; font:bold 11px Arial; color:#fff; overflow:hidden; cursor:pointer; text-decoration:underline;}
+
+.ErrorMessage .MessageWindowTopLeft {background:url('img/message.red.png') no-repeat 0 0;}
+.ErrorMessage .MessageWindowTopRight {background:url('img/message.red.png') no-repeat right -4px;}
+.ErrorMessage .MessageWindowTop {background:url('img/message.red.png') repeat-x 0 -8px;}
+.ErrorMessage .MessageWindowBottomLeft {background:url('img/message.red.png') no-repeat 0 -46px;}
+.ErrorMessage .MessageWindowBottomRight {background:url('img/message.red.png') no-repeat right -50px;}
+.ErrorMessage .MessageWindowBottom {background:url('img/message.red.png') repeat-x 0 -12px;}
+.ErrorMessage .MessageWindowLeft {background:url('img/message.red.vertical.png') repeat-y bottom left;}
+.ErrorMessage .MessageWindowRight {background:url('img/message.red.vertical.png') repeat-y bottom right;}
+.ErrorMessage .MessageWindowContent {background:url('img/message.red.background.png') repeat bottom center;}
+.ErrorMessage .MessageWindowButtonClose {background:url('img/message.red.png') no-repeat 0 -16px;}
+.ErrorMessage .MessageWindowButtonClose-over {background:url('img/message.red.png') no-repeat -16px -16px;}
+.ErrorMessage .MessageWindowIcon {background:url('img/message.red.png') no-repeat 0 -32px;}
+
+.SystemMessage .MessageWindowTopLeft {background:url('img/message.blue.png') no-repeat 0 0;}
+.SystemMessage .MessageWindowTopRight {background:url('img/message.blue.png') no-repeat right -4px;}
+.SystemMessage .MessageWindowTop {background:url('img/message.blue.png') repeat-x 0 -8px;}
+.SystemMessage .MessageWindowBottomLeft {background:url('img/message.blue.png') no-repeat 0 -46px;}
+.SystemMessage .MessageWindowBottomRight {background:url('img/message.blue.png') no-repeat right -50px;}
+.SystemMessage .MessageWindowBottom {background:url('img/message.blue.png') repeat-x 0 -12px;}
+.SystemMessage .MessageWindowLeft {background:url('img/message.blue.vertical.png') repeat-y bottom left;}
+.SystemMessage .MessageWindowRight {background:url('img/message.blue.vertical.png') repeat-y bottom right;}
+.SystemMessage .MessageWindowContent {background:url('img/message.blue.background.png') repeat bottom center;}
+.SystemMessage .MessageWindowButtonClose {background:url('img/message.blue.png') no-repeat 0 -16px;}
+.SystemMessage .MessageWindowButtonClose-over {background:url('img/message.blue.png') no-repeat -16px -16px;}
+.SystemMessage .MessageWindowIcon {background:url('img/message.blue.png') no-repeat 0 -32px;}
+
+.ActionMessage .MessageWindowTopLeft {background:url('img/message.green.png') no-repeat 0 0;}
+.ActionMessage .MessageWindowTopRight {background:url('img/message.green.png') no-repeat right -4px;}
+.ActionMessage .MessageWindowTop {background:url('img/message.green.png') repeat-x 0 -8px;}
+.ActionMessage .MessageWindowBottomLeft {background:url('img/message.green.png') no-repeat 0 -46px;}
+.ActionMessage .MessageWindowBottomRight {background:url('img/message.green.png') no-repeat right -50px;}
+.ActionMessage .MessageWindowBottom {background:url('img/message.green.png') repeat-x 0 -12px;}
+.ActionMessage .MessageWindowLeft {background:url('img/message.green.vertical.png') repeat-y bottom left;}
+.ActionMessage .MessageWindowRight {background:url('img/message.green.vertical.png') repeat-y bottom right;}
+.ActionMessage .MessageWindowContent {background:url('img/message.green.background.png') repeat bottom center;}
+.ActionMessage .MessageWindowButtonClose {background:url('img/message.green.png') no-repeat 0 -16px;}
+.ActionMessage .MessageWindowButtonClose-over {background:url('img/message.green.png') no-repeat -16px -16px;}
+.ActionMessage .MessageWindowIcon {background:url('img/message.green.png') no-repeat 0 -32px;}
+
+
+/* ******************************************* */
+/*                LAYOUT PANEL                 */
+/* ******************************************* */
+.LayoutPanelContentIcon {float:left; background-position:5px 3px;}
+.LayoutPanelContentTitle {float:left; cursor:pointer;}
+.LayoutPanelMenuItem {cursor:pointer;}
+.LayoutPanelContentHeader {background:url('img/layout.png') repeat-x 0 0; height:22px;}
+
+.hsplitter {background:url('img/layout.hsplitter.png') repeat-y center; width:7px; cursor:e-resize;}
+.hsplitter img,.vsplitter img {display:none;}
+.hsplitter td {cursor:e-resize;}
+.vsplitter {background:transparent url('img/layout.vsplitter.png') repeat-x center; height:7px; cursor:n-resize;}
+
+.LayoutPanelContent {background:url('img/layout.border.png') repeat-x top left; height:100%;}
+.LayoutPanelBottom {background:url('img/layout.border.png') repeat-x bottom left; height:23px;}
+.LayoutPanelLeft {background:url('img/layout.border.png') repeat-y top left; height:23px;}
+.LayoutPanelRight {background:url('img/layout.border.png') repeat-y top right; height:23px;}
+.LayoutPanelContentIn {padding:1px;}
+
+.LayoutPanelHeaderNavigation {position:absolute; top:1px; right:1px; background:url('img/layout.png') no-repeat 0 -22px;} /* width treba kvoli IE nastavovat podla aktualneho poctu buttonov (+/- 19px) *//*	width: 46px; */
+.LayoutPanelHeaderNavigationIn {float:right; margin:0 0 0 4px; background:url('img/layout.png') repeat-x 0 0;}
+.LayoutPanelButtons {float: right; padding:4px 4px 4px 0;}
+.LayoutButtonMenu {background-position:0 -180px;}
+.LayoutButtonMenu-over {background-position:-14px -180px;}
+
+.LayoutPanelItemContent {padding:5px 0 0;}
+.LayoutPanelItemContent .FormPanel p {padding:0 0 10px;}
+.LayoutPanelItemContent .FormPanel .Button {margin:15px 0 0;}
+
+.LayoutTabsContainer {width:100%; height:22px; overflow:hidden;}
+.LayoutTabs {height:22px; width:9999px;}
+.LayoutTab {float:left; padding:0 4px 0 0; background:url('img/layout.png') no-repeat right -44px; font-size:13px;}
+.LayoutTabRight {float:left; background:url('img/layout.png') repeat-x 0 0;}
+
+.LayoutTabActive {background:url('img/layout.png') no-repeat right -122px; font-weight:bold;}
+.LayoutTabActive .LayoutTabRight {background:url('img/layout.png') repeat-x 0 -144px;}
+
+.LayoutPanelContentTitle {padding:3px 20px 0 0;}
+.LayoutPanelContentIcon {padding:4px 6px 2px 3px;}
+
+.LayoutTabButton {float:left; margin:4px 0 0 5px; width:14px; height:14px; background:url('img/layout.png') no-repeat; cursor:pointer;}
+.LayoutTabButtonTowin {background-position:0 -108px;}
+.LayoutTabButtonTowin-over {background-position:-14px -108px;}
+.LayoutTabButtonClose {background-position:0 -94px;}
+.LayoutTabButtonClose-over {background-position:-14px -94px;}
+
+.LayoutTabActive .LayoutTabButtonTowin, .LayoutTabActive .LayoutTabButtonClose {background:url('img/layout.png') no-repeat;}
+.LayoutTabActive .LayoutTabButtonTowin {background-position:0 -180px;}
+.LayoutTabActive .LayoutTabButtonTowin-over {background-position:-14px -180px;}
+.LayoutTabActive .LayoutTabButtonClose {background-position:0 -166px;}
+.LayoutTabActive .LayoutTabButtonClose-over {background-position:-14px -166px;}
+
+
+/* ******************************************* */
+/*                  LOGIN BOX                  */
+/* ******************************************* */
+.LoginMain {width:100%; min-height:300px; _height:300px; margin:150px 0 0; padding:0; text-align:center;}
+.LoginMain .Window-active {width:350px; margin:0 auto; text-align:left; position:relative;}
+.LoginMain .WindowBottomRight {background:url('img/window.active.br.clean.png') no-repeat top right;}
+.LoginMain .WindowIn {padding:10px 0 10px 10px; overflow:hidden;}
+.LoginMain .CheckBoxContainer {margin:5px 0 0;}
+.LoginMain .Button {margin:5px 0 0;}
+.LoginMain .FormMessage-error {margin:5px 0 0; padding:3px 0; font-weight:bold; color:#e60101;}
+* html .LoginMain .FormField {width:100%;}
+
+/* ******************************************* */
+/*                   TREE                      */
+/* ******************************************* */
+.TreeItemWidget {border:2px solid transparent;}
+.TreeItemWidget-selected {border:1px dotted #000;}
+.TreeItemWidget-dropIn {border:2px solid #0087ff; border-right:0;}
+.TreeItemWidget-dropAfter {border-bottom:2px solid #0087ff;}
+.TreeItemWidget-dropBefore {border-top:2px solid #0087ff;}
+
+
+/* ******************************************* */
+/*                 CLEAR FIX                   */
+/* ******************************************* */
+.clear {clear:both;}
+
+/* ******************************************* */
+/*                 SIDEBAR                     */
+/* ******************************************* */
+.SideBar {position:relative; background:url('img/sidebar.background.png');}
+.SideBarBorder {height:100%; background:url('img/sidebar.border.png') repeat-y;}
+.SideBarPadding {float:left; width:10px; height:100%;}
+
+.SideBarHeader {position:relative; float:right; margin:4px 8px 5px 0;}
+.SideBarHeader .IconButton {position:relative; float:left; margin:0 2px;}
+
+.SideBarGadgetWrapper {position:relative;}
+.SideBarGadgetWrapper-dropAbove {border-top:1px dotted #000000;}
+.SideBarGadgetWrapper-dropBellow {border-bottom:1px dotted #000;}
+
+.SideBarButtonAdd, .SideBarButtonAdd-over, .SideBarButtonTop, .SideBarButtonTop-over, .SideBarButtonTop-down, .SideBarButtonTop-downOver, .SideBarButtonClose, .SideBarButtonClose-over, .SideBarButtonOpen, .SideBarButtonOpen-over
+	{position:relative; float:left; width:16px; height:16px; background:url('img/sidebar.png') no-repeat 0 0;}
+
+.SideBarButtonAdd {background-position:0 0;}
+.SideBarButtonAdd-over {background-position:-16px 0;}
+.SideBarButtonTop {background-position:0 -16px;}
+.SideBarButtonTop-over {background-position:-16px -16px;}
+.SideBarButtonTop-down {background-position:-32px -16px;}
+.SideBarButtonTop-downOver {background-position:-32px -16px;}
+.SideBarButtonClose {background-position:0 -32px;}
+.SideBarButtonClose-over {background-position:-16px -32px;}
+
+.SideBarClosed {width:8px; height:100%; background:url('img/sidebar.closed.png'); border-left:1px solid #000;}
+.SideBarArrow {position:absolute; top:50%; margin:0 0 0 1px; width:6px; height:8px; background:url('img/sidebar.png') no-repeat 0 -48px;}
+
+.SideBar .WindowResizerW {position:absolute; width:10px; background:none;}
+.SideBar .GadgetsPanel {float:left;}
+
+
+/* ******************************************* */
+/*               GADGETS                       */
+/* ******************************************* */	
+.GadgetSearch .Search {display:block;}
+.GadgetSearch .FormField {float:left; margin:0 0 5px; width:185px;}	
+.GadgetSearch .FormFieldInputContainer {width:185px;}
+.GadgetSearch .FormFieldInput {width:185px;}
+.GadgetSearch .CheckBox {float:left;}
+.GadgetSearch .Label {float:left; width:50px; margin:2px 0 0;}
+.GadgetSearch .GridTable {margin:10px 0 0;}
+.GadgetSearch .FormFieldLabel {display:none;}
+.GadgetSearch .DataText {padding:2px 2px 2px 25px; display:block; cursor:pointer;}
+
+.GadgetsList {margin:2px 0 0;}
+.GadgetsPager {clear:left;}
+.GadgetTitle {text-align:center; color:#dedddd;}
+.GadgetRow {float:left; width:92px; height:87px; margin:0 5px 5px 0; padding:5px; background:#191919; border:1px solid #1b1b1b; overflow:hidden;}
+.GadgetRow .ButtonText {float:left; margin:3px 0 0; padding:0; width:92px; height:26px; font:normal normal 10px/12px Arial;	overflow:hidden; color:#ffffff;}
+.GadgetRow-over {background:#2c2828;}
+.GadgetRow-over .GadgetTitle {color:#fff;}
+.GadgetImage {float:left; padding:5px; width:80px; height:45px; background:#fff; border:1px solid #4f4f4f; text-align:center; cursor:pointer;}	
+
+.ButtonSmall .ButtonText a {font-size:10px;}
+.AddGadgetFields {float:left;}
+.AddGadgetFields .FormField .FormFieldLabel {float:left; width:45px;}
+.AddGadgetFields .FormField .FormFieldInputContainer {float:left; width:160px;}
+.AddGadgetButton {float:left;}
+.AddGadgetPager {clear:left; margin:5px 0 0;}
+.GadgetsSearchIcon {float:left; margin:3px 0 0;	background:url(img/icon.gadgets.png) no-repeat 0 -234px;}
+
+
+/* ******************************************* */
+/*               GADGET TYPES                  */
+/* ******************************************* */
+.contentGadgetType {background:url('img/icon.gadgets.png') no-repeat 2px 2px; color:#ff9500;}
+.contentGadgetType.GridRow-checked {background-color:#ff9500; color:#fff; font-weight:bold;}
+.contentGadgetType.GridRow-mouseOver {background-color:#fbf1e3; color:#ff9500;}
+
+.essentialGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -16px; color:#0193e6;}
+.allGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -34px; color:#0193e6;}
+.newsGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -52px; color:#0193e6;}
+.toolsGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -70px; color:#0193e6;}
+.communicationGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -88px; color:#0193e6;}
+.funandgamesGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -106px; color:#0193e6;}
+.financeGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -124px; color:#0193e6;}
+.sportsGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -142px; color:#0193e6;}
+.lifestyleGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -160px; color:#0193e6;}
+.politicsGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -178px; color:#0193e6;}
+.technologyGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -196px; color:#0193e6;}
+
+.essentialGadgetType.GridRow-checked, .allGadgetType.GridRow-checked, .newsGadgetType.GridRow-checked, 
+.toolsGadgetType.GridRow-checked, .communicationGadgetType.GridRow-checked, .funandgamesGadgetType.GridRow-checked, 
+.financeGadgetType.GridRow-checked, .sportsGadgetType.GridRow-checked, .lifestyleGadgetType.GridRow-checked, 
+.politicsGadgetType.GridRow-checked, .technologyGadgetType.GridRow-checked 
+	{background-color:#0193e6; color:#fff; font-weight:bold;}
+
+.essentialGadgetType.GridRow-mouseOver, .allGadgetType.GridRow-mouseOver, .newsGadgetType.GridRow-mouseOver,
+.toolsGadgetType.GridRow-mouseOver, .communicationGadgetType.GridRow-mouseOver, .funandgamesGadgetType.GridRow-mouseOver,
+.financeGadgetType.GridRow-mouseOver, .sportsGadgetType.GridRow-mouseOver, .lifestyleGadgetType.GridRow-mouseOver,
+.politicsGadgetType.GridRow-mouseOver, .technologyGadgetType.GridRow-mouseOver 
+	{background-color:#e8f7fd; color:#0193e6;}
+
+.customGadgetType {background:url(img/icon.gadgets.png) no-repeat 2px -215px; color:#89dd27;}
+.customGadgetType.GridRow-checked {background-color:#89dd27; color:#fff; font-weight:bold;}
+.customGadgetType.GridRow-mouseOver {background-color:#e4fdd8; color:#89dd27;}
+
+
+/* ******************************************* */
+/*           WALLPAPERS                        */
+/* ******************************************* */
+.WallPaperSettings .FormFieldInputContainer {width:auto;}
+.WallPaperSettings .FormFieldInput {width:auto;}
+.WallPaperSettings .IconDelete {position:absolute; left:0; top:59px;}
+.WallPaperCustom {background:#000 url(img/custom.jpg) repeat scroll center;}
+.WallPaperButton {width:100px; height:70px;}
+.WallpaperSelect {margin:10px; float:left;}
+.WallpaperSelect .RadioButton {float:none;}
+.WallpaperSelect .FormFieldInput {width:150px;}
+.WallpaperSelect .FormFieldLabel {float:none;}
+.WallpaperColorPicker {border:1px solid #000;}
+
+.WallpaperPositionSetting .FormFieldInput {width:400px;}
+.WallpaperPositionSetting .FormFieldInputContainer {width:400px;}
+
+.WallpaperAddNew .ThinButton {margin:5px 0 0;}  
+
+.WallPaperCenteredImage, .WallPaperTiledImage, .WallPaperStretchedImage {float:left; width:64px; height:44px; background:url(img/wallpaper.positions.png) no-repeat 0 0;}
+.WallPaperTiledImage {background-position:0 -45px;}
+.WallPaperStretchedImage {background-position:0 -89px;}
+
+.WallpaperPositionSetting .RadioButton {padding:0 0 0 14px; margin:0 0 0 5px;}
+.WallpaperPositionSetting .RadioButtonLabel {margin:0 0 0 2px; padding:0;}
+
+.WallPaperSettings .RadioButton {height:110px;}
+.WallpaperName {width:100px; overflow:hidden; height:30px;}
+
+.IconPicker {width:48px; height:48px; border:1px dotted #000;}
+
+.Trash {width:60px;	height:32px; padding:10px 0 0 34px; background:url(img/icon.trash.png) left no-repeat;}
+
+.SizeFormatWidget {text-align:right;}
+.AlignWidgetleft {text-align:left;}
+.AlignWidgetcenter {text-align:center;}
+.AlignWidgetright {text-align:right;}
+
+
+/* ******************************************* */
+/*           NO DATA TEMPLATES                 */
+/* ******************************************* */
+.noDataHeader {text-align:center; font-weight:bold; margin:5px 0 0;}
+.noDataText {text-align:center; margin:5px 0 0;}
+.logsNoData {clear:both; margin:10px 0 0; height:268px; display:block; background:url('img/smpl_logs_no_data.jpg') no-repeat top center;}
+
+
+/* ******************************************* */
+/*                  THEMES          		   */
+/* ******************************************* */
+.ThemePanelItem {margin:0 15px 15px 0; background:#dfe8f4; border:1px solid #516992; width:425px; min-height:200px; float:left;}
+* html .ThemePanelItem {height:200px;}
+.ThemeHeader {background:#516992; min-height:30px;}
+* html .ThemeHeader {height:30px;}
+.ThemeHeaderLeft {float:left; font-size:14px; color:#ffffff; font-weight:bold; padding:6px 0 0 8px;}
+.ThemeHeaderRight {float:right; padding:5px 0 0;}
+.ThemeBody {padding:10px; color:#102e50; line-height:18px; font-size:12px; min-height:170px;}
+.ThemeThumbnailWrapper {float:right; border:2px solid #d2dce8;}
+.ThemeThumbnail {border:3px solid #ffffff;}
+.ThemeDefinition {float:left; width:190px;}
+.ThemeDescription {color:#102e50;}
+.ThemeAuthor {color:#102e50; font-size:11px;}
+.ThemeUrl a {color:#102e50; text-decoration:underline; font-weight:bold; font-size:11px;}
+.ThemeButtons {padding:5px 0 0;}
+.NoThemeThumbnail {background:url('img/no.theme.thumbnail.jpg') no-repeat; height:148px; width:203px;}
+
+.ThemePanelItem-disabled {background:#eaeaea; border:1px solid #9f9f9f;}
+.ThemePanelItem-disabled .ThemeHeader {background:#9f9f9f;}
+.ThemePanelItem-disabled.ThemeThumbnailWrapper {border:2px solid #D5D5D5;}
+
+
+/***************************************/
+/*                PLUGINS              */
+/***************************************/
+.PluginsListItem {margin:0 0 5px; min-height:66px; _height:66px; background:#fff url('img/plugin.png') repeat-x bottom; border:1px solid #b1b1b1;}
+.PluginsListItem table {border-collapse:collapse;}
+.PluginDetail {width:100%;}
+.PluginDetail .gwt-Label {display:inline;}
+.PluginDetailLogo {width:60px; height:60px; background:url('img/plugin.png') no-repeat 15px 5px;}
+.PluginDetailLogo-inactive {width:60px; height:60px; background:url('img/plugin.png') no-repeat 15px -55px;}
+.FeatureLogo {width:60px; height:60px; background:url('img/icon-features-big.png') no-repeat 15px 5px;}
+
+.PluginMoreInfo {padding-left:25px;}
+.PluginActions {padding:0;}
+.PluginHeader {border-bottom:#a1a1a1 1px solid;}
+.PluginName {float:left; font:bold 14px Arial; width:auto;}
+.PluginPrice {float:right; font:bold 14px Arial; width:auto;}
+.PluginUsage {float:left; width:auto;}
+.PluginInfo {float:right; width:auto;}
+.PluginData {padding:5px 0 3px; vertical-align:top;}
+.PluginDescription {width:100%;}
+
+/***************************************/
+/*                FEATURES             */
+/***************************************/
+.FeatureListItem {margin:0 0 5px; min-height:66px; _height:66px; background:#fff url('img/plugin.png') repeat-x bottom; border:1px solid #b1b1b1;}
+.FeatureListItem table {border-collapse:collapse;}
+.FeatureDetail {width:100%;}
+.FeatureDetail .gwt-Label {display:inline;}
+.FeatureDetailLogo {width:60px; height:60px; background:url('img/feature.png') no-repeat 15px 5px;}
+.FeatureDetailLogo-inactive {width:60px; height:60px; background:url('img/feature.png') no-repeat 15px -55px;}
+
+.FeatureMoreInfo {padding-left:25px;}
+.FeatureActions {padding:0;}
+.FeatureHeader {border-bottom:#a1a1a1 1px solid;}
+.FeatureName {float:left; font:bold 14px Arial; width:auto;}
+.FeatureInfo {float:right; width:auto;}
+.FeatureData {padding:5px 0 3px; vertical-align:top;}
+.FeatureDescription {width:100%;}
+
+
+/***************************************/
+/*                LINES                */
+/***************************************/
+.Line {height:1px; margin:0 0 5px; padding:5px 0 0; border:none; border-bottom:1px dotted #b2b2b2; clear:both;}
+.VerticalLine {float:left; margin:0 5px 0; padding:0; height:100%; border:none; border-right:1px dotted #b2b2b2;}
+.LineShort {width: 298px; height: 5px; background:url('img/line.short.gif') no-repeat left top;}
+
+
+/* ******************************************* */
+/*            SUPPORT BROWSERS                 */
+/* ******************************************* */
+.SupportBrowsers {float:right; margin:12px 0 0 0px;}
+.SupportStrap {float:left; margin:0 5px 0 0; padding:8px 0 0; color:#808080;}
+
+.Firefox, .Ie, .Safari, .Opera, .Chrome
+	{float:left;width:23px; height:22px; background:url('img/browsers.png') no-repeat 0 0;}
+
+.Firefox {background-position:0 0;}
+.Ie {background-position:-23px 0;}
+.Safari {background-position:-47px 0;}
+.Opera {background-position:-70px 0;}
+.Chrome {background-position:-92px 0;}
+
+
+/* ******************************************* */
+/*            INVALID LICENCE                  */
+/* ******************************************* */
+.InvalidLicense {margin:80px auto 0; width:400px;}
+.InvalidLicenseIcon {padding:34px 0 0 60px; height:48px; background:url('img/icon-invalidlicence-big.png') no-repeat; font-weight:bold; color:#eb0101;}
+.InvalidLicenseText {padding:0 0 25px;}
+
+
+/***************************************/
+/*          DISCLOSURE PANEL           */
+/***************************************/
+.gwt-DisclosurePanel-open .header {border-bottom:1px solid #dedede;}
+
+
+/***************************************/
+/*                 CREDITS             */
+/***************************************/
+.About {margin:0; text-align:center; }
+.About strong {padding:7px 0 0; display:block; color:#59739c;}
+
+
+/* ******************************************* */
+/*              CONFIRM DIALOG                 */
+/* ******************************************* */
+.ConfirmDialog {margin:10px 0 0 10px; padding:5px 5px 5px 60px; min-height:60px; background:url('img/icon-confirmationrequired-big.png') no-repeat top left;}
+.ConfirmDialog .gwt-Label {margin:0 0 5px 0;}
+.ConfirmDialog .Button {margin:0; padding:0; width:45px;}
+* html .ConfirmDialog .ButtonContent {float:left;}
+.ConfirmDialog .Caption {border-bottom:1px solid; font-size:large; cursor:move;}
+.ConfirmDialog .WithValue {padding-top: 5px; padding-bottom: 10px;}
+.ConfirmDialog .WithValue .gwt-Label {float: left;}
+
+
+/* ******************************************* */
+/*              MESSAGE CONTAINER              */
+/* ******************************************* */
+.MessageContainer {text-align:center;}
+.MessageContainer .Error {font-size:x-large; color:#ff0000;}
+.MessageContainer .Info {font-size:x-large; color:#008000;}
+
+
+/* ******************************************* */
+/*                 DRAGGABLE                   */
+/* ******************************************* */
+.Draggable .allowed, .Draggable .disabled {float:left; padding:16px 0 0 16px; display:inline; background:url('img/draggable.png') no-repeat top;}
+.Draggable .disabled {background-position:bottom;}
+
+.DragProxy {float:left; display:block;}
+.DragProxy .Inline {float:left; display:inline;}
+.Draggable .DragProxy {opacity:0.7;	filter:alpha(opacity = 70);	zoom:1;}
+
+
+/* ******************************************* */
+/*                    OTHER                    */
+/* ******************************************* */
+.ExtensionFields-Empty {display:none;}
+.LoadingTemplate {font-style:italic;}
+.Window .LoadingTemplate {width:100px; height:100px; background-color:transparent; font-style:italic;}
+
+.ColumnResizePopup {display:none;}
+
+.HelpIcon {background:url('img/icon-help-small.png') no-repeat top left;}
+.HelpBigIcon {background:url('img/icon-help-big.png') no-repeat top left;}
+
+.Divider {height:1px; line-height:1px; font-size:1px;}
+.screen {position:relative;}
+.path div {display:inline;}
+.path span {margin:0 5px; text-decoration:underline; cursor:pointer;}
+.TemplateEditor {width:400px;}
+.ThemeEntry-selected {background-color:#fff; border:1px solid #808080;}	
+
+.MainLoginPanel {position:relative; margin:auto; width:100%;}
+.MainLoginPanel, .MainContainer {background:#ffffff url('img/login.background.png') repeat-x; position:relative;}
+
+.HelpReadMore {text-decoration:underline; color:#7393bb; cursor:pointer;}
+
+.HorizontalLayoutPanel {position:relative; height:500px;}
+
+.EditListBoxCloseButton {clear:both; float:left;}
+
+.FilterUser .Resize {min-height: 20px;_height: 20px;}
+.FilterUser .ListBoxInput {width:200px;}
+.FilterUser .ListBox {width:218px;}
+
+.PendingTasksProgressBar {background: transparent url('img/loading_window.gif') no-repeat; padding-left: 100px; display: inline;}
+
+/* ******************************************* */
+/*                 FILE WIDGET                 */
+/* ******************************************* */
+.FileWidget {min-height: 16px; cursor: pointer;}
+.FileWidget-Selected {background:#e0e9f2; cursor: default;}
+.UnknownFile {margin-right:5px; float: left; width:16px; height:16px;background-image:url('img/unknown_file.png');}
+.FileName {margin-right:10px;float: left;}
+.FileSize {float: left; font-style: italic;}
+.Folder {background-image:url('img/folder.png');}
+.pdf {background-image:url('img/pdf.png');}
+.txt {background-image:url('img/txt.png');}
+.php {background-image:url('img/php.png');}
+.html {background-image:url('img/html.png');}
+.htm {background-image:url('img/html.png');}
+.jpeg {background-image:url('img/image.png');}
+.jpg {background-image:url('img/image.png');}
+.png {background-image:url('img/image.png');}
+.gif {background-image:url('img/image.png');}
+.xls {background-image:url('img/xls.png');}
+.zip {background-image:url('img/zip.png');}
+.tgz {background-image:url('img/zip.png');}
+.tar {background-image:url('img/zip.png');}
+.doc {background-image:url('img/doc.png');}
+.avi {background-image:url('img/video.png');}
+.swf {background-image:url('img/swf.png');}
+
+/* ******************************************* */
+/*                   RSS BOX                   */
+/* ******************************************* */
+.RssBox {width: 100%; height: 100%; overflow-y: auto; overflow-x: auto; background: black;}
+
+/* ******************************************* */
+/*                    Upload                   */
+/* ******************************************* */
+.FileUpload .LinkButton {display:inline;}
+.FileUpload .LinkButton .ButtonContent {display:inline;}
+.UploadPanel {width: 100%;}
+.FormField-FormUploadFile .FormFieldInputContainer .FormFieldInput {width: 650px;}
+.FileUpload {width: 550px; background: transparent url("img/attachment.png") no-repeat; padding-left: 40px; margin-bottom: 5px; padding-bottom: 15px;}
+.loading-upload {margin:0 0 0 5px; width:20px; height:20px; display:inline-block; display:-moz-inline-box; line-height:21px;}
+* html .loading-upload {padding:0 8px; display:inline; font-size:20px;}
+.remove-upload {height:24px;width:24px;background: transparent url('img/attachment_delete.png') no-repeat left top; cursor:pointer; right: 15px; position: absolute;}
+* html .remove-upload {display:inline;  padding:0 8px;  font-size:20px;}
+img.ImageUploadWidget {float:left; margin:5px 0; height:57px;}
+img.NoImageLoaded {background:url('img/no_image.gif') no-repeat left top; width:125px}
+.ImageUploaderButtons .ThinButton {margin:0px 5px 5px 0px;}
+.UploadedFileName .ButtonText {font-weight: bold; font-size: large;}
+.UploadedFileType {font-size: x-small;}
+.UploadedFileSize {font-size: x-small;padding-left: 5px;}
+
+
+/* ******************************************* */
+/*                   PRINT                     */
+/* ******************************************* */
+.PrintingFrame {width: 0px; height: 0px; border: 0;}
+
+
+/* ******************************************* */
+/*               ICON OBJECT                   */
+/* ******************************************* */
+.IconObject {
+   	float:left;
+	width:250px;	
+	border:1px solid #bfd3ed;
+	background-color:#ffffff;
+	height:110px;
+	padding:10px;
+	margin:0 0 20px 30px;
+}
+
+.IconObjectIcon {
+	float:left; 
+	margin:0 15px 0 0; 
+	height:100%;
+}
+
+.IconObjectDescriptionContainer {
+	color:black; 
+	padding-right:5px;
+}
+
+.IconObjectName {
+    float:left;
+	width:180px;
+	margin:0 0 5px;
+    cursor:pointer;
+    text-decoration:underline;
+	font-weight:bold;	
+	color:#106fb0;
+    font-size: 13px;
+}
+
+
+.IconsPanel .SimpleIconObject {
+	float: left;
+	width: 100px;
+	text-align: center;
+	margin: 5px;	
+}
+.IconsPanel .IconObjectName {
+	font-weight: normal;
+	color: #135fab;
+	font-size:12px;
+	width: 100px;
+	float: none;
+	text-decoration: none;
+}
+.IconsPanel .BigIcon {
+	cursor:pointer;
+}
+
+.IconObjectDescription {
+	float:left;
+}
+
+
+/* ******************************************* */
+/*                 GRID TABLE2                  */
+/* ******************************************* */
+.g-TablePanel {
+    position: relative;
+}
+.g-Table {
+    background-color:#FFFFFF;
+    overflow:hidden;
+    position:relative;
+    width: 100%;
+    height: 500px;
+}
+.g-TableHeader {
+    background:#F9F9F9 url("img/table2-hrow.gif") repeat-x scroll 0 bottom;
+    cursor:default;
+    padding:1px 0 0;
+}
+.g-TableBody {
+}
+
+.g-TableScroller {
+    background:transparent none repeat scroll 0 0 !important;
+    height:3px;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    position:absolute;
+    right:0;
+    width:18px;
+    z-index:1;
+}
+.g-TableScroller div {
+    background:transparent none repeat scroll 0 0;
+    font-size:1px;
+    height:0;
+    overflow:hidden;
+    width:1px;
+}
+
+.g-TableRow {
+    border-color:#FFFFFF #EDEDED #EDEDED;
+    border-style:solid;
+    border-width:1px;
+    cursor:default;
+    width:100%;
+}
+
+.g-TableBody-focus .g-TableRow-selected {
+    background: #DFE8F6 none repeat scroll 0 0 !important;
+    border:1px dotted #A3BAE9;
+} 
+
+.g-TableRow-selected {
+    background:#DDDDDD none repeat scroll 0 0 !important;
+    border:1px dotted #AAAAAA;
+}
+
+/* ******************************************* */
+/*      POPUP WINDOW EXTENDABLE - DETAIL       */
+/* ******************************************* */
+.PopupHeader {font-weight:bold; font-size:12px; height: 20px; cursor: move; background-color: #e2e8f2;}
+.PopupWinMainExtendable .CloseButton {padding:0 16px 0 0; background-position:right -254px;}
+.PopupWinMainExtendable #Header {height: auto;}
+
+.Draggable .ContentWidget .TransactionData .DataField {width: 250px;}
+.Draggable .ContentWidget .DataFieldLabel {float: left; width: 100px;}
+.Draggable .ContentWidget .TextData {font-weight: bold;}
+
+
+
+
+.FBShare {width:64px;height:24px;background-image:url('img/FB_share_button.png');float:left;}
+.TwitterShare {float:left;}
+
+/***************************************/
+/*         CUSTOM VIEW HEADER          */
+/***************************************/
+.CustomViewHeader .ScreenDescription {margin:0 40px 0 72px;}
+.CustomViewHeader .ScreenTitle {margin:0 42px 0 72px;}
+.CustomViewRightIcons .RefreshButton {float:none;}
+.CustomViewRightIcons {float:right; position:relative;}
+
+
+/***************************************/
+/*         SELECT ACCOUNT FORM         */
+/***************************************/
+.SelectAccount .RadioButton {float: none;}
+
+
+/***************************************/
+/*           PRIVILEGES FORM           */
+/***************************************/
+.PrivilegesInfoMessage {font-size: larger; padding-top: 10px;}
+
+/***************************************/
+/*          FORM  FIELDS                  */
+/***************************************/
+.g-FormField2 .TextBox {-moz-border-radius:5px; border-radius:5px;}
+.g-FormField2-Error .TextBox {border:1px solid #a60000; -moz-border-radius:5px 5px 0 0; border-radius:5px 5px 0 0;}
+.g-FormField2-Error .g-FormField2-Message {display:block;}
+.g-FormField2-Waiting .g-FormField2-Message {display:block;}
+.g-FormField2-Valid .g-FormField2-Message {display:block;}
+.g-FormField2-Error .g-FormField2-Message {background:#a60000; border:1px solid #a60000; font-size:9px; color:#ffffff; clear:both; -moz-border-radius:0 0 5px 5px; border-radius:0 0 5px 5px;}
+.g-FormField2-Waiting .g-FormField2-Message {background:rgb(0,0,255); border:1px solid #a60000; font-size:9px; color:#ffffff; clear:both; -moz-border-radius:0 0 5px 5px; border-radius:0 0 5px 5px;}
+.g-FormField2-Valid .g-FormField2-Message {background:rgb(0,255,0); border:1px solid #a60000; font-size:9px; color:#ffffff; clear:both; -moz-border-radius:0 0 5px 5px; border-radius:0 0 5px 5px;}
+.g-FormField2-Label {float:left;}
+.g-FormField2-InputPanel {float:left;}

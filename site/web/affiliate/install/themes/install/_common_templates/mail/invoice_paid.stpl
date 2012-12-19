@@ -1,0 +1,16 @@
+<font size="2">
+<span style="font-family: Arial;">##Dear## {$accountname},</span><br><br>
+<span style="font-family: Arial;">##Your invoice was marked as paid##</span>
+</font>
+<br><br>
+<strong style="font-family: Arial;">.:##Invoice paid##:.</strong><br><br></font>
+<font size="2"><span style="font-family: Arial;">##Amount##: </span><strong style="font-family: Arial;">{$amount|currency}</strong></font><br>
+<font size="2"><span style="font-family: Arial;">##Date from##: </span><strong style="font-family: Arial;">{$datefrom}</strong><br></font>
+<font size="2"><span style="font-family: Arial;">##Date to##: </span><strong style="font-family: Arial;">{$dateto}</strong></font><br>
+<font size="2"><span style="font-family: Arial;">##Due date##: </span><strong style="font-family: Arial;">{$duedate}</strong></font><br>
+<font size="2"><span style="font-family: Arial;">##Invoice##: </span><br><strong style="font-family: Arial;">{$invoice}</strong></font>
+<br><br>
+<font size="2">
+<span style="font-family: Arial;">##Sincerely##,</span><br><br>
+<span style="font-family: Arial;">##Your Affiliate Network Manager##</span>
+</font>

@@ -1,0 +1,1 @@
+ALTER TABLE  `qu_pap_users` CHANGE  `originalparentuserid`  `originalparentuserid` CHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL

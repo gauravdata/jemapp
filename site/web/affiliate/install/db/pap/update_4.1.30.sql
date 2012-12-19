@@ -1,0 +1,1 @@
+ALTER TABLE qu_pap_payout ADD invoicenumber INT DEFAULT '0' AFTER invoice;

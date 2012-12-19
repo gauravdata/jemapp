@@ -1,0 +1,1 @@
+ALTER TABLE qu_g_settings ADD INDEX ( name ) ;

@@ -1,0 +1,30 @@
+<font size="2">
+<span style="font-family: Arial;">##Dear merchant##,</span><br/><br/>
+<span style="font-family: Arial;">##A new sale/lead was recorded at ##{$date}{*Date*} {$time}{*Time*}.</span><br/>
+<br/><br/>
+<font size="4"><strong style="font-family: Arial;">##Sale details##:</strong></font><br/>
+<span style="font-family: Arial;">##Total cost##: </span><strong style="font-family: Arial;">{$totalcost|currency}</strong><br/>
+<span style="font-family: Arial;">##Order ID##: </span><strong style="font-family: Arial;">{$orderid}</strong><br/>
+<span style="font-family: Arial;">##Product ID##: </span><strong style="font-family: Arial;">{$productid}</strong><br/>
+<span style="font-family: Arial;">##Commission for affiliates##: </span><strong style="font-family: Arial;">{$commission|currency}</strong><br/>
+
+<br/>
+
+<table cellspacing="0" cellpadding="4" border="1" style="font-family: Arial;">
+	<tr bgcolor="DCDCDC" style="font-size: 90%">
+		<td><strong>##Name##</strong></td><td><strong>##Email##</strong></td><td><strong>##Tier##</strong></td><td><strong>##Commission##</strong></td><td><strong>##Status##</strong></td><td><strong>##Date of visit##</strong></td><td><strong>##Referer url##</strong></td></strong>
+	</tr>
+{foreach from=$transactions item=transaction}
+	<tr style="font-size: 90%">
+        <td>{$transaction->getName()}</td><td>{$transaction->getEmail()}</td><td>{$transaction->getTier()}</td>
+    <td>{$transaction->getCommission()|currency} ({$transaction->getCommissionSplit()}%)</td><td>{$transaction->getStatus()}</td><td>{$transaction->getLastClickTime()}</td><td>{$transaction->getRefererUrl()} </td>
+	</tr>
+{/foreach}
+</table>
+
+<br />
+<br />
+
+<span style="font-family: Arial;">##Regards,##</span><br/><br/>
+<span style="font-family: Arial;">##Your## {$postAffiliatePro}.</span><br/>
+</font>

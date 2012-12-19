@@ -1,0 +1,22 @@
+##Dear## {$firstname} {$lastname},<br>
+<br>
+##new monthly report was generated.##<br>
+<br>
+##Now is## {$date}{*Server Date*} {$time}{*Server Time*}<br>
+##Monthly report is generated for:## <span style="font-weight: bold;">{$dateFrom}{*Date from is report generated*} </span>- <span style="font-weight: bold;">{$dateTo}{*Date to is report generated*}</span><br>
+<br>
+##Impressions:## {$impressions->count->all}<br>
+##Clicks:## {$clicks->count->all}<br>
+<br>
+##Number of Sales:## {$sales->count->all}<br>
+##Commissions per Sales:## {$sales->commission->all|currency}{*Commissions per Sales*}<br>
+##Totalcost of Sales:## {$sales->totalCost->all|currency}<br>
+<br>
+##Number of Actions:## {$actions->count->all}{*Number of Actions*}<br>
+##Commissions per Actions:## {$actions->commission->all|currency}{*Comissions per Actions*}<br>
+##Total cost of Actions:## {$actions->totalCost->all|currency}{*Total cost of Actions*}<br>
+<br>
+##All Commissions:## {$transactions->commission->all|currency}<br>
+-----------------------------------<br>
+<br>
+{$commissionsList->list}{*List of commissions*}

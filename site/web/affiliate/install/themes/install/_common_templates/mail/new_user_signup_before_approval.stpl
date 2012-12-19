@@ -1,0 +1,7 @@
+<font size="2">
+    <span style="font-family: Arial;">##Dear## {$firstname} {$lastname},</span><br/><br/>
+    <span style="font-family: Arial;">##Thank you for your registration in our affiliate program.##</span><br/>
+    <span style="font-family: Arial;"><br/>##We review every application## <span style="font-weight: bold;">##manually##</span>, ##and your registration is waiting for manual approval.## ##Please, be patient.##</span><br/><br/>
+    <span style="font-family: Arial;">##After confirming your registration, you will receive one more email with all the necessary information.##</span><br/><br/><span style="font-family: Arial;">--</span><br/>
+    <span style="font-family: Arial;">##Sincerely,##</span><br/><br/>
+    <span style="font-family: Arial;">##Your Affiliate manager##</span></font>

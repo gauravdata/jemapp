@@ -1,0 +1,1 @@
+ALTER TABLE qu_g_authusers ADD ip VARCHAR(40) NULL;

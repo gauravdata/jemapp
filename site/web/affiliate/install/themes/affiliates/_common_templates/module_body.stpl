@@ -1,0 +1,4 @@
+<!-- module_body -->
+<div id="body" class="Body">
+ <div style="LoadingScreen">{include file="loading_screen.tpl"}</div>
+</div>

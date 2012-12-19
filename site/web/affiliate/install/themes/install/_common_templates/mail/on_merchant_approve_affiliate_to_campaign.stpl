@@ -1,0 +1,4 @@
+<font size="2"><span style="font-family: Arial;">##Dear## {$firstname} {$lastname}</span><br/><br/>
+<span style="font-family: Arial;">##You have been approved in campaign## {$campaignname} </span><br/><br/>
+<span style="font-family: Arial;">##Sincerely,##</span><br/><br/>
+<span style="font-family: Arial;">##Your Affiliate manager##</span><br/></font>

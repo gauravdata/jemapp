@@ -1,0 +1,1 @@
+ALTER TABLE qu_g_roles ADD COLUMN accountid CHAR(8);
