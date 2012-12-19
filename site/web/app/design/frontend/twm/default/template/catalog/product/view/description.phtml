@@ -30,7 +30,7 @@
  * @see Mage_Catalog_Block_Product_View_Description
  */
 ?>
-<?php 
+<?php
 	$_description = $this->getProduct()->getDescription(); 
 	$_product = $this->getProduct();
 ?>
@@ -39,9 +39,10 @@
     <div class="std">
         <?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), nl2br($_description), 'description') ?>
 		<!-- AddThis Button BEGIN -->
-		<div class="addthis_toolbox addthis_default_style ">
+		<div class="addthis_toolbox addthis_default_style">
 		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
 		<a class="addthis_button_tweet"></a>
+                <a class="addthis_button_pinterest" pi:pinit:layout="horizontal" pi:pinit:media="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(400)?>"></a>
 		<a class="addthis_counter addthis_pill_style"></a>
 		</div>
 		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dda75ff408b45cf"></script>

@@ -33,7 +33,7 @@
 				<p id="site-title">
         <?php
           if (isset($_COOKIE['PAPVisitorId'])) {
-            require_once("/home/notomatoes/domains/webstore.no-tomatoes.com/public_html/affiliate/api/PapApi.class.php");
+            require_once(Mage::getBaseDir('base') . "/affiliate/api/PapApi.class.php");
             try {
               // login to API
               $session = new Gpf_Api_Session("http://webstore.no-tomatoes.com/affiliate/scripts/server.php");
