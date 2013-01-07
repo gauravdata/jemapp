@@ -60,7 +60,7 @@ Default layout, loads most of the pages
             </action>
             <action method="addLink" translate="label title" module="contacts">
             	<label>Contact</label>
-            	<url>contacts</url>
+            	<url>contact</url>
             	<title>Contact</title>
             	<prepare>true</prepare>
             	<urlParams/>
