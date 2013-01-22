@@ -1,0 +1,67 @@
+<div style="
+    background-image:url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>adminhtml/default/default/images/fam_bullet_error.gif');
+    background-repeat:no-repeat; 
+    background-color:rgb(255,255,255); 
+    padding:9px;
+    padding-left:28px;
+    height:27px;
+    border:1px solid #CCCCCC;
+    background-position:10px 10px;
+">
+    <h4><?php echo Mage::helper('buckaroo3extended')->__('These options are only intended for expert users. Tampering with the default settings may negatively affect the workflow and performance of all Buckaroo payment methods. Use at your own risk.')?></h4>
+</div>
+<script type="text/javascript" charset="utf-8" src="<?php echo $this->getSkinUrl("buckaroo/js/jquery-1.4.4.min.js");?>"></script>
+<script type = 'text/javascript'>
+jQuery.noConflict();
+jQuery('document').ready(
+	function() {
+		if (jQuery("#buckaroo_buckaroo3extended_active").val() == 0 ) {
+			jQuery("#buckaroo_buckaroo3extended").prev().prev().addClass('disabled');
+		} 
+		else if (jQuery("#buckaroo_buckaroo3extended_active").val() == 1 
+				&& jQuery("#buckaroo_buckaroo3extended_mode").val() == 1)
+		{
+			jQuery("#buckaroo_buckaroo3extended").prev().prev().css('background-color','rgb(196,226,159)');
+		} 
+		else
+		{
+			jQuery("#buckaroo_buckaroo3extended").prev().prev().css('background-color','rgb(137,197,64)');
+		}
+
+    	jQuery('.buckaroo-header').html('&nbsp;').css('background-image', "url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>adminhtml/default/default/buckaroo/images/buckaroo_large.png')").css('width','151').css('height','30');
+
+		<?php foreach($this->config as $config): ?>
+			jQuery('#buckaroo_buckaroo3extended_<?php echo $config; ?>').prev().prev().css('background-color','rgb(245,111,9)')
+		<?php endforeach;?>
+    	    									      
+		<?php foreach($this->methods as $method):?>
+    		if (jQuery("#buckaroo_buckaroo3extended_<?php echo $method; ?>_active").val() == 0 ) {
+    			jQuery("#buckaroo_buckaroo3extended_<?php echo $method; ?>").prev().prev().addClass('disabled');
+    		} 
+    		else if (jQuery("#buckaroo_buckaroo3extended_<?php echo $method; ?>_active").val() == 1 
+    				&& jQuery("#buckaroo_buckaroo3extended_<?php echo $method; ?>_mode").val() == 1)
+    		{
+    			jQuery("#buckaroo_buckaroo3extended_<?php echo $method; ?>").prev().prev().css('background-color','rgb(196,226,159)');
+    		} 
+    		else
+    		{
+    			jQuery("#buckaroo_buckaroo3extended_<?php echo $method; ?>").prev().prev().css('background-color','rgb(137,197,64)');
+    		}
+		<?php endforeach;?>
+		<?php foreach($this->services as $service):?>    
+    		if (jQuery("#buckaroo_buckaroo3extended_<?php echo $service; ?>_active").val() == 0 ) {
+    			jQuery("#buckaroo_buckaroo3extended_<?php echo $service; ?>").prev().prev().addClass('disabled');
+    		} 
+    		else if (jQuery("#buckaroo_buckaroo3extended_<?php echo $service; ?>_active").val() == 1 
+    				&& jQuery("#buckaroo_buckaroo3extended_<?php echo $service; ?>_allow_push").val() == 0)
+    		{
+    			jQuery("#buckaroo_buckaroo3extended_<?php echo $service; ?>").prev().prev().css('background-color','rgb(174,216,230)');
+    		} 
+    		else
+    		{
+    			jQuery("#buckaroo_buckaroo3extended_<?php echo $service; ?>").prev().prev().css('background-color','rgb(30,143,255)');
+    		}
+	    <?php endforeach;?>
+    }
+);
+</script>

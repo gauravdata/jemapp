@@ -41,8 +41,8 @@
             <default_setup>
                 <connection>
                     <host><![CDATA[127.0.0.1]]></host>
-                    <username><![CDATA[notomatoes_admin]]></username>
-                    <password><![CDATA[0oxMl2MK]]></password>
+                    <username><![CDATA[root]]></username>
+                    <password><![CDATA[J0nes]]></password>
                     <dbname><![CDATA[notomatoes_shop]]></dbname>
                     <active>1</active>
                 </connection>
@@ -50,7 +50,7 @@
         </resources>
         <session_save><![CDATA[files]]></session_save>
 	<cache>
-            <backend>apc</backend><!-- apc / memcached / xcache / empty=file -->
+            <backend></backend><!-- apc / memcached / xcache / empty=file -->
 	</cache>
     </global>
     <admin>
