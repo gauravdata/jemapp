@@ -558,11 +558,3 @@ div.block-layered-nav dt.amshopby-collapsed
 .MagicZoomBigImageCont { left: 353px !important; }
 
 .addthis_button_pinterest { margin-bottom:5px; }
-
-.payment-method .dob-day,
-.payment-method .dob-month { float:left; margin-right:10px; width:30px; }
-.payment-method .dob-year { float:left; width:160px; }
-
-.payment-method .dob-day label,
-.payment-method .dob-month label,
-.payment-method .dob-year label { display:block; text-align:center !important; }
