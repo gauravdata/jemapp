@@ -805,3 +805,20 @@ div.onestepcheckout-comments textarea {
     overflow: auto;
     text-align:left;
 }
+
+
+/* === Custom === */
+.payment-method .dob-day,
+.payment-method .dob-month { float:left; margin-right:10px; width:30px; }
+.payment-method .dob-year { float:left; width:50px; }
+
+.payment-method .dob-day label,
+.payment-method .dob-month label,
+.payment-method .dob-year label { display:block; text-align:center !important; }
+
+.checkoutcontainer .payment-methods .input-box .input-text,
+.checkoutcontainer .payment-methods .input-box textarea,
+.checkoutcontainer .payment-methods .input-box select { width:90% !important; }
+
+dd.payment-method { padding:0; }
+.payment-method ul li { margin:10px 0; }
