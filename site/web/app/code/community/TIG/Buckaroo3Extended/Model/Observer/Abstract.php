@@ -1,6 +1,7 @@
 <?php
 class TIG_Buckaroo3Extended_Model_Observer_Abstract extends TIG_Buckaroo3Extended_Model_Abstract 
-{  
+{
+    protected $_storeId;  
     protected $_order;
     protected $_bilingInfo;
     protected $_method = '';
@@ -18,6 +19,7 @@ class TIG_Buckaroo3Extended_Model_Observer_Abstract extends TIG_Buckaroo3Extende
     
     public function __construct()
     {
+        $this->setStoreId(Mage::app()->getStore()->getId());
         $this->_loadLastOrder();
         $this->_setOrderBillingInfo();
     }
@@ -47,13 +49,13 @@ class TIG_Buckaroo3Extended_Model_Observer_Abstract extends TIG_Buckaroo3Extende
     {
         $method = $this->_order->getPayment()->getMethod();
         
-        $dueDaysInvoice = Mage::getStoreConfig('buckaroo/' . $method . '/due_date_invoice', Mage::app()->getStore()->getStoreId());
-        $dueDays = Mage::getStoreConfig('buckaroo/' . $method . '/due_date', Mage::app()->getStore()->getStoreId());
+        $dueDaysInvoice = Mage::getStoreConfig('buckaroo/' . $method . '/due_date_invoice', $this->getStoreId());
+        $dueDays = Mage::getStoreConfig('buckaroo/' . $method . '/due_date', $this->getStoreId());
         
         $invoiceDate = date('Y-m-d', mktime(0, 0, 0, date("m")  , (date("d") + $dueDaysInvoice), date("Y")));
         $dueDate = date('Y-m-d', mktime(0, 0, 0, date("m")  , (date("d") + $dueDaysInvoice + $dueDays), date("Y")));
         
-        if (array_key_exists('customVars', $vars) && is_array($vars['customVars'][$serviceName])) {
+        if (array_key_exists('customVars', $vars) && array_key_exists($serviceName, $vars['customVars']) && is_array($vars['customVars'][$serviceName])) {
 		    $vars['customVars'][$serviceName] = array_merge($vars['customVars'][$serviceName], array(
             	'DateDue'			     => $dueDate,
             	'InvoiceDate'			 => $invoiceDate,
@@ -79,7 +81,7 @@ class TIG_Buckaroo3Extended_Model_Observer_Abstract extends TIG_Buckaroo3Extende
     		$VAT += $taxRecord['amount'];
     	}
     	
-    	$reminderLevel = Mage::getStoreConfig('buckaroo/buckaroo3extended_' . $this->_method . '/reminder_level', Mage::app()->getStore()->getId());
+    	$reminderLevel = Mage::getStoreConfig('buckaroo/buckaroo3extended_' . $this->_method . '/reminder_level', $this->getStoreId());
     	
     	$creditmanagementArray = array(
     			'AmountVat'        => $VAT,
@@ -183,7 +185,7 @@ class TIG_Buckaroo3Extended_Model_Observer_Abstract extends TIG_Buckaroo3Extende
             )
         );
         
-		if (array_key_exists('customVars', $vars) && is_array($vars['customVars'][$serviceName])) {
+		if (array_key_exists('customVars', $vars) && array_key_exists($serviceName, $vars['customVars']) && is_array($vars['customVars'][$serviceName])) {
 		    $vars['customVars'][$serviceName] = array_merge($vars['customVars'][$serviceName], $array);
 		} else {
     		$vars['customVars'][$serviceName] = $array;
@@ -198,6 +200,7 @@ class TIG_Buckaroo3Extended_Model_Observer_Abstract extends TIG_Buckaroo3Extende
 		        'PhoneNumber' => $processedPhoneNumber['clean'],
 		    ));
 		}
+        
 		return $vars;
     }
     
@@ -382,7 +385,7 @@ class TIG_Buckaroo3Extended_Model_Observer_Abstract extends TIG_Buckaroo3Extende
 	 */
     protected function _getPaymentMethodsAllowed()
     {
-        $configAllowed = Mage::getStoreConfig('buckaroo/' . $this->_code . '/allowed_methods', Mage::app()->getStore()->getStoreId());
+        $configAllowed = Mage::getStoreConfig('buckaroo/' . $this->_code . '/allowed_methods', $this->getStoreId());
         
         $allowedArray = explode(',', $configAllowed);
         
@@ -409,5 +412,104 @@ class TIG_Buckaroo3Extended_Model_Observer_Abstract extends TIG_Buckaroo3Extende
         $allowedString = implode(',', $allowedArray);
         
         Return $allowedString;
+    }
+    
+    protected function _getSecureStatus($enrolled, $authenticated, $order)
+    {
+        $status = null;
+        $useSuccessStatus = Mage::getStoreConfig('buckaroo/' . $this->_code . '/active_status', $order->getStoreId());
+        
+        if ($enrolled && $authenticated && $useSuccessStatus) {
+            switch($order->getState()) {
+                // case Mage_Sales_Model_Order::STATE_NEW:        $status = Mage::getStoreConfig(
+                                                                   // 'buckaroo/' . $this->_code . '/secure_status_new',
+                                                                    // $order->getStoreId())
+                                                               // ;
+                                                               // break;
+                case Mage_Sales_Model_Order::STATE_PROCESSING: $status = Mage::getStoreConfig(
+                                                                   'buckaroo/' . $this->_code . '/secure_status_processing',
+                                                                    $order->getStoreId())
+                                                               ;
+                                                               break;
+            }
+        } elseif (!$enrolled || !$authenticated) {
+            switch($order->getState()) {
+                // case Mage_Sales_Model_Order::STATE_NEW:        $status = Mage::getStoreConfig(
+                                                                   // 'buckaroo/' . $this->_code . '/secure_status_new',
+                                                                    // $order->getStoreId())
+                                                               // ;
+                                                               // break;
+                case Mage_Sales_Model_Order::STATE_PROCESSING: $status = Mage::getStoreConfig(
+                                                                   'buckaroo/' . $this->_code . '/unsecure_status_processing',
+                                                                    $order->getStoreId())
+                                                               ;
+                                                               break;
+                // case Mage_Sales_Model_Order::STATE_HOLDED:     $status = Mage::getStoreConfig(
+                                                                   // 'buckaroo/' . $this->_code . '/secure_status_holded',
+                                                                    // $order->getStoreId())
+                                                               // ;
+                                                               // break;
+                // case Mage_Sales_Model_Order::STATE_CANCELED:  $status = Mage::getStoreConfig(
+                                                                   // 'buckaroo/' . $this->_code . '/secure_status_canceled',
+                                                                    // $order->getStoreId())
+                                                               // ;
+                                                               // break;
+            }
+        }
+
+        return $status;
+    }
+
+	protected function _updateSecureStatus($enrolled, $authenticated, $order)
+	{
+        $shouldHold = Mage::getStoreConfig('buckaroo/' . $this->_code . '/unsecure_hold', $order->getStoreId());
+        
+        if (
+        	(!$enrolled || !$authenticated)
+        	&& $shouldHold 
+        	&& $order->canHold()) 
+        {
+            $order->hold()->save();
+        }
+        
+        $status = $this->_getSecureStatus($enrolled, $authenticated, $order);
+        
+        $enrolledString = $enrolled ? 'yes' : 'no';
+        $authenticatedString = $authenticated ? 'yes' : 'no';
+		
+        if ($status) {
+            $order->setStatus($status)
+                  ->addStatusHistoryComment(
+                      Mage::helper('buckaroo3extended')->__("3D Secure enrolled: %s<br/>3D Secure authenticated: %s", $enrolledString, $authenticatedString),
+                      $status
+                  );
+        } else {
+            $order->addStatusHistoryComment(
+                      Mage::helper('buckaroo3extended')->__("3D Secure enrolled: %s<br/>3D Secure authenticated: %s", $enrolledString, $authenticatedString)
+                  );
+        }
+        
+        $order->save();
+	}
+
+    protected function _getServiceVersion()
+    {
+        $version = Mage::getStoreConfig('buckaroo/' . $this->_code . '/service_version', $this->getStoreId());
+        if (is_null($version)) {
+            $version = 1;
+        }
+        
+        return $version;
+    }
+    
+    protected function _getRefundServiceVersion($order)
+    {
+        $versionUsed = $order->getBuckarooServiceVersionUsed();
+        
+        if (!is_null($versionUsed)) {
+            return $versionUsed;
+        }
+        
+        return $this->_getServiceVersion();
     }
 }

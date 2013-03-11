@@ -1,5 +1,5 @@
 <?php 
-abstract class TIG_Buckaroo3Extended_Model_Abstract extends Mage_Payment_Model_Method_Abstract
+class TIG_Buckaroo3Extended_Model_Abstract extends Mage_Payment_Model_Method_Abstract
 {    
 	const BUCKAROO_SUCCESS           = 'BUCKAROO_SUCCESS';
     const BUCKAROO_FAILED            = 'BUCKAROO_FAILED';
@@ -114,7 +114,7 @@ abstract class TIG_Buckaroo3Extended_Model_Abstract extends Mage_Payment_Model_M
 	
 	public function getDebugEmail()
 	{
-		return $this->_debugEmail();
+		return $this->_debugEmail;
 	}
 	
 	public function setBillingInfo($billingInfo)
@@ -197,7 +197,7 @@ abstract class TIG_Buckaroo3Extended_Model_Abstract extends Mage_Payment_Model_M
 	protected function _checkExpired()
 	{
 	    if (empty($this->_order)) {
-		    $returnUrl = Mage::getUrl(Mage::getStoreConfig('buckaroo/buckaroo3extended/failure_redirect', Mage::app()->getStore()->getStoreId()));
+		    $returnUrl = Mage::getUrl(Mage::getStoreConfig('buckaroo/buckaroo3extended_advanced/failure_redirect', Mage::app()->getStore()->getStoreId()));
 	        header('location:' . $returnUrl);
 	    }
 	}
@@ -254,9 +254,6 @@ abstract class TIG_Buckaroo3Extended_Model_Abstract extends Mage_Payment_Model_M
     	$quoteId = $this->_order->getQuoteId();
     	
         $quote = Mage::getModel('sales/quote')->load($quoteId)->setIsActive(true)->save();
-        
-        Mage::getSingleton('checkout/session')->getQuote()->setIsActive(true)->save();
-        Mage::getSingleton('checkout/session')->getQuote()->setReservedOrderId(null)->save();
     }
     
     /**
@@ -388,16 +385,11 @@ abstract class TIG_Buckaroo3Extended_Model_Abstract extends Mage_Payment_Model_M
 	 */
 	protected function _getLocale()
 	{
-		$country = $this->_order->getBillingAddress()->getCountry();
-		switch ($country)
-		{
-    		case 'BE': 
-    		case 'NL': $locale = 'nl-' . $country; 
-    		           $lang = 'NL';
-    				   break;
-    		default:   $locale = 'en-US';
-    		           $lang = 'EN';
-		}
+        $country = $this->_order->getBillingAddress()->getCountry();
+        
+        $locale = Mage::app()->getLocale()->getLocaleCode();
+        $locale = str_replace('_', '-', $locale);
+        $lang = strtoupper(substr($locale, 0, 2));
 		
 		return array($country, $locale, $lang);
 	}
@@ -488,15 +480,19 @@ abstract class TIG_Buckaroo3Extended_Model_Abstract extends Mage_Payment_Model_M
 	 */
 	protected function _checkCorrectAmount()
 	{
-	    $amountPaid = round($this->_postArray['brq_amount'] * 100, 0);
+	    $amountPaid = $this->_postArray['brq_amount'];
 	    
 	    if ($this->_postArray['brq_currency'] == $this->_order->getStoreCurrencyCode()) {
-	        $amountOrdered = round($this->_order->getBaseGrandTotal() * 100, 0);
+	        $this->_debugEmail .= "Currency used is same as order currency \n";
+	        $amountOrdered = $this->_order->getBaseGrandTotal();
 	    } else {
-	        $amountOrdered = round($this->_order->getBaseGrandTotal() * 100, 0);
+            $this->_debugEmail .= "Currency used is different from order currency \n";
+	        $amountOrdered = $this->_order->getBaseGrandTotal();
 	    }
 	    
-	    if ($amountPaid != $amountOrdered) {
+        $this->_debugEmail .= "Amount paid: {$amountPaid}. Amount ordered: {$amountOrdered} \n";
+        
+	    if (($amountPaid - $amountOrdered) > 0.01 || ($amountPaid - $amountOrdered) < -0.01) {
 	        return array(
                'message' => 'Incorrect amount transfered',
                'status'  => self::BUCKAROO_INCORRECT_PAYMENT,

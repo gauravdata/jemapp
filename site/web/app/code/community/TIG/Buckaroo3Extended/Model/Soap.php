@@ -126,6 +126,13 @@ final class TIG_Buckaroo3Extended_Model_Soap extends TIG_Buckaroo3Extended_Model
             $this->_addCustomFields($TransactionRequest, $key, $service->Name);
         }
         
+        $Software = new Software();
+        $Software->PlatformName = $this->_vars['Software']['PlatformName'];
+        $Software->PlatformVersion = $this->_vars['Software']['PlatformVersion'];
+        $Software->ModuleSupplier = $this->_vars['Software']['ModuleSupplier'];
+        $Software->ModuleName = $this->_vars['Software']['ModuleName'];
+        $Software->ModuleVersion = $this->_vars['Software']['ModuleVersion'];
+        
         $Header = new Header();
         $Header->MessageControlBlock = new MessageControlBlock();
         $Header->MessageControlBlock->Id = '_control';
@@ -133,6 +140,7 @@ final class TIG_Buckaroo3Extended_Model_Soap extends TIG_Buckaroo3Extended_Model
         $Header->MessageControlBlock->Culture = $this->_vars['locale'];
         $Header->MessageControlBlock->TimeStamp = time();
         $Header->MessageControlBlock->Channel = 'Web';
+        $Header->MessageControlBlock->Software = $Software;
         $Header->Security = new SecurityType();
         $Header->Security->Signature = new SignatureType();
         
@@ -439,8 +447,9 @@ class SoapClientWSSEC extends SoapClient
     	//Canonicalize nodeset
     	$signedINFO = $this->GetCanonical($SignedInfoNodeSet);
     	
-    	$certificateId = Mage::getStoreConfig('buckaroo/buckaroo3extended_certificate/certificate', Mage::app()->getStore()->getId());
+    	$certificateId = Mage::getStoreConfig('buckaroo/buckaroo3extended/certificate_selection', Mage::app()->getStore()->getId());
     	$certificate = Mage::getModel('buckaroo3extended/certificate')->load($certificateId)->getCertificate();
+        
     	$priv_key = substr($certificate, 0, 8192);
     	
     	if ($priv_key === false) {
@@ -543,6 +552,7 @@ class MessageControlBlock
 	public $Culture;
 	public $TimeStamp;
 	public $Channel;
+    public $Software;
 }
 
 class Body
@@ -588,4 +598,13 @@ class IPAddress
 {
  	public $_;
  	public $Type;
+}
+
+class Software
+{
+    public $PlatformName;
+    public $PlatformVersion;
+    public $ModuleSupplier;
+    public $ModuleName;
+    public $ModuleVersion;
 }

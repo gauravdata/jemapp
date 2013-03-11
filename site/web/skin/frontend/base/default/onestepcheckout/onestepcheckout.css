@@ -21,7 +21,7 @@ ol.checkout-agreements {
 
 /* Button CSS */
 .onestepcheckout-button, .onestepcheckout-button:visited {
-    background: #222 url(images/button-background.png) repeat-x;
+    background: #222 url(../../../base/default/onestepcheckout/images/button-background.png) repeat-x;
     display: inline-block;
     padding: 5px 10px 6px;
     color: #fff;
@@ -153,7 +153,7 @@ div.onestepcheckout-threecolumns div.onestepcheckout-column-left {
     width: 33%;
     float: left;
     margin-right: 15px;
-    background: transparent url(images/line-gradient.gif) no-repeat scroll
+    background: transparent url(../../../base/default/onestepcheckout/images/line-gradient.gif) no-repeat scroll
         right top;
     padding-top: 15px;
 }
@@ -163,7 +163,7 @@ div.onestepcheckout-threecolumns div.onestepcheckout-column-middle {
     float: left;
     margin-right: 15px;
     padding-right: 15px;
-    background: transparent url(images/line-gradient.gif) no-repeat scroll
+    background: transparent url(../../../base/default/onestepcheckout/images/line-gradient.gif) no-repeat scroll
         right top;
     padding-top: 15px;
 }
@@ -194,7 +194,7 @@ div.onestepcheckout-error {
     padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 25px;
-    background-image: url(images/onestepcheckout-error.jpg);
+    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-error.jpg);
     background-repeat: no-repeat;
     background-position: 5px 5px;
 }
@@ -387,7 +387,7 @@ div.onestepcheckout-shipping-method {
 div.loading-ajax, div.loading-ajax-login {
     height: 50px;
     text-align: center;
-    background-image: url(images/ajax-loader.gif);
+    background-image: url(../../../base/default/onestepcheckout/images/ajax-loader.gif);
     background-repeat: no-repeat;
     background-position: center center;
 }
@@ -404,19 +404,19 @@ p.onestepcheckout-numbers {
 }
 
 p.onestepcheckout-numbers-1 {
-    background-image: url(images/onestepcheckout-numbers-1.png);
+    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-numbers-1.png);
 }
 
 p.onestepcheckout-numbers-2 {
-    background-image: url(images/onestepcheckout-numbers-2.png);
+    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-numbers-2.png);
 }
 
 p.onestepcheckout-numbers-3 {
-    background-image: url(images/onestepcheckout-numbers-3.png);
+    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-numbers-3.png);
 }
 
 p.onestepcheckout-numbers-4 {
-    background-image: url(images/onestepcheckout-numbers-4.png);
+    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-numbers-4.png);
 }
 
 div.onestepcheckout-skin-magento .onestepcheckout-numbers {
@@ -429,22 +429,22 @@ div.onestepcheckout-skin-magento .onestepcheckout-numbers {
 }
 
 div.onestepcheckout-skin-magento p.onestepcheckout-numbers-1 {
-    background-image: url(images/skin-magento/onestepcheckout-numbers-1.png)
+    background-image: url(../../../base/default/onestepcheckout/images/skin-magento/onestepcheckout-numbers-1.png)
         !important;
 }
 
 div.onestepcheckout-skin-magento p.onestepcheckout-numbers-2 {
-    background-image: url(images/skin-magento/onestepcheckout-numbers-2.png)
+    background-image: url(../../../base/default/onestepcheckout/images/skin-magento/onestepcheckout-numbers-2.png)
         !important;
 }
 
 div.onestepcheckout-skin-magento p.onestepcheckout-numbers-3 {
-    background-image: url(images/skin-magento/onestepcheckout-numbers-3.png)
+    background-image: url(../../../base/default/onestepcheckout/images/skin-magento/onestepcheckout-numbers-3.png)
         !important;
 }
 
 div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
-    background-image: url(images/skin-magento/onestepcheckout-numbers-4.png)
+    background-image: url(../../../base/default/onestepcheckout/images/skin-magento/onestepcheckout-numbers-4.png)
         !important;
 }
 
@@ -509,14 +509,14 @@ div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
 }
 
 .onestepcheckout-popup-footer {
-    background-image: url(images/onestepcheckout-popup-footer.png);
+    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-popup-footer.png);
     background-repeat: no-repeat;
     height: 13px;
 }
 
 .onestepcheckout-popup-wrapper {
-    background-image: url(images/onestepcheckout-popup-header.png);
-    *background-image: url(images/onestepcheckout-popup-header.png)
+    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-popup-header.png);
+    *background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-popup-header.png)
         !important;
     background-repeat: no-repeat;
 }
@@ -612,7 +612,7 @@ div.onestepcheckout-comments textarea {
     width: 47%;
     float: left;
     margin-right: 30px;
-    background: transparent url(images/line-gradient.gif) no-repeat scroll
+    background: transparent url(../../../base/default/onestepcheckout/images/line-gradient.gif) no-repeat scroll
         right top;
 }
 
