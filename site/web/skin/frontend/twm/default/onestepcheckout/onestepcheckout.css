@@ -821,3 +821,5 @@ div.onestepcheckout-comments textarea {
 
 dd.payment-method { padding:0; }
 .payment-method ul li { margin:10px 0; }
+
+.payment-method ul li .v-fix { float:left; }
