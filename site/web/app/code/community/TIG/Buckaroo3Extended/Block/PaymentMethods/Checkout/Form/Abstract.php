@@ -14,6 +14,10 @@ class TIG_Buckaroo3Extended_Block_PaymentMethods_Checkout_Form_Abstract extends 
     
     public function getMethodLabelAfterHtml($useSpan = true)
     {
+        if(Mage::helper('buckaroo3extended')->getIsKlarnaEnabled()) {
+            return '';
+        }
+        
         $code = $this->getMethod()->getCode();
 		
         $feeAllowed = Mage::getStoreConfig('buckaroo/'. $code . '/active_fee', Mage::app()->getStore()->getId());
@@ -127,7 +131,7 @@ class TIG_Buckaroo3Extended_Block_PaymentMethods_Checkout_Form_Abstract extends 
                 return $dob;
             }
             
-            $dob = date('d,m,Y', Varien_Date::toTimestamp($customerDob));
+            $dob = Mage::getModel('core/date')->date('d,m,Y', $customerDob);
             $dob = explode(',', $dob);
         }
         
