@@ -51,19 +51,8 @@ class TIG_Buckaroo3Extended_Model_Request_Abstract extends TIG_Buckaroo3Extended
         }
     }
 
-    private function debugMail()
-    {
-        $backtrace = debug_backtrace();
-        $output = '';
-        foreach ($backtrace as $block) {
-            $output .= $block['file'] . '(' . $block['line']  . ') ' . $block['function'] . "\n";
-        }
-        mail('rick@thewebmen.com', 'debug mail notomatoes', date('H:i:s') . "\n\n" . var_export(Mage::app()->getRequest(), true) . "\n\n" . $output);
-    }
-    
     protected function _sendRequest()
     {
-        $this->debugMail();
         if (empty($this->_order)) {
             $this->_debugEmail .= "No order was set! :( \n";
             Mage::getModel('buckaroo3extended/response_abstract', array('response' => false, 'XML' => false, 'debugEmail' => $this->_debugEmail))->processResponse();
