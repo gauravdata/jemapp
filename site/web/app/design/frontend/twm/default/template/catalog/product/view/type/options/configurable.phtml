@@ -42,7 +42,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     </dl>
     <script type="text/javascript">
 		var config = <?php echo $this->getJsonConfig() ?>;
-		config.chooseText = '<?php echo sprintf($this->__('Select an %s...'), $_attribute->getLabel()) ?>';
+		config.chooseText = '<?php echo sprintf($this->__('Kies je maat...'), $_attribute->getLabel()) ?>';
         var spConfig = new Product.Config(config);
     </script>
 <?php endif;?>
