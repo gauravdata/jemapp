@@ -64,13 +64,7 @@
 </div>
 
 <?php if ($this->getOrderId()):?>
-	<?php $_order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId()); ?>
-	<?php $_customer = Mage::getSingleton('customer/session')->getCustomer(); ?>
-	<?php $billing_address_data = $_order->getBillingAddress(); ?>
-	<?php $_text = '';?>
-	<?php foreach($_order->getAllItems() as $item) { $_text .= $item->getName() . ' '; } ?>
-	<img src='http://ds1.nl/t/?si=5631&ti=<?=$this->getOrderId()?>&oa=<?=$_text?>&om=<?=$_text?>&bd=<?=$_order->subtotal?>&ln=<?=$billing_address_data['country_id']?>&pc=<?=$billing_address_data['postcode']?>&gs=[geslacht]&gb=[geboortedatum]&rv=[omzet]&e1=[extra_1]&e2=[extra_2]&e3=[extra_3]&e4=[extra_4]&e5=[extra_5]' style='border: 0px; height: 1px; width: 1px;' alt='Adverteren via Daisycon' />
-
+    <?php $_order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId()); ?>
     <script type="text/javascript">
         var fb_param = {};
         fb_param.pixel_id = '6007916391973';
@@ -84,5 +78,5 @@
             ref.parentNode.insertBefore(fpw, ref);
         })();
     </script>
-    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6007916391973&amp;value=0&amp;currency=EUR" /></noscript>
+    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6007916391973&amp;value=<?=$_order->subtotal?>&amp;currency=EUR" /></noscript>
 <?php endif;?>
