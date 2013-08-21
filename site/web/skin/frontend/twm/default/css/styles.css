@@ -400,6 +400,11 @@ button.btn-checkout:hover {
 
 li.section .buttons-set	{ margin-bottom: 0; }
 
+#billing_address_list .input-address-1, #billing_address_list .input-address-2 { float:left; }
+#billing_address_list .input-address-2 { margin-left:10px; }
+#billing_address_list .input-address-1 input { width:160px; }
+#billing_address_list .input-address-2 input { width:70px; }
+
 /* Content Columns */
 .col2-set .col-1 		{ float:left; width:49%; }
 .col2-set .col-2 		{ float:right; width:49%; }
