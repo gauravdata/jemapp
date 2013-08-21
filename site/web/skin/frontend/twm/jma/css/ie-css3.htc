@@ -1,0 +1,176 @@
+--Do not remove this if you are using--
+Original Author: Remiz Rahnas
+Original Author URL: http://www.htmlremix.com
+Published date: 2008/09/24
+
+Changes by Nick Fetchak:
+- IE8 standards mode compatibility
+- VML elements now positioned behind original box rather than inside of it - should be less prone to breakage
+- Added partial support for 'box-shadow' style
+- Checks for VML support before doing anything
+- Updates VML element size and position via timer and also via window resize event
+- lots of other small things
+Published date : 2010/03/14
+http://fetchak.com/ie-css3
+
+Thanks to TheBrightLines.com (http://www.thebrightlines.com/2009/12/03/using-ies-filter-in-a-cross-browser-way) for enlightening me about the DropShadow filter
+
+<public:attach event="ondocumentready" onevent="ondocumentready('v08vnSVo78t4JfjH')" />
+<script type="text/javascript">
+
+border_opacity = false; // Use opacity on borders of rounded-corner elements? Note: This causes antialiasing issues
+
+
+// supportsVml() borrowed from http://stackoverflow.com/questions/654112/how-do-you-detect-support-for-vml-or-svg-in-a-browser
+function supportsVml() {
+	if (typeof supportsVml.supported == "undefined") {
+		var a = document.body.appendChild(document.createElement('div'));
+		a.innerHTML = '<v:shape id="vml_flag1" adj="1" />';
+		var b = a.firstChild;
+		b.style.behavior = "url(#default#VML)";
+		supportsVml.supported = b ? typeof b.adj == "object": true;
+		a.parentNode.removeChild(a);
+	}
+	return supportsVml.supported
+}
+
+
+// findPos() borrowed from http://www.quirksmode.org/js/findpos.html
+function findPos(obj) {
+	var curleft = curtop = 0;
+
+	if (obj.offsetParent) {
+		do {
+			curleft += obj.offsetLeft;
+			curtop += obj.offsetTop;
+		} while (obj = obj.offsetParent);
+	}
+
+	return({
+		'x': curleft,
+		'y': curtop
+	});
+}
+
+function createBorderRect(element, vml_parent) {
+	if (isNaN(element.borderRadius)) { return(false); }
+
+	element.style.background = 'transparent';
+	element.style.borderColor = 'transparent';
+
+	var rect = document.createElement('v:roundrect');
+	rect.position_offset = {
+		'y': (0.5 * element.strokeWeight) - vml_parent.pos_ieCSS3.y,
+		'x': (0.5 * element.strokeWeight) - vml_parent.pos_ieCSS3.x
+	};
+	rect.size_offset = {
+		'width': 0 - element.strokeWeight,
+		'height': 0 - element.strokeWeight
+	};
+	rect.arcsize = element.arcSize +'px';
+	rect.strokeColor = element.strokeColor;
+	rect.strokeWeight = element.strokeWeight +'px';
+	rect.stroked = element.stroked;
+	rect.className = 'vml_border_radius';
+	rect.style.display = element.currentStyle.display;
+	rect.style.margin = element.currentStyle.margin;
+	element.style.margin = '0px';
+	rect.style.padding = element.currentStyle.padding;
+	element.style.padding = '0px';
+	rect.style.position = element.currentStyle.position;
+	rect.style.top = element.currentStyle.top;
+	rect.style.left = element.currentStyle.left;
+	rect.style.width = (element.offsetWidth + rect.size_offset.width) +'px';
+	rect.style.height = (element.offsetHeight + rect.size_offset.height) +'px';
+	rect.style.antialias = true;
+	//rect.style.zIndex = element.zIndex - 1;
+
+	if (border_opacity && (element.opacity < 1)) {
+		rect.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(Opacity='+ parseFloat(element.opacity * 100) +')';
+	}
+
+	var fill = document.createElement('v:fill');
+	if(element.fillColor == 'transparent') element.fillColor = '#FF00FF';
+	fill.color = element.fillColor;
+	fill.type = 'tile';
+	fill.src = element.fillSrc;
+	fill.className = 'vml_border_radius_fill';
+	fill.opacity = (parseFloat(element.opacity) < 1 )?parseFloat(element.opacity):1;
+
+	// Hack: IE6 doesn't support transparent borders, use padding to offset original element
+	isIE6 = /msie|MSIE 6/.test(navigator.userAgent);
+	if (isIE6 && (element.strokeWeight > 0)) {
+		element.style.borderStyle = 'none';
+		element.style.paddingTop = parseInt(element.currentStyle.paddingTop || 0) + element.strokeWeight;
+		element.style.paddingBottom = parseInt(element.currentStyle.paddingBottom || 0) + element.strokeWeight;
+	}
+
+	rect.appendChild(fill);
+	//element.parentNode.appendChild(rect);
+	element.parentNode.insertBefore(rect, element.element);
+	fill.appendChild(this.element);
+
+	// For window resizing
+	//element.vml.push(rect);
+
+	return(true);
+}
+
+function ondocumentready(classID) {
+	if (!supportsVml()) { return(false); }
+
+  if (this.className.match(classID)) { return(false); }
+	this.className = this.className.concat(' ', classID);
+
+	// Add a namespace for VML (IE8 requires it)
+	if (!document.namespaces.v) { document.namespaces.add("v", "urn:schemas-microsoft-com:vml"); }
+
+	// These attrs are for the script and have no meaning to the browser:
+	this.borderRadius = parseInt(this.currentStyle['iecss3-border-radius'] ||
+	                             this.currentStyle['-moz-border-radius'] ||
+	                             this.currentStyle['-webkit-border-radius'] ||
+	                             this.currentStyle['border-radius'] ||
+	                             this.currentStyle['-khtml-border-radius']);
+	this.arcSize = Math.min(this.borderRadius / Math.min(this.offsetWidth, this.offsetHeight), 1);
+	this.fillColor = this.currentStyle.backgroundColor;
+	this.fillSrc = this.currentStyle.backgroundImage.replace(/^url\("(.+)"\)$/, '$1');
+	this.strokeColor = this.currentStyle.borderColor;
+	this.strokeWeight = parseInt(this.currentStyle.borderWidth);
+	this.stroked = 'true';
+	if (isNaN(this.strokeWeight) || (this.strokeWeight == 0)) {
+		this.strokeWeight = 0;
+		this.strokeColor = fillColor;
+		this.stroked = 'false';
+	}
+	this.opacity = parseFloat(this.currentStyle.opacity || 1);
+	this.textShadow = this.currentStyle['text-shadow'];
+
+	this.element.vml = new Array();
+	this.zIndex = parseInt(this.currentStyle.zIndex);
+	if (isNaN(this.zIndex)) { this.zIndex = 0; }
+
+	// Find which element provides position:relative for the target element (default to BODY)
+	vml_parent = this;
+	var limit = 100, i = 0;
+	do {
+		vml_parent = vml_parent.parentElement;
+		i++;
+		if (i >= limit) { return(false); }
+	} while ((typeof(vml_parent) != 'undefined') && (vml_parent.currentStyle.position != 'relative') && (vml_parent.tagName != 'BODY'));
+
+	vml_parent.pos_ieCSS3 = findPos(vml_parent);
+	this.pos_ieCSS3 = findPos(this);
+
+	var rv2 = createBorderRect(this, vml_parent);
+
+	if (typeof(vml_parent.document.ieCSS3_stylesheet) == 'undefined') {
+		vml_parent.document.ieCSS3_stylesheet = vml_parent.document.createStyleSheet();
+		vml_parent.document.ieCSS3_stylesheet.addRule("v\\:roundrect", "behavior: url(#default#VML)");
+		vml_parent.document.ieCSS3_stylesheet.addRule("v\\:fill", "behavior: url(#default#VML)");
+		// Compatibility with IE7.js
+		vml_parent.document.ieCSS3_stylesheet.ie7 = true;
+	}
+}
+
+</script>
+
