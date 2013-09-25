@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <Wingify_Abtester>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Wingify_Abtester>
-    </modules>
-</config> 

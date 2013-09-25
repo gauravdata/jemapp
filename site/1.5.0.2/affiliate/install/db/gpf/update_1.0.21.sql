@@ -1,1 +1,0 @@
-DELETE au FROM qu_g_authusers au LEFT JOIN qu_g_users qu ON au.authid=qu.authid WHERE qu.authid IS NULL;

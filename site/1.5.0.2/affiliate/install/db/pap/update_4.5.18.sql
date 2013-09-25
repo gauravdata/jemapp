@@ -1,1 +1,0 @@
-UPDATE qu_g_languages SET languageid = CONCAT(languageid , '-DE'), code = CONCAT(code, '-DE') WHERE code = 'de';

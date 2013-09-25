@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <Magavenue_Shopializable>
-            <active>true</active>
-            <codePool>community</codePool>
-        </Magavenue_Shopializable>
-    </modules>
-</config>

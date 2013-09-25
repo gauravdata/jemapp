@@ -1,2 +1,0 @@
-<!-- campaigns -->
-{widget id="CampaignsPanel"}

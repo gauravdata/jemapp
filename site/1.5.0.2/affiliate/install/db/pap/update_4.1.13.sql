@@ -1,1 +1,0 @@
-ALTER TABLE `qu_pap_users` DROP `notificationemail`;

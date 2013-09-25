@@ -1,1 +1,0 @@
-ALTER TABLE  `qu_pap_transactions` ADD  `commissiongroupid` CHAR(8) NULL DEFAULT NULL after commtypeid;

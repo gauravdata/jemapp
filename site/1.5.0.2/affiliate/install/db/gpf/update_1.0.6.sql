@@ -1,1 +1,0 @@
-ALTER TABLE qu_g_mail_templates ADD COLUMN is_custom CHAR(1) NOT NULL DEFAULT 'N';

@@ -1,1 +1,0 @@
-ALTER TABLE qu_pap_accountings CHANGE dateinsterted dateinserted DATETIME;

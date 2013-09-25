@@ -1,1 +1,0 @@
-ALTER TABLE qu_g_tasks ADD rtype CHAR(1) ASCII NOT NULL DEFAULT 'C' AFTER is_executing;

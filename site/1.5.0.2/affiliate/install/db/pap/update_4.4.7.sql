@@ -1,1 +1,0 @@
-UPDATE qu_g_plannedtasks SET accountid = 'default1' WHERE classname IN ('Pap_Mail_PayDayReminder_PayDaySendTask', 'Pap_Mail_Reports_ReportsSendTask');
