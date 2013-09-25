@@ -1,0 +1,15 @@
+<![if !lt IE 9]>
+<script type="text/javascript">
+function sendData(element)
+{
+     jQuery.post(
+         '<?php echo Mage::getUrl('buckaroo3extended/checkout/saveData', array('_secure'=>true));?>',
+         {
+             name: element.attr('name'),
+             value: element.val()
+         }
+     );
+}
+</script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/TIG/Buckaroo3Extended/saveData.js', array('_secure' => true)); ?>"></script>
+<![endif]>

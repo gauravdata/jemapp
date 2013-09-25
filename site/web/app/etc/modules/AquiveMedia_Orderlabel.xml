@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <AquiveMedia_Orderlabel>
+      <active>true</active>
+      <codePool>local</codePool>
+    </AquiveMedia_Orderlabel>
+  </modules>
+</config> 

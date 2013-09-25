@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Iksanika_Countdown>
+            <version>0.1.1</version>
+        </Iksanika_Countdown>
+    </modules>
+    <admin>
+        <routers>
+            <countdown>
+                <!-- should be set to "admin" when overloading admin stuff (?) -->
+                <use>admin</use>
+                <args>
+                    <module>Iksanika_Countdown</module>
+                    <!-- This is used when "catching" the rewrite above -->
+                    <frontName>countdown</frontName>
+                </args>
+            </countdown>
+        </routers>
+    </admin>
+    <global>
+        <blocks>
+            <countdown>
+                <class>Iksanika_Countdown_Block</class>
+            </countdown>
+        </blocks>
+        <helpers>
+            <countdown>
+                <class>Iksanika_Countdown_Helper</class>
+            </countdown>
+        </helpers>
+        <models>
+            <countdown>
+                <class>Iksanika_Countdown_Model</class>
+            </countdown>
+        </models>
+    </global>
+    <default>
+        <countdown>
+            <general>
+                <activate>1</activate>
+                <heading>viewpage</heading>
+                <caption>viewpage</caption>
+                <title>Will expire in:</title>
+                <days>Day</days>
+                <hours>Hour</hours>
+                <mins>Min</mins>
+                <sec>Sec</sec>
+                <formating>hours_min_sec</formating>
+                <design>DIGITS_OLD</design>
+            </general>
+            <colors>
+                <text>444444</text>
+                <title>444444</title>
+                <caption>444444</caption>
+            </colors>
+            <defaults>
+            </defaults>
+        </countdown>
+    </default>
+    <frontend>
+        <routers>
+            <countdown>
+                <use>standard</use>
+                <args>
+                    <module>Iksanika_Countdown</module>
+                    <frontName>countdown</frontName>
+                </args>
+            </countdown>
+        </routers>
+        <layout>
+            <updates>
+                <countdown>
+                    <file>iksanika_countdown.xml</file>
+                </countdown>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <countdown>
+                    <file>iksanika_countdown.xml</file>
+                </countdown>
+            </updates>
+        </layout>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <countdown>
+                                            <title>Price Countdown Config</title>
+                                        </countdown>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+    
+    
+    
+    </adminhtml>   
+</config>

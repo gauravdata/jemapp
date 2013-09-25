@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <countdown translate="label" module="countdown">
+            <label>Iksanika</label>
+            <sort_order>19</sort_order>
+        </countdown>
+    </tabs>
+    <sections>
+        <countdown translate="label" module="countdown">
+            <label>Price Countdown</label>
+            <tab>countdown</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>120</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="countdown">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <activate translate="label">
+                            <label>Price Countdown is Activate:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Activate Product Countdown</comment>
+                        </activate>
+
+                        <heading translate="label">
+                            <label>Countdown Heading:</label>
+                            <frontend_type>select</frontend_type>
+                            <!--
+                            <source_model>adminhtml/system_config_source_Heading</source_model>
+                            -->
+                            <source_model>Iksanika_Countdown_Model_System_Config_VisibleOptions</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Countdown Heading</comment>
+                        </heading>
+
+                         <caption translate="label">
+                            <label>Countdown Caption:</label>
+                            <frontend_type>select</frontend_type>
+                            <!--
+                            <source_model>adminhtml/system_config_source_Caption</source_model>
+                            -->
+                            <source_model>Iksanika_Countdown_Model_System_Config_VisibleOptions</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Countdown Caption</comment>
+                        </caption>
+                        
+                        <title translate="label">
+                            <label>Countdown Title:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Countdown Title</comment>
+                        </title>
+                        
+                        <days translate="label">
+                            <label>Days title:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Countdown Days Title</comment>
+                        </days>
+                        
+                        <hours translate="label">
+                            <label>Hours title:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Countdown Hours Title</comment>
+                        </hours>
+                        
+                        <mins translate="label">
+                            <label>Minutes title:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Countdown Minutes Title</comment>
+                        </mins>
+                        
+                        <sec translate="label">
+                            <label>Seconds title:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Countdown Seconds Title</comment>
+                        </sec>
+                        
+                        <formating translate="label">
+                            <label>Formating Options:</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Iksanika_Countdown_Model_System_Config_Formating</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Formating Options</comment>
+                        </formating>
+                        
+                        <design translate="label">
+                            <label>Design</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Iksanika_Countdown_Model_System_Config_Design</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Countdown Design</comment>
+                        </design>
+                        
+                    </fields>
+                </general>
+                <colors translate="label" module="countdown">
+                    <label>Colors</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <text translate="label">
+                            <label>Countdown Color:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Please Click the text box to select color</comment>
+                        </text>
+
+                        <title translate="label">
+                            <label>Countdown Heading Text Color:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Please Click the text box to select color</comment>
+                        </title>
+
+                        <caption translate="label">
+                            <label>Countdown Caption Text Color:</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Please Click the text box to select color</comment>
+                        </caption>
+                        
+                    </fields>
+                </colors>
+            </groups>
+        </countdown>
+    </sections>
+</config>

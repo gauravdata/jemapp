@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+
+<config>
+   <sections>
+        <sales_pdf>
+            <groups>
+                <mppdfinvoice translate="label">                    
+                    <label>Mindstretch Better Invoice Layout</label>
+                    <frontend_type>text</frontend_type>
+					<comment><![CDATA[
+					<div class="custom-options">
+					<div class="box">
+					<br/><p class="grand-total">Better Invoice Layout<br/><b></b></p>
+					<p>Welcome to the Better Invoice Layout module for Magento. From this control panel you can customize the module. <br>If you have any questions please visit the links below to get access to our Customer Support.</p>
+					- <a href="http://www.magaddons.com/wiki/?s=Better+Invoice" target="_blank"><strong>MagAddons.com Wiki</strong></a> <font size=1>(opens in new window)</font><br/>
+					- <a href="http://www.mindstretch.nl/supportrequest" target="_blank"><strong>MagAddons.com Support</strong></a> <font size=1>(opens in new window)</font><br/>
+					<br/><p class="grand-total">How to start using the Better Invoice Layout module?<br/><b></b></p>
+					<p>- Just enter your detailed information and upload your logo.</p>
+					<br>
+					</div>
+					</div>					
+					]]></comment>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>    
+                        <company translate="label">
+                            <label>Company</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</company>		
+                        <street1 translate="label">
+                            <label>Street 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</street1>	
+                        <street2 translate="label">
+                            <label>Street 2</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</street2>	
+                        <zipcodecity translate="label">
+                            <label>Zipcode and City</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</zipcodecity>
+                        <country translate="label">
+                            <label>Country</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</country>
+                        <vatnumber translate="label">
+                            <label>VAT number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</vatnumber>
+                        <companyid translate="label">
+                            <label>Company ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</companyid>
+                        <telephonenumber translate="label">
+                            <label>Telephonenumber</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</telephonenumber>
+                        <email translate="label">
+                            <label>Email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</email>
+						<bankaccount translate="label">
+                            <label>Bankaccount</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</bankaccount>
+						<iban translate="label">
+                            <label>IBAN</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>    
+						</iban>
+                        <footer_text translate="label">
+                            <label>Invoice Footer Text</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                            
+							<comment>Please enter your details here. It will be placed in the lower left corner. </comment>
+                        </footer_text>
+                    </fields>                       
+                </mppdfinvoice>
+            </groups>
+        </sales_pdf>
+    </sections>
+</config>

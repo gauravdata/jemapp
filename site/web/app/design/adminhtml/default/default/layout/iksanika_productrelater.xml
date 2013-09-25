@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addJs">
+                <script>Iksanika/productrelater/jquery-1.9.1.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>Iksanika/productrelater/relaterproducts.js</script>
+            </action>
+            <action method="addJs">
+                <script>Iksanika/productrelater/relatergrid.js</script>
+            </action> 
+            <action method="addJs">
+                <script>Iksanika/productrelater/egsupplemental.js</script>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>Iksanika/productrelater/resources/css/productrelater.css</name>
+            </action>
+        </reference> 
+    </default>
+</layout>   

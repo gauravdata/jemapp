@@ -1,0 +1,86 @@
+.CountdownBase { padding-top: 5px; padding-top: 5px; clear: both;}
+
+.CountdownBase .CountdownTextBasic,
+.CountdownBase .CountdownTextBackground,
+.CountdownBase .CountdownDigitsBasic 
+{font-size: 13px;}
+.CountdownBase .CountdownTextBasic .HeadingTitle,
+.CountdownBase .CountdownTextBackground .HeadingTitle
+{
+    clear: both;
+    font-weight: bold;
+/*    padding-top:15px;*/
+}
+.CountdownBase .CountdownDigitsBasic .HeadingTitle 
+{clear: both;font-weight: bold;}
+.CountdownBase .CountdownTextBasic .description,
+.CountdownBase .CountdownDigitsBasic .description 
+{ margin: 7px 3px; }
+.CountdownBase .CountdownTextBackground .description
+{ margin: 0px 0px; }
+.CountdownBase .CountdownDigitsBasic .description div {
+    float: left;
+    width: 61px/*68px*/;
+    font-weight: bold;
+}
+
+.CountdownBase .CountdownTextBasic .description div,
+.CountdownBase .CountdownTextBackground .description div {
+    float: left;
+    width: 41px;
+    font-weight: bold;
+}
+.CountdownBase .CountdownTextBackground .description .seconds {
+    width: 31px;
+}
+.CountdownBase .CountdownTextBackground .description div {
+    background-color: #D9D9D9;
+}
+
+.CountdownBase .CountdownTextBasic .Countdown,
+.CountdownBase .CountdownTextBackground .Countdown {
+    font-size: 26px;
+}
+
+.CountdownBase .CountdownTextBasic .Countdown .sep
+{
+    margin:0px 4px;
+}
+.CountdownBase .CountdownTextBasic .Countdown .day,
+.CountdownBase .CountdownTextBasic .Countdown .hour,
+.CountdownBase .CountdownTextBasic .Countdown .min,
+.CountdownBase .CountdownTextBasic .Countdown .sec {
+}
+
+
+
+.CountdownBase .CountdownTextBackground .Countdown .sep {
+    padding:4px 0px;
+    background-color: #777;
+}
+.CountdownBase .CountdownTextBackground .Countdown .day {
+    padding:4px 4px;
+    background-color: #292929;
+}
+.CountdownBase .CountdownTextBackground .Countdown .hour,
+.CountdownBase .CountdownTextBackground .Countdown .min,
+.CountdownBase .CountdownTextBackground .Countdown .sec {
+    padding:4px 4px;
+    background-color: #777;
+}
+
+
+.timer-grid{float: left;width: 100%;padding: 3px 0 0 0;color: #000000;font-size: 18px;font-family: arial;font-weight: bold;}
+.timer-list{float: left;width: 100%;padding: 0;color: #000000;font-size: 18px;font-family: arial; font-weight: bold;}
+.timer-view{/*float: left;width: 100%;padding:2px 0 0 0px;*/color: #000000;/*font-size: 40px; font-family:arial;*/font-weight: bold;}
+.timer-view .day   {margin:1px 1px}
+.timer-view .hour  {margin:1px 1px}
+.timer-view .min   {margin:1px 1px}
+.timer-view .sec   {margin:1px 1px}
+.timer-compare{float: left;width: 100%;padding: 0;color: #000000;font-size: 22px;font-family: arial; font-weight: bold;}
+.timerspec{float: left;width: 100%;color: #1E7EC8;font-size: 13px;}
+.timerdate{/*float: left;width: 100%;padding:0 0 3px 0;*/color: #1E7EC8;font-size: 12px;}
+.timerdate .day    {margin:1px 1px; width:20px; text-align: center;}
+.timerdate .hour   {margin:1px 1px;width:20px; text-align: center;}
+.timerdate .min    {margin:1px 1px; width:20px; text-align: center;}
+.timerdate .sec    {margin:1px 1px; width:20px; text-align: center;}

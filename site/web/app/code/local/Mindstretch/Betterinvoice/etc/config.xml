@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <modules>
+        <Mindstretch_Betterinvoice>
+            <version>1.0.0</version>
+        </Mindstretch_Betterinvoice>
+    </modules>
+		 <frontend>
+        <translate>
+            <modules>
+                <translations>
+                    <files>
+                        <default>Mindstretch_BetterInvoice.csv</default>
+                    </files>
+                </translations>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <translations>
+                    <files>
+                        <default>Mindstretch_BetterInvoice.csv</default>
+                    </files>
+                </translations>
+            </modules>
+        </translate>
+    </adminhtml>
+    <global>
+        <models>
+            <sales>
+                  <rewrite>
+			<order_pdf_invoice>Mindstretch_Betterinvoice_Model_Order_Pdf_Invoice</order_pdf_invoice>
+                  </rewrite>
+            </sales>
+            <sales>
+                  <rewrite>
+			<order_pdf_items_invoice_default>Mindstretch_Betterinvoice_Model_Order_Pdf_Items_Invoice_Default</order_pdf_items_invoice_default>
+                  </rewrite>
+            </sales>
+        </models>
+    </global>
+</config>

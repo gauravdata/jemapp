@@ -1,0 +1,476 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+
+<?php
+    /* Count for timer calculation declared here */
+    $count = 1;
+    $_product = $this->getProduct();
+    $toDate = $_product->getSpecialTODate();
+
+    $countdownFormatting    = Mage::getStoreConfig('countdown/general/formating');
+    $countdownDesign        = Mage::getStoreConfig('countdown/general/design');
+    
+    /* Admin Controllers for timer are declared here */
+    $countdownIsActive      = Mage::getStoreConfig('countdown/general/activate');
+    $countdownIsActiveTitle = Mage::getStoreConfig('countdown/general/heading');
+    $countdownIsActiveDesc  = Mage::getStoreConfig('countdown/general/caption');
+    $countdownTitle         = Mage::getStoreConfig('countdown/general/title');
+
+    $countdownTitleDay  = Mage::getStoreConfig('countdown/general/days');
+    $countdownTitleHour = Mage::getStoreConfig('countdown/general/hours');
+    $countdownTitleMin  = Mage::getStoreConfig('countdown/general/mins');
+    $countdownTitleSec  = Mage::getStoreConfig('countdown/general/sec');
+
+    $colorDescription   = Mage::getStoreConfig('countdown/colors/caption'); //
+    $colorCountdown     = Mage::getStoreConfig('countdown/colors/text'); //
+    
+    $colorHeader        = Mage::getStoreConfig('countdown/colors/title'); // first line - title above countdown
+?>
+
+
+
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view hproduct">
+    <div class="product-essential">
+    <form action="<?php echo $this->getAddToCartUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+
+        <div class="product-shop hreview-aggregate">
+            <div class="product-name">
+                <h1 class="item name fn rounded dark"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            </div>
+
+			<div class="product-column">
+				<div class="product-img-box">
+					<?php echo $this->getChildHtml('media') ?>
+				</div>
+				<div class="product-meta-box">
+					<?php echo $this->getChildHtml('description') ?>
+					<ul class="meta">
+						<li><?php echo $this->getReviewsSummaryHtml($_product, false, true)?></li>
+						<!--<li><?php echo $this->getChildHtml('alert_urls') ?></li>-->
+						<li><?php echo $this->getChildHtml('product_type_data') ?></li>
+						<?php if (!$this->hasOptions()):?>
+						<li class="add-to-box">
+							<?php if($_product->isSaleable()): ?>
+								<?php echo $this->getChildHtml('addtocart') ?>
+							<?php endif; ?>
+						</li>
+					<?php endif; ?>
+					</ul>
+					<?php echo $this->getChildHtml('other');?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php if ($toDate && $countdownIsActive): ?>
+
+    <?php 
+    /**
+     * TEXT COUNTDOWN VERSION 
+     */
+    ?>
+
+    <?php if($countdownDesign == Iksanika_Countdown_Model_System_Config_Design::TEXT) : ?>
+
+    
+        <?php if ($_product->getPrice() > $_product->getSpecialPrice()) : ?>
+                <?php if ($_product->getSpecialPrice() != 0 || $_product->getSpecialPrice() != "") : ?>
+                    
+            <div class="CountdownBase Text TextH4">
+                <div class="CountdownTextBasic">
+
+                    <?php if ($countdownIsActiveTitle == 'showall' || $countdownIsActiveTitle == 'viewpage' && $countdownIsActiveTitle != 'hideall' && $countdownTitle != '') : ?>
+                        <div id="heading<?php echo $count; ?>" class="HeadingTitle" style="color:#<?php echo $colorHeader; ?>;"><?php echo $countdownTitle ?></div>
+                    <?php endif; ?>
+                    
+                    <div id="countbox_<?php echo $count; ?>" class="Countdown" style="color: #<?php echo $colorCountdown;?>;"></div>
+                    
+                    <?php if ($countdownIsActiveDesc == 'showall' || $countdownIsActiveDesc == 'viewpage' && $countdownIsActiveDesc != 'hideall') : ?>
+                        <?php /*<div class="clear"></div> */ ?>
+                        <div class="description" id="caption<?php echo $count; ?>" style="color: #<?php echo $colorDescription?>;">
+                            <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC) : ?>
+                            <div class="days"><?php echo $countdownTitleDay?></div>
+                            <?php endif; ?>
+                            <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC) :?>
+                            <div class="hours"><?php echo $countdownTitleHour?></div>
+                            <?php endif; ?>
+                            <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::MIN_SEC) : ?>
+                            <div class="minutes"><?php echo $countdownTitleMin?></div>
+                            <?php endif; ?>
+                            <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::SEC) : ?>
+                            <div class="seconds"><?php echo $countdownTitleSec?></div>
+                            <?php endif; ?>
+                        </div>
+               <?php endif; ?>
+                </div>
+            </div>
+            <?php
+            endif;
+        endif; 
+        ?>
+
+            <?php if ($_product->getPrice() > $_product->getSpecialPrice()) : ?>
+                <?php if ($_product->getSpecialPrice() != 0 || $_product->getSpecialPrice() != "") : ?>
+                    <script type="text/javascript">
+                        var dthen<?php echo $count; ?> = new Date("<?php echo Date("m/d/y", strtotime($toDate)) . ' 11:59:00 PM'; ?>");
+                        start = "<?php echo Date("m/d/y h:i:s A", strtotime(Mage_Core_Model_Locale::date(null, null, "en_US", true))); ?>";
+                        start_date = Date.parse(start);
+                        var dnow<?php echo $count; ?> = new Date(start_date);
+                        if(CountStepper>0)
+                            ddiff= new Date((dnow<?php echo $count; ?>)-(dthen<?php echo $count; ?>));
+                        else
+                            ddiff = new Date((dthen<?php echo $count; ?>)-(dnow<?php echo $count; ?>));
+                        gsecs<?php echo $count; ?> = Math.floor(ddiff.valueOf()/1000);
+                        
+
+                        <?php
+                            $displayFormat = false;
+                            if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC)
+                            {
+                                $displayFormat = "<span class='day'>%%D%%</span><span class='sep'>:</span><span class='hour'>%%H%%</span><span class='sep'>:</span><span class='min'>%%M%%</span><span class='sep'>:</span><span class='sec'>%%S%%</span>";
+                            }else
+                            if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC)
+                            {
+                                $displayFormat = "<span class='hour'>%%H%%</span><span class='sep'>:</span><span class='min'>%%M%%</span><span class='sep'>:</span><span class='sec'>%%S%%</span>";
+                            }else
+                            if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::MIN_SEC)
+                            {
+                                $displayFormat = "<span class='min'>%%M%%</span><span class='sep'>:</span><span class='sec'>%%S%%</span>";
+                            }else
+                            if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::SEC)
+                            {
+                                $displayFormat = "<span class='sec'>%%S%%</span>";
+                            }
+                        ?>
+                        
+                        <?php if($displayFormat) : ?>
+                        DisplayFormat = "<?php echo $displayFormat;?>";
+                        <?php endif;?>
+                        
+                        var iid<?php echo $count; ?> = "countbox_<?php echo $count; ?>";
+                        CountBack(gsecs<?php echo $count; ?>,"countbox_"+j, j);
+                        j++;
+                    </script>
+                    <?php $count = $count + 1; ?>
+                <?php endif;
+            endif;
+        ?>
+
+    <?php endif;?>
+
+
+    <?php 
+    /**
+     * TEXT COUNTDOWN VERSION WITH BACKGROUND
+     */
+    ?>
+
+    <?php if($countdownDesign == Iksanika_Countdown_Model_System_Config_Design::TEXT_BACKGROUND) : ?>
+
+    
+        <?php if ($_product->getPrice() > $_product->getSpecialPrice()) : ?>
+                <?php if ($_product->getSpecialPrice() != 0 || $_product->getSpecialPrice() != "") : ?>
+                    
+            <div class="CountdownBase Text">
+                <div class="CountdownTextBackground">
+
+                    <?php if ($countdownIsActiveTitle == 'showall' || $countdownIsActiveTitle == 'viewpage' && $countdownIsActiveTitle != 'hideall' && $countdownTitle != '') : ?>
+                        <div id="heading<?php echo $count; ?>" class="HeadingTitle" style="color:#<?php echo $colorHeader; ?>;"><?php echo $countdownTitle ?></div>
+                    <?php endif; ?>
+                    
+                    <div id="countbox_<?php echo $count; ?>" class="Countdown" style="color: #<?php echo $colorCountdown;?>;"></div>
+                    
+                    <?php if ($countdownIsActiveDesc == 'showall' || $countdownIsActiveDesc == 'viewpage' && $countdownIsActiveDesc != 'hideall') : ?>
+                        <?php /*<div class="clear"></div> */ ?>
+                        <div class="description" id="caption<?php echo $count; ?>" style="color: #<?php echo $colorDescription?>;">
+                            <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC) : ?>
+                            <div class="days"><?php echo $countdownTitleDay?></div>
+                            <?php endif; ?>
+                            <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC) :?>
+                            <div class="hours"><?php echo $countdownTitleHour?></div>
+                            <?php endif; ?>
+                            <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::MIN_SEC) : ?>
+                            <div class="minutes"><?php echo $countdownTitleMin?></div>
+                            <?php endif; ?>
+                            <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::MIN_SEC ||
+                                     $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::SEC) : ?>
+                            <div class="seconds"><?php echo $countdownTitleSec?></div>
+                            <?php endif; ?>
+                        </div>
+               <?php endif; ?>
+                </div>
+            </div>
+            <?php
+            endif;
+        endif; 
+        ?>
+
+            <?php if ($_product->getPrice() > $_product->getSpecialPrice()) : ?>
+                <?php if ($_product->getSpecialPrice() != 0 || $_product->getSpecialPrice() != "") : ?>
+                    <script type="text/javascript">
+                        var dthen<?php echo $count; ?> = new Date("<?php echo Date("m/d/y", strtotime($toDate)) . ' 11:59:00 PM'; ?>");
+                        start = "<?php echo Date("m/d/y h:i:s A", strtotime(Mage_Core_Model_Locale::date(null, null, "en_US", true))); ?>";
+                        start_date = Date.parse(start);
+                        var dnow<?php echo $count; ?> = new Date(start_date);
+                        if(CountStepper>0)
+                            ddiff= new Date((dnow<?php echo $count; ?>)-(dthen<?php echo $count; ?>));
+                        else
+                            ddiff = new Date((dthen<?php echo $count; ?>)-(dnow<?php echo $count; ?>));
+                        gsecs<?php echo $count; ?> = Math.floor(ddiff.valueOf()/1000);
+                        
+
+                        <?php
+                            $displayFormat = false;
+                            if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC)
+                            {
+                                $displayFormat = "<span class='day'>%%D%%</span><span class='hour'>%%H%%</span><span class='sep'>:</span><span class='min'>%%M%%</span><span class='sep'>:</span><span class='sec'>%%S%%</span>";
+                            }else
+                            if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC)
+                            {
+                                $displayFormat = "<span class='hour'>%%H%%</span><span class='sep'>:</span><span class='min'>%%M%%</span><span class='sep'>:</span><span class='sec'>%%S%%</span>";
+                            }else
+                            if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::MIN_SEC)
+                            {
+                                $displayFormat = "<span class='min'>%%M%%</span><span class='sep'>:</span><span class='sec'>%%S%%</span>";
+                            }else
+                            if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::SEC)
+                            {
+                                $displayFormat = "<span class='sec'>%%S%%</span>";
+                            }
+                        ?>
+                        
+                        <?php if($displayFormat) : ?>
+                        DisplayFormat = "<?php echo $displayFormat;?>";
+                        <?php endif;?>
+                        
+                        var iid<?php echo $count; ?> = "countbox_<?php echo $count; ?>";
+                        CountBack(gsecs<?php echo $count; ?>,"countbox_"+j, j);
+                        j++;
+                    </script>
+                    <?php $count = $count + 1; ?>
+                <?php endif;
+            endif;
+        ?>
+
+    <?php endif;?>
+
+
+
+    <?php 
+    /**
+     * DIGITALS COUNTDOWN VERSION'S
+     */
+    ?>
+
+    <?php if($countdownDesign == Iksanika_Countdown_Model_System_Config_Design::DIGITS_OLD  ||  $countdownDesign == Iksanika_Countdown_Model_System_Config_Design::DIGITS_OLD2): ?>
+
+    <?php
+        $targetTime = strtotime(Date("m/d/y", strtotime($toDate)) . ' 11:59:00 PM');
+        $startTime  = strtotime(Date("m/d/y h:i:s A", strtotime(Mage_Core_Model_Locale::date(null, null, "en_US", true))));
+        $diff   = $targetTime - $startTime;
+        $sec    = $diff % 60;
+        $min    = floor($diff/60) % 60;
+        $hours  = floor($diff/(60*60)) % 24;
+        $days   = floor($diff/(60*60*24)) % 365;
+    ?>
+    <div class="CountdownBase Text TextH4">
+        <div class="CountdownDigitsBasic">
+            <?php if($countdownIsActiveTitle == 'showall' || $countdownIsActiveTitle == 'viewpage' && $countdownIsActiveTitle != 'hideall' && $countdownTitle != '') :?>
+            <div class="HeadingTitle" id="heading<?php echo $count; ?>" style="color:#<?php echo $colorHeader?>;"><?php echo $countdownTitle ?></div>
+            <?php endif; ?>
+            
+            <?php
+                $displayFormat = false;
+                if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC)
+                {
+                    $displayFormat = "99.23:59:59";
+                    $displayTime = ($days < 10 ? '0':'').$days.'.'.($hours < 10 ? '0':'').$hours.':'.($min < 10 ? '0':'').$min.':'.($sec < 10 ? '0':'').$sec;
+                }else
+                if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC)
+                {
+                    $displayFormat = "23:59:59";
+                    $displayTime = ($hours < 10 ? '0':'').$hours.':'.($min < 10 ? '0':'').$min.':'.($sec < 10 ? '0':'').$sec;
+                }else
+                if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::MIN_SEC)
+                {
+                    $displayFormat = "59:59";
+                    $displayTime = ($min < 10 ? '0':'').$min.':'.($sec < 10 ? '0':'').$sec;
+                }else
+                if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::SEC)
+                {
+                    $displayFormat = "59";
+                    $displayTime = ($sec < 10 ? '0':'').$sec;
+                }else
+                {
+                    $displayFormat = "99.23:59:59";
+                    $displayTime = ($days < 10 ? '0':'').$days.'.'.($hours < 10 ? '0':'').$hours.':'.($min < 10 ? '0':'').$min.':'.($sec < 10 ? '0':'').$sec;
+                }
+            ?>
+            
+            <?php if($countdownDesign == Iksanika_Countdown_Model_System_Config_Design::DIGITS_OLD) : ?>
+            <span class="counter counter-analog" data-direction="down" data-format="<?php echo $displayFormat;?>"><?php echo $displayTime;?></span>
+            <?php endif;?>
+            <?php if($countdownDesign == Iksanika_Countdown_Model_System_Config_Design::DIGITS_OLD2) : ?>
+            <span class="counter counter-analog2" data-direction="down" data-format="<?php echo $displayFormat;?>"><?php echo $displayTime;?></span>
+            <?php endif;?>
+                
+            <?php if($countdownIsActiveDesc == 'showall' || $countdownIsActiveDesc == 'viewpage') :?>
+            <div class="description" style="color: #<?php echo $colorDescription?>;">
+                <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC) : ?>
+                <div class="days"><?php echo $countdownTitleDay?></div>
+                <?php endif; ?>
+                <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC ||
+                            $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC) :?>
+                <div class="hours"><?php echo $countdownTitleHour?></div>
+                <?php endif; ?>
+                <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC ||
+                            $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC ||
+                            $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::MIN_SEC) : ?>
+                <div class="minutes"><?php echo $countdownTitleMin?></div>
+                <?php endif; ?>
+                <?php if($countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::DAYS_HOURS_MIN_SEC ||
+                            $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::HOURS_MIN_SEC ||
+                            $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::MIN_SEC ||
+                            $countdownFormatting == Iksanika_Countdown_Model_System_Config_Formating::SEC) : ?>
+                <div class="seconds"><?php echo $countdownTitleSec?></div>
+                <?php endif; ?>
+            </div>
+            <?php endif;?>
+        </div>
+    </div>
+    <script>
+        $j('.counter').counter();
+    </script>
+    <?php endif; ?>
+<?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+						<?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+					<?php endif;?>
+
+					<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+						<?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+					<?php endif;?>
+				</div>
+				<div class="clear">&nbsp;</div>
+			</div>
+			<div class="clear">&nbsp;</div>
+        </div>
+        
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+            var productAddToCartForm = new VarienForm('product_addtocart_form');
+            productAddToCartForm.submit = function(){
+                    if (this.validator.validate()) {
+                            this.form.submit();
+							return true;
+                    }
+					return false;
+            }.bind(productAddToCartForm);
+    //]]>
+    </script>
+    </div>
+	<div class="product-collateral">
+		<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+			<?php if ($alias == 'description') continue; ?>
+			<div class="box-collateral <?php echo "box-{$alias}"?>">
+				<?php if ($title = $this->getChildData($alias, 'title')):?>
+					<h2 class="rounded dark"><?php echo $this->escapeHtml($title); ?></h2>
+				<?php endif;?>
+				<?php echo $html; ?>
+			</div>
+		<?php endforeach;?>
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+    </div>
+</div>

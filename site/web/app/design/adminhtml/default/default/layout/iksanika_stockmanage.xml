@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addJs">
+                <script>Iksanika/stockmanage/jquery-1.9.1.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>Iksanika/stockmanage/stockupdater.js</script>
+            </action>
+            <action method="addJs">
+                <script>Iksanika/stockmanage/stockgrid.js</script>
+            </action> 
+            <action method="addJs">
+                <script>Iksanika/stockmanage/egsupplemental.js</script>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>Iksanika/stockmanage/resources/css/stockupdater.css</name>
+            </action>
+        </reference> 
+    </default>
+</layout>   

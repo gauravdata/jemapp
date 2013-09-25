@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <aquive translate="label">
+            <label>Aquive Media</label>
+            <sort_order>310</sort_order>
+        </aquive>
+    </tabs>
+    <sections>
+        <orderlabel translate="label">
+            <label>AquiveMedia - Order Labels</label>
+            <tab>aquive</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <layout translate="label">
+                            <label>Label Layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>orderlabel/system_config_source_general_layout</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </layout>
+                        <buttonlocation translate="label">
+                            <label>Button Location</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>orderlabel/system_config_source_general_buttonlocation</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>yw2kad
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </buttonlocation>
+                        <postcodeformat translate="label">
+                            <label><![CDATA[Postcode & City Format]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>orderlabel/system_config_source_general_postcodeformat</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>yw2kad
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </postcodeformat>
+                        <localscript translate="label comment">
+                            <label>Use Local Script Files</label>
+                            <comment>Will use files hosted on the Dymo servers if not enabled</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </localscript>
+                    </fields>
+                </general>
+                <sender translate="label">
+                    <label>Sender Label Settings</label>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Print Sender Label</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enabled>
+                        <name translate="label">
+                            <label>Sender Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </name>
+                        <address translate="label">
+                            <label>Sender Address</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </address>
+                        <city translate="label">
+                            <label>Sender City</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </city>
+                        <postcode translate="label">
+                            <label>Sender Postcode</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </postcode>
+                        <country translate="label">
+                            <label>Sender Country</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </country>
+                    </fields>
+                </sender>
+
+                <recipient translate="label">
+                    <label>Recipient Label Settings</label>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <print_country translate="label">
+                            <label>Print Country</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </print_country>
+                        <print_state translate="label">
+                            <label>Print State</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </print_state>
+                        <print_phone translate="label">
+                            <label>Print Phonenumber</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </print_phone>
+                        <print_company translate="label">
+                            <label>Print Company</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </print_company>
+                        <print_company_prefix translate="label">
+                            <label>Company Prefix</label>
+                            <comment>This will prefix the customer's name. e.g. att. J. Doe.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <print_company>1</print_company>
+                            </depends>
+                        </print_company_prefix>
+                    </fields>
+                </recipient>
+            </groups>
+        </orderlabel>
+    </sections>
+</config>

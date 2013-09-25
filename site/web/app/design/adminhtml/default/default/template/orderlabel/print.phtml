@@ -1,0 +1,101 @@
+<?php
+/**
+ * @var $this AquiveMedia_Orderlabel_Block_Adminhtml_Print
+ */
+?>
+<div class="content-header">
+    <h3 class="icon-head head-sales-order"><?php echo $this->getPageTitle();?></h3>
+</div>
+<?php if (Mage::helper('orderlabel')->isActiveLayoutValid()): ?>
+<div>
+    <div class="label-previews">
+        <?php foreach ($this->getAddresses() as $address): ?>
+        <div class="label-preview">
+            <div class="label-text">
+                <?php foreach ($address as $type => $value): ?>
+                    <?php if($value != null): ?>
+                        <span><?php echo $value;?></span><br/>
+                    <?php endif; ?>
+                <?php endforeach;?>
+            </div>
+        </div>
+        <?php endforeach;?>
+        <div class="clear"></div>
+    </div>
+    <br/>
+
+    <div class="printControls">
+        <button class="scalable back"
+                onClick="setLocation('<?php echo Mage::getUrl('adminhtml/sales_order', array('_current' => true)); ?>');return false;">
+            <span><?php echo Mage::helper('orderlabel')->__('Back'); ?></span>
+        </button>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <button id="printButton">Print Labels On</button>
+        <select id="printersSelect"></select>
+    </div>
+
+    <div id="extra-info">
+        <div id="settings-info">
+            <table>
+                <thead>
+                <tr>
+                    <th><?php echo Mage::helper('orderlabel')->__('Selected Label');?></th>
+                    <th><?php echo Mage::helper('orderlabel')->__('Sender Label Printing');?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><?php echo Mage::helper('orderlabel')->getFormatedLayout();?></td>
+                    <td><?php
+                        if (Mage::helper('orderlabel')->isSenderEnabled()) {
+                            echo Mage::helper('orderlabel')->__('Enabled');
+                        } else {
+                            echo Mage::helper('orderlabel')->__('Disabled');
+                        }
+                        ?>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="printer-info">
+        </div>
+    </div>
+</div>
+<?php
+    $senderDetails = Mage::helper('orderlabel')->getSenderDetails(true);
+    if ($senderDetails === null) {
+        // Null conversion for javascript
+        $senderDetails = 'null';
+    }
+    ?>
+<?php echo Mage::helper('orderlabel')->getScriptHtml(); ?>
+
+<script type="text/javascript" language="javascript">
+    var senderText = '<?php echo Mage::helper('orderlabel')->__('Sender');?>';
+    var addressData = <?php echo $this->getAddresses(true);?>;
+    var senderData = <?php echo $senderDetails;?>;
+    var labelXml = null;
+    var labelUrl = '<?php echo Mage::helper('orderlabel')->getActiveLabelLayoutUrl(); ?>';
+</script>
+<?php else: ?>
+<ul class="messages">
+    &nbsp;
+    <li class="notice-msg">
+        <ul>
+            <li>
+                <span>
+                    <?php echo Mage::helper('orderlabel')->__('The module has not been configured yet.');?><br/>
+                    <?php echo Mage::helper('orderlabel')->__('There is no active layout.');?><br/>
+                </span>
+                <span>
+                    <?php echo Mage::helper('orderlabel')->__('Click');?>&nbsp;
+                    <a href="<?php echo Mage::helper("adminhtml")->getUrl("adminhtml/system_config/edit/", array("section" => "orderlabel"));?>">
+                        <?php echo Mage::helper('orderlabel')->__('here');?></a>&nbsp;
+                    <?php echo Mage::helper('orderlabel')->__('to go to the configuration manager.');?>
+                </span>
+            </li>
+        </ul>
+    </li>
+</ul>
+<?php endif; ?>

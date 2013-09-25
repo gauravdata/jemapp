@@ -1,0 +1,37 @@
+#printer-info {
+}
+
+#extra-info {
+    color: #777;
+}
+
+#extra-info th {
+    width: 200px;
+}
+
+#settings-info{
+    margin-bottom: 10px;
+}
+
+.label-previews {
+    width: 80%;
+}
+
+.label-preview {
+    min-width: 180px;
+    float: left;
+    margin: 0 10px 10px 0;
+    padding: 10px;
+    border: 1px solid #777;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.label-text{
+    display: inline-block;
+    text-align: left;
+}
+
+.printControls{
+    margin-bottom: 25px;
+}

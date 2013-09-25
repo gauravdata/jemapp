@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mindstretch_Betterinvoice>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Mindstretch_Betterinvoice>
+    </modules>
+</config>

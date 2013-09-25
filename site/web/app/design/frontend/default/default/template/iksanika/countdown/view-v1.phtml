@@ -1,0 +1,96 @@
+<?php
+    /* Count for timer calculation declared here */
+    $count = 1;
+    $_product = $this->getProduct();
+    $toDate = $_product->getSpecialTODate();
+
+    /* Admin Controllers for timer are declared here */
+    $timer_active       = Mage::getStoreConfig('countdown/general/activate');
+    $timer_head_active  = Mage::getStoreConfig('countdown/general/heading');
+    $timer_desc_active  = Mage::getStoreConfig('countdown/general/caption');
+    $timer_head         = Mage::getStoreConfig('countdown/general/title');
+
+    $desc_color         = Mage::getStoreConfig('countdown/colors/caption');
+    $timer_color        = Mage::getStoreConfig('countdown/colors/text');
+    $head_color         = Mage::getStoreConfig('countdown/colors/title');
+?>
+
+
+<?php $_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+
+<?php /* <ul class="add-to-links"> */ ?>
+<?php if ($this->helper('wishlist')->isAllow()) : ?>
+    <div class="addToFaves" style="padding-top: 10px;"> 
+    <?php /* <a href="<?php echo $_wishlistSubmitUrl ?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a> */ ?>
+        <a href="<?php echo $_wishlistSubmitUrl ?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;"  class="btn secondary gae-click*Product-Page*PrForm*Add-To-Favorites LayoutAlign-Center" id="favorites"><?php echo $this->__('Add to Wishlist') ?></a>
+    </div>
+    <?php endif; ?>
+
+<?php if ($toDate): ?>
+
+    <!--Condition for Timer Controllers goes here-->
+    <div class="">
+    <?php if ($timer_active == 1) : ?>
+        <?php if ($_product->getPrice() > $_product->getSpecialPrice()) : ?>
+                <?php if ($_product->getSpecialPrice() != 0 || $_product->getSpecialPrice() != "") : ?>
+                    <?php if ($timer_head_active == 'showall' || $timer_head_active == 'viewpage' && $timer_head_active != 'hideall' && $timer_head != '') : ?>
+                        <div id="heading<?php echo $count; ?>" class="Text TextH4" style="color:#<?php echo $head_color; ?>; /*font-size: 18px; font-weight:bold;*/padding-top:15px;clear: both;"><?php echo $timer_head ?></div>
+                    <?php endif; ?>
+                    <div id="countbox_<?php echo $count; ?>" class="timer-view Text" style="font-size: 24px;"></div>
+                    <?php if ($timer_desc_active == 'showall' || $timer_desc_active == 'viewpage' && $timer_desc_active != 'hideall') : ?>
+                        <div class="clear"></div>
+                        <div class='timerdate' id="caption<?php echo $count; ?>  Text TextH4">
+                        <?php /*
+                          <span class='hour' style='margin:1px 23px 0 0px'><?php echo $this->__('Days') ?></span>
+                          <span class='hour' style='margin:1px 19px 0 15px'><?php echo $this->__('Hours') ?></span>
+                          <span class='min'  style='margin:1px 20px 0 7px'><?php echo $this->__('Minutes') ?></span>
+                          <span class='sec' style='margin:1px 0 0 2px'><?php echo $this->__('Seconds') ?></span></div>
+                         */ ?>
+                            <span class='hour Text TextH5' style='/*margin:1px 23px 0 0px*/'><?php echo $this->__('Дней') ?></span>
+                            <span class='hour Text TextH5' style='margin: 1px 15px 0 15px'><?php echo $this->__('Час') ?></span>
+                            <span class='min Text TextH5'  style='margin: 1px 10px 0 0px'><?php echo $this->__('Мин') ?></span>
+                            <span class='sec Text TextH5' style='margin: 1px 0 0 5px'><?php echo $this->__('Сек') ?></span></div>
+                <?php endif;
+            endif;
+        endif; ?>
+
+            <?php if ($_product->getPrice() > $_product->getSpecialPrice()) : ?>
+                <?php if ($_product->getSpecialPrice() != 0 || $_product->getSpecialPrice() != "") : ?>
+                    <script type="text/javascript">
+                        var dthen<?php echo $count; ?> = new Date("<?php echo Date("m/d/y", strtotime($toDate)) . ' 11:59:00 PM'; ?>");
+                        start = "<?php echo Date("m/d/y h:i:s A", strtotime(Mage_Core_Model_Locale::date(null, null, "en_US", true))); ?>";
+                        start_date = Date.parse(start);
+                        var dnow<?php echo $count; ?> = new Date(start_date);
+                        if(CountStepper>0)
+                            ddiff= new Date((dnow<?php echo $count; ?>)-(dthen<?php echo $count; ?>));
+                        else
+                            ddiff = new Date((dthen<?php echo $count; ?>)-(dnow<?php echo $count; ?>));
+                        gsecs<?php echo $count; ?> = Math.floor(ddiff.valueOf()/1000);
+
+                        var iid<?php echo $count; ?> = "countbox_<?php echo $count; ?>";
+                        CountBack(gsecs<?php echo $count; ?>,"countbox_"+j, j);
+                        j++;
+                    </script>
+                    <?php $count = $count + 1; ?>
+                <?php endif;
+            endif;
+        endif; ?>
+    </div>
+    <!--Dynamic style changes goes here-->
+    <style>
+        .timer-view
+        {
+            /*float: left;width: 100%;padding:0;*/
+            color: #<?php echo $timer_color; ?>;
+            /*font-size: 40px; font-family: arial;*/
+            font-weight: bold;
+        }
+        .timerdate
+        {
+            /*float: left;width: 100%;padding:0 0 15px 10px;*/
+            color: #<?php echo $desc_color; ?>;
+            font-size: 13px;
+        }
+    </style>
+
+<?php endif; ?>

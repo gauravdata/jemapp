@@ -1,0 +1,16 @@
+<?php
+$senderDetails = Mage::helper('orderlabel')->getSenderDetails(true);
+if ($senderDetails === null) {
+    // Null conversion for javascript
+    $senderDetails = 'null';
+}
+?>
+<?php echo Mage::helper('orderlabel')->getScriptHtml();?>
+<script type="text/javascript" language="javascript">
+    var senderText = '<?php echo Mage::helper('orderlabel')->__('Sender');?>';
+    var addressData = Array(<?php echo $this->getShippingAddressJSON();?>);
+    var senderData = <?php echo $senderDetails?>;
+    var labelXml = null;
+    var labelUrl = '<?php echo Mage::helper('orderlabel')->getActiveLabelLayoutUrl(); ?>';
+    var moduleReady = <?php echo Mage::helper('orderlabel')->isActiveLayoutValid() ? 'true' : 'false';?>;
+</script>
