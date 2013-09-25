@@ -1,1 +1,0 @@
-ALTER TABLE `qu_g_authusers` ADD `notificationemail` VARCHAR( 80 ) NULL;

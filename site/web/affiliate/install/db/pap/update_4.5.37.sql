@@ -1,1 +1,0 @@
-ALTER TABLE qu_pap_clicks ADD INDEX IDX_qu_pap_clicks_dateinserted (dateinserted);

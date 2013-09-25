@@ -1,1 +1,0 @@
-ALTER TABLE `qu_g_mail_templates` CHANGE `userid` `userid` VARCHAR(8) NULL DEFAULT NULL

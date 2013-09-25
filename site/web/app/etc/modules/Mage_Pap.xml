@@ -1,9 +1,0 @@
-<config>
-	<modules>
-		<Mage_Pap>
-			<active>true</active>
-			<codePool>local</codePool>
-			<version>1.3.6</version>
-		</Mage_Pap>
-	</modules>
-</config>

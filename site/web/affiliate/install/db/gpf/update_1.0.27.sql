@@ -1,1 +1,0 @@
-ALTER TABLE qu_g_logs ADD rtype CHAR(1) ASCII AFTER level;

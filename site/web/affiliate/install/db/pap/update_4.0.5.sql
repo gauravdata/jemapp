@@ -1,1 +1,0 @@
-UPDATE qu_g_filters SET userid = NULL WHERE preset = 'Y';

@@ -1,1 +1,0 @@
-UPDATE qu_pap_banners SET data3 = 'F' WHERE rtype = 'H' AND data3 = 'Y';

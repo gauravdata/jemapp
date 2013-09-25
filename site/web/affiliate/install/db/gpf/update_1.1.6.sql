@@ -1,1 +1,0 @@
-ALTER TABLE  `qu_g_mail_templates` ADD  `userid` VARCHAR( 8 ) NOT NULL
