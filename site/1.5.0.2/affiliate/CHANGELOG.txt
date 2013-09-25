@@ -1,0 +1,5 @@
+This is Post Affiliate Pro (http://www.qualityunit.com/postaffiliatepro)
+Affiliate software from Quality Unit (http://www.qualityunit.com)
+
+CHANGE LOG is updated online in our bugtracker:
+http://bugs.qualityunit.com/mantis/changelog_page.php

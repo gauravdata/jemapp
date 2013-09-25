@@ -1,0 +1,19 @@
+<!-- installer_header -->
+<div class="Header">
+    <div class="HeaderInfo">
+        <div class="HeaderInfoLeft">
+            <strong><a class="Logo" title="PostAffiliatePro" href="index.php"/></a></strong>
+        </div>
+        <div class="HeaderInfoRight">
+            v. {widget id="VersionHeader" class="Inliner"}
+        </div>
+    </div>
+    {widget id="ScenarioName"}
+    <div class="ProgressBar">
+        <div class="ProgressBarLeft">
+          <div class="ProgressBarRight">
+            {widget id="ProgressSteps"}
+          </div>     
+        </div>
+    </div>
+</div>

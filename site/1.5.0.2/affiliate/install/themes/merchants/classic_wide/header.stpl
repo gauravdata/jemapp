@@ -1,0 +1,16 @@
+<!-- header -->
+<div class="Header">
+	<div class="HeaderInfo">		
+		<a class="Logo" title="{$programName}" href="index.php"><img src="{$programLogo}" class="LogoImage"/></a>
+		<div style="position: absolute; right: 0px;">{$quChatButton}</div>
+	</div>
+	<div class="Navigation">
+		<div class="NavigationLeft">
+			<div class="NavigationRight">
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

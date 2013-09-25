@@ -1,0 +1,11 @@
+##Dear## {$firstname} {$lastname},<br>
+<br>
+##The following campaigns have been suspended.##<br>
+<br>
+<span style="font-weight: bold;">##Suspended campaigns##</span>:<br>
+{foreach from=$suspendedcampaigns item=campaign}
+{$campaign.name}<br>
+{/foreach}
+<br>
+##Sincerely,##<br>
+##Your Affiliate manager##

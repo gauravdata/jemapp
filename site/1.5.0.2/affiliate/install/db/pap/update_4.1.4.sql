@@ -1,0 +1,1 @@
+ALTER TABLE qu_pap_transactions CHANGE refererurl refererurl TEXT ASCII;

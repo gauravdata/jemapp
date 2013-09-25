@@ -1,0 +1,1 @@
+TRUNCATE qu_pap_visitors;

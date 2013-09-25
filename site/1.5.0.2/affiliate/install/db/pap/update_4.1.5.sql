@@ -1,0 +1,2 @@
+ALTER TABLE `qu_pap_payout` CHANGE `affiliatenote` `affiliatenote` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `qu_pap_payouthistory` CHANGE `affiliatenote` `affiliatenote` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;  

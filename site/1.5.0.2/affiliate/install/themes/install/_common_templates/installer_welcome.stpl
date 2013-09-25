@@ -1,0 +1,10 @@
+<!-- update_check_requirements -->
+<p>
+##Thank you for choosing Post Affiliate Pro! We hope you have as much fun using this
+program as we did creating it.##
+</p>
+
+{server_widget class="Pap_Install_Ui_CheckRequirements"}
+{server_widget class="Pap_Install_Ui_RecommendedSettings"}
+
+{widget id='Check'}

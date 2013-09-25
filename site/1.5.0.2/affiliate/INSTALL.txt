@@ -1,0 +1,4 @@
+Post Affiliate Pro installation
+
+For details about installation read:
+http://support.qualityunit.com/knowledgebase/post-affiliate-pro/installation-and-upgrade/clean-installation.html

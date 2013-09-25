@@ -1,0 +1,11 @@
+<!-- account_topmenu  -->
+<div class="Navigation">
+	<div class="NavigationLeft">
+		<div class="NavigationRight">
+			<ul class="nav">
+				<li><a href="index.php">##Login##</a></li>
+				<li><a href="signup.php">##Join##</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

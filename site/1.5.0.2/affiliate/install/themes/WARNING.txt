@@ -1,0 +1,7 @@
+Please DO NOT modify content of standard templates.
+
+All modifications in standard templates will be lost after
+software update.
+
+If you need to make customization, please create new your own
+theme (you can create it by copying existing one).

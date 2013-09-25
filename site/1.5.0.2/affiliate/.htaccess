@@ -1,0 +1,12 @@
+# Start Post Affiliate Pro Code
+
+<ifModule mod_rewrite.c>
+
+RewriteEngine on
+
+RewriteRule ^sites/([^/]+)/([^/]+)/(.*) scripts/page.php?a_aid=$2&a_bid=$1&a_file=$3 [L,QSA]
+RewriteRule ^sites/([^/]+)/(.*) scripts/page.php?a_aid=$2&a_bid=$1&a_redir=Y [L,QSA]
+
+</ifModule>
+
+# End of Post Affiliate Site Pro Code

@@ -1,0 +1,9 @@
+<font size="2">
+<span style="font-family: Arial;">##Dear## {$firstname} {$lastname},</span><br/><br/>
+<span style="font-family: Arial;">##I would like to let you know that we paid your commissions earned in our affiliate program.##</span><br/><br/><strong style="font-family: Arial;">.:Payout preview:.</strong><br/><br/>
+<span style="font-family: Arial;">##Date##: </span><strong style="font-family: Arial;">{$date}</strong><br/>
+<span style="font-family: Arial;">##Amount payed##: </span><strong style="font-family: Arial;">{$payment|currency}</strong><br/>
+<span style="font-family: Arial;">##Payout method##: </span><strong style="font-family: Arial;">{$payoutmethod}</strong><br/><br/>
+<span style="font-family: Arial;">##Sincerely##,</span><br/><br/>
+<span style="font-family: Arial;">##Your Affiliate manager##</span>
+</font>

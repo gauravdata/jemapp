@@ -1,0 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta name="robots" content="none"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <title>/*{$name}*/</title>
+    </head>
+    <body>
+        <script src="http://gmodules.com/ig/ifr?url=/*{$url}*/&amp;synd=open&amp;w=/*{$panelWidth}*/&amp;h=/*{$panelHeight}*/&amp;title=&amp;border=%23ffffff%7C3px%2C0px+solid+%23999999&amp;output=js/*{foreach from=$properties item=property}*/&amp;up_/*{$property->getName()}*/=/*{$property->getValue()|escape}*//*{/foreach}*/"></script>
+    </body>
+</html>

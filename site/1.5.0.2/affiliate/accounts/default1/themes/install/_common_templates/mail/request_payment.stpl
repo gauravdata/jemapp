@@ -1,0 +1,17 @@
+<font size="2">
+<span style="font-family: Arial;">##Dear## {$accountname},</span><br><br>
+<span style="font-family: Arial;">##I'm sending you proforma invoice for ##  {$datefrom} - {$dateto}</span>
+</font>
+<font size="2"><strong style="font-family: Arial;">{$amount|currency}</strong></font>
+<br><br>
+<font size="2"><strong style="font-family: Arial;">.:##Request payment##:.</strong><br><br></font>
+<font size="2"><span style="font-family: Arial;">##Amount##: </span><strong style="font-family: Arial;">{$amount|currency}</strong></font><br>
+<font size="2"><span style="font-family: Arial;">##Date from##: </span><strong style="font-family: Arial;">{$datefrom}</strong><br></font>
+<font size="2"><span style="font-family: Arial;">##Date to##: </span><strong style="font-family: Arial;">{$dateto}</strong></font><br>
+<font size="2"><span style="font-family: Arial;">##Due date##: </span><strong style="font-family: Arial;">{$duedate}</strong></font><br>
+<font size="2"><span style="font-family: Arial;">##Proforma invoice##: </span><br><strong style="font-family: Arial;">{$proformainvoice}</strong></font>
+<br><br>
+<font size="2">
+<span style="font-family: Arial;">##Sincerely##,</span><br><br>
+<span style="font-family: Arial;">##Your Affiliate Network Manager##</span>
+</font>

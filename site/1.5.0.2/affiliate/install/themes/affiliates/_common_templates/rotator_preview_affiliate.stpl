@@ -1,0 +1,5 @@
+<!-- rotator_preview_affiliate -->
+<div onClick="var banners = document.getElementById('RotatorsPreview{$id}'); if(banners.style['display'] == 'none') banners.style['display'] = 'block'; else banners.style['display'] = 'none';" style="cursor: pointer">
+    ##Rotator (Click to show rotated banners)##
+</div><br>
+<div id="RotatorsPreview{$id}" style="display:block">{$banners}</div>

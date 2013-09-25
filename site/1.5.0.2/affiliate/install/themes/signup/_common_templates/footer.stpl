@@ -1,0 +1,15 @@
+<!-- footer -->
+<div class="cleaner"></div>
+<div class="Footer">
+	<div class="FooterLeft">
+		<div class="FooterRight">
+			<div class="Copyright">{$papCopyrightText}</div>
+		</div>
+	</div>
+</div>
+
+<script id="pap_x2s6df8d" src="../scripts/clickjs.php" type="text/javascript">
+</script>
+<script type="text/javascript">
+papTrack();
+</script>

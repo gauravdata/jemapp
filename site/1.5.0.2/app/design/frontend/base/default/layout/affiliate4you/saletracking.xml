@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<layout>
+    
+    <checkout_onepage_success>
+        <reference name="before_body_end">
+            <block type="affiliate4you/trackingcode" name="affiliate4you_saletracking" as="affiliate4you.saletracking" />
+        </reference>
+    </checkout_onepage_success>
+    
+    <checkout_multishipping_success>
+        <reference name="before_body_end">
+            <block type="affiliate4you/trackingcode" name="affiliate4you_saletracking" as="affiliate4you.saletracking" />
+        </reference>
+    </checkout_multishipping_success>
+    
+</layout>

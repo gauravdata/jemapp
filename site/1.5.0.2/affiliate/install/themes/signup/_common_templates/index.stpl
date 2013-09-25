@@ -1,0 +1,46 @@
+<!-- index -->
+<div class="MainPanel">
+<div class="ContentLeft">
+<div class="ContentRight">
+<div class="MainInfoContent">
+
+<div class="login-box-white"><div class="login-box">{include file='join_now.stpl'}</div></div>
+<h2 class="first">Make $50 commission for all products!</h2>
+<p>Not only can you join our team and help spread the word about your favorite products, you can get rewarded for your efforts. 
+Our system tracks referrals and pays top dollar for every new client you send our way. </p>
+<h2>High Conversion Rate = More Money.</h2>
+<p>
+Our website and plans generate one of the highest conversion rates in the industry.  
+Our high conversion rates mean that the people who you send here are more likely to signup for hosting.  
+Of course we can't prove that either, but if you don't trust us, why would you want to refer people here?
+</p>
+<h2>How does it work?</h2>
+<p>It couldn't be simpler! We've streamlined our entire affiliate process to ensure ease of use, 
+while still maintaining extremely accurate tracking methods. The process is as follows:</p>
+<ol>
+    <li>Visitor clicks on an affiliate link on your site or in an email.</li>
+    <li>The visitors IP is logged and a cookie is placed in their browser for tracking purposes.</li>
+    <li>The visitor browses our site, and may decide to order.</li>
+    <li>If the visitor orders (the order need not be placed during the same browser session--cookies and IPs are stored indefinitely), the order will be registered as a sale for you.</li>
+    <li>We will review and approve the sale.</li>
+    <li>You will receive commission payouts on the 15th of every month (if your balance is at least $100) via PayPal.</li>
+</ol>
+<p><strong>That's it! You send us business, we send you money!</strong></p>
+<h2>Rules and Requirements</h2>
+<p>We do have some basic ground rules for the program, so please read before signing     up:</p>
+<ul>
+    <li>All participants must have a PayPal account (in order to receive payouts).</li>
+    <li>All participants in the US must enter a US Social Security or Taxpayer ID number. International customers simply enter &quot;International&quot; in this field.</li>
+    <li>You may NOT receive credit for referring yourself.</li>
+</ul>
+<p>Participants caught violating or attempting to circumvent these rules will have all affiliate credit voided and will not receive payouts. Additionally, they will be banned from further participation in our affiliate program.</p>
+<h2>Ready to join?</h2>
+<p>Signing up and getting your account configured couldn't be easier. You can be referring business our way in as little as five minutes.</p>
+<p><a href="./signup.php">&raquo; click here to join</a></p>
+
+
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>

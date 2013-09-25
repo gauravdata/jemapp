@@ -1,0 +1,16 @@
+<font size="2">
+<span style="font-family: Arial;">##Dear merchant##,</span><br/><br/>
+<span style="font-family: Arial;">##Affiliate## {$firstname} {$lastname} ##joined your campaign## {$campaignname}.</span><br/>
+<span style="font-family: Arial;">##This affiliate is waiting for your approval.##</span><br/><br/>
+
+<span style="font-family: Arial;">##If you want to APPROVE affiliate to join camapign click here##: </span><br/>
+<span style="font-family: Arial;"><a href="{$affiliate_join_campaign_approve_link}">{$affiliate_join_campaign_approve_link}</a></span>
+<br/><br/>
+
+<span style="font-family: Arial;">##If you want to DECLINE affiliate to join camapign click here##: </span><br/>
+<span style="font-family: Arial;"><a href="{$affiliate_join_campaign_decline_link}">{$affiliate_join_campaign_decline_link}</a></span>
+<br/><br/>
+
+<span style="font-family: Arial;">##Regards##,</span><br/><br/>
+<span style="font-family: Arial;">##Your## {$postAffiliatePro}.</span>
+</font>

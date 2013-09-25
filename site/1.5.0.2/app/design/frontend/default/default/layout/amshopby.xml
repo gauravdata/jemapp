@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<layout>
+    <amshopby_index_index>
+        <reference name="left">
+           <block type="catalog/layer_view" name="catalog.leftnav" before="-" template="catalog/layer/view.phtml"/> 
+        </reference>
+        <reference name="content">
+            <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
+                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </block>
+            </block>
+    		<block type="amshopby/top" name="amshopby.top" before="category.products" template="amshopby/top.phtml"/>
+        </reference>
+    </amshopby_index_index>
+
+    <catalog_category_layered> 
+        <reference name="content">
+                <block type="amshopby/top" name="amshopby.top" before="category.products" template="amshopby/top.phtml"/>
+        </reference>
+    </catalog_category_layered> 
+
+<!-- comment this out if you need the navigation on the product page
+     <catalog_product_view>
+        <reference name="right">
+           <block type="catalog/layer_view" name="catalog.leftnav" before="-" template="catalog/layer/view.phtml"/> 
+        </reference>
+     </catalog_product_view>
+-->
+    
+</layout>

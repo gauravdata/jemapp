@@ -1,0 +1,14 @@
+<!-- tour -->
+<div class="MainPanel">
+<div class="MainContainer">
+<div class="MainInfoContent">
+
+<div class="JoinNowBox"><div class="JoinNowBoxIn">{include file='join_now.stpl'}</div></div>
+<h2 class="first">Affiliate program tour</h2>
+<p>to be added</p>
+
+<div class="clear"></div>
+</div>
+</div>
+</div>
+

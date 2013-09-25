@@ -1,0 +1,2 @@
+ALTER TABLE qu_pap_transactions CHANGE firstclickip firstclickip VARCHAR(39) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE qu_pap_transactions CHANGE lastclickip lastclickip VARCHAR(39) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;

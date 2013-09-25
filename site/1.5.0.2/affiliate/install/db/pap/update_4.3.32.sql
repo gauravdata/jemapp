@@ -1,0 +1,1 @@
+INSERT INTO qu_pap_impressions (userid,campaignid,bannerid,parentbannerid,countrycode,cdata1,cdata2,channel,dateinserted,raw,uniq) SELECT userid, campaignid, bannerid, parentbannerid, countrycode, cdata1, cdata2, channel, CONCAT(DATE(day), ' 22:00:00') as dateinserted, raw_22 as raw, unique_22 as uniq FROM qu_pap_dailyimpressions WHERE raw_22 > 0 OR unique_22 > 0;

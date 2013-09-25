@@ -1,0 +1,15 @@
+<html>
+    <head>
+    </head>
+    <body onLoad="javascript: document.postForm.submit();">
+        <form name="postForm" action="{$url}" method="post">
+            {foreach from=$fields item=field}
+                <input type="hidden" name="{$field.name}" value="{$field.value|escape}">
+                <input type="hidden" name="{$field.name}Error" value="{$field.error|escape}">
+            {/foreach}
+            <input type="hidden" name="errorMessage" value="{$errorMessage|escape}">
+            <input type="hidden" name="cumulativeErrorMessage" value="{$cumulativeErrorMessage|escape}">
+            <input type="hidden" name="successMessage" value="{$successMessage|escape}">
+        </form>
+    </body>
+</html>

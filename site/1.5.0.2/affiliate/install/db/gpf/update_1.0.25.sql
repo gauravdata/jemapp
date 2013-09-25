@@ -1,0 +1,1 @@
+ALTER TABLE qu_g_mail_accounts ADD COLUMN smtp_auth_method VARCHAR(16) NULL DEFAULT NULL;

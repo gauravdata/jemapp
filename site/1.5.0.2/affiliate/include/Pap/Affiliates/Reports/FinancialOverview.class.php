@@ -1,0 +1,37 @@
+<?php
+/**
+ *   @copyright Copyright (c) 2007 Quality Unit s.r.o.
+ *   @package PostAffiliatePro
+ *   @author Milos Jancovic
+ *   @since Version 1.0.0
+ *   $Id: InvoiceFormatForm.class.php 16653 2008-03-25 10:42:12Z mjancovic $
+ *
+ *   Licensed under the Quality Unit, s.r.o. Standard End User License Agreement,
+ *   Version 1.0 (the "License"); you may not use this file except in compliance
+ *   with the License. You may obtain a copy of the License at
+ *   http://www.qualityunit.com/licenses/license
+ *
+ */
+
+/**
+ * @package PostAffiliatePro
+ */
+class Pap_Affiliates_Reports_FinancialOverview extends Gpf_Object {
+    
+    /**
+     *
+     * @service financial_overview read
+     * @param $fields
+     */
+    public function load(Gpf_Rpc_Params $params) {
+        $data = new Gpf_Rpc_Data($params);
+        
+        $transactions = new Pap_Stats_Transactions(new Pap_Stats_Params());
+        $data->setValue("approvedCommissions", round($transactions->getCommission()->getApproved(), 2));
+        $data->setValue("pendingCommissions", round($transactions->getCommission()->getPending(), 2));
+        
+        return $data;
+    }
+}
+
+?>

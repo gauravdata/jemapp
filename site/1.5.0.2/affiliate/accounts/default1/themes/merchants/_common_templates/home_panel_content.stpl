@@ -1,0 +1,104 @@
+<!-- home_panel_content -->
+
+{if $pendingTasks != false}
+<div class="StatsSectionTitle">##Tasks waiting for approval##</div>
+<table width="600" class="StatsSummaries">
+  <tr class="light">
+    <td align="left" width="20%" nowrap><a href="#Affiliate-Manager">##Affiliates##</a></td>
+    <td align="right"><span class="NumberData">{$pendingTasks.affiliates}</span></td>
+    <td align="left" width="20%" nowrap><a href="#Transaction-Manager">##Commissions##</a></td>
+    <td align="right"><span class="NumberData">{$pendingTasks.commissions}</span></td>
+  </tr>
+  <tr class="dark">
+    <td align="left" width="20%" nowrap><a href="#Direct-Links-Manager">##DirecLink Urls##</a></td>
+    <td align="right"><span class="NumberData">{$pendingTasks.links}</span></td>
+    <td align="left" width="20%" nowrap><a href="#Mail-Outbox">##Unsent emails##</a></td>
+    <td align="right"><span class="NumberData">{$pendingTasks.emails}</span></td>
+  </tr>  
+</table>
+<br/><br/>
+{/if}
+<div class="StatsSectionTitle">##Traffic overview##</div>
+<table width="600" class="StatsSummaries">
+  <tr class="gray" >
+    <td class="white" rowspan="2"></td>
+    <td align="center" width="16%" colspan="3">##Today##</td>
+    <td align="center" width="16%" colspan="3">##This month##</td>
+  </tr>
+  <tr class="gray" >
+    <td align="center">##raw##</td>
+    <td align="center" colspan="2">##unique##</td>
+    <td align="center" >##raw##</td>
+    <td align="center" colspan="2">##unique##</td>
+  </tr>
+  <tr class="light">
+    <td align="left" width="30%" nowrap>##Impressions##</td>
+    <td align="center">{$todayImpressions->count->raw|number_span}</td>
+    <td align="center" colspan="2">{$todayImpressions->count->unique|number_span}</td>
+    <td align="center">{$thisMonthImpressions->count->raw|number_span}</td>
+    <td align="center" colspan="2">{$thisMonthImpressions->count->unique|number_span}</td>
+  </tr>
+  <tr class="dark">
+    <td align="left" width="30%" nowrap>##Clicks##</td>
+    <td align="center">{$todayClicks->count->raw|number_span}</td>
+    <td align="center" colspan="2">{$todayClicks->count->unique|number_span}</td>
+    <td align="center">{$thisMonthClicks->count->raw|number_span}</td>
+    <td align="center" colspan="2">{$thisMonthClicks->count->unique|number_span}</td>
+  </tr>
+  
+
+  <tr class="gray" >
+    <td align="center"></td>
+    <td align="center">##approved##</td>
+    <td align="center">##paid##</td>
+    <td align="center">##pending##</td>
+    <td align="center">##approved##</td>
+    <td align="center">##paid##</td>
+    <td align="center">##pending##</td>
+  </tr>
+  <tr class="light">
+    <td align="left" width="30%" nowrap>##Number of Sales##</td>
+    <td align="center">{$todaySales->count->approved|number_span}</td>
+    <td align="center">{$todaySales->count->paid|number_span}</td>
+    <td align="center">{$todaySales->count->pending|number_span}</td>
+    <td align="center">{$thisMonthSales->count->approved|number_span}</td>
+    <td align="center">{$thisMonthSales->count->paid|number_span}</td>
+    <td align="center">{$thisMonthSales->count->pending|number_span}</td>
+  </tr>
+  <tr class="dark">
+    <td align="left" width="30%" nowrap>##Total cost of Sales##</td>
+    <td align="center">{$todaySales->totalCost->approved|currency_span}</td>
+    <td align="center">{$todaySales->totalCost->paid|currency_span}</td>
+    <td align="center">{$todaySales->totalCost->pending|currency_span}</td>
+    <td align="center">{$thisMonthSales->totalCost->approved|currency_span}</td>
+    <td align="center">{$thisMonthSales->totalCost->paid|currency_span}</td>
+    <td align="center">{$thisMonthSales->totalCost->pending|currency_span}</td>
+  </tr>
+  <tr class="light">
+    <td align="left" width="30%" nowrap>##All Commissions##</td>
+    <td align="center">{$todayCommissions->commission->approved|currency_span}</td>
+    <td align="center">{$todayCommissions->commission->paid|currency_span}</td>
+    <td align="center">{$todayCommissions->commission->pending|currency_span}</td>
+    <td align="center">{$thisMonthCommissions->commission->approved|currency_span}</td>
+    <td align="center">{$thisMonthCommissions->commission->paid|currency_span}</td>
+    <td align="center">{$thisMonthCommissions->commission->pending|currency_span}</td>
+  </tr>
+  <tr class="dark">
+    <td align="left" width="30%" nowrap>##All Refunds##</td>
+    <td align="center">{$todayRefunds->commission->approved|currency_span}</td>
+    <td align="center">{$todayRefunds->commission->paid|currency_span}</td>
+    <td align="center">{$todayRefunds->commission->pending|currency_span}</td>
+    <td align="center">{$thisMonthRefunds->commission->approved|currency_span}</td>
+    <td align="center">{$thisMonthRefunds->commission->paid|currency_span}</td>
+    <td align="center">{$thisMonthRefunds->commission->pending|currency_span}</td>
+  </tr>
+  <tr class="light">
+    <td align="left" width="30%" nowrap>##All Chargebacks##</td>
+    <td align="center">{$todayChargebacks->commission->approved|currency_span}</td>
+    <td align="center">{$todayChargebacks->commission->paid|currency_span}</td>
+    <td align="center">{$todayChargebacks->commission->pending|currency_span}</td>
+    <td align="center">{$thisMonthChargebacks->commission->approved|currency_span}</td>
+    <td align="center">{$thisMonthChargebacks->commission->paid|currency_span}</td>
+    <td align="center">{$thisMonthChargebacks->commission->pending|currency_span}</td>
+  </tr>
+</table>

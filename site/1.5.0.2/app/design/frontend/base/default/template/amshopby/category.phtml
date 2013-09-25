@@ -1,0 +1,23 @@
+<ol>
+<?php if (0 == $this->getDisplayType()): // default ?>
+    <?php foreach ($this->getItems() as $_item): ?>
+        <li>
+            <?php if ($_item->getCount() > 0): ?>
+            <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?></a>
+            <?php else: echo $_item->getLabel() ?>
+            <?php endif; ?>
+            (<?php echo $_item->getCount() ?>)
+        </li>
+    <?php endforeach ?>
+<?php elseif (1 == $this->getDisplayType()): // dropdown ?>
+    <li>
+        <select onchange="if (this.value) setLocation(this.value)" class="amshopby-select">
+            <!-- uncomment to show Filter name in the dropdown <option value=""><?php echo $this->getName() ?></option>-->
+            <option value=""></option>
+            <?php foreach ($this->getItems() as $_item): ?>
+            <option  value="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?> (<?php echo $_item->getCount() ?>)</option>
+            <?php endforeach ?>
+        </select>
+    </li>
+<?php endif ?>
+</ol>

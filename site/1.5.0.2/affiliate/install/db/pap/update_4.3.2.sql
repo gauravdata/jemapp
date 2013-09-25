@@ -1,0 +1,1 @@
+UPDATE qu_g_settings SET accountid = NULL WHERE name = 'default_campaign_id';

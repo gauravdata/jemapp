@@ -1,0 +1,26 @@
+<!-- installer_recommended_settings -->
+<fieldset>
+ <legend>##Recommended Settings##</legend>
+<p>
+##These are the recommended settings for PHP in order to ensure full compatibility with PAP.
+PAP will still operate even if your settings do not match.##
+</p>
+
+<table class="RecommendedSettings">
+     <tr class="Head">
+         <td></td>
+         <td>##Name##</td>
+         <td class="CellSwitch">##Recommended##</td>
+         <td class="CellSwitch">##Current##</td>
+     </tr>
+	{foreach from=$settings item=setting}
+        <tr class="Row Row{if $setting->isRecommended()}Ok{else}Failed{/if}">
+            <td class="Cell Cell{if $setting->isRecommended()}Ok{else}Failed{/if}"><div class="CellText">{if $setting->isRecommended()}OK{else}FAILED{/if}</div></td>
+            <td class="CellName">{$setting->getName()}</td>
+            <td class="CellSwitch Cell{if $setting->getRecommended()}On{else}Off{/if}">{$setting->getRecommendedAsText()}</td>
+            <td class="CellSwitch Cell{if $setting->getCurrent()}On{else}Off{/if}">{$setting->getCurrentAsText()}</td>
+        </tr>
+	{/foreach}
+</table>
+
+</fieldset>

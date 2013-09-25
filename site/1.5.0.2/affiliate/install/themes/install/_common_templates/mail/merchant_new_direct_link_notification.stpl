@@ -1,0 +1,10 @@
+<font size="2">
+<span style="font-family: Arial;">##Dear merchant##,</span><br/><br/>
+<span style="font-family: Arial;">##Affiliate## {$firstname} {$lastname} ##added new directlink at## {$date}.</span><br/><br/>
+<span style="font-family: Arial;">##URL##: <span style="font-weight: bold;">{$directlink_url}</span></span><br/>
+<span style="font-family: Arial;">##Note##: <span style="font-weight: bold;">{$directlink_note}</span></span><br/><br/>
+<span style="font-family: Arial;">##If you like to APPROVE it click here##: <a href="{$directlink_approve}">{$directlink_approve}</a></span><br/></font><font size="2"><br/><br/> 
+<span style="font-family: Arial;">##If you like to DECLINE it click here##: <a href="{$directlink_decline}">{$directlink_decline}</a></span><br/></font><font size="2"><br/><br/>
+<span style="font-family: Arial;">##Regards##,</span><br/><br/>
+<span style="font-family: Arial;">##Your## {$postAffiliatePro}.</span>
+</font>

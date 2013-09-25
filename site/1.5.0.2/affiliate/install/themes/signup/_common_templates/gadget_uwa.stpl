@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <meta name="robots" content="none"/>
+        <title>/*{$name}*/</title>
+        <script type="text/javascript"  src="http://www.netvibes.com/js/UWA/load.js.php?env=BlogWidget"></script>
+    </head>
+    <body>
+        <div id="/*{$id}*/">Loading /*{$name}*/</div>
+        <script type="text/javascript">
+            var BW = new UWA.BlogWidget( 
+                { container: document.getElementById("/*{$id}*/"),
+                  moduleUrl: '/*{$url}*/' } );
+            BW.setConfiguration(
+                { 'title':'',
+                  'height':'100%',
+                  'borderWidth':'0', 
+                  'color':'#ffffff',
+                  'displayTitle':false,
+                  'displayFooter':false });
+            BW.setPreferencesValues(
+                { /*{foreach from=$properties item=property}*/
+                      '/*{$property->getName()}*/':'/*{$property->getValue()}*/',       
+                  /*{/foreach}*/
+                  'aaaa':'aaaa'
+                });
+        </script>
+    </body>
+</html>

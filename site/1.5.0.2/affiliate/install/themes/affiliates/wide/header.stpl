@@ -1,0 +1,21 @@
+<!-- header -->
+<div class="Header">
+	<div class="HeaderInfo">
+		<div class="HeaderInfoIn">
+	    	<strong class="Title">{$programName}</strong>
+			<p class="Text">
+			<span style="color: #CC0000;">##Change the look of these pages by choosing from our different themes, or customize it by adjusting the easy-to-use templates.</span>
+			<br/>
+			Easily change logo in your merchant panel. Remove this text by editing the file /themes/default/header.stpl##
+		</div> 
+	</div>
+	<a class="Logo" title="{$programName}" href="index.php"/><img src="{$programLogo}" class="LogoImage"></a>
+  {if $isLogged eq 1}
+      {include file='topmenu_logged.stpl'}
+  {else}
+      {include file='topmenu_notlogged.stpl'}
+  {/if}
+</div>
+
+
+

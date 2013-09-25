@@ -1,0 +1,18 @@
+<font size="2">
+<span style="font-family: Arial;">##Dear## {$firstname} {$lastname}</span><br><br>
+<span style="font-family: Arial;">##Thank you for registration in our affiliate program.##</span><br><br>
+<span style="font-family: Arial;">##You have been approved and you can login using the following link##: </span>
+<span style="font-weight: bold; font-family: Arial;">{$merchantLoginLink}{*Merchant Login Link*}</span><br/><br/>
+##Your account##: 
+<span style="font-weight: bold;">{$accountname}{*Account name*}</span><br>
+<span style="font-family: Arial;">##Your username##: </span>
+<span style="font-weight: bold;">{$accountemail}{*Account email*}</span><br>
+<span style="font-family: Arial;">##Your password##: </span>
+<span style="font-weight: bold;">{$password}{*Password*}</span><br>
+<span style="font-weight: normal;">##Your account ID##: </span>
+<span style="font-weight: bold;">{$accountid}{*Account ID*}</span>
+<br>
+<br>
+<span style="font-family: Arial;">##Sincerely,##</span><br><br>
+<span style="font-family: Arial;">##Your Affiliate manager##</span>
+</font>

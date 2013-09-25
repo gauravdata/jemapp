@@ -1,0 +1,19 @@
+<font size="2">
+<span style="font-family: Arial;">##Dear merchant,##</span><br><br>
+<span style="font-family: Arial;">##Account## </span>
+{$accountname}{*Account name*}
+<span style="font-family: Arial;"> ##signed-up to your affiliate program at## {$date}.</span><br><br>
+<span style="font-family: Arial;">##Account name##: </span>
+<span style="font-weight: bold;">{$accountname}{*Account name*}
+</span>
+<br>
+<span style="font-family: Arial;">##Account email##: </span>
+<span style="font-weight: bold;">{$accountemail}{*Account email*}
+</span>
+<br>
+<span style="font-family: Arial;">##Account ID##: </span>
+<span style="font-weight: bold;">{$accountid}{*Account ID*}</span>
+<br>
+<span style="font-family: Arial;">##Account status##: </span>
+<span style="font-weight: bold;">{$accountstatus}{*Account status*}</span>
+</font>

@@ -1,0 +1,8 @@
+##Dear merchant##,<br>
+<br>
+##Today is pay day.##<br>
+##Now is## {$date}{*Server Date*} {$time}{*Server Time*}<br>
+<br>
+##Payout amount:## {$amounttopay|currency}{*Amount to pay*}<br>##Approved commissions:## {$approvedcommissions|currency}{*Approved commissions*}<br>
+##Pending commissions:## {$pendingcommissions|currency}{*Pending commissions*}<br>
+##Declined commissions:## {$declinedcommissions|currency}{*Declined commissions*}

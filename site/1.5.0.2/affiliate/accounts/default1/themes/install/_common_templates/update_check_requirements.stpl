@@ -1,0 +1,10 @@
+<!-- installer_welcome -->
+<p>
+##Please review your system settings, before starting update all requirements must be fulfilled.##
+</p>
+
+
+{server_widget class="Pap_Install_Ui_CheckRequirements"}
+{server_widget class="Pap_Install_Ui_RecommendedSettings"}
+
+{widget id='Check'}

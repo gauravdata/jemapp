@@ -1,0 +1,7 @@
+<font style="font-family: Arial;" size="2">
+##Dear## {$firstname} {$lastname},<br/><br/>
+##One of your sub-affiliates## </font><font style="font-family: Arial;" size="2">##made a sale/lead.##<br/><br/>
+<strong>.:##Sale/lead preview##:.</strong><br/>##Total cost##: <strong>{$totalcost|currency}</strong><br/>
+##Product ID##: <strong>{$productid}</strong><br/><br/>##Sincerely,##<br/><br/>
+##Your Affiliate manager##<br/>
+</font>
