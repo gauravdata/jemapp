@@ -2,3 +2,5 @@
 .modal-body { width: 500px; background: #FFF; max-height: 400px; overflow: auto; margin: 0 auto; }
 .modal-footer { width: 500px; background: #FFF; margin: 0 auto; }
 .modal-header .close { float:right; }
+
+.modal .alert { background: #fff; margin: 150px auto 0; width: 400px; }

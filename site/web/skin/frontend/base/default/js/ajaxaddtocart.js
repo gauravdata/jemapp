@@ -1,10 +1,12 @@
 jQuery(function() {
 
+
     var productform = jQuery('#product_addtocart_form');
 
     if (productform.length > 0) {
-        productform[0].submit = function() {
-
+        productform.submit(function(e) {
+            e.preventDefault();
+            $('product_addtocart_form').stopObserving('submit');
             if (this.action.indexOf('checkout/') > -1) {
                 var action = this.action.replace('checkout/','ajaxaddtocart/');
                 jQuery.post(action,jQuery(this).serialize(),function(data) {
@@ -38,6 +40,6 @@ jQuery(function() {
                 this.submit();
             }
             return true;
-        };
+        });
     }
 });
