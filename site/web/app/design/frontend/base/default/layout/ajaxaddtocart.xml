@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout>
+
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/bootstrap-modal.min.js</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/bootstrap-modal.min.css</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>css/modal.css</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/ajaxaddtocart.js</name><params/></action>
+        </reference>
+    </catalog_product_view>
+
+    <ajaxaddtocart_cart_add>
+        <reference name="root">
+            <action method="setTemplate">
+                <template></template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="checkout/cart_sidebar" name="cart_sidebar" template="ajaxaddtocart/added.phtml" output="toHtml">
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                    <label>Shopping Cart Sidebar Extra Actions</label>
+                </block>
+            </block>
+        </reference>
+    </ajaxaddtocart_cart_add>
+</layout>

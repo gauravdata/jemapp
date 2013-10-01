@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_AjaxAddtocart>
+            <version>1.0.0</version>
+        </Twm_AjaxAddtocart>
+    </modules>
+
+    <frontend>
+        <layout>
+            <updates>
+                <ajaxaddtocart module="ajaxaddtocart">
+                    <file>ajaxaddtocart.xml</file>
+                </ajaxaddtocart>
+            </updates>
+        </layout>
+
+        <routers>
+            <ajaxaddtocart>
+                <use>standard</use>
+                <args>
+                    <module>Twm_AjaxAddtocart</module>
+                    <frontName>ajaxaddtocart</frontName>
+                </args>
+            </ajaxaddtocart>
+        </routers>
+    </frontend>
+</config>
