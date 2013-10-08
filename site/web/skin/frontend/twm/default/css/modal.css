@@ -3,4 +3,54 @@
 .modal-footer { width: 500px; background: #FFF; margin: 0 auto; }
 .modal-header .close { float:right; }
 
-.modal .alert { background: #fff; margin: 150px auto 0; width: 400px; }
+.modal .alert { background: #fff; margin: 150px auto 0; width: 400px; padding: 15px 15px 1px; }
+.modal .alert button.close { float: right; }
+.modal .alert h4 { margin: 0 0 15px; font-size: 14px; }
+
+.modal button {
+	background: #4C4C4C;
+	color: #fff;
+	border: none;
+	font-size: 16px;
+}
+.modal button:hover {
+	background: #000;
+}
+
+.modal-footer button {
+	padding: 5px 10px;
+}
+.modal .pull-left {
+	float: left;
+}
+.modal .pull-right {
+	float: right;
+}
+.modal .pull-right button {
+	background: #FF6A17;
+}
+.modal .pull-right button:hover {
+	background: #000;
+}
+
+.modal #cart-sidebar li {
+	list-style: none;
+	border-bottom: 1px solid #E5E5E5;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+}
+.modal #cart-sidebar li .product-image {
+	float: left;
+}
+.modal #cart-sidebar li .product-details {
+	margin-left: 60px;
+}
+.modal #cart-sidebar li .product-details .product-name a {
+	color: #000;
+	font-weight: bold;
+}
+.modal #cart-sidebar li .product-details a.btn-edit,
+.modal #cart-sidebar li .product-details a.btn-remove {
+	float: right;
+	padding-left: 10px;
+}
