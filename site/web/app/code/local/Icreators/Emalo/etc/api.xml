@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Emalo Import Module
+ *
+ */
+-->
+<config>
+	<api>
+		<resources>
+			<emalo_import translate="title" module="emalo">
+				<title>Emalo Api</title>
+				<model>Emalo/Soap_Api</model>
+				<acl>emalo</acl>
+				<methods>
+					<send translate="title" module="emalo">
+						<title>Send</title>
+					</send>
+				</methods>
+				<faults module="emalo">
+				</faults>
+			</emalo_import >
+		</resources>
+		<v2>
+            <resources_function_prefix>
+                <emalo>emalo</emalo>
+            </resources_function_prefix>
+        </v2>
+		<acl>
+			<resources>
+				<emalo translate="title" module="emalo">
+					<title>Emalo</title>
+					<send translate="title" module="emalo">
+						<title>Send</title>
+					</send>
+				</emalo>
+			</resources>
+		</acl>
+	</api>
+</config>
