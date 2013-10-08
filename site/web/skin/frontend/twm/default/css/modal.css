@@ -1,6 +1,6 @@
-.modal-header { background: #fff; width: 500px; margin: 150px auto 0; }
-.modal-body { width: 500px; background: #FFF; max-height: 400px; overflow: auto; margin: 0 auto; }
-.modal-footer { width: 500px; background: #FFF; margin: 0 auto; }
+.modal-header { background: #fff; width: 300px; margin: 150px auto 0; }
+.modal-body { width: 300px; background: #FFF; max-height: 400px; overflow: auto; margin: 0 auto; }
+.modal-footer { width: 300px; background: #FFF; margin: 0 auto; }
 .modal-header .close { float:right; }
 
 .modal .alert { background: #fff; margin: 150px auto 0; width: 400px; padding: 15px 15px 1px; }
