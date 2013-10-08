@@ -30,16 +30,13 @@
 			<div class="grid_12">
 				<a href="<?php echo $this->getUrl('') ?>"><img src="<?=$this->getSkinUrl('images/logo.jpg');?>" alt="Je m'appelle" class="logo" /></a>
 				<!--<img src="<?=$this->getSkinUrl('images/zevende_hemel.gif');?>" alt="de Zevende Hemel" class="text" />-->
-				<p id="site-title">
 				<div class="options-menu">
 					<?php echo $this->getChildHtml('topLinks') ?>
 					<?php echo $this->getChildHtml('store_language') ?>
 				</div>
 				<?php echo $this->getChildHtml('topContainer'); ?>
 				<div class="clear">&nbsp;</div>
-				<p class="title"></p>
-				<?php
-					echo $this->getChildHtml('breadcrumbs') ?>
+				<?php echo $this->getChildHtml('breadcrumbs') ?>
 			</div>
 		</div>
     </div>
