@@ -35,7 +35,7 @@
 <div class="block block-cart">
 	<img src="<?php echo $this->getSkinUrl('images/no_tomatoes-bag-left.png') ?>" alt="cart" />
     <?php $_cartQty = $this->getSummaryCount() ?>
-    <p class="title"><?php echo $this->__('My Cart') ?></p>
+    <p class="title"><?php echo Mage::helper('checkout')->__('My Cart') ?></p>
     <div class="block-content">
     <?php if ($_cartQty>0): ?>
         <div class="summary">
