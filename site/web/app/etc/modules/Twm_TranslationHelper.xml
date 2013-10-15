@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_TranslationHelper>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Twm_TranslationHelper>
+    </modules>
+</config>
