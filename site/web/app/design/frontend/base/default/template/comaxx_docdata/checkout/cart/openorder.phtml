@@ -1,0 +1,28 @@
+<?php
+if ($order = $this->getOpenOrder()) : 
+$abort_url = $this->getAbortUrl($order);
+$cancel_url = $this->getCancelUrl($order);
+if (!empty($abort_url) && !empty($cancel_url)) : 
+?>
+<ul class="messages">
+	<li class="success-msg openorder">
+		<ul>
+			<li>
+				<span><?php echo $this->__("You still have an open order. You can <a href='%s'>recover your shopping cart</a> or you can <a href='%s'>cancel</a> the order.", $cancel_url, $abort_url); ?></span>
+				<span class="order-total"><?php echo $this->__('Order total: ').Mage::helper('core')->currency($order->getGrandTotal()); ?>.</span>
+				<div class="openorder-items-header"><?php echo $this->__('Order items: '); ?></div>
+				<?php $order_items = $order->getAllItems(); ?>
+				<?php if (count($order_items) > 0) : ?>
+				<ul class="openorder-items">
+					<?php foreach ($order_items as $order_item) : ?>
+					<li><span class="qty">(<?php echo (int) $order_item->getQtyOrdered(); ?>x) </span><?php echo $order_item->getName(); ?></li>
+					<?php endforeach; ?>
+				</ul>
+				<?php endif; ?>
+			</li>
+		</ul>
+	</li>
+</ul>
+<?php endif; ?>
+
+<?php endif; ?>

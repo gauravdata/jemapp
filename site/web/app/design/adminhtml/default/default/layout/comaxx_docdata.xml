@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<layout>
+	<default>
+		<reference name="head">
+			<action method="addCss"><file>comaxx/docdata.css</file></action>
+		</reference>
+	</default>
+		
+		
+	<adminhtml_sales_order_view>
+		<reference name="order_tab_info">
+			<!-- template for payment information on order -->
+			<action method="setTemplate"><template>comaxx_docdata/order/view/tab/info.phtml</template></action>
+		</reference>
+	</adminhtml_sales_order_view>
+</layout>

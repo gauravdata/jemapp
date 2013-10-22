@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+/* set config page header image */
+h3.docdata-header { background:url(images/docdata-payments.png) no-repeat 0 0; height:0; overflow:hidden; padding:40px 0 0; width:128px; }
+
+/* set image and size */
+ul.tabs a.docdata-section span,
+ul.tabs a.docdata-section:hover span { background:url(images/docdata-payments.png) no-repeat 0 0; height:0; overflow:hidden; padding:38px 0 0; width:128px; }
+
+/* different bgcolor to show menu selection (otherwise not visible due to image) */
+ul.tabs a.docdata-section.active, ul.tabs a.docdata-section.active:hover { background-color:#fff; }
+
+/* prevent resize of menu item */
+ul.tabs a.docdata-section,
+ul.tabs a.docdata-section:hover { background:url(../images/tabs_span_bg.gif) repeat-x 0 100%; border-bottom:none; padding:0.5em 0.5em 0.28em 1.5em; }

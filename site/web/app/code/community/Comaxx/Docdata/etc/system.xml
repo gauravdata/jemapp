@@ -1,0 +1,1524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<sections>
+		<docdata translate="label" module="docdata">
+			<label>Docdata</label>
+			<!-- class is for Magento menu entry class -->
+			<class>docdata-section</class>
+			<!-- header-css is for class of the config page header -->
+			<header_css>docdata-header</header_css>
+			<tab>sales</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>400</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<general translate="label">
+					<label>General settings</label>
+					<expanded>1</expanded>
+					<sort_order>0</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<version>
+							<sort_order>1</sort_order>
+							<label>Plugin Version</label>
+							<frontend_type>label</frontend_type>
+							<frontend_model>docdata/config_version</frontend_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</version>
+						<active translate="label">
+							<label>Enabled</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>Enables or disables the plugin.</comment>
+						</active>
+						<module_mode translate="label">
+							<label>Module Mode</label>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_ModuleModes</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Sets the plugin into a specific mode causing test or production merchant settings to be used along with the respective Docdata environment.</comment>
+						</module_mode>
+						<webmenu_active translate="label">
+							<label>Web menu type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_WebmenuTypes</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Showing the Webmenu leaves the choice of payment method up to be decided in the Docdata Webmenu. The other choice means customers get to choose in the checkout process, but they may always switch method once they're in the Docdata Webmenu.</comment>
+						</webmenu_active>
+						<webmenu_css_id translate="label">
+							<label>Web menu CSS profile</label>
+							<sort_order>110</sort_order>
+							<frontend_type>text</frontend_type>
+							<validate>validate-digits</validate>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>CSS profile that will be used to display the WebMenu page</comment>
+						</webmenu_css_id>
+						<docdata_payment_title translate="label">
+							<label>Docdata payment method title</label>
+							<sort_order>120</sort_order>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>When the setting 'Web menu type' has the value 'Display the payment menu' the checkout will show this generic payment method. This title is the display name.</comment>
+						</docdata_payment_title>
+						<confidence_level translate="label">
+							<label>Confidence level</label>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_ConfidenceLevels</source_model>
+							<sort_order>130</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Determines when the order is seen as paid. On 'Authorization' the order will be set to paid on an authorized payment. Set on 'Capture' to only set order to paid when all money transfers are fully completed.</comment>
+						</confidence_level>
+					</fields>
+				</general>
+				<merchant_account translate="label">
+					<label>Merchant Account</label>
+					<expanded>1</expanded>
+					<sort_order>3</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<production_username translate="label">
+							<label>Merchant Username</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry</validate>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment><![CDATA[Username for your Docdata merchant <u>production</u> account login.]]></comment>
+						</production_username>
+						<production_password translate="label">
+							<label>Merchant Password</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry</validate>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment><![CDATA[Password for your Docdata merchant <u>production</u> account login.]]></comment>
+						</production_password>
+						<test_username translate="label">
+							<label>Merchant Test Username</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry</validate>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment><![CDATA[Username for your Docdata merchant <u>test</u> account login.]]></comment>
+						</test_username>
+						<test_password translate="label">
+							<label>Merchant Test Password</label>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry</validate>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment><![CDATA[Password for your Docdata merchant <u>test</u> account login.]]></comment>
+						</test_password>
+					</fields>
+				</merchant_account>
+				<payment_preferences translate="label">
+					<label>Payment Preferences</label>
+					<expanded>0</expanded>
+					<sort_order>5</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<profile translate="label">
+							<label>Payment profile</label>
+							<sort_order>50</sort_order>
+							<validate>required-entry</validate>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Profile that is used to select the payment methods that can be used to pay this order.</comment>
+						</profile>
+						<number_of_days_to_pay>
+							<label>Number of days to pay</label>
+							<sort_order>60</sort_order>
+							<frontend_type>text</frontend_type>
+							<validate>required-entry validate-digits</validate>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Number of days the customer has to perform a payment.</comment>
+						</number_of_days_to_pay>
+						<exhortation_period1_number_days translate="label">
+							<label>Days Exhortation 1</label>
+							<frontend_type>text</frontend_type>
+							<validate>validate-digits</validate>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Number of days before the first payment reminder is sent.</comment>
+						</exhortation_period1_number_days>
+						<exhortation_period1_profile translate="label">
+							<label>Profile Exhortation 1</label>
+							<sort_order>80</sort_order>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Profile that is used for the reminder of exhortation period 1.</comment>
+						</exhortation_period1_profile>
+						<exhortation_period2_number_days translate="label">
+							<label>Days Exhortation 2</label>
+							<sort_order>90</sort_order>
+							<frontend_type>text</frontend_type>
+							<validate>validate-digits</validate>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Number of days before the second payment reminder is sent.</comment>
+						</exhortation_period2_number_days>
+						<exhortation_period2_profile translate="label">
+							<label>Profile Exhortation 2</label>
+							<sort_order>100</sort_order>
+							<frontend_type>text</frontend_type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Profile that is used for the reminder of exhortation period 2.</comment>
+						</exhortation_period2_profile>
+					</fields>
+				</payment_preferences>
+				<custom_statuses>
+					<label>Custom Statuses</label>
+					<expanded>0</expanded>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<new translate="label">
+							<label>New order status</label>
+							<sort_order>10</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_statuses</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Determines a custom status to be used for a new order. Default use is 'pending'.</comment>
+						</new>
+						<pending_payment translate="label">
+							<label>Pending payment status</label>
+							<sort_order>20</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_statuses</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Determines a custom status to be used for an order that has selected a payment method but is not yet (fully) paid. Default use is 'pending payment'.</comment>
+						</pending_payment>
+						<pending_refund translate="label">
+							<label>Pending refund status</label>
+							<sort_order>30</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_statuses</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Determines a custom status to be used for an order for which a refund has been requested but not yet (fully) refunded. Default use is 'pending payment'.</comment>
+						</pending_refund>
+						<paid translate="label">
+							<label>Paid status</label>
+							<sort_order>40</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_statuses</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Determines a custom status to be used for a paid order. Default use is 'payment review'.</comment>
+						</paid>
+						<refunded translate="label">
+							<label>Refunded status</label>
+							<sort_order>50</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_statuses</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Determines a custom status to be used for a refunded order. Default use is 'payment review'.</comment>
+						</refunded>
+						<charged_back translate="label">
+							<label>Charged back status</label>
+							<sort_order>60</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_statuses</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Used when a payment is charged back by the financial institution. Default use is 'payment review'.</comment>
+						</charged_back>
+						<canceled translate="label">
+							<label>Canceled status</label>
+							<sort_order>70</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_statuses</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Determines a custom status to be used for a canceled order. Default use is 'canceled'.</comment>
+						</canceled>
+						<on_hold translate="label">
+							<label>On hold status</label>
+							<sort_order>80</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>docdata/config_types_statuses</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Used as an error status. When manual action is required this status is used. For example when Docdata updates are inconsistent with what Magento expects.  </comment>
+						</on_hold>
+					</fields>
+				</custom_statuses>
+				<connection translate="label">
+					<label>Connection settings</label>
+					<sort_order>12</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<soap_encryption translate="label">
+							<label>Enable RC4</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Enables RC4 soap connection</comment>
+						</soap_encryption>
+					</fields>
+				</connection>
+				
+				<!-- Start of the payment methods configuration, each node based on the code of the payment method -->
+				<!-- Statusses order starts at 1000 to make sure they're the last groups in the list -->
+				<!-- Each item is +10 from the last, this allows to add items in abc order afterwards -->
+				<!-- config_path nodes are used to specify which static config values are overridden -->
+				
+				<docdata_ap>
+					<label>AfterPay</label>
+					<sort_order>1020</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_ap/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_ap/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<displayfields translate="label">
+							<label>Display Checkout fields</label>
+							<config_path>payment/docdata_ap/displayfields</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>When set to No the fields phonenumber/street/housenr/housenr addition won't be shown by default.</comment>
+							<depends>
+								<active>1</active>
+							</depends>
+						</displayfields>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_ap/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<extra_costs translate="label">
+							<label>Added costs</label>
+							<config_path>payment/docdata_ap/extra_costs</config_path>
+							<frontend_type>text</frontend_type>
+							<validate>validate-number</validate>
+							<comment>Amount to be added to each order for using Afterpay</comment>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs>
+						<extra_costs_tax_included translate="label">
+							<label>Added costs includes tax</label>
+							<config_path>payment/docdata_ap/extra_costs_tax_included</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs_tax_included>
+						<extra_costs_displaytax translate="label">
+							<label>Display added cost as</label>
+							<config_path>payment/docdata_ap/extra_costs_displaytax</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>tax/system_config_source_tax_display_type</source_model>
+							<sort_order>7</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs_displaytax>
+						<extra_costs_taxclass translate="label">
+							<label>Tax Class for added costs</label>
+							<config_path>payment/docdata_ap/extra_costs_taxclass</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_shipping_taxclass</source_model>
+							<sort_order>8</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs_taxclass>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_ap/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+									<active>1</active>
+								</depends>
+						</sort_order>
+					</fields>
+				</docdata_ap>
+				<docdata_amex>
+					<label>American Express</label>
+					<sort_order>1030</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_amex/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_amex/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_amex/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_amex/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_amex>
+				<docdata_bt>
+					<label>Bank Transfer</label>
+					<sort_order>1040</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_bt/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_bt/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_bt/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_bt/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_bt>
+				<docdata_dd>
+					<label>Direct Debit</label>
+					<sort_order>1070</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_dd/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_dd/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_dd/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_dd/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_dd>
+				<docdata_deb>
+					<label>DIRECT eBanking</label>
+					<sort_order>1080</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_deb/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_deb/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_deb/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_deb/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_deb>
+				<docdata_elv>
+					<label>ELV</label>
+					<sort_order>1100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_elv/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_elv/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_elv/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_elv/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_elv>
+				<docdata_gp>
+					<label>Giropay</label>
+					<sort_order>1110</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_gp/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_gp/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_gp/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_gp/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_gp>
+				<docdata_idl>
+					<label>iDEAL</label>
+					<sort_order>1120</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_idl/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_idl/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_idl/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_idl/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_idl>
+				<docdata_kbcpb>
+					<label>KBC PAY Button</label>
+					<sort_order>1140</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_kbcpb/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_kbcpb/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_kbcpb/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_kbcpb/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_kbcpb>
+				
+				<docdata_klarna_account>
+					<label>Klarna Account</label>
+					<sort_order>1145</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_klarna_account/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_klarna_account/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<displayfields translate="label">
+							<label>Display Checkout fields</label>
+							<config_path>payment/docdata_klarna_account/displayfields</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>When set to No the fields phonenumber/street/housenr/housenr addition won't be shown by default.</comment>
+							<depends>
+								<active>1</active>
+							</depends>
+						</displayfields>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_klarna_account/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<extra_costs translate="label">
+							<label>Added costs</label>
+							<config_path>payment/docdata_klarna_account/extra_costs</config_path>
+							<frontend_type>text</frontend_type>
+							<validate>validate-number</validate>
+							<comment>Amount to be added to each order for using Klarna Account</comment>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs>
+						<extra_costs_tax_included translate="label">
+							<label>Added costs includes tax</label>
+							<config_path>payment/docdata_klarna_account/extra_costs_tax_included</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs_tax_included>
+						<extra_costs_displaytax translate="label">
+							<label>Display added cost as</label>
+							<config_path>payment/docdata_klarna_account/extra_costs_displaytax</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>tax/system_config_source_tax_display_type</source_model>
+							<sort_order>7</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs_displaytax>
+						<extra_costs_taxclass translate="label">
+							<label>Tax Class for added costs</label>
+							<config_path>payment/docdata_klarna_account/extra_costs_taxclass</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_shipping_taxclass</source_model>
+							<sort_order>8</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs_taxclass>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_klarna_account/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_klarna_account>
+				<docdata_klarna_invoice>
+					<label>Klarna Invoice</label>
+					<sort_order>1146</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_klarna_invoice/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_klarna_invoice/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<displayfields translate="label">
+							<label>Display Checkout fields</label>
+							<config_path>payment/docdata_klarna_invoice/displayfields</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>When set to No the fields phonenumber/street/housenr/housenr addition won't be shown by default.</comment>
+							<depends>
+								<active>1</active>
+							</depends>
+						</displayfields>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_klarna_invoice/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<extra_costs translate="label">
+							<label>Added costs</label>
+							<config_path>payment/docdata_klarna_invoice/extra_costs</config_path>
+							<frontend_type>text</frontend_type>
+							<validate>validate-number</validate>
+							<comment>Amount to be added to each order for using Klarna Invoice</comment>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs>
+						<extra_costs_tax_included translate="label">
+							<label>Added costs includes tax</label>
+							<config_path>payment/docdata_klarna_invoice/extra_costs_tax_included</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs_tax_included>
+						<extra_costs_displaytax translate="label">
+							<label>Display added cost as</label>
+							<config_path>payment/docdata_klarna_invoice/extra_costs_displaytax</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>tax/system_config_source_tax_display_type</source_model>
+							<sort_order>7</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs_displaytax>
+						<extra_costs_taxclass translate="label">
+							<label>Tax Class for added costs</label>
+							<config_path>payment/docdata_klarna_invoice/extra_costs_taxclass</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_shipping_taxclass</source_model>
+							<sort_order>8</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</extra_costs_taxclass>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_klarna_invoice/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_klarna_invoice>
+				
+				<docdata_mae>
+					<label>Maestro</label>
+					<sort_order>1150</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_mae/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_mae/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_mae/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_mae/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_mae>
+				<docdata_mc>
+					<label>Mastercard</label>
+					<sort_order>1160</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_mc/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_mc/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_mc/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_mc/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_mc>
+				<docdata_mrc>
+					<label>MrCash</label>
+					<sort_order>1180</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_mrc/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_mrc/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_mrc/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_mrc/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_mrc>
+				<docdata_ppl>
+					<label>PayPal</label>
+					<sort_order>1200</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_ppl/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_ppl/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_ppl/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_ppl/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_ppl>
+				<docdata_sof>
+					<label>Sofortüberweisung</label>
+					<sort_order>1210</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_sof/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_sof/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_sof/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_sof/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_sof>
+				<docdata_vi>
+					<label>Visa</label>
+					<sort_order>1220</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<config_path>payment/docdata_vi/active</config_path>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<config_path>payment/docdata_vi/title</config_path>
+							<comment>Used on the front-end as the name of the method.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</title>
+						<command translate="label">
+							<label>Payment method name</label>
+							<config_path>payment/docdata_vi/command</config_path>
+							<comment>As specified in the docdata backend.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</command>
+						<sort_order translate="label">
+							<label>Sort order</label>
+							<config_path>payment/docdata_vi/sort_order</config_path>
+							<comment>Sort order for the onepage checkout payment method screen.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends>
+								<active>1</active>
+							</depends>
+						</sort_order>
+					</fields>
+				</docdata_vi>
+				
+				
+				<!-- End of the payment methods list -->
+				
+			</groups>
+		</docdata>
+	</sections>
+</config>

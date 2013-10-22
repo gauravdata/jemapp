@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Comaxx_Docdata>
+			<version>1.0.14</version>
+		</Comaxx_Docdata>
+	</modules>
+
+	<global>
+		<helpers>
+			<docdata>
+				<class>Comaxx_Docdata_Helper</class>
+			</docdata>
+		</helpers>
+
+		<models>
+			<docdata>
+				<class>Comaxx_Docdata_Model</class>
+			</docdata>
+			<sales>
+				<rewrite>
+					<order_pdf_invoice>Comaxx_Docdata_Model_Sales_Order_Pdf_Invoice</order_pdf_invoice>
+				</rewrite>
+			</sales>
+		</models>
+
+		<events>
+			<sales_order_creditmemo_refund>
+				<observers>
+					<comaxx_docdata_sales_observer>
+						<type>singleton</type>
+						<class>Comaxx_Docdata_Model_Sales_Observer</class>
+						<method>refundPayment</method>
+					</comaxx_docdata_sales_observer>
+				</observers>
+			</sales_order_creditmemo_refund>
+			<sales_order_payment_cancel>
+				<observers>
+					<comaxx_docdata_sales_observer>
+						<type>singleton</type>
+						<class>Comaxx_Docdata_Model_Sales_Observer</class>
+						<method>cancelPayment</method>
+					</comaxx_docdata_sales_observer>
+				</observers>
+			</sales_order_payment_cancel>
+		</events>
+		
+		<blocks>
+			<docdata>
+				<class>Comaxx_Docdata_Block</class>
+			</docdata>
+			<adminhtml>
+				<rewrite>
+					<!-- rewrites in backend for display of order/invoice/creditmemo-->
+					<sales_order_grid>Comaxx_Docdata_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
+					<sales_order_totals>Comaxx_Docdata_Block_Adminhtml_Sales_Totals_Order</sales_order_totals>
+					<sales_order_invoice_totals>Comaxx_Docdata_Block_Adminhtml_Sales_Totals_Invoice</sales_order_invoice_totals>
+					<sales_order_creditmemo_totals>Comaxx_Docdata_Block_Adminhtml_Sales_Totals_Creditmemo</sales_order_creditmemo_totals>
+				</rewrite>
+			</adminhtml>
+			<sales>
+				<rewrite>
+					<!-- rewrite for frontend order overview in account section -->
+					<order_totals>Comaxx_Docdata_Block_Sales_Totals_Order</order_totals>
+				</rewrite>
+			</sales>
+		</blocks>
+
+		<resources>
+			<comaxx_docdata_setup>
+				<setup>
+					<module>Comaxx_Docdata</module>
+					<class>Comaxx_Docdata_Model_Resource_Setup</class>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</comaxx_docdata_setup>
+			<docdata_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</docdata_write>
+			<docdata_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</docdata_read>
+		</resources>
+		
+		<payment>
+			<groups>
+				<docdata>Docdata</docdata>
+			</groups>
+		</payment>
+		
+		<sales>
+			<quote>
+				<totals>
+					<docdata_ap>
+						<!-- totals model -->
+						<class>docdata/sales_totals_quote</class>
+						<!-- determine position of the totals entry -->
+						<after>subtotal,discount,shipping,tax</after>
+						<before>grand_total</before>
+						<!-- renderer block for afterpay fee in checkout -->
+						<renderer>docdata/checkout_afterpay</renderer>
+						<admin_renderer>docdata/checkout_afterpay</admin_renderer>
+					</docdata_ap>
+					
+					<!-- totals block for checkout display of afterpay fee -->
+					<docdata_ap_tax>
+						<!-- totals tax model -->
+						<class>docdata/sales_totals_tax_quote</class>
+						<!-- determine position of the totals entry -->
+						<after>subtotal,discount,shipping,tax</after>
+						<before>grand_total</before>
+					</docdata_ap_tax>
+				</totals>
+			</quote>
+			
+			<order_invoice>
+				<totals>
+					<docdata_ap>
+						<!-- totals block so invoice includes afterpay fee in totals -->
+						<class>docdata/sales_totals_invoice</class>
+						<after>subtotal,discount,shipping,tax</after>
+						<before>grand_total</before>
+					</docdata_ap>
+				</totals>
+			</order_invoice>
+			
+			
+		</sales>
+				
+		<fieldsets>
+			<sales_convert_quote>
+				<docdata_fee_amount>
+					<to_order>*</to_order>
+				</docdata_fee_amount>
+				<docdata_fee_tax_amount>
+					<to_order>*</to_order>
+				</docdata_fee_tax_amount>
+			</sales_convert_quote>
+			<sales_convert_order>
+				<docdata_fee_amount>
+					<to_invoice>*</to_invoice>
+				</docdata_fee_amount>
+				<docdata_fee_tax_amount>
+					<to_invoice>*</to_invoice>
+				</docdata_fee_tax_amount>
+			</sales_convert_order>
+			
+			<sales_convert_quote_address>
+				<docdata_extra_street>
+					<to_order_address>*</to_order_address>
+				</docdata_extra_street>
+				<docdata_extra_housenumber>
+					<to_order_address>*</to_order_address>
+				</docdata_extra_housenumber>
+				<docdata_extra_housenumber_addition>
+					<to_order_address>*</to_order_address>
+				</docdata_extra_housenumber_addition>
+				<docdata_extra_telephone>
+					<to_order_address>*</to_order_address>
+				</docdata_extra_telephone>
+			</sales_convert_quote_address>
+		</fieldsets>
+	</global>
+
+	<frontend>
+		<routers>
+			<docdata>
+				<use>standard</use>
+				<args>
+					<module>Comaxx_Docdata</module>
+					<frontName>docdata</frontName>
+				</args>
+			</docdata>
+		</routers>
+		<layout>
+			<updates>
+				<docdata>
+					<file>comaxx_docdata.xml</file>
+				</docdata>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<translations>
+					<files>
+						<default>Comaxx_Docdata.csv</default>
+					</files>
+				</translations>
+			</modules>
+		</translate>
+	</frontend>
+	
+	<!-- backend config page -->
+	<adminhtml>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<docdata translate="title" module="docdata">
+											<title>Docdata</title>
+										</docdata>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<!-- add layout file for adminhtml overrides/styling -->
+		<layout>
+			<updates>
+				<docdata>
+					<file>comaxx_docdata.xml</file>
+				</docdata>
+			</updates>
+		</layout>
+		<translate>
+			<modules>
+				<translations>
+					<files>
+						<default>Comaxx_Docdata.csv</default>
+					</files>
+				</translations>
+			</modules>
+		</translate>
+	</adminhtml>
+	
+	<!-- backend config defaults, includes all the general docdata config values  -->
+	<default>
+		<docdata>
+			<test>
+				<wsdl>https://test.docdatapayments.com/ps/services/paymentservice/1_0?wsdl</wsdl>
+				<webmenu>https://test.docdatapayments.com/ps/menu</webmenu>
+			</test>
+			<production>
+				 <wsdl>https://secure.docdatapayments.com/ps/services/paymentservice/1_0?wsdl</wsdl>
+				 <webmenu>https://secure.docdatapayments.com/ps/menu</webmenu>
+			</production>
+			<currencies>ANG,GBP,RSD,AUD,HKD,RUB,AWG,HUF,SEK,BGN,ISK,SGD,BRL,JPY,CAD,LTL,THB,CHF,LVL,TRY,CNY,USD,CZK,NOK,ZAR,DKK,NZD,PLN,EUR,RON</currencies>
+			<european_countries>AD,AL,AT,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FO,FR,GG,GB,GI,GR,HR,HU,IE,IM,IS,IT,JE,LI,LT,LU,LV,MC,MD,MK,MT,NL,NO,PL,PT,RO,RU,SE,SI,SJ,SK,SM,TR,UA,VA,YU</european_countries>
+			<general>
+				<active>0</active>
+				<module_mode>test</module_mode>
+				<webmenu_active>0</webmenu_active>
+				<webmenu_css_id>1</webmenu_css_id>
+				<docdata_payment_title>Docdata</docdata_payment_title>
+				<confidence_level>authorization</confidence_level>
+			</general>
+			<payment_preferences>
+				<profile>standard</profile>
+				<number_of_days_to_pay>6</number_of_days_to_pay>
+			</payment_preferences>
+			<custom_statuses>
+				<new>pending</new>
+				<pending_payment>pending_payment</pending_payment>
+				<pending_refund>pending_payment</pending_refund>
+				<paid>payment_review</paid>
+				<refunded>payment_review</refunded>
+				<charged_back>payment_review</charged_back>
+				<canceled>canceled</canceled>
+				<on_hold>holded</on_hold>
+			</custom_statuses>
+			<fallback_statuses>
+				<new>pending</new>
+				<pending_payment>pending_payment</pending_payment>
+				<pending_refund>pending_payment</pending_refund>
+				<paid>payment_review</paid>
+				<refunded>payment_review</refunded>
+				<charged_back>payment_review</charged_back>
+				<canceled>canceled</canceled>
+				<on_hold>holded</on_hold>
+			</fallback_statuses>
+			<locking>
+				<!-- in seconds -->
+				<lock_timeout_sec>60</lock_timeout_sec>
+				<!-- in seconds can be < 1 -->
+				<try_wait_sec>0.2</try_wait_sec>
+				<!-- in seconds -->
+				<steal_loc_sec>3600</steal_loc_sec>
+				<!-- in seconds -->
+				<cleanup_time_sec>483600</cleanup_time_sec>
+			</locking>
+			<connection>
+				<soap_encryption>0</soap_encryption>
+			</connection>
+		</docdata>
+
+		<!-- registering the payment methods, includes all information directly relevant to a single payment method -->
+
+		<payment>
+			<docdata_payments>
+				<title>Docdata</title>
+				<active>1</active>
+				<model>docdata/method_docdata</model>
+				<regions>INT</regions>
+				<group>docdata</group>
+				<sort_order>1</sort_order>
+			</docdata_payments>
+			<docdata_mc>
+				<title>Mastercard</title>
+				<active>0</active>
+				<model>docdata/method_mastercard</model>
+				<regions>INT</regions>
+				<group>docdata</group>
+				<command>MASTERCARD</command>
+				<sort_order>2</sort_order>
+			</docdata_mc>
+			<docdata_vi>
+				<title>Visa</title>
+				<active>0</active>
+				<model>docdata/method_visa</model>
+				<regions>INT</regions>
+				<group>docdata</group>
+				<command>VISA</command>
+				<sort_order>3</sort_order>
+			</docdata_vi>
+			<docdata_mae>
+				<title>Maestro</title>
+				<active>0</active>
+				<model>docdata/method_maestro</model>
+				<regions>INT</regions>
+				<group>docdata</group>
+				<command>MAESTRO</command>
+				<sort_order>4</sort_order>
+			</docdata_mae>
+			<docdata_amex>
+				<title>American Express</title>
+				<active>0</active>
+				<model>docdata/method_americanexpress</model>
+				<regions>INT</regions>
+				<group>docdata</group>
+				<command>AMEX</command>
+				<sort_order>5</sort_order>
+			</docdata_amex>
+			<docdata_ppl>
+				<title>PayPal</title>
+				<active>0</active>
+				<model>docdata/method_paypal</model>
+				<regions>INT</regions>
+				<group>docdata</group>
+				<command>PAYPAL_EXPRESS_CHECKOUT</command>
+				<sort_order>6</sort_order>
+			</docdata_ppl>
+			<docdata_bt>
+				<title>Bank Transfer</title>
+				<active>0</active>
+				<model>docdata/method_banktransfer</model>
+				<regions>INT</regions>
+				<group>docdata</group>
+				<command>BANK_TRANSFER</command>
+				<sort_order>7</sort_order>
+			</docdata_bt>
+			<docdata_idl>
+				<title>iDEAL</title>
+				<active>0</active>
+				<model>docdata/method_ideal</model>
+				<regions>NL</regions>
+				<group>docdata</group>
+				<command>IDEAL</command>
+				<issuers>
+					<rbb>
+						<id>0021</id>
+						<name>Rabobank</name>
+					</rbb>
+					<abn>
+						<id>0031</id>
+						<name>ABN Amro Bank</name>
+					</abn>
+					<fries>
+						<id>0091</id>
+						<name>Friesland Bank</name>
+					</fries>
+					<vlb>
+						<id>0161</id>
+						<name>van Lanschot Bankiers</name>
+					</vlb>
+					<trio>
+						<id>0511</id>
+						<name>Triodos Bank</name>
+					</trio>
+					<ing>
+						<id>0721</id>
+						<name>ING Bank</name>
+					</ing>
+					<sns>
+						<id>0751</id>
+						<name>SNS Bank</name>
+					</sns>
+					<asn>
+						<id>0761</id>
+						<name>ASN Bank</name>
+					</asn>
+					<snsr>
+						<id>0771</id>
+						<name>SNS Regio Bank</name>
+					</snsr>
+					<knab>
+						<id>KNAB</id>
+						<name>KNAB Bank</name>
+					</knab>
+				</issuers>
+				<sort_order>1</sort_order>
+			</docdata_idl>
+			<docdata_dd>
+				<title>Direct Debit</title>
+				<active>0</active>
+				<model>docdata/method_directdebit</model>
+				<regions>NL</regions>
+				<group>docdata</group>
+				<command>DIRECT_DEBIT</command>
+				<sort_order>8</sort_order>
+			</docdata_dd>
+			<docdata_deb>
+				<title>DIRECT eBanking</title>
+				<active>0</active>
+				<model>docdata/method_directebanking</model>
+				<regions>NL,BE,GB,PL</regions>
+				<group>docdata</group>
+				<command>EBANKING</command>
+				<sort_order>9</sort_order>
+			</docdata_deb>
+			<docdata_mrc>
+				<title>MrCash</title>
+				<active>0</active>
+				<model>docdata/method_mrcash</model>
+				<regions>BE</regions>
+				<group>docdata</group>
+				<command>MISTERCASH</command>
+				<sort_order>10</sort_order>
+			</docdata_mrc>
+			<docdata_kbcpb>
+				<title>KBC PAY Button</title>
+				<active>0</active>
+				<model>docdata/method_kbcpaybutton</model>
+				<regions>BE</regions>
+				<group>docdata</group>
+				<command>KBC</command>
+				<sort_order>11</sort_order>
+			</docdata_kbcpb>
+			<docdata_gp>
+				<title>Giropay</title>
+				<active>0</active>
+				<model>docdata/method_giropay</model>
+				<regions>DE</regions>
+				<group>docdata</group>
+				<command>GIROPAY</command>
+				<sort_order>12</sort_order>
+			</docdata_gp>
+			<docdata_sof>
+				<title>Sofortüberweisung</title>
+				<active>0</active>
+				<model>docdata/method_sofortuberweisung</model>
+				<regions>DE,AT,CH</regions>
+				<group>docdata</group>
+				<command>SOFORT_UEBERWEISUNG</command>
+				<sort_order>13</sort_order>
+			</docdata_sof>
+			<docdata_elv>
+				<title>ELV</title>
+				<active>0</active>
+				<model>docdata/method_elv</model>
+				<regions>DE</regions>
+				<group>docdata</group>
+				<command>ELV</command>
+				<sort_order>14</sort_order>
+			</docdata_elv>
+			<docdata_ap>
+				<title>AfterPay</title>
+				<active>0</active>
+				<displayfields>1</displayfields>
+				<model>docdata/method_afterpay</model>
+				<regions>NL</regions>
+				<group>docdata</group>
+				<command>AFTERPAY_OPEN_INVOICE</command>
+				<sort_order>15</sort_order>
+			</docdata_ap>
+			<docdata_klarna_account>
+				<title>Klarna Account</title>
+				<active>0</active>
+				<displayfields>1</displayfields>
+				<model>docdata/method_klarnaaccount</model>
+				<regions>SE,DK,NO,FI,DE,NL,AT</regions>
+				<group>docdata</group>
+				<command>KLARNA_ACCOUNT</command>
+				<sort_order>16</sort_order>
+			</docdata_klarna_account>
+			<docdata_klarna_invoice>
+				<title>Klarna Invoice</title>
+				<active>0</active>
+				<displayfields>1</displayfields>
+				<model>docdata/method_klarnainvoice</model>
+				<regions>SE,DK,NO,FI,DE,NL,AT</regions>
+				<group>docdata</group>
+				<command>KLARNA_INVOICE</command>
+				<sort_order>17</sort_order>
+			</docdata_klarna_invoice>
+
+			<!-- legacy payment methods (only remain in code to support viewing orders made by these payment methods -->
+			<docdata>
+				<title>Docdata</title>
+				<active>0</active>
+				<model>docdata/method_netropolis</model>
+				<group>docdata</group>
+				<sort_order>1</sort_order>
+			</docdata>
+			<docdata_ag>
+				<title>Acceptgiro</title>
+				<active>0</active>
+				<model>docdata/method_acceptgiro</model>
+				<regions>NL</regions>
+				<group>docdata</group>
+				<sort_order>18</sort_order>
+			</docdata_ag>
+			<docdata_cb>
+				<title>Carte Bleue</title>
+				<active>0</active>
+				<model>docdata/method_cartebleue</model>
+				<regions>FR</regions>
+				<group>docdata</group>
+				<sort_order>19</sort_order>
+			</docdata_cb>
+			<docdata_dnb>
+				<title>Dexia Netbanking</title>
+				<active>0</active>
+				<model>docdata/method_dexianetbanking</model>
+				<regions>BE</regions>
+				<group>docdata</group>
+				<sort_order>20</sort_order>
+			</docdata_dnb>
+			<docdata_inghp>
+				<title>ING Home'Pay</title>
+				<active>0</active>
+				<model>docdata/method_inghomepay</model>
+				<regions>BE</regions>
+				<group>docdata</group>
+				<sort_order>21</sort_order>
+			</docdata_inghp>
+			<docdata_mtx>
+				<title>Minitix</title>
+				<active>0</active>
+				<model>docdata/method_minitix</model>
+				<regions>NL</regions>
+				<group>docdata</group>
+				<sort_order>22</sort_order>
+			</docdata_mtx>
+			<docdata_mpo>
+				<title>MrPay Online</title>
+				<active>0</active>
+				<model>docdata/method_mrpayonline</model>
+				<regions>NL</regions>
+				<group>docdata</group>
+				<sort_order>23</sort_order>
+			</docdata_mpo>
+			<docdata_wlie>
+				<title>Wallie</title>
+				<active>0</active>
+				<model>docdata/method_wallie</model>
+				<regions>NL,BE,DE,GB,FR,ES,AT,CH</regions>
+				<group>docdata</group>
+				<sort_order>24</sort_order>
+			</docdata_wlie>
+		</payment>
+
+		<sales>
+			<totals_sort>
+				<docdata_payment_fee>15</docdata_payment_fee>
+			</totals_sort>
+		</sales>
+	</default>
+</config>

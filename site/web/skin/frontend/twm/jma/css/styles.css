@@ -362,6 +362,7 @@ button.btn-checkout:hover {
 
 .checkout-types a		{ color: #4c4c4c; text-decoration: none; }
 .checkout-types a:hover	{ color: #000; }
+.minimum-quantity-text { color:#FF6A17; font-weight:bold; text-align: right; }
 
 /*- Checkout -*/
 .opc 			{ position:relative; }

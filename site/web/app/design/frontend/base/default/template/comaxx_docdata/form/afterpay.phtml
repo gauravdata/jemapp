@@ -1,0 +1,59 @@
+<?php $_code = $this->getMethodCode() ?>
+<?php $displayfields = $this->helper('docdata/config')->getPaymentMethodItem($_code, 'displayfields'); ?>
+<?php $billingShippingSame = $this->isBillingShippingSame(); ?>
+<div id="fields-container-afterpay"<?php echo (!$displayfields) ? ' class="visuallyhidden"' : ''; ?>>
+	<div class="form-list" id="payment_form_<?php echo $_code ?>" style="display: none;">
+		<?php echo Mage::helper('docdata')->__('Please fill these extra values to use the payment method'); ?>
+		<br/><br/>
+		<div class="dd_shopper_box_1">
+			<strong><?php echo Mage::helper('docdata')->__('Shopper'); ?></strong>
+			
+			<ul>
+				<li>
+					<label for="<?php echo $_code ?>_shopper_phonenumber" class="required"><em>*</em><?php echo Mage::helper('docdata')->__('Phone number') ?></label>
+					<div class="input-box">
+						<input type="text" id="<?php echo $_code ?>_shopper_phonenumber" name="payment[shopper_phonenumber]" value="<?php echo $this->getCustomerPhone(); ?>" class="required-entry validate-afterpay-phonenumber">
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="dd_shopper_box_2">
+			<strong><?php echo Mage::helper('docdata')->__('Billing address'); ?></strong>
+			<ul>
+				<li>
+					<label for="<?php echo $_code ?>_billing_street" class="required"><em>*</em><?php echo Mage::helper('docdata')->__('Street') ?></label>
+					<div class="input-box">
+						<input type="text" id="<?php echo $_code ?>_billing_street" name="payment[billing_street]" value="<?php echo $this->getCustomerStreet(); ?>" class="required-entry">
+					</div>
+				</li>
+				<li>
+					<label for="<?php echo $_code ?>_billing_housenumber" class="required billing_housenumber"><?php echo Mage::helper('docdata')->__('House number') ?> <em>*</em> + <?php echo Mage::helper('docdata')->__('Addition') ?></label>
+					<div class="input-box small">
+						<input type="text" id="<?php echo $_code ?>_billing_housenumber" name="payment[billing_housenumber]" value="<?php echo $this->getCustomerHousenumber(); ?>" class="required-entry validate-digits afterpay_housenumber">
+						<input type="text" id="<?php echo $_code ?>_billing_housenumberaddition" name="payment[billing_housenumberaddition]" value="<?php echo $this->getCustomerHousenumberAddition(); ?>">
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<div id="<?php echo $_code ?>_shipping_fields"<?php if ($billingShippingSame) echo ' style="display: none;"'; ?>>
+			<strong><?php echo Mage::helper('docdata')->__('Shipping address'); ?></strong>
+			<ul>
+				<li>
+					<label for="<?php echo $_code ?>_shipping_street" class="required"><em>*</em><?php echo Mage::helper('docdata')->__('Street') ?></label>
+					<div class="input-box">
+						<input type="text" id="<?php echo $_code ?>_shipping_street" name="payment[shipping_street]" value="<?php echo $this->getShippingStreet(); ?>" class="required-entry">
+					</div>
+				</li>
+				<li>
+					<label for="<?php echo $_code ?>_shipping_housenumber" class="required shipping_housenumber"><?php echo Mage::helper('docdata')->__('House number') ?> <em>*</em> + <?php echo Mage::helper('docdata')->__('Addition') ?></label>
+					<div class="input-box small">
+						<input type="text" id="<?php echo $_code ?>_shipping_housenumber" name="payment[shipping_housenumber]" value="<?php echo $this->getShippingHousenumber(); ?>" class="required-entry validate-digits afterpay_housenumber">
+						<input type="text" id="<?php echo $_code ?>_shipping_housenumberaddition" name="payment[shipping_housenumberaddition]" value="<?php echo $this->getShippingHousenumberAddition(); ?>">
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

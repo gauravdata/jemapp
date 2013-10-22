@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<!-- Afterpay field styling for default magento look -->
+			<action method="addItem"><type>skin_css</type><name>comaxx_docdata/css/styles.css</name><params/></action>
+			<!-- Afterpay form validation methods -->
+			<action method="addItem"><type>skin_js</type><name>comaxx_docdata/js/validation.js</name><params/></action>
+		</reference>
+	</default>
+	
+	<checkout_cart_index>
+		<reference name="content">
+			<block type="docdata/checkout_cart_openorder" name="docdata.openorder" template="comaxx_docdata/checkout/cart/openorder.phtml" before="checkout.cart">
+			</block>
+		</reference>
+	</checkout_cart_index>
+</layout>

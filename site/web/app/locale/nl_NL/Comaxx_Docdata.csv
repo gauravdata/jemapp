@@ -1,0 +1,139 @@
+"We're sorry but an error occured trying to create your order. We restored your shopping cart, and you may try again or come back later. We will keep your shopping cart saved if you're logged in.","Helaas is er een fout opgetreden bij het aanmaken van uw order. We hebben uw winkelwagen hersteld, en u kunt het opnieuw proberen of later terugkomen. Uw winkelwagen blijft bewaard als u ingelogd bent."
+"An error occured during the payment process. We restored your shopping cart, and you may try again or come back later. We will keep your shopping cart saved if you're logged in.","Er is een fout opgetreden tijdens het betaal proces. We hebben uw winkelwagen hersteld, en u kunt het opnieuw proberen of later terugkomen. Uw winkelwagen blijft bewaart als u ingelogd bent."
+Your payment was cancelled upon your request. You can still place your order again later.',Uw betaling is op uw verzoek geannuleerd. U kunt nog steeds later een order plaatsen.
+Redirecting to Docdata...,Bezig met doorverwijzen naar Docdata...
+Shipping,Verzending
+Shipping cost,Verzendkosten
+Discount,Korting
+Online total refunded amount updated to %s.,Online total refunded bedrag aangepast naar %s.
+Requested refund of %s at Docdata backoffice.,Verzochte refund van %s in de Docdata backoffice.
+Canceled through Magento backoffice.,Canceled door middel van de Magento backoffice.
+AfterPay servicekosten,AfterPay servicekosten
+AfterPay servicekosten (Excl.BTW),AfterPay servicekosten (Excl.BTW)
+AfterPay servicekosten (Incl.BTW),AfterPay servicekosten (Incl.BTW)
+Please fill these extra values to use the AfterPay payment method,Vul deze extra waarden in om gebruik te maken van de betaalmethode AfterPay.
+Shopper,Shopper
+Phone number,Telefoonnummer
+Billing address,Factuuradres
+Street,Straat
+House number,Huisnummer
+Addition,Toevoeging
+Shipping address,Verzendadres
+Select your bank,Selecteer uw bank
+--Please Select--,--Maak uw keuze--
+New order payment created at Docdata.,Nieuwe betaling aangemaakt bij Docdata.
+New pending capture found in Docdata open payments.,Nieuwe pending capture gevonden in de open betalingen van Docdata.
+New pending refund found in the open payments. Assuming manual refund done in Docdata backoffice.,Nieuwe pending refund gevonden in de open betalingen. Aangenomen dat handmatige refund heeft plaatsgevonden in de Docdata backoffice.
+Canceled because no non-canceled payments could be found.,Ge-annulleerd omdat er geen niet-gecancelde betalingen kunnen worden gevonden.
+Fully paid according to Docdata approximate totals.,Volledig betaald volgens de Docdata approximate totals.
+Partially paid according to Docdata approximate totals.,Deels betaald volgens de Docdata approximate totals.
+Fully refunded according to Docdata approximate totals.,Volledig gerefund volgens de Docdata approximate totals.
+Partially refunded according to Docdata approximate totals.,Deels gerefund volgens de Docdata approximate totals.
+Afterpay fee,Afterpay fee
+Comaxx_Docdata::Docdata Payment Id,Docdata Payment Id
+Mage_Adminhtml::Docdata Payment Id : ,Docdata Payment Id : 
+Mage_Adminhtml::Docdata Payment Order Key : ,Docdata Payment Order Key : 
+Comaxx_Docdata::General settings,Algemene instellingen
+Comaxx_Docdata::Plugin Version,Plugin Versie
+Comaxx_Docdata::Enabled,Ingeschakeld
+Comaxx_Docdata::Enables or disables the plugin.,Schakelt de plugin in of uit.
+Comaxx_Docdata::Module Mode,Module Modus
+Comaxx_Docdata::Test Mode,Test Modus
+Comaxx_Docdata::Production Mode,Productie Modus
+Comaxx_Docdata::Sets the plugin into a specific mode causing test or production merchant settings to be used along with the respective Docdata environment.,"Stelt de plugin in op een bepaalde modus, wat ervoor zorgt dat de test of productie gegevens gebruikt worden met de bijbehorende Docdata omgeving."
+Comaxx_Docdata::Web menu type,Web menu type
+Comaxx_Docdata::Show only the Docdata Webmenu option,Toon alleen de Docdata Webmenu optie
+Comaxx_Docdata::Go directly to a selected payment method in the Docdata Webmenu,Ga direct naar de geselecteerde betaalmethode in het Docdata Webmenu
+"Comaxx_Docdata::Showing the Webmenu leaves the choice of payment method up to be decided in the Docdata Webmenu. The other choice means customers get to choose in the checkout process, but they may always switch method once they're in the Docdata Webmenu.","Het betaalmenu tonen betekent dat de klant pas in het Docdata Webmenu kiest voor de betaalmethode. De andere keuze geeft de klant de mogelijkheid om de betaalmethode te selecteren tijdens het checkout proces, maar ze kunnen nog altijd wisselen van betaalmethode zodra ze in het Docdata Webmenu komen."
+Comaxx_Docdata::Web menu CSS profile,Web menu CSS profiel
+Comaxx_Docdata::CSS profile that will be used to display the WebMenu page,CSS profiel dat wordt gebruikt om de WebMenu pagina te tonen
+Comaxx_Docdata::Docdata payment method title,Docdata betaalmethode titel
+Comaxx_Docdata::When the setting 'Web menu type' has the value 'Display the payment menu' the checkout will show this generic payment method. This title is the display name.,Als de instelling 'Web menu type' de waarde heeft 'Toon alleen de Docdata Webmenu optie'' dan zal de checkout deze generieke betaalmethode tonen. Deze titel is de weergegeven naam.
+Comaxx_Docdata::Confidence level,Confidence level
+Comaxx_Docdata::Authorization,Authorization
+Comaxx_Docdata::Capture,Capture
+Comaxx_Docdata::Determines when the order is seen as paid. On 'Authorization' the order will be set to paid on an authorized payment. Set on 'Capture' to only set order to paid when all money transfers are fully completed.,Bepaalt wanneer de order als betaald beschouwd wordt. Met 'Authorization' wordt de order ingesteld op paid als de betaling geauthorizeerd is. Met 'Capture' wordt de order ingesteld op betaald als al het geld daadwerkelijk is ontvangen.
+Comaxx_Docdata::Merchant Account,Merchant Account
+Comaxx_Docdata::Merchant Username,Merchant Username
+Comaxx_Docdata::Username for your Docdata merchant <u>production</u> account login.,Username voor uw Docdata merchant <u>production</u> account login.
+Comaxx_Docdata::Merchant Password,Merchant Password
+Comaxx_Docdata::Password for your Docdata merchant <u>production</u> account login.,Password voor uw Docdata merchant <u>production</u> account login.
+Comaxx_Docdata::Merchant Test Username,Merchant Test Username
+Comaxx_Docdata::Username for your Docdata merchant <u>test</u> account login.,Username voor uw Docdata merchant <u>test</u> account login.
+Comaxx_Docdata::Merchant Test Password,Merchant Test Password
+Comaxx_Docdata::Password for your Docdata merchant <u>test</u> account login.,Password voor uw Docdata merchant <u>test</u> account login.
+Comaxx_Docdata::Payment Preferences,Payment Voorkeuren
+Comaxx_Docdata::Payment profile,Payment profile
+Comaxx_Docdata::Profile that is used to select the payment methods that can be used to pay this order.,Profiel dat wordt gebruikt om de betaalmethoden te selecteren die gebruikt kunnen worden om deze order te betalen.
+Comaxx_Docdata::Number of days to pay,Aantal dagen om te betalen
+Comaxx_Docdata::Number of days the customer has to perform a payment.,Het aantal dagen dat de klant heeft om de betaling te voldoen..
+Comaxx_Docdata::Days Exhortation 1,Aantal dagen tot herinnering  1
+Comaxx_Docdata::Number of days before the first payment reminder is sent.,Het aantal dagen voor de eerste betalingsherinnering wordt verzonden.
+Comaxx_Docdata::Profile Exhortation 1,Profiel van herinnering 1
+Comaxx_Docdata::Profile that is used for the reminder of exhortation period 1.,Profiel dat gebruikt wordt voor de herinnering van betalingstermijn 1.
+Comaxx_Docdata::Days Exhortation 2,Aantal dagen tot herinnering  2
+Comaxx_Docdata::Number of days before the second payment reminder is sent.,Het aantal dagen voor de tweede betalingsherinnering wordt verzonden.
+Comaxx_Docdata::Profile Exhortation 2,Profiel van herinnering 1
+Comaxx_Docdata::Profile that is used for the reminder of exhortation period 2.,Profiel dat gebruikt wordt voor de herinnering van betalingstermijn 2.
+Comaxx_Docdata::Custom Statuses,Aangepaste Statuses
+Comaxx_Docdata::New order status,New order status
+Mage_Adminhtml::-- Please Select --,-- Maak uw keuze --
+Comaxx_Docdata::Determines a custom status to be used for a new order. Default use is 'pending'.,Bepaalt een aangepaste status om te gebruiken voor een nieuwe order. Standaard is dit 'pending'.
+Comaxx_Docdata::Pending payment status,Pending payment status
+Comaxx_Docdata::Determines a custom status to be used for an order that has selected a payment method but is not yet (fully) paid. Default use is 'pending payment'.,Bepaalt een aangepaste status om te gebruiken voor een order waar een betaalmethode is gekozen maar nog niet (volledig) is betaald. Standaard is dit 'pending payment'.
+Comaxx_Docdata::Pending refund status,Pending refund status
+Comaxx_Docdata::Determines a custom status to be used for an order for which a refund has been requested but not yet (fully) refunded. Default use is 'pending payment'.,Bepaalt een aangepaste status om te gebruiken voor een order waarvoor een refund is verzocht maar die nog niet (volledig) is gerefund. Standaard is dit 'pending payment'.
+Comaxx_Docdata::Paid status,Paid status
+Comaxx_Docdata::Determines a custom status to be used for a paid order. Default use is 'payment review'.,Bepaalt een aangepaste status om te gebruiken voor een betaalde order. Standaard is dit 'payment review'.
+Comaxx_Docdata::Refunded status,Refunded status
+Comaxx_Docdata::Determines a custom status to be used for a refunded order. Default use is 'payment review'.,Bepaalt een aangepaste status om te gebruiken voor een refunded order. Standaard is dit 'payment review'.
+Comaxx_Docdata::Charged back status,Charged back status
+Comaxx_Docdata::Used when a payment is charged back by the financial institution. Default use is 'payment review'.,Bepaalt een aangepaste status om te gebruiken voor een order waar een betaling is terug gevorderd. Standaard is dit 'payment review'.
+Comaxx_Docdata::Canceled status,Canceled status
+Comaxx_Docdata::Determines a custom status to be used for a canceled order. Default use is 'canceled'.,Bepaalt een aangepaste status om te gebruiken voor een canceled order. Standaard is dit 'canceled'.
+Comaxx_Docdata::On hold status,On hold status
+Comaxx_Docdata::Used as an error status. When manual action is required this status is used. For example when Docdata updates are inconsistent with what Magento expects.,Wordt gebruikt als een error status. Als handmatige actie is vereist wordt deze status gebruikt. Bijvoorbeeld als de Docdata updates inconsistent zijn met wat Magento verwacht.
+Comaxx_Docdata::AfterPay,AfterPay
+Comaxx_Docdata::Title,Titel
+Comaxx_Docdata::Used on the front-end as the name of the method.,Wordt gebruikt in de front-end als de naam van de methode.
+Comaxx_Docdata::Display Checkout fields,Toon Checkout velden
+Comaxx_Docdata::When set to No the fields phonenumber/street/housenr/housenr addition won't be shown by default.,Indien ingesteld op Nee dan worden de velden telefoonnummer/straat/huisnr/housenr toevoeging standaard niet getoond.
+Comaxx_Docdata::Payment method name,Betaal methode naam
+Comaxx_Docdata::As specified in the docdata backend.,Zoals aangegeven in de docdata backend.
+Comaxx_Docdata::Added costs,Toegevoegde kosten
+Comaxx_Docdata::Amount to be added to each order for using Afterpay,Bedrag dat wordt toegevoegd voor elke order met Afterpay
+Comaxx_Docdata::Added costs includes tax,Toegevoegde kosten inclusief BTW
+Comaxx_Docdata::Display added cost as,Geef toegevoegde kosten weer als
+Comaxx_Docdata::Tax Class for added costs,BTW tarief voor toegevoegde kosten
+Comaxx_Docdata::American Express,American Express
+Comaxx_Docdata::Bank Transfer,Bank Transfer
+Comaxx_Docdata::Direct Debit,Direct Debit
+Comaxx_Docdata::DIRECT eBanking,DIRECT eBanking
+Comaxx_Docdata::ELV,ELV
+Comaxx_Docdata::Giropay,Giropay
+Comaxx_Docdata::iDEAL,iDEAL
+Comaxx_Docdata::KBC PAY Button,KBC PAY Button
+Comaxx_Docdata::Maestro,Maestro
+Comaxx_Docdata::Mastercard,Mastercard
+Comaxx_Docdata::MrCash,MrCash
+Comaxx_Docdata::PayPal,PayPal
+Comaxx_Docdata::Sofortüberweisung,Sofortüberweisung
+Comaxx_Docdata::Visa,Visa
+Comaxx_Docdata::Klarna Invoice,Klarna Invoice
+Comaxx_Docdata::Klarna Account,Klarna Account
+Comaxx_Docdata::Amount to be added to each order for using Klarna Invoice,Bedrag dat wordt toegevoegd voor iedere order die gebruik maakt van Klarna Invoice
+Comaxx_Docdata::Amount to be added to each order for using Klarna Account,Bedrag dat wordt toegevoegd voor iedere order die gebruik maakt van Klarna Account
+Klarna Invoice servicekosten,Klarna Invoice servicekosten
+Klarna Invoice servicekosten (Excl.BTW),Klarna Invoice servicekosten (Excl.BTW)
+Klarna Invoice servicekosten (Incl.BTW),Klarna Invoice servicekosten (Incl.BTW)
+Klarna Invoice fee,Klarna Invoice fee
+Klarna Account servicekosten,Klarna Account servicekosten
+Klarna Account servicekosten (Excl.BTW),Klarna Account servicekosten (Excl.BTW)
+Klarna Account servicekosten (Incl.BTW),Klarna Account servicekosten (Incl.BTW)
+Klarna Account fee,Klarna Account fee
+"The email address you tried to use was not accepted by our payment gateway, please choose another while placing the order again.","Het email adres wat u heeft geprobeerd te gebruiken is niet geaccepteerd door onze payment gateway, graag een andere kiezen wanneer u de order opnieuw plaatst."
+"The email address you tried to use is too long for our payment gateway, please select a shorter email address when placing the order again.","Het email adres wat u geprobeerd heeft te gebruiken is te lang voor onze payment gateway, graag een korter e-mail adres kiezen als u de order opnieuw plaatst."
+You still have an open order. You can <a href='%s'>recover your shopping cart</a> or you can <a href='%s'>cancel</a> the order.,U heeft nog een open order. U kunt <a href='%s'>uw winkelwagen herstellen</a> of u kunt <a href='%s'>de order annuleren</a>.
+Order total: ,Order totaal: 
+Order items: ,Order items: 
+Your payment was cancelled upon your request.,Uw betaling is op uw verzoek geannuleerd.
