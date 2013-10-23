@@ -39,7 +39,7 @@
 		<div class="grid_4 omega">
 			<div class="block light wrapped">
 				<?php if(!$this->hasError()): ?>
-                <?php if (Mage::helper('checkout/cart')->getCart()->getItemsQty() >= 3) : ?>
+                <?php //if (Mage::helper('checkout/cart')->getCart()->getItemsQty() >= 3) : ?>
                 <ul class="checkout-types">
                     <?php foreach ($this->getMethods('methods') as $method): ?>
                         <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
@@ -47,9 +47,9 @@
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
-                    <?php else : ?>
+                    <?php /*else : ?>
                         <div class="minimum-quantity-text"><?php echo $this->__('Voeg minimaal 3 producten toe aan je winkelwagen om af te rekenen. 3 halen = 1 betalen!') ?></div>
-                    <?php endif ?>
+                    <?php endif*/ ?>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -137,7 +137,7 @@
 			<div class="block light wrapped">
 				<?php echo $this->getChildHtml('totals'); ?>
 				<?php if(!$this->hasError()): ?>
-                    <?php if (Mage::helper('checkout/cart')->getCart()->getItemsQty() >= 3) : ?>
+                    <?php //if (Mage::helper('checkout/cart')->getCart()->getItemsQty() >= 3) : ?>
                         <ul class="checkout-types">
                         <?php foreach ($this->getMethods('methods') as $method): ?>
                             <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
@@ -145,9 +145,9 @@
                             <?php endif; ?>
                         <?php endforeach; ?>
                         </ul>
-                    <?php else : ?>
+                    <?php /*else : ?>
                         <div class="minimum-quantity-text"><?php echo $this->__('Voeg minimaal 3 producten toe aan je winkelwagen om af te rekenen. 3 halen = 1 betalen!') ?></div>
-                    <?php endif ?>
+                    <?php endif*/ ?>
 				<?php endif; ?>
 				<div class="clear">&nbsp;</div>
 			</div>
