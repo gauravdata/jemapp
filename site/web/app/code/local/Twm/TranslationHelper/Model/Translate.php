@@ -17,6 +17,7 @@ class Twm_TranslationHelper_Model_Translate extends Mage_Core_Model_Translate {
         $result = parent::translate($args);
 
         $text = array_shift($args);
+	if (!is_object($text)) return;
         $code = $text->getCode();
         $text = $text->getText();
 
