@@ -15,12 +15,12 @@ class Icreators_Emalo_IndexController extends Mage_Core_Controller_Front_Action
             Mage::throwException('Empty order in function ' . __FUNCTION__);
         }
 
-        $order = new Mage_Sales_Model_Order();
-        $order->loadByIncrementId($incrementId);
-        $xml = $this->generateXml($order);
-
         try
         {
+            $order = new Mage_Sales_Model_Order();
+            $order->loadByIncrementId($incrementId);
+            $xml = $this->generateXml($order);
+
             $icUrl = Mage::getStoreConfig('emalo_options/export/emalourl');
             $icAccessArea = Mage::getStoreConfig('emalo_options/export/emaloAccessArea');
             $icCustomerNumber = Mage::getStoreConfig('emalo_options/export/emaloCustomerNumber');
