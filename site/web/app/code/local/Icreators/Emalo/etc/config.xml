@@ -100,7 +100,7 @@
                 </observers>
             </admin_system_config_changed_section_emalo_options>
 
-            <sales_order_payment_capture>
+            <checkout_onepage_controller_success_action>
                 <observers>
                     <Icreators_order_success>
                         <type>singleton</type>
@@ -108,7 +108,7 @@
                         <method>exportOrder</method>
                     </Icreators_order_success>
                 </observers>
-            </sales_order_payment_capture>
+            </checkout_onepage_controller_success_action>
         </events>
 
     </global>
