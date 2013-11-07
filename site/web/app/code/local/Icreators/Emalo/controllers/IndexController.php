@@ -12,7 +12,7 @@ class Icreators_Emalo_IndexController extends Mage_Core_Controller_Front_Action
         $incrementId = $this->getRequest()->getParam('order_id');
 
         if (empty($incrementId)) {
-            Mage::exception('Empty order');
+            Mage::throwException('Empty order in function ' . __FUNCTION__);
         }
 
         $order = new Mage_Sales_Model_Order();
