@@ -145,6 +145,42 @@ class Icreators_Emalo_Model_Observer
             Mage::log('Event for invalid order #' . $incrementId, null, 'emalo.log');
         }
     }
+
+    public function payOrder($observer)
+    {
+        $event = $observer->getEvent();
+        $order =$event->getOrder();
+
+        $incrementId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+        $order->loadByIncrementId($incrementId);
+        $xml = $this->generateXml($order);
+
+        try
+        {
+            $icUrl = Mage::getStoreConfig('emalo_options/export/emalourl');
+            $icAccessArea = Mage::getStoreConfig('emalo_options/export/emaloAccessArea');
+            $icCustomerNumber = Mage::getStoreConfig('emalo_options/export/emaloCustomerNumber');
+            $icPassword = Mage::getStoreConfig('emalo_options/export/emaloPassword');
+            $result = '';
+            $params = array(
+                "sAccessArea" 		=> $icAccessArea,
+                'sCustomerNumber' 	=> $icCustomerNumber,
+                'sPassword' 		=> $icPassword,
+                'sMethod' 			=> "mfnlWebshopIn",
+                'sParams'		 	=> $xml,
+                'sResult' 			=> $result
+            );
+
+            ini_set('default_socket_timeout', 60);
+            $client = new SoapClient($icUrl);
+            $result = $client->gbCallCustomerBusinessLinkMethod($params);
+        }
+        catch(Exception $e)
+        {
+            Mage::log('Exception for event order ' . $e->getMessage(), null, 'emalo.log');
+        }
+    }
+
     public function getItemSku($item)
     {
         if ($item->getProductType() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE)

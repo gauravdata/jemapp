@@ -109,6 +109,15 @@
                     </Icreators_order_success>
                 </observers>
             </checkout_onepage_controller_success_action>
+            <sales_order_invoice_pay>
+                <observers>
+                    <Icreators_order_pay>
+                        <type>singleton</type>
+                        <class>Icreators_Emalo_Model_Observer</class>
+                        <method>payOrder</method>
+                    </Icreators_order_pay>
+                </observers>
+            </sales_order_invoice_pay>
         </events>
 
     </global>
