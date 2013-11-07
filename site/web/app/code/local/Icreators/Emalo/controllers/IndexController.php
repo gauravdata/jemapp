@@ -19,6 +19,11 @@ class Icreators_Emalo_IndexController extends Mage_Core_Controller_Front_Action
         {
             $order = new Mage_Sales_Model_Order();
             $order->loadByIncrementId($incrementId);
+
+            if (!$order->getId()) {
+                Mage::throwException('Invalid order number');
+            }
+
             $xml = $this->generateXml($order);
 
             $icUrl = Mage::getStoreConfig('emalo_options/export/emalourl');
