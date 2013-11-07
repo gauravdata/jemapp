@@ -140,4 +140,13 @@ class Icreators_Emalo_IndexController extends Mage_Core_Controller_Front_Action
         return $xml;
     }
 
+    protected function getItemSku($item)
+    {
+        if ($item->getProductType() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE)
+        {
+            return $item->getProductOptionByCode('simple_sku');
+        }
+        return $item->getSku();
+    }
+
 }
