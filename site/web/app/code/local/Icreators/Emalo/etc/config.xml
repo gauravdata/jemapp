@@ -22,7 +22,7 @@
                 </Emalo>
             </updates>
         </layout>
-    </frontend>  
+    </frontend>
     <adminhtml>
         <acl>
             <resources>
@@ -89,29 +89,27 @@
                 <class>Icreators_Emalo_Block</class>
             </Emalo>
         </blocks>
-		<events>
-		
-		
-		  <admin_system_config_changed_section_emalo_options>
+        <events>
+            <admin_system_config_changed_section_emalo_options>
                 <observers>
                     <emalo_license_validation>
-                            <type>singleton</type>
-                            <class>Icreators_Emalo_Model_Observer</class>
-                            <method>validate_admin_license</method>
+                        <type>singleton</type>
+                        <class>Icreators_Emalo_Model_Observer</class>
+                        <method>validate_admin_license</method>
                     </emalo_license_validation>
                 </observers>
-            </admin_system_config_changed_section_emalo_options> 
-			
-            <checkout_onepage_controller_success_action>
-	    	    <observers>
-            		<Icreators_order_success>
-					<type>singleton</type>
-	    	            <class>Icreators_Emalo_Model_Observer</class>
+            </admin_system_config_changed_section_emalo_options>
+
+            <sales_order_payment_capture>
+                <observers>
+                    <Icreators_order_success>
+                        <type>singleton</type>
+                        <class>Icreators_Emalo_Model_Observer</class>
                         <method>exportOrder</method>
                     </Icreators_order_success>
                 </observers>
-	    	</checkout_onepage_controller_success_action>
-	    </events>
-		
+            </sales_order_payment_capture>
+        </events>
+
     </global>
 </config>
