@@ -5,12 +5,18 @@ class Icreators_Emalo_Model_Observer
 
     public function generateXml(Mage_Sales_Model_Order $order)
     {
+
         $orderId  = $order->getIncrementId();
-        Mage::log('Generate xml for order #' . $orderId, null, 'emalo.log');
-        $shippingAmount = $order->getData('shipping_amount'); // in cents
-        $shippingAmount = (int)($shippingAmount);
-        $paymentMethod 	= $order->getPayment()->getMethod();
+        $orderTotal = $order->getGrandTotal();
+        $orderValue = $order->getSubtotal();
+        $shippingAmount = $order->getShippingAmount();
+        $shippingTaxAmount = $order->getShippingTaxAmount();
+        $ShippingMethod= $order->getAddressShippingMethod ();
+
+        $paymentMethod  = $order->getPayment()->getMethod();
         $paymentType	= $order->getPayment()->getType();
+        $orderStatus = $order->getStatus();
+        $orderState = $order->getState();
 
         $shippingAddress = $order->getShippingAddress();
         $billingAddress = $order->getBillingAddress();
@@ -33,6 +39,7 @@ class Icreators_Emalo_Model_Observer
 				<LANGUAGE>NL</LANGUAGE>
 				<FIRSTNAME>".$billingAddress->getFirstname()."</FIRSTNAME>
 				<LASTNAME>".$billingAddress->getLastname()."</LASTNAME>
+				<PHONENR>".$billingAddress->getTelephone()."</PHONENR>
 			</PA>
 
 			<SA>
@@ -51,42 +58,47 @@ class Icreators_Emalo_Model_Observer
 				<EMAIL>".$order->getCustomerEmail()."</EMAIL>
 			</SA>
 
+
+
 			<HEADER>
 				<ORDERNUMBER>".$orderId."</ORDERNUMBER>
+				<ORDERTOTAL>".$orderTotal."</ ORDERTOTAL >
+				<ORDERVALUE>".$orderValue."</ ORDERVALUE >
+				<SHIPPINGAMOUNT>".$shippingAmount."</ SHIPPINGAMOUNT >
+				<SHIPPINGTAX>".$shippingTaxAmount."</ SHIPPINGTAX >
+				<SHIPPINGMETHOD>".$ShippingMethod."</ SHIPPINGMETHOD >
+				<ORDERNUMBER>".$orderId."</ORDERNUMBER>
+				<ORDERNUMBER>".$orderId."</ORDERNUMBER>
+				<PAYMENTTYPE>".$paymentType."</ PAYMENTTYPE>
+				<PAYMENTMETHOD>".$paymentMethod ."</ PAYMENTMETHOD >
+				<ORDERSTATUS>".$orderStatus."</ ORDERSTATUS >
+				<ORDERSTATE>".$orderState."</ ORDERSTATE >
 				<ORDERTYPE>IP-</ORDERTYPE>
 			</HEADER>";
 
-        $orderItems = $order->getItemsCollection();
-        $xml.= "<POSITIONS>";
-        foreach ($orderItems as $item)
+		$orderItems = $order->getItemsCollection();
+		$xml.= "<POSITIONS>";
+		foreach ($orderItems as $item)
         {
             if (!$item->isDummy())
             {
                 $xml .= "<POSITION>";
                 $sku = $this->getItemSku($item);
-                $pos = strpos($sku, '-');
-                if ($pos === false)
-                {
-                    $xml .= "<PRODUCTNUMBER>".$sku."</PRODUCTNUMBER>";
-                    $xml .= "<VARIANTID></VARIANTID>";
-                }
-                else
-                {
-                    $xml .= "<PRODUCTNUMBER>".$sku."</PRODUCTNUMBER>";
-                    $xml .= "<VARIANTID></VARIANTID>";
-                }
+                $xml .= "<PRODUCTNUMBER>".$sku."</PRODUCTNUMBER>";
+                $xml .= "<VARIANTID></VARIANTID>";
                 $xml .= "<QUANTITY>".(int)$item->getQtyOrdered()."</QUANTITY>";
+                $xml .= "<QTYINVOICE>".(int)$item->getQtyToInvoice ()."</QTYINVOICE >";
                 $xml .= "<PRICE>".(int)($item->getPrice()*100)."</PRICE>";
+                $xml .= "<DISCOUNT>".$item->getDiscountAmount ()."</DISCOUNT >";
+                $xml .= "<PRICE2>".$item->getPrice()."</PRICE2>";
+                $xml .= "<PRICETAX>".$item->getTaxAmount ()."</PRICETAX>";
+                $xml .= "<PRICEGROSS>".$item-> getPriceInclTax ()."</ PRICEGROSS >";
                 $xml .= "</POSITION>";
             }
         }
-        $xml .= "</POSITIONS>
+		$xml .= "</POSITIONS>
 		</SALESORDER>
 </SALESORDERS>";
-
-
-
-
 
 
         $dir = Mage::getBaseDir().DS.'var'.DS.'emalo'.DS.'export'.DS;
@@ -132,17 +144,13 @@ class Icreators_Emalo_Model_Observer
                     'sResult' 			=> $result
                 );
 
-                ini_set('default_socket_timeout', 60);
                 $client = new SoapClient($icUrl);
                 $result = $client->gbCallCustomerBusinessLinkMethod($params);
             }
             catch(Exception $e)
             {
-                Mage::log('Exception for event order ' . $e->getMessage(), null, 'emalo.log');
+                echo $e->getMessage();
             }
-        } else {
-            $incrementId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
-            Mage::log('Event for invalid order #' . $incrementId, null, 'emalo.log');
         }
     }
 
@@ -151,12 +159,12 @@ class Icreators_Emalo_Model_Observer
         $event = $observer->getEvent();
         $order =$event->getOrder();
 
-        $incrementId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
-        $order->loadByIncrementId($incrementId);
-        $xml = $this->generateXml($order);
-
         try
         {
+            $incrementId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+            $order->loadByIncrementId($incrementId);
+            $xml = $this->generateXml($order);
+
             $icUrl = Mage::getStoreConfig('emalo_options/export/emalourl');
             $icAccessArea = Mage::getStoreConfig('emalo_options/export/emaloAccessArea');
             $icCustomerNumber = Mage::getStoreConfig('emalo_options/export/emaloCustomerNumber');
