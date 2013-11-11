@@ -124,13 +124,16 @@ class Icreators_Emalo_Model_Observer
 	}
 
 
-	public function exportOrder()
+	public function exportOrder($observer)
 	{
 		if($this->validate())
 		{
-			$order = new Mage_Sales_Model_Order();
-			$incrementId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
-			$order->loadByIncrementId($incrementId);
+			//$order = new Mage_Sales_Model_Order();
+			//$incrementId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+			//$order->loadByIncrementId($incrementId);
+			$event = $observer->getEvent();
+			$order = $event->getOrder();
+
 			$xml = $this->generateXml($order);
 
 			try
