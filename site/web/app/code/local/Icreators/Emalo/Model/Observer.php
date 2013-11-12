@@ -157,7 +157,7 @@ class Icreators_Emalo_Model_Observer
 			}
 			catch(Exception $e)
 			{
-				echo $e->getMessage();
+                Mage::log('Exception on Emalo export ' . $e->getMessage(), Zend_Log, 'emalo.log');
 			}
 		}
 	}
