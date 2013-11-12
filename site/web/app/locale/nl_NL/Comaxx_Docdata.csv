@@ -137,3 +137,5 @@ You still have an open order. You can <a href='%s'>recover your shopping cart</a
 Order total: ,Order totaal: 
 Order items: ,Order items: 
 Your payment was cancelled upon your request.,Uw betaling is op uw verzoek geannuleerd.
+"If yes the system will only send an order confirmation message once an order is set to paid. If no the system will send an order confirmation once an order is created.","Indien ja zal het systeem pas een email sturen wanneer een order op status paid komt te staan. Indien nee zal het systeem een email sturen zodra de order is aangemaakt."
+"Cancel order since all pending amounts are 0 (closed canceled/expired).", "Cancel order doordat alle openstaande (pending) bedragen op 0 gezet zijn (closed canceled/expired)."

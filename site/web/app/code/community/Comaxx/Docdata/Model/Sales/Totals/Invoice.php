@@ -26,7 +26,7 @@ class Comaxx_Docdata_Model_Sales_Totals_Invoice extends Mage_Sales_Model_Order_I
 				$method = $payment->getMethodInstance();
 			}
 			
-			if (!($method instanceof Comaxx_Docdata_Model_Method_Fee)) {
+			if ($invoice->getDocdataFeeAmount() == 0 || $invoice->getDocdataFeeAmount() == null) {
 				return $this;
 			}
 		} else {

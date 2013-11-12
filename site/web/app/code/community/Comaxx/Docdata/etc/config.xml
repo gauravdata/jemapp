@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Comaxx_Docdata>
-			<version>1.0.14</version>
+			<version>1.0.16</version>
 		</Comaxx_Docdata>
 	</modules>
 
@@ -43,6 +43,15 @@
 					</comaxx_docdata_sales_observer>
 				</observers>
 			</sales_order_payment_cancel>
+			<sales_order_payment_pay>
+            	<observers>
+              		<comaxx_docdata_pay_observer>
+                		<type>singleton</type>
+                		<class>Comaxx_Docdata_Model_Sales_Observer</class>
+                		<method>paidOrder</method>
+              		</comaxx_docdata_pay_observer>
+            	</observers>
+          	</sales_order_payment_pay>    
 		</events>
 		
 		<blocks>

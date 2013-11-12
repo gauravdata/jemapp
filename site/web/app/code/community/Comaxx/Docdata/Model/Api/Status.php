@@ -208,7 +208,7 @@ class Comaxx_Docdata_Model_Api_Status extends Comaxx_Docdata_Model_Api_Abstract 
 		// All these nodes are all in their minor currency
 
 		// Make variables of everything in the $fields array, for easy use
-		$fields = array('totalRegistered', 'totalCaptured', 'totalRefunded', 'totalAcquirerApproved');
+		$fields = array('totalRegistered', 'totalCaptured', 'totalRefunded', 'totalAcquirerApproved', 'totalShopperPending', 'totalAcquirerPending');
 		foreach ($fields as $field) $$field = (int) $totals->$field;
 		//in case of authorization confidence level, check if amount needs to be captured
 		if ($confidenceLevel === self::CONFIDENCE_AUTH && $totalCaptured === 0 && $totalAcquirerApproved > 0) {
@@ -235,6 +235,15 @@ class Comaxx_Docdata_Model_Api_Status extends Comaxx_Docdata_Model_Api_Abstract 
 			}
 		}
 
+		//check if all totals (except registered) are placed to 0 (closed/expired)
+		if ($totalRegistered > 0
+			&& $totalCaptured === 0
+			&& $totalAcquirerApproved === 0
+			&& $totalShopperPending === 0
+			&& $totalAcquirerPending === 0) {
+			$suggests[$api::STATUS_CLOSED_CANCELED] = $api->translate("Cancel order since all pending amounts are 0 (closed canceled/expired).");
+		}
+		
 		return $suggests;
 	}
 }

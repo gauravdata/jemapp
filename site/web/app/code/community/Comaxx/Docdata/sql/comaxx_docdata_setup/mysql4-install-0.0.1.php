@@ -1,4 +1,11 @@
 <?php
+// Crude, but better than trying hoplessly to get stuff working
+// while the only thing that is missing is a proper php version!
+if (version_compare(phpversion(), '5.3.10', '<')) {
+	// php version isn't high enough
+	throw new ErrorException("Sorry! But the PHP version on this server is not supported by the Comaxx Docdata plugin. Minimum required version is 5.3.10");
+}
+
 $this->startSetup();
 
 $connection = $this->_connection;

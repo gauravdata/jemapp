@@ -106,7 +106,7 @@ class Twm_AjaxAddtocart_CartController extends Mage_Checkout_CartController
         } catch (Exception $e) {
             echo $this->__('Cannot add the item to shopping cart.');
             //$this->_getSession()->addException($e, $this->__('Cannot add the item to shopping cart.'));
-            //Mage::logException($e);
+            Mage::logException($e);
 
             //$this->_goBack();
 

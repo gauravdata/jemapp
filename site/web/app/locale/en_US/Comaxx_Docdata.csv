@@ -137,3 +137,4 @@
 "Order total: ","Order total: "
 "Order items: ","Order items: "
 "Your payment was cancelled upon your request.","Your payment was cancelled upon your request."
+"Cancel order since all pending amounts are 0 (closed canceled/expired).","Cancel order since all pending amounts are 0 (closed canceled/expired)."

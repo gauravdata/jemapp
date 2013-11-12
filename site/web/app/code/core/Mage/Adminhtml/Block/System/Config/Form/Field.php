@@ -108,7 +108,7 @@ class Mage_Adminhtml_Block_System_Config_Form_Field
                         if (is_array($v['value']) && in_array($k, $v['value'])) {
                             $defTextArr[] = $v['label'];
                         }
-                    } elseif ($v['value']==$defText) {
+                    } elseif (@$v['value']==$defText) {
                         $defTextArr[] = $v['label'];
                         break;
                     }

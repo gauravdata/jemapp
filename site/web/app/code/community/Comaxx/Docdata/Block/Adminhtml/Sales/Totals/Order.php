@@ -19,12 +19,16 @@ class Comaxx_Docdata_Block_Adminhtml_Sales_Totals_Order extends Mage_Adminhtml_B
 		$amount = $order->getDocdataFeeAmount();
 		$method = $order->getPayment()->getMethodInstance();
 		
-		if (($method instanceof Comaxx_Docdata_Model_Method_Fee) && $amount) {
+		if ($amount) {
+			$label = ($method instanceof Comaxx_Docdata_Model_Method_Fee)
+				? $method->getPmName() . ' servicekosten'
+				: 'servicekosten';
+			
 			$this->addTotalBefore(new Varien_Object(array(
 				'code'      => 'docdata_payment_fee',
 				'value'     => $amount,
 				'base_value'=> $amount,
-				'label'     => $this->helper('docdata')->__($method->getPmName() . ' servicekosten')
+				'label'     => $this->helper('docdata')->__($label)
 				), array('tax'))
 			);
 		}

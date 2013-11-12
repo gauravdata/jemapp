@@ -229,8 +229,12 @@ class Comaxx_Docdata_Model_Magento implements Comaxx_Docdata_Model_System {
 				'_' => $current_payment_refund,
 				'currency' => $currency
 			);
-			//set payment id
-			$call_elements['paymentId'] = $payment['id'];
+			
+			// Set payment id
+			// SOAP messes up ints which go over the PHP_INT_MAX, which is a  
+			// problem on 32bit systems, paymentId may go over the 32bit limit.
+			// TODO: Test this solution resolves the problems on 32bit (the float cast)
+			$call_elements['paymentId'] = (float)$payment['id'];
 			
 			//create call API object, pass self and the call elements
 			$this->_call_api = Mage::getModel('docdata/api_refund')->call($this, $response_object, $call_elements);
@@ -409,7 +413,7 @@ class Comaxx_Docdata_Model_Magento implements Comaxx_Docdata_Model_System {
 			// because that payment would not be cancelled, and thus the status would not be added.
 			// After cancelled we do not want to change stuff if an order actually looks to be paid already
 			if ($status === self::STATUS_CLOSED_CANCELED) {
-				$final_status = $status;
+				$final_status = self::STATUS_CLOSED_CANCELED;
 				$msg = $_msg;
 				break;
 			} elseif ($status === self::STATUS_CLOSED_PAID) {
@@ -522,6 +526,10 @@ class Comaxx_Docdata_Model_Magento implements Comaxx_Docdata_Model_System {
 		}
 
 		if ($state !== null) {
+			if ($state == $order::STATE_CANCELED) {
+				//register cancel to return stock
+				$order->registerCancellation();
+			}
 			// 3. Set the state, status, and the message, save order
 			$order->setState($state, $status, $msg)->save();
 		} else {

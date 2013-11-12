@@ -85,4 +85,27 @@ class Comaxx_Docdata_Model_Sales_Observer {
 			} 
 		}
 	}
+	
+	/*
+	 * In case configuration requires sending confirmation email on paid order this function handles the checks and sends mail
+	 *
+	 * @param Varien_Event_Observer $observer Event observer
+	 *
+	 * @exception Mage_Core_Exception
+	 * @return void
+	 */
+	public function paidOrder(Varien_Event_Observer $observer) {
+		if (Mage::getStoreConfig('docdata/general/mail_confirmation_on_paid')) {
+		
+			$invoice = $observer->getEvent()->getInvoice();
+			$order = $invoice->getOrder();
+			
+			if ($invoice->getState() == Mage_Sales_Model_Order_Invoice::STATE_PAID && !$order->getEmailSent()) {
+				$order->sendNewOrderEmail();
+				$order->save();
+			}		
+		}
+		
+		return $this;
+	}
 }

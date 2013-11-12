@@ -271,7 +271,7 @@ class Comaxx_Docdata_PaymentController extends Mage_Core_Controller_Front_Action
 		Mage::getModel('docdata/magento')->statusCall($order, array());
 		
 		//send email if not done yet
-		if (!$order->getEmailSent()) {
+		if (!Mage::getStoreConfig('docdata/general/mail_confirmation_on_paid') && !$order->getEmailSent()) {
 			$order->sendNewOrderEmail();
 		}
 		
@@ -358,7 +358,7 @@ class Comaxx_Docdata_PaymentController extends Mage_Core_Controller_Front_Action
 			$error = true;
 		} else {
 			//send email if not done yet
-			if (!$order->getEmailSent()) {
+			if (!Mage::getStoreConfig('docdata/general/mail_confirmation_on_paid') && !$order->getEmailSent()) {
 				$order->sendNewOrderEmail();
 			}
 		
