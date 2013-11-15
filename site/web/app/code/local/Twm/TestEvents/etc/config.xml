@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_TestEvents>
+            <version>0.1.0</version>
+        </Twm_TestEvents>
+    </modules>
+    <global>
+        <models>
+            <twm_testevents>
+                <class>Twm_TestEvents_Model</class>
+                <resourceModel>twm_testevents_resource</resourceModel>
+            </twm_testevents>
+            <twm_testevents_resource>
+                <class>Twm_TestEvents_Model_Resource</class>
+            </twm_testevents_resource>
+        </models>
+        <helpers>
+            <twm_testevents>
+                <class>Twm_TestEvents_Helper</class>
+            </twm_testevents>
+        </helpers>
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <twm_testevent_sales_order_save_after>
+                        <type>singleton</type>
+                        <class>twm_testevents/observer</class>
+                        <method>onSalesOrderSaveAfter</method>
+                    </twm_testevent_sales_order_save_after>
+                </observers>
+            </sales_order_save_after>
+        </events>
+    </global>
+</config>
