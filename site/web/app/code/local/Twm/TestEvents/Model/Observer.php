@@ -15,6 +15,7 @@ class Twm_TestEvents_Model_Observer
     public function onSalesOrderSaveAfter(Varien_Event_Observer $observer)
     {
         $event = $observer->getEvent();
+        /* @var $order Mage_Sales_Model_Order */
         $order = $event->getOrder();
 
         $incrementId = $order->getIncrementId();

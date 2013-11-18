@@ -124,16 +124,73 @@ class Icreators_Emalo_Model_Observer
 	}
 
 
-	public function exportOrder($observer)
+	public function onSalesOrderSaveAfter(Varien_Event_Observer $observer)
+	{
+		$event = $observer->getEvent();
+		$order = $event->getOrder();
+
+		$incrementId = $order->getIncrementId();
+
+		$status = $order->getStatus();
+		$state = $order->getState();
+
+		// Mage::log("Order #{$incrementId} saved (state: {$state})", Zend_Log::DEBUG, 'debug.log');
+		if ($state == Mage_Sales_Model_Order::STATE_PROCESSING)
+		{
+			// Mage::log("Order #{$incrementId} saved (status: {$status})", Zend_Log::DEBUG, 'debug.log');
+			if ($order->hasInvoices())
+			{
+				$invoicesPaid = true;
+				foreach ($order->getInvoiceCollection() as $invoice)
+				{
+					if ($invoice->getState() !== Mage_Sales_Model_Order_Invoice::STATE_PAID)
+					{
+						// $invoiceId = $invoice->getId();
+						// Mage::log("Invoice #{$invoiceId} not paid", Zend_Log::DEBUG, 'debug.log');
+						$invoicesPaid = false;
+					}
+				}
+				if ($invoicesPaid)
+				{
+					// Mage::log("Order #{$incrementId} saved and invoices paid (status: {$status})", Zend_Log::DEBUG, 'debug.log');
+					$xml = $this->generateXml($order);
+
+					try
+					{
+						$icUrl = Mage::getStoreConfig('emalo_options/export/emalourl');
+						$icAccessArea = Mage::getStoreConfig('emalo_options/export/emaloAccessArea');
+						$icCustomerNumber = Mage::getStoreConfig('emalo_options/export/emaloCustomerNumber');
+						$icPassword = Mage::getStoreConfig('emalo_options/export/emaloPassword');	
+						$result = '';
+						$params = array(
+								"sAccessArea" 		=> $icAccessArea, 
+								'sCustomerNumber' 	=> $icCustomerNumber, 
+								'sPassword' 		=> $icPassword, 
+								'sMethod' 			=> "mfnlWebshopIn", 
+								'sParams' 		 	=> $xml, 
+								'sResult' 			=> $result
+						);
+
+						$client = new SoapClient($icUrl);
+						$result = $client->gbCallCustomerBusinessLinkMethod($params);
+					}
+					catch(Exception $e)
+					{
+						echo $e->getMessage();
+					}
+				}
+			}
+		}
+	}
+
+
+	public function exportOrder()
 	{
 		if($this->validate())
 		{
-			//$order = new Mage_Sales_Model_Order();
-			//$incrementId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
-			//$order->loadByIncrementId($incrementId);
-			$event = $observer->getEvent();
-			$order = $event->getOrder();
-
+			$order = new Mage_Sales_Model_Order();
+			$incrementId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+			$order->loadByIncrementId($incrementId);
 			$xml = $this->generateXml($order);
 
 			try
@@ -150,19 +207,19 @@ class Icreators_Emalo_Model_Observer
 						'sMethod' 			=> "mfnlWebshopIn", 
 						'sParams' 		 	=> $xml, 
 						'sResult' 			=> $result
-			);
+				);
 
 				$client = new SoapClient($icUrl);
 				$result = $client->gbCallCustomerBusinessLinkMethod($params);
 			}
 			catch(Exception $e)
 			{
-                Mage::log('Exception on Emalo export ' . $e->getMessage(), Zend_Log::CRIT, 'emalo.log');
+				echo $e->getMessage();
 			}
 		}
 	}
 	public function getItemSku($item)
-    {
+	{
 		if ($item->getProductType() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE)
 		{
 			return $item->getProductOptionByCode('simple_sku');

@@ -22,10 +22,10 @@
 			</emalo_import >
 		</resources>
 		<v2>
-            <resources_function_prefix>
-                <emalo>emalo</emalo>
-            </resources_function_prefix>
-        </v2>
+			<resources_function_prefix>
+				<emalo>emalo</emalo>
+			</resources_function_prefix>
+		</v2>
 		<acl>
 			<resources>
 				<emalo translate="title" module="emalo">

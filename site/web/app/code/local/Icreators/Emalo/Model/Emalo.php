@@ -7,5 +7,4 @@ class Icreators_Emalo_Model_Emalo extends Mage_Core_Model_Abstract
         parent::_construct();
         $this->_init('Emalo/Emalo');
     }
-	
 }

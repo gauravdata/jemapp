@@ -7,81 +7,78 @@
 -->
 
 <config>
-    <tabs>
-        <emaloconfig translate="label" module="emalo">
-            <label>EMALO Configuration</label>
-            <sort_order>99999</sort_order>
-        </emaloconfig>
-    </tabs> 
-    <sections>
-        <emalo_options translate="label" module="emalo">
-            <label>EMALO Configuration Options</label>
-            <tab>emaloconfig</tab>
-            <frontend_type>text</frontend_type>
-            <sort_order>1000</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
-            <show_in_store>1</show_in_store>                    
-				  <groups>
-							<export translate="label">
-								<label> EMALO Order Export Settings</label>
-								<frontend_type>text</frontend_type>
-								<sort_order>1</sort_order>
-								<show_in_default>1</show_in_default>
-								<show_in_website>1</show_in_website>
-								<show_in_store>1</show_in_store>                
-							
-									<fields>
-										<emalourl translate="emalo">
-											<label>Soap Url</label>
-											<comment>Add "?WSDL" at the end of url.Example: "https://c2.m2sc.nl/xyz/abc/asd.asmx?WSDL"</comment>
-											<frontend_type>text</frontend_type>
-											<sort_order>1</sort_order>
-											<show_in_default>1</show_in_default>
-											<show_in_website>1</show_in_website>
-											<show_in_store>1</show_in_store>
-										</emalourl>
-										
-										<emaloAccessArea translate="emalo">
-										  <label>Access Area</label>
-										  <frontend_type>text</frontend_type>
-										  <sort_order>2</sort_order>
-										  <show_in_default>1</show_in_default>
-										  <show_in_website>1</show_in_website>
-										  <show_in_store>1</show_in_store>
-										</emaloAccessArea>
-									
-										<emaloCustomerNumber translate="emalo">
-											<label>Customer Number</label>
-											<frontend_type>text</frontend_type>
-											<sort_order>3</sort_order>
-											<show_in_default>1</show_in_default>
-											<show_in_website>1</show_in_website>
-											<show_in_store>1</show_in_store>
-										</emaloCustomerNumber>
-									
-										<emaloPassword translate="emalo">
-											<label>Password</label>
-											<frontend_type>password</frontend_type>
-											<sort_order>4</sort_order>
-											<show_in_default>1</show_in_default>
-											<show_in_website>1</show_in_website>
-											<show_in_store>1</show_in_store>
-										</emaloPassword>
-										
-										<key translate="emalo">
-											<label>License Key</label>
-											<frontend_type>text</frontend_type>
-											<sort_order>5</sort_order>
-											<show_in_default>1</show_in_default>
-											<show_in_website>1</show_in_website>
-											<show_in_store>1</show_in_store>
-										</key>
-										
-									</fields>  
-					  </export>
-				   </groups>
-				    
-         </emalo_options>
-    </sections>     
+	<tabs>
+		<emaloconfig translate="label" module="emalo">
+			<label>EMALO Configuration</label>
+			<sort_order>99999</sort_order>
+		</emaloconfig>
+	</tabs> 
+	<sections>
+		<emalo_options translate="label" module="emalo">
+			<label>EMALO Configuration Options</label>
+			<tab>emaloconfig</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>1000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<export translate="label">
+					<label> EMALO Order Export Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<emalourl translate="emalo">
+							<label>Soap Url</label>
+							<comment>Add "?WSDL" at the end of url.Example: "https://c2.m2sc.nl/xyz/abc/asd.asmx?WSDL"</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</emalourl>
+
+						<emaloAccessArea translate="emalo">
+							<label>Access Area</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</emaloAccessArea>
+
+						<emaloCustomerNumber translate="emalo">
+							<label>Customer Number</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</emaloCustomerNumber>
+
+						<emaloPassword translate="emalo">
+							<label>Password</label>
+							<frontend_type>password</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</emaloPassword>
+
+						<key translate="emalo">
+							<label>License Key</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</key>
+					</fields>
+				</export>
+			</groups>
+		</emalo_options>
+	</sections>
 </config>

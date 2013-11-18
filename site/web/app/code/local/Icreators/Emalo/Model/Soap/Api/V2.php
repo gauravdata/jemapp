@@ -18,6 +18,4 @@ class Icreators_Emalo_Model_Soap_Api_V2 extends Icreators_Emalo_Model_Soap_Api
         }
         return array();
     }
-
-
 }
