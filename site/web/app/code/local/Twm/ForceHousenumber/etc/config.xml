@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_ForceHousenumber>
+            <version>0.0.1</version>
+        </Twm_ForceHousenumber>
+    </modules>
+    <global>
+        <blocks>
+            <twm_forcehousenumber>
+                <class>Twm_ForceHousenumber_Block</class>
+            </twm_forcehousenumber>
+            <onestepcheckout>
+                <rewrite>
+                    <checkout>Twm_ForceHousenumber_Block_Checkout</checkout>
+                </rewrite>
+            </onestepcheckout>
+        </blocks>
+    </global>
+</config>
