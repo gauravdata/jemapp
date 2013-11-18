@@ -20,7 +20,7 @@
                 <class>Twm_TestEvents_Helper</class>
             </twm_testevents>
         </helpers>
-        <events>
+        <!--<events>
             <sales_order_save_after>
                 <observers>
                     <twm_testevent_sales_order_save_after>
@@ -30,6 +30,6 @@
                     </twm_testevent_sales_order_save_after>
                 </observers>
             </sales_order_save_after>
-        </events>
+        </events>-->
     </global>
 </config>
