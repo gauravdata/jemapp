@@ -3,8 +3,6 @@
 class Twm_ForceHousenumber_Block_Checkout extends Idev_OneStepCheckout_Block_Checkout
 {
 
-    const REGEX_MATCH_HOUSENUMBER = '\s(\d+\s*\-*\w*)$';
-
     public function customerHasAddresses()
     {
         foreach ($this->getCustomer()->getAddresses() as $address) {
@@ -58,11 +56,6 @@ class Twm_ForceHousenumber_Block_Checkout extends Idev_OneStepCheckout_Block_Che
                 ->setOptions($options);
 
             $select->addOption('', Mage::helper('checkout')->__('New Address'));
-
-            $isPost = $this->getRequest()->getPost();
-            $isPost = (!empty($isPost));
-            $selectedValue = $this->getRequest()->getPost('billing_address_id', false);
-
 
             if($this->getNewAddressSelectValueOnError($type)){
                 $select->setValue('');
