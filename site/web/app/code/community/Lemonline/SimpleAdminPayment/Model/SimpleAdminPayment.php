@@ -26,13 +26,11 @@ class Lemonline_SimpleAdminPayment_Model_SimpleAdminPayment extends Mage_Payment
 			$invoice = $payment->getOrder()->prepareInvoice();
     		$invoice->register();
     		$payment->getOrder()->addRelatedObject($invoice);
-            $payment->getOrder()->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true, 'Auto capture of Simple Admin payment');
     	}
 		if($this->getConfigData('shipment_auto') && $payment->getOrder()->canShip()) {
 			$shipment = $payment->getOrder()->prepareShipment();
     		$shipment->register();
     		$payment->getOrder()->addRelatedObject($shipment);
-            $payment->getOrder()->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true, 'Auto ship of Simple Admin payment');
     	}
     	return $this;
     }
