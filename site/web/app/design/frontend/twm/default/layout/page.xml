@@ -48,8 +48,8 @@ Default layout, loads most of the pages
                 <action method="addJs"><script>varien/menu.js</script></action>
                 <action method="addJs"><script>mage/translate.js</script></action>
                 <action method="addJs"><script>mage/cookies.js</script></action>
-                <action method="addJs"><script>flash/swfobject.js</script></action>
-                <action method="addJs"><script>lib/floguriparser.js</script></action>
+                <!-- <action method="addJs"><script>flash/swfobject.js</script></action> -->
+                <!-- <action method="addJs"><script>lib/floguriparser.js</script></action> -->
                 <!--<action method="addJs"><script>lib/lightbox.js</script></action>-->
 				<!--<action method="addItem"><type>skin_js</type><script>js/lazierLoad.js</script></action> -->
 				<action method="addJs" ifconfig="web/seo/lazierload"><script>lazierload/lazierLoad.js</script></action>
