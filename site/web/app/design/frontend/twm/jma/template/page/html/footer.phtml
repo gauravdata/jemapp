@@ -28,18 +28,29 @@
 <div class="footer-container">
     <div class="footer">
 		<div class="container_12">
-			<div class="grid_2 alpha">
-				<p class="title">FAQ</p>
-				<?php echo $this->getChildHtml('cms_footer_links') ?>
+			<div class="grid_3 alpha">
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_1')->toHtml(); ?>
 			</div>
 			<div class="grid_3">
-				<p class="title">Social Media</p>
-				<?php echo $this->getChildHtml('social_media') ?>
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_2')->toHtml(); ?>
 			</div>
 			<div class="grid_4">
-				<img src="<?=$this->getSkinUrl('images/betaalmogelijkheden.jpg');?>" alt="Betaalmogelijkheden" />
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_3')->toHtml(); ?>
+				<div id="mc_embed_signup">
+					<form action="http://jemappelle.us2.list-manage.com/subscribe/post?u=6d968025bfb15f787403ae3eb&amp;id=11e8c0880e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+						<label for="mce-EMAIL">
+							Schrijf je in voor onze nieuwsbrief
+						</label>
+						<p>
+							en ontvang als eerste de aanbiedingen<br />
+							zodat je niet meer misgrijpt!
+						</p>
+						<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="E-mailadres" required>
+						<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+					</form>
+				</div>
 			</div>
-			<div class="grid_3 omega">
+			<div class="grid_2 omega">
 				<iframe class="iframe-right" scrolling="no" src="https://www.kiyoh.nl/widget.php?company=6589&size=small" width="160" height="98" border="0" frameborder="0"></iframe>
 				<!--Start of Zopim Live Chat Script-->
 				<script type="text/javascript">
