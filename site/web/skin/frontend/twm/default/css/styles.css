@@ -87,7 +87,7 @@ label.required em	{ color: #FF0000; margin-right: 5px; }
 .header .text		{ float: left; margin: 60px 0 0 30px; }
 
 .header .options-menu		{ float: right; margin-top: 40px; }
-.header ul.links, .header .form-language	{ float: left; margin-left: 10px; }
+.header ul.links, .header .form-language	{ float: left; margin-left: 10px; position: relative }
 .header .form-language		{ display: none; }
 .header .links li			{ float: left; border-right: 1px solid #000; padding: 0 7px; }
 .header .links a			{ color: #444; text-decoration: none; }
@@ -101,7 +101,7 @@ label.required em	{ color: #FF0000; margin-right: 5px; }
 	right: 0;
 	top: -40px;
 	padding: 10px 0 0 30px;
-	background: url('../images/shoppingbag.jpg') no-repeat left bottom;
+	background: url('../images/shoppingbag.png') no-repeat left bottom;
 }
 
 .header p.title		{ display: none; }
