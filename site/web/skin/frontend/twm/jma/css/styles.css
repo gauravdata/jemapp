@@ -129,7 +129,7 @@ label.required em	{ color: #FF0000; margin-right: 5px; }
 .breadcrumbs a:hover	{ color: #444; }
 
 /***--- CONTENT ---***/
-.main-container				{ padding: 125px 0 170px; }
+.main-container				{ padding: 125px 0 250px; }
 
 col-main .block-content		{ margin-bottom: 20px; }
 
@@ -460,19 +460,77 @@ tr.tax-details-first td 		{ border-top:1px solid #d2d8db; }
 .connect_widget_button_count_count	{ padding: 2px 2px 0; color: #4c4c4c; }
 
 /***--- FOOTER ---***/
-.footer-container		{ width: 100%; height: 170px; position: absolute; bottom: 0; }
-.footer .container_12	{ width: 950px; border-right: 10px solid #fff; background: url(../images/footerBorder.gif) repeat-x left top; padding-top: 19px; }
+.footer-container		{ width: 100%; position: absolute; bottom: 0; background: #2e2d2c; padding-bottom: 20px; color: #fff; line-height: 20px; }
+.footer .container_12	{ width: 950px; padding-top: 19px; }
 
-.footer a	{ color: #444; text-decoration: none; }
+.footer a		{ color: #fff; text-decoration: none; }
 .footer a:hover	{ color: #7f7f7f; }
 
-.footer p.title { text-align: left; }
+.footer h2, .footer label { font-family: 'Arial', sans-serif; font-size: 14px; text-transform: none; font-weight: bold; background: none; padding: 0; }
 
 .payment	{ width: 380px; float: right; }
 .payment a	{ display: inline; padding: 0 2px; }
 
 .iframe-right {
 	float: right;
+}
+
+.footer ul.social {
+	overflow: hidden;
+}
+.footer ul.social li {
+	float: left;
+}
+.footer ul.social li a {
+	display: block;
+	width: 10px;
+	height: 21px;
+	background: url('../images/social.jpg') no-repeat;
+	overflow: hidden;
+	text-indent: -999px;
+	margin-right: 10px;
+}
+.footer ul.social li.facebook a {
+	width: 10px;
+	background-position: 0 0;
+}
+.footer ul.social li.youtube a {
+	width: 53px;
+	background-position: -33px 0;
+}
+.footer ul.social li.google a {
+	width: 18px;
+	background-position: -103px 0;
+}
+.footer ul.social li.pintrest a {
+	width: 20px;
+	background-position: -135px 0;
+}
+
+.footer form {
+	width: 260px;
+	margin-top: 25px;
+	padding-top: 20px;
+	border-top: 1px solid #fff;
+	line-height: 16px;
+}
+.footer form input {
+	float: left;
+	margin: 0;
+}
+.footer form input[type=email] {
+	border: none;
+	padding: 5px;
+	width: 220px;
+}
+.footer form input[type=submit] {
+	padding: 0;
+	width: 30px;
+	border: none;
+	height: 26px;
+	background: url('../images/arrow-white_on_black.jpg') no-repeat 50% 50% #000;
+	text-indent: -9999px;
+	overflow: hidden;
 }
 
 /* Clears ================================================================================ */
