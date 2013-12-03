@@ -14,7 +14,11 @@ class Twm_TranslationHelper_Block_Adminhtml_Translations_Renderer extends Mage_A
         $value = $row->getData($column);
         if ($column == 'store_id') {
             if ($value == 0) return 'Any';
-            $store = Mage::app()->getStore($value);
+            try {
+                $store = Mage::app()->getStore($value);
+            } catch (Mage_Core_Model_Store_Exception $e) {
+                return $value;
+            }
             return $store->getName();
         } elseif ($column == 'locale') {
             $locales = Mage::helper('translationhelper')->getLocales();
