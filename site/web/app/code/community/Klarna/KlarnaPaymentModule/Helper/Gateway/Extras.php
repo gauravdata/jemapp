@@ -338,6 +338,7 @@ class Klarna_KlarnaPaymentModule_Helper_Gateway_Extras
         $applyAfter = Mage::helper('tax')->applyTaxAfterDiscount(
             $this->order->getStoreId()
         );
+/*
         if ($applyAfter == true) {
             //With this setting active the discount will not have the correct
             //value. We need to take each respective products rate and calculate
@@ -357,6 +358,7 @@ class Klarna_KlarnaPaymentModule_Helper_Gateway_Extras
                 $amount -= $newAmount;
             }
         }
+*/
 
         $desc = $this->order->getDiscountDescription();
 
