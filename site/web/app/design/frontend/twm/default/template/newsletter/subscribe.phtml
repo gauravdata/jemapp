@@ -25,11 +25,11 @@
  */
 ?>
 <div class="block dark block-subscribe">
-    <p class="title"><?php echo $this->__('Newsletter') ?></p>
     <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
         <div class="block-content">
             <label for="newsletter"><?php echo $this->__('Sign Up for Our Newsletter:') ?></label>
-		    <input type="text" name="email" id="newsletter" title="<?php echo $this->__('Sign up for our newsletter') ?>" value="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email" />
+			<p><?php echo $this->__('and be the first to receive offers and never miss a thing!') ?></p>
+		    <input type="text" name="email" id="newsletter" title="<?php echo $this->__('Sign up for our newsletter') ?>" placeholder="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email" />
 			<input type="submit" class="submit" value="&gt;&gt;" />
         </div>
     </form>

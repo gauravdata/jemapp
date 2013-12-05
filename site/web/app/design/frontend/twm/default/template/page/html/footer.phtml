@@ -36,17 +36,17 @@
 			</div>
 			<div class="grid_4">
 				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_3')->toHtml(); ?>
-				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_4')->toHtml(); ?>
+				<?=$this->getChildHtml('footer.newsletter');?>
 			</div>
 			<div class="grid_2 omega">
 				<iframe class="iframe-right" scrolling="no" src="https://www.kiyoh.nl/widget.php?company=6589&size=small" width="160" height="98" border="0" frameborder="0"></iframe>
 				<!--Start of Zopim Live Chat Script-->
 				<script type="text/javascript">
 					window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-						d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-						_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-						$.src='//cdn.zopim.com/?1FLflW44wh11XqC97BDGtOGb5ihxiAzV';z.t=+new Date;$.
-							type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+					d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+					_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+					$.src='//cdn.zopim.com/?1FLflW44wh11XqC97BDGtOGb5ihxiAzV';z.t=+new Date;$.
+					type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 				</script>
 				<!--End of Zopim Live Chat Script-->
 			</div>
