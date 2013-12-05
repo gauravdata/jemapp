@@ -1,0 +1,94 @@
+<?php if(Mage::helper('customercredit')->isEnableShareCredit()): ?>
+<div class="box-account box-recent">
+    <div class="page-head box-credit-generate" style="border-bottom: 1px solid #D9DDE3; width: 100%">
+        <h2 style="float:none;"><?php echo $this->__('Generate My Codes') ?></h2>
+    </div>
+    <br>
+<form action="<?php echo $this->getUrl('customercredit/refferals/generate') ?>"  method="post" id="form-validate-generator">
+    
+        <?php echo $this->getBlockHtml('formkey')?>
+        <ul class="form-list customcredit-list">
+            <li>
+                <label for="credit_value_id" class="required"><em>*</em><?php echo $this->__('Credit Value') ?></label>
+                <div class="input-box">
+                    <input type="text" name="credit_value" id="credit_value_id" value="" title="<?php echo $this->__('Credit Value') ?>" class="input-text required-entry" />
+                </div>
+            </li>
+            <li>
+                <label for="generateButton">&nbsp;</label>
+                <div class="input-box">
+                    <button id="generateButton" type="submit" title="<?php echo $this->__('Generate code') ?>" class="button"><span><span><?php echo $this->__('Generate code') ?></span></span></button>
+                </div>
+            </li>
+        </ul>
+</form>
+<script type=”text/javascript”>
+//< ![CDATA[
+var dataForm = new VarienForm('form-validate-generator',true);
+//]]>
+</script>
+</div>
+<?php
+$_items = $this->getCollection(); ?>
+<br>
+<div class="box-account box-recent">
+    <div class="page-head credit-payment">
+        <h2><?php echo $this->__('My Credit Codes') ?></h2>
+    </div>
+    <br>
+    <?php echo $this->getPagerHtml(); ?>
+    
+    <table cellspacing="0" class="data-table" id="my-credit-code-table">
+        <col width="150" />
+        <col width="150" />
+        <col width="150" />
+
+        <thead>
+            <tr>
+                <th><?php echo $this->__('Code Id') ?></th>
+                <th><?php echo $this->__('Code Balance') ?></th>
+                <th><?php echo $this->__('Created On') ?></th>
+                <th><?php echo $this->__('Used On') ?></th>
+                <th><?php echo $this->__('Action') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if($_items->getSize()): ?>
+            <?php foreach ($_items as $_item): ?>
+            <tr>
+                    <td><?php echo $_item->getCode()?></td>
+                    <td><?php echo Mage::helper('core')->currency($_item->getCredit())?></td>
+                    <td><?php echo $_item->getCreatedDate()?></td>
+                    <td><?php echo $_item->getUsedDate()?></td>
+                    <td>
+                        <?php if(!$_item->getUsedDate()) : ?>
+                        <a onclick="confirmDelete('<?php echo $this->getUrl('*/*/removeCode',array('code_id'=>$_item->getId()))?>');" style="cursor: pointer;">
+                        Remove
+                        </a>
+                        <?php else: ?>
+                        --
+                        <?php endif; ?>
+                            
+                    </td>
+                </tr>
+            <?php endforeach;?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="5"><p style="margin:10px 35%"><?php echo $this->__('You didn\'t create any codes yet.'); ?></p></td>
+                </tr>
+            <?php endif ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('my-credit-code-table');
+        function confirmDelete(url)
+        {
+            if(confirm('<?php echo $this->__('Are you sure to remove this code?')?>')) {
+                window.location.href = url;
+            }
+        }
+    
+    </script>
+    <?php echo $this->getPagerHtml(); ?>
+    
+</div>
+<?php endif; ?>
