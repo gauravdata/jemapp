@@ -154,6 +154,9 @@ class Comaxx_Docdata_PaymentController extends Mage_Core_Controller_Front_Action
 			}
 
 			if ($result->hasError()) {
+				if ($_SERVER['REMOTE_ADDR'] == '95.97.31.66') {					
+					exit(var_dump($result->getErrorMessage()));
+				}
 				if (!$errorMsg) {
 					$errorMsg = __('We\'re sorry but an error occured trying to create your order. We restored your shopping cart, and you may try again or come back later. We will keep your shopping cart saved if you\'re logged in.');
 				}
