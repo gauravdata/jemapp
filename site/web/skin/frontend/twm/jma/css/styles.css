@@ -305,9 +305,6 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 
 .currently .btn-remove	{ display: block; }
 
-/*- Newsletter -*/
-.block-subscribe label			{ display: none; }
-
 /*- Cart -*/
 ul.messages	{ margin-bottom: 20px; border: 1px solid #4c4c4c; padding: 12px; background:  }
 ul.messages .success-msg	{ padding-left: 28px; background: url(../images/i_msg-success.gif) no-repeat left; }
@@ -518,7 +515,7 @@ tr.tax-details-first td 		{ border-top:1px solid #d2d8db; }
 	float: left;
 	margin: 0;
 }
-.footer form input[type=email] {
+.footer form input[type=text] {
 	border: none;
 	padding: 5px;
 	width: 220px;
