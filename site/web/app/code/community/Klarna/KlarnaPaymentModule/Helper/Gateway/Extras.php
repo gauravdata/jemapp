@@ -364,7 +364,8 @@ class Klarna_KlarnaPaymentModule_Helper_Gateway_Extras
             "qty" => 1,
             "sku" => $desc,
             "name" => Mage::helper('sales')->__('Discount (%s)', $desc),
-            "price" => $amount
+            "price" => $amount,
+            "flags" => KlarnaFlags::INC_VAT
         );
     }
 }
