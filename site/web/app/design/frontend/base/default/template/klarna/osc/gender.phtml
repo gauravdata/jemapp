@@ -1,0 +1,33 @@
+<?php if (isset($showGender)): ?>
+    <li>
+        <label><?php echo $genderLabel; ?></label>
+        <div class="input-box">
+            <input
+                type="radio"
+                name="<?php echo $gender_name; ?>"
+                value="1"
+                id="id_klarna_gender_male_<?php echo $code; ?>"
+                <?php if ($gender === 1 || $gender === '1'): ?>
+                    checked="checked"
+                <?php endif; ?>
+            />
+            <label style="float: none;" for="id_klarna_gender_male_<?php echo $code; ?>">
+                <?php echo $maleLabel; ?>
+            </label>
+            &nbsp;&nbsp;
+            <input
+                type="radio"
+                name="<?php echo $gender_name; ?>"
+                value="0"
+                id="id_klarna_gender_female_<?php echo $code; ?>"
+                class="validate-one-required"
+                <?php if ($gender === 0 || $gender === '0'): ?>
+                    checked="checked"
+                <?php endif; ?>
+            />
+            <label style="float: none;" for="id_klarna_gender_female_<?php echo $code; ?>">
+                <?php echo $femaleLabel; ?>
+            </label>
+        </div>
+    </li>
+<?php endif; ?>

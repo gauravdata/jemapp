@@ -1,0 +1,18 @@
+<link type="text/css" rel="stylesheet" href="<?php echo $checkoutCSS; ?>" />
+<span id="klarna_logo" class="<?php echo $logo; ?>"></span>
+<?php if (isset($showTransactionNumber)): ?>
+<p><b><?php echo $label; ?>:</b> <?php echo $transactionNumber; ?></p>
+<?php endif; ?>
+<?php if (isset($reference)): ?>
+<p><b><?php echo $reference_label; ?>:</b> <?php echo $reference; ?></p>
+<?php endif; ?>
+<?php if (isset($showInvoiceNumbers)): ?>
+<fieldset>
+    <ul>
+        <li><b><?php echo $invoiceLabel; ?></b></li>
+        <?php foreach($invoiceNumbers as $link): ?>
+        <li><a href="<?php echo $link; ?>"><?php echo $link; ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+</fieldset>
+<?php endif; ?>

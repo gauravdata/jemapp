@@ -1,0 +1,34 @@
+<link type="text/css" rel="stylesheet" href="<?php echo $checkoutCSS; ?>" />
+<?php if ($hasPClasses === true): ?>
+    <table class="pclassTable">
+        <tr>
+            <th>Country</th>
+            <th>PClass ID</th>
+            <th>Merchant ID</th>
+            <th>Description</th>
+            <th>Expiry date</th>
+            <th>Months</th>
+            <th>Start fee</th>
+            <th>Invoice fee</th>
+            <th>Interest rate</th>
+            <th>Minimum amount</th>
+        </tr>
+        <?php foreach($pclasses AS $pclass): ?>
+        <tr>
+            <?php $country = strtolower($pclass["country"]); ?>
+            <td><span class="klarna_flag_<?php echo $country; ?>"></span></td>
+            <td><?php echo $pclass['id']; ?></td>
+            <td><?php echo $pclass['eid']; ?></td>
+            <td><?php echo $pclass['description']; ?></td>
+            <td><?php echo $pclass['expiryDate']; ?></td>
+            <td><?php echo $pclass['months']; ?></td>
+            <td><?php echo $pclass['startFee']; ?></td>
+            <td><?php echo $pclass['invoiceFee']; ?></td>
+            <td><?php echo $pclass['interestRate']; ?></td>
+            <td><?php echo $pclass['minAmount']; ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+<?php else: ?>
+    <div class="pclassNotice">No PClasses in the database</div>
+<?php endif; ?>

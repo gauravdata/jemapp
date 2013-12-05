@@ -1,0 +1,32 @@
+<fieldset class="form-list">
+    <ul id="payment_form_<?php echo $code; ?>" class="klarna_box_container" style="display:none">
+        <li>
+            <span id="<?php echo $code; ?>_logo" class="logo <?php echo $logo;?>"></span>
+        </li>
+        <li>
+            <div id="<?php echo $code;?>_terms" class="klarna_box_top_agreement"></div>
+        </li>
+
+        <li>
+            <div class="error_hook"></div>
+        </li>
+        <?php
+            // Include subtemplates
+            include dirname(__FILE__) . '/osc/pno.phtml';
+
+            include dirname(__FILE__) . '/osc/pclasses.phtml';
+
+            include dirname(__FILE__) . '/osc/gender.phtml';
+
+            include dirname(__FILE__) . '/osc/dob.phtml';
+
+            include dirname(__FILE__) . '/osc/consent.phtml';
+        ?>
+
+        <script type="text/javascript">
+            <?php
+                echo $checkoutJs;
+            ?>
+        </script>
+    </ul>
+</fieldset>
