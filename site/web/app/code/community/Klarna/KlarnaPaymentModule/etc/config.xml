@@ -106,8 +106,8 @@
                 <totals>
                     <klarna_fee>
                         <class>klarnaPaymentModule/quote_total</class>
-                        <after>subtotal,discount,shipping</after>
-                        <before>tax,grand_total</before>
+                        <after>subtotal,discount,shipping,tax</after>
+                        <before>grand_total</before>
                         <renderer>klarnaPaymentModule/checkout_fee</renderer>
                     </klarna_fee>
                     <klarna_tax>
