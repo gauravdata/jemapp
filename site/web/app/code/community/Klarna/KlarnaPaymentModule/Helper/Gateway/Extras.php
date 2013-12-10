@@ -334,11 +334,11 @@ class Klarna_KlarnaPaymentModule_Helper_Gateway_Extras
             return;
         }
 
-        $amouExtrant = $this->order->getDiscountAmount();
+        $amount = $this->order->getDiscountAmount();
         $applyAfter = Mage::helper('tax')->applyTaxAfterDiscount(
             $this->order->getStoreId()
         );
-
+	/*
         if ($applyAfter == true) {
             //With this setting active the discount will not have the correct
             //value. We need to take each respective products rate and calculate
@@ -358,7 +358,7 @@ class Klarna_KlarnaPaymentModule_Helper_Gateway_Extras
                 $amount -= $newAmount;
             }
         }
-
+	*/
         $desc = $this->order->getDiscountDescription();
 
         $this->_extras[] = array(
@@ -366,7 +366,7 @@ class Klarna_KlarnaPaymentModule_Helper_Gateway_Extras
             "sku" => $desc,
             "name" => Mage::helper('sales')->__('Discount (%s)', $desc),
             "price" => $amount,
-	        "flags" => KlarnaFlags::INC_VAT
+	    //"flags" => KlarnaFlags::INC_VAT
         );
     }
 }
