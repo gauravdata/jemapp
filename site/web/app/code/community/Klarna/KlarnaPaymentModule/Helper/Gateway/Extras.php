@@ -334,7 +334,7 @@ class Klarna_KlarnaPaymentModule_Helper_Gateway_Extras
             return;
         }
 
-        $amount = $this->order->getDiscountAmount();
+        $amouExtrant = $this->order->getDiscountAmount();
         $applyAfter = Mage::helper('tax')->applyTaxAfterDiscount(
             $this->order->getStoreId()
         );
@@ -367,7 +367,7 @@ class Klarna_KlarnaPaymentModule_Helper_Gateway_Extras
             "sku" => $desc,
             "name" => Mage::helper('sales')->__('Discount (%s)', $desc),
             "price" => $amount,
-	    "flags" => KlarnaFlags::INC_VAT
+	        "flags" => KlarnaFlags::INC_VAT
         );
     }
 }
