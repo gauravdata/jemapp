@@ -13,7 +13,12 @@ class Icreators_Emalo_Model_Observer
 		$orderState = $order->getState();
 		$orderTotal = $order->getGrandTotal();
 		$orderValue = $order->getSubtotal();
-		$shippingMethod = $order->getAddressShippingMethod();
+		// $shippingMethod = $order->getAddressShippingMethod();
+		$shippingMethod = $order->getShippingMethod();
+		$shippingDescription = $order->getShippingDescription();
+		$storeId = Mage::app()->getStore()->getId();
+		$storeName = Mage::app()->getStore()->getName();
+		$websiteId = Mage::app()->getStore()->getWebsiteId();
 		// ADDED BY M2SC END
 
 		$shippingAmount = $order->getData('shipping_amount'); // in cents
@@ -34,47 +39,51 @@ class Icreators_Emalo_Model_Observer
 			</CUSTOMER>
 
 			<PA>
-				<NAME1>".substr($billingAddress->getName(),0,50)."</NAME1>
-				<STREET>".$billingAddress->getStreetFull()."</STREET>
+				<NAME1>".htmlspecialchars(.substr($billingAddress->getName(),0,50))."</NAME1>
+				<STREET>".htmlspecialchars(.$billingAddress->getStreetFull())."</STREET>
 				<POSTALCODE>".$billingAddress->getPostcode()."</POSTALCODE>
-				<CITY>".$billingAddress->getCity()."</CITY>
+				<CITY>".htmlspecialchars(.$billingAddress->getCity())."</CITY>
 				<COUNTRY>".$billingAddress->getCountryId()."</COUNTRY>
 				<LANGUAGE>NL</LANGUAGE>
-				<FIRSTNAME>".$billingAddress->getFirstname()."</FIRSTNAME>
-				<LASTNAME>".$billingAddress->getLastname()."</LASTNAME>
+				<FIRSTNAME>".htmlspecialchars(.$billingAddress->getFirstname())."</FIRSTNAME>
+				<LASTNAME>".htmlspecialchars(.$billingAddress->getLastname())."</LASTNAME>
 			</PA>
 
 			<SA>
 				<NATURALPERSON/>
-				<NAME1>".substr($shippingAddress->getName(),0,50)."</NAME1>
-				<STREET>".$shippingAddress->getStreetFull()."</STREET>
+				<NAME1>".htmlspecialchars(.substr($shippingAddress->getName(),0,50))."</NAME1>
+				<STREET>".htmlspecialchars($shippingAddress->getStreetFull())."</STREET>
 				<POSTALCODE>".$shippingAddress->getPostcode()."</POSTALCODE>
-				<CITY>".$shippingAddress->getCity()."</CITY>
+				<CITY>".htmlspecialchars(.$shippingAddress->getCity())."</CITY>
 				<COUNTRY>".$shippingAddress->getCountryId()."</COUNTRY>
 				<LANGUAGE>NL</LANGUAGE>
-				<FIRSTNAME>".$shippingAddress->getFirstname()."</FIRSTNAME>
+				<FIRSTNAME>".htmlspecialchars(.$shippingAddress->getFirstname())."</FIRSTNAME>
 				<PREFIX/>
-				<LASTNAME>".$shippingAddress->getLastname()."</LASTNAME>
-				<PHONENR>".$billingAddress->getTelephone()."</PHONENR>
+				<LASTNAME>".htmlspecialchars(.$shippingAddress->getLastname())."</LASTNAME>
+				<PHONENR>".htmlspecialchars(.$billingAddress->getTelephone())."</PHONENR>
 				<MOBILEPHONE></MOBILEPHONE>
-				<EMAIL>".$order->getCustomerEmail()."</EMAIL>
+				<EMAIL>".htmlspecialchars(.$order->getCustomerEmail())."</EMAIL>
 			</SA>
 
 			<HEADER>
 				<ORDERNUMBER>".$orderId."</ORDERNUMBER>
 				<ORDERSTATUS>".$orderStatus."</ORDERSTATUS>
 				<ORDERSTATE>".$orderState."</ORDERSTATE>
+				<WEBSITEID>".$websiteId."</WEBSITEID>
+				<STOREID>".$storeId."</STOREID>
+				<STORENAME>".htmlspecialchars(.$storeName)."</STORENAME>
 				<ORDERTYPE>IP-</ORDERTYPE>
 				<ORDERTOTAL>".$orderTotal."</ORDERTOTAL>
 				<ORDERVALUE>".$orderValue."</ORDERVALUE>
 				<SHIPPINGAMOUNT>".$shippingAmount."</SHIPPINGAMOUNT>
 				<SHIPPINGMETHOD>".$shippingMethod."</SHIPPINGMETHOD>
+				<SHIPPINGDESCRIPTION>".htmlspecialchars((.$shippingDescription)."</SHIPPINGDESCRIPTION>
 				<PAYMENTTYPE>".$paymentType."</PAYMENTTYPE>
-				<PAYMENTMETHOD>".$paymentMethod ."</PAYMENTMETHOD>
-			</HEADER>";
+				<PAYMENTMETHOD>".htmlspecialchars(.$paymentMethod)."</PAYMENTMETHOD>
+			</HEADER>"
 
 		$orderItems = $order->getItemsCollection();
-		$xml.= "<POSITIONS>";
+		$xml.= "<POSITIONS>"
 		foreach ($orderItems as $item)
 		{
 			if (!$item->isDummy())
@@ -94,7 +103,7 @@ class Icreators_Emalo_Model_Observer
 				}
 				$xml .= "<QUANTITY>".(int)$item->getQtyOrdered()."</QUANTITY>";
 				$xml .= "<PRICE>".(int)($item->getPrice()*100)."</PRICE>";
-				$xml .= "</POSITION>";
+				$xml .= "</POSITION>"
 			}
 		}
 		$xml .= "</POSITIONS>
@@ -163,7 +172,7 @@ class Icreators_Emalo_Model_Observer
 						$icPassword = Mage::getStoreConfig('emalo_options/export/emaloPassword');	
 						$result = '';
 						$params = array(
-								"sAccessArea" 		=> $icAccessArea, 
+								'sAccessArea' 		=> $icAccessArea, 
 								'sCustomerNumber' 	=> $icCustomerNumber, 
 								'sPassword' 		=> $icPassword, 
 								'sMethod' 			=> "mfnlWebshopIn", 
@@ -201,7 +210,7 @@ class Icreators_Emalo_Model_Observer
 				$icPassword = Mage::getStoreConfig('emalo_options/export/emaloPassword');	
 				$result = '';
 				$params = array(
-						"sAccessArea" 		=> $icAccessArea, 
+						'sAccessArea' 		=> $icAccessArea, 
 						'sCustomerNumber' 	=> $icCustomerNumber, 
 						'sPassword' 		=> $icPassword, 
 						'sMethod' 			=> "mfnlWebshopIn", 
