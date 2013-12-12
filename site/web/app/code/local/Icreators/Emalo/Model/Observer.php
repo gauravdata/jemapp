@@ -39,30 +39,30 @@ class Icreators_Emalo_Model_Observer
 			</CUSTOMER>
 
 			<PA>
-				<NAME1>".htmlspecialchars(.substr($billingAddress->getName(),0,50))."</NAME1>
-				<STREET>".htmlspecialchars(.$billingAddress->getStreetFull())."</STREET>
+				<NAME1>".htmlspecialchars(substr($billingAddress->getName(),0,50))."</NAME1>
+				<STREET>".htmlspecialchars($billingAddress->getStreetFull())."</STREET>
 				<POSTALCODE>".$billingAddress->getPostcode()."</POSTALCODE>
-				<CITY>".htmlspecialchars(.$billingAddress->getCity())."</CITY>
+				<CITY>".htmlspecialchars($billingAddress->getCity())."</CITY>
 				<COUNTRY>".$billingAddress->getCountryId()."</COUNTRY>
 				<LANGUAGE>NL</LANGUAGE>
-				<FIRSTNAME>".htmlspecialchars(.$billingAddress->getFirstname())."</FIRSTNAME>
-				<LASTNAME>".htmlspecialchars(.$billingAddress->getLastname())."</LASTNAME>
+				<FIRSTNAME>".htmlspecialchars($billingAddress->getFirstname())."</FIRSTNAME>
+				<LASTNAME>".htmlspecialchars($billingAddress->getLastname())."</LASTNAME>
 			</PA>
 
 			<SA>
 				<NATURALPERSON/>
-				<NAME1>".htmlspecialchars(.substr($shippingAddress->getName(),0,50))."</NAME1>
+				<NAME1>".htmlspecialchars(substr($shippingAddress->getName(),0,50))."</NAME1>
 				<STREET>".htmlspecialchars($shippingAddress->getStreetFull())."</STREET>
 				<POSTALCODE>".$shippingAddress->getPostcode()."</POSTALCODE>
-				<CITY>".htmlspecialchars(.$shippingAddress->getCity())."</CITY>
+				<CITY>".htmlspecialchars($shippingAddress->getCity())."</CITY>
 				<COUNTRY>".$shippingAddress->getCountryId()."</COUNTRY>
 				<LANGUAGE>NL</LANGUAGE>
-				<FIRSTNAME>".htmlspecialchars(.$shippingAddress->getFirstname())."</FIRSTNAME>
+				<FIRSTNAME>".htmlspecialchars($shippingAddress->getFirstname())."</FIRSTNAME>
 				<PREFIX/>
-				<LASTNAME>".htmlspecialchars(.$shippingAddress->getLastname())."</LASTNAME>
-				<PHONENR>".htmlspecialchars(.$billingAddress->getTelephone())."</PHONENR>
+				<LASTNAME>".htmlspecialchars($shippingAddress->getLastname())."</LASTNAME>
+				<PHONENR>".htmlspecialchars($billingAddress->getTelephone())."</PHONENR>
 				<MOBILEPHONE></MOBILEPHONE>
-				<EMAIL>".htmlspecialchars(.$order->getCustomerEmail())."</EMAIL>
+				<EMAIL>".htmlspecialchars($order->getCustomerEmail())."</EMAIL>
 			</SA>
 
 			<HEADER>
@@ -71,16 +71,16 @@ class Icreators_Emalo_Model_Observer
 				<ORDERSTATE>".$orderState."</ORDERSTATE>
 				<WEBSITEID>".$websiteId."</WEBSITEID>
 				<STOREID>".$storeId."</STOREID>
-				<STORENAME>".htmlspecialchars(.$storeName)."</STORENAME>
+				<STORENAME>".htmlspecialchars($storeName)."</STORENAME>
 				<ORDERTYPE>IP-</ORDERTYPE>
 				<ORDERTOTAL>".$orderTotal."</ORDERTOTAL>
 				<ORDERVALUE>".$orderValue."</ORDERVALUE>
 				<SHIPPINGAMOUNT>".$shippingAmount."</SHIPPINGAMOUNT>
 				<SHIPPINGMETHOD>".$shippingMethod."</SHIPPINGMETHOD>
-				<SHIPPINGDESCRIPTION>".htmlspecialchars((.$shippingDescription)."</SHIPPINGDESCRIPTION>
+				<SHIPPINGDESCRIPTION>".htmlspecialchars($shippingDescription)."</SHIPPINGDESCRIPTION>
 				<PAYMENTTYPE>".$paymentType."</PAYMENTTYPE>
-				<PAYMENTMETHOD>".htmlspecialchars(.$paymentMethod)."</PAYMENTMETHOD>
-			</HEADER>"
+				<PAYMENTMETHOD>".htmlspecialchars($paymentMethod)."</PAYMENTMETHOD>
+			</HEADER>";
 
 		$orderItems = $order->getItemsCollection();
 		$xml.= "<POSITIONS>"
