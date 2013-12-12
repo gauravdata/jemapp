@@ -83,7 +83,7 @@ class Icreators_Emalo_Model_Observer
 			</HEADER>";
 
 		$orderItems = $order->getItemsCollection();
-		$xml.= "<POSITIONS>"
+		$xml.= "<POSITIONS>";
 		foreach ($orderItems as $item)
 		{
 			if (!$item->isDummy())
@@ -103,7 +103,7 @@ class Icreators_Emalo_Model_Observer
 				}
 				$xml .= "<QUANTITY>".(int)$item->getQtyOrdered()."</QUANTITY>";
 				$xml .= "<PRICE>".(int)($item->getPrice()*100)."</PRICE>";
-				$xml .= "</POSITION>"
+				$xml .= "</POSITION>";
 			}
 		}
 		$xml .= "</POSITIONS>
