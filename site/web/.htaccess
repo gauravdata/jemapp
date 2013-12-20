@@ -122,6 +122,12 @@
 
     RewriteBase /
 
+
+RewriteCond %{HTTP_HOST} ^(www\.)?jemappelle\.nl
+RewriteRule ^retour\.pdf retour-jma.pdf [L]
+
+RewriteRule ^retour\.pdf retour-nt.pdf [L]
+
 ############################################
 ## uncomment next line to enable light API calls processing
 
@@ -209,3 +215,4 @@
     #FileETag none
 
 SetEnvIf Host ^webstore\.jemappelle\.nl MAGE_RUN_CODE=jma_nl
+
