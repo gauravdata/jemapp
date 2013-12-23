@@ -152,7 +152,7 @@ class Icreators_Emalo_Model_Observer
 				$invoicesPaid = true;
 				foreach ($order->getInvoiceCollection() as $invoice)
 				{
-					if ($invoice->getState() !== Mage_Sales_Model_Order_Invoice::STATE_PAID)
+					if ((int)$invoice->getState() !== Mage_Sales_Model_Order_Invoice::STATE_PAID)
 					{
 						// $invoiceId = $invoice->getId();
 						// Mage::log("Invoice #{$invoiceId} not paid", Zend_Log::DEBUG, 'debug.log');
