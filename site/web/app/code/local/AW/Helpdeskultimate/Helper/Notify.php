@@ -398,7 +398,6 @@ class AW_Helpdeskultimate_Helper_Notify extends AW_Helpdeskultimate_Helper_Abstr
     private function log()
     {
         $args = func_get_args();
-	var_dump($args); die;
         call_user_func_array(array(Mage::helper('helpdeskultimate/logger'), 'log'), array_values($args));
         return $this;
     }
