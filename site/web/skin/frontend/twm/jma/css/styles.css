@@ -263,7 +263,8 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 #recently-viewed-items p	{ margin: 0; padding: 5px 0; }
 
 .sidebar .block-border	{ margin-bottom: 20px; background: url("../images/footerBorder.gif") repeat-x scroll right bottom transparent; }
-.sidebar .meta p.product-name	{ text-align: center; margin: 0; min-height: 32px; }
+.sidebar .meta { min-height: 160px; }
+.sidebar .meta p.product-name	{ text-align: center; margin: 0; }
 .sidebar .product-details .pricerange	{ text-align: center; margin-bottom: 10px; }
 .sidebar .product-details .pricerange p	{ display: inline; margin: 0 3px; }
 
