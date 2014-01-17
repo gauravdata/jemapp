@@ -41,7 +41,7 @@
 ?>
 <?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top') ?>
 <div class="nav-container">
-	<img src="<?=$this->getSkinUrl('images/menu-image.jpg');?>" alt="No Tomatoes Surfing" />
+	<img src="<?=$this->getSkinUrl('images/menu-image-' . Mage::app()->getLocale()->getLocaleCode() . '.jpg');?>" alt="No Tomatoes Surfing" />
 	<ul id="nav">
 		<!--<li class=""><a href="<?php echo $this->getUrl('') ?>">Home</a></li>-->
 		<?php if($_menu): ?>
