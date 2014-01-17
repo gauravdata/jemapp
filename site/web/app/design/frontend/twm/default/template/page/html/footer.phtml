@@ -39,6 +39,7 @@
 				<?=$this->getChildHtml('footer.newsletter');?>
 			</div>
 			<div class="grid_2 omega">
+				<?php if(Mage::app()->getLocale()->getLocaleCode() == 'nl_NL') { ?>
 				<iframe class="iframe-right" scrolling="no" src="https://www.kiyoh.nl/widget.php?company=6589&size=small" width="160" height="98" border="0" frameborder="0"></iframe>
 				<!--Start of Zopim Live Chat Script-->
 				<script type="text/javascript">
@@ -49,6 +50,7 @@
 					type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
 				</script>
 				<!--End of Zopim Live Chat Script-->
+				<?php } ?>
 			</div>
 			<div class="clear">&nbsp;</div>
 		</div>
