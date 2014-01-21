@@ -26,12 +26,11 @@ class Amasty_Shopby_Block_Adminhtml_Filter_Edit_Tab_Values extends Mage_Adminhtm
     {
         $hlp = Mage::helper('amshopby');
 
-        $this->addColumn('value_id', array(
+        $this->addColumn('option_id', array(
             'header'    => $hlp->__('ID'),
-            'index'     => 'value_id',
+            'index'     => 'option_id',
             'width'     => '50px', 
         ));
-
        
         $this->addColumn('title', array(
             'header'    => $hlp->__('Title'),
@@ -45,4 +44,5 @@ class Amasty_Shopby_Block_Adminhtml_Filter_Edit_Tab_Values extends Mage_Adminhtm
     {
         return $this->getUrl('*/adminhtml_value/edit', array('id' => $row->getValueId()));
     }
+
 }

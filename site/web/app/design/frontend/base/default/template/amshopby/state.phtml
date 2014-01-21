@@ -21,5 +21,7 @@
         </li>
     <?php endforeach; ?>
     </ol>
-    <div class="actions"><a href="<?php echo Mage::helper('amshopby')->getFullUrl(array(), 1) ?>"><?php echo Mage::helper('catalog')->__('Clear All') ?></a></div>
+    <?php if (Mage::helper('amshopby')->isVersionLessThan(1, 7)): ?>
+    <div class="actions"><a href="<?php echo Mage::helper('amshopby/url')->getFullUrl(array(), 1) ?>"><?php echo Mage::helper('catalog')->__('Clear All') ?></a></div>
+    <?php endif; ?>
 <?php endif; ?>

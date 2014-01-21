@@ -22,13 +22,22 @@ class Amasty_Shopby_IndexController extends Mage_Core_Controller_Front_Action
           
         // need to prepare layer params
         try {
-            Mage::dispatchEvent('catalog_controller_category_init_after', array('category' => $category, 'controller_action' => $this));
+            Mage::dispatchEvent('catalog_controller_category_init_after', 
+                array('category' => $category, 'controller_action' => $this));
         } catch (Mage_Core_Exception $e) {
             Mage::logException($e);
-            return false;
-        }      
+            return;
+        } 
+        // observer can change value
+        if (!$category->getId()){
+            $this->_forward('noRoute'); 
+            return;
+        }     
             
         $this->loadLayout();
+        $this->_initLayoutMessages('catalog/session');
+        $this->_initLayoutMessages('checkout/session');  
+
         $this->renderLayout();
     }
 

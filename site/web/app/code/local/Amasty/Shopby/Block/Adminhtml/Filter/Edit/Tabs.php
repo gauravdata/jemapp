@@ -18,12 +18,17 @@ class Amasty_Shopby_Block_Adminhtml_Filter_Edit_Tabs extends Mage_Adminhtml_Bloc
             'label'     => Mage::helper('amshopby')->__('General'),
             'content'   => $this->getLayout()->createBlock('amshopby/adminhtml_filter_edit_tab_general')->toHtml(),
         ));
-
-        $this->addTab('values', array(
-            'label'     => Mage::helper('amshopby')->__('Options'),
-            'class'     => 'ajax',
-            'url'       => $this->getUrl('*/*/values', array('_current' => true)),
-        ));
+        
+        /*
+         * Add options tab only for decimals
+         */         
+        if (Mage::registry('amshopby_filter')->getBackendType() != 'decimal') {
+            $this->addTab('values', array(
+                'label'     => Mage::helper('amshopby')->__('Options'),
+                'class'     => 'ajax',
+                'url'       => $this->getUrl('*/*/values', array('_current' => true)),
+            ));
+        }
 
         $this->_updateActiveTab();
         return parent::_beforeToHtml();
@@ -31,15 +36,15 @@ class Amasty_Shopby_Block_Adminhtml_Filter_Edit_Tabs extends Mage_Adminhtml_Bloc
     
     protected function _updateActiveTab()
     {
-    	$tabId = $this->getRequest()->getParam('tab');
-    	if ($tabId) {
-    		$tabId = preg_replace("#{$this->getId()}_#", '', $tabId);
-    		if ($tabId) {
-    			$this->setActiveTab($tabId);
-    		}
-    	}
-    	else {
-    	   $this->setActiveTab('general'); 
-    	}
+        $tabId = $this->getRequest()->getParam('tab');
+        if ($tabId) {
+            $tabId = preg_replace("#{$this->getId()}_#", '', $tabId);
+            if ($tabId) {
+                $this->setActiveTab($tabId);
+            }
+        }
+        else {
+           $this->setActiveTab('general'); 
+        }
     }
 }

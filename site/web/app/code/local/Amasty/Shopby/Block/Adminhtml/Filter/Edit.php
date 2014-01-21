@@ -13,6 +13,11 @@ class Amasty_Shopby_Block_Adminhtml_Filter_Edit extends Mage_Adminhtml_Block_Wid
 
     public function getHeaderText()
     {
-        return Mage::helper('amshopby')->__('Edit Filter Properties');
+        $model = Mage::registry('amshopby_filter');
+        
+        if ($model) {
+            $attribute =  Mage::getModel('eav/entity_attribute')->load($model->getAttributeId());
+            return Mage::helper('amshopby')->__('Edit Filter "' . $attribute->getFrontendLabel() . '" Properties');
+        }
     }
 }

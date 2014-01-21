@@ -6,7 +6,7 @@
         <ol class="narrowed-category">
     <?php else: ?>
         <p class="block-subtitle"><?php echo Mage::helper('catalog')->__('Currently Shopping by') ?></p>
-        <!--<ol class="currently test">    
+        <ol class="currently">    
     <?php endif; ?>
     <?php foreach ($_filters as $_filter): ?>
         <li>
@@ -21,5 +21,7 @@
         </li>
     <?php endforeach; ?>
     </ol>
-    <div class="actions"><a href="<?php echo Mage::helper('amshopby/url')->getFullUrl(array(), 1) ?>"><?php echo Mage::helper('catalog')->__('Clear All') ?></a></div>-->
+    <?php if (Mage::helper('amshopby')->isVersionLessThan(1, 7)): ?>
+    <div class="actions"><a href="<?php echo Mage::helper('amshopby/url')->getFullUrl(array(), 1) ?>"><?php echo Mage::helper('catalog')->__('Clear All') ?></a></div>
+    <?php endif; ?>
 <?php endif; ?>

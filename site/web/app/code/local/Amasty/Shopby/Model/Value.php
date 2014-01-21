@@ -8,9 +8,4 @@ class Amasty_Shopby_Model_Value extends Mage_Core_Model_Abstract
     {    
         $this->_init('amshopby/value');
     }
-    
-    public function getFilterId()
-    {
-        return $this->getResource()->getFilterId($this->getOptionId());
-    }    
 }

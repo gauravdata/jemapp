@@ -840,13 +840,15 @@ $('billing:email').observe('blur', function(e)    {
                 else if(result == 'exists') {
                     <?php if($this->settings['registration_order_without_password']): ?>
                     // Remove the password fields if the email exists in database
-                    pwfields = $('onestepcheckout-li-password');
-                    if(pwfields){
-                        pwfields.hide();
-                    }
-                    <?php endif; ?>
+                    $('onestepcheckout-li-password').hide();
+                    <?php else: ?>
+
                     $('onestepcheckout-email-error-message').update('<?php echo $this->__('Email address already registered. Please <a href="javascript:void(0);" onclick="login_popup.show(); return false;">login now</a> or use a different email address.'); ?>');
                     $('onestepcheckout-email-error').show();
+                    // Ask the user to login or change email address
+                    //login_popup.show();
+                    $('id_onestepcheckout_username').value = email;
+                    <?php endif; ?>
                 }
                 else    {
                     $('onestepcheckout-email-error').hide();
@@ -870,17 +872,16 @@ Validation.add('validate-email', '<?php echo $this->__('This is a required field
             if(response.status == 200)  {
                 var result = response.responseText.evalJSON().result;
                 if(result == 'invalid') {
-                    value = false;
+                    value =  false;
                 } else if(result == 'exists') {
                     <?php if($this->settings['registration_order_without_password']): ?>
-                        pwfields = $('onestepcheckout-li-password');
-                        if(pwfields){
-                            pwfields.hide();
-                        }
-                    <?php endif; ?>
+                    $('onestepcheckout-li-password').hide();
+                    <?php else: ?>
                     $('onestepcheckout-email-error-message').update('<?php echo $this->__('Email address already registered. Please <a href="javascript:void(0);" onclick="login_popup.show(); return false;">login now</a> or use a different email address.'); ?>');
                     $('onestepcheckout-email-error').show();
+                    $('id_onestepcheckout_username').value = email;
                     value =  false;
+                    <?php endif; ?>
                 }
             }
         }
@@ -889,6 +890,10 @@ Validation.add('validate-email', '<?php echo $this->__('This is a required field
 });
 </script>
 <?php endif; ?>
+
+
+
+
 
 <?php if($this->settings['enable_terms']): ?>
 <div id="onestepcheckout-toc-popup" style="display: none;">
@@ -980,7 +985,7 @@ Event.observe(window, 'load', function() {
         $$('.onestepcheckout-place-order').each(function(elem){
             elem.observe('click', function(e)   {
                 Event.stop(e);
-
+                
                // First validate the form
                 var form = new VarienForm('onestepcheckout-form');
 
@@ -1043,6 +1048,7 @@ Event.observe(window, 'load', function() {
 
         $$('dl.shipment-methods input').invoke('observe', 'click', get_separate_save_methods_function(url, update_payments));
         $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
+        $$('div.payment-methods input[name="payment\[use_internal_credit\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
 
         $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
             $$('div.onestepcheckout-payment-method-error').each(function(item) {
@@ -1160,12 +1166,6 @@ Event.observe(window, 'load', function() {
             euvat.observe('click', get_save_billing_function(url_save_billing, url_set_methods, update_payments, true));
         }
 
-        var euvatid = $('billing:vat_id');
-
-        if(euvatid !== null){
-            euvatid.observe('click', get_save_billing_function(url_save_billing, url_set_methods, update_payments, true));
-        }
-
         triggers = ['<?php echo implode ('\',\'',$triggers)?>'];
         btriggered = [];
         striggered = [];
@@ -1198,62 +1198,35 @@ Event.observe(window, 'load', function() {
         batriggered = false;
         satriggered = false;
 
-        changeTimer = false;
-        changeInterval = 1000;
-
         triggers.each(function(item){
             var belement = $('billing:'+item);
             if(belement){
                 belement.observe('change', function(e){
-                    var element = e.element();
-                    var id = element.id;
-                    var tagname = element.tagName;
-                    if(tagname === 'SELECT'){
-                        clearTimeout(changeTimer);
-                        changeTimer = setTimeout(bcallbackEvent, changeInterval, id);
-                    } else {
-                        bcallbackEvent(id);
+                    id = e.element().id;
+                    if(!btriggered.include(id)){
+                        btriggered.push(id);
                     }
+                    if(btriggered.length >= triggers.length-1){
+                        batriggered = true;
+                    }
+                    get_save_billing_function(url_save_billing, url_set_methods, update_payments, batriggered)();
                 });
             }
 
             var selement = $('shipping:'+item);
             if(selement){
                 selement.observe('change', function(e){
-                    var element = e.element();
-                    var id = element.id;
-                    var tagname = element.tagName;
-                    if(tagname === 'SELECT'){
-                        clearTimeout(changeTimer);
-                        changeTimer = setTimeout(scallbackEvent, changeInterval, id);
-                    } else {
-                        scallbackEvent(id);
+                    id = e.element().id;
+                    if(!striggered.include(id)){
+                        striggered.push(id);
                     }
+                    if(striggered.length >= triggers.length-1){
+                        satriggered = true;
+                    }
+                    get_save_billing_function(url_save_billing, url_set_methods, update_payments, satriggered)();
                 });
             }
         });
-
-        function scallbackEvent (id){
-            if(!striggered.include(id)){
-                striggered.push(id);
-            }
-            if(striggered.length >= triggers.length-1){
-                satriggered = true;
-            }
-            get_save_billing_function(url_save_billing, url_set_methods, update_payments, satriggered)();
-        }
-
-
-        function bcallbackEvent (id){
-            if(!btriggered.include(id)){
-                btriggered.push(id);
-            }
-            if(btriggered.length >= triggers.length-1){
-                batriggered = true;
-            }
-            get_save_billing_function(url_save_billing, url_set_methods, update_payments, batriggered)();
-        }
-
 
         <?php if($this->isCustomerLoggedIn()):?>
             var bselect = $('billing-address-select');
@@ -1275,7 +1248,9 @@ if($('payment-tool-tip-close')){
 }
 
 </script>
-
+<script type="text/javascript">
+	paymentrefresh('<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>');
+</script>
 
 <?php endif; ?>
 

@@ -14,7 +14,7 @@
             <ul class="bare-list">
             <?php foreach ($options as $o): ?>
                 <li>
-                    <a href="<?php echo $o['url'] ?>"><?php echo $this->htmlEscape($o['label']) ?></a>
+                    <a href="<?php echo $o['url'] ?>"><?php echo $this->htmlEscape($o['label']) ?></a> <?php if ($this->getShowCounts()) { echo '('.$o['cnt'].')'; } ?>
                 </li>
             <?php endforeach ?>
             </ul>

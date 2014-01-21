@@ -4,8 +4,8 @@
 */ 
 class Amasty_Shopby_Block_Adminhtml_Value_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
-  protected function _prepareForm()
-  {
+    protected function _prepareForm()
+    {
         //create form structure
         $form = new Varien_Data_Form(array(
           'id' => 'edit_form',
@@ -22,18 +22,25 @@ class Amasty_Shopby_Block_Adminhtml_Value_Edit_Form extends Mage_Adminhtml_Block
         
         $fldSet = $form->addFieldset('set', array('legend'=> $hlp->__('General')));
         $fldSet->addField('is_featured', 'select', array(
-          'label'     => $hlp->__('Featured'),
-          'name'      => 'is_featured',
-          'values'    => array(
-            array(
-                'value' => 0,
-                'label' => Mage::helper('catalog')->__('No')
+            'label'     => $hlp->__('Featured'),
+            'name'      => 'is_featured',
+            'values'    => array(
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('catalog')->__('No')
+                ),
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('catalog')->__('Yes')
+                ),
             ),
-            array(
-                'value' => 1,
-                'label' => Mage::helper('catalog')->__('Yes')
-            )),
+            'onchange'  => 'featured(this)', 
         ));         
+        
+        $fldSet->addField('featured_order', 'text', array(
+            'label'     => $hlp->__('Featured Order'),
+            'name'      => 'featured_order',
+        ));
 
         
         $fldMain = $form->addFieldset('main', array('legend'=> $hlp->__('Products List Page')));
@@ -57,6 +64,11 @@ class Amasty_Shopby_Block_Adminhtml_Value_Edit_Form extends Mage_Adminhtml_Block
           'label'     => $hlp->__('Meta-Description Tag'),
           'name'      => 'meta_descr',
         ));
+        $fldMain->addField('meta_kw', 'text', array(
+          'label' => $hlp->__('Meta-Keyword Tag'),
+          'name' => 'meta_kw',
+        ));
+
         $fldMain->addField('img_big', 'file', array(
             'label'     => $hlp->__('Image'),
             'name'      => 'img_big',
@@ -97,6 +109,18 @@ class Amasty_Shopby_Block_Adminhtml_Value_Edit_Form extends Mage_Adminhtml_Block
             'value'     => 1,
         )); 
         
+        $fldNav->addField('img_small_hover', 'file', array(
+            'label'     => $hlp->__('Image On Hover'),
+            'name'      => 'img_small_hover',
+            'required'  => false,
+            'after_element_html' => $this->getImageHtml($model->getImgSmallHover()), 
+        )); 
+        $fldNav->addField('remove_img_small_hover', 'checkbox', array(
+            'label'     => $hlp->__('Remove Image'),
+            'name'      => 'remove_img_small_hover',
+            'value'     => 1,
+        )); 
+        
 
         
         //set form values
@@ -110,10 +134,10 @@ class Amasty_Shopby_Block_Adminhtml_Value_Edit_Form extends Mage_Adminhtml_Block
         }
         
         return parent::_prepareForm();
-  }
+    }
   
-  private function getImageHtml($img)
-  {
+    private function getImageHtml($img)
+    {
         $html = '';
         if ($img){
             $html .= '<p style="margin-top: 5px">';
@@ -121,5 +145,5 @@ class Amasty_Shopby_Block_Adminhtml_Value_Edit_Form extends Mage_Adminhtml_Block
             $html .= '</p>';
         } 
         return $html;     
-  }
+    }
 }

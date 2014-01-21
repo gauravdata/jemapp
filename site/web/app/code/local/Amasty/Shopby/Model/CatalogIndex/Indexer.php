@@ -15,5 +15,5 @@ class Amasty_Shopby_Model_CatalogIndex_Indexer extends Mage_CatalogIndex_Model_I
         }
         
         return $products;
-	}
+    }
 }

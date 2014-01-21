@@ -15,7 +15,7 @@ class Amasty_Shopby_Block_Catalog_Product_List_Toolbar extends Mage_Catalog_Bloc
     public function getPagerHtml()
     {
         if ($this->skip())
-            return parent::getPagerUrl($params);
+            return parent::getPagerHtml();
             
         $alias = 'product_list_toolbar_pager';
         $oldPager   = $this->getChild($alias);
@@ -37,10 +37,9 @@ class Amasty_Shopby_Block_Catalog_Product_List_Toolbar extends Mage_Catalog_Bloc
     private function skip()
     {
         $r = Mage::app()->getRequest();
-        if ('catalogsearch' == $r->getModuleName())
+        // todo add more conditions if needed   
+        if (in_array($r->getModuleName(), array('supermenu', 'supermenuadmin', 'catalogsearch','tag', 'catalogsale','catalognew')))
             return true;
-        
-        // todo add more conditions if needed    
             
         return false;
     }

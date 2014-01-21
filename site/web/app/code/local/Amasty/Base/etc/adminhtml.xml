@@ -14,6 +14,9 @@
                                     <ambase>
                                         <title>Amasty - Extensions Information</title>
                                     </ambase>
+                                    <amstore>
+                                        <title>Amasty - Extensions Store</title>
+                                    </amstore>
                                 </children>
                             </config>
                         </children>

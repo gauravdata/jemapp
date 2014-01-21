@@ -8,4 +8,5 @@ class Amasty_Shopby_Block_Catalog_Pager extends Mage_Page_Block_Html_Pager
     {
         return $this->getParentBlock()->getPagerUrl($params);
     }
+    
 }

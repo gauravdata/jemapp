@@ -586,6 +586,13 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
         try {
             $payment = $this->getRequest()->getPost('payment', array());
             //$payment = array();
+           //////////// MageWorx Fix ///////////////
+                if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit') {
+                  Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
+                } else {
+                    Mage::getModel('checkout/session')->setUseInternalCredit(false);
+                }
+                //////////// MageWorx Fix ///////////////
             if(!empty($paymentMethod)){
                 $payment['method'] = $paymentMethod;
             }
@@ -640,6 +647,14 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
             try {
                 $payment = $this->getRequest()->getPost('payment', array());
                 $payment['method'] = $payment_method;
+                
+                //////////// MageWorx Fix ///////////////
+                if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit') {
+                  Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
+                } else {
+                    Mage::getModel('checkout/session')->setUseInternalCredit(false);
+                }
+                //////////// MageWorx Fix ///////////////
                 //$payment_result = $this->_getOnepage()->savePayment($payment);
                 $helper->savePayment($payment);
             }

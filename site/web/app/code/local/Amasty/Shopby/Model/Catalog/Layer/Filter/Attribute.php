@@ -5,8 +5,11 @@
 
 class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Model_Layer_Filter_Attribute
 {
-    // start version dependend functions
+    // start version dependent functions
     
+    /**
+     * @deprecated
+     */
     protected function _getRemoveImage()
     {
          if (Mage::helper('amshopby')->isVersionLessThan(1, 4)){
@@ -15,19 +18,23 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Mo
          else {
             return Mage::getDesign()->getSkinUrl('images/btn_remove.gif');
          }
-            
+    }
+    
+    protected function _getBlankImage()
+    {
+        return Mage::getDesign()->getSkinUrl('images/spacer.gif');
     }
     
     protected function _getCount($attribute)
     {
-         $optionsCount = array();
-         if (Mage::helper('amshopby')->isVersionLessThan(1, 4)){
+        $optionsCount = array();
+        if (Mage::helper('amshopby')->isVersionLessThan(1, 4)){
             $optionsCount = Mage::getSingleton('catalogindex/attribute')->getCount(
                 $attribute,
                 $this->_getBaseCollectionSql()
             );
-         }
-         else {
+        }
+        else {
             // clone select from collection with filters
             $select = $this->_getBaseCollectionSql();
             
@@ -53,9 +60,9 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Mo
                 ->group("{$tableAlias}.value");
     
             $optionsCount = $connection->fetchPairs($select);
-         } 
+        } 
          
-         return $optionsCount;       
+        return $optionsCount;       
     }
     
     protected function _getIsFilterableAttribute($attribute)
@@ -106,20 +113,46 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Mo
             ->where("$alias.attribute_id = ?", $attribute->getId())
             ->where("$alias.value IN (?)", $value);
         }
-        else{
+        else {
+            $attr = false;  // use AND logic
             $connection = $this->_getResource()->getReadConnection();
-            $conditions = array(
-                "{$alias}.entity_id = e.entity_id",
-                $connection->quoteInto("{$alias}.attribute_id = ?", $attribute->getAttributeId()),
-                $connection->quoteInto("{$alias}.store_id = ?",     $collection->getStoreId()),
-                $connection->quoteInto("{$alias}.value IN(?)",      $value)
-            );
-    
-            $collection->getSelect()->join(
-                array($alias => $this->_getResource()->getMainTable()),
-                join(' AND ', $conditions),
-                array()
-            );            
+            
+            if (is_array($value) && $attr) {
+                
+                foreach ($value as $i => $attrValue) {
+                    $alias = $alias . $i;
+                    $conditions = array(
+                        "{$alias}.entity_id = e.entity_id",
+                        $connection->quoteInto("{$alias}.attribute_id = ?", $attribute->getAttributeId()),
+                        $connection->quoteInto("{$alias}.store_id = ?",     $collection->getStoreId()),
+                        $connection->quoteInto("{$alias}.value = ?",      $attrValue)
+                    );
+
+                    $collection->getSelect()->join(
+                        array($alias => $this->_getResource()->getMainTable()),
+                        join(' AND ', $conditions),
+                        array()
+                    );
+                }
+            } else {
+                
+                $conditions = array(
+                    "{$alias}.entity_id = e.entity_id",
+                    $connection->quoteInto("{$alias}.attribute_id = ?", $attribute->getAttributeId()),
+                    $connection->quoteInto("{$alias}.store_id = ?",     $collection->getStoreId()),
+                    $connection->quoteInto("{$alias}.value IN(?)",      $value)
+                );
+                
+                $collection->getSelect()->join(
+                    array($alias => $this->_getResource()->getMainTable()),
+                    join(' AND ', $conditions),
+                    array()
+                );          
+            }
+        }
+        
+        if (isset($_REQUEST['debug'])) {
+            Zend_Debug::dump($collection->getSelect()->__toString());
         }
         
         if (count($value) > 1)
@@ -127,7 +160,8 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Mo
 
         return null;
     }      
-    // END version dependend code
+    
+    // END version dependent code
     
 
     /**
@@ -146,7 +180,8 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Mo
             //generate Status Block
             $attribute = $this->getAttributeModel();      
             $text = '';
-            foreach ($attribute->getSource()->getAllOptions() as $option) {
+            $options = Mage::helper('amshopby/attributes')->getAttributeOptions($attribute->getAttributeCode());
+            foreach ($options as $option) {
                 $k = array_search($option['value'], $currentVals);
                 if (false !== $k){
     
@@ -164,9 +199,11 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Mo
                     $url = Mage::helper('amshopby/url')->getFullUrl($query);
                     
                     $text .= $option['label'] 
-                          . '&nbsp;'
-                          . '<a href="' . $url . '">'
-                          . '<img src="' . $this->_getRemoveImage() . '" alt="' . Mage::helper('catalog')->__('Remove This Item') . '" />'
+//                          . '&nbsp;'
+//                          . '<a href="' . $url . '">'
+//                          . '<img src="' . $this->_getRemoveImage() . '" alt="' . Mage::helper('catalog')->__('Remove This Item') . '" />'
+                          . '<a href="' . $url . '" class="btn-remove-inline">'
+                          . '<img src="' . $this->_getBlankImage() . '" width="13" height="12" alt="' . Mage::helper('catalog')->__('Remove This Item') . '" />'
                           . '</a>, ';
                 }
             }
@@ -194,8 +231,7 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Mo
         $attribute = $this->getAttributeModel();
         $this->_requestVar = $attribute->getAttributeCode();
 
-
-        $options = $attribute->getFrontend()->getSelectOptions();
+        $options = Mage::helper('amshopby/attributes')->getAttributeOptions($attribute->getAttributeCode());
         $optionsCount = $this->_getCount($attribute);
         $data = array();
 
@@ -219,15 +255,14 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Mo
             $currentVals = implode(',', $currentVals);
             $cnt = isset($optionsCount[$option['value']]) ? $optionsCount[$option['value']] : 0;    
             if ($cnt || $this->_getIsFilterableAttribute($attribute) != self::OPTIONS_ONLY_WITH_RESULTS) {
-                    $data[] = array(
-                        'label'     => $option['label'],
-                        'value'     => $currentVals,
-                        'count'     => $cnt,
-                        'option_id' => $option['value'],
-                    );
+                $data[] = array(
+                    'label'     => $option['label'],
+                    'value'     => $currentVals,
+                    'count'     => $cnt,
+                    'option_id' => $option['value'],
+                );
             }
         }
-  
         return $data;
     }
 
@@ -262,12 +297,14 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Mo
         $newWhere = array();
 
         foreach ($oldWhere as $cond){
-           if (!strpos($cond, $alias))
-               $newWhere[] = $cond;
+            if (!strpos($cond, $alias)){
+                $newWhere[] = $cond;
+            }
         }
   
-        if ($newWhere && substr($newWhere[0], 0, 3) == 'AND')
-           $newWhere[0] = substr($newWhere[0], 3);        
+        if ($newWhere && substr($newWhere[0], 0, 3) == 'AND'){
+            $newWhere[0] = substr($newWhere[0], 3);
+        }
         
         $baseSelect->setPart(Varien_Db_Select::WHERE, $newWhere);
         
@@ -275,8 +312,9 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Mo
         $newFrom = array();
         
         foreach ($oldFrom as $name=>$val){
-           if ($name != $alias)
-               $newFrom[$name] = $val;
+            if ($name != $alias){
+                $newFrom[$name] = $val;
+            }
         }
         $baseSelect->setPart(Varien_Db_Select::FROM, $newFrom);
 

@@ -8,10 +8,10 @@ class Icreators_Emalo_IndexController extends Mage_Core_Controller_Front_Action
     }
 
 	public function twmPushOrdersAction() {
-		exit('nee');
 		echo '<pre>';
 		$orders = Mage::getModel('sales/order')->getCollection()
 			->addfieldtofilter('created_at',array(array('gteq' => '2013-12-13 00:00:00')));
+		$i = 0;
 		foreach ($orders as $order) {
 			$state = $order->getState();
 			if ($state == Mage_Sales_Model_Order::STATE_PROCESSING)
@@ -31,6 +31,7 @@ class Icreators_Emalo_IndexController extends Mage_Core_Controller_Front_Action
 					if ($invoicesPaid) {
 						$this->pushOrder($order->getId());
 						var_dump($order->getId());					
+						$i++;
 					}
 					else {
 						var_dump('not paid');
@@ -76,7 +77,8 @@ class Icreators_Emalo_IndexController extends Mage_Core_Controller_Front_Action
 	        ini_set('default_socket_timeout', 60);
          	$client = new SoapClient($icUrl);
 	        $result = $client->gbCallCustomerBusinessLinkMethod($params);
-        	}
+        	var_dump($result);
+		}
 	        catch(Exception $e)
         	{
             		Mage::log('Exception for event order ' . $e->getMessage(), null, 'emalo.log');

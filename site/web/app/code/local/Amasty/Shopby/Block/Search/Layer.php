@@ -1,4 +1,7 @@
 <?php
+/**
+ * @copyright   Copyright (c) 2009-2012 Amasty (http://www.amasty.com)
+ */
 class Amasty_Shopby_Block_Search_Layer extends Amasty_Shopby_Block_Catalog_Layer_View
 {
     /**
@@ -7,7 +10,7 @@ class Amasty_Shopby_Block_Search_Layer extends Amasty_Shopby_Block_Catalog_Layer
     protected function _construct()
     {
         parent::_construct();
-        Mage::register('current_layer', $this->getLayer());
+        Mage::register('current_layer', $this->getLayer(), true);
     } 
     
     /**
@@ -33,9 +36,20 @@ class Amasty_Shopby_Block_Search_Layer extends Amasty_Shopby_Block_Catalog_Layer
     
     public function canShowBlock()
     {
-        if (!Mage::helper('amshopby')->isVersionLessThan(1, 4, 2)){
-            $_isLNAllowedByEngine = Mage::helper('catalogsearch')->getEngine()->isLeyeredNavigationAllowed();
-            if (!$_isLNAllowedByEngine) {
+        if (version_compare(Mage::getVersion(), '1.4.2', '>=')){
+            $allowed = true;
+            
+            $engine = Mage::helper('catalogsearch')->getEngine();
+            // deprecated function name
+            if (method_exists($engine, 'isLeyeredNavigationAllowed')){
+                $allowed = $engine->isLeyeredNavigationAllowed();
+            } 
+            // modern version 
+            else { 
+                $allowed = $engine->isLayeredNavigationAllowed();
+            }  
+               
+            if (!$allowed) {
                 return false;
             }
         }
@@ -44,11 +58,10 @@ class Amasty_Shopby_Block_Search_Layer extends Amasty_Shopby_Block_Catalog_Layer
             ->getConfig(Mage_CatalogSearch_Model_Layer::XML_PATH_DISPLAY_LAYER_COUNT);
 
         if (!$availableResCount
-            || ($availableResCount>=$this->getLayer()->getProductCollection()->getSize())) {
+            || ($availableResCount >= $this->getLayer()->getProductCollection()->getSize())) {
             return parent::canShowBlock();
         }
+        
         return false;
     } 
-    
-     
 }

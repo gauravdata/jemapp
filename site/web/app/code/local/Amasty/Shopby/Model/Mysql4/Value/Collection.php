@@ -1,4 +1,9 @@
 <?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2008-2012 Amasty (http://www.amasty.com)
+* @package Amasty_Shopby
+*/
 class Amasty_Shopby_Model_Mysql4_Value_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
     public function _construct()
@@ -21,4 +26,17 @@ class Amasty_Shopby_Model_Mysql4_Value_Collection extends Mage_Core_Model_Mysql4
             
         return $this;
     } 
+    
+    public function addValue()
+    {
+        $storeId = Mage::app()->getStore()->getId();
+        $this->getSelect()->joinLeft(
+            array('ov' => $this->getTable('eav/attribute_option_value')), 
+            'main_table.option_id = ov.option_id AND ov.store_id=' . $storeId, 
+            array('ov.value')
+        );
+            
+        return $this;
+    }    
+    
 }

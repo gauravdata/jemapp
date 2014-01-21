@@ -49,7 +49,21 @@ class Amasty_Shopby_Block_List extends Mage_Core_Block_Template
         }
         
         usort($options, array($this, '_sortByName'));
-         
+                 
+        // add images
+        $ids = array();
+        foreach ($options as $opt){
+            $ids[] = $opt['value']; 
+        }
+        $collection = Mage::getResourceModel('amshopby/value_collection')
+            ->addFieldToFilter('option_id', array('in'=>$ids))
+            ->load();
+        $images = array();
+        foreach ($collection as $value){
+            $images[$value->getOptionId()] = $value->getImgBig() ? Mage::getBaseUrl('media') . 'amshopby/' . $value->getImgBig() : ''; 
+        }
+        // end add images        
+            
         $c = 0;
         $letters = array();
         $hlp    = Mage::helper('amshopby/url');
@@ -58,9 +72,12 @@ class Amasty_Shopby_Block_List extends Mage_Core_Block_Template
                 
                 $opt['cnt'] = $optionsCount[$opt['value']];
                 $opt['url'] = $hlp->getOptionUrl($attribute->getAttributeCode(), $opt['label'], $opt['value']);  
-
+                $opt['img'] = isset($images[$opt['value']]) ? $images[$opt['value']] : '';
                 
+                //$i = mb_strtoupper(mb_substr($opt['label'], 0, 1, 'UTF-8'));
                 $i = strtoupper(substr($opt['label'], 0, 1));
+
+if (is_numeric($i)) { $i = '#'; }
                 
                 if (!isset($letters[$i]['items'])){
                     $letters[$i]['items'] = array();
@@ -106,7 +123,12 @@ class Amasty_Shopby_Block_List extends Mage_Core_Block_Template
     
     public function _sortByName($a, $b)
     {
-        return strcmp($a['label'], $b['label']);
+        $x = substr($a['label'], 0, 1);
+        $y = substr($b['label'], 0, 1);
+        if (is_numeric($x) && !is_numeric($y)) return 1;
+        if (!is_numeric($x) && is_numeric($y)) return -1;
+
+        return strcmp(strtoupper($a['label']), strtoupper($b['label']));
     }
 
 }

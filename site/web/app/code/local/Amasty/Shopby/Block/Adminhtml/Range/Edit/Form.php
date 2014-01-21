@@ -29,6 +29,7 @@ class Amasty_Shopby_Block_Adminhtml_Range_Edit_Form extends Mage_Adminhtml_Block
       'class'     => 'required-entry',
       'required'  => true,
       'name'      => 'price_to',
+      'note'      =>  $hlp->__('Please set 999999 to show `and above`')
     ));
       
     //set form values

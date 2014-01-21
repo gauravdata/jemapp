@@ -12,16 +12,20 @@ class Amasty_Shopby_Model_Mysql4_Price13 extends Mage_CatalogIndex_Model_Mysql4_
         parent::_construct();
     }
 
-    // compatibility with default magento ranges
-    public function getMaxValue($attribute = null, $entitySelect)
+    /**
+     * Retrieve minimal and maximal prices
+     * 
+     * @return array (max, min)
+     */
+    public function getMaxMinPrice($attribute = null, $entitySelect) 
     {
         $select = $this->_prepareSelect(null, true, $entitySelect, $attribute);
         $price  = $this->_price;
         
-        $select->from('', "MAX($price)");
-
-        return $this->_getReadAdapter()->fetchOne($select);
-    }    
+        $select->from('', "MAX($price) as max_price, MIN($price) as min_price");
+            
+        return $this->_getReadAdapter()->fetchRow($select, array(), Zend_Db::FETCH_NUM);
+    }
     
     // compatibility with default magento ranges
     // NOTE! DIFFERENT argumens order (magento bug)
@@ -53,17 +57,20 @@ class Amasty_Shopby_Model_Mysql4_Price13 extends Mage_CatalogIndex_Model_Mysql4_
         // it already contains all necessary joins
         $select = $this->_prepareSelect($filter, true);
 
-        $countExpr  = new Zend_Db_Expr('COUNT(DISTINCT price_table.entity_id)');
+        $countExpr  = new Zend_Db_Expr('COUNT(DISTINCT price_table_amshopby.entity_id)');
         
         $rangeExpr  = "CASE ";
         $price    =  $this->_price;
-        foreach ($ranges as $n => $r)
+        
+        
+        foreach ($ranges as $n => $r){
             $rangeExpr .= "WHEN ($price >= {$r[0]} AND $price < {$r[1]}) THEN $n ";
+        }
         $rangeExpr .= " END";
         $rangeExpr = new Zend_Db_Expr($rangeExpr);
 
         $select->from('', array('range' => $rangeExpr, 'count' => $countExpr))->group('range');
-
+        
         $counts = $this->_getReadAdapter()->fetchPairs($select);
         return $counts;
     }
@@ -78,11 +85,13 @@ class Amasty_Shopby_Model_Mysql4_Price13 extends Mage_CatalogIndex_Model_Mysql4_
     {
         $select = $this->_prepareSelect($filter);
         
-        if ($from)
+        if ($from){
             $select->where($this->_price . ' >= ?', $from);
+        }
             
-        if ($to)
-            $select->where($this->_price . ' < ?', $to);
+        if ($to){
+            $select->where($this->_price . ' <= ?', $to);
+        }
 
         return $this;  
     }
@@ -104,18 +113,20 @@ class Amasty_Shopby_Model_Mysql4_Price13 extends Mage_CatalogIndex_Model_Mysql4_
             $oldWhere = $ret->getPart(Varien_Db_Select::WHERE);
             $newWhere = array();
             foreach ($oldWhere as $cond){
-               if (false === strpos($cond, $this->_price))
+               if (false === strpos($cond, $this->_price)){
                    $newWhere[] = $cond;
+               }
             }
-            if ($newWhere && substr($newWhere[0], 0, 3) == 'AND')
+            if ($newWhere && substr($newWhere[0], 0, 3) == 'AND'){
                $newWhere[0] = substr($newWhere[0], 3); 
+            }
                       
             $ret->setPart(Varien_Db_Select::WHERE, $newWhere);             
         }
         else{ //first time
             $ret->distinct(true);
             
-            $tableName = 'price_table';
+            $tableName = 'price_table_amshopby';
             $ret->joinLeft(
                 array($tableName => $this->getMainTable()),
                 $tableName .'.entity_id=e.entity_id',

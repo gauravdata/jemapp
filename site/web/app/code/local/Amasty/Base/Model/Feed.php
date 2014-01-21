@@ -100,7 +100,8 @@ class Amasty_Base_Model_Feed extends Mage_AdminNotification_Model_Feed
         if (is_null($this->_feedUrl)) {
             $this->_feedUrl = self::URL_NEWS;
         }
-        return $this->_feedUrl;
+        $query = '?s=' . urlencode(Mage::getStoreConfig('web/unsecure/base_url')); 
+        return $this->_feedUrl  . $query;
     }
     
     protected function getInterests()

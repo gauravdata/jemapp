@@ -12,30 +12,38 @@ class Amasty_Shopby_Model_Mysql4_Price extends Mage_Catalog_Model_Resource_Eav_M
     {
         parent::_construct();
     }
-
-    // default Magento maxPrice
-    public function getMaxPrice($filter)
+    
+    /**
+     * Retrieve minimal and maximal prices
+     * 
+     * @param Mage_Catalog_Model_Layer_Filter_Price $filter
+     * @return array (max, min)
+     */
+    public function getMaxMinPrice($filter) 
     {
+        $hasPrice = $this->_price;
         $select = $this->_prepareSelect($filter, true);
         
         $price = $this->_price;
-        $select->from('', "MAX($price)");
+        $select->from('', "MAX($price) as max_price, MIN($price) as min_price");
+        
+        if (!$hasPrice)
+            $this->_price = '';
+            
+        return $this->_getReadAdapter()->fetchRow($select, array(), Zend_Db::FETCH_NUM);
+    }
 
-        return $this->_getReadAdapter()->fetchOne($select);
-    }    
     
     // default Magento ranges
     public function getCount($filter, $range)
     {
         $select = $this->_prepareSelect($filter, true);
-
         $price = $this->_price;
         $select->columns(array(
             'range' => new Zend_Db_Expr("FLOOR($price / $range) + 1"),
             'count' => new Zend_Db_Expr('COUNT(*)')
         ));
         $select->group('range');
-
         return $this->_getReadAdapter()->fetchPairs($select);
     }    
     
@@ -63,8 +71,7 @@ class Amasty_Shopby_Model_Mysql4_Price extends Mage_Catalog_Model_Resource_Eav_M
             'range' => $rangeExpr,
             'count' => $countExpr
         ));
-        // why we needed this condition?
-        //$select->where("{$table}.min_price > 0");
+
         $select->group('range');
 
         return $this->_getReadAdapter()->fetchPairs($select);
@@ -81,7 +88,7 @@ class Amasty_Shopby_Model_Mysql4_Price extends Mage_Catalog_Model_Resource_Eav_M
             $select->where($this->_price . ' >= ?', $from);
             
         if ($to)
-            $select->where($this->_price . ' < ?', $to);
+            $select->where($this->_price . ' <= ?', $to);
             
         return $this;
     }
@@ -91,7 +98,7 @@ class Amasty_Shopby_Model_Mysql4_Price extends Mage_Catalog_Model_Resource_Eav_M
         $collection = $filter->getLayer()->getProductCollection();
         $collection->addPriceData($filter->getCustomerGroupId(), $filter->getWebsiteId());
         $select     = $collection->getSelect();
-        
+       
         $ret  = $clone ? clone $select : $select;
         
         if ($this->_price){ 
@@ -118,9 +125,9 @@ class Amasty_Shopby_Model_Mysql4_Price extends Mage_Catalog_Model_Resource_Eav_M
          
             // will be used in the count function
             $this->_price = "(({$table}.min_price {$additional}) * {$rate})";
+
         }
 
-        
         if ($clone){
             $ret->reset(Zend_Db_Select::COLUMNS);
             $ret->reset(Zend_Db_Select::ORDER);

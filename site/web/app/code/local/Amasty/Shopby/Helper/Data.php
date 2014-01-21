@@ -5,7 +5,55 @@
 class Amasty_Shopby_Helper_Data extends Mage_Core_Helper_Abstract
 {
     protected $filters = null;
-    protected $icons      = null;
+    protected $icons   = null;
+    
+    const XML_PATH_SEO_PRICE_NOFOLLOW       = 'amshopby/seo/price_nofollow';
+    const XML_PATH_SEO_PRICE_NOINDEX        = 'amshopby/seo/price_noindex';
+    const XML_PATH_SEO_PRICE_RELNOFOLLOW    = 'amshopby/seo/price_rel_nofollow';
+    
+    const CACHE_LIFETIME = 10800; // half an hour // todo: move to config?
+    
+    public function getBlockCacheLifetime()
+    {
+        return self::CACHE_LIFETIME;
+    }
+    
+    public function getSeoPriceNofollow()
+    {
+        return Mage::getStoreConfigFlag(self::XML_PATH_SEO_PRICE_NOFOLLOW);
+    }
+    
+    public function getSeoPriceNoindex()
+    {
+        return Mage::getStoreConfigFlag(self::XML_PATH_SEO_PRICE_NOINDEX);
+    }
+    
+    public function getSeoPriceRelNofollow()
+    {
+        return Mage::getStoreConfigFlag(self::XML_PATH_SEO_PRICE_RELNOFOLLOW);
+    }
+    
+    public function getDecimalDisplayTypes()
+    {
+        return array(
+            $this->__('Default'), 
+            $this->__('Dropdown'), 
+            $this->__('From-To Only'),
+            $this->__('Slider'),
+        );
+    }
+    
+    public function getDisplayTypes()
+    {
+        return array(
+            $this->__('Labels Only'), 
+            $this->__('Images Only'), 
+            $this->__('Images and Labels'),
+            $this->__('Drop-down List'),
+            $this->__('Labels in 2 columns'),
+        );
+    }
+    
     
     protected function _getFilters()
     {
@@ -24,37 +72,36 @@ class Amasty_Shopby_Helper_Data extends Mage_Core_Helper_Abstract
         return $this->filters;
     }
     
-    public function init($productCollection)
+    public function init()
     {
         // make sure we call this only once
         if (!is_null($this->icons))
             return;
             
         $filters = $this->_getFilters();
-                    
-        $ids = array();    
-        foreach ($productCollection as $prod){
-            foreach ($filters as $f){
-                $optionIds  = trim($prod->getData($f->getAttributeCode()), ',');
-                if ($optionIds){
-                    $ids = array_merge($ids, explode(',', $optionIds));  
-                }
-            }
-        }
 
         $optionCollection = Mage::getResourceModel('amshopby/value_collection')
             ->addPositions()
-            ->addFieldToFilter('option_id', array('in' => $ids))
-            ->addFieldToFilter('img_medium', array('gt' => ''));  
-            
-        //echo (string)$optionCollection->getSelect();
-        //exit;
+            ->addFieldToFilter('img_medium', array('gt' => ''))  
+            ->addValue();  
             
         $this->icons = array();
+        if (!$filters)
+            return;
+            
         $hlp = Mage::helper('amshopby/url');
         foreach ($optionCollection as $opt){
-            $filter = $filters[$opt->getFilterId()];
             
+            $filterId = $opt->getFilterId();
+            // it is possible when "use on view" = "false"
+            if (empty($filters[$filterId]))
+                continue;
+                
+            $filter = $filters[$filterId];
+                            
+            // seo urls fix when different values        
+            $opt->setTitle($opt->getValue() ? $opt->getValue() : $opt->getTitle());
+                
             $img  = $opt->getImgMedium();
             $code = $filter->getAttributeCode();
             $url  = $hlp->getOptionUrl($code, $opt->getTitle(), $opt->getOptionId());
@@ -62,6 +109,7 @@ class Amasty_Shopby_Helper_Data extends Mage_Core_Helper_Abstract
             $this->icons[$opt->getOptionId()] = array(
                 'url'   => str_replace('___SID=U&','', $url),
                 'title' => $opt->getTitle(),
+                'descr' => $opt->getDescr(),
                 'img'   => Mage::getBaseUrl('media') . 'amshopby/' . $img,  
                 'pos'   => $filter->getPosition(),  
                 'pos2'  => $opt->getSortOrder(),  
@@ -84,9 +132,8 @@ class Amasty_Shopby_Helper_Data extends Mage_Core_Helper_Abstract
         if ('view' == $mode){
             $this->init(array($product));    
         }
-    
         $filters = $this->_getFilters();
-
+        
         $items = array();
         foreach ($filters as $filter){
             $code = $filter->getAttributeCode(); 
@@ -101,15 +148,25 @@ class Amasty_Shopby_Helper_Data extends Mage_Core_Helper_Abstract
                 continue;
             
             $optIds  = trim($product->getData($code), ','); 
+            if (!$optIds && $product->isConfigurable()){
+                $usedProds = $product->getTypeInstance(true)->getUsedProducts(null, $product);
+                foreach ($usedProds as $child){
+                    if ($child->getData($code)){
+                        $optIds .= $child->getData($code) . ',';
+                    }
+                }
+            }
+            
             if ($optIds){
                 $optIds = explode(',', $optIds);
+                $optIds = array_unique($optIds);
                 foreach ($optIds as $id){
                     if (!empty($this->icons[$id])){
                         $items[] = $this->icons[$id];
                     }
                 }
             }
-        }   
+        }  
        
         //sort by position in the layered navigation
         usort($items, array('Amasty_Shopby_Helper_Data', '_srt'));
@@ -173,4 +230,14 @@ class Amasty_Shopby_Helper_Data extends Mage_Core_Helper_Abstract
        
        return $v;       
     } 
+    
+    /**
+     * Check that amlanding is installed and filter enabled
+     * @return boolean
+     */
+    public function landingNewFilter()
+    {
+        return ('true' == (string)Mage::getConfig()->getNode('modules/Amasty_Xlanding/active') && Mage::helper('amlanding')->newFilterActive());
+    }
+    
 }

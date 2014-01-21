@@ -1345,14 +1345,16 @@ class MageWorx_CustomerCredit_Model_Observer
 
     public function expirationDateCron() {
         $today = strtotime(date("Y-m-d"));
+        if(!Mage::getStoreConfig('mageworx_customers/customercredit_expiration/expiration_enable')) return ;
         $model=Mage::getModel('customercredit/credit');
         $collection = $model->getCollection()->joinCustomerTable();
         $sendCustomerNotificationPeriod = Mage::getStoreConfig('mageworx_customers/customercredit_expiration/notify_expiration_date_left');
         foreach ($collection as $item) {
+            
             if($item->getExpirationTime()!='0000-00-00') {
                 $date = strtotime($item->getExpirationTime());
                 $hash = ($date-$today)/(3600*24);
-                if($hash==$sendCustomerNotificationPeriod) {
+                if(($hash==$sendCustomerNotificationPeriod) && ($item->getValue()>0)) {
                     Mage::helper('customercredit')->sendNotificationExpiration($item->getCustomerId(),$sendCustomerNotificationPeriod);
                 }
                 if($hash==0) {

@@ -57,7 +57,7 @@ class MageWorx_CustomerCredit_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     public function isEnabledInvoiceOrder() {
-        return Mage::getStoreConfigFlag('mageworx_customers/customercredit_credit/enable_invoice_order');
+        return Mage::getStoreConfig('mageworx_customers/customercredit_credit/enable_invoice_order');
     }
     
     public function isEnabledPartialPayment() {
@@ -236,10 +236,10 @@ class MageWorx_CustomerCredit_Helper_Data extends Mage_Core_Helper_Abstract
         
         $creditData = $customer->getCustomerCreditData();
        
-        if (isset($creditData['value_change'])) $valueChange = intval($creditData['value_change']); else $valueChange = 0;
+        if (isset($creditData['value_change'])) $valueChange = floatval($creditData['value_change']); else $valueChange = 0;
         if ($valueChange==0) return $this;
         
-        if (isset($creditData['credit_value'])) $creditValue = intval($creditData['credit_value']); else $creditValue = 0;
+        if (isset($creditData['credit_value'])) $creditValue = floatval($creditData['credit_value']); else $creditValue = 0;
         $balance = Mage::helper('core')->currencyByStore($creditValue + $valueChange, $storeId, true, false);
         
         if (isset($creditData['comment'])) $comment = trim($creditData['comment']); else $comment = '';        
@@ -296,10 +296,10 @@ class MageWorx_CustomerCredit_Helper_Data extends Mage_Core_Helper_Abstract
         $customerName = $customer->getFirstname() . ' ' . $customer->getLastname();
         
         $creditData = $customer->getCustomerCreditData();
-        if (isset($creditData['value_change'])) $valueChange = intval($creditData['value_change']); else $valueChange = 0;
+        if (isset($creditData['value_change'])) $valueChange = floatval($creditData['value_change']); else $valueChange = 0;
         if ($valueChange==0) return $this;
         
-        if (isset($creditData['credit_value'])) $creditValue = intval($creditData['credit_value']); else $creditValue = 0;        
+        if (isset($creditData['credit_value'])) $creditValue = floatval($creditData['credit_value']); else $creditValue = 0;        
         $balance = Mage::helper('core')->currency($creditValue + $valueChange, true, false);        
         
         if (isset($creditData['comment'])) $comment = trim($creditData['comment']); else $comment = '';                
@@ -513,10 +513,10 @@ class MageWorx_CustomerCredit_Helper_Data extends Mage_Core_Helper_Abstract
             $customerId = null;
             if(Mage::app()->getStore()->isAdmin()) {
                 
-                if(!Mage::getSingleton('admin/session')->isAllowed('admin/customer/credit')) {
-                    $this->_isShowCustomerCreditFlag = false;
-                    return false;
-                }
+//                if(!Mage::getSingleton('admin/session')->isAllowed('admin/customer/credit')) {
+//                    $this->_isShowCustomerCreditFlag = false;
+//                    return false;
+//                }
                 //invoice order ?
                 if(Mage::registry('current_customer')) {
                     $customerId = Mage::registry('current_customer')->getId();
