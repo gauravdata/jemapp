@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:typens="urn:{{var wsdl.name}}"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             name="{{var wsdl.name}}"
+             targetNamespace="urn:{{var wsdl.name}}">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:{{var wsdl.name}}">
+             
+            <xsd:complexType name="autologinCustomerEntity">
+                <xsd:sequence>
+                    <xsd:element name="customer_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="email" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="firstname" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="lastname" type="xsd:string" minOccurs="0" /> 
+                    <xsd:element name="website_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="store_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="group_id" type="xsd:int" minOccurs="0" />
+                    <xsd:element name="hash" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="is_enabled" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="autologinCustomerEntityArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:autologinCustomer" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="autologinListRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="autologinListResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:autologinCustomerEntityArray" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="autologinGetHashRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerId" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="autologinGetHashResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="autologinGetUrlRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerId" type="xsd:int" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="storeId" type="xsd:int" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="storeUrl" type="xsd:string" /> 
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="autologinGetUrlResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="autologinRenewHashRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="customerId" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="autologinRenewHashResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:boolean" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="autologinListRequest">
+        <wsdl:part name="parameters" element="typens:autologinListRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="autologinListResponse">
+        <wsdl:part name="parameters" element="typens:autologinListResponseParam" />
+    </wsdl:message>
+     <wsdl:message name="autologinGetHashRequest">
+        <wsdl:part name="parameters" element="typens:autologinGetHashRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="autologinGetHashResponse">
+        <wsdl:part name="parameters" element="typens:autologinGetHashResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="autologinGetUrlRequest">
+        <wsdl:part name="parameters" element="typens:autologinGetUrlRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="autologinGetUrlResponse">
+        <wsdl:part name="parameters" element="typens:autologinGetUrlResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="autologinRenewHashRequest">
+        <wsdl:part name="parameters" element="typens:autologinRenewHashRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="autologinRenewHashResponse">
+        <wsdl:part name="parameters" element="typens:autologinRenewHashResponseParam" />
+    </wsdl:message>
+    <wsdl:portType name="{{var wsdl.handler}}PortType">
+        <wsdl:operation name="autologinList">
+            <wsdl:documentation>Retrieve Customers List</wsdl:documentation>
+            <wsdl:input message="typens:autologinListRequest" />
+            <wsdl:output message="typens:autologinListResponse" />
+        </wsdl:operation>
+         <wsdl:operation name="autologinGetHash">
+            <wsdl:documentation>Retrieve Customer Hash</wsdl:documentation>
+            <wsdl:input message="typens:autologinGetHashRequest" />
+            <wsdl:output message="typens:autologinGetHashResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="autologinGetUrl">
+            <wsdl:documentation>Retrieve a Customer login url</wsdl:documentation>
+            <wsdl:input message="typens:autologinGetUrlRequest" />
+            <wsdl:output message="typens:autologinGetUrlResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="autologinRenewHash">
+            <wsdl:documentation>Renew customer hash</wsdl:documentation>
+            <wsdl:input message="typens:autologinRenewHashRequest" />
+            <wsdl:output message="typens:autologinRenewHashResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="autologinList">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="autologinGetHash">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="autologinGetUrl">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="autologinRenewHash">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

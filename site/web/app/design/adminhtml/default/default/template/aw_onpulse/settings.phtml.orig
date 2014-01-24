@@ -1,0 +1,95 @@
+<?php if ((Mage::getStoreConfig('awonpulse/general/credurlkey'))&&(Mage::getStoreConfig('awonpulse/general/credhash'))) {
+      $credurlkey = Mage::getStoreConfig('awonpulse/general/credurlkey');
+      $credhash = Mage::getStoreConfig('awonpulse/general/credhash');
+      $qrsrc = 'http://chart.apis.google.com/chart?chs=250x250&cht=qr&chld=1/1&choe=utf-8&chl=';
+      $backUrl = Mage::getBaseUrl().md5($credurlkey.$credhash);
+      $qrsrc.= 'http://ostapchik.dev/onpulse/?qrhash='.base64_encode($backUrl);
+      }
+else {
+    $credurlkey = '';
+    $credhash = '';
+    $qrsrc = null;
+}
+?>
+
+<table class="form-list">
+    <tbody>
+<form method="post">
+    <tr>
+        <td class="label">
+            <label><?php echo Mage::helper('awonpulse')->__('Url key') ?></label>
+        </td>
+        <td class="value">
+        <input class="input-text" onclick="this.select()" type="text" readonly="readonly" name="groups[general][fields][credurlkey][value]" id="urlkey" value="<?php echo Mage::getBaseUrl().$credurlkey;?>">
+        </td>
+    </tr>
+    <tr>
+        <td class="label">
+        <label><?php echo Mage::helper('awonpulse')->__('Hash') ?></label>
+        </td>
+        <td class="value">
+        <input class="input-text" type="text" onclick="this.select()" readonly="readonly" name="groups[general][fields][credhash][value]" id="hash" value="<?php echo $credhash;?>">
+        </td>
+    </tr>
+    <tr>
+        <td>
+        <button  onclick="generate(this);">Regenerate</button>
+        </td>
+        <td></td>
+    </tr>
+    <?php if ($qrsrc) : ?>
+    <tr>
+        <td class="label">
+            <label><?php echo Mage::helper('awonpulse')->__('QR code for fast navigation') ?></label>
+        </td>
+        <td>
+            <br />&nbsp;&nbsp;<img src="<?php echo $qrsrc; ?>">
+        </td>
+    </tr>
+    <?php endif; ?>
+</form>
+    </tbody>
+</table>
+
+
+    <script type="text/javascript">
+        var flagSubmit = false;
+        function generate() {
+            if (!flagSubmit){
+                key = mkPass(8);
+                hash = mkPass(8);
+                document.getElementById('urlkey').value = key;
+                document.getElementById('hash').value = hash;
+                flagSubmit = true;
+            }
+        }
+    </script>
+
+
+        <script>
+            function mtRand(min, max)
+            {
+                var range = max - min + 1;
+                var n = Math.floor(Math.random() * range) + min;
+                return n;
+            }
+
+            function mkPass(len)
+            {
+                var len=8;
+                var pass = '';
+                var rnd = 0;
+                var c = '';
+                for (i = 0; i < len; i++) {
+                    rnd = mtRand(0, 1); // Латиница или цифры
+                    if (rnd == 0) {
+                        c = String.fromCharCode(mtRand(48, 57));
+                    }
+                    if (rnd == 1) {
+                        c = String.fromCharCode(mtRand(97, 122));
+                    }
+                    pass += c;
+                }
+                return pass;
+            }
+        </script>

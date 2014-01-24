@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <autologin translate="title" module="autologin">
+                <model>autologin/api</model>
+                <title>Autologin API</title>
+                <acl>autologin</acl>
+                <methods>
+                    <list translate="title" module="autologin">
+                        <title>Retrieve customers</title>
+                        <method>items</method>
+                        <acl>autologin/list</acl>
+                    </list>
+                    <getUrl translate="title" module="autologin">
+                        <title>Retrieve Autologin Url</title>
+                        <acl>autologin/url</acl>
+                    </getUrl>
+                    <getHash translate="title" module="autologin">
+                        <title>Retrieve Autologin Hash</title>
+                        <acl>autologin/hash</acl>
+                    </getHash>
+                    <renewHash translate="title" module="autologin">
+                        <title>Renew Autologin Hash</title>
+                        <acl>autologin/generate</acl>
+                    </renewHash>
+                </methods>
+                <faults module="autologin">
+                    <data_invalid>
+                        <code>100</code>
+                        <message>Invalid customer data. Details in error message.</message>
+                    </data_invalid>
+                    <not_exists>
+                        <code>101</code>
+                        <message>Customer not exists.</message>
+                    </not_exists>
+                </faults>
+            </autologin>
+        </resources>
+        <v2>
+            <resources_function_prefix>
+                <autologin>autologin</autologin>
+            </resources_function_prefix>
+        </v2>
+        <acl>
+            <resources>
+                <autologin translate="title" module="autologin">
+                     <title>Autologin</title>
+                     <sort_order>3</sort_order>
+                     <generate translate="title" module="autologin">
+                        <title>Renew Hash</title>
+                     </generate>
+                     <hash translate="title" module="autologin">
+                        <title>Get Hash</title>
+                     </hash>
+                     <url translate="title" module="autologin">
+                        <title>Get Url</title>
+                     </url>
+                     <list translate="title" module="autologin">
+                        <title>List</title>
+                     </list>
+                </autologin>
+            </resources>
+        </acl>
+    </api>
+</config>

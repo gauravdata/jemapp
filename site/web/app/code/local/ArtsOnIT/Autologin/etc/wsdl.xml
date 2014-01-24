@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:typens="urn:{{var wsdl.name}}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+    name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" />
+  			<complexType name="autologinCustomerEntity">
+                <all>
+                    <element name="customer_id" type="xsd:int" minOccurs="0" />
+                    <element name="email" type="xsd:string" minOccurs="0" />
+                    <element name="firstname" type="xsd:string" minOccurs="0" /> 
+                    <element name="lastname" type="xsd:string" minOccurs="0" />
+                    <element name="website_id" type="xsd:int" minOccurs="0" />
+                    <element name="store_id" type="xsd:int" minOccurs="0" />
+                    <element name="group_id" type="xsd:int" minOccurs="0" />
+                    <element name="hash" type="xsd:string" minOccurs="0" /> 
+                    <element name="is_enabled" type="xsd:int" minOccurs="0" /> 
+ 
+                </all>
+            </complexType>
+            <complexType name="autologinCustomerEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:autologinCustomerEntity[]" />
+                    </restriction>
+                </complexContent>
+            </complexType>
+     	</schema>
+    </types>
+    <message name="autologinListRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="filters" type="typens:filters" />
+    </message>
+    <message name="autologinListResponse">
+        <part name="storeView" type="typens:autologinCustomerEntityArray" />
+    </message>
+    <message name="autologinGetHashRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="customerId" type="xsd:int" />
+    </message>
+    <message name="autologinGetHashResponse">
+        <part name="hash" type="xsd:string" />
+    </message>
+    <message name="autologinGetUrlRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="customerId" type="xsd:int" />
+        <part name="storeId" type="xsd:int" />
+        <part name="storeUrl" type="xsd:string" />
+    </message>
+    <message name="autologinGetUrlResponse">
+        <part name="url" type="xsd:string" />
+    </message>
+    <message name="autologinRenewHashRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="customerId" type="xsd:int" />
+    </message>
+    <message name="autologinRenewHashResponse">
+        <part name="res" type="xsd:boolean" />
+    </message>
+    <portType name="{{var wsdl.handler}}PortType">
+        <operation name="autologinList">
+            <documentation>Retrieve customers with Autologin</documentation>
+            <input message="typens:autologinListRequest" />
+            <output message="typens:autologinListResponse" />
+        </operation>
+        <operation name="autologinGetHash">
+            <documentation>Retrieve Customer Hash</documentation>
+            <input message="typens:autologinGetHashRequest" />
+            <output message="typens:autologinGetHashResponse" />
+        </operation>
+        <operation name="autologinGetUrl">
+            <documentation>Retrieve Login Url</documentation>
+            <input message="typens:autologinGetUrlRequest" />
+            <output message="typens:autologinGetUrlResponse" />
+        </operation>
+        <operation name="autologinRenewHash">
+            <documentation>Retrieve Customer Hash</documentation>
+            <input message="typens:autologinRenewHashRequest" />
+            <output message="typens:autologinRenewHashResponse" />
+        </operation>
+    </portType>
+    <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="autologinList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="autologinGetHash">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="autologinGetUrl">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="autologinRenewHash">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+     </binding>
+</definitions>
