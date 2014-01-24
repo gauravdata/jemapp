@@ -9,6 +9,7 @@
 {"store url=\"\"":"Store Url",
 "skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
 "htmlescape var=$customerName":"Customer Name",
+"htmlescape var=$customerEmail":"Customer Email",
 "store url=\"customer/account/\"":"Customer Account Url",
 "var comment":"Comment",
 "var store.getFrontendName()":"Store Name"}
@@ -31,54 +32,61 @@ style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; fo
         width="650" style="border:1px solid #E0E0E0;">
           <tbody>
             <tr>
-              <td valign="top"><a href="{{store url="><img src="{{skin url="
-                alt="{{var store.getFrontendName()}}"
+              <td valign="top"><a
+                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customer=&#x2019;customer_email&#x2019;}}"><img
+                src="{{skin url=" alt="{{var logo_alt}}"
                 style="margin-bottom:10px;" border="0"></a></td>
             </tr>
             <!-- [ middle starts here] -->
             <tr>
               <td valign="top"><h2
                 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Bonjour
-                {{htmlescape var=$customerName}},</h2>
+                {{htmlescape var=$order.customer_email}},</h2>
 
                 <p
                 style="font-size:12px; line-height:16px; margin:0 0 10px 0;"><span
-                style="font-size: 10pt">Je tegoed in Boutique Je m'appelle is
-                bijgewerkt! </span></p>
+                style="font-size: 10pt">Je tegoed in <strong><a
+                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customer=&#x2019;customer_email&#x2019;}}">Boutique
+                Je m'appelle</a></strong> is bijgewerkt! </span></p>
 
                 <p
                 style="font-size:12px; line-height:16px; margin:0 0 10px 0;"><span
                 style="font-size: 10pt">Je hebt op dit moment
-                <strong>{{htmlescape var=$balance}}</strong> tegoed om een
-                nieuwe bestelling te plaatsen.</span></p>
+                <strong>{{htmlescape var=$balance}}</strong> om te besteden in
+                de shop.</span></p>
+
+                <p></p>
 
                 <p style="font-size: 10pt">Wat moet je doen:</p>
 
-                <p style="font-size: 10pt">1. Klik hier om in te loggen in je
-                account:</p>
-
-                <p style="font-size: 10pt"></p>
+                <p style="font-size: 10pt">1. <a name="Klik" id="Klik"
+                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customerName=&#x2019;customerName&#x2019;}}">Klik
+                hier om naar de site te gaan.</a></p>
 
                 <p style="font-size: 10pt">2. Je bent nu ingelogd. Plaats de
                 producten die je wilt bestellen in je shoppingbag en ga naar je
-                shoppingcart. Omdat je nu ook 1 of 2 artikelen kunt omruilen,
+                shoppingcart. Omdat je nu ook 1 of 2 artikelen mag omruilen,
                 wordt de korting van de 3=1 deal pas berekend wanneer je een
                 code hebt ingevuld. </p>
 
-                <p style="font-size: 10pt"><strong>Vul bij het veld OMRUILCODE
-                de code 'RETURN' in en klik op 'Omruilcode toepassen'. Klik
-                daarna op 'AFREKENEN".</strong></p>
+                <p style="font-size: 10pt">Vul bij het veld OMRUILCODE de code
+                '<strong>RETURN</strong>' in en klik op 'Omruilcode toepassen'.
+                Dan wordt de 3=1 deal voor jouw producten in werking gesteld.
+                Klik daarna op 'AFREKENEN".</p>
 
                 <p style="font-size: 10pt">3. Kies bij BETAALWIJZE op 'Mijn
-                tegoed'. Je ziet hier het bedrag wat je tegoed hebt in Boutique
-                Je m'appelle. Wanneer je deze optie aanklikt, wordt het tegoed
-                besteedt aan je bestelling en kun je je bestelling plaatsen!</p>
+                tegoed'. Je ziet hier het bedrag wat je tegoed hebt in
+                <strong><a
+                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customer=&#x2019;customer_email&#x2019;}}">Boutique
+                Je m'appelle</a></strong>. Wanneer je deze optie aanklikt,
+                wordt het tegoed besteedt aan je bestelling en kun je je
+                bestelling plaatsen!</p>
 
                 <p
                 style=" line-height:16px; margin:0 0 10px 0;font-size: 10pt"></p>
 
-                <p style=" line-height:16px; margin:0;font-size: 10pt">Heb je
-                nog vragen, dan hoor ik het graag! <br>
+                <p style=" line-height:16px; margin:0;font-size: 10pt">Beaucoup
+                de plaisir! <br>
                 <br>
                 Je m'appelle Maurice </p>
 
@@ -99,8 +107,9 @@ style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; fo
               <td bgcolor="#EAEAEA" align="center"
               style="background:#EAEAEA; text-align:center;">
                 <center>
-                <p style="font-size:12px; margin:0;">Beaucoup de plaisir,
-                <strong>{{var store.getFrontendName()}}</strong></p>
+                <p style="font-size:12px; margin:0;"><strong><a
+                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customer=&#x2019;customer_email&#x2019;}}">{{var
+                store.getFrontendName()}}</a></strong></p>
                 </center>
               </td>
             </tr>
