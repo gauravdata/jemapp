@@ -61,7 +61,7 @@ class Amasty_Shopby_Block_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Bl
         }
         
         $sortBy = $this->getSortBy();
-        $functions = array(0 => '_sortByPosition', 1 => '_sortByName', 2 => '_sortByCounts');
+        $functions = array(1 => '_sortByName', 2 => '_sortByCounts');
         if (isset($functions[$sortBy])){
             usort($items, array($this, $functions[$sortBy]));
         }
@@ -81,20 +81,6 @@ class Amasty_Shopby_Block_Catalog_Layer_Filter_Attribute extends Mage_Catalog_Bl
         return $items;
     }
 
-    public function _sortByPosition($a, $b)
-    {
-        $x = $a['position'];
-        $y = $b['position'];
-        if (is_numeric($x) && is_numeric($y)){
-            if ($x == $y)
-                return 0;
-            return ($x < $y ? 1 : -1);
-        }
-        else {
-            return strcmp($x, $y);
-        }
-    }
-    
     public function _sortByName($a, $b)
     {
         $x = $a['label'];

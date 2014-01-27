@@ -54,13 +54,13 @@ class Amasty_Shopby_Helper_Attributes
 	            ->setItemObjectClass('catalog/resource_eav_attribute')            
 	            ->addStoreLabel(Mage::app()->getStore()->getId())
 	            ->addIsFilterableFilter()
-	            ->setOrder('position', 'ASC');        
+	            ->setOrder('position', 'ASC');
             $collection->load();
             $this->_attributes = $collection;
         }
         return $this->_attributes;
     }
-    
+
     /**
      * Get option for specific attribute
      * @param string $attributeCode
@@ -87,8 +87,11 @@ class Amasty_Shopby_Helper_Attributes
 	{
 		if (is_null($this->_options)) {
 			$valuesCollection = Mage::getResourceModel('eav/entity_attribute_option_collection')
-				->setStoreFilter()
-				->toArray();
+				->setStoreFilter();
+
+            $valuesCollection->getSelect()->order('sort_order ASC');
+
+            $valuesCollection = $valuesCollection->toArray();
 			$this->_options = $valuesCollection['items'];
 		}
 		return $this->_options;
