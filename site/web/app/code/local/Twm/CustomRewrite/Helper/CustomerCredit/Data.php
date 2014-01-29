@@ -63,4 +63,42 @@ class Twm_CustomRewrite_Helper_CustomerCredit_Data extends MageWorx_CustomerCred
 
         return $this;
     }
+
+    public function sendNotificationExpiration($customerId,$daysLeft) {
+        $customer = Mage::getModel('customer/customer')->load($customerId);
+        $storeId = $customer->getStoreId();
+
+        // Retrieve corresponding email template id and customer name
+        $templateId = 'customercredit_email_credit_expiration_notice';
+
+        $customerName = $customer->getFirstname() . ' ' . $customer->getLastname();
+        $customerEmail = $customer->getEmail();
+
+        $translate = Mage::getSingleton('core/translate');
+        /* @var $translate Mage_Core_Model_Translate */
+        $translate->setTranslateInline(false);
+
+        $mailer = Mage::getModel('core/email_template_mailer');
+
+        $emailInfo = Mage::getModel('core/email_info');
+        $emailInfo->addTo($customer->getEmail(), $customerName);
+        $mailer->addEmailInfo($emailInfo);
+
+        // Set all required params and send emails
+        $mailer->setSender(Mage::getStoreConfig('sales_email/order_comment/identity', $storeId));
+        $mailer->setStoreId($storeId);
+        $mailer->setTemplateId($templateId);
+        $mailer->setTemplateParams(array(
+                'daysLeft'   => $daysLeft,
+                'customerName' => $customerName,
+                'customerEmail' => $customerEmail,
+                'customer' => $customer
+            )
+        );
+        $translate->setTranslateInline(true);
+        $mailer->send();
+
+        return $this;
+    }
+
 }
