@@ -32,12 +32,12 @@ body, textarea, button	{ font-family: Arial, Helvetica, sans-serif; font-size: 1
 .wrapper	{ min-height: 100%; position: relative; }
 
 @font-face {
-    font-family: 'LetterGothicMTStdRegular';
-    src: url('../fonts/lettergothicmtstd-webfont.eot');
-    src: url('../fonts/lettergothicmtstd-webfont.eot?#iefix') format('eot'),
-         url('../fonts/lettergothicmtstd-webfont.woff') format('woff'),
-         url('../fonts/lettergothicmtstd-webfont.ttf') format('truetype'),
-         url('../fonts/lettergothicmtstd-webfont.svg#webfont9Uli7UaI') format('svg');
+    font-family: 'acidregular';
+    src: url('../fonts/acid-webfont.eot');
+    src: url('../fonts/acid-webfont.eot?#iefix') format('eot'),
+         url('../fonts/acid-webfont.woff') format('woff'),
+         url('../fonts/acid-webfont.ttf') format('truetype'),
+         url('../fonts/acid-webfont.svg#webfont9Uli7UaI') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -47,14 +47,14 @@ body, textarea, button	{ font-family: Arial, Helvetica, sans-serif; font-size: 1
 	text-transform: uppercase;
 	color: #4c4c4c;
 	font-size: 40px;
-	font-family: "LetterGothicMTStdRegular";
+	font-family: "acidregular";
 	margin-top: 65px;
 	padding-left: 20px;
 	line-height: 1em;
 	float: left;
 }
 h1, h2, p.title, .block-account .block-title, .sidebar .block-title	{
-	font-family: "LetterGothicMTStdRegular";
+	font-family: "acidregular";
 	font-size: 1.65em;
 	line-height: 1em;
 	color: #fff;
@@ -113,7 +113,7 @@ label.required em	{ color: #FF0000; margin-right: 5px; }
 #nav ul				{ display: none; }
 
 #nav		{ margin: 20px 0; }
-#nav li		{ font-size: 1.65em; font-family: "LetterGothicMTStdRegular"; line-height: 1em; text-transform: uppercase; }
+#nav li		{ font-size: 1.65em; font-family: "acidregular"; line-height: 1em; text-transform: uppercase; }
 #nav a		{ color: #4c4c4c; text-decoration: none; }
 #nav a:hover, #nav .active a.level-top		{ color: #c10e22; }
 
@@ -131,7 +131,7 @@ label.required em	{ color: #FF0000; margin-right: 5px; }
 /***--- CONTENT ---***/
 .main-container				{ padding: 125px 0 250px; }
 
-col-main .block-content		{ margin-bottom: 20px; }
+.col-main .block-content		{ margin-bottom: 20px; }
 
 /*- Columns -*/
 .col2-left-layout .sidebar, .col3-layout div.left	{ float: left; }
@@ -141,7 +141,7 @@ col-main .block-content		{ margin-bottom: 20px; }
 .collection-image		{ position: relative; margin-bottom: 20px; }
 .collection-image img	{ display: block; }
 
-.collection-image span			{ position: absolute; right: 10px; font-family: "LetterGothicMTStdRegular"; color: #fff; font-size: 4.75em; line-height: 0.65em; text-align: right; text-transform: uppercase; }
+.collection-image span			{ position: absolute; right: 10px; font-family: "acidregular"; color: #fff; font-size: 4.75em; line-height: 0.65em; text-align: right; text-transform: uppercase; }
 .collection-image span.top		{ top: 15px; }
 .collection-image span.bottom	{ bottom: 0; }
 .collection-image strong		{ display: block; color: #000; font-size: 0.4em; }
@@ -203,7 +203,7 @@ p.category-image	{ margin-bottom: 25px; float: left; }
 .products-grid .item 			{ margin-bottom: 20px; text-align: center; }
 .products-grid .item img		{ margin-bottom: 15px; }
 .products-grid .item p.title	{ text-align: center; font-size: 1.25em; font-weight: normal; margin-bottom: 5px; }
-.products-grid .item .actions	{ font-family: "LetterGothicMTStdRegular"; text-align: center; font-size: 1.25em; }
+.products-grid .item .actions	{ font-family: "acidregular"; text-align: center; font-size: 1.25em; }
 .products-grid .item p			{ margin: 0; }
 .products-grid .item a			{ color: #4c4c4c; text-decoration: none; }
 .products-grid .item a:hover	{ color: #7f7f7f; }
@@ -233,7 +233,7 @@ p.availability				{ margin: 0; border-top: 1px solid #d5d5cb; padding-top: 15px;
 .product-options .validation-advice	{ padding: 5px 0; color: #FF0000; }
 
 .add-to-cart .submit {
-	font-family: "LetterGothicMTStdRegular";
+	font-family: "acidregular";
 	position: relative;
 	font-size: 1.65em;
 	line-height: 1em;
@@ -274,10 +274,12 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 .sidebar .block	p		{ margin: 10px 0; }
 .sidebar .block p.subtotal, .sidebar .block p.empty	{ margin-bottom: 0; }
 .sidebar .block a		{ color: #000; text-decoration: none; }
+.sidebar .dark a		{ color: #fff; }
 .sidebar .block a:hover	{ color: #c10e22;}
 
 .sidebar .block-viewed	{ background: none; padding: 0; }
 .sidebar .block-viewed p.title, .bestsellers p.title, .sidebar .block-title	{ margin-top: 0; padding: 10px 0 5px; margin: 0; color: #4c4c4c; }
+.sidebar .dark .block-title 	{ color: #fff; }
 .sidebar .block-viewed a		{ color: #444; text-decoration: none; }
 .sidebar .block-viewed a:hover	{ color: #000; }
 
@@ -287,7 +289,7 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 .sidebar .block form			{ margin-top: 10px; }
 .sidebar .block .input-text		{ width: 215px; color: #4c4c4c; border: none; background: #fff; padding: 5px; }
 .sidebar .block .submit, .block-cart button.button {
-	font-family: "LetterGothicMTStdRegular"; font-size: 2.1em; background: none; padding: 0; float: right; border: none; color: #fff; margin: 0;
+	font-family: "acidregular"; font-size: 2.1em; background: none; padding: 0; float: right; border: none; color: #fff; margin: 0;
 }
 .block-cart button.button	{ height: 25px; text-align: right; }
 .sidebar .block .submit:hover, .block-cart button.button:hover	{ color: #000; }
@@ -296,7 +298,7 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 #narrow-by-list				{ }
 .sidebar .block-layered-nav	{ color: #4c4c4c; padding: 0; background: none; text-transform: uppercase; }
 .sidebar .block-layered-nav dd		{ margin: 20px 0 10px; }
-.sidebar .block-layered-nav dd li	{ /*width: 150px; float: left;*/ font-family: "LetterGothicMTStdRegular"; font-size: 1.65em; line-height: 1em;  }
+.sidebar .block-layered-nav dd li	{ /*width: 150px; float: left;*/ font-family: "acidregular"; font-size: 1.65em; line-height: 1em;  }
 .sidebar .block-layered-nav dd a		{ color: #4c4c4c; text-decoration: none; }
 .sidebar .block-layered-nav dd a:hover	{ color: #c10e22; }
 .block-layered-nav .block-title		{ display: none; }
@@ -311,7 +313,7 @@ ul.messages .success-msg	{ padding-left: 28px; background: url(../images/i_msg-s
 ul.messages .error-msg		{ padding-left: 28px; background: url(../images/i_msg-error.gif) no-repeat left; }
 ul.messages .note-msg		{ padding-left: 28px; background: url(../images/i_msg-note.gif) no-repeat left; }
 button.btn-checkout {
-	font-family: "LetterGothicMTStdRegular"; font-size: 1.6em; background: #ff6a17; padding: 10px 10px 8px; float: right; border: none; color: #fff; margin: 0 0 20px; text-transform: uppercase;
+	font-family: "acidregular"; font-size: 1.6em; background: #ff6a17; padding: 10px 10px 8px; float: right; border: none; color: #fff; margin: 0 0 20px; text-transform: uppercase;
 }
 button.btn-checkout:hover {
 	background: #000;
@@ -324,7 +326,7 @@ button.btn-checkout:hover {
 
 .data-table 				{ width:100%; margin-bottom: 20px; }
 .data-table thead 			{ background-color: #4c4c4c; }
-.data-table th 				{ font-family: "LetterGothicMTStdRegular"; padding: 12px 15px 10px; border: 1px solid #4c4c4c; font-weight: normal; color: #fff; text-align: left; font-size: 1.3em; text-transform: uppercase; white-space: nowrap; }
+.data-table th 				{ font-family: "acidregular"; padding: 12px 15px 10px; border: 1px solid #4c4c4c; font-weight: normal; color: #fff; text-align: left; font-size: 1em; text-transform: uppercase; white-space: nowrap; }
 
 .data-table td 					{ padding: 10px; font-size: 1.2em; border: 1px solid #4c4c4c; vertical-align: top; }
 .data-table td .product-name	{ margin: 0; }
@@ -351,7 +353,7 @@ button.btn-checkout:hover {
 .cart .input-box		{ float: left; margin-right: 10px; }
 .cart .buttons-set		{ float: left; }
 
-.totals .block			{ font-family: "LetterGothicMTStdRegular"; border: 1px solid #4c4c4c; padding: 12px 15px; text-align: right; color: #4c4c4c; margin-bottom: 20px; }
+.totals .block			{ font-family: "acidregular"; border: 1px solid #4c4c4c; padding: 12px 15px; text-align: right; color: #4c4c4c; margin-bottom: 20px; }
 .totals table			{ width: 100%; text-align: right; font-size: 1.4em; margin-bottom: 15px; }
 .totals table td		{ padding: 0 0 15px 5px; }
 .totals button.btn-checkout	{ margin-bottom: 10px; }

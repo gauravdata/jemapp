@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Twm_WelcomeTopLink>
+			<version>1.0.0</version>
+		</Twm_WelcomeTopLink>
+	</modules>
+	<global>
+		<helpers>
+			<welcometoplink>
+				<class>Twm_WelcomeTopLink_Helper</class>
+			</welcometoplink>
+		</helpers>
+	</global>
+</config>
