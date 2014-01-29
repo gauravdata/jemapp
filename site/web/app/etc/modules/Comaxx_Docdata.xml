@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<Comaxx_Docdata>
-			<active>true</active>
+			<active>false</active>
 			<codePool>community</codePool>
 		</Comaxx_Docdata>
 	</modules>
