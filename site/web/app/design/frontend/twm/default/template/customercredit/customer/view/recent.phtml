@@ -37,10 +37,6 @@
 <?php $_items = $this->getLogItems(); ?>
 
 <div class="box-account box-recent">
-    <div class="box-head credit-payment">
-        <h2><?php echo $this->__('Recent Actions') ?></h2>
-        <a href="<?php echo $this->getViewAllUrl()?>"><?php echo Mage::helper('customercredit')->__('View All') ?></a>
-    </div>
     <table cellspacing="0" class="data-table" id="my-credit-log-table">
         <col width="50" />
         <col width="50" />
@@ -74,5 +70,6 @@
             <?php endif ?>
         </tbody>
     </table>
+	<a href="<?php echo $this->getViewAllUrl()?>"><?php echo Mage::helper('customercredit')->__('View All') ?></a>
     <script type="text/javascript">decorateTable('my-credit-log-table')</script>
 </div>
