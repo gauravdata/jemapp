@@ -226,7 +226,7 @@ p.category-image	{ margin-bottom: 25px; float: left; }
 .product-img-box 	{ width: 340px; float: left; margin-right: 20px; }
 
 .more-views			{ margin-bottom: 20px; }
-.more-views p		{ font-size: 1.15em; font-weight: bold; }
+.more-views p		{ font-size: 1.15em; font-family: 'acidbold' font-weight: normal; }
 #product-image-gallery-list li	{ float: left; clear: right; border: 1px solid #ddd; padding: 3px; margin-right: 5px; }
 
 .product-meta-box			{ width: 260px; float: left; margin-bottom: 20px; text-decoration: none; }
@@ -238,9 +238,9 @@ p.old-price, p.special-price{ margin: 0; }
 .product-meta-box .required	{ margin: 10px 0; text-align: right; color: #FF0000; }
 
 p.availability				{ margin: 0; border-top: 1px solid #d5d5cb; padding-top: 15px; }
-.availability .value-title	{ font-weight: bold; }
+.availability .value-title	{ font-family: 'acidbold' font-weight: normal; }
 
-.product-options label				{ display: block; font-weight: bold; margin-bottom: 10px; }
+.product-options label				{ display: block; font-family: 'acidbold' font-weight: normal; margin-bottom: 10px; }
 .product-options-bottom .price-box 	{ display: none; }
 .product-options-bottom input.qty	{ width: 25px; text-align: center; }
 
@@ -345,7 +345,7 @@ button.btn-checkout:hover {
 .data-table td 					{ padding: 10px; font-size: 1.2em; border: 1px solid #4c4c4c; vertical-align: top; }
 .data-table td .product-name	{ margin: 0; }
 .data-table td .product-name a	{ text-decoration: underline; color: #000; }
-.data-table td .item-options dt	{ font-weight: bold; }
+.data-table td .item-options dt	{ font-family: 'acidbold' font-weight: normal; }
 .data-table td .item-options dd	{ padding: 0; }
 
 .opc .data-table tfoot td 	{ background: #adadad; border: 1px solid #9aa3c0; border-top: none; }
@@ -404,7 +404,7 @@ button.btn-checkout:hover {
 
 .form-list .field		{ width: 275px; float: left; }
 .form-list li.wide		{ width: 600px; }
-.form-list label		{ font-weight: bold; }
+.form-list label		{ font-family: 'acidbold' font-weight: normal; }
 .form-list .control label	{ font-weight: normal; }
 .form-list input.input-text, .form-list textarea{
 	width: 90%;
@@ -628,7 +628,7 @@ div.block-layered-nav dd a.amshopby-attr-selected {color: #C10E22;}
 div.block-layered-nav dd a img {padding: 0 5px 5px 5px; float:left;} 
 
 div.block-layered-nav dd li.amshopby-cat-level-2 {padding-left:20px;}
-div.block-layered-nav dd a.amshopby-cat-selected {font-weight: bold;
+div.block-layered-nav dd a.amshopby-cat-selected {font-family: 'acidbold' font-weight: normal;
 color:black; text-decoration: none; cursor:text;}
 
 div.block-layered-nav dd li span.amshopby-plusminus {float:left;
