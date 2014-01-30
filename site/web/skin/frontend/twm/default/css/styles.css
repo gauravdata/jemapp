@@ -296,6 +296,7 @@ p.old-price	{ text-decoration: line-through; color: #FF0000; }
 .sidebar .block-viewed	{ background: none; padding: 0; }
 .sidebar .block-viewed p.title, .bestsellers p.title, .sidebar .block-title	{ margin-top: 0; padding: 10px 0 5px; margin: 0; color: #023e75; }
 .sidebar .block .block-title 	{ color: #fff; }
+.sidebar .block .block-title strong	{ font-family: 'acidregular' }
 .sidebar .block-viewed a		{ color: #444; text-decoration: none; }
 .sidebar .block-viewed a:hover	{ color: #000; }
 
