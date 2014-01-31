@@ -20,7 +20,7 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
@@ -40,13 +40,30 @@
  */
 ?>
 <?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top') ?>
-<div class="nav-container">
-	<img src="<?=$this->getSkinUrl('images/menu-image-' . Mage::app()->getLocale()->getLocaleCode() . '.jpg');?>" alt="No Tomatoes Surfing" />
-	<ul id="nav">
-		<!--<li class=""><a href="<?php echo $this->getUrl('') ?>">Home</a></li>-->
-		<?php if($_menu): ?>
-			<?php echo $_menu ?>
-		<?php endif ?>
-	</ul>
-	<?php //echo $this->getChildHtml('topSearch') ?>
-</div>
+<?php if($_menu): ?>
+
+<nav role="navigation">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="navbar navbar-default">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<?php echo $_menu ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<?php endif ?>

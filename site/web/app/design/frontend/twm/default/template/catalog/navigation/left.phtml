@@ -20,7 +20,7 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
@@ -34,23 +34,17 @@
 <?php $_categories = $this->getCurrentChildCategories() ?>
 <?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
 <?php if($_count): ?>
-<div class="block dark block-layered-nav">
-    <div class="block-content">
-        <dl id="narrow-by-list2">
-            <dt><?php echo $this->__('Category') ?></dt>
-            <dd>
-                <ol>
-                <?php foreach ($_categories as $_category): ?>
-                    <?php if($_category->getIsActive()): ?>
-                    <li>
-                        <a href="<?php echo $this->getCategoryUrl($_category) ?>"<?php if ($this->isCategoryActive($_category)): ?> class="current"<?php endif; ?>><?php echo $this->htmlEscape($_category->getName()) ?></a>
-                    </li>
-                    <?php endif; ?>
-                <?php endforeach ?>
-                </ol>
-            </dd>
-        </dl>
-        <script type="text/javascript">decorateDataList('narrow-by-list2')</script>
-    </div>
+<p class="sub-title"><?php echo $this->__('Category') ?></p>
+<div id="narrow-by-list2">
+	<ul class="list-group">
+	<?php foreach ($_categories as $_category): ?>
+		<?php if($_category->getIsActive()): ?>
+		<li class="list-group-item">
+			<a href="<?php echo $this->getCategoryUrl($_category) ?>"<?php if ($this->isCategoryActive($_category)): ?> class="current"<?php endif; ?>><?php echo $this->escapeHtml($_category->getName()) ?></a><span class="badge"><?php echo $_category->getProductCount() ?></span>
+		</li>
+		<?php endif; ?>
+	<?php endforeach ?>
+	</ul>
 </div>
+<script type="text/javascript">decorateDataList('narrow-by-list2')</script>
 <?php endif; ?>

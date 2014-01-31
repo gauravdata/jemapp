@@ -20,25 +20,23 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<?php $_product = $this->getProduct() ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
 <?php if($_product->isSaleable()): ?>
     <div class="add-to-cart">
         <?php if(!$_product->isGrouped()): ?>
-        <label for="qty"><?php echo $this->__('Qty:') ?></label>
-        <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getMinimalQty($_product) ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
-		<div class="clear">&nbsp;</div>
-        <?php endif; ?>
-		<div class="block light order">
-	        <button type="submit" class="submit" class="button btn-cart">
-				<img src="<?php echo $this->getSkinUrl('images/no_tomatoes-bag-right.png') ?>" alt="cart" />
-				<span><?php echo $this->__('Voeg toe aan 3=1 deal') ?></span>
-			</button>
-			<div class="clear">&nbsp;</div>
+		<div class="form-inline">
+			<div class="form-group">
+				<label for="qty"><?php echo $this->__('Qty:') ?></label>
+				<input type="text" name="qty" id="qty" maxlength="4" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="form-control qty" />
+			</div>
 		</div>
-		<?php echo $this->getChildHtml('', true, true) ?>
+        <?php endif; ?>
+        <button type="button" title="<?php echo $buttonTitle ?>" class="btn btn-success btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+        <?php echo $this->getChildHtml('', true, true) ?>
     </div>
 <?php endif; ?>

@@ -20,70 +20,75 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
 <?php if($this->getItems()->getSize()): ?>
-<div class="block-related">
-    <div class="block-title">
-        <span><?php echo $this->__('Related Products') ?></span>
-    </div>
-</div>
-
-<div class="block-content block-border">
-	<ol class="mini-products-list" id="block-related">
-	<?php $i = 0; foreach($this->getItems() as $_item): ?>
-		<li class="item grid_2 <?php echo ($i++ % 2 == 0)?'alpha':'omega'; ?>">
-			<div class="product">
-				<div class="meta">
-					<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(126) ?>" width="126" height="126" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" /></a>
-					<p class="product-name"><?php echo $this->htmlEscape($_item->getName()) ?></p>
+<div class="block block-white" id="block-related">
+	<p class="title"><?php echo $this->__('Related Products') ?></p>
+	<div class="block-content">
+		<p><?php echo $this->__('Check items to add to the cart or') ?>&nbsp;<a href="#" onclick="selectAllRelated(this); return false;"><?php echo $this->__('select all') ?></a></p>
+		<ul class="list-group">
+		<?php foreach($this->getItems() as $_item): ?>
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-md-4">
+						<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(100) ?>" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></a>
+					</div>
+					<div class="col-md-8">
+						<?php if(!$_item->isComposite() && $_item->isSaleable()): ?>
+							<?php if (!$_item->getRequiredOptions()): ?>
+							<input type="checkbox" class="related-checkbox" id="related-checkbox<?php echo $_item->getId() ?>" name="related_products[]" value="<?php echo $_item->getId() ?>" />
+							<?php endif; ?>
+						<?php endif; ?>
+						<a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->escapeHtml($_item->getName()) ?></a>
+						<?php echo $this->getPriceHtml($_item, true, '-related') ?>
+						<?php if ($this->helper('wishlist')->isAllow()) : ?>
+							<a href="<?php echo $this->getAddToWishlistUrl($_item) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a>
+						<?php endif; ?>
+					</div>
 				</div>
-				<div class="actions product-details">
-					<a href="<?php echo $_item->getProductUrl() ?>" class="button"><?php echo $this->getPriceHtml($_item, true, '-related') ?></a>
-				</div>
-			</div>
-		</li>
-	<?php endforeach ?>
-	</ol>
-	<div class="clear">&nbsp;</div>
-	<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+			</li>
+		<?php endforeach ?>
+		</ul>
+		<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+		<script type="text/javascript">
+			//<![CDATA[
+			$$('.related-checkbox').each(function(elem){
+				Event.observe(elem, 'click', addRelatedToProduct)
+			});
+
+			var relatedProductsCheckFlag = false;
+			function selectAllRelated(txt){
+				if (relatedProductsCheckFlag == false) {
+					$$('.related-checkbox').each(function(elem){
+						elem.checked = true;
+					});
+					relatedProductsCheckFlag = true;
+					txt.innerHTML="<?php echo $this->__('unselect all') ?>";
+				} else {
+					$$('.related-checkbox').each(function(elem){
+						elem.checked = false;
+					});
+					relatedProductsCheckFlag = false;
+					txt.innerHTML="<?php echo $this->__('select all') ?>";
+				}
+				addRelatedToProduct();
+			}
+
+			function addRelatedToProduct(){
+				var checkboxes = $$('.related-checkbox');
+				var values = [];
+				for(var i=0;i<checkboxes.length;i++){
+					if(checkboxes[i].checked) values.push(checkboxes[i].value);
+				}
+				if($('related-products-field')){
+					$('related-products-field').value = values.join(',');
+				}
+			}
+			//]]>
+		</script>
+	</div>
 </div>
-<script type="text/javascript">
-//<![CDATA[
-$$('.related-checkbox').each(function(elem){
-	Event.observe(elem, 'click', addRelatedToProduct)
-});
-
-var relatedProductsCheckFlag = false;
-function selectAllRelated(txt){
-	if (relatedProductsCheckFlag == false) {
-		$$('.related-checkbox').each(function(elem){
-			elem.checked = true;
-		});
-		relatedProductsCheckFlag = true;
-		txt.innerHTML="<?php echo $this->__('unselect all') ?>";
-	} else {
-		$$('.related-checkbox').each(function(elem){
-			elem.checked = false;
-		});
-		relatedProductsCheckFlag = false;
-		txt.innerHTML="<?php echo $this->__('select all') ?>";
-	}
-	addRelatedToProduct();
-}
-
-function addRelatedToProduct(){
-	var checkboxes = $$('.related-checkbox');
-	var values = [];
-	for(var i=0;i<checkboxes.length;i++){
-		if(checkboxes[i].checked) values.push(checkboxes[i].value);
-	}
-	if($('related-products-field')){
-		$('related-products-field').value = values.join(',');
-	}
-}
-//]]>
-</script>
 <?php endif ?>

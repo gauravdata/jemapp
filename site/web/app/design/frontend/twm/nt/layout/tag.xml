@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+	<!--
+	Default layout, loads most of the pages
+	-->
+
+	<default>
+		<remove name="left.newsletter" /> <!-- if you want to remove the newsletter block which is on the left side -->
+		<!-- Mage_Newsletter -->
+		<reference name="footer">
+			<block type="newsletter/subscribe" name="newsletter" as="newsletter" template="newsletter/subscribe.phtml" before="-" />
+		</reference>
+	</default>
+</layout>

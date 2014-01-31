@@ -20,7 +20,7 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
@@ -35,24 +35,16 @@
     $_product = $this->getProduct()
 ?>
 <?php if($_additional = $this->getAdditionalData()): ?>
-<div class="box-collateral box-additional">
-	<h2 class="rounded dark"><?php echo $_product->getName().' '.$this->__('Additional Information') ?></h2>
-    <table class="data-table" id="product-attribute-specs-table">
-        <col width="25%" />
-        <col />
-        <tbody>
-        <?php foreach ($_additional as $_data): ?>
-			<?php if (!in_array($_data['value'], array('Nee','No'))): ?>
-				<tr>
-					<th class="label"><?php echo $this->htmlEscape($this->__($_data['label'])) ?></th>
-					<?php
-					?>
-					<td class="data <?php echo strtolower($_data['label']); ?>"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
-				</tr>
-			<?php endif; ?>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+	<h2><?php echo $_product->getName().' '.$this->__('Additional Information') ?></h2>
+	<table class="table table-striped" id="product-attribute-specs-table">
+		<tbody>
+		<?php foreach ($_additional as $_data): ?>
+			<tr>
+				<th><?php echo $this->escapeHtml($this->__($_data['label'])) ?></th>
+				<td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+			</tr>
+		<?php endforeach; ?>
+		</tbody>
+	</table>
     <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
-</div>
 <?php endif;?>

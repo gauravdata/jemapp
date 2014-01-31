@@ -20,18 +20,16 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
 <meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
 <title><?php echo $this->getTitle() ?></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
 <meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
 <meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
-<?php if (Mage::app()->getRequest()->getRequestString() == "/") : ?>
-<link rel="canonical" href="<?php echo $this->getBaseUrl() ?>" />
-<?php endif; ?>
 <link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
 <link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
 <!--[if lt IE 7]>
@@ -42,35 +40,7 @@
 //]]>
 </script>
 <![endif]-->
-<?php if (Mage::registry('current_product')) { ?>
-<!--start Facebook Open Graph Protocol-->
-<meta property="og:site_name" content="Your Site Name" />
-<meta property="og:title" content="<?php echo $this->getTitle() ?>" />
-<meta property="og:type" content="product" />
-<meta property="og:url" content="<?php echo Mage::helper('core/url')->getCurrentUrl()  ?>"/>
-<meta property="og:image" content="<?php echo Mage::helper('catalog/image')->init(Mage::registry('current_product'), 'small_image')->resize(100,100);?>"/>
-<link rel="image_src" type="image/jpeg" href="<?php echo Mage::helper('catalog/image')->init(Mage::registry('current_product'), 'small_image')->resize(100,100);?>" />
-<meta property="og:description" content="<?php echo $this->getDescription() ?>"/>
-<meta property="fb:admins" content="your_profile_id_here" />
-<!--end Facebook Open Graph Protocol-->
-<?php } ?>
 <?php echo $this->getCssJsHtml() ?>
 <?php echo $this->getChildHtml() ?>
 <?php echo $this->helper('core/js')->getTranslatorScript() ?>
 <?php echo $this->getIncludes() ?>
-<script type="text/javascript">
-    //<![CDATA[
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-    })();
-
-    var _gaq = _gaq || [];
-
-    _gaq.push(['_setAccount', 'UA-3334504-3']);
-    _gaq.push(['_trackPageview']);
-
-
-    //]]>
-</script>

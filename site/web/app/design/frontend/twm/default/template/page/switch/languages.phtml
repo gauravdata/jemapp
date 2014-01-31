@@ -20,7 +20,7 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
@@ -32,13 +32,13 @@
  */
 ?>
 <?php if(count($this->getStores())>1): ?>
-<div class="form-language">
-	<ul>
+<div class="form-language pull-right">
+    <select id="select-language" class="form-control" title="<?php echo $this->__('Your Language') ?>" onchange="window.location.href=this.value">
+		<option value=""><?php echo $this->__('Your Language:') ?></option>
     <?php foreach ($this->getStores() as $_lang): ?>
-        <?php $_selected = ($_lang->getId() == $this->getCurrentStoreId()) ? 'active' : '' ?>
-		<?php list($_language, $_country) = explode('_', $_lang->getLocaleCode()); ?>
-		<li><a href="#" onclick="window.location.href='<?php echo $_lang->getCurrentUrl() ?>'"><img src="<?= $this->getSkinUrl("images/{$_language}.gif");?>" alt="<?php echo $this->htmlEscape($_lang->getName()) ?>" title="<?php echo $this->htmlEscape($_lang->getName()) ?>" class="<?php echo $_selected ?>" /></a></li>
+        <?php $_selected = ($_lang->getId() == $this->getCurrentStoreId()) ? ' selected="selected"' : '' ?>
+        <option value="<?php echo $_lang->getCurrentUrl() ?>"<?php echo $_selected ?>><?php echo $this->escapeHtml($_lang->getName()) ?></option>
     <?php endforeach; ?>
-	</ul>
+    </select>
 </div>
 <?php endif; ?>

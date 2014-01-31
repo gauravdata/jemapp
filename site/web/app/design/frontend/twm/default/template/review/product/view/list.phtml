@@ -20,7 +20,7 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
@@ -28,42 +28,38 @@
 <?php $_items = $this->getReviewsCollection()->getItems();?>
 <div class="box-collateral box-reviews" id="customer-reviews">
     <?php if (count($_items)):?>
-		<div class="block light">
-			<h2><?php echo $this->__('Customer Reviews') ?></h2>
-			<?php echo $this->getChildHtml('toolbar') ?>
-			<dl>
-			<?php foreach ($_items as $_review):?>
-				<dt>
-					<?php $_votes = $_review->getRatingVotes(); ?>
-					<?php if (count($_votes)): ?>
-					<table class="ratings-table">
-						<col width="1" />
-						<col />
-						<tbody>
-							<?php foreach ($_votes as $_vote): ?>
-							<tr>
-								<th><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></th>
-								<td>
-									<div class="rating-box">
-										<div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
-									</div>
-								</td>
-							</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-					<?php endif; ?>
-					<?php echo nl2br($this->htmlEscape($_review->getDetail())) ?>
-				</dt>
-				<dd>
-					<?php echo $this->__('Review by <span>%s</span>', $this->htmlEscape($_review->getNickname())) ?> <small class="date"><?php echo $this->__('(%s)', $this->formatDate($_review->getCreatedAt()), 'long') ?></small>
-				</dd>
-			<?php endforeach; ?>
-			</dl>
-			<?php echo $this->getChildHtml('toolbar') ?>
+        <h2><?php echo $this->__('Customer Reviews') ?></h2>
+        <?php echo $this->getChildHtml('toolbar') ?>
+        <?php foreach ($_items as $_review):?>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+                <a href="<?php echo $this->getReviewUrl($_review->getId()) ?>"><?php echo $this->escapeHtml($_review->getTitle()) ?></a> <?php echo $this->__('Review by <span>%s</span>', $this->escapeHtml($_review->getNickname())) ?> <?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?>
+            </div>
+			<div class="panel-body">
+                <?php $_votes = $_review->getRatingVotes(); ?>
+                <?php if (count($_votes)): ?>
+				<?php foreach ($_votes as $_vote): ?>
+				<?php echo $this->__($this->escapeHtml($_vote->getRatingCode())) ?>
+				<?php
+				$rating = ceil($_vote->getPercent());
+				if($rating < 33){
+					$class = 'progress-bar-danger';
+				} elseif($rating < 66) {
+					$class = 'progress-bar-warning';
+				} else {
+					$class = 'progress-bar-success';
+				}
+				?>
+				<div class="progress">
+					<div class="progress-bar <?=$class;?>" style="width:<?=$rating;?>%;"></div>
+				</div>
+				<?php endforeach; ?>
+                <?php endif; ?>
+                <?php echo nl2br($this->escapeHtml($_review->getDetail())) ?>
+            </div>
 		</div>
+        <?php endforeach; ?>
+        <?php echo $this->getChildHtml('toolbar') ?>
     <?php endif;?>
-</div>
-<div class="block light">
     <?php echo $this->getChildHtml('review_form') ?>
 </div>

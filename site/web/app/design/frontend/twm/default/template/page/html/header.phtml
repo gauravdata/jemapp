@@ -20,27 +20,22 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-?>
-<div class="header-container">
-    <div class="header">
-		<div class="container_12">
-			<div class="grid_12">
-				<a href="<?php echo $this->getUrl('') ?>"><img src="<?=$this->getSkinUrl('images/logo.jpg');?>" alt="No Tomatoes - Life is good by" class="logo" /></a>
-				<!--<img src="<?=$this->getSkinUrl('images/zevende_hemel.gif');?>" alt="de Zevende Hemel" class="text" />-->
-				<p id="site-title"></p>
-				<div class="options-menu">
-					<?php echo $this->getChildHtml('topLinks') ?>
-					<?php echo $this->getChildHtml('store_language') ?>
-				</div>
-				<?php echo $this->getChildHtml('topContainer'); ?>
-				<div class="clear">&nbsp;</div>
-				<?php
-					echo $this->getChildHtml('breadcrumbs') ?>
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?><header>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+				<?php echo $this->getChildHtml('breadcrumbs') ?>
+			</div>
+			<div class="col-sm-6">
+				<?php echo $this->getChildHtml('topLinks') ?>
 			</div>
 		</div>
-    </div>
-</div>
-<?php echo $this->getChildHtml('topMenu') ?>
+	</div>
+</header>

@@ -20,13 +20,11 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div class="page-title">
-    <h1><?php echo $this->__('Your order has been received') ?></h1>
-</div>
+<h1><?php echo $this->__('Your order has been received.') ?></h1>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
 
@@ -34,10 +32,10 @@
 <?php if ($this->getCanViewOrder()) :?>
     <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
 <?php  else :?>
-    <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?>.</p>
+    <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
 <?php endif;?>
     <p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
-<?php if ($this->getViewOrder() && $this->getCanPrintOrder()) :?>
+<?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
     <p>
         <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
         <?php echo $this->getChildHtml() ?>
@@ -58,25 +56,4 @@
 <?php endforeach;?>
 </ul>
 <?php endif;?>
-
-<div class="buttons-set">
-    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
-</div>
-
-<?php if ($this->getOrderId()):?>
-    <?php $_order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId()); ?>
-    <script type="text/javascript">
-        var fb_param = {};
-        fb_param.pixel_id = '6007916391973';
-        fb_param.value = '<?=$_order->subtotal?>';
-        fb_param.currency = 'EUR';
-        (function(){
-            var fpw = document.createElement('script');
-            fpw.async = true;
-            fpw.src = '//connect.facebook.net/en_US/fp.js';
-            var ref = document.getElementsByTagName('script')[0];
-            ref.parentNode.insertBefore(fpw, ref);
-        })();
-    </script>
-    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6007916391973&amp;value=<?=$_order->subtotal?>&amp;currency=EUR" /></noscript>
-<?php endif;?>
+<button type="button" class="btn btn-success" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>

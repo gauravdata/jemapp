@@ -20,7 +20,7 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
@@ -32,10 +32,10 @@
 
 ?>
 <?php if ($this->getIsNeedToDisplaySideBar()):?>
-<div class="block block-cart">
-	<img src="<?php echo $this->getSkinUrl('images/no_tomatoes-bag-left.png') ?>" alt="cart" />
+<div class="block" id="block-cart">
     <?php $_cartQty = $this->getSummaryCount() ?>
-    <p class="title"><?php echo Mage::helper('checkout')->__('My Cart') ?></p>
+	<img src="<?php echo $this->getSkinUrl('img/shoppingbag-big.png') ?>" alt="cart" class="pull-right" />
+	<p class="title"><?php echo Mage::helper('checkout')->__('My Cart') ?></p>
     <div class="block-content">
     <?php if ($_cartQty>0): ?>
         <div class="summary">
@@ -45,9 +45,13 @@
                 <p class="amount"><?php echo $this->__('There are <a href="%s">%s items</a> in your cart.', $this->getUrl('checkout/cart'), $_cartQty) ?></p>
             <?php endif ?>
             <p class="subtotal">
-                <span class="label"><?php echo $this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
-                <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
-                    <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                <?php if ($this->canApplyMsrp()): ?>
+                    <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+                <?php else: ?>
+                    <span class="label"><?php echo $this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+                    <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+                        <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                    <?php endif; ?>
                 <?php endif; ?>
             </p>
         </div>
@@ -55,16 +59,21 @@
     <?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
     <div class="actions">
         <?php echo $this->getChildHtml('extra_actions') ?>
-        <button type="button" title="<?php echo $this->__('Checkout') ?>" class="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span>&gt;&gt;</span></span></button>
+        <button type="button" title="<?php echo $this->__('Checkout') ?>" class="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
     </div>
     <?php endif ?>
     <?php $_items = $this->getRecentItems() ?>
     <?php if(count($_items)): ?>
-        
+        <p class="block-subtitle"><?php echo $this->__('Recently added item(s)') ?></p>
+        <ol id="cart-sidebar" class="mini-products-list">
+        <?php foreach($_items as $_item): ?>
+            <?php echo $this->getItemHtml($_item) ?>
+        <?php endforeach; ?>
+        </ol>
+        <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
     <?php else: ?>
         <p class="empty"><?php echo $this->__('You have no items in your shopping cart.') ?></p>
     <?php endif ?>
-		<div class="clear">&nbsp;</div>
     </div>
 </div>
 <?php endif;?>

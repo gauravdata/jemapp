@@ -1,0 +1,58 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php echo $this->getChildHtml('topMenu') ?>
+<div class="footer-container">
+	<div class="footer">
+		<div class="container_12">
+			<div class="grid_3 alpha">
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_1')->toHtml(); ?>
+			</div>
+			<div class="grid_3">
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_2')->toHtml(); ?>
+			</div>
+			<div class="grid_4">
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_3')->toHtml(); ?>
+				<?=$this->getChildHtml('footer.newsletter');?>
+			</div>
+			<div class="grid_2 omega">
+				<?php if(Mage::app()->getLocale()->getLocaleCode() == 'nl_NL') { ?>
+				<iframe class="iframe-right" scrolling="no" src="https://www.kiyoh.nl/widget.php?company=6589&size=small" width="160" height="98" border="0" frameborder="0"></iframe>
+				<!--Start of Zopim Live Chat Script-->
+				<script type="text/javascript">
+					window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+					d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+					_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+					$.src='//cdn.zopim.com/?1FLflW44wh11XqC97BDGtOGb5ihxiAzV';z.t=+new Date;$.
+					type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+				</script>
+				<!--End of Zopim Live Chat Script-->
+				<?php } ?>
+			</div>
+			<div class="clear">&nbsp;</div>
+		</div>
+	</div>
+</div>

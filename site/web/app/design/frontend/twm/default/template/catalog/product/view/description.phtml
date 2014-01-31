@@ -20,7 +20,7 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
@@ -31,22 +31,23 @@
  */
 ?>
 <?php
-	$_description = $this->getProduct()->getDescription(); 
-	$_product = $this->getProduct();
+$_description = $this->getProduct()->getDescription();
+$_product = $this->getProduct();
 ?>
 <?php if ($_description): ?>
-<div class="box-collateral box-description">
-    <div class="std">
-        <?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), nl2br($_description), 'description') ?>
-		<!-- AddThis Button BEGIN -->
-		<div class="addthis_toolbox addthis_default_style">
-		<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-		<a class="addthis_button_tweet"></a>
-                <a class="addthis_button_pinterest" pi:pinit:layout="horizontal" pi:pinit:media="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(400)?>"></a>
-		<a class="addthis_counter addthis_pill_style"></a>
+	<div class="box-collateral box-description">
+		<div class="std">
+			<p><?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), nl2br($_description), 'description') ?></p>
+			<!-- AddThis Button BEGIN -->
+			<div class="addthis_toolbox addthis_default_style">
+				<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+				<a class="addthis_button_tweet"></a>
+				<a class="addthis_button_pinterest" pi:pinit:layout="horizontal" pi:pinit:media="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize(400)?>"></a>
+				<a class="addthis_counter addthis_pill_style"></a>
+			</div>
+			<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dda75ff408b45cf"></script>
+			<!-- AddThis Button END -->
 		</div>
-		<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4dda75ff408b45cf"></script>
-		<!-- AddThis Button END -->
-    </div>
-</div>
+	</div>
 <?php endif; ?>
+

@@ -20,22 +20,25 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div class="block dark block-subscribe">
-    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
-        <div class="block-content">
-            <label for="newsletter"><?php echo $this->__('Sign Up for Our Newsletter:') ?></label>
-			<p><?php echo $this->__('and be the first to receive offers and never miss a thing!') ?></p>
-		    <input type="text" name="email" id="newsletter" title="<?php echo $this->__('Sign up for our newsletter') ?>" placeholder="<?php echo $this->__('Email Address') ?>" class="input-text required-entry validate-email" />
-			<input type="submit" class="submit" value="&gt;&gt;" />
-        </div>
-    </form>
-    <script type="text/javascript">
-    //<![CDATA[
-        var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
-    //]]>
-    </script>
-</div>
+<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+	<h2><?php echo $this->__('Sign Up for Our Newsletter:') ?></h2>
+	<label for="newsletter"><?php echo $this->__('and be the first to receive offers and never miss a thing!') ?></label>
+	<div class="input-group">
+		<input type="text" name="email" id="newsletter" placeholder="<?php echo $this->__('Email') ?>" class="form-control required-entry validate-email" />
+		<a href="#" class="input-group-addon submit" title="<?php echo $this->__('Subscribe') ?>">&raquo;</a>
+	</div>
+	<button type="submit" title="<?php echo $this->__('Subscribe') ?>" class="hidden"><?php echo $this->__('Subscribe') ?></button>
+</form>
+<script type="text/javascript">
+	jQuery('#newsletter-validate-detail a.submit').click(function(){
+		jQuery("#newsletter-validate-detail button").trigger('click');
+		return false;
+	});
+	//<![CDATA[
+		var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+	//]]>
+</script>

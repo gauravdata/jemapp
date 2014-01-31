@@ -20,7 +20,7 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
@@ -29,38 +29,30 @@
  * Template for Mage_Page_Block_Html
  */
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<!DOCTYPE html>
+<html lang="<?php echo $this->getLang() ?>">
 	<head>
 		<?php echo $this->getChildHtml('head') ?>
 	</head>
-	<?php $store = Mage::app()->getStore()->getCode(); ?>
-	<body class="<?php echo $store; ?> <?php echo $this->getBodyClass(); ?>">
+	<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
 		<?php echo $this->getChildHtml('after_body_start') ?>
-		<div class="wrapper">
-			<?php echo $this->getChildHtml('global_notices') ?>
-			<div class="main-container col2-left-layout">
-				<div class="container_12">
-					<div class="main">
-						<div class="grid_8 col-main">
-							<?php echo $this->getChildHtml('global_messages') ?>
-							<?php echo $this->getChildHtml('content') ?>
-						</div>
-						<div class="grid_4 sidebar left">
-							<?php echo $this->getChildHtml('left') ?>
-						</div>
-						<div class="clear">&nbsp;</div>
-					</div>
+		<?php echo $this->getChildHtml('global_notices') ?>
+		<div id="wrapper">
+			<div class="container" id="main-container">
+				<div class="row">
+					<aside class="col-md-4" id="aside-left">
+						<?php echo $this->getChildHtml('left') ?>
+					</aside>
+					<main class="col-md-8" id="main">
+						<?php echo $this->getChildHtml('global_messages') ?>
+						<?php echo $this->getChildHtml('content') ?>
+					</main>
 				</div>
 			</div>
 			<?php echo $this->getChildHtml('header') ?>
 			<?php echo $this->getChildHtml('footer') ?>
-			<?php echo $this->getChildHtml('before_body_end') ?>
 		</div>
+		<?php echo $this->getChildHtml('before_body_end') ?>
 		<?php echo $this->getAbsoluteFooter() ?>
-		<div id="socialLinks">
-			<a href="http://www.facebook.com/notomatoesjeans" target="_blank"><img src="<?=$this->getSkinUrl('images/facebook.gif');?>" alt="Bekijk No Tomatoes op Facebook" class="logo" /></a>
-			<a href="http://twitter.com/#!/no_tomatoes" target="_blank"><img src="<?=$this->getSkinUrl('images/twitter.gif');?>" alt="Volg No Tomatoes op Twitter" /></a>
-		</div>
 	</body>
 </html>
