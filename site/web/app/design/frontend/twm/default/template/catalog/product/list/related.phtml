@@ -28,30 +28,22 @@
 <div class="block block-white" id="block-related">
 	<p class="title"><?php echo $this->__('Related Products') ?></p>
 	<div class="block-content">
-		<p><?php echo $this->__('Check items to add to the cart or') ?>&nbsp;<a href="#" onclick="selectAllRelated(this); return false;"><?php echo $this->__('select all') ?></a></p>
-		<ul class="list-group">
+		<div class="row">
 		<?php foreach($this->getItems() as $_item): ?>
-			<li class="list-group-item">
-				<div class="row">
-					<div class="col-md-4">
-						<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(100) ?>" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></a>
-					</div>
-					<div class="col-md-8">
-						<?php if(!$_item->isComposite() && $_item->isSaleable()): ?>
-							<?php if (!$_item->getRequiredOptions()): ?>
-							<input type="checkbox" class="related-checkbox" id="related-checkbox<?php echo $_item->getId() ?>" name="related_products[]" value="<?php echo $_item->getId() ?>" />
-							<?php endif; ?>
+			<div class="col-sm-6 text-center">
+				<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" class="thumbnail">
+					<span><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(100) ?>" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></span>
+					<?php if(!$_item->isComposite() && $_item->isSaleable()): ?>
+						<?php if (!$_item->getRequiredOptions()): ?>
+						<input type="checkbox" class="related-checkbox" id="related-checkbox<?php echo $_item->getId() ?>" name="related_products[]" value="<?php echo $_item->getId() ?>" />
 						<?php endif; ?>
-						<a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->escapeHtml($_item->getName()) ?></a>
-						<?php echo $this->getPriceHtml($_item, true, '-related') ?>
-						<?php if ($this->helper('wishlist')->isAllow()) : ?>
-							<a href="<?php echo $this->getAddToWishlistUrl($_item) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a>
-						<?php endif; ?>
-					</div>
-				</div>
-			</li>
+					<?php endif; ?>
+					<span class="product-name sync-height"><?php echo $this->escapeHtml($_item->getName()) ?></span>
+					<?php echo $this->getPriceHtml($_item, true, '-related') ?>
+				</a>
+			</div>
 		<?php endforeach ?>
-		</ul>
+		</div>
 		<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
 		<script type="text/javascript">
 			//<![CDATA[

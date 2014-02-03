@@ -28,7 +28,7 @@
 ?><div class="awrma-account">
     <div class="page-title title-buttons">
         <h1><?php echo $this->__('RMA') ?></h1>
-        <a class="link-awrma-newrma" href="<?php echo $this->getUrl('awrma/customer_rma/new') ?>"><?php echo $this->__('Request New RMA') ?></a>
+        <p><a class="link-awrma-newrma btn btn-primary" href="<?php echo $this->getUrl('awrma/customer_rma/new') ?>"><?php echo $this->__('Request New RMA') ?></a></p>
     </div>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
     <?php if ($this->getRmaEntitiesCollection()->getSize()) : ?>
