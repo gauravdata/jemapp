@@ -34,19 +34,22 @@
     $_product = $this->getProduct();
     $_helper = $this->helper('catalog/output');
 ?>
+
 <div class="onsale-product-container">
 	<?php echo Mage::helper('onsale')->getProductLabelHtml($_product); ?>
 	<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
-	<p class="product-image product-image-zoom">
+	<p class="product-image">
+		<span class="glyphicon glyphicon-search"></span>
 		<?php
-			$_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(600).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" />';
+			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(425).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(800).'" />';
 			echo $_helper->productAttribute($_product, $_img, 'image');
 		?>
 	</p>
 	<?php else: ?>
 	<p class="product-image">
+		<span class="glyphicon glyphicon-search"></span>
 		<?php
-			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(600).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" />';
+			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(425).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(800).'" />';
 			echo $_helper->productAttribute($_product, $_img, 'image');
 		?>
 	</p>
@@ -58,7 +61,7 @@
     <div class="row">
     <?php foreach ($this->getGalleryImages() as $_image): ?>
         <div class="col-xs-3 text-center">
-			<a class="thumbnail" href="#" onclick="popWin('<?php echo $this->getGalleryUrl($_image) ?>', 'gallery', 'width=600,height=600,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" title="<?php echo $this->escapeHtml($_image->getLabel()) ?>">
+			<a title="<?php echo $this->escapeHtml($_image->getLabel()) ?>" class="thumbnail" href="#" data-image-small="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(425); ?>" data-image-large="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(800); ?>">
 				<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(100); ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
 			</a>
         </div>
@@ -66,3 +69,27 @@
     </div>
 </div>
 <?php endif; ?>
+<script type="text/javascript">
+	function setZoom(){
+		jQuery('#zoom-image').elevateZoom({
+			zoomType: "inner",
+			cursor: "crosshair",
+			zoomWindowFadeIn: 500,
+			zoomWindowFadeOut: 750
+		});
+	}
+	jQuery(window).resize(function(){
+		setZoom();
+	});
+	jQuery(window).load(function(){
+		jQuery('.more-views .row > div:first-child a').addClass('active');
+		jQuery('.more-views .row > div a').click(function(){
+			jQuery('.more-views .row > div a').removeClass('active');
+			jQuery(this).addClass('active');
+			jQuery('.product-image img#zoom-image').attr('src', jQuery(this).data('image-small')).data('zoom-image', jQuery(this).data('image-large'));
+			setZoom();
+			return false;
+		});
+		setZoom();
+	});
+</script>

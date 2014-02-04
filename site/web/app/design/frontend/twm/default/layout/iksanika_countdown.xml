@@ -2,7 +2,7 @@
 <layout version="0.1.0">
     <default>
          <reference name="head">
-             <action method="addJs"><script>Iksanika/countdown/jquery-1.9.1.min.js</script></action>
+			 <!--<action method="addJs"><script>Iksanika/countdown/jquery-1.9.1.min.js</script></action>-->
              <action method="addJs"><script>Iksanika/countdown/countdown.js</script></action>
              <action method="addJs"><script>Iksanika/countdown/jquery.countdown.js</script></action>
              <action method="addJs"><script>Iksanika/countdown/jquery.counter.js</script></action>

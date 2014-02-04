@@ -3,9 +3,6 @@
 
     <catalog_product_view>
         <reference name="head">
-            <action method="addItem"><type>skin_js</type><name>js/bootstrap-modal.min.js</name><params/></action>
-            <action method="addItem"><type>skin_css</type><name>css/bootstrap-modal.min.css</name><params/></action>
-            <action method="addItem"><type>skin_css</type><name>css/modal.css</name><params/></action>
             <action method="addItem"><type>skin_js</type><name>js/ajaxaddtocart.js</name><params/></action>
         </reference>
     </catalog_product_view>

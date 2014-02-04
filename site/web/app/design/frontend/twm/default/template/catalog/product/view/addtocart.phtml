@@ -36,7 +36,7 @@
 			</div>
 		</div>
         <?php endif; ?>
-        <button type="button" title="<?php echo $buttonTitle ?>" class="btn btn-success btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+        <button type="submit" title="<?php echo $buttonTitle ?>" class="btn btn-success btn-cart"><?php echo $buttonTitle ?></button>
         <?php echo $this->getChildHtml('', true, true) ?>
     </div>
 <?php endif; ?>

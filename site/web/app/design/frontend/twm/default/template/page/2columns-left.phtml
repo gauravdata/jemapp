@@ -38,6 +38,7 @@
 		<?php echo $this->getChildHtml('after_body_start') ?>
 		<?php echo $this->getChildHtml('global_notices') ?>
 		<div id="wrapper">
+			<?php echo $this->getChildHtml('header') ?>
 			<div class="container" id="main-container">
 				<div class="row">
 					<aside class="col-md-4" id="aside-left">
@@ -49,7 +50,6 @@
 					</main>
 				</div>
 			</div>
-			<?php echo $this->getChildHtml('header') ?>
 			<?php echo $this->getChildHtml('footer') ?>
 		</div>
 		<?php echo $this->getChildHtml('before_body_end') ?>
