@@ -2,7 +2,7 @@
 	MAIN / DEFAULT
 ======================================================*/
 html, body {
-	font-family: 'acidregular', Arial, san-serif;
+	font-family: 'LetterGothicMTStdRegular', Arial, san-serif;
 	font-size: 12px;
 	line-height: 20px;
 	height: 100%;
@@ -31,6 +31,9 @@ html, body {
 /*======================================================
 	BOOTSTRAP OVERWRITES/COPIES
 ======================================================*/
+.glyphicon-remove:before {
+	content: "\e020";
+}
 
 /*= Panels =*/
 .panel-group {
@@ -59,6 +62,9 @@ html, body {
 }
 
 /*= Modals =*/
+.modal-dialog {
+	width: 400px;
+}
 .modal-content {
 	border-radius: 0;
 	box-shadow: none;
@@ -145,6 +151,20 @@ select.address-select {
 	margin-bottom: 30px;
 }
 
+/*= Tables =*/
+.table thead > tr > th,
+.table tbody > tr > th,
+.table tfoot > tr > th,
+.table thead > tr > td,
+.table tbody > tr > td,
+.table tfoot > tr > td {
+	border-color: #9aa3c0;
+}
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: #d7dbe6;
+}
+
 /*======================================================
 	BUTTONS
 ======================================================*/
@@ -159,7 +179,8 @@ select.address-select {
 }
 .btn-primary,
 .btn-success,
-.btn-warning {
+.btn-warning,
+.btn-danger {
 	background: #dfdfdf;
 	border-color: #a4a4a4;
 }
@@ -171,7 +192,10 @@ select.address-select {
 .btn-success:disabled,
 .btn-warning:hover,
 .btn-warning:focus,
-.btn-warning:disabled {
+.btn-warning:disabled,
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:disabled {
 	background: #cbcbcb;
 	border-color: #8e8e8e;
 	color: #000;
@@ -220,7 +244,7 @@ legend,
 	background: #023e75;
 	color: #fff;
 	text-transform: uppercase;
-	padding: 8px 15px;
+	padding: 10px 15px 6px;
 	font-weight: normal;
 	border: none;
 	font-family: inherit;
@@ -496,6 +520,9 @@ aside #block-cart .btn-link {
 }
 
 /*= Related =*/
+#block-related {
+	background: url('../img/border-horizontal.gif') repeat-x bottom left;
+}
 #block-related .product-name {
 	text-decoration: none;
 	display: block;
@@ -615,6 +642,7 @@ p.no-rating a {
 	display: none;
 }
 .product-options-bottom .btn-cart {
+	min-height: 56px;
 	background: #023e75;
 	box-shadow: none;
 	border: none;
@@ -644,16 +672,45 @@ p.no-rating a {
 }
 
 /*======================================================
+	CART
+======================================================*/
+.checkout-cart-index fieldset {
+	border: none;
+	padding: 0;
+	background: none;
+}
+.checkout-cart-index .btn-checkout {
+	background: #023e75;
+	box-shadow: none;
+	border-radius: 0;
+	border: none;
+	color: #fff;
+	padding: 7px 10px 3px;
+	text-transform: uppercase;
+	font-size: 20px;
+}
+.checkout-cart-index .btn-checkout:hover,
+.checkout-cart-index .btn-checkout:focus {
+	background: #000;
+}
+.checkout-cart-index h1 .pull-right {
+	margin: -10px -15px;
+}
+#shopping-cart-totals-table tfoot {
+	font-size: 18px;
+}
+
+/*======================================================
 	CHECKOUT
 ======================================================*/
 #discount-coupon-form {
-	background: #f5f5f5;
+	background: #023e75;
 	padding: 15px;
 	margin-bottom: 20px;
-
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
+	color: #fff;
+}
+#discount-coupon-form h2 {
+	padding: 0;
 }
 
 /*======================================================
