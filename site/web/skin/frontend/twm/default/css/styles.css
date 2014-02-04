@@ -92,11 +92,19 @@ fieldset {
 	background: #d7dbe6;
 	margin-bottom: 20px;
 }
-fieldset *:last-child {
+fieldset > *:last-child {
 	margin-bottom: 0;
 }
 fieldset .legend {
 	margin: -16px -16px 15px;
+}
+p.form-label {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+form .field,
+.pcnl-info-text {
+	margin-bottom: 15px;
 }
 select.validate-select,
 select.address-select {
@@ -114,12 +122,18 @@ select.address-select {
 	vertical-align: middle;
 	width: 100%;
 }
-.form-control {
+.form-control,
+.input-text {
 	border-radius: 0;
 	border: 1px solid #00427b;
 	padding: 5px;
 	font-size: 12px;
 	height: auto;
+	display: block;
+	width: 100%;
+	line-height: 1.428571429;
+	vertical-align: middle;
+	color: #555;
 }
 .form-control:focus {
 	border-color: #00427b;
@@ -700,9 +714,6 @@ p.no-rating a {
 	font-size: 18px;
 }
 
-/*======================================================
-	CHECKOUT
-======================================================*/
 #discount-coupon-form {
 	background: #023e75;
 	padding: 15px;
@@ -711,6 +722,20 @@ p.no-rating a {
 }
 #discount-coupon-form h2 {
 	padding: 0;
+}
+
+/*======================================================
+	CHECKOUT
+======================================================*/
+
+#onestepcheckout-form fieldset {
+	padding: 0 !important;
+	border: none;
+	background: none;
+}
+.input-box input[type=checkbox] {
+	display: inline-block;
+	margin: -2px 8px 0 0;
 }
 
 /*======================================================
