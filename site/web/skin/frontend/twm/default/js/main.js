@@ -1,18 +1,16 @@
-function setHeaderAndFooter() {
-	var headerHeight = jQuery('header').outerHeight();
+function setFooter() {
 	var footerHeight = jQuery('footer').outerHeight();
 	jQuery('#main-container').css({
-		paddingTop: headerHeight,
 		paddingBottom: footerHeight + 30
 	});
 }
 
 jQuery(window).resize(function(){
 	jQuery('.sync-height').syncheight();
-	setHeaderAndFooter();
+	setFooter();
 });
 jQuery(window).load(function(){
 	jQuery('.sync-height').syncheight();
-	setHeaderAndFooter();
+	setFooter();
 	jQuery('fieldset legend').contents().unwrap().wrap('<div class="legend"/>');
 });
