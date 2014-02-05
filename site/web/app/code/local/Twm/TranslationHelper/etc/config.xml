@@ -67,30 +67,4 @@
             </translationhelper>
         </routers>
     </admin>
-    <adminhtml>
-        <menu>
-            <cms>
-                <children>
-                    <translationhelper>
-                        <title>Translation Helper</title>
-                        <action>translationhelper/adminhtml_index</action>
-                        <children>
-                            <translationhelper_translations>
-                                <title>Translations</title>
-                                <action>translationhelper/adminhtml_index</action>
-                            </translationhelper_translations>
-                            <translationhelper_inline_enable>
-                                <title>Enable Inline Translations</title>
-                                <action>translationhelper/adminhtml_inline/enable</action>
-                            </translationhelper_inline_enable>
-                            <translationhelper_inline_disable>
-                                <title>Disable Inline Translations</title>
-                                <action>translationhelper/adminhtml_inline/disable</action>
-                            </translationhelper_inline_disable>
-                        </children>
-                    </translationhelper>
-                </children>
-            </cms>
-        </menu>
-    </adminhtml>
 </config>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <cms module="translationhelper" translate="title">
+            <children>
+                <translationhelper module="translationhelper" translate="title">
+                    <title>Translation Helper</title>
+                    <action>translationhelper/adminhtml_index</action>
+                    <children>
+                        <translationhelper_translations>
+                            <title>Translations</title>
+                            <action>translationhelper/adminhtml_index</action>
+                        </translationhelper_translations>
+                        <translationhelper_inline_enable>
+                            <title>Enable Inline Translations</title>
+                            <action>translationhelper/adminhtml_inline/enable</action>
+                        </translationhelper_inline_enable>
+                        <translationhelper_inline_disable>
+                            <title>Disable Inline Translations</title>
+                            <action>translationhelper/adminhtml_inline/disable</action>
+                        </translationhelper_inline_disable>
+                    </children>
+                </translationhelper>
+            </children>
+        </cms>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <cms>
+                        <children>
+                            <translationhelper module="translationhelper">
+                                <title>Translation Helper</title>
+                                <children>
+                                    <translationhelper_translations>
+                                        <title>Translations</title>
+                                    </translationhelper_translations>
+                                    <translationhelper_inline_enable>
+                                        <title>Enable Inline Translations</title>
+                                    </translationhelper_inline_enable>
+                                    <translationhelper_inline_disable>
+                                        <title>Disable Inline Translations</title>
+                                    </translationhelper_inline_disable>
+                                </children>
+                            </translationhelper>
+                        </children>
+                    </cms>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
