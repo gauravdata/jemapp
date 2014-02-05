@@ -41,7 +41,7 @@
 	<p class="product-image">
 		<span class="glyphicon glyphicon-search"></span>
 		<?php
-			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(425).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(800).'" />';
+			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" />';
 			echo $_helper->productAttribute($_product, $_img, 'image');
 		?>
 	</p>
@@ -49,7 +49,7 @@
 	<p class="product-image">
 		<span class="glyphicon glyphicon-search"></span>
 		<?php
-			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(425).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(800).'" />';
+			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" />';
 			echo $_helper->productAttribute($_product, $_img, 'image');
 		?>
 	</p>
@@ -61,7 +61,7 @@
     <div class="row">
     <?php foreach ($this->getGalleryImages() as $_image): ?>
         <div class="col-xs-3 text-center">
-			<a title="<?php echo $this->escapeHtml($_image->getLabel()) ?>" class="thumbnail" href="#" data-image-small="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(425); ?>" data-image-large="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(800); ?>">
+			<a title="<?php echo $this->escapeHtml($_image->getLabel()) ?>" class="thumbnail" href="#" data-image-small="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(725); ?>" data-image-large="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(725); ?>">
 				<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(100); ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
 			</a>
         </div>

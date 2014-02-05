@@ -40,10 +40,10 @@
 <?php echo $this->getBlockHtml('formkey') ?>
 <h1 class="product-name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
 <div class="row">
-	<div class="col-md-7" id="product-view">
+	<div class="col-sm-7" id="product-view">
 		<?php echo $this->getChildHtml('media') ?>
 	</div>
-	<div class="col-md-5" id="product-view-details">
+	<div class="col-sm-5" id="product-view-details">
 		<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
 			<div class="hidden">
 				<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />

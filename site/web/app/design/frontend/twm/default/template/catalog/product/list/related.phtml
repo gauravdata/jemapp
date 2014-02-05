@@ -30,7 +30,7 @@
 	<div class="block-content">
 		<div class="row">
 		<?php foreach($this->getItems() as $_item): ?>
-			<div class="col-sm-6 text-center">
+			<div class="col-xs-6 text-center">
 				<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" class="thumbnail">
 					<span><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(100) ?>" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></span>
 					<?php if(!$_item->isComposite() && $_item->isSaleable()): ?>
