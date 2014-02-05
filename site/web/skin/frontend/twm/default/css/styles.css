@@ -70,6 +70,9 @@ html, body {
 	box-shadow: none;
 	border: none;
 }
+.modal.wide .modal-dialog {
+	width: 850px;
+}
 
 /*= Thumbnails =*/
 .thumbnail {
@@ -550,7 +553,8 @@ aside #block-cart .btn-link {
 /*======================================================
 	TOOLBARS & PAGERS
 ======================================================*/
-.toolbar {
+.toolbar,
+.pager {
 	background: none;
 	margin: 15px 0;
 	padding: 8px 0;
@@ -559,6 +563,7 @@ aside #block-cart .btn-link {
 	border-radius: 0;
 }
 .limiter .form-control,
+.pager .form-control,
 .sort-by .form-control {
 	width: auto;
 }
@@ -568,11 +573,19 @@ aside #block-cart .btn-link {
 .pager {
 	text-align: left;
 }
+.pager label {
+	font-weight: normal;
+}
 .pager .pagination {
 	margin: 10px 0;
 }
 .pager li > a {
 	border-radius: 0;
+}
+.pager .amount,
+.pager .limiter {
+	display: inline-block;
+	margin: 0;
 }
 
 /*======================================================
@@ -655,7 +668,7 @@ p.no-rating a {
 .product-options-bottom .price-box {
 	display: none;
 }
-.product-options-bottom .btn-cart {
+#product_addtocart_form .btn-cart {
 	min-height: 56px;
 	background: #023e75;
 	box-shadow: none;
@@ -671,7 +684,7 @@ p.no-rating a {
 	position: relative;
 	margin: 40px 0 20px;
 }
-.product-options-bottom .btn-cart:before {
+#product_addtocart_form .btn-cart:before {
 	content: " ";
 	position: absolute;
 	display: block;
@@ -681,7 +694,7 @@ p.no-rating a {
 	left: 20px;
 	top: -30px;
 }
-.product-options-bottom .btn-cart:hover {
+#product_addtocart_form .btn-cart:hover {
 	background: #000;
 }
 
@@ -710,6 +723,13 @@ p.no-rating a {
 .checkout-cart-index h1 .pull-right {
 	margin: -10px -15px;
 }
+
+#shopping-cart-table tfoot td {
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+}
+
 #shopping-cart-totals-table tfoot {
 	font-size: 18px;
 }
@@ -747,6 +767,10 @@ p.required {
 .validation-advice {
 	margin-top: 5px;
 	color: #ff0500;
+}
+label em {
+	color: #ff0500;
+	margin-right: 5px;
 }
 ul.messages,
 ul.messages ul {
@@ -811,6 +835,7 @@ footer ul {
 /*= Social =*/
 footer ul.social {
 	overflow: hidden;
+	margin-bottom: 20px;
 }
 footer ul.social li {
 	float: left;
