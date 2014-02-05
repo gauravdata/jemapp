@@ -13,7 +13,7 @@ jQuery(function() {
                     jQuery('#added-to-cart').remove();
 
                     //enable addtocart button
-                    productform.find('.btn-large').removeAttr('disabled');
+                    //productform.find('.btn-large').removeAttr('disabled');
 
                     //check if there is a message
                     var htmlfound = data.indexOf('<');
@@ -22,13 +22,17 @@ jQuery(function() {
                         jQuery('#added-to-cart').modal();
                     }
                     else {
-                        var alertmessage = '<div class="modal hide fade">';
-                        alertmessage += '<div class="alert alert-block alert-error" style="margin-bottom:0px;">';
-                        alertmessage += '<button type="button" class="close" data-dismiss="modal">×</button>';
-                        alertmessage += '<h4 class="alert-heading">Fout</h4>';
+                        var alertmessage = '<div class="modal fade">';
+						alertmessage += '<div class="modal-dialog">';
+						alertmessage += '<div class="modal-content">';
+						alertmessage += '<div class="modal-header">';
+						alertmessage += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+						alertmessage += '<h4 class="modal-title">Fout</h4>';
+						alertmessage += '</div>';
+						alertmessage += '<div class="modal-body">';
                         alertmessage += '<p>'+data+'</p>';
-                        alertmessage += '<p><a class="btn" data-dismiss="modal" href="#">Sluiten</a></p>';
-                        alertmessage += '</div></div>';
+						alertmessage += '<button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Sluiten</button>';
+                        alertmessage += '</div></div></div></div>';
                         alertmessage = jQuery(alertmessage);
                         jQuery('body').append(alertmessage);
                         alertmessage.modal();

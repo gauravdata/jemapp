@@ -25,6 +25,7 @@
  */
 ?>
 <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+	<?php echo $this->getBlockHtml('formkey'); ?>
 	<h2><?php echo $this->__('Sign Up for Our Newsletter:') ?></h2>
 	<label for="newsletter"><?php echo $this->__('and be the first to receive offers and never miss a thing!') ?></label>
 	<div class="input-group">

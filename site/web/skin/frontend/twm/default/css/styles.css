@@ -6,6 +6,7 @@ html, body {
 	font-size: 12px;
 	line-height: 20px;
 	height: 100%;
+	background: #f7f7f7;
 }
 
 *:focus {
@@ -81,6 +82,7 @@ html, body {
 	border: none;
 	text-align: center;
 	margin-bottom: 15px;
+	padding: 5px;
 }
 a.thumbnail.active,
 a.thumbnail:hover,
@@ -89,7 +91,8 @@ a.thumbnail:focus {
 }
 
 /*= Forms =*/
-fieldset {
+fieldset,
+.fieldset {
 	border: 1px solid #9aa3c0;
 	padding: 15px;
 	background: #d7dbe6;
@@ -98,7 +101,8 @@ fieldset {
 fieldset > *:last-child {
 	margin-bottom: 0;
 }
-fieldset .legend {
+fieldset .legend,
+.fieldset .legend {
 	margin: -16px -16px 15px;
 }
 p.form-label {
@@ -112,13 +116,13 @@ form .field,
 select.validate-select,
 select.address-select {
 	display: block;
-	color: #555555;
+	color: #555;
 	background: #fff;
-	border: 1px solid #CCCCCC;
-	border-radius: 4px;
+	border: 1px solid #00427b;
+	border-radius: 0;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-	font-size: 14px;
-	height: 34px;
+	font-size: 12px;
+	height: auto;
 	line-height: 1.42857;
 	padding: 6px 12px;
 	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
@@ -126,7 +130,8 @@ select.address-select {
 	width: 100%;
 }
 .form-control,
-.input-text {
+.input-text,
+input[type=text] {
 	border-radius: 0;
 	border: 1px solid #00427b;
 	padding: 5px;
@@ -141,6 +146,9 @@ select.address-select {
 .form-control:focus {
 	border-color: #00427b;
 	box-shadow: 0 0 10px rgba(0,66,123,0.5);
+}
+textarea {
+	min-height: 100px;
 }
 
 /*= Carousel =*/
@@ -185,15 +193,18 @@ select.address-select {
 /*======================================================
 	BUTTONS
 ======================================================*/
+button,
 .btn {
+	border: 1px solid #a4a4a4;
 	transition: all 0.3s ease-out;
 	border-radius: 2px;
-	padding: 4px 10px;
+	padding: 6px 10px 4px;
 	font-size: 12px;
 	box-shadow: inset 0 10px 10px rgba(255,255,255,0.65);
 	color: #000;
 	text-decoration: none;
 }
+button,
 .btn-primary,
 .btn-success,
 .btn-warning,
@@ -201,6 +212,9 @@ select.address-select {
 	background: #dfdfdf;
 	border-color: #a4a4a4;
 }
+button:hover,
+button:focus,
+button:disabled,
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:disabled,
@@ -398,6 +412,63 @@ header .top-links a span {
 }
 #search_autocomplete ul li span {
 	margin-right: 5px;
+}
+
+/*======================================================
+	NAV
+======================================================*/
+.navbar-default {
+	background: #023e75;
+	border-radius: 0;
+	border: none;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+	border: none;
+	padding: 0;
+	background: none;
+}
+.navbar-nav {
+	float: none;
+}
+.navbar-default .navbar-nav > li > a {
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.navbar-default .navbar-nav > li:hover > a,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li.active > a {
+	color: #fff;
+	text-decoration: underline;
+}
+.navbar-default .navbar-nav > li > a .caret {
+	border-top-color: #fff;
+	border-bottom-color: #fff;
+}
+
+/*= Dropdown =*/
+.navbar-default .navbar-nav > li > .dropdown-menu {
+	border: none;
+	border-radius: 0;
+	background: #023e75;
+	color: #fff;
+	box-shadow: none;
+	text-align: right;
+	padding: 5px 15px;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu ol {
+	padding: 0;
+	list-style: none;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu a {
+	color: #fff;
+	text-decoration: none;
+}
+.navbar-default .navbar-nav > li > .dropdown-menu a:hover,
+.navbar-default .navbar-nav > li > .dropdown-menu a.amshopby-attr-selected {
+	text-decoration: underline;
 }
 
 /*======================================================
@@ -628,6 +699,7 @@ p.product-image .glyphicon {
 	font-size: 27px;
 	color: #023e75;
 	position: absolute;
+	margin: 10px;
 }
 .thumbnail .product-image {
 	margin-bottom: 10px;
@@ -756,6 +828,48 @@ p.no-rating a {
 .input-box input[type=checkbox] {
 	display: inline-block;
 	margin: -2px 8px 0 0;
+}
+div.pcnl-address-text {
+	padding: 0;
+	margin-bottom: 15px;
+}
+
+.payment-methods input[type=radio] {
+	display: inline-block;
+	margin-top: 0;
+}
+.payment-methods label {
+	font-weight: normal;
+	display: inline;
+}
+.payment-methods ul {
+	list-style: none;
+	padding: 0;
+}
+
+ul#payment_form_customercredit {
+	margin-top: 5px;
+}
+
+#payment_form_klarna_invoice li {
+	margin-top: 15px;
+}
+#payment_form_klarna_invoice li > label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.btn#onestepcheckout-place-order {
+	background: #023e75;
+	box-shadow: none;
+	border-radius: 0;
+	color: #fff;
+	text-transform: uppercase;
+	border: none;
+	font-size: 20px;
+	padding: 8px 10px 5px;
+	margin-bottom: 15px;
 }
 
 /*======================================================
@@ -912,7 +1026,8 @@ footer #newsletter-validate-detail .input-group-addon {
 		border-right: none;
 		padding-left: 10px;
 	}
-	.toolbar .form-control {
+	.toolbar .form-control,
+	.pager .form-control {
 		display: inline-block;
 	}
 }

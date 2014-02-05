@@ -27,6 +27,7 @@
 <div class="form-add">
     <?php if ($this->getAllowWriteReviewFlag()): ?>
     <form action="<?php echo $this->getAction() ?>" method="post" id="review-form">
+		<?php echo $this->getBlockHtml('formkey'); ?>
         <fieldset>
 			<legend><?php echo $this->__('Write Your Own Review') ?></legend>
             <?php echo $this->getChildHtml('form_fields_before')?>

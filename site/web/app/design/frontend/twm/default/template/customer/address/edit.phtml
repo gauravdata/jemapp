@@ -59,17 +59,24 @@
     </fieldset>
     <fieldset>
         <legend><?php echo $this->__('Address') ?></legend>
+		<div class="row">
         <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
-            <div class="form-group">
-                <label for="street_1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
-				<input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="form-control<?php echo $_streetValidationClass ?>" />
-            </div>
+			<div class="col-xs-8">
+				<div class="form-group">
+					<label for="street_1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+					<input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="form-control<?php echo $_streetValidationClass ?>" />
+				</div>
+			</div>
         <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
         <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
-            <div class="form-group">
-				<input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i ?>" class="form-control<?php echo $_streetValidationClass ?>" />
-            </div>
+			<div class="col-xs-4">
+				<div class="form-group">
+					<label for="street_1" class="required"><em>*</em><?php echo $this->__('Housenumber') ?></label>
+					<input type="text" name="street[]" value="<?php echo $this->escapeHtml($this->getAddress()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i ?>" class="form-control<?php echo $_streetValidationClass ?>" />
+				</div>
+			</div>
         <?php endfor; ?>
+		</div>
 		<?php if ($this->helper('customer/address')->isVatAttributeVisible()) : ?>
 		<div class="form-group">
 			<label for="vat_id"><?php echo $this->__('VAT Number') ?></label>

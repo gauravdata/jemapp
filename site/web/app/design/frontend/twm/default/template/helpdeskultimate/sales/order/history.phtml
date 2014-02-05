@@ -32,7 +32,7 @@
 </div>
 <?php echo $this->getPagerHtml(); ?>
 <?php if ($_orders->getSize()): ?>
-<table cellspacing="0" class="data-table" id="my-orders-table">
+<table cellspacing="0" class="table table-striped" id="my-orders-table">
     <thead>
     <tr>
         <th><?php echo $this->__('Order #') ?></th>
@@ -40,7 +40,6 @@
         <th><?php echo $this->__('Ship to') ?></th>
         <th><?php echo $this->__('Order Total') ?></th>
         <th><?php echo $this->__('Order Status') ?></th>
-        <th>&nbsp;</th>
     </tr>
     </thead>
     <tbody>
@@ -53,18 +52,6 @@
                 : '&nbsp;' ?></td>
         <td><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
         <td><em><?php echo $_order->getStatusLabel() ?></em></td>
-        <td class="a-center"><a
-                href="<?php echo $this->getViewUrl($_order) ?>"><?php echo $this->__('View Order') ?></a>
-            <?php /*<span class="separator">|</span><a href="<?php echo $this->getTrackUrl($_order) ?>"><?php echo $this->__('Track Order') ?></a>&nbsp;*/ ?>
-            <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
-                <span class="separator">|</span> <a href="<?php echo $this->getReorderUrl($_order) ?>"
-                                                    style="font-weight: bold; color: #FF6600;"><?php echo $this->__('Reorder') ?></a>
-                <?php endif ?>
-            <?php if (Mage::getStoreConfig('helpdeskultimate/advanced/orders_enabled')): ?>
-                <span class="separator">|</span> <a
-                        href="<?php echo Mage::getUrl('helpdeskultimate/customer', array('order' => $_order->getId()))?>#ticket-create-form"><?php echo Mage::helper('helpdeskultimate')->__('Create ticket');?></a>
-                <?php endif;?>
-        </td>
     </tr>
         <?php endforeach; ?>
     </tbody>

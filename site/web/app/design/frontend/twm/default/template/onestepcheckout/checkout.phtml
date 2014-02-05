@@ -56,11 +56,9 @@ $helper = Mage::helper('onestepcheckout/checkout');
                         <?php endif; ?>
                 </li>
                 <?php if ($this->customerHasAddresses()): ?>
-                <li>
+                <li class="form-group">
                     <label for="billing-address-select"><?php echo $this->__('Select a billing address from your address book or enter a new address.') ?></label>
-                    <div class="input-box">
-                        <?php echo $this->getAddressesHtmlSelect('billing') ?>
-                    </div>
+                    <?php echo $this->getAddressesHtmlSelect('billing') ?>
                 </li>
                 <?php endif; ?>
                 <li>
@@ -100,14 +98,12 @@ $helper = Mage::helper('onestepcheckout/checkout');
             <script type="text/javascript">
                 var shipping = new Shipping();
             </script>
-            <ul>
-                <li class="shipping-address-title">
-                    <?php echo $this->__('Shipping address'); ?>
-                </li>
+			<h2><?php echo $this->__('Shipping address'); ?></h2>
+            <ul class="list-unstyled">
                 <?php if ($this->customerHasAddresses()): ?>
-                   <li class="form-alt">
+                   <li class="form-alt form-group">
                        <label for="shipping-address-select"><?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?></label>
-                       <div class="input-box"><?php echo $this->getAddressesHtmlSelect('shipping') ?></div>
+                       <?php echo $this->getAddressesHtmlSelect('shipping') ?>
                    </li>
                 <?php endif ?>
                 <li id="shipping_address_list" <?php if($this->customerHasAddresses() && !$this->getNewAddressSelectValueOnError('shipping')) { echo '  style="display: none;" '; } ?>>
@@ -807,7 +803,7 @@ $helper = Mage::helper('onestepcheckout/checkout');
         ?>
 
         <div class="onestepcheckout-place-order-wrapper">
-            <button type="button" title="<?php echo $this->__('Place order now'); ?>" id="onestepcheckout-place-order" class="large orange onestepcheckout-button onestepcheckout-place-order" onclick="javascript:void(0);"><span><span><?php echo $this->__('Place order now'); ?></span></span></button>
+            <button type="button" title="<?php echo $this->__('Place order now'); ?>" id="onestepcheckout-place-order" class="btn btn-success btn-large onestepcheckout-button onestepcheckout-place-order" onclick="javascript:void(0);"><span><span><?php echo $this->__('Place order now'); ?></span></span></button>
         </div>
     </div>
     <div style="clear: both;">&nbsp;</div>

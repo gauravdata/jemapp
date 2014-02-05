@@ -37,6 +37,11 @@
                 <class>Mage_GoogleCheckout_Model</class>
             </googlecheckout>
         </models>
+		<helpers>
+			<googlecheckout>
+				<class>Mage_GoogleCheckout_Helper</class>
+			</googlecheckout>
+		</helpers>
     </global>
     <default>
         <payment>

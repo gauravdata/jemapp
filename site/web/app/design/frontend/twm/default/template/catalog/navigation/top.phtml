@@ -39,31 +39,15 @@
  * string If specified wraps children list in div with this class
  */
 ?>
-<?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top') ?>
-<?php if($_menu): ?>
-
-<nav role="navigation">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="navbar navbar-default">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-					</div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
-							<?php echo $_menu ?>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</nav>
-
-<?php endif ?>
+<?php
+/* @var Mage_Catalog_Model_Category $currentCategory */
+$topCategory = $currentCategory = $this->getCurrentCategory();
+if ($topCategory->getLevel() > 2) {
+	do {
+		$topCategory = $topCategory->getParentCategory();
+	} while ($topCategory->getLevel() != 2);
+}
+?>
+<?php foreach ($topCategory->getChildrenCategories() as $category) : ?>
+	<li class="<?php echo $currentCategory->getId() == $category->getId() ? 'active' : '' ?>"><a href="<?php echo $this->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
+<?php endforeach ?>
