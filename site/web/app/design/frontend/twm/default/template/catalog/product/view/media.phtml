@@ -82,7 +82,9 @@
 		setZoom();
 	});
 	jQuery(window).load(function(){
+		setZoom();
 		jQuery('.more-views .row > div:first-child a').addClass('active');
+
 		jQuery('.more-views .row > div a').click(function(){
 			jQuery('.more-views .row > div a').removeClass('active');
 			jQuery(this).addClass('active');
@@ -90,6 +92,24 @@
 			setZoom();
 			return false;
 		});
-		setZoom();
+
+		jQuery('p.product-image').click(function(){
+			jQuery('#product-image-modal h4').html(jQuery('h1.product-name').html());
+			jQuery('#product-image-modal .modal-body img').attr('src', jQuery('.product-image img').data('zoom-image'));
+			jQuery('#product-image-modal').modal();
+		});
 	});
 </script>
+<div id="product-image-modal" class="modal wide fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Product title</h4>
+			</div>
+			<div class="modal-body">
+				<img src="" />
+			</div>
+		</div>
+	</div>
+</div>

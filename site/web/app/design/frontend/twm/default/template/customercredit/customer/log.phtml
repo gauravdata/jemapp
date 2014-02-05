@@ -36,12 +36,10 @@
 ?>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <?php $_items = $this->getLogItems(); ?>
-<div class="page-head">
-    <h3><?php echo $this->__('My Credit Activity') ?></h3>
-</div>
+<h1><?php echo $this->__('My Credit Activity') ?></h1>
 <?php echo $this->getPagerHtml(); ?>
 
-<table cellspacing="0" class="data-table" id="my-credit-log-table">
+<table cellspacing="0" class="table table-striped" id="my-credit-log-table">
     <col width="50" />
     <col width="50" />
     <col width="150" />
