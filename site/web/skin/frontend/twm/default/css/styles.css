@@ -355,7 +355,7 @@ header {
 }
 header a.logo {
 	display: block;
-	margin-top: 30px;
+	margin: 15px 0 5px;
 }
 
 /*= Toplinks =*/
