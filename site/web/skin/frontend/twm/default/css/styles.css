@@ -578,9 +578,19 @@ aside #block-cart > img {
 aside #block-cart .title {
 	margin-top: 0;
 }
-aside #block-cart .btn-link {
+aside #block-cart .btn.btn-link {
+	font-size: 30px;
+	margin: 0;
+	padding: 0;
+	min-height: 0;
+	height: auto;
+	line-height: 20px;
 	color: #fff;
 	text-decoration: none;
+}
+aside #block-cart .btn.btn-link:hover,
+aside #block-cart .btn.btn-link:focus {
+	color: #9aa3c0;
 }
 
 /*= Recently viewed =*/
