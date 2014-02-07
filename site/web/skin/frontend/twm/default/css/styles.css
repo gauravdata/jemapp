@@ -482,6 +482,7 @@ button.navbar-toggle {
 .navbar-default .navbar-nav > li > .dropdown-menu a {
 	color: #fff;
 	text-decoration: none;
+	font-size: 17px;
 }
 .navbar-default .navbar-nav > li > .dropdown-menu a:hover,
 .navbar-default .navbar-nav > li > .dropdown-menu a.amshopby-attr-selected {
