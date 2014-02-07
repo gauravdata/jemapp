@@ -587,7 +587,7 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
             $payment = $this->getRequest()->getPost('payment', array());
             //$payment = array();
            //////////// MageWorx Fix ///////////////
-                if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit') {
+                if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit' || $paymentMethod=='customercredit' ) {
                   Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
                 } else {
                     Mage::getModel('checkout/session')->setUseInternalCredit(false);

@@ -1198,7 +1198,11 @@ class MageWorx_CustomerCredit_Model_Observer
     
     public function placeOrderCustomer($order) {
     //    echo "<pre>"; print_r($order->getQuote()->getCustomer()->getData()); exit;
-        $customer = $order->getQuote()->getCustomer();
+        if($order->getQuote()) {
+            $customer = $order->getQuote()->getCustomer();
+        } else {
+            $customer = $order->getCustomer();
+        }
         $customerId = $customer->getId();
         $customerGroupId = $customer->getGroupId();
 

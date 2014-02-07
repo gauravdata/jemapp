@@ -3,6 +3,7 @@ class TIG_Buckaroo3Extended_Model_PaymentMethods_Empayment_Observer extends TIG_
 {
     protected $_code   = 'buckaroo3extended_empayment';
     protected $_method = 'empayment';
+    protected $_service = 'Empaymentcollecting';
 
     public function buckaroo3extended_request_addservices(Varien_Event_Observer $observer)
     {
@@ -15,7 +16,7 @@ class TIG_Buckaroo3Extended_Model_PaymentMethods_Empayment_Observer extends TIG_
         $vars = $request->getVars();
         
         $array = array(
-            $this->_method     => array(
+            $this->_service => array(
                 'action'    => 'Pay',
                 'version'   => 1,
             ),
@@ -59,11 +60,8 @@ class TIG_Buckaroo3Extended_Model_PaymentMethods_Empayment_Observer extends TIG_
 
         $this->_addEmpaymentVars($vars);
         $this->_addPersonVars($vars);
-        $this->_addBankAccountVars($vars);
         $this->_addBillingAddressVars($vars);
-
         $request->setVars($vars);
-
         return $this;
     }
 
@@ -87,52 +85,15 @@ class TIG_Buckaroo3Extended_Model_PaymentMethods_Empayment_Observer extends TIG_
         $storeId = Mage::app()->getStore()->getId();
         
         $array = array(
+            'processingtype'           => 'Deferred',
             'reference'                => $this->_order->getIncrementId(),
             'emailAddress'             => $this->_billingInfo['email'],
         );
         
-        if (array_key_exists('customVars', $vars) && array_key_exists($this->_method, $vars['customVars']) && is_array($vars['customVars'][$this->_method])) {
-            $vars['customVars'][$this->_method] = array_merge($vars['customVars'][$this->_method], $array);
+        if (array_key_exists('customVars', $vars) && array_key_exists($this->_service, $vars['customVars']) && is_array($vars['customVars'][$this->_service])) {
+            $vars['customVars'][$this->_service] = array_merge($vars['customVars'][$this->_service], $array);
         } else {
-            $vars['customVars'][$this->_method] = $array;
-        }
-    }
-
-    protected function _addBankAccountVars(&$vars)
-    {
-        $additionalFields = Mage::getSingleton('checkout/session')->getData('additionalFields');
-        
-        $array = array(
-            'Type'                             => array(
-                                                      'value' => 'DOM',
-                                                      'group' => 'bankaccount',
-                                                  ),
-            'DomesticAccountHolderName'        => array(
-                                                      'value' => $additionalFields['DOM']['accountHolder'],
-                                                      'group' => 'bankaccount',
-                                                  ),
-            'DomesticCountry'                  => array(
-                                                      'value' => 528,
-                                                      'group' => 'bankaccount',
-                                                  ),
-            'DomesticBankIdentifier'           => array(
-                                                      'value' => $additionalFields['DOM']['bankId'],
-                                                      'group' => 'bankaccount',
-                                                  ),
-            'DomesticAccountNumber'            => array(
-                                                      'value' => $additionalFields['DOM']['accountNumber'],
-                                                      'group' => 'bankaccount',
-                                                  ),
-            'Collect'                          => array(
-                                                      'value' => 1,
-                                                      'group' => 'bankaccount',
-                                                  ),
-        );
-        
-        if (array_key_exists('customVars', $vars) && is_array($vars['customVars'][$this->_method])) {
-            $vars['customVars'][$this->_method] = array_merge($vars['customVars'][$this->_method], $array);
-        } else {
-            $vars['customVars'][$this->_method] = $array;
+            $vars['customVars'][$this->_service] = $array;
         }
     }
 
@@ -157,10 +118,10 @@ class TIG_Buckaroo3Extended_Model_PaymentMethods_Empayment_Observer extends TIG_
                             ),
         );
         
-        if (array_key_exists('customVars', $vars) && is_array($vars['customVars'][$this->_method])) {
-            $vars['customVars'][$this->_method] = array_merge($vars['customVars'][$this->_method], $array);
+        if (array_key_exists('customVars', $vars) && array_key_exists($this->_service, $vars['customVars']) && is_array($vars['customVars'][$this->_service])) {
+            $vars['customVars'][$this->_service] = array_merge($vars['customVars'][$this->_service], $array);
         } else {
-            $vars['customVars'][$this->_method] = $array;
+            $vars['customVars'][$this->_service] = $array;
         }
     }
 
@@ -199,10 +160,49 @@ class TIG_Buckaroo3Extended_Model_PaymentMethods_Empayment_Observer extends TIG_
                             ),
         );
         
-        if (array_key_exists('customVars', $vars) && is_array($vars['customVars'][$this->_method])) {
-            $vars['customVars'][$this->_method] = array_merge($vars['customVars'][$this->_method], $array);
+        if (array_key_exists('customVars', $vars) && array_key_exists($this->_service, $vars['customVars']) && is_array($vars['customVars'][$this->_service])) {
+            $vars['customVars'][$this->_service] = array_merge($vars['customVars'][$this->_service], $array);
         } else {
-            $vars['customVars'][$this->_method] = $array;
+            $vars['customVars'][$this->_service] = $array;
+        }
+    }
+    
+    /* deprecated function from v4.7.0*/
+    protected function _addBankAccountVars(&$vars)
+    {
+        $additionalFields = Mage::getSingleton('checkout/session')->getData('additionalFields');
+        
+        $array = array(
+            'Type'                             => array(
+                                                      'value' => 'DOM',
+                                                      'group' => 'bankaccount',
+                                                  ),
+            'DomesticAccountHolderName'        => array(
+                                                      'value' => $additionalFields['DOM']['accountHolder'],
+                                                      'group' => 'bankaccount',
+                                                  ),
+            'DomesticCountry'                  => array(
+                                                      'value' => 528,
+                                                      'group' => 'bankaccount',
+                                                  ),
+            'DomesticBankIdentifier'           => array(
+                                                      'value' => $additionalFields['DOM']['bankId'],
+                                                      'group' => 'bankaccount',
+                                                  ),
+            'DomesticAccountNumber'            => array(
+                                                      'value' => $additionalFields['DOM']['accountNumber'],
+                                                      'group' => 'bankaccount',
+                                                  ),
+            'Collect'                          => array(
+                                                      'value' => 1,
+                                                      'group' => 'bankaccount',
+                                                  ),
+        );
+        
+        if (array_key_exists('customVars', $vars) && array_key_exists($this->_service, $vars['customVars']) && is_array($vars['customVars'][$this->_service])) {
+            $vars['customVars'][$this->_service] = array_merge($vars['customVars'][$this->_service], $array);
+        } else {
+            $vars['customVars'][$this->_service] = $array;
         }
     }
     

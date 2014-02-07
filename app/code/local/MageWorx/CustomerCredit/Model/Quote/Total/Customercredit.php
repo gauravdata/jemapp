@@ -43,7 +43,7 @@ class MageWorx_CustomerCredit_Model_Quote_Total_Customercredit extends Mage_Sale
         if(!$session->getUseInternalCredit() && !Mage::app()->getStore()->isAdmin()) {
              return $this;
         }
-      //  echo 555; exit;
+      
         Mage::getSingleton('customer/session')->setData('customer_credit_rule',false);
         $websiteId = Mage::app()->getWebsite()->getId();
         $customerGroupId = Mage::getSingleton('customer/session')->getCustomer()->getGroupId(); 

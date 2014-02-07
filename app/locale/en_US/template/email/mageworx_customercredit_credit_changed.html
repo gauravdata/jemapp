@@ -32,36 +32,35 @@ style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; fo
         width="650" style="border:1px solid #E0E0E0;">
           <tbody>
             <tr>
-              <td valign="top"><a
-                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customer=&#x2019;customer_email&#x2019;}}"><img
-                src="{{skin url=" alt="{{var logo_alt}}"
-                style="margin-bottom:10px;" border="0"></a></td>
+              <td valign="top"><a href="{{store url='' _autologin='1' _autologin_customer=$order.getCustomerEmail()}}"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/></a></td>
             </tr>
             <!-- [ middle starts here] -->
             <tr>
               <td valign="top"><h2
-                style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Bonjour
-                {{htmlescape var=$order.customer_email}},</h2>
+                style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Goed nieuws,
+                {{htmlescape var=$customerName}},</h2>
 
                 <p
                 style="font-size:12px; line-height:16px; margin:0 0 10px 0;"><span
-                style="font-size: 10pt">Je tegoed in <strong><a
-                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customer=&#x2019;customer_email&#x2019;}}">Boutique
-                Je m'appelle</a></strong> is bijgewerkt! </span></p>
+                style="font-size: 10pt"><br>
+                Je tegoed in <strong><a
+                href="{{store url='' _autologin='1' _autologin_customer=$customerEmail}}">{{var
+                store.getFrontendName()}}</a></strong> is bijgewerkt!
+                </span></p>
 
                 <p
                 style="font-size:12px; line-height:16px; margin:0 0 10px 0;"><span
                 style="font-size: 10pt">Je hebt op dit moment
                 <strong>{{htmlescape var=$balance}}</strong> om te besteden in
-                de shop.</span></p>
+                de webshop.</span></p>
 
                 <p></p>
 
                 <p style="font-size: 10pt">Wat moet je doen:</p>
 
                 <p style="font-size: 10pt">1. <a name="Klik" id="Klik"
-                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customerName=&#x2019;customerName&#x2019;}}">Klik
-                hier om naar de site te gaan.</a></p>
+                href="{{store url='' _autologin='1' _autologin_customer=$customerEmail}}">Klik
+                hier om naar de site te gaan en direct in te loggen.</a></p>
 
                 <p style="font-size: 10pt">2. Je bent nu ingelogd. Plaats de
                 producten die je wilt bestellen in je shoppingbag en ga naar je
@@ -77,18 +76,18 @@ style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; fo
                 <p style="font-size: 10pt">3. Kies bij BETAALWIJZE op 'Mijn
                 tegoed'. Je ziet hier het bedrag wat je tegoed hebt in
                 <strong><a
-                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customer=&#x2019;customer_email&#x2019;}}">Boutique
-                Je m'appelle</a></strong>. Wanneer je deze optie aanklikt,
-                wordt het tegoed besteedt aan je bestelling en kun je je
-                bestelling plaatsen!</p>
+                href="{{store url='' _autologin='1' _autologin_customer=$customerEmail}}">{{var
+                store.getFrontendName()}}</a></strong>. Wanneer je deze optie
+                aanklikt, wordt het tegoed besteedt aan je bestelling en kun je
+                je bestelling plaatsen!</p>
 
                 <p
                 style=" line-height:16px; margin:0 0 10px 0;font-size: 10pt"></p>
 
-                <p style=" line-height:16px; margin:0;font-size: 10pt">Beaucoup
-                de plaisir! <br>
-                <br>
-                Je m'appelle Maurice </p>
+                <p
+                style=" line-height:16px; margin:0;font-size: 10pt">Shopze!</p>
+
+                <p>{{var store.getFrontendName()}}</p>
 
                 <p style="font-size: 10pt"></p>
 
