@@ -1,0 +1,13 @@
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+var/*
+!var/.htaccess
+media/*
+!media/.htaccess
+.idea/
+maintenance.flag
+errors/local.xml
+downloader/*.cfg
