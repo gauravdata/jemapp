@@ -117,7 +117,7 @@
     </td>
     <?php if (!$viewOnly && Mage::helper('awrma/config')->getAllowPerOrderRMA()) : ?>
         <td class="a-center">
-            <a class="btn-remove2" title="Remove item" href="#" onclick="ordersControl.removeItem('order-item-row-<?php echo $_item->getId() ?>');return false;">Remove item</a>
+            <a class="btn-remove2" title="<?php echo $this->__('Remove item') ?>" href="#" onclick="ordersControl.removeItem('order-item-row-<?php echo $_item->getId() ?>');return false;"><?php echo $this->__('Remove item') ?></a>
         </td>
     <?php endif; ?>
 </tr>
