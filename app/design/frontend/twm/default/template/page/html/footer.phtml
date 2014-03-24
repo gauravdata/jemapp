@@ -20,39 +20,37 @@
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<?php echo $this->getChildHtml('topMenu') ?>
-<div class="footer-container">
-	<div class="footer">
-		<div class="container_12">
-			<div class="grid_3 alpha">
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
 				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_1')->toHtml(); ?>
 			</div>
-			<div class="grid_3">
+			<div class="col-md-3">
 				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_2')->toHtml(); ?>
 			</div>
-			<div class="grid_4">
+			<div class="col-md-4">
 				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_3')->toHtml(); ?>
 				<?=$this->getChildHtml('footer.newsletter');?>
 			</div>
-			<div class="grid_2 omega">
+			<div class="col-md-2">
 				<?php if(Mage::app()->getLocale()->getLocaleCode() == 'nl_NL') { ?>
-				<!--<iframe class="iframe-right" scrolling="no" src="https://www.kiyoh.nl/widget.php?company=6589&size=small" width="160" height="98" border="0" frameborder="0"></iframe>-->
-				<!--Start of Zopim Live Chat Script-->
-				<script type="text/javascript">
-					window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-					d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-					_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-					$.src='//cdn.zopim.com/?1FLflW44wh11XqC97BDGtOGb5ihxiAzV';z.t=+new Date;$.
-					type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-				</script>
-				<!--End of Zopim Live Chat Script-->
+					<iframe class="iframe-right" scrolling="no" src="https://www.kiyoh.nl/widget.php?company=6589&size=small" width="160" height="98" border="0" frameborder="0"></iframe>
+					<!--Start of Zopim Live Chat Script-->
+					<script type="text/javascript">
+						window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+							d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+							_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+							$.src='//cdn.zopim.com/?1FLflW44wh11XqC97BDGtOGb5ihxiAzV';z.t=+new Date;$.
+								type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+					</script>
+					<!--End of Zopim Live Chat Script-->
 				<?php } ?>
 			</div>
-			<div class="clear">&nbsp;</div>
 		</div>
 	</div>
-</div>
+</footer>
