@@ -33,15 +33,15 @@ $catalogSearchHelper =  $this->helper('catalogsearch');
         <a href="#" class="input-group-addon submit"><?php echo $this->__('Search') ?></a>
 	</div>
 	<button type="submit" title="<?php echo $this->__('Search') ?>" class="hidden"><?php echo $this->__('Search') ?></button>
-	<div id="search_autocomplete" class="search-autocomplete"></div>
-	<script type="text/javascript">
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+        <script type="text/javascript">
 		jQuery('#search_mini_form a.submit').click(function(){
 			jQuery("#search_mini_form button").trigger('click');
 			return false;
 		});
-		//<![CDATA[
+        //<![CDATA[
 			var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php //echo $this->__('Search entire store here...') ?>');
 			searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
-		//]]>
-	</script>
+        //]]>
+        </script>
 </form>

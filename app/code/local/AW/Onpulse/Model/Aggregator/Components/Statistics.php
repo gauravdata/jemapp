@@ -50,7 +50,7 @@ class AW_Onpulse_Model_Aggregator_Components_Statistics extends AW_Onpulse_Model
     /**
      * @param $event
      */
-    public function pushData($event)
+    public function pushData($event = null)
     {
         $aggregator = $event->getEvent()->getAggregator();
         $dashboard = array();

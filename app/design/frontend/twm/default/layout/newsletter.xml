@@ -32,14 +32,14 @@
 Default layout, loads most of the pages
 -->
 
-	<default>
+    <default>
 
-		<!-- Mage_Newsletter -->
-		<reference name="footer">
-			<block type="newsletter/subscribe" name="footer.newsletter" template="newsletter/subscribe.phtml" />
-		</reference>
+        <!-- Mage_Newsletter -->
+        <reference name="footer">
+            <block type="newsletter/subscribe" name="footer.newsletter" template="newsletter/subscribe.phtml" />
+        </reference>
 
-	</default>
+    </default>
 
 <!--
 Customer account pages, rendered for all tabs in dashboard

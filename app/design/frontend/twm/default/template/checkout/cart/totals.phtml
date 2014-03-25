@@ -36,13 +36,13 @@
     <div class="cart-msrp-totals"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></div>
 <?php else: ?>
     <table id="shopping-cart-totals-table" class="table table-striped">
-        <col />
-        <col width="1" />
-        <tfoot>
-            <?php echo $this->renderTotals('footer'); ?>
-        </tfoot>
-        <tbody>
-            <?php echo $this->renderTotals(); ?>
-        </tbody>
-    </table>
+    <col />
+    <col width="1" />
+    <tfoot>
+        <?php echo $this->renderTotals('footer'); ?>
+    </tfoot>
+    <tbody>
+        <?php echo $this->renderTotals(); ?>
+    </tbody>
+</table>
 <?php endif; ?>

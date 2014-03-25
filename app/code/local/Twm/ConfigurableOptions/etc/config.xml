@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_ConfigurableOptions>
+            <version>0.1.0</version>
+        </Twm_ConfigurableOptions>
+    </modules>
+    <global>
+        <models>
+            <twm_configurableoptions>
+                <class>Twm_ConfigurableOptions_Model</class>
+                <resourceModel>twm_configurableoptions_resource</resourceModel>
+            </twm_configurableoptions>
+            <twm_configurableoptions_resource>
+                <class>Twm_ConfigurableOptions_Model_Resource</class>
+            </twm_configurableoptions_resource>
+        </models>
+        <blocks>
+            <twm_configurableoptions>
+                <class>Twm_ConfigurableOptions_Block</class>
+            </twm_configurableoptions>
+            <catalog>
+                <rewrite>
+                    <product_view_type_configurable>Twm_ConfigurableOptions_Block_Catalog_Product_View_Type_Configurable</product_view_type_configurable>
+                </rewrite>
+            </catalog>
+        </blocks>
+        <helpers>
+            <twm_configurableoptions>
+                <class>Twm_ConfigurableOptions_Helper</class>
+            </twm_configurableoptions>
+        </helpers>
+    </global>
+</config>

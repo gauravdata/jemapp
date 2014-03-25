@@ -30,7 +30,9 @@ class AW_Onpulse_Model_Credentials extends Mage_Core_Model_Abstract
         if(Mage::app()->getDefaultStoreView() !== null) {
             $defaultStore = Mage::app()->getDefaultStoreView()->getId();
         }
-        if(AW_Onpulse_Helper_Data::getPlatform() == AW_Onpulse_Helper_Data::EE_PLATFORM) {
+        if(AW_Onpulse_Helper_Data::getPlatform() == AW_Onpulse_Helper_Data::EE_PLATFORM
+            && version_compare(Mage::getVersion(), '1.13.0.0', '>=')
+        ) {
             $this->_updateURLRedirectEE($idPath,$oldRequestPath, $requestPath);
         }
         $keyRewrite

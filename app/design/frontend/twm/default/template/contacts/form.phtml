@@ -25,28 +25,28 @@
  */
 ?>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
-<h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
+    <h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
 <form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post">
     <fieldset>
         <legend><?php echo Mage::helper('contacts')->__('Contact Information') ?></legend>
 		<div class="form-group">
-			<label for="name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Name') ?></label>
+                    <label for="name" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Name') ?></label>
 			<input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>" class="form-control required-entry" type="text" required="required" />
-		</div>
+                    </div>
 		<div class="form-group">
-			<label for="email" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Email') ?></label>
+                    <label for="email" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Email') ?></label>
 			<input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>" class="form-control required-entry validate-email" type="text" required="required" />
-		</div>
+                    </div>
 		<div class="form-group">
-			<label for="telephone"><?php echo Mage::helper('contacts')->__('Telephone') ?></label>
+                <label for="telephone"><?php echo Mage::helper('contacts')->__('Telephone') ?></label>
 			<input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" value="" class="form-control" type="text" />
-		</div>
+                </div>
 		<div class="form-group">
-			<label for="comment" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Comment') ?></label>
+                <label for="comment" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Comment') ?></label>
 			<textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" class="form-control required-entry" cols="5" rows="3" required="required"></textarea>
-		</div>
+                </div>
     </fieldset>
-	<p class="required"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p>
+        <p class="required"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p>
 	<input type="text" name="hideit" id="hideit" value="" class="hidden" />
 	<button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="btn btn-success"><?php echo Mage::helper('contacts')->__('Submit') ?></button>
 </form>
@@ -55,3 +55,7 @@
     var contactForm = new VarienForm('contactForm', true);
 //]]>
 </script>
+<h2>Contactgegevens</h2>
+<p>Je kunt ons 24/7 bereiken via het mailadres <a href="mailto:webstore@notomatoes.com">webstore@notomatoes.com</a></p>
+<p>Onze adresgegevens zijn:</p>
+<p>No Tomatoes Webstore<br />Badhuisweg 117<br />7314 JK Apeldoorn</p>

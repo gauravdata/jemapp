@@ -27,22 +27,22 @@
 <?php if($crumbs && is_array($crumbs)): ?>
 <ol class="breadcrumb">
 	<li><?=$this->__('You are here:');?></li>
-	<?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
-		<li class="<?php echo $_crumbName ?>">
-		<?php if($_crumbInfo['link']): ?>
+        <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+            <li class="<?php echo $_crumbName ?>">
+            <?php if($_crumbInfo['link']): ?>
 			<a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->escapeHtml($_crumbInfo['title']) ?>">
 				<?php echo $this->escapeHtml($_crumbInfo['label']) ?>
 			</a>
-		<?php elseif($_crumbInfo['last']): ?>
+            <?php elseif($_crumbInfo['last']): ?>
 			<strong>
 				<?php echo $this->escapeHtml($_crumbInfo['label']) ?>
 			</strong>
-		<?php else: ?>
+            <?php else: ?>
 			<strong>
 				<?php echo $this->escapeHtml($_crumbInfo['label']) ?>
 			</strong>
-		<?php endif; ?>
-		</li>
-	<?php endforeach; ?>
+            <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
 </ol>
 <?php endif; ?>

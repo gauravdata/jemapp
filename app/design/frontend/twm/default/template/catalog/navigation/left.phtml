@@ -37,14 +37,14 @@
 <p class="sub-title"><?php echo $this->__('Category') ?></p>
 <div id="narrow-by-list2">
 	<ul class="list-group">
-	<?php foreach ($_categories as $_category): ?>
-		<?php if($_category->getIsActive()): ?>
+                <?php foreach ($_categories as $_category): ?>
+                    <?php if($_category->getIsActive()): ?>
 		<li class="list-group-item">
 			<a href="<?php echo $this->getCategoryUrl($_category) ?>"<?php if ($this->isCategoryActive($_category)): ?> class="current"<?php endif; ?>><?php echo $this->escapeHtml($_category->getName()) ?></a><span class="badge"><?php echo $_category->getProductCount() ?></span>
-		</li>
-		<?php endif; ?>
-	<?php endforeach ?>
+                    </li>
+                    <?php endif; ?>
+                <?php endforeach ?>
 	</ul>
 </div>
-<script type="text/javascript">decorateDataList('narrow-by-list2')</script>
+        <script type="text/javascript">decorateDataList('narrow-by-list2')</script>
 <?php endif; ?>

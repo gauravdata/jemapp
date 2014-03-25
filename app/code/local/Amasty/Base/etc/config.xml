@@ -47,9 +47,9 @@
 	<adminhtml>
         <layout>
             <updates>
-                <awall module="Amasty_Base">
+                <ambase module="Amasty_Base">
                     <file>amasty/ambase/ambase.xml</file>
-                </awall>
+                </ambase>
             </updates>
         </layout>
 

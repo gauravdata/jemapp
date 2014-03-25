@@ -39,109 +39,109 @@
 			<fieldset>
                 <legend><?php echo $this->__('Request Information') ?></legend>
 				<div class="form-group">
-					<label for="awrma-order" class="required"><em>*</em><?php echo $this->__('Order') ?></label>
+                        <label for="awrma-order" class="required"><em>*</em><?php echo $this->__('Order') ?></label>
 					<select type="select" name="order" id="awrma-order" title="<?php echo $this->__('Order') ?>" class="form-control validate-select required-entry" defaultvalue="">
-						<option value=""><?php echo $this->__('Please select order') ?></option>
-						<?php foreach ($this->getCustomerOrders() as $order) : ?>
-							<option value="<?php echo $order->getIncrementId(); ?>" <?php if (isset($_formData['order']) && $_formData['order'] == $order->getIncrementId()) : ?>selected="selected"<?php endif; ?>>
-								<?php echo '#' . $order->getIncrementId() . ', ' . $this->formatDate($order->getCreatedAtStoreDate()) . ', ' . $order->formatPrice($order->getGrandTotal()) ?>
-							</option>
-						<?php endforeach; ?>
-					</select>
-				</div>
+                                <option value=""><?php echo $this->__('Please select order') ?></option>
+                                <?php foreach ($this->getCustomerOrders() as $order) : ?>
+                                    <option value="<?php echo $order->getIncrementId(); ?>" <?php if (isset($_formData['order']) && $_formData['order'] == $order->getIncrementId()) : ?>selected="selected"<?php endif; ?>>
+                                        <?php echo '#' . $order->getIncrementId() . ', ' . $this->formatDate($order->getCreatedAtStoreDate()) . ', ' . $order->formatPrice($order->getGrandTotal()) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
 				<div class="form-group">
-					<label for="awrma-items-ordered-table"><?php echo $this->__('Items Ordered') ?></label>
+                        <label for="awrma-items-ordered-table"><?php echo $this->__('Items Ordered') ?></label>
 					<table class="data-table table tables-triped" id="awrma-items-ordered-table" name="items">
-						<thead id="awrma-items-head">
-							<tr>
-								<th><?php echo $this->__('Product Name') ?></th>
-								<th><?php echo $this->__('SKU') ?></th>
-								<th><?php echo $this->__('Qty') ?></th>
-								<?php if (Mage::helper('awrma/config')->getAllowPerOrderRMA()) : ?><th></th><?php endif; ?>
-							</tr>
-							<tr id="awrma-items-noorder" style="display: none;">
-								<td colspan="4"><?php echo $this->__('No order selected') ?></td>
-							</tr>
-							<tr id="awrma-items-noitems" style="display: none;">
-								<td colspan="4"><?php echo $this->__('No items selected') ?></td>
-							</tr>
-							<tr id="awrma-items-loading" style="display: none;">
-								<td colspan="4"><img src="<?php echo $this->getSkinUrl('aw_rma/images/ajax-loader.gif') ?>" /></td>
-							</tr>
-							<tr id="awrma-items-error" style="display: none;">
-								<td colspan="4"><?php echo $this->__('Some error occurs. Please, try again to select order') ?></td>
-							</tr>
-						</thead>
-						<tbody id="awrma-items">
-							<tr>
-								<td colspan="4"><?php echo $this->__('No order selected') ?></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+                                <thead id="awrma-items-head">
+                                    <tr>
+                                        <th><?php echo $this->__('Product Name') ?></th>
+                                        <th><?php echo $this->__('SKU') ?></th>
+                                        <th><?php echo $this->__('Qty') ?></th>
+                                        <?php if (Mage::helper('awrma/config')->getAllowPerOrderRMA()) : ?><th></th><?php endif; ?>
+                                    </tr>
+                                    <tr id="awrma-items-noorder" style="display: none;">
+                                        <td colspan="4"><?php echo $this->__('No order selected') ?></td>
+                                    </tr>
+                                    <tr id="awrma-items-noitems" style="display: none;">
+                                        <td colspan="4"><?php echo $this->__('No items selected') ?></td>
+                                    </tr>
+                                    <tr id="awrma-items-loading" style="display: none;">
+                                        <td colspan="4"><img src="<?php echo $this->getSkinUrl('aw_rma/images/ajax-loader.gif') ?>" /></td>
+                                    </tr>
+                                    <tr id="awrma-items-error" style="display: none;">
+                                        <td colspan="4"><?php echo $this->__('Some error occurs. Please, try again to select order') ?></td>
+                                    </tr>
+                                </thead>
+                                <tbody id="awrma-items">
+                                    <tr>
+                                        <td colspan="4"><?php echo $this->__('No order selected') ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
 				<div class="form-group">
-					<label for="awrma-packageopened" class="required"><em>*</em><?php echo $this->__('Package Opened') ?></label>
+                            <label for="awrma-packageopened" class="required"><em>*</em><?php echo $this->__('Package Opened') ?></label>
 					<select type="select" name="packageopened" id="awrma-packageopened" title="<?php echo $this->__('Package Opened') ?>" class="validate-select required-entry form-control">
-						<?php $_itemSelected = isset($_formData['packageopened']) ? $_formData['packageopened'] : Mage::getModel('awrma/source_packageopened')->getDefaultValue(); ?>
-						<?php foreach (Mage::getModel('awrma/source_packageopened')->toOptionArray() as $_item) : ?>
-							<option value="<?php echo $_item['value'] ?>" <?php if ($_itemSelected == $_item['value']) : ?>selected="selected" <?php endif; ?>><?php echo $_item['label'] ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-				<?php $_types = $this->getRequestTypes() ?>
-				<?php if ($_types->getSize()) : ?>
+                                    <?php $_itemSelected = isset($_formData['packageopened']) ? $_formData['packageopened'] : Mage::getModel('awrma/source_packageopened')->getDefaultValue(); ?>
+                                    <?php foreach (Mage::getModel('awrma/source_packageopened')->toOptionArray() as $_item) : ?>
+                                        <option value="<?php echo $_item['value'] ?>" <?php if ($_itemSelected == $_item['value']) : ?>selected="selected" <?php endif; ?>><?php echo $_item['label'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        <?php $_types = $this->getRequestTypes() ?>
+                        <?php if ($_types->getSize()) : ?>
 					<div class="form-group">
-						<label for="awrma-request-type" class="required"><em>*</em><?php echo $this->__('Request Type') ?></label>
-						<div class="input-box">
-							<?php $_itemSelected = isset($_formData['requesttype']) ? $_formData['requesttype'] : '' ?>
+                                <label for="awrma-request-type" class="required"><em>*</em><?php echo $this->__('Request Type') ?></label>
+                                <div class="input-box">
+                                    <?php $_itemSelected = isset($_formData['requesttype']) ? $_formData['requesttype'] : '' ?>
 							<select type="select" name="requesttype" id="awrma-request-type" title="<?php echo $this->__('Request Type') ?>" class="validate-select required-entry form-control">
-								<?php foreach ($_types as $_item) : ?>
-									<option value="<?php echo $_item->getId() ?>" <?php if ($_item->getId() == $_itemSelected) : ?>selected="selected" <?php endif; ?>><?php echo $_item->getName() ?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
-					</div>
-				<?php endif ?>
+                                        <?php foreach ($_types as $_item) : ?>
+                                            <option value="<?php echo $_item->getId() ?>" <?php if ($_item->getId() == $_itemSelected) : ?>selected="selected" <?php endif; ?>><?php echo $_item->getName() ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        <?php endif ?>
 				<div class="form-group">
-					<label for="awrma-additional-info"><?php echo $this->__('Additional Information') ?></label>
+                        <label for="awrma-additional-info"><?php echo $this->__('Additional Information') ?></label>
 						<textarea class="form-control" name="additionalinfo" id="awrma-additional-info"><?php if (isset($_formData['additionalinfo']))
-					echo $_formData['additionalinfo'] ?></textarea>
-				</div>
-				<?php if (Mage::helper('awrma/config')->getReasonsEnabled()) : ?>
+                        echo $_formData['additionalinfo'] ?></textarea>
+                        </div>
+                    <?php if (Mage::helper('awrma/config')->getReasonsEnabled()) : ?>
 					<div class="form-group">
-						<label for="reason_id" class="required"><em>*</em><?php echo $this->__('Choose Reason') ?></label>
+                            <label for="reason_id" class="required"><em>*</em><?php echo $this->__('Choose Reason') ?></label>
 						<select type="select" name="reason_id" id="reason_id" title="<?php echo $this->__('Choose Reason') ?>" class="validate-select required-entry form-control">
-							<option value=""><?php echo $this->__('Please select reason') ?></option>
-							<?php $_itemSelected = isset($_formData['reasonsenabled'])?$_formData['reasonsenabled']:''; ?>
-							<?php foreach ($this->getAvailableReasons() as $_item) : ?>
-								<option value="<?php echo $_item->getId(); ?>" <?php if ($_itemSelected == $_item->getId()) : ?>selected="selected" <?php endif; ?>><?php echo $_item->getName() ?></option>
-							<?php endforeach; ?>
-							<?php if (Mage::helper('awrma/config')->getReasonsOtherOptionEnabled()): ?>
-								<option value="0"  <?php if (false && $_itemSelected === 0) : ?>selected="selected" <?php endif; ?>><?php echo $this->__('Other'); ?></option>
-							<?php endif; ?>
-						</select>
-					</div>
+                                    <option value=""><?php echo $this->__('Please select reason') ?></option>
+                                    <?php $_itemSelected = isset($_formData['reasonsenabled'])?$_formData['reasonsenabled']:''; ?>
+                                    <?php foreach ($this->getAvailableReasons() as $_item) : ?>
+                                        <option value="<?php echo $_item->getId(); ?>" <?php if ($_itemSelected == $_item->getId()) : ?>selected="selected" <?php endif; ?>><?php echo $_item->getName() ?></option>
+                                    <?php endforeach; ?>
+                                    <?php if (Mage::helper('awrma/config')->getReasonsOtherOptionEnabled()): ?>
+                                        <option value="0"  <?php if (false && $_itemSelected === 0) : ?>selected="selected" <?php endif; ?>><?php echo $this->__('Other'); ?></option>
+                                    <?php endif; ?>
+                                </select>
+                            </div>
 					<div id="reason-information" class="form-group" style="display:none;">
-						<label for="reason_details"><?php echo $this->__('Reason Details') ?></label>
+                            <label for="reason_details"><?php echo $this->__('Reason Details') ?></label>
 						<textarea class="form-control" name="reason_details" id="reason_details"><?php if (isset($_formData['reason_details'])): ?>
-							<?php echo $_formData['reason_details']; ?>
-							<?php endif; ?></textarea>
-					</div>
-					<script type="text/javascript">
-						Event.observe(document, 'dom:loaded', function(event) {
-							if ($('reason_id').value === '0') {
-								$('reason-information').show();
-							}
-							Event.observe($('reason_id'), 'change', function(event){
-								if ($('reason_id').value == '0') {
-									$('reason-information').show();
-								} else {
-									$('reason-information').hide();
-								}
-							});
-						});
-					</script>
-				<?php endif; ?>
+                                    <?php echo $_formData['reason_details']; ?>
+                                    <?php endif; ?></textarea>
+                            </div>
+                        <script type="text/javascript">
+                            Event.observe(document, 'dom:loaded', function(event) {
+                                if ($('reason_id').value === '0') {
+                                    $('reason-information').show();
+                                }
+                                Event.observe($('reason_id'), 'change', function(event){
+                                    if ($('reason_id').value == '0') {
+                                        $('reason-information').show();
+                                    } else {
+                                        $('reason-information').hide();
+                                    }
+                                });
+                            });
+                        </script>
+                    <?php endif; ?>
             </fieldset>
             <div class="buttons-set">
                 <p class="required"><?php echo $this->__('* Required Fields') ?></p>

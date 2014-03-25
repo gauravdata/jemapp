@@ -40,47 +40,47 @@
 	<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
 	<p class="product-image">
 		<span class="glyphicon glyphicon-search"></span>
-		<?php
-			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" />';
-			echo $_helper->productAttribute($_product, $_img, 'image');
-		?>
+        <?php
+            $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" />';
+            echo $_helper->productAttribute($_product, $_img, 'image');
+        ?>
 	</p>
 	<?php else: ?>
 	<p class="product-image">
 		<span class="glyphicon glyphicon-search"></span>
-		<?php
+						<?php
 			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" />';
-			echo $_helper->productAttribute($_product, $_img, 'image');
-		?>
+							echo $_helper->productAttribute($_product, $_img, 'image');
+						?>
 	</p>
-	<?php endif; ?>
+				<?php endif; ?>
 </div>
 <?php if (count($this->getGalleryImages()) > 0): ?>
-<div class="more-views">
+	<div class="more-views">
     <p class="title"><?php echo $this->__('More views') ?></p>
     <div class="row">
     <?php foreach ($this->getGalleryImages() as $_image): ?>
         <div class="col-xs-3 text-center">
 			<a title="<?php echo $this->escapeHtml($_image->getLabel()) ?>" class="thumbnail" href="#" data-image-small="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(725); ?>" data-image-large="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(725); ?>">
 				<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(100); ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
-			</a>
+				</a>
         </div>
-    <?php endforeach; ?>
-    </div>
+		<?php endforeach; ?>
+	</div>
 </div>
 <?php endif; ?>
-<script type="text/javascript">
+	<script type="text/javascript">
 	function setZoom(){
 		jQuery('#zoom-image').elevateZoom({
 			zoomType: "inner",
 			cursor: "crosshair",
 			zoomWindowFadeIn: 500,
 			zoomWindowFadeOut: 750
-		});
+				});
 	}
 	jQuery(window).resize(function(){
 		setZoom();
-	});
+			});
 	jQuery(window).load(function(){
 		setZoom();
 		jQuery('.more-views .row > div:first-child a').addClass('active');
@@ -99,7 +99,7 @@
 			jQuery('#product-image-modal').modal();
 		});
 	});
-</script>
+	</script>
 <div id="product-image-modal" class="modal wide fade">
 	<div class="modal-dialog">
 		<div class="modal-content">

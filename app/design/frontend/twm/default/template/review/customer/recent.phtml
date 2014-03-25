@@ -26,28 +26,28 @@
 ?>
 <?php if( $this->getCollection() && $this->count()): ?>
 <div id="my_recent_reviews">
-	<h2><?php echo $this->__('My Recent Reviews') ?></h2>
+			<h2><?php echo $this->__('My Recent Reviews') ?></h2>
 	<p><a href="<?php echo $this->getAllReviewsUrl() ?>"><?php echo $this->__('View All Reviews') ?></a></p>
 	<div class="table-responsive">
 		<table class="table table-striped">
-		<?php $iterator = 0 ?>
-		<?php foreach ($this->getCollection() as $_review): ?>
+    <?php $iterator = 0 ?>
+    <?php foreach ($this->getCollection() as $_review): ?>
 			<tr>
 				<td><span class="nobr"><?php echo $this->dateFormat($_review->getReviewCreatedAt()); ?></span></td>
 				<td><a href="<?php echo $this->getProductLink() ?>id/<?php echo $_review->getEntityPkValue() ?>"><?php echo $this->escapeHtml($_review->getName()) ?></a></td>
 				<td>
-					<?php if($_review->getSum()): ?>
-						<div class="rating-box">
-							<div class="rating" style="width:<?php echo ( $_review->getSum() / $_review->getCount() ) ?>%;"></div>
-						</div>
-					<?php endif; ?>
+                <?php if($_review->getSum()): ?>
+                        <div class="rating-box">
+                            <div class="rating" style="width:<?php echo ( $_review->getSum() / $_review->getCount() ) ?>%;"></div>
+                        </div>
+                <?php endif; ?>
 				</td>
 				<td><?php echo $this->helper('review')->getDetailHtml($_review->getDetail()) ?></td>
 				<td><a href="<?php echo $this->getReviewLink() ?>id/<?php echo $_review->getReviewId() ?>" class="btn btn-link"><?php echo $this->__('View Details') ?></a></td>
 			</tr>
 		<?php endforeach; ?>
 		</table>
-	</div>
-	<script type="text/javascript">decorateList('my_recent_reviews');</script>
+            </div>
+    <script type="text/javascript">decorateList('my_recent_reviews');</script>
 </div>
 <?php endif; ?>

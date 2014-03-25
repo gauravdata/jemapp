@@ -47,6 +47,11 @@ Default layout, loads most of the pages
                 <action method="addJs"><script>varien/form.js</script></action>
                 <action method="addJs"><script>mage/translate.js</script></action>
                 <action method="addJs"><script>mage/cookies.js</script></action>
+                <!-- <action method="addJs"><script>flash/swfobject.js</script></action> -->
+                <!-- <action method="addJs"><script>lib/floguriparser.js</script></action> -->
+                <!--<action method="addJs"><script>lib/lightbox.js</script></action>-->
+				<!--<action method="addItem"><type>skin_js</type><script>js/lazierLoad.js</script></action> -->
+				<action method="addJs" ifconfig="web/seo/lazierload"><script>lazierload/lazierLoad.js</script></action>
 
                 <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
 
@@ -87,7 +92,6 @@ Default layout, loads most of the pages
                 <block type="page/html_welcome" name="welcome" as="welcome"/>
 				<block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
             </block>
-
 
             <block type="core/text_list" name="left" as="left" translate="label">
                 <label>Left Column</label>

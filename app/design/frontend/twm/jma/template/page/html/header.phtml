@@ -29,7 +29,7 @@
 		<div class="container_12">
 			<div class="grid_12">
 				<a href="<?php echo $this->getUrl('') ?>"><img src="<?=$this->getSkinUrl('images/logo.jpg');?>" alt="Je m'appelle" class="logo" /></a>
-				<!--<img src="<?=$this->getSkinUrl('images/zevende_hemel.gif');?>" alt="de Zevende Hemel" class="text" />-->
+				<div style="padding: 10px 10px 0 10px; float: left;"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('center-top')->toHtml(); ?></div>
 				<div class="options-menu">
 					<?php echo $this->getChildHtml('topLinks') ?>
 					<?php echo $this->getChildHtml('store_language') ?>

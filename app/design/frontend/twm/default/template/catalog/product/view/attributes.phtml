@@ -37,14 +37,16 @@
 <?php if($_additional = $this->getAdditionalData()): ?>
 	<h2><?php echo $_product->getName().' '.$this->__('Additional Information') ?></h2>
 	<table class="table table-striped" id="product-attribute-specs-table">
-		<tbody>
-		<?php foreach ($_additional as $_data): ?>
-			<tr>
-				<th><?php echo $this->escapeHtml($this->__($_data['label'])) ?></th>
-				<td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
-			</tr>
-		<?php endforeach; ?>
-		</tbody>
-	</table>
+        <tbody>
+        <?php foreach ($_additional as $_data): ?>
+			<?php if (!in_array($_data['value'], array('Nee','No'))): ?>
+				<tr>
+                    <th><?php echo $this->escapeHtml($this->__($_data['label'])) ?></th>
+                    <td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+				</tr>
+			<?php endif; ?>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
     <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
 <?php endif;?>

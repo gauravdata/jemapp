@@ -11,3 +11,5 @@ media/*
 maintenance.flag
 errors/local.xml
 downloader/*.cfg
+downloader/.cache/
+ioncube/

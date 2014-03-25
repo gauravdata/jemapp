@@ -24,7 +24,7 @@
                     <label>Amasty Extensions Store</label>
                     <frontend_type>text</frontend_type>
                     <frontend_model>ambase/store</frontend_model>
-                    <sort_order>2</sort_order>
+                    <sort_order>999</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
@@ -35,7 +35,7 @@
 			<label><![CDATA[General]]></label>
 			<tab>amasty</tab>
 			<frontend_type>text</frontend_type>
-			<sort_order>30</sort_order>
+			<sort_order>998</sort_order>
 			<show_in_default>1</show_in_default>
 			<show_in_website>1</show_in_website>
 			<show_in_store>1</show_in_store>

@@ -38,9 +38,9 @@
 <?php if ($this->displayProductStockStatus()): ?>
     <?php if ($_product->isAvailable() && $_hasAssociatedProducts): ?>
         <p><span class="label label-success"><?php echo $this->__('Availability:') ?> <?php echo $this->__('In stock') ?></span></p>
-    <?php else: ?>
+<?php else: ?>
         <p><span class="label label-danger"><?php echo $this->__('Availability:') ?> <?php echo $this->__('Out of stock') ?></span></p>
-    <?php endif; ?>
+<?php endif; ?>
 <?php endif; ?>
 <?php echo $this->getChildHtml('product_type_data_extra') ?>
 <table class="data-table grouped-items-table" id="super-product-table">

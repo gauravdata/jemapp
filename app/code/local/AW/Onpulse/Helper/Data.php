@@ -128,7 +128,7 @@ class AW_Onpulse_Helper_Data extends Mage_Core_Helper_Abstract
 
     private function _getCustomersRecentOrders($customer)
     {
-        if(version_compare(Mage::getVersion(),'1.4.1','<')) {
+        if(version_compare(Mage::getVersion(),'1.4.1.0','<=')) {
             $orderCollection=Mage::getModel('awonpulse/aggregator_components_order')->getCollectionForOldMegento();
         } else {
         /** @var $orderCollection Mage_Sales_Model_Resource_Order_Collection */
@@ -137,7 +137,7 @@ class AW_Onpulse_Helper_Data extends Mage_Core_Helper_Abstract
             ->addAttributeToSelect('*')
             ->addOrder('entity_id', 'DESC');
         }
-        $orderCollection->addAttributeToFilter('customer_id', array('eq' => $customer->getId()))
+        $orderCollection->addAttributeToFilter('main_table.customer_id', array('eq' => $customer->getId()))
             ->setPageSize(self::RECENT_ORDERS_COUNT);
         return $orderCollection;
     }
@@ -241,7 +241,7 @@ class AW_Onpulse_Helper_Data extends Mage_Core_Helper_Abstract
             'grand_total' => $this->getPriceFormat($order->getBaseGrandTotal()),
             'shipping_amount' => $this->getPriceFormat($order->getBaseShippingAmount()),
             'tax' => $this->getPriceFormat($order->getBaseTaxAmount()),
-            'gift_cards_amount' => $this->getPriceFormat($order->getGiftCardsAmount()),
+            'gift_cards_amount' => -$this->getPriceFormat($order->getGiftCardsAmount()),
             'currency' => Mage::app()->getLocale()->currency(Mage::app()->getStore()->getBaseCurrencyCode())->getSymbol(),
 
             //-----------------------------------------------------

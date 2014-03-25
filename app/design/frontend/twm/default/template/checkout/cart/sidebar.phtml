@@ -35,7 +35,7 @@
 <div class="block" id="block-cart">
     <?php $_cartQty = $this->getSummaryCount() ?>
 	<img src="<?php echo $this->getSkinUrl('img/shoppingbag-big-left.png') ?>" alt="cart" class="pull-right" />
-	<p class="title"><?php echo Mage::helper('checkout')->__('My Cart') ?></p>
+    <p class="title"><?php echo Mage::helper('checkout')->__('My Cart') ?></p>
     <div class="block-content">
     <?php if ($_cartQty>0): ?>
         <div class="summary">
@@ -50,10 +50,10 @@
                 <?php else: ?>
                     <p>
 						<?php echo $this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
-						<?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
-							<br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
-						<?php endif; ?>
-					</p>
+                <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+                    <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                <?php endif; ?>
+            </p>
                 <?php endif; ?>
             </p>
         </div>
@@ -66,7 +66,7 @@
     <?php endif ?>
     <?php $_items = $this->getRecentItems() ?>
     <?php if(count($_items)): ?>
-
+        
     <?php else: ?>
         <p class="empty"><?php echo $this->__('You have no items in your shopping cart.') ?></p>
     <?php endif ?>

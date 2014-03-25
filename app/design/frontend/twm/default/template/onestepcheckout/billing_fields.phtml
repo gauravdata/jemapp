@@ -43,15 +43,20 @@ $dataHelper = Mage::helper('onestepcheckout');
         </div>';
     ?>
 <?php endif; ?>
-
+<?php
+$addressLabels = array(
+1 => 'Street',
+2 => 'House no.',
+);
+?>
 <?php if(!$this->settings['exclude_address']):?>
     <?php if(Mage::getStoreConfig('onestepcheckout/exclude_fields/enable_address_fields')):?>
         <?php
         $addressFields = '';
             for ($_i=1, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++){
                     $addressFields .= '<div class="form-group input-address-short'.((in_array('address', $formErrors)) ? ' input-error' : '').'">
-                    <label for="billing:street'.$_i.'">'.$this->__('Street Address '.$_i).'<span class="required">*</span></label><br />
-                    <input type="text" title="'.$this->__('Street Address '.$_i).'" name="billing[street][]" id="billing:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getStreet($_i)).'" class="required-entry form-control onestepcheckout-address-line" />
+                    <label for="billing:street'.$_i.'">'.$this->__($addressLabels[$_i]).'<span class="required">*</span></label><br />
+                    <input type="text" title="'.$this->__($addressLabels[$_i]).'" name="billing[street][]" id="billing:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getStreet($_i)).'" class="required-entry form-control onestepcheckout-address-line" />
                     </div>';
             }
             $billingFields['street'] = $addressFields;
@@ -61,14 +66,14 @@ $dataHelper = Mage::helper('onestepcheckout');
         $addressFields = '';
             for ($_i=1, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++){
 
-                    $addressFields .= '<input type="text" title="'.$this->__('Street Address '.$_i).'" name="billing[street][]" id="billing:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getStreet($_i)).'" class="'.(($_i == 1)? 'required-entry ' : '').'form-control onestepcheckout-address-line" />';
+                    $addressFields .= '<input type="text" title="'.$this->__($addressLabels[$_i]).'" name="billing[street][]" id="billing:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getStreet($_i)).'" class="'.(($_i == 1)? 'required-entry ' : '').'form-control onestepcheckout-address-line" />';
                     $addressFields .= (($_i != $this->helper('customer/address')->getStreetLines()) ? '<br/>': '');
             }
             $billingFields['street'] = '
                 <div class="form-group input-address'.((in_array('address', $formErrors)) ? ' input-error' : '').'">
                     <label for="billing:street1">'.$this->__('Address').'<span class="required">*</span></label><br />
                     '.$addressFields.'
-                </div>';
+              </div>';
         ?>
     <?php endif; ?>
 <?php endif; ?>

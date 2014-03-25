@@ -41,46 +41,46 @@
 					<span class="product-name sync-height"><?php echo $this->escapeHtml($_item->getName()) ?></span>
 					<?php echo $this->getPriceHtml($_item, true, '-related') ?>
 				</a>
-			</div>
+    </div>
 		<?php endforeach ?>
-		</div>
-		<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
-		<script type="text/javascript">
-			//<![CDATA[
-			$$('.related-checkbox').each(function(elem){
-				Event.observe(elem, 'click', addRelatedToProduct)
-			});
+</div>
+	<script type="text/javascript">decorateList('block-related', 'none-recursive')</script>
+<script type="text/javascript">
+//<![CDATA[
+$$('.related-checkbox').each(function(elem){
+	Event.observe(elem, 'click', addRelatedToProduct)
+});
 
-			var relatedProductsCheckFlag = false;
-			function selectAllRelated(txt){
-				if (relatedProductsCheckFlag == false) {
-					$$('.related-checkbox').each(function(elem){
-						elem.checked = true;
-					});
-					relatedProductsCheckFlag = true;
-					txt.innerHTML="<?php echo $this->__('unselect all') ?>";
-				} else {
-					$$('.related-checkbox').each(function(elem){
-						elem.checked = false;
-					});
-					relatedProductsCheckFlag = false;
-					txt.innerHTML="<?php echo $this->__('select all') ?>";
-				}
-				addRelatedToProduct();
-			}
+var relatedProductsCheckFlag = false;
+function selectAllRelated(txt){
+	if (relatedProductsCheckFlag == false) {
+		$$('.related-checkbox').each(function(elem){
+			elem.checked = true;
+		});
+		relatedProductsCheckFlag = true;
+		txt.innerHTML="<?php echo $this->__('unselect all') ?>";
+	} else {
+		$$('.related-checkbox').each(function(elem){
+			elem.checked = false;
+		});
+		relatedProductsCheckFlag = false;
+		txt.innerHTML="<?php echo $this->__('select all') ?>";
+	}
+	addRelatedToProduct();
+}
 
-			function addRelatedToProduct(){
-				var checkboxes = $$('.related-checkbox');
-				var values = [];
-				for(var i=0;i<checkboxes.length;i++){
-					if(checkboxes[i].checked) values.push(checkboxes[i].value);
-				}
-				if($('related-products-field')){
-					$('related-products-field').value = values.join(',');
-				}
-			}
-			//]]>
-		</script>
+function addRelatedToProduct(){
+	var checkboxes = $$('.related-checkbox');
+	var values = [];
+	for(var i=0;i<checkboxes.length;i++){
+		if(checkboxes[i].checked) values.push(checkboxes[i].value);
+	}
+	if($('related-products-field')){
+		$('related-products-field').value = values.join(',');
+	}
+}
+//]]>
+</script>
 	</div>
 </div>
 <?php endif ?>

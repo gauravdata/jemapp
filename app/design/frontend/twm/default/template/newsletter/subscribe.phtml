@@ -24,22 +24,22 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
 	<?php echo $this->getBlockHtml('formkey'); ?>
 	<h2><?php echo $this->__('Sign Up for Our Newsletter:') ?></h2>
 	<label for="newsletter"><?php echo $this->__('and be the first to receive offers and never miss a thing!') ?></label>
 	<div class="input-group">
 		<input type="text" name="email" id="newsletter" placeholder="<?php echo $this->__('Email') ?>" class="form-control required-entry validate-email" />
 		<a href="#" class="input-group-addon submit" title="<?php echo $this->__('Subscribe') ?>">&raquo;</a>
-	</div>
+        </div>
 	<button type="submit" title="<?php echo $this->__('Subscribe') ?>" class="hidden"><?php echo $this->__('Subscribe') ?></button>
-</form>
-<script type="text/javascript">
+    </form>
+    <script type="text/javascript">
 	jQuery('#newsletter-validate-detail a.submit').click(function(){
 		jQuery("#newsletter-validate-detail button").trigger('click');
 		return false;
 	});
-	//<![CDATA[
-		var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
-	//]]>
-</script>
+    //<![CDATA[
+        var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+    //]]>
+    </script>
