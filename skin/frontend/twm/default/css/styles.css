@@ -430,6 +430,22 @@ button.navbar-toggle {
     border-radius: 0;
     box-shadow: none;
 }
+button.navbar-toggle .toggle-text {
+	float: left;
+	color: #ccc;
+	line-height: 12px;
+	margin-right: 10px;
+}
+button.navbar-toggle .toggle-text,
+button.navbar-toggle:hover .icon-bar {
+	transition: all 0.3s ease-out;
+}
+button.navbar-toggle:hover .toggle-text {
+	color: #2e2d2c;
+}
+button.navbar-toggle:hover .icon-bar {
+	background-color: #2e2d2c;
+}
 
 .navbar-default {
     background: #2e2d2c;
@@ -1035,9 +1051,6 @@ footer #newsletter-validate-detail .input-group-addon {
     }
 }
 @media(max-width: 769px) {
-    header a.logo {
-        text-align: center;
-    }
     .navbar-nav {
         margin: 0;
     }
@@ -1069,9 +1082,13 @@ footer #newsletter-validate-detail .input-group-addon {
         display: inline-block;
     }
     .breadcrumb {
-        margin-bottom: 50px;
+        position: absolute;
+		margin: 35px 0 0;
     }
     .modal-dialog {
         width: 90%;
     }
+	#product_addtocart_form .btn-cart {
+		width: 100%;
+	}
 }
