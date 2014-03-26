@@ -30,8 +30,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-6">
-				<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
-                <div style="padding: 10px 10px 0 10px; float: left;"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('center-top')->toHtml(); ?></div>
+				<div class="clearfix">
+					<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+					<div class="center-top">
+						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('center-top')->toHtml(); ?>
+					</div>
+				</div>
 				<?php echo $this->getChildHtml('breadcrumbs') ?>
 			</div>
 			<div class="col-sm-6">

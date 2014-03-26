@@ -34,7 +34,7 @@
 <?php if ($this->getIsNeedToDisplaySideBar()):?>
 <div class="block" id="block-cart">
     <?php $_cartQty = $this->getSummaryCount() ?>
-	<img src="<?php echo $this->getSkinUrl('img/shoppingbag-big-left.png') ?>" alt="cart" class="pull-right" />
+	<img src="<?php echo $this->getSkinUrl('images/shoppingbag-big-left.png') ?>" alt="cart" class="pull-right" />
     <p class="title"><?php echo Mage::helper('checkout')->__('My Cart') ?></p>
     <div class="block-content">
     <?php if ($_cartQty>0): ?>

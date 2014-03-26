@@ -63,6 +63,14 @@ html, body {
 }
 
 /*= Modals =*/
+.modal .close {
+	font-size: 45px;
+	margin-top: -10px;
+}
+.modal button.close:hover,
+.modal button.close:focus {
+	background: none;
+}
 .modal-dialog {
     width: 400px;
 }
@@ -319,8 +327,14 @@ p.title {
 p.sub-title {
     font-size: 125%;
 }
-strong {
+strong,
+dt,
+.close,
+th {
 	font-weight: normal;
+}
+dt {
+	color: #023e75;
 }
 
 #qty {
@@ -356,6 +370,10 @@ header {
 header a.logo {
     display: block;
     margin: 15px 0 5px;
+}
+header .center-top {
+	float: left;
+	padding: 10px;
 }
 
 /*= Toplinks =*/
@@ -394,7 +412,7 @@ header .top-links a span {
     right: 0;
     top: -45px;
     padding: 10px 0 10px 30px;
-    background: url('../img/shoppingbag.png') no-repeat left;
+    background: url('../images/shoppingbag.png') no-repeat left;
 }
 
 /*= Search =*/
@@ -471,8 +489,7 @@ button.navbar-toggle:hover .icon-bar {
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > li.active > a {
-    color: #fff;
-    text-decoration: underline;
+    color: #8b8b8b;
 }
 .navbar-default .navbar-nav > li > a .caret {
     border-top-color: #fff;
@@ -559,7 +576,8 @@ aside .block a {
     color: #fff;
     text-decoration: underline;
 }
-aside .block a:hover {
+aside .block a:hover,
+aside .block a:focus {
     color: #9aa3c0;
     text-decoration: none;
 }
@@ -568,7 +586,6 @@ aside .block .list-group a {
 }
 aside .block .list-group strong {
     color: #9aa3c0;
-    font-weight: normal;
 }
 
 /*= Block white =*/
@@ -611,12 +628,12 @@ aside #block-cart .btn.btn-link:focus {
 /*= Recently viewed =*/
 #recently-viewed-items {
     padding-bottom: 45px;
-    background: url('../img/life-is-good.gif') no-repeat bottom center;
+    background: url('../images/life-is-good.gif') no-repeat bottom center;
 }
 #recently-viewed-items li {
     padding-bottom: 5px;
     margin-bottom: 5px;
-    background: url('../img/border-horizontal.gif') repeat-x bottom left;
+    background: url('../images/border-horizontal.png') repeat-x bottom left;
 }
 #recently-viewed-items li a {
     text-decoration: underline;
@@ -624,7 +641,7 @@ aside #block-cart .btn.btn-link:focus {
 
 /*= Related =*/
 #block-related {
-    background: url('../img/border-horizontal.gif') repeat-x bottom left;
+    background: url('../images/border-horizontal.png') repeat-x bottom left;
 }
 #block-related .product-name {
     text-decoration: none;
@@ -636,6 +653,18 @@ aside #block-cart .btn.btn-link:focus {
     margin-bottom: 10px;
 }
 
+/*= Poll =*/
+#poll-answers {
+	list-style: none;
+	padding-left: 0;
+}
+#poll-answers input {
+	display: inline;
+}
+#poll-answers .label {
+	font-size: 100%;
+}
+
 /*======================================================
 	TOOLBARS & PAGERS
 ======================================================*/
@@ -645,7 +674,7 @@ aside #block-cart .btn.btn-link:focus {
     margin: 15px 0;
     padding: 8px 0;
     border: none;
-    background: url('../img/border-horizontal.gif') repeat-x top left, url('../img/border-horizontal.gif') repeat-x bottom left;
+    background: url('../images/border-horizontal.png') repeat-x top left, url('../images/border-horizontal.png') repeat-x bottom left;
     border-radius: 0;
 }
 .limiter .form-control,
@@ -792,7 +821,7 @@ p.no-rating a {
     display: block;
     width: 67px;
     height: 97px;
-    background: url('../img/shoppingbag-big-right.png');
+    background: url('../images/shoppingbag-big-right.png');
     left: 20px;
     top: -30px;
 }
@@ -995,7 +1024,7 @@ footer ul.social li a {
     display: block;
     width: 10px;
     height: 21px;
-    background: url('../img/social.jpg') no-repeat;
+    background: url('../images/social.jpg') no-repeat;
     overflow: hidden;
     text-indent: -999px;
     margin-right: 10px;
@@ -1037,7 +1066,7 @@ footer #newsletter-validate-detail .input-group-addon {
     text-indent: -99px;
     padding-left: 15px;
     padding-right: 15px;
-    background: url('../img/arrow-submit.jpg') no-repeat 50% 50% #000;
+    background: url('../images/arrow-submit.jpg') no-repeat 50% 50% #000;
     border: none;
     border-radius: 0;
 }

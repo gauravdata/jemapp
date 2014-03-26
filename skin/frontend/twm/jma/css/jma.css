@@ -1,3 +1,79 @@
-html, body {
+/*= Text colors =*/
+p.title,
+aside > .block-white .title,
+aside > .block-white .sub-title,
+.price-box,
+.product-name a,
+p.product-image .glyphicon {
+	color: #4c4c4c;
+}
+aside .block .list-group strong,
+aside .block a:hover,
+aside .block a:focus {
+	color: #aaa;
+}
+a:hover,
+a:focus,
+dt {
 	color: #000;
+}
+
+/*= Background colors =*/
+h1,
+h2,
+legend,
+.legend,
+aside > .block,
+#discount-coupon-form,
+.checkout-cart-index .btn-checkout {
+	background-color: #4c4c4c;
+}
+aside > .block-white {
+	background: none;
+}
+.panel-default > .panel-heading,
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: #eee;
+}
+
+/*= Border color =*/
+.panel,
+.panel-default > .panel-heading,
+.form-control,
+.input-text, input[type=text],
+a.thumbnail.active,
+a.thumbnail:hover,
+a.thumbnail:focus,
+.table thead > tr > th,
+.table tbody > tr > th,
+.table tfoot > tr > th,
+.table thead > tr > td,
+.table tbody > tr > td,
+.table tfoot > tr > td {
+	border-color: #aaa;
+}
+
+/*= Product detail button =*/
+#product_addtocart_form .btn-cart {
+	background-color: #ff6a17;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+#product_addtocart_form .btn-cart:before {
+	display: none;
+}
+
+/*= Background images =*/
+header .top-links a span {
+	background-image: url('../images/shoppingbag.png');
+}
+.toolbar,
+.pager,
+#block-related,
+#recently-viewed-items li {
+	background-image: url('../images/border-horizontal.png');
+}
+aside #block-cart > img {
+	display: none;
 }
