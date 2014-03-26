@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default translate="label" module="page">
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/jma.css</stylesheet></action>
+		</reference>
+	</default>
+</layout>
