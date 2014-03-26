@@ -57,7 +57,7 @@ $checkoutHelper = Mage::helper('onestepcheckout/checkout');
 
 <table class="onestepcheckout-totals table table-striped">
     <?php foreach($this->getTotals() as $total): ?>
-    <?php if(!$total->getTitle()){continue;}?>
+    <?php if(!$total->getTitle() || $total->getCode() == 'tax'){continue;}?>
         <?php
         $fullInfo = $total->getFullInfo();
 
