@@ -24,8 +24,7 @@ h2,
 legend,
 .legend,
 aside > .block,
-#discount-coupon-form,
-.checkout-cart-index .btn-checkout {
+#discount-coupon-form {
 	background-color: #4c4c4c;
 }
 aside > .block-white {
@@ -35,6 +34,13 @@ aside > .block-white {
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
 	background-color: #eee;
+}
+.onestepcheckout-summary {
+	background: #ffe6d8;
+}
+.onestepcheckout-summary .table-striped > tbody > tr:nth-child(odd) > td,
+.onestepcheckout-summary .table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: #fff5ef;
 }
 
 /*= Border color =*/
@@ -54,7 +60,7 @@ a.thumbnail:focus,
 	border-color: #aaa;
 }
 
-/*= Product detail button =*/
+/*= Buttons =*/
 #product_addtocart_form .btn-cart {
 	background-color: #ff6a17;
 	padding-left: 20px;
@@ -64,12 +70,20 @@ a.thumbnail:focus,
 	display: none;
 }
 
+.checkout-cart-index .btn-checkout,
+.btn#onestepcheckout-place-order {
+	background: #ff6a17;
+	border-color: #d65108;
+}
+
 /*= Background images =*/
 header .top-links a span {
 	background-image: url('../images/shoppingbag.png');
 }
 .toolbar,
-.pager,
+.pager {
+	background: url('../images/border-horizontal.png') repeat-x top left, url('../images/border-horizontal.png') repeat-x bottom left;
+}
 #block-related,
 #recently-viewed-items li {
 	background-image: url('../images/border-horizontal.png');

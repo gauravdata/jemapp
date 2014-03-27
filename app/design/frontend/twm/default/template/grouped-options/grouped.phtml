@@ -41,7 +41,7 @@
     <!--<p class="availability out-of-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>-->
 <?php endif; ?>
 <?php echo $this->getChildHtml('product_type_data_extra') ?>
-<table class="data-table grouped-items-table" id="super-product-table">
+<table class="table table-striped grouped-items-table" id="super-product-table">
     <col />
     <col />
     <col width="1" />
@@ -65,11 +65,14 @@
             <td><img class="fn photo" src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(126,126); ?>" width="126" height="126" alt="<?php echo $this->htmlEscape($this->getImageLabel($_item, 'small_image')) ?>" /></td>
             <td><?php echo $this->htmlEscape($_item->getName()) ?></td>
             <?php if ($this->helper('groupedoptions')->getCanShowProductPrice($this, $_product)): ?>
-            <td class="a-right">
+            <td class="a-right nobr">
                 <?php if ($this->helper('groupedoptions')->getCanShowProductPrice($this, $_item)): ?>
                 <?php echo $this->getPriceHtml($_item, true) ?>
                 <?php echo $this->getTierPriceHtml($_item) ?>
                 <?php endif; ?>
+				<?php if(Mage::app()->getLocale()->getLocaleCode() == 'de_DE') { ?>
+				*
+				<?php } ?>
             </td>
             <?php endif; ?>
             <?php if ($_product->isSaleable()): ?>
@@ -98,5 +101,8 @@
     <?php endif; ?>
     </tbody>
 </table>
+<?php if(Mage::app()->getLocale()->getLocaleCode() == 'de_DE') { ?>
+<p>* <a href="http://www.jemappelle.de/versand">Alle Preise inkl. MwSt, zzgl. Versand</a></p>
+<?php } ?>
 <input name="qty_increments" type="hidden" value="<?php echo (int)$_product->getStockItem()->getQtyIncrements(); ?>" />
 <script type="text/javascript">decorateTable('super-product-table');</script>

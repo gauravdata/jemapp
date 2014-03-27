@@ -156,6 +156,9 @@ input[type=text] {
     vertical-align: middle;
     color: #555;
 }
+input.qty {
+	text-align: center;
+}
 .form-control:focus {
     border-color: #00427b;
     box-shadow: 0 0 10px rgba(0,66,123,0.5);
@@ -240,9 +243,10 @@ button:disabled,
 .btn-danger:hover,
 .btn-danger:focus,
 .btn-danger:disabled {
-    background: #cbcbcb;
+    background: #aaa;
     border-color: #8e8e8e;
     color: #000;
+	box-shadow: inset 0 10px 10px rgba(255,255,255,0.35);
 }
 
 .btn-back,
@@ -327,6 +331,7 @@ p.title {
 p.sub-title {
     font-size: 125%;
 }
+b,
 strong,
 dt,
 .close,
@@ -709,6 +714,9 @@ aside #block-cart .btn.btn-link:focus {
 .category-image img {
     width: 100%;
 }
+.category-description {
+	margin-bottom: 20px;
+}
 .thumbnail .product-name {
     margin: 0;
 }
@@ -719,6 +727,9 @@ aside #block-cart .btn.btn-link:focus {
 .product-name a:hover,
 .product-name a:focus {
     color: #7f7f7f;
+}
+#product-list > .row:last-child .thumbnail {
+	margin-bottom: 0;
 }
 
 /*======================================================
@@ -829,6 +840,21 @@ p.no-rating a {
     background: #000;
 }
 
+#product-view-details .fbintegrator-likebutton {
+	margin-bottom: 20px;
+}
+
+/*= Grouped =*/
+.grouped-items-table .grouped-option {
+	padding-top: 0;
+}
+.grouped-items-table .grouped-option-title {
+	font-weight: normal;
+}
+.grouped-items-table .price-box {
+	display: inline-block;
+}
+
 /*======================================================
 	CART
 ======================================================*/
@@ -856,6 +882,7 @@ p.no-rating a {
 }
 .checkout-cart-index h1 .pull-right .btn {
     border: none;
+	background: none;
     box-shadow: none;
     border-radius: 0;
 }
@@ -928,13 +955,26 @@ ul#payment_form_customercredit {
     color: #fff;
     border-color: #002e59;
     font-size: 27px;
-    padding: 8px 20px 5px;
+    padding: 0 20px 3px;
     margin-bottom: 15px;
 }
 .btn#onestepcheckout-place-order:hover,
 .btn#onestepcheckout-place-order:focus {
     background: #111;
     border-color: #000;
+}
+
+.onestepcheckout-summary {
+	padding: 10px 20px;
+	margin-bottom: 20px;
+	background: #d7dbe6;
+}
+.onestepcheckout-summary .table-striped > tbody > tr:nth-child(odd) > td,
+.onestepcheckout-summary .table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: #edf1fa;
+}
+.onestepcheckout-summary .grand-total {
+	color: #000;
 }
 
 /*======================================================
