@@ -1132,8 +1132,11 @@ footer #newsletter-validate-detail .input-group-addon {
     #search_mini_form {
         margin: 10px 0;
     }
+	header {
+		min-height: 0;
+	}
     header .top-links {
-        margin-top: 0;
+        margin: 30px 0 50px;
     }
     .navbar-nav > li > .dropdown-menu {
         position: static;
@@ -1152,7 +1155,7 @@ footer #newsletter-validate-detail .input-group-addon {
     }
     .breadcrumb {
         position: absolute;
-		margin: 35px 0 0;
+		margin: 60px 0 0;
     }
     .modal-dialog {
         width: 90%;
