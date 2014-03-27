@@ -31,6 +31,8 @@ aside > .block-white {
 	background: none;
 }
 .panel-default > .panel-heading,
+fieldset,
+.fieldset,
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
 	background-color: #eee;
@@ -46,6 +48,8 @@ aside > .block-white {
 /*= Border color =*/
 .panel,
 .panel-default > .panel-heading,
+fieldset,
+.fieldset,
 .form-control,
 .input-text, input[type=text],
 a.thumbnail.active,
