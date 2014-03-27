@@ -373,12 +373,12 @@ header {
     min-height: 195px;
 }
 header a.logo {
-    display: block;
+    float: left;
     margin: 15px 0 5px;
 }
 header .center-top {
 	float: left;
-	padding: 10px;
+	margin: 10px 20px;
 }
 
 /*= Toplinks =*/

@@ -29,16 +29,17 @@
 ?><header>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-8">
 				<div class="clearfix">
 					<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
 					<div class="center-top">
+						aap
 						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('center-top')->toHtml(); ?>
 					</div>
 				</div>
 				<?php echo $this->getChildHtml('breadcrumbs') ?>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-4">
 					<?php echo $this->getChildHtml('topLinks') ?>
 				</div>
 			</div>
