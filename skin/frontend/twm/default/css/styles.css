@@ -850,6 +850,9 @@ p.no-rating a {
 .grouped-items-table .grouped-option-title {
 	font-weight: normal;
 }
+.grouped-items-table .grouped-options-cell.last {
+    padding-bottom: 32px;
+}
 .grouped-items-table .price-box {
 	display: inline-block;
 }

@@ -48,7 +48,7 @@ $_formJsVar = "productAddToCartForm".$_product->getId();
     <?php foreach($_attributes as $_attribute): ?>
     <?php $values = $config['attributes'][$_attribute->getAttributeId()]['options']; ?>
     <div class="grouped-option">
-        <label class="grouped-option-title"><span class="required">*&nbsp;</span><?php echo $_attribute->getLabel() ?></label>
+        <?php /*<label class="grouped-option-title"><span class="required">*&nbsp;</span><?php echo $_attribute->getLabel() ?></label>*/ ?>
         <select name="super_attribute[<?php echo $_product->getId() ?>][<?php echo $_attribute->getAttributeId() ?>]" id="<?php echo $this->helper('groupedoptions')->getHtmlConfigAttributeId($_attribute);?>" class="go-qty-required-entry super-attribute-select">
             <option><?php echo $this->__('Choose an Option...') ?></option>
         </select>
