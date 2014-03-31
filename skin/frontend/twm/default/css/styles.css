@@ -378,12 +378,15 @@ header a.logo {
 }
 header .center-top {
 	float: left;
-	margin: 10px 20px;
+	margin: 10px 20px 0;
+}
+header .center-top p {
+	margin: 0;
 }
 
 /*= Toplinks =*/
 header .top-links {
-    margin-top: 143px;
+    margin-top: 115px;
     position: relative;
 }
 header .top-links li {
