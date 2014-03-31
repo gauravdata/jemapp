@@ -369,9 +369,6 @@ dt {
 /*======================================================
 	HEADER
 ======================================================*/
-header {
-    min-height: 195px;
-}
 header a.logo {
     float: left;
     margin: 15px 0 5px;
@@ -1138,9 +1135,6 @@ footer #newsletter-validate-detail .input-group-addon {
     #search_mini_form {
         margin: 10px 0;
     }
-	header {
-		min-height: 0;
-	}
     header .top-links {
         margin: 30px 0 50px;
     }
