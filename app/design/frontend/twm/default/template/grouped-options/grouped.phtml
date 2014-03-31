@@ -101,8 +101,5 @@
     <?php endif; ?>
     </tbody>
 </table>
-<?php if(Mage::app()->getLocale()->getLocaleCode() == 'de_DE') { ?>
-<p>* <a href="http://www.jemappelle.de/versand">Alle Preise inkl. MwSt, zzgl. Versand</a></p>
-<?php } ?>
 <input name="qty_increments" type="hidden" value="<?php echo (int)$_product->getStockItem()->getQtyIncrements(); ?>" />
 <script type="text/javascript">decorateTable('super-product-table');</script>
