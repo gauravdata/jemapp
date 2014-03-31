@@ -984,6 +984,14 @@ ul#payment_form_customercredit {
 	color: #000;
 }
 
+.onestepcheckout-enable-terms {
+	margin-bottom: 5px;
+}
+.onestepcheckout-enable-terms label {
+	display: inline;
+	margin-bottom: 0;
+}
+
 /*======================================================
 	VALIDATION & MESSAGES
 ======================================================*/
