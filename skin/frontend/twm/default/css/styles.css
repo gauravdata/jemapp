@@ -331,6 +331,9 @@ p.title {
 p.sub-title {
     font-size: 125%;
 }
+.small {
+	font-size: 0.85em;
+}
 b,
 strong,
 dt,
@@ -967,7 +970,8 @@ ul#payment_form_customercredit {
     border-color: #000;
 }
 
-.onestepcheckout-summary {
+.onestepcheckout-summary,
+.highlight {
 	padding: 10px 20px;
 	margin-bottom: 20px;
 	background: #d7dbe6;

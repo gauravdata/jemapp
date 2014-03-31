@@ -37,7 +37,8 @@ fieldset,
 .table-striped > tbody > tr:nth-child(odd) > th {
 	background-color: #eee;
 }
-.onestepcheckout-summary {
+.onestepcheckout-summary,
+.highlight {
 	background: #ffe6d8;
 }
 .onestepcheckout-summary .table-striped > tbody > tr:nth-child(odd) > td,
