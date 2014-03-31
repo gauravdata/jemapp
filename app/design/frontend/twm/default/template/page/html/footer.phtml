@@ -39,7 +39,7 @@
 			</div>
 			<div class="col-md-2">
 				<?php if(Mage::app()->getLocale()->getLocaleCode() == 'nl_NL') { ?>
-				<!--<iframe class="iframe-right" scrolling="no" src="https://www.kiyoh.nl/widget.php?company=6589&size=small" width="160" height="98" border="0" frameborder="0"></iframe>-->
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('Kiyoh')->toHtml(); ?>
 				<!--Start of Zopim Live Chat Script-->
 				<script type="text/javascript">
 				window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
