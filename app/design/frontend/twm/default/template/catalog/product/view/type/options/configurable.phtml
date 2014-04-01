@@ -27,18 +27,59 @@
 
 <?php
 $_product    = $this->getProduct();
+Mage::helper('catalog/product')->setSkipSaleableCheck(true);
+$jsonConfig = $this->getJsonConfig();
+$this->unsAllowProducts();
+$config = Mage::helper('core')->jsonDecode($jsonConfig);
+Mage::helper('catalog/product')->setSkipSaleableCheck(false);
+
 $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 ?>
 <?php if ($_product->isSaleable() && count($_attributes)):?>
-    <?php foreach($_attributes as $_attribute): ?>
-	<div class="form-group">
-<!--		<label class="required"><em>*</em>--><?php //echo $_attribute->getLabel() ?><!--</label>-->
-		<select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select form-control<?php if ($_attribute->decoratedIsLast){?> last<?php }?>">
-                <option><?php echo $this->__('Choose an Option...') ?></option>
-            </select>
-            </div>
-    <?php endforeach; ?>
-    <script type="text/javascript">
-	var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
-    </script>
+	<?php foreach($_attributes as $_attribute): ?>
+		<div class="form-group btn-group<?php if ($_attribute->decoratedIsLast){?> last<?php }?>">
+			<?php $values = $config['attributes'][$_attribute->getAttributeId()]['options']; ?>
+			<select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+				<option><?php echo $this->__('Choose an Option...') ?></option>
+			</select>
+			<div class="super_attribute<?php echo $_attribute->getAttributeId() ?>-options">
+				<?php foreach ($values as $value): ?>
+					<button id="option<?=$value['id']?>" class="option-btn" value="<?=$value['id']?>"><?=$value['label']?></button>
+				<?php endforeach ?>
+			</div>
+		</div>
+	<?php endforeach; ?>
+	<script type="text/javascript">
+		var config = <?php echo $this->getJsonConfig() ?>;
+		config.chooseText = '<?php echo sprintf($this->__('Kies je maat...'), $_attribute->getLabel()) ?>';
+		var spConfig = new Product.Config(config);
+
+		var buttons = $$('.super_attribute<?php echo $_attribute->getAttributeId() ?>-options .option-btn');
+
+		buttons.each(function(btn){
+			$(btn).on('click', function(evt){
+				$('attribute<?php echo $_attribute->getAttributeId() ?>').setValue(this.value);
+				fireEvent($('attribute<?php echo $_attribute->getAttributeId() ?>')[0], 'change');
+				$$('.super_attribute<?php echo $_attribute->getAttributeId() ?>-options .option-btn').each(function(btn){
+					btn.removeClassName('pressed');
+				});
+				$(this).addClassName('pressed');
+				evt.stop();
+				return false;
+			});
+			for (id in config.attributes) {
+				var attr = config.attributes[id];
+				for (key in attr.options) {
+					var option = attr.options[key];
+					if (typeof option != 'object') continue;
+					if (option.id == btn.value) {
+						return;
+					}
+				}
+			}
+			$(btn).addClassName('disabled').disable();
+		});
+		$('attribute<?php echo $_attribute->getAttributeId() ?>').hide();
+
+	</script>
 <?php endif;?>

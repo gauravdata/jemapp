@@ -250,6 +250,25 @@ button:disabled,
 	box-shadow: inset 0 10px 10px rgba(255,255,255,0.35);
 }
 
+button:disabled {
+	opacity: 0.35;
+	cursor: not-allowed;
+	position: relative;
+}
+button:disabled:after {
+	width: 80%;
+	position: absolute;
+	content: " ";
+	height: 1px;
+	background: #ff0000;
+	left: 10%;
+	top: 50%;
+
+	transform:rotate(-10deg);
+	-ms-transform:rotate(-10deg);
+	-webkit-transform:rotate(-10deg);
+}
+
 .btn-back,
 .btn-link,
 .btn-default {
@@ -278,6 +297,14 @@ button:disabled,
 }
 .btn-back:before {
     content: "« ";
+}
+
+.btn-group {
+	margin-bottom: -3px;
+}
+.btn-group .btn,
+.btn-group button {
+	margin-bottom: 3px;
 }
 
 /*======================================================
@@ -474,7 +501,7 @@ button.navbar-toggle:hover .icon-bar {
 }
 
 .navbar-default {
-    background: #2e2d2c;
+	background: #023e75;
     border-radius: 0;
     border: none;
 }
@@ -491,13 +518,24 @@ button.navbar-toggle:hover .icon-bar {
     color: #fff;
     text-decoration: none;
     text-transform: capitalize;
-    font-size: 23px;
+    font-size: 22px;
 }
 .navbar-default .navbar-nav > li:hover > a,
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-nav > li.active > a {
-    color: #8b8b8b;
+.navbar-default .navbar-nav > li.active > a,
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+	color: #9aa3c0;
+	background: none;
+}
+.navbar-default .navbar-nav > li.seperator {
+	height: 50px;
+	width: 26px;
+	font-size: 0px;
+	line-height: 0px;
+	background: url('../images/nav-seperator.png') no-repeat 50% 50%;
 }
 .navbar-default .navbar-nav > li > a .caret {
     border-top-color: #fff;
@@ -508,7 +546,7 @@ button.navbar-toggle:hover .icon-bar {
 .navbar-default .navbar-nav > li > .dropdown-menu {
     border: none;
     border-radius: 0;
-    background: #2e2d2c;
+    background: #023e75;
     color: #fff;
     box-shadow: none;
     text-align: right;
@@ -785,6 +823,9 @@ table a.product-image {
 #product-view .onsale-product-container {
     z-index: 0;
 }
+#product-image-modal .modal-body {
+	text-align: center;
+}
 
 /*= Info =*/
 .addthis_toolbox a {
@@ -1038,7 +1079,7 @@ ul.messages li.error-msg ul li {
 	FOOTER
 ======================================================*/
 footer {
-    background: #2e2d2c;
+    background: #023e75;
     margin-top: 20px;
     padding: 20px 0;
     color: #fff;
@@ -1059,7 +1100,8 @@ footer a {
 }
 footer a:hover,
 footer a:focus {
-    color: #7f7f7f;
+	color: #fff;
+	opacity: 0.5;
 }
 footer ul {
     padding: 0;
@@ -1079,7 +1121,7 @@ footer ul.social li a {
     display: block;
     width: 10px;
     height: 21px;
-    background: url('../images/social.jpg') no-repeat;
+    background: url('../images/social.png') no-repeat;
     overflow: hidden;
     text-indent: -999px;
     margin-right: 10px;

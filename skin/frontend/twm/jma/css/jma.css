@@ -7,6 +7,15 @@ aside > .block-white .sub-title,
 p.product-image .glyphicon {
 	color: #4c4c4c;
 }
+.navbar-default .navbar-nav > li:hover > a,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li.active > a,
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+	color: #8b8b8b;
+}
 aside .block .list-group strong,
 aside .block a:hover,
 aside .block a:focus {
@@ -17,6 +26,10 @@ a:focus,
 dt {
 	color: #000;
 }
+footer a:hover,
+footer a:focus {
+	color: #7f7f7f;
+}
 
 /*= Background colors =*/
 h1,
@@ -24,7 +37,10 @@ h2,
 legend,
 .legend,
 aside > .block,
-#discount-coupon-form {
+#discount-coupon-form,
+.navbar-default,
+.navbar-default .navbar-nav > li > .dropdown-menu,
+footer {
 	background-color: #4c4c4c;
 }
 aside > .block-white {
