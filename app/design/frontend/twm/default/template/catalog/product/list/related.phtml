@@ -32,7 +32,7 @@
 		<?php foreach($this->getItems() as $_item): ?>
 			<div class="col-xs-6 text-center">
 				<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" class="thumbnail">
-					<span><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(100) ?>" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></span>
+					<span><img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(155) ?>" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></span>
 					<?php if(!$_item->isComposite() && $_item->isSaleable()): ?>
 						<?php if (!$_item->getRequiredOptions()): ?>
 						<input type="checkbox" class="related-checkbox" id="related-checkbox<?php echo $_item->getId() ?>" name="related_products[]" value="<?php echo $_item->getId() ?>" />
