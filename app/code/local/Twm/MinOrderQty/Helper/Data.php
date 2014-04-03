@@ -18,11 +18,17 @@ class Twm_MinOrderQty_Helper_Data extends Mage_Core_Helper_Abstract
 			if ($cart->getQuote()->getItemsCount()) {
 				$minimumQty = Mage::getStoreConfig('sales/minimum_order_qty/qty');
 
-				$couponCodeException = Mage::getStoreConfig('sales/minimum_order_qty/coupon_exception');
-
 				//check if coupon code for exception was used
-				if ($couponCodeException && $couponCodeException == $cart->getQuote()->getCouponCode()) {
-					return true;
+				$couponCodeException = Mage::getStoreConfig('sales/minimum_order_qty/coupon_exception');
+				$ruleIds = $cart->getQuote()->getAppliedRuleIds();
+				if ($couponCodeException && $ruleIds) {
+					$couponCodeException = explode(",",$couponCodeException);
+					$ruleIds = explode(",",$ruleIds);
+					foreach ($ruleIds as $ruleId) {
+						if (in_array($ruleId,$couponCodeException)) {
+							return true;
+						}
+					}
 				}
 
 				if ($cart->getQuote()->getItemsQty() < $minimumQty) {
