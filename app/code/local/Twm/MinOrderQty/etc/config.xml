@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_MinOrderQty>
+            <version>1.0.0</version>
+        </Twm_MinOrderQty>
+    </modules>
+    <global>
+        <helpers>
+            <minorderqty>
+                <class>Twm_MinOrderQty_Helper</class>
+            </minorderqty>
+        </helpers>
+    </global>
+    <default>
+        <sales>
+            <minimum_order_qty>
+                <active>0</active>
+                <qty>0</qty>
+                <message>Your order does not match or exceed the minimum order quantity.</message>
+            </minimum_order_qty>
+        </sales>
+    </default>
+</config>
