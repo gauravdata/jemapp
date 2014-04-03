@@ -2,5 +2,34 @@
 
 class Twm_MinOrderQty_Helper_Data extends Mage_Core_Helper_Abstract
 {
+	/**
+	 * Retrieve shopping cart model object
+	 *
+	 * @return Mage_Checkout_Model_Cart
+	 */
+	protected function _getCart()
+	{
+		return Mage::getSingleton('checkout/cart');
+	}
 
+	public function validateOrderQty() {
+		if (Mage::getStoreConfig('sales/minimum_order_qty/active')) {
+			$cart = $this->_getCart();
+			if ($cart->getQuote()->getItemsCount()) {
+				$minimumQty = Mage::getStoreConfig('sales/minimum_order_qty/qty');
+
+				$couponCodeException = Mage::getStoreConfig('sales/minimum_order_qty/coupon_exception');
+
+				//check if coupon code for exception was used
+				if ($couponCodeException && $couponCodeException == $cart->getQuote()->getCouponCode()) {
+					return true;
+				}
+
+				if ($cart->getQuote()->getItemsQty() < $minimumQty) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 }

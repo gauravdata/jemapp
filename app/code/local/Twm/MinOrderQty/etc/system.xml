@@ -35,6 +35,14 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </message>
+					<coupon_exception translate="label">
+						<label>Coupon code exception</label>
+						<sort_order>20</sort_order>
+						<frontend_type>text</frontend_type>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</coupon_exception>
                     </fields>
                 </minimum_order_qty>
             </groups>

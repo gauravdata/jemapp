@@ -6,12 +6,40 @@
         </Twm_MinOrderQty>
     </modules>
     <global>
+	    <blocks>
+		    <twm_minorderqty>
+			    <class>Twm_MinOrderQty_Block</class>
+		    </twm_minorderqty>
+		    <checkout>
+			    <rewrite>
+				    <onepage_link>Twm_MinOrderQty_Block_Onepage_Link</onepage_link>
+			    </rewrite>
+		    </checkout>
+	    </blocks>
         <helpers>
             <minorderqty>
                 <class>Twm_MinOrderQty_Helper</class>
             </minorderqty>
         </helpers>
+	    <models>
+		    <minorderqty>
+			    <class>MinOrderQty_Model</class>
+		    </minorderqty>
+	    </models>
     </global>
+	<frontend>
+		<events>
+			<controller_action_predispatch>
+				<observers>
+					<cartcontroller_index>
+						<type>singleton</type>
+						<class>Twm_MinOrderQty_Model_Observer</class>
+						<method>checkMinOrderQty</method>
+					</cartcontroller_index>
+				</observers>
+			</controller_action_predispatch>
+		</events>
+	</frontend>
     <default>
         <sales>
             <minimum_order_qty>
