@@ -31,7 +31,7 @@
  * @package    Mage_Checkout
  * @author      Magento Core Team <core@magentocommerce.com>
  */
-class Twm_MinOrderQty_Block_Onepage_Link extends Mage_Checkout_Block_Onepage_Link {
+class Twm_MinOrderQty_Block_Onepage_Link extends Idev_OneStepCheckout_Block_Checkout_Onepage_Link {
 
 	public function isDisabled() {
 		$disabled = parent::isDisabled();
