@@ -387,9 +387,19 @@ dt {
 }
 .old-price {
     color: #aa1717;
+    font-size: 18px;
 }
 .special-price {
     color: #008800;
+}
+.grouped-items-table .special-price {
+    float: left;
+}
+
+.thumbnail .special-price,
+.thumbnail .old-price {
+    float: none !important;
+    display: inline !important;
 }
 
 .nobr {
