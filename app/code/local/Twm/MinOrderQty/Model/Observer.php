@@ -28,5 +28,10 @@ class Twm_MinOrderQty_Model_Observer {
 				$cart->getCheckoutSession()->addNotice($warning);
 			}
 		}
+		if ($controller instanceof Idev_OneStepCheckout_IndexController) {
+			if (!Mage::helper("minorderqty")->validateOrderQty()) {
+				return $event->getControllerAction()->getResponse()->setRedirect(Mage::getUrl('checkout/cart'));
+			}
+		}
 	}
 }
