@@ -392,6 +392,9 @@ dt {
 .special-price {
     color: #008800;
 }
+.grouped-options-row .special-price {
+    float: left;
+}
 
 .nobr {
     white-space: nowrap;
