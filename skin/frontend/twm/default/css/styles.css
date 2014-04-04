@@ -392,7 +392,7 @@ dt {
 .special-price {
     color: #008800;
 }
-.grouped-options-row .special-price {
+.grouped-items-table .special-price {
     float: left;
 }
 
