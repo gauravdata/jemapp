@@ -396,6 +396,12 @@ dt {
     float: left;
 }
 
+.thumbnail .special-price,
+.thumbnail .old-price {
+    float: none !important;
+    display: inline !important;
+}
+
 .nobr {
     white-space: nowrap;
 }
