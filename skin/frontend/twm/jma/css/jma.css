@@ -31,6 +31,15 @@ footer a:focus {
 	color: #7f7f7f;
 }
 
+#onestepcheckout-login-popup {
+    background-color: #FFF;
+    border: 1px solid #4c4c4c;
+    padding: 0 15px;
+}
+#onestepcheckout-login-popup h1 {
+    margin: 0 -15px;
+}
+
 /*= Background colors =*/
 h1,
 h2,
