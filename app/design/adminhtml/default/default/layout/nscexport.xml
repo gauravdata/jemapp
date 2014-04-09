@@ -1,8 +1,47 @@
 <?xml version="1.0"?>
-<layout version="0.1.0">
-    <nscexport_adminhtml_nscexport_index>
-        <reference name="content">
-            <block type="nscexport/adminhtml_nscexport" name="nscexport" />
-        </reference>
-    </nscexport_adminhtml_nscexport_index>
+<layout version="0.1.0">	
+	<adminhtml_nscexport_profiles_grid_index>
+		<reference name="content">			
+			<block name="profiles.grid.container" type="nscexport/adminhtml_nscexport" template="nscexport/nscexport.phtml"/>			
+		</reference>
+		<reference name="head">
+            <action method="addItem"><type>skin_css</type><file>koongo.css</file></action>
+		</reference>
+	</adminhtml_nscexport_profiles_grid_index>	
+	<adminhtml_nscexport_profiles_grid_new>		
+		<reference name="head">
+            <action method="addItem"><type>skin_css</type><file>koongo.css</file></action>
+		</reference>
+	</adminhtml_nscexport_profiles_grid_new>
+	<adminhtml_nscexport_profiles_grid_edit>
+		<!--<update handle="editor"/>-->
+		<reference name="content">
+			<block name="profile.edit" type="nscexport/adminhtml_nscexport_edit" template="nscexport/edit.phtml">
+				<block name="edit.form" type="nscexport/adminhtml_nscexport_edit_form" template="nscexport/edit/form.phtml" as="editForm" />
+			</block>
+		</reference>
+		<reference name="head">
+            <action method="addItem"><type>skin_css</type><file>koongo.css</file></action>
+		</reference>
+	</adminhtml_nscexport_profiles_grid_edit>
+	<adminhtml_nscexport_activation_index>
+		<reference name="content">
+			<block name="nscexport_activation" type="nscexport/adminhtml_nscexport_activation" template="nscexport/activation.phtml">
+				<block name="nscexport_activation_contact" type="nscexport/adminhtml_nscexport_activation_contact" as="contactForm" />
+			</block>
+		</reference>
+		<reference name="head">
+            <action method="addItem"><type>skin_css</type><file>koongo.css</file></action>
+		</reference>
+	</adminhtml_nscexport_activation_index>
+	<adminhtml_nscexport_action_docs>
+		<reference name="head">
+			<action method="addJs"><script>nscexport/tinybox2.js</script></action>
+			<action method="addCss"><stylesheet>css/nscexport/tinybox2.css</stylesheet></action>
+            <action method="addItem"><type>skin_css</type><file>koongo.css</file></action>
+		</reference>
+		<reference name="content">			
+			<block name="nscexport_docs" type="nscexport/adminhtml_nscexport_docs" template="nscexport/docs.phtml"/>			
+		</reference>		
+	</adminhtml_nscexport_action_docs>	
 </layout>
