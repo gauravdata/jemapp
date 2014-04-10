@@ -66,7 +66,7 @@ $addressLabels = array(
         $addressFields = '';
             for ($_i=1, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++){
 				$addressFields .= '<div class="form-group">';
-				$addressFields .= '<label>'.$this->__($addressLabels[$_i]).'</label>';
+				$addressFields .= '<label>'.$this->__($addressLabels[$_i]).' *</label>';
 				$addressFields .= '<input type="text" title="'.$this->__($addressLabels[$_i]).'" name="billing[street][]" id="billing:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getStreet($_i)).'" class="'.(($_i == 1)? 'required-entry ' : '').'form-control onestepcheckout-address-line" />';
 				$addressFields .= '</div>';
             }
