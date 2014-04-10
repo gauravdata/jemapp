@@ -1,0 +1,2 @@
+<?php class Nostress_Nscexport_Model_Mysql4_Categoryproducts_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract{public function _construct(){parent::_construct();$this->_init("\x6e\x73c\x65\x78\x70o\x72\x74/c\x61\x74eg\x6fr\x79\x70r\x6f\x64\x75\x63t\x73");}}
+?>

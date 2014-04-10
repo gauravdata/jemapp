@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>aw_customsmtp/js/testconnection.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>aw_customsmtp/css/config.css</name>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
+    <customsmtp_admin_adminhtml_mails_index>
+        <reference name="content">
+            <block type="customsmtp/adminhtml_mails" />
+        </reference>
+    </customsmtp_admin_adminhtml_mails_index>
+    <customsmtp_admin_adminhtml_mails_view>
+        <reference name="content">
+            <block type="customsmtp/adminhtml_mails_view"/>
+        </reference>
+    </customsmtp_admin_adminhtml_mails_view>
+</layout>

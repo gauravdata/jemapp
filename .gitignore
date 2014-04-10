@@ -13,3 +13,8 @@ errors/local.xml
 downloader/*.cfg
 downloader/.cache/
 ioncube/
+stats/
+sitemap.xml
+retour-nt.pdf
+retour-jma.pdf
+retour-jma-de.pdf

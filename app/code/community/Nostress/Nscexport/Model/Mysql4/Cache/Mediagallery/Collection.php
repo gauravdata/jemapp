@@ -1,0 +1,2 @@
+<?php class Nostress_Nscexport_Model_Mysql4_Cache_Mediagallery_Collection extends Nostress_Nscexport_Model_Mysql4_Cache_Collection{public function _construct(){parent::_construct();$this->_init("\x6esc\x65\x78\x70o\x72\x74/\x63\x61\x63\x68\x65\x5fme\x64i\x61g\x61lle\x72\x79");}}
+?>

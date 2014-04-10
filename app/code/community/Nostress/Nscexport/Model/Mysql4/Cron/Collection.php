@@ -1,0 +1,2 @@
+<?php class Nostress_Nscexport_Model_Mysql4_Cron_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract{public function _construct(){parent::_construct();$this->_init("n\x73cexpo\x72\x74/c\x72on");}}
+?>

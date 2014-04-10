@@ -1,0 +1,77 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Customsmtp
+ * @version    1.0.8
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><div class="box">
+    <div class="fieldset">
+        <table class="form-list" cellspacing="0">
+            <tbody>
+            <tr>
+                <td class="label">
+                    <label><?php echo $this->__("Subject")?></label>
+                </td>
+                <td>
+                    <strong><?php echo $this->filterJS($this->getMail()->getSubject()) ?></strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label><?php echo $this->__("From")?></label>
+                </td>
+                <td>
+                    <strong><?php echo $this->filterJS($this->getMail()->getFromName()) ?> &lt;<a
+                        href="mailto:<?php echo ($this->getMail()->getFromEmail())?>"><?php echo $this->filterJS($this->getMail()->getFromEmail()) ?></a>
+                        &gt;</strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label><?php echo $this->__("To")?></label>
+                </td>
+                <td>
+                    <strong><?php echo $this->filterJS($this->getMail()->getToName()) ?> &lt;<a
+                        href="mailto:<?php echo ($this->getMail()->getToEmail())?>"><?php echo $this->filterJS($this->getMail()->getToEmail())?></a>
+                        &gt;</strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label>Date</label>
+                </td>
+                <td>
+                    <strong><?php echo $this->formatDate($this->getMail()->getDate(), 'medium', true);?></strong>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label></label>
+                </td>
+                <td>
+                    <strong></strong>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

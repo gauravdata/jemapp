@@ -1,0 +1,2 @@
+<?php class Nostress_Nscexport_Model_Mysql4_Cache_Tax_Collection extends Nostress_Nscexport_Model_Mysql4_Cache_Collection{public function _construct(){parent::_construct();$this->_init("\x6e\x73\x63\x65xport/\x63\x61\x63he\x5ft\x61x");}}
+?>

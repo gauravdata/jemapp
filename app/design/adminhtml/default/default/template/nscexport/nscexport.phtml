@@ -1,0 +1,118 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Nostress
+ * @package    Nostress_Nscexport
+ * @copyright Copyright (c) 2012 NoStress Commerce (http://www.nostresscommerce.cz)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+/**
+ * Template for Mage_Adminhtml_Block_Widget_Grid_Container
+ */
+?>
+
+<?php 	if(Mage::helper('nscexport/version')->isLicenseEmpty()): ?>
+  <div id="overlay" class="overlay"></div>
+  <div id="overlay-data" class="overlay-data">
+    <div class="container">
+      <div class="box">
+        <div class="koongo">
+          <div class="logo"></div>
+          <div class="line"></div>
+          <div class="btn-set">
+            <div class="l">
+            	<?php 
+					$info = $this->getTrialConnectorInfo();
+					$code = $info->getCode()?$info->getCode():'KOONGO_FREE_TRIAL_30D';
+					$label = $info->getLabel()?$info->getLabel():$this->__('Activate as Koongo Trial');
+					$title = $info->getTitle()?$info->getTitle():$this->__('Activate as Koongo Trial');
+					$shortDescription = $info->getShortDescription()?$info->getShortDescription():$this->__('I want to try for 30 days for <span>FREE</span>!');
+					
+            		echo $this->getButtonHtml($this->getActivateFormUrl($code),"btn-koongo",$title,"btn_activate_trial",$label); 
+            	?>
+              <div class="destroy"></div>
+              <div class="info">
+              	<?php echo $shortDescription; ?>               
+              </div>              
+            </div>
+            <div class="r">
+            	<?php 
+					$info = $this->getLiveConnectorInfo();					
+					$label = $info->getLabel()?$info->getLabel():$this->__('Activate as Koongo Full');
+					$title = $info->getTitle()?$info->getTitle():$this->__('Activate as Koongo Full');
+					$shortDescription = $info->getShortDescription()?$info->getShortDescription():'I have payed for full version and I have a live license key.';
+					
+            		echo $this->getButtonHtml($this->getLicenseConfigUrl(),"btn-koongo",$title,"btn_activate_live",$label); 
+            	?>         
+              <div class="destroy"></div>
+              <div class="info">
+                <?php echo $shortDescription; ?>    
+              </div>	
+            </div>
+            <div class="destroy"></div>
+          </div>
+        </div> 
+      </div>
+      
+      <div class="box">
+      <?php 
+		$connectors = $this->getCustomConnectors();	
+		$first = true;
+		foreach($connectors as $info):	
+			if(!$first)
+				echo '<div class="line"></div>';
+			else 
+				$first = false;
+		?> 				
+	        <div class="unit">
+	          <div class="logo custom"><img alt="<?php echo $info->getImageTitle(); ?>" title="<?php echo $info->getImageTitle(); ?>" src="<?php echo $info->getImageUrl(); ?>"></div>	          
+	          <div class="line"></div>
+	          <div class="info">
+	          	<?php echo $info->getDescription(); ?>	             
+	          </div>
+	          <div class="btn-one">
+	          	<?php  echo $this->getButtonHtml($this->getActivateFormUrl($info->getCode()),"btn",$info->getTitle(),"btn_activate_live",$info->getLabel()); ?> 
+	            <div class="sub-info"><?php echo $info->getShortDescription(); ?></div> 
+	          </div>      
+	          <div class="destroy"></div>
+	        </div> 	        
+        <?php endforeach; ?>
+      </div>
+
+    </div>
+	</div>
+<?php endif;?>
+
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="<?php echo $this->getHeaderWidth() ?>"><?php echo $this->getHeaderHtml() ?></td>
+            <td class="form-buttons"><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <?php echo $this->getGridHtml() ?>
+</div>
+
+<script>
+window.onload=function() 
+{
+	//Remove header js toolbar
+	$$('.' + 'content-header-floating')[0].remove();
+}
+
+</script>

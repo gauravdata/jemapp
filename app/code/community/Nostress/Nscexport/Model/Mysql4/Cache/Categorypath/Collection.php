@@ -1,0 +1,2 @@
+<?php class Nostress_Nscexport_Model_Mysql4_Cache_Categorypath_Collection extends Nostress_Nscexport_Model_Mysql4_Cache_Collection{public function _construct(){parent::_construct();$this->_init("\x6es\x63\x65x\x70o\x72\x74/\x63a\x63h\x65\x5fcate\x67\x6fr\x79p\x61t\x68");}}
+?>
