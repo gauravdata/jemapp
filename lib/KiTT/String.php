@@ -58,6 +58,10 @@ class KiTT_String
         if ($to === null) {
             $to = self::$klarnaEncoding;
         }
+	$result = iconv($from, $to, $str);
+	if ($result === false) {
+		return utf8_decode($str);
+	}
         return iconv($from, $to, $str);
     }
 
