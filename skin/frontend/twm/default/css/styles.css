@@ -1227,4 +1227,10 @@ footer #newsletter-validate-detail .input-group-addon {
 	#product_addtocart_form .btn-cart {
 		width: 100%;
 	}
+    p.product-image .glyphicon {
+        display: none;
+    }
+    #product-view .onsale-product-container, .onsale-product-container .onsale-product-container-inside {
+        cursor: default;
+    }
 }
