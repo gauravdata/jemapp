@@ -71,12 +71,18 @@
 <?php endif; ?>
 	<script type="text/javascript">
 	function setZoom(){
-		jQuery('#zoom-image').elevateZoom({
-			zoomType: "inner",
-			cursor: "crosshair",
-			zoomWindowFadeIn: 500,
-			zoomWindowFadeOut: 750
-				});
+        if(jQuery(window).width() > 752){
+            jQuery('#zoom-image').elevateZoom({
+                zoomType: "inner",
+                cursor: "crosshair",
+                zoomWindowFadeIn: 500,
+                zoomWindowFadeOut: 750
+            });
+        }else{
+            jQuery('#zoom-image').click(function(){
+                return false;
+            });
+        }
 	}
 	jQuery(window).resize(function(){
 		setZoom();
