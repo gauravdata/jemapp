@@ -158,6 +158,7 @@ input[type=text] {
 }
 input.qty {
 	text-align: center;
+	min-width: 30px;
 }
 .form-control:focus {
     border-color: #00427b;
@@ -1041,6 +1042,17 @@ ul#payment_form_customercredit {
 .onestepcheckout-enable-terms label {
 	display: inline;
 	margin-bottom: 0;
+}
+
+/*= Login modal =*/
+.onestepcheckout-error {
+	color: #ff0500;
+	margin-bottom: 20px;
+}
+#onestepcheckout-forgot-loading,
+#onestepcheckout-login-loading {
+	height: 32px;
+	background: url('../images/loading.gif') no-repeat center;
 }
 
 /*======================================================

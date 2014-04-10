@@ -1,0 +1,2 @@
+<?php class Nostress_Nscexport_Model_Mysql4_Cache_Superattributes_Collection extends Nostress_Nscexport_Model_Mysql4_Cache_Collection{public function _construct(){parent::_construct();$this->_init("n\x73\x63e\x78p\x6f\x72t/\x63\x61ch\x65\x5fsup\x65\x72\x61t\x74r\x69\x62ut\x65\x73");}}
+?>

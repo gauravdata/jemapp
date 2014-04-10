@@ -1,0 +1,33 @@
+<?php
+    $helper = Mage::helper( 'nscexport');
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="<?php echo $this->getHeaderWidth() ?>"><?php echo $this->getHeaderHtml() ?></td>
+            <td class="form-buttons"><?php echo $this->getButtonsHtml() ?></td>
+        </tr>
+    </table>
+</div>
+<div class="videos">
+    <?php $videos = $this->getVideos();
+    if( count( $videos)) { ?>
+    <?php
+        $i = 0;
+        foreach( $videos as $video) {
+    ?>
+    <div class="item">
+        <a data-toggle="lightbox" href="javascript:void(0);" onclick="TINY.box.show({iframe:'<?php echo $video['url']; ?>',width:750,height:500,maskopacity:40,closejs:function(){closeJS()}});">
+            <img src="<?php echo $video['thumbnail_url']; ?>" title="<?php echo $video['name']; ?>" />
+        </a>
+        <div class="item-content">
+            <h4><?php echo $video['name']; ?></h4>
+            <div class="description"><?php echo $video['description']; ?></div>
+        </div>
+        <div class="item-footer">
+            <div class="timer">Time: <span><?php echo date('i:s',$video['duration']); ?></span></div>
+        </div>
+    </div>
+    <?php } ?>
+    <?php } ?>
+</div>

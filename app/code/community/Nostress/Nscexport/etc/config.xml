@@ -1,0 +1,340 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Nostress_Nscexport>
+            <version>6.3.0.0</version>
+        </Nostress_Nscexport>
+    </modules>
+    <admin>
+        <routers>
+			<adminhtml>
+                 <args>
+                     <modules>
+                         <nscexport before="Mage_Adminhtml">Nostress_Nscexport_Adminhtml</nscexport>
+                     </modules>
+                 </args>
+             </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <koongo>
+                <use>standard</use>
+                <args>
+                    <module>Nostress_Nscexport</module>
+                    <frontName>koongo</frontName>
+                </args>
+            </koongo>
+        </routers>
+    </frontend>
+    <adminhtml>
+		<menu>
+			<koongoconnector translate="title" module="nscexport">
+				<title>Koongo</title>
+				<sort_order>31</sort_order>
+				<children>
+					<nscexportprofiles translate="title" module="nscexport">
+						<title>Export Profiles</title>
+						<action>adminhtml/nscexport_profiles_grid</action>
+					</nscexportprofiles>
+					<nscexportconfig translate="title" module="nscexport">
+						<title>Configuration</title>
+						<action>adminhtml/system_config/edit/section/koongo_config</action>
+					</nscexportconfig>
+					<nscexportcron translate="title" module="nscexport">
+						<title>Cronjob</title>
+						<children>
+                            <schedule translate="title" module="nscexport">
+                                <title>Schedule</title>
+                                <action>adminhtml/nscexport_schedule_grid</action>
+                            </schedule>
+                            <history translate="title" module="nscexport">
+                                <title>History</title>
+                                <action>adminhtml/nscexport_history_grid</action>
+                            </history>
+                        </children>
+					</nscexportcron>
+					<nscexportlicense translate="title" module="nscexport">
+						<title>License &amp; Plugins</title>
+						<action>adminhtml/system_config/edit/section/koongo_license_and_plugins</action>
+					</nscexportlicense>
+					<nscexportdocs translate="title" module="nscexport">
+						<title>Help &amp; Docs</title>
+						<action>adminhtml/nscexport_action/docs</action>						
+					</nscexportdocs>
+					<nscexportcustomfeed translate="title" module="nscexport">
+						<title>Custom Feed Layout</title>
+						<action>adminhtml/nscexport_action/customFeedRedirect</action>						
+					</nscexportcustomfeed>
+				</children>
+			</koongoconnector>
+		</menu>
+		<acl>
+	    	<resources>
+	        	<admin>
+	            	<children>
+	            		<system>
+							<children>
+								<config>
+									<children>
+										<koongo_license_and_plugins translate="title" module="nscexport">
+											<title>License &amp; Plugins</title>
+											<sort_order>61</sort_order>
+										</koongo_license_and_plugins>
+										<koongo_config translate="title" modul="nscexport">
+                                           	<title>Configuration</title>
+                                       	</koongo_config>
+									</children>
+								</config>
+							</children>
+						</system>
+                   		<koongoconnector translate="title" module="nscexport">
+                   			<title>Koongo Connector</title>
+                   			<children>
+								<nscexportprofiles translate="title" module="nscexport">
+									<title>Export Profiles</title>
+								</nscexportprofiles>
+								<nscexportconfig translate="title" module="nscexport">
+									<title>Configuration</title>
+								</nscexportconfig>
+								<nscexportcron translate="title" module="nscexport">
+									<title>Cronjob</title>
+									<children>
+			                            <schedule translate="title" module="nscexport">
+			                                <title>Schedule</title>
+			                            </schedule>
+			                            <history translate="title" module="nscexport">
+			                                <title>History</title>
+			                            </history>
+			                        </children>
+								</nscexportcron>
+								<nscexportlicense translate="title" module="nscexport">
+									<title>License &amp; Plugins</title>
+								</nscexportlicense>
+								<nscexportdocs translate="title" module="nscexport">
+									<title>Help &amp; Docs</title>
+								</nscexportdocs>
+								<nscexportcustomfeed translate="title" module="nscexport">
+									<title>Custom Feed Layout</title>
+								</nscexportcustomfeed>
+                   	    	</children>
+						</koongoconnector>
+					</children>
+	        	</admin>
+	     	</resources>
+		</acl>
+		<layout>
+			<updates>
+				<nscexport>
+					<file>nscexport.xml</file>
+				</nscexport>
+			</updates>
+		</layout>
+		<translate>
+	      	<modules>
+            	<Nostress_Nscexport>
+	            	<files>
+	                	<default>Nostress_Nscexport.csv</default>
+	            	</files>
+	        	</Nostress_Nscexport>
+        	</modules>
+    	</translate>
+    </adminhtml>
+    <global>
+    	<events>
+            <catalog_product_save_commit_after>
+                <observers>
+                    <nscexport>
+                        <type>singleton</type>
+                        <class>nscexport/observer</class>
+                        <method>processCatalogProductAfterSaveEvent</method>
+                    </nscexport>
+                </observers>
+            </catalog_product_save_commit_after>
+            <catalog_product_save_before>
+                 <observers>
+                    <nscexport>
+                        <type>singleton</type>
+                        <class>nscexport/observer</class>
+                        <method>setNewProductSaveFlag</method>
+                    </nscexport>
+                </observers>
+            </catalog_product_save_before>
+        </events>
+        <models>
+            <nscexport>
+                <class>Nostress_Nscexport_Model</class>
+                <resourceModel>nscexport_mysql4</resourceModel>
+            </nscexport>
+            <nscexport_mysql4>
+                <class>Nostress_Nscexport_Model_Mysql4</class>
+                <entities>
+                    <profile>
+                        <table>nostress_export</table>
+                    </profile>
+                    <categoryproducts>
+                        <table>nostress_export_categoryproducts</table>
+                    </categoryproducts>
+                    <enginecategory>
+                        <table>nostress_export_enginecategory</table>
+                    </enginecategory>
+                    <cron>
+                    	<table>nostress_export_cron</table>
+                    </cron>
+                    <plugin>
+                    	<table>nostress_export_plugin</table>
+                    </plugin>
+                    <feed>
+                        <table>nostress_export_feed</table>
+                    </feed>
+                    <taxonomy_setup>
+                        <table>nostress_export_taxonomy_setup</table>
+                    </taxonomy_setup>
+                    <cache_categorypath>
+                    	<table>nostress_export_cache_categorypath</table>
+                    </cache_categorypath>
+                    <cache_productinfo>
+                    	<table>nostress_export_cache_productinfo</table>
+                    </cache_productinfo>
+                    <cache_categories>
+                    	<table>nostress_export_cache_categories</table>
+                    </cache_categories>
+                    <cache_superattributes>
+                    	<table>nostress_export_cache_superattributes</table>
+                    </cache_superattributes>
+                    <cache_mediagallery>
+                    	<table>nostress_export_cache_mediagallery</table>
+                    </cache_mediagallery>
+                    <cache_tax>
+                    	<table>nostress_export_cache_tax</table>
+                    </cache_tax>
+                    <cache_weee>
+                    	<table>nostress_export_cache_weee</table>
+                    </cache_weee>
+                </entities>
+            </nscexport_mysql4>
+        </models>
+        <resources>
+            <nscexport_setup>
+                <setup>
+                    <module>Nostress_Nscexport</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </nscexport_setup>
+            <nscexport_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </nscexport_write>
+            <nscexport_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </nscexport_read>
+        </resources>
+		<blocks>
+			<nscexport>
+				<class>Nostress_Nscexport_Block</class>
+			</nscexport>
+			<nscexportprofile>
+				<class>Nostress_Nscexport_Block_Adminhtml_Nscexport</class>
+			</nscexportprofile>
+			<adminhtml>
+				<rewrite>
+					<catalog_category_tab_attributes>Nostress_Nscexport_Block_Adminhtml_Catalog_Category_Tab_Attributes</catalog_category_tab_attributes>					
+					<page_menu>Nostress_Nscexport_Block_Adminhtml_Page_Menu</page_menu>
+				</rewrite>
+			</adminhtml>			
+		</blocks>
+        <helpers>
+            <nscexport>
+                <class>Nostress_Nscexport_Helper</class>
+            </nscexport>
+        </helpers>
+    </global>
+    <crontab>
+        <jobs>
+           <nostress_koongo_connector>
+                <schedule>
+                		<cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>nscexport/observer::generateFeeds</model>
+                </run>
+            </nostress_koongo_connector>
+            <nostress_koongo_plugins>
+                <schedule>
+                		<cron_expr>0 3 * * *</cron_expr><!-- Run daily at 3.00 am -->
+                </schedule>
+                <run>
+                    <model>nscexport/observer::updatePluginInfo</model>
+                </run>
+            </nostress_koongo_plugins>
+        </jobs>
+    </crontab>
+	<default>
+		<koongo_config>
+			<general>
+				<cron_run_period>60</cron_run_period>
+				<cron_last_run>00:00:00</cron_last_run>
+				<media_gallery_attribute_code>media_gallery</media_gallery_attribute_code>
+				<image_folder>catalog/product</image_folder>
+				<server_url_secure>https://www.nostresscommerce.cz/xmlFeedServer.php</server_url_secure>
+				<server_url_unsecure>http://www.nostresscommerce.cz/xmlFeedServer.php</server_url_unsecure>
+				<koongo_api_url_secure>http://www.koongo.com/api/1.0/koongo/</koongo_api_url_secure>
+				<koongo_api_url_unsecure>http://www.koongo.com/api/1.0/koongo/</koongo_api_url_unsecure>>
+				<taxonomy_source_url>http://flow.nostresscommerce.cz/feeds-taxonomy/</taxonomy_source_url>
+				<collections_json_url>http://www.koongo.com/js/koongo/collections.json</collections_json_url>	
+				<connectors_json_url>http://www.koongo.com/js/koongo/connectors.json</connectors_json_url>	
+				<university_json_url>http://www.koongo.com/js/koongo/university.json</university_json_url>			
+				<common_attribute_codes>size,color,length,availability,manufacturer,gender,custom_stock_status</common_attribute_codes>
+				<temp_file_prefix>temp-</temp_file_prefix>
+				<customer_group_code>NOT LOGGED IN</customer_group_code>
+				<filepath>/media/xmlFeedExport/</filepath>
+				<review_url>review/product/list/id/</review_url>
+				<batch_size>10000</batch_size>
+				<debug_mode>0</debug_mode>
+				<remove_illegal_chars_reg_expression>/[(\x00-\x08\x0B\x0C\x0E-\x1F)]+/</remove_illegal_chars_reg_expression>
+				<log_events>1</log_events>
+				<log_limit>200</log_limit>
+				<log_rest>50</log_rest>
+				<render_taxonomies>1</render_taxonomies>
+				<allow_inactive_categories_export>1</allow_inactive_categories_export>
+				<allow_child_products_export>1</allow_child_products_export>
+				<allow_excluded_images_export>1</allow_excluded_images_export>
+				<conditions_disabled_attributes>stock_status,type,is_child,is_parent,categories,media_gallery,super_attributes,currency,language,locale,visibility</conditions_disabled_attributes>
+				<support_email>support@koongo.com</support_email>
+			</general>
+			<help>
+				<step1>https://docs.koongo.com/display/KoongoConnector/Export+Profile+Creation</step1>
+				<general_info>https://docs.koongo.com/display/KoongoConnector/Tab+1%3A+General</general_info>
+
+				<feed_common>https://docs.koongo.com/display/KoongoConnector/Tab+2%3A+Feed+Details#Tab2%3AFeedDetails-Common</feed_common>
+				<feed_shipping>https://docs.koongo.com/display/KoongoConnector/Shipping+Costs+Export</feed_shipping>
+				<feed_attributes>https://docs.koongo.com/display/KoongoConnector/Tab+2%3A+Feed+Details#Tab2%3AFeedDetails-Feed-specificAttributes</feed_attributes>
+				<feed_amt>https://docs.koongo.com/display/KoongoConnector/Attributes+Mapping</feed_amt>
+
+        		<product_common>https://docs.koongo.com/display/KoongoConnector/Tab+3%3A+Product+Filter#Tab3%3AProductFilter-Commonfilter</product_common>
+				<product_cp>https://docs.koongo.com/display/KoongoConnector/Tab+3%3A+Product+Filter#Tab3%3AProductFilter-Category-Productfilter</product_cp>
+
+				<attribute_common>https://docs.koongo.com/display/KoongoConnector/Tab+4%3A+Attribute+Filter#Tab4%3AAttributeFilter-Stockfilter</attribute_common>
+				<attribute_visibility>https://docs.koongo.com/display/KoongoConnector/Tab+4%3A+Attribute+Filter#Tab4%3AAttributeFilter-Visibilityfilter</attribute_visibility>
+				<attribute_conditions>https://docs.koongo.com/display/KoongoConnector/Tab+4%3A+Attribute+Filter#Tab4%3AAttributeFilter-Attributefilter</attribute_conditions>
+
+				<ftp_info>https://docs.koongo.com/display/KoongoConnector/Tab+5.+FTP+Settings</ftp_info>
+
+				<troubleshooting>https://docs.koongo.com/display/KoongoConnector/Troubleshooting</troubleshooting>
+				<support>https://docs.koongo.com/display/koongo/Support+and+Feedback</support>
+				<module_update_link>https://docs.koongo.com/display/KoongoConnector/Upgrade</module_update_link>
+				<plugin_update_link>https://docs.koongo.com/display/KoongoConnector/Plugin+Management</plugin_update_link>
+				<plugin_list_link>https://store.koongo.com/plugins.html</plugin_list_link>
+				<xslt_library>https://docs.koongo.com/display/KoongoConnector/XLST+Library</xslt_library>
+				<feed_collections>https://docs.koongo.com/display/KoongoConnector/Terms+Definitions#TermsDefinitions-Feedcollection</feed_collections>
+				<license_conditions>https://docs.koongo.com/display/KoongoConnector/License+Conditions</license_conditions>			
+				<flat_catalog>https://docs.koongo.com/display/KoongoConnector/Installation#Installation-EnableFlatCatalog</flat_catalog>	
+			</help>
+		</koongo_config>
+	</default>
+</config>

@@ -3,7 +3,7 @@
     <modules>
         <Nostress_Nscexport>
             <active>true</active>
-            <codePool>local</codePool>
+            <codePool>community</codePool>
         </Nostress_Nscexport>
     </modules>
 </config> 

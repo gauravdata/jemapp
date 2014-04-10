@@ -1,0 +1,333 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Nostress
+ * @package    Nostress_Nscexport
+ * @copyright Copyright (c) 2012 NoStress Commerce (http://www.nostresscommerce.cz)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<style>
+.grid tr.disabled td {
+	/*background: #f5f5f5 !important;*/
+	color: #a0a0a0;
+}
+.addAttributeButton {
+	float: right;
+}
+#_feedattributes_map_fieldset .label {
+	display: none;
+}
+</style>
+<div class="content-header">
+	<h3><?php echo $this->htmlEscape($this->getHeader()).($this->getProfileId() ? ' ('.Mage::helper('nscexport')->__('ID: %s', $this->getProfileId()).')' : '') ?></h3>
+	<p class="content-buttons form-buttons">
+		<?php
+		echo $this->getBackButtonHtml();
+		//echo $this->getResetButtonHtml();
+		if ($this->getProfileId()) {
+			echo $this->getDeleteButtonHtml();
+		}
+		echo $this->getAdditionalButtonsHtml();
+		echo $this->getSaveButtonHtml();
+		echo $this->getSaveAndContinueButtonHtml();
+		
+		echo $this->getUploadButtonHtml();
+		
+		echo $this->getLivechatButtonHtml();
+		?>
+	</p>
+</div>
+<?php echo $this->getTabsHtml(); ?>
+<form id="profile_edit_form" action="<?php echo $this->getSaveUrl(); ?>" method="post" enctype="multipart/form-data">
+	<div class="no-display">
+		<input type="hidden" name="isIframe" value="1" />
+		<input name="form_key" type="hidden" value="<?php echo $this->getFormKey() ?>" />
+		<input type="hidden" name="active_tab_id" id="active_tab_id" value="" />
+	</div>
+	<div id="profile_tab_content"></div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+	profileForm = new varienForm('profile_edit_form');
+	
+	profileForm.submit = function (url) {
+		this.errorSections = $H({});
+		this.canShowError = true;
+		this.submitUrl = url;
+		if (this.validator && this.validator.validate()) {
+			if (this.validationUrl){
+				this._validate();
+			}
+			else {
+				if (this.isSubmitted) {
+					return false;
+				}
+				this.isSubmitted = true;
+				this._submit();
+			}
+			displayLoadingMask();
+			return true;
+		}
+		return false;
+	};
+	
+	profileForm.getProfileId = function () {
+		collection = $(this.formId).getInputs('hidden','general[id]');
+		if (collection.size() > 0) {
+			return collection.first().value;
+		}
+		return false;
+	};
+	
+	/**
+	* Create/edit some profile
+	*/
+	function profileSubmit(url, useAjax) {
+		var activeTab = $('active_tab_id');
+		if (activeTab) {
+			if (activeTab.tabsJsObject && activeTab.tabsJsObject.activeTab) {
+				activeTab.value = activeTab.tabsJsObject.activeTab.id;
+			}
+		}
+		
+		var params = {};
+		var fields = $('profile_edit_form').getElementsBySelector('input', 'select');
+		
+		for (var i=0; i < fields.length; i++) {
+			if (!fields[i].name) {
+				continue;
+			}
+			params[fields[i].name] = fields[i].getValue();
+		}
+		
+		//console.log(params);
+		
+		var profileId = params['general[id]'] ? params['general[id]'] : 0;
+		var isCreating = profileId == 0; // Separate variable is needed because '0' in javascript converts to TRUE
+		
+		// Submit form
+		profileForm.submit();
+	}
+	
+	function toggleApplyVisibility(select) {
+		if ($(select).value == 1) {
+			$(select).next('select').removeClassName('no-display');
+			$(select).next('select').removeClassName('ignore-validate');
+		}
+		else {
+			$(select).next('select').addClassName('no-display');
+			$(select).next('select').addClassName('ignore-validate');
+			var options = $(select).next('select').options;
+			for (var i=0; i < options.length; i++) {
+				options[i].selected = false;
+			}
+		}
+	}
+	
+	function checkApplyVisibility(select) {
+		if ($(select).previous('select').value == 1) {
+			$(select).removeClassName('no-display');
+			$(select).removeClassName('ignore-validate');
+		}
+		else {
+			$(select).addClassName('no-display');
+			$(select).addClassName('ignore-validate');
+			var options = $(select).options;
+			for (var i=0; i < options.length; i++) {
+				options[i].selected = false;
+			}
+		}
+	}
+	
+	checkApplyVisibility($('_productstypes'));
+	
+	function addAttribute() {
+		var numrows = $$('#tempshutdown_container tr').length;
+		var element1 = 'magentoAttributes_'+numrows;
+		var element2 = 'parentSelect_'+numrows;
+		var element3 = 'postConfig_'+numrows;
+		var element4 = 'translate_'+numrows;
+
+		var rowIndex = <?php echo $this->getCustomAttributeIndexOffset();?>;
+		rowIndex = rowIndex + (numrows-1);
+		
+		new Ajax.Updater(
+			{success: element1},
+			'<?php echo $this->getUrl('adminhtml/nscexport_action/getMagentoAttributes'); ?>', {
+				asynchronous: true,
+				evalScripts: false,
+				onComplete: function(request, json) {
+					Element.hide(element1);
+					Element.show(element1);
+				},
+				onLoading: function(request, json){},
+				parameters: {index: rowIndex, store_id: <?php echo $this->getStoreId() ?>, feed_code:'<?php echo $this->getFeedCode()?>',}
+		});
+		new Ajax.Updater(
+			{success: element2},
+			'<?php echo $this->getUrl('adminhtml/nscexport_action/getParentSelect'); ?>', {
+				asynchronous: true,
+				evalScripts: false,
+				onComplete: function(request, json) {
+					Element.hide(element2);
+					Element.show(element2);
+				},
+				onLoading: function(request, json){},
+				parameters: {index: rowIndex}
+		});
+		new Ajax.Updater(
+			{success: element3},
+			'<?php echo $this->getUrl('adminhtml/nscexport_action/getPostConfig'); ?>', {
+				asynchronous: true,
+				evalScripts: false,
+				onComplete: function(request, json) {
+					Element.hide(element3);
+					Element.show(element3);
+				},
+				onLoading: function(request, json){},
+				parameters: {index: rowIndex, file: <?php echo "'".$this->getFileType()."'"; ?>}
+		});
+		new Ajax.Updater(
+				{success: element4},
+				'<?php echo $this->getUrl('adminhtml/nscexport_action/getTranslate'); ?>', {
+					asynchronous: true,
+					evalScripts: true,
+					onComplete: function(request, json) {
+						Element.hide(element4);
+						Element.show(element4);
+					},
+					onLoading: function(request, json){},
+					parameters: {index: rowIndex, file: <?php echo "'".$this->getFileType()."'"; ?>}
+			});
+				
+		//var removeButton = <?php //echo $this->getRemoveButtonHtml(); ?>;
+		var removeButton = '<button onclick="removeCustomAttribute('+numrows+')" class="scalable delete" type="button"><span><?php echo $this->__("Delete"); ?></span></button>';
+		var xpathHtml = <?php echo "'".$this->getXpathColumnHtml()."'"; ?>;
+		var xpath = '';
+		if(xpathHtml && 0 !== xpathHtml.length)
+			xpath = xpathHtml.replace('{numrows}',rowIndex);
+
+		
+		$('tempshutdown_container').insert({
+			bottom: '<tr id="custom'+numrows+'"><td>'+numrows+'</td><td><input type="text" name="feed[attributes][attribute]['+rowIndex+'][label]" value="" style="width: 95%;" /></td>'+xpath+'<td><input type="text" name="feed[attributes][attribute]['+rowIndex+'][prefix]" value="" style="width: 95%;" /></td><td><input type="text" name="feed[attributes][attribute]['+rowIndex+'][constant]" value="" style="width: 95%;" /></td><td><span id="magentoAttributes_'+numrows+'"></span></td><td><span id="translate_'+numrows+'"></span></td><td><input type="text" name="feed[attributes][attribute]['+rowIndex+'][suffix]" value="" style="width: 95%;" /></td><td><span id="parentSelect_'+numrows+'"></span></td><td><input type="text" name="feed[attributes][attribute]['+rowIndex+'][limit]" value="" style="width: 95%;" /></td><td><span id="postConfig_'+numrows+'"></span><input type="hidden" name="feed[attributes][attribute]['+rowIndex+'][code]" value="custom_attribute" /></td><td>'+removeButton+'</td></tr>'
+		});
+	}
+	
+	function removeCustomAttribute(key) {
+		key = key || 0;
+		if (key == 0) {
+			var numrows = $$('#tempshutdown_container tr').length;
+		}
+		else {
+			var numrows = (key+1);
+		}
+		if ($('custom'+(numrows-1))) {
+			$('custom'+(numrows-1)).remove();
+		}
+	}
+	
+	function removeCustomAttributeElement(key) {
+		key = key || 0;
+		if ($('custom_'+key)) {
+			$('customdelete'+key).value = 1;
+			$('custom_'+key).hide();
+		}
+	}
+
+	
+	function addInterval() {
+		var numrows = $$('#shipping_container tr').length;
+		var rowIndex = numrows-1;
+		
+		var removeButton = getRemoveIntervalButton(numrows);
+
+		var priceFromValue = '0.0';
+		if(rowIndex > 0)
+		{
+			var id = 'input_price_to_'+(rowIndex-1);
+			priceFromValue = $(id).value;
+		}
+		
+		$('shipping_container').insert({
+			bottom: '<tr id="interval'+numrows+'">'+
+				'<td>'+numrows+'</td>'+
+				'<td>'+getIntervalInputHtml('price_from',rowIndex,priceFromValue)+'</td>'+
+				'<td>'+getIntervalInputHtml('price_to',rowIndex,'1000000.0')+'</td>'+
+				'<td>'+getIntervalInputHtml('cost',rowIndex,'0.0')+'</td>'+
+				'<td>'+removeButton+'</td></tr>'
+		});
+	}
+
+	function getIntervalInputHtml(attribute,rowIndex,value)
+	{
+		return '<input type="text" id="input_'+attribute+'_'+rowIndex+'" name="'+getIntervalInputName(attribute,rowIndex)+'" value="'+value+'" style="width: 95%;" />';
+	}
+
+	function getIntervalInputName(attribute,index)
+	{
+		return 'feed[common][shipping][cost_setup]['+index+']['+attribute+']';
+	}
+
+	function getRemoveIntervalButton(rowIndex)
+	{
+		return '<button onclick="removeInterval('+rowIndex+')" class="scalable delete" type="button"><span><?php echo $this->__("Delete"); ?></span></button>';
+	}
+
+	function removeInterval(key)
+	{
+		key = key || 0;
+		if ($('interval'+key))
+		{
+			$('interval'+key).remove();
+		}
+
+	    var table=document.getElementById('shipping_container');
+
+	    for(var i=1; i<table.rows.length;i++)
+		{
+	    	table.rows[i].cells[0].innerHTML = i;
+	    	table.rows[i].id = 'interval'+i;
+	    		    	
+	        var inputs = table.rows[i].getElementsByTagName("input");
+			var inputIndex = i-1;
+	        inputs[0].name = getIntervalInputName('price_from',inputIndex);
+	        inputs[1].name = getIntervalInputName('price_to',inputIndex);
+	        inputs[2].name = getIntervalInputName('cost',inputIndex);
+	        table.rows[i].cells[4].innerHTML = getRemoveIntervalButton(i);
+		}
+	}
+
+	function testFtpConnection( url) {
+		
+		new Ajax.Request( url, {
+			method: 'post',
+			parameters: Form.serialize($('profile_edit_form')),
+            onSuccess: function(data) {
+                alert( data.responseText.evalJSON());
+            }
+        });
+	}
+	
+	<?php
+	if ($this->isAjax() && ($block = $this->getLayout()->getBlock('tabs')) && ($_tabsJsObject=$block->getJsObjectName())) {
+		echo $_tabsJsObject; ?>.moveTabContentInDest();
+	if (<?php echo $_tabsJsObject ?>.activeTab) {
+		$('active_tab_id').value = <?php echo $_tabsJsObject ?>.activeTab.id;
+	}
+	$('active_tab_id').tabsJsObject = <?php echo $_tabsJsObject ?>;
+	<?php } ?>
+//]]>
+</script>

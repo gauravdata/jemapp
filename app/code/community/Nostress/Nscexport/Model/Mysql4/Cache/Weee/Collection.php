@@ -1,0 +1,2 @@
+<?php class Nostress_Nscexport_Model_Mysql4_Cache_Weee_Collection extends Nostress_Nscexport_Model_Mysql4_Cache_Collection{public function _construct(){parent::_construct();$this->_init("n\x73\x63\x65\x78\x70\x6fr\x74/\x63ache_\x77e\x65e");}}
+?>
