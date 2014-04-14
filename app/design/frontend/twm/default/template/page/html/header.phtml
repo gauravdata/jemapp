@@ -29,20 +29,22 @@
 ?><header>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-8">
-				<div class="clearfix">
-					<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
-					<div class="center-top">
-						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('center-top')->toHtml(); ?>
-					</div>
-				</div>
-				<?php echo $this->getChildHtml('breadcrumbs') ?>
+			<div class="col-sm-12 clearfix">
+                <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+                <div class="center-top">
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('center-top')->toHtml(); ?>
+                </div>
 			</div>
-			<div class="col-sm-4">
+        </div>
+        <div class="row">
+			<div class="col-md-6 pull-right clearfix">
                 <?php echo $this->getChildHtml('topLinks') ?>
                 <?php if(Mage::app()->getStore()->getCode() == 'jma_de') { ?>
                 <a href="https://www.trustedshops.de/shop/certificate.php?shop_id=X4627E49FE043182CCB0A5B15B5F06E23" target="_blank"><img src="<?=$this->getSkinUrl('images/trusted-shops.jpg');?>" alt="Trusted Shops" class="trusted-shops"></a>
                 <?php } ?>
+            </div>
+            <div class="col-md-6 pull-left clearfix">
+                <?php echo $this->getChildHtml('breadcrumbs') ?>
             </div>
         </div>
     </div>

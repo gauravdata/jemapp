@@ -112,8 +112,3 @@ header .top-links a span {
 aside #block-cart > img {
 	display: none;
 }
-
-/*= Margins & paddings =*/
-header .top-links {
-	margin-top: 90px;
-}
