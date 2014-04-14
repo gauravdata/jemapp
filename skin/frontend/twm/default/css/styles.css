@@ -1221,6 +1221,10 @@ footer #newsletter-validate-detail .input-group-addon {
     header .top-links {
         margin: 55px 0 10px;
     }
+    .trusted-shops {
+        bottom: 42px;
+        max-width: 50px;
+    }
     .breadcrumb {
         margin-bottom: 10px;
     }
