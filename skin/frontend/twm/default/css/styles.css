@@ -462,7 +462,7 @@ header .top-links a span {
 
 .trusted-shops {
     position: absolute;
-    top: 20px;
+    top: -70px;
     right: 100px;
 }
 
