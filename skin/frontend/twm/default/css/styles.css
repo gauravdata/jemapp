@@ -1214,12 +1214,13 @@ footer #newsletter-validate-detail .input-group-addon {
     }
     header .center-top {
         margin: 0;
+        display: none;
     }
     header a.logo img {
         max-width: 175px;
     }
     header .top-links {
-        margin: 55px 0 10px;
+        margin: 0 0 10px;
     }
     .trusted-shops {
         bottom: 42px;
