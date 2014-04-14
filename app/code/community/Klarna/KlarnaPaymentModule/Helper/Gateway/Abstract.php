@@ -178,7 +178,6 @@ abstract class Klarna_KlarnaPaymentModule_Helper_Gateway_Abstract
                 ->init($this->data, $this->order);
 
             $taxRate = $extras->getTaxRate($product->getTaxClassId());
-
             $this->_addArticle(
                 array(
                     "qty" => $qty,
