@@ -39,8 +39,11 @@
 				<?php echo $this->getChildHtml('breadcrumbs') ?>
 			</div>
 			<div class="col-sm-4">
-					<?php echo $this->getChildHtml('topLinks') ?>
-				</div>
-			</div>
-		</div>
+                <?php echo $this->getChildHtml('topLinks') ?>
+                <?php if(Mage::app()->getStore()->getCode() == 'jma_de') { ?>
+                <a href="https://www.trustedshops.de/shop/certificate.php?shop_id=X4627E49FE043182CCB0A5B15B5F06E23"><img src="<?=$this->getSkinUrl('images/trusted-shops.jpg');?>" alt="Trusted Shops" class="trusted-shops"></a>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
 </header>

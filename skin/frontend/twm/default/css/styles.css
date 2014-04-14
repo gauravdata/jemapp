@@ -461,6 +461,12 @@ header .top-links a span {
     background: url('../images/shoppingbag.png') no-repeat left;
 }
 
+.trusted-shops {
+    position: absolute;
+    top: 20px;
+    right: 100px;
+}
+
 /*= Search =*/
 #search_autocomplete {
     background: #fff;
@@ -1211,6 +1217,12 @@ footer #newsletter-validate-detail .input-group-addon {
     #search_mini_form {
         margin: 10px 0;
     }
+    header a.logo {
+        margin-top: 5px;
+    }
+    header a.logo img {
+        max-width: 200px;
+    }
     header .top-links {
         margin: 30px 0 50px;
     }
@@ -1231,7 +1243,7 @@ footer #newsletter-validate-detail .input-group-addon {
     }
     .breadcrumb {
         position: absolute;
-		margin: 60px 0 0;
+		margin: 120px 0 0;
     }
     .modal-dialog {
         width: 90%;
