@@ -42,16 +42,17 @@
         <?php echo $this->renderTotals('footer'); ?>
     </tfoot>
     <tbody>
-            <?php if (Mage::registry('3is1total')) : ?>
+	<?php $_cart = $this->getLayout()->getBlock('checkout.cart'); ?>	
+            <?php if ($_cart->hasTotal3is1()) : ?>
             <tr>
                 <td class="a-right"><?php echo $this->__('3=1 Normal price') ?></td>
-                <td class="a-right"><?php echo $this->helper('checkout')->formatPrice(Mage::registry('3is1total')) ?></td>
+                <td class="a-right"><?php echo $this->helper('checkout')->formatPrice($_cart->getTotal3is1()) ?></td>
             </tr>
         <?php endif; ?>
-        <?php if (Mage::registry('3is1discount')) : ?>
+        <?php if ($_cart->hasDiscount3is1()) : ?>
             <tr>
                 <td style="background-color: #f2d3a5; border-color: #c5a479; color: #c5a479;" class="a-right"><?php echo $this->__('3=1 Discount') ?></td>
-                <td style="background-color: #f2d3a5; border-color: #c5a479; color: #c5a479;" class="a-right"><?php echo $this->helper('checkout')->formatPrice(Mage::registry('3is1discount')) ?>-</td>
+                <td style="background-color: #f2d3a5; border-color: #c5a479; color: #c5a479;" class="a-right"><?php echo $this->helper('checkout')->formatPrice($_cart->getDiscount3is1()) ?>-</td>
             </tr>
         <?php endif; ?>
         <?php echo $this->renderTotals(); ?>
