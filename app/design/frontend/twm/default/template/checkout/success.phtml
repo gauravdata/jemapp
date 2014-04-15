@@ -76,10 +76,12 @@
     <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6007916391973&amp;value=<?=$_order->subtotal?>&amp;currency=EUR" /></noscript>
     <!-- START of the zanox affiliate HTML code -->
     <!-- (The HTML code may not be changed in the sense of faultless functionality!) -->
-    <script type="text/javascript" src="https://ad.zanox.com/pps/?15071C778574155&mode=[[1]]&CID=[[NL]]&CustomerID=[[XXX]]&OrderID=[[XXX]]&CurrencySymbol=[[EUR]]&TotalPrice=[[XXX]]">
+    <?php $_orderId = Mage::getSingleton('checkout/session')->getLastOrderId();  ?>
+    <?php $_customerId = Mage::getSingleton('customer/session')->getCustomerId();?>
+    <script type="text/javascript" src="https://ad.zanox.com/pps/?15071C778574155&mode=[[1]]&CID=[[NL]]&CustomerID=[[<?php echo $_customerId; ?>]]&OrderID=[[<?php echo $_orderId; ?>]]&CurrencySymbol=[[EUR]]&TotalPrice=[[<?php echo $_order->getGrandTotal();?>]]">
     </script>
     <noscript>
-        <img src="https://ad.zanox.com/pps/?15071C778574155&mode=[[2]]&CID=[[NL]]&CustomerID=[[XXX]]&OrderID=[[XXX]]&CurrencySymbol=[[EUR]]&TotalPrice=[[XXX]]" width="1" height="1" />
+        <img src="https://ad.zanox.com/pps/?15071C778574155&mode=[[2]]&CID=[[NL]]&CustomerID=[[<?php echo $_customerId; ?>]]&OrderID=[[<?php echo $_orderId; ?>]]&CurrencySymbol=[[EUR]]&TotalPrice=[[<?php echo $_order->getGrandTotal();?>]]" width="1" height="1" />
     </noscript>
     <!-- END zanox-affiliate HTML-Code -->
 <?php endif;?>
