@@ -716,6 +716,23 @@ aside #block-cart .btn.btn-link:focus {
 }
 
 /*= Poll =*/
+#added-to-cart p,
+#added-to-cart dl {
+    margin: 0;
+}
+#added-to-cart .truncated {
+    margin-bottom: 10px;
+}
+#added-to-cart .truncated dt,
+#added-to-cart .truncated dd {
+    display: inline;
+    margin-right: 5px;
+}
+#added-to-cart .modal-footer {
+    margin-top: 0;
+}
+
+/*= Poll =*/
 #poll-answers {
 	list-style: none;
 	padding-left: 0;
