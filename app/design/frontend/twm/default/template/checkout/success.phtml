@@ -79,10 +79,10 @@
     <?php $_orderId = Mage::getSingleton('checkout/session')->getLastOrderId();  ?>
     <?php $_customerId = Mage::getSingleton('customer/session')->getCustomerId(); ?>
     <?php $_customerId = (empty($_customerId))? 1:$_customerId; ?>
-    <script type="text/javascript" src="https://ad.zanox.com/pps/?15071C778574155&mode=[[1]]&CID=[[NL]]&CustomerID=[[<?php echo $_customerId; ?>]]&OrderID=[[<?php echo $_orderId; ?>]]&CurrencySymbol=[[EUR]]&TotalPrice=[[<?php echo $_order->getGrandTotal();?>]]">
+    <script type="text/javascript" src="https://ad.zanox.com/pps/?15071C778574155&mode=[[1]]&CID=[[NL]]&CustomerID=[[<?php echo $_customerId; ?>]]&OrderID=[[<?php echo $_order->getIncrementId(); ?>]]&CurrencySymbol=[[EUR]]&TotalPrice=[[<?php echo $_order->getSubtotal();?>]]">
     </script>
     <noscript>
-        <img src="https://ad.zanox.com/pps/?15071C778574155&mode=[[2]]&CID=[[NL]]&CustomerID=[[<?php echo $_customerId; ?>]]&OrderID=[[<?php echo $_orderId; ?>]]&CurrencySymbol=[[EUR]]&TotalPrice=[[<?php echo $_order->getGrandTotal();?>]]" width="1" height="1" />
+        <img src="https://ad.zanox.com/pps/?15071C778574155&mode=[[2]]&CID=[[NL]]&CustomerID=[[<?php echo $_customerId; ?>]]&OrderID=[[<?php echo $_order->getIncrementId(); ?>]]&CurrencySymbol=[[EUR]]&TotalPrice=[[<?php echo $_order->getSubtotal();?>]]" width="1" height="1" />
     </noscript>
     <!-- END zanox-affiliate HTML-Code -->
 <?php endif;?>
