@@ -42,6 +42,11 @@
 				<class>Mage_GoogleCheckout_Helper</class>
 			</googlecheckout>
 		</helpers>
+		<blocks>
+			<googlecheckout>
+				<class>Mage_GoogleCheckout_Block</class>
+			</googlecheckout>
+		</blocks>
     </global>
     <default>
         <payment>
