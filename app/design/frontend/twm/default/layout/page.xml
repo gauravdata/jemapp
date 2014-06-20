@@ -70,7 +70,7 @@ Default layout, loads most of the pages
                 <action method="addItem"><type>skin_js</type><name>js/nav.js</name><params/></action>
 				<action method="addItem"><type>skin_js</type><name>js/main.js</name><params/></action>
 
-				<block type="core/template" name="googleanalytics" as="googleanalytics" template="page/html/googleanalytics.phtml" />
+				<!--<block type="core/template" name="googleanalytics" as="googleanalytics" template="page/html/googleanalytics.phtml" />-->
             </block>
 
             <block type="core/text_list" name="after_body_start" as="after_body_start" translate="label">

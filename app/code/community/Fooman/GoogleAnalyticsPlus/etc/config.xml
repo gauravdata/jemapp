@@ -2,10 +2,7 @@
 <config>
     <modules>
         <Fooman_GoogleAnalyticsPlus>
-            <version>0.11.1</version>
-            <depends>
-                <Mage_GoogleAnalytics />
-            </depends>
+            <version>0.14.7</version>
         </Fooman_GoogleAnalyticsPlus>
     </modules>
 
@@ -24,12 +21,14 @@
             <googleanalyticsplus>
                 <class>Fooman_GoogleAnalyticsPlus_Block</class>
             </googleanalyticsplus>
-            <googleanalytics>
-                <rewrite>
-                     <ga>Fooman_GoogleAnalyticsPlus_Block_Ga</ga>
-                </rewrite>                     
-            </googleanalytics>
         </blocks>
+        <resources>
+            <googleanalyticsplus_setup>
+                <setup>
+                    <module>Fooman_GoogleAnalyticsPlus</module>
+                </setup>
+            </googleanalyticsplus_setup>
+        </resources>
     </global>
     <frontend>
         <layout>
@@ -42,22 +41,29 @@
     </frontend>
     <default>
         <google>
-            <analyticsplus>                
-                <keywordtracker>0</keywordtracker><!--keywordtracker = deprecated -->
+            <analyticsplus_classic>
                 <accountnumber2/>
                 <domainname2/>
-                <firstouch>0</firstouch>
                 <anonymise>0</anonymise>
-                <trackpageloadtime>0</trackpageloadtime>
                 <amounttotrack/>
                 <domainname/>
                 <conversionenabled>0</conversionenabled>
                 <conversionid/>
                 <conversionlanguage>en</conversionlanguage>
-                <conversionlabel>Purchase</conversionlabel>
-            </analyticsplus>
+                <conversionlabel/>
+                <categorytrackingattribute/>
+            </analyticsplus_classic>
+            <analyticsplus_dynremarketing>
+                <feed_product_id>entity_id</feed_product_id>
+            </analyticsplus_dynremarketing>
         </google>
     </default>
-
+    <phpunit>
+        <suite>
+            <modules>
+                <Fooman_GoogleAnalyticsPlus/>
+            </modules>
+        </suite>
+    </phpunit>
 </config>
 

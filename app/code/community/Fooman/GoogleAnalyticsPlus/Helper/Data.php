@@ -1,40 +1,66 @@
 <?php
+/**
+ * Fooman GoogleAnalyticsPlus
+ *
+ * @package   Fooman_GoogleAnalyticsPlus
+ * @author    Kristof Ringleff <kristof@fooman.co.nz>
+ * @copyright Copyright (c) 2010 Fooman Limited (http://www.fooman.co.nz)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
 {
-    
-    const XML_PATH_GOOGLEANALYTICSPLUS_SETTINGS = 'google/analyticsplus/';
 
     /**
-     * Return store config value for key
+     * retrieve requested value from order or item
+     * convert from base currency if configured
+     * else return order currency
      *
-     * @param   string $key
-     * @return  string
+     * @param      $object
+     * @param      $field
+     *
+     * @return string
      */
-    public function getGoogleanalyticsplusStoreConfig ($key, $flag=false)
+    public function convert($object, $field)
     {
-        $path = self::XML_PATH_GOOGLEANALYTICSPLUS_SETTINGS . $key;
-        if ($flag) {
-            return Mage::getStoreConfigFlag($path);
-        } else {
-            return Mage::getStoreConfig($path);
+        if (!Mage::getStoreConfig('google/analyticsplus/convertcurrencyenabled')) {
+            return $object->getDataUsingMethod($field);
         }
-    }
-
-    public function convert($order, $dataMethod, $item=null)
-    {
-        $basecur = $order->getBaseCurrency();
-        if($basecur) {
-            return sprintf("%01.4f", Mage::app()->getStore()->roundPrice(
-                $basecur->convert(
-                    (is_null($item))?$order->$dataMethod():$item->$dataMethod(),
-                    Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrency')
-                ))
+        //getPrice and getFinalPrice do not have equivalents
+        if ($field != 'price' && $field != 'final_price') {
+            $field = 'base_' . $field;
+        }
+        $basecur = Mage::app()->getStore($object->getStoreId())->getBaseCurrency();
+        if ($basecur) {
+            return sprintf(
+                "%01.4f", Mage::app()->getStore()->roundPrice(
+                    $basecur->convert(
+                        $object->getDataUsingMethod($field),
+                        Mage::getStoreConfig('google/analyticsplus/convertcurrency')
+                    )
+                )
             );
         } else {
             //unable to load base currency return zero
             return '0.0000';
-            //return (is_null($item))?$order->$dataMethod():$item->$dataMethod();
+        }
+    }
+
+    /**
+     * currency for tracking
+     *
+     * @param $object
+     *
+     * @return string
+     */
+    public function getTrackingCurrency($object)
+    {
+        if (!Mage::getStoreConfig('google/analyticsplus/convertcurrencyenabled')) {
+            return $object->getBaseCurrencyCode();
+        } else {
+            return Mage::getStoreConfig('google/analyticsplus/convertcurrency');
         }
     }
 
