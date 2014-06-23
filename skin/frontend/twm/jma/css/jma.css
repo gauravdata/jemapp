@@ -48,6 +48,7 @@ aside > .block-white {
 }
 .panel-default > .panel-heading,
 fieldset,
+form fieldset.highlight,
 .fieldset,
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {

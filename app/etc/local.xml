@@ -40,14 +40,14 @@
             </db>
             <default_setup>
                 <connection>
-					<host><![CDATA[127.0.0.1]]></host>
+					<!--<host><![CDATA[127.0.0.1]]></host>
 					<dbname><![CDATA[notomatoes_shop]]></dbname>
 					<username><![CDATA[notomatoes]]></username>
-					<password><![CDATA[trAs3ubr]]></password>
-					<!--<host><![CDATA[localhost]]></host>
+					<password><![CDATA[trAs3ubr]]></password>-->
+					<host><![CDATA[localhost]]></host>
 					<dbname><![CDATA[notomatoes-shop]]></dbname>
 					<username><![CDATA[root]]></username>
-					<password><![CDATA[J0nes]]></password>-->
+					<password><![CDATA[J0nes]]></password>
                     <active>1</active>
                 </connection>
             </default_setup>

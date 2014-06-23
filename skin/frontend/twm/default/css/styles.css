@@ -103,6 +103,7 @@ a.thumbnail:focus {
 
 /*= Forms =*/
 fieldset,
+form fieldset.highlight,
 .fieldset {
     border: 1px solid #9aa3c0;
     padding: 15px;
