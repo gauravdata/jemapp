@@ -26,329 +26,331 @@
  * @author     Magento Core Team <core@magentocommerce.com>
  * @author     Fooman, Kristof Ringleff <kristof@fooman.co.nz>
  */
-class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Block_Common_Abstract
+class  Fooman_GoogleAnalyticsPlus_Block_Ga extends Mage_GoogleAnalytics_Block_Ga
 {
 
-    const URL_GA_STANDARD = 'http://www.google-analytics.com/ga.js';
-    const URL_GA_STANDARD_SECURE = 'https://ssl.google-analytics.com/ga.js';
-    const URL_DOUBLECLICK = 'http://stats.g.doubleclick.net/dc.js';
-    const URL_DOUBLECLICK_SECURE = 'https://stats.g.doubleclick.net/dc.js';
-
-    protected $_helper;
-
-    protected function _construct()
-    {
-        parent::_construct();
-        $this->setTemplate('fooman/googleanalyticsplus/ga.phtml');
-        $this->_helper = Mage::helper('googleanalyticsplus');
-    }
-
-
     /**
-     * get the current url to send to Google Analytics
+     * Return REQUEST_URI for current page
+     * Magento default analytics reports can include the same page as
+     * /checkout/onepage/index/ and   /checkout/onepage/
+     * filter out index/ here
      *
      * @return string
      */
-    public function getUrlToTrack()
-    {
-        $optPageURL = trim($this->getPageName());
-        if ($optPageURL && preg_match('/^\/.*/i', $optPageURL)) {
-            $optPageURL = "{$this->jsQuoteEscape($optPageURL)}";
+    public function getPageName() {
+        if (!$this->hasData('page_name')) {
+            $pageName = Mage::getSingleton('core/url')->escape($_SERVER['REQUEST_URI']);
+            $pageName = rtrim(str_replace('index/','',$pageName), '/'); 
+            $this->setPageName($pageName);
         }
-        return $optPageURL;
+        return $this->getData('page_name');
     }
-
+   
     /**
-     * things have change in Magento 1.4.2
-     *
-     * @return bool
-     */
-    public function isNew()
-    {
-        //Mage 1.4.2 +
-        return method_exists(Mage::helper('googleanalytics'), 'isGoogleAnalyticsAvailable');
-    }
-
-    /**
-     * get Google Analytics profile id
-     *
-     * @return mixed|string
-     */
-    public function getMainAccountId()
-    {
-        if (!Mage::helper('googleanalytics')->isGoogleAnalyticsAvailable()) {
-            return '';
-        }
-        return Mage::getStoreConfig(Mage_GoogleAnalytics_Helper_Data::XML_PATH_ACCOUNT);
-    }
-
-    /**
-     * get alternative Google Analytics profile id
-     *
-     * @return mixed
-     */
-    public function getAlternativeAccountId()
-    {
-        return Mage::getStoreConfig('google/analyticsplus_classic/accountnumber2');
-    }
-
-    /**
-     * should we include tracking code
-     * if cookies have not been accepted - do no track
-     *
-     * @return bool
-     */
-    public function shouldIncludeTracking()
-    {
-        $coreHelperDir = Mage::getConfig()->getModuleDir('', 'Mage_Core') . DS . 'Helper' . DS;
-        if (file_exists($coreHelperDir . 'Cookie.php')) {
-            if (Mage::helper('core/cookie')->isUserNotAllowSaveCookie()) {
-                return false;
-            }
-        }
-        return (bool)$this->getMainAccountId();
-    }
-
-    /**
-     * which GA script are we using?
+     * Prepare and return block's html output
      *
      * @return string
      */
-    public function getGaLocation()
+    protected function _toHtml()
     {
         $secure = Mage::app()->getStore()->isCurrentlySecure() ? 'true' : 'false';
-        if ($secure == 'true') {
-            if (Mage::getStoreConfig('google/analyticsplus_classic/remarketing')) {
-                return self::URL_DOUBLECLICK_SECURE;
-            } else {
-                return self::URL_GA_STANDARD_SECURE;
-            }
-        } else {
-            if (Mage::getStoreConfig('google/analyticsplus_classic/remarketing')) {
-                return self::URL_DOUBLECLICK;
-            } else {
-                return self::URL_GA_STANDARD;
-            }
+        $handles = $this->getLayout()->getUpdate()->getHandles();
+        
+        if (in_array('checkout_onepage_success', $handles) || in_array('checkout_multishipping_success', $handles))
+            $success = true;
+        else {
+            $success = false;
         }
+        
+        $helper = Mage::helper('googleanalytics');        
+        if (method_exists($helper, 'isGoogleAnalyticsAvailable')) {
+            //Mage 1.4.2 +
+            $new = true;
+            if (!Mage::helper('googleanalytics')->isGoogleAnalyticsAvailable()) {
+                return '';
+            }
+            $accountId = Mage::getStoreConfig(Mage_GoogleAnalytics_Helper_Data::XML_PATH_ACCOUNT);
+        } else {
+            //Mage 1.4.1.1 and below
+            $new = false;
+            if (!Mage::getStoreConfigFlag('google/analytics/active')) {
+                return '';
+            }
+            $accountId = $this->getAccount();
+        }
+        $accountId2 = Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('accountnumber2');
+        
+        $html = '
+<!-- BEGIN GOOGLE ANALYTICS CODE -->
+<script type="text/javascript">
+//<![CDATA[
+            (function() {
+                var ga = document.createElement(\'script\'); ga.type = \'text/javascript\'; ga.async = true;';
+                if ($secure == 'true') {
+                    $html .= 'ga.src = \'https://ssl.google-analytics.com/ga.js\';';
+                } else {
+                    $html .= 'ga.src = \'http://google-analytics.com/ga.js\';';
+                }
+                $html .= '
+                var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+            var _gaq = _gaq || [];
+'
+  . $this->_getPageTrackingCode($accountId,$accountId2)
+  . ($new?$this->_getOrdersTrackingCode($accountId2):'')
+  . $this->_getAjaxPageTracking($accountId2) . '
+//]]>
+</script>
+'
+ . ($new?'':$this->_getQuoteOrdersHtml($accountId2))
+ . ($success?$this->_getCustomerVars($accountId2):'').'
+<!-- END GOOGLE ANALYTICS CODE -->
+';
+        return $html;
     }
 
     /**
-     * determine if we are on the order success page
+     * Retrieve Order Data HTML
      *
-     * @return bool
-     */
-    public function isSuccessPage()
+     * @return string
+     **/
+    public function getOrderHtml()
     {
-        $handles = $this->getLayout()->getUpdate()->getHandles();
-        $orderIds = $this->getOrderIds();
-        return in_array('checkout_onepage_success', $handles)
-        || in_array('checkout_multishipping_success', $handles)
-        || (!empty($orderIds) && is_array($orderIds));
+        if(!Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrencyenabled')) {
+            return parent::getOrderHtml();
+        }
+
+        $order = $this->getOrder();
+        if (!$order) {
+            return '';
+        }
+
+        if (!$order instanceof Mage_Sales_Model_Order) {
+            $order = Mage::getModel('sales/order')->load($order);
+        }
+
+        if (!$order) {
+            return '';
+        }
+
+
+        $address = $order->getBillingAddress();
+
+        $html = '<script type="text/javascript">' . "\n";
+        $html .= "//<![CDATA[\n";
+        $html .= '_gaq.push(["_addTrans",';
+        $html .= '"' . $order->getIncrementId() . '",';
+        $html .= '"' . $order->getAffiliation() . '",';
+        $html .= '"' . Mage::helper('googleanalyticsplus')->convert($order,'getBaseGrandTotal') . '",';
+        $html .= '"' . Mage::helper('googleanalyticsplus')->convert($order,'getBaseTaxAmount') . '",';
+        $html .= '"' . Mage::helper('googleanalyticsplus')->convert($order,'getBaseShippingAmount') . '",';
+        $html .= '"' . $this->jsQuoteEscape($address->getCity(), '"') . '",';
+        $html .= '"' . $this->jsQuoteEscape($address->getRegion(), '"') . '",';
+        $html .= '"' . $this->jsQuoteEscape($address->getCountry(), '"') . '"';
+        $html .= ']);' . "\n";
+
+        foreach ($order->getAllItems() as $item) {
+            if ($item->getParentItemId()) {
+                continue;
+            }
+
+            $html .= '_gaq.push(["_addItem",';
+            $html .= '"' . $order->getIncrementId() . '",';
+            $html .= '"' . $this->jsQuoteEscape($item->getSku(), '"') . '",';
+            $html .= '"' . $this->jsQuoteEscape($item->getName(), '"') . '",';
+            $html .= '"' . $item->getCategory() . '",';
+            $html .= '"' . Mage::helper('googleanalyticsplus')->convert($order,'getBasePrice', $item) . '",';
+            $html .= '"' . $item->getQtyOrdered() . '"';
+            $html .= ']);' . "\n";
+        }
+
+        $html .= '_gaq.push(["_trackTrans"]);' . "\n";
+        $html .= '//]]>';
+        $html .= '</script>';
+
+        return $html;
     }
 
+    /**
+     *  Transaction on Mage 1.4.1.1 and below
+     *  duplicate for secondary tracker
+     *
+     * @param bool|int $accountId2
+     * @return string
+     */
+    protected function _getQuoteOrdersHtml ($accountId2 = false)
+    {
+        $html = "\n".parent::getQuoteOrdersHtml();
+        if ($accountId2) {
+            $html .= str_replace('_gaq.push(["_', '_gaq.push(["t2._', $html);
+        }
+        return $html;
+    }
 
     /**
      * Render information about specified orders and their items
      *
      * @link http://code.google.com/apis/analytics/docs/gaJS/gaJSApiEcommerce.html#_gat.GA_Tracker_._addTrans
-     *
-     * @param bool $accountIdAlt
-     *
+     * @param bool $accountId2
      * @return string
      */
-    public function getOrdersTrackingCode($accountIdAlt = false)
+    protected function _getOrdersTrackingCode($accountId2 = false)
     {
-        $html = '';
-        $orderIds = $this->getOrderIds();
-        if (empty($orderIds) || !is_array($orderIds)) {
-            return $html;
-        }
+        if (Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrencyenabled')) {
 
-        $collection = Mage::getResourceModel('sales/order_collection')
-            ->addFieldToFilter('entity_id', array('in' => $orderIds));
-        $result = array();
-        foreach ($collection as $order) {
-            if ($order->getIsVirtual()) {
-                $address = $order->getBillingAddress();
-            } else {
-                $address = $order->getShippingAddress();
+            $orderIds = $this->getOrderIds();
+            if (empty($orderIds) || !is_array($orderIds)) {
+                return;
             }
 
-            $result[] = sprintf(
-                "_gaq.push(['_addTrans', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s']);",
-                $order->getIncrementId(),
-                $this->jsQuoteEscape(Mage::app()->getStore()->getFrontendName()),
-                Mage::helper('googleanalyticsplus')->convert($order, 'grand_total'),
-                Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount'),
-                Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount'),
-                $this->jsQuoteEscape($address->getCity()),
-                $this->jsQuoteEscape($address->getRegion()),
-                $this->jsQuoteEscape($address->getCountry())
-            );
+            $collection = Mage::getResourceModel('sales/order_collection')
+                ->addFieldToFilter('entity_id', array('in' => $orderIds));
+            $result = array();
+            foreach ($collection as $order) {
+                if ($order->getIsVirtual()) {
+                    $address = $order->getBillingAddress();
+                } else {
+                    $address = $order->getShippingAddress();
+                }
 
-            foreach ($order->getAllVisibleItems() as $item) {
-                $result[] = sprintf(
-                    "_gaq.push(['_addItem', '%s', '%s', '%s', '%s', '%s', '%s']);",
+                $result[] = sprintf("_gaq.push(['_addTrans', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s']);",
                     $order->getIncrementId(),
-                    $this->jsQuoteEscape($item->getSku()),
-                    $this->jsQuoteEscape($item->getName()),
-                    $this->jsQuoteEscape($this->getCategory($item)),
-                    Mage::helper('googleanalyticsplus')->convert($item, 'price'),
-                    (int)$item->getQtyOrdered()
+                    Mage::app()->getStore()->getFrontendName(),
+                    Mage::helper('googleanalyticsplus')->convert($order, 'getBaseGrandTotal'),
+                    Mage::helper('googleanalyticsplus')->convert($order, 'getBaseTaxAmount'),
+                    Mage::helper('googleanalyticsplus')->convert($order, 'getBaseShippingAmount'),
+                    $this->jsQuoteEscape($address->getCity()),
+                    $this->jsQuoteEscape($address->getRegion()),
+                    $this->jsQuoteEscape($address->getCountry())
                 );
+
+                foreach ($order->getAllVisibleItems() as $item) {
+                    $result[] = sprintf("_gaq.push(['_addItem', '%s', '%s', '%s', '%s', '%s', '%s']);",
+                        $order->getIncrementId(),
+                        $this->jsQuoteEscape($item->getSku()), $this->jsQuoteEscape($item->getName()),
+                        null, // there is no "category" defined for the order item
+                        Mage::helper('googleanalyticsplus')->convert($order, 'getBasePrice', $item),
+                        $item->getQtyOrdered()
+                    );
+
+                }
+                $result[] = "_gaq.push(['_trackTrans']);";
+                $html = implode("\n", $result);
             }
-            $result[] = "_gaq.push(['_trackTrans']);";
-            $html = implode("\n", $result);
+        } else {
+            $html = "\n" . parent::_getOrdersTrackingCode();
         }
 
-        if ($accountIdAlt) {
+        if ($accountId2) {
             $html .= str_replace('_gaq.push([\'_', '_gaq.push([\'t2._', $html);
         }
         return $html;
     }
 
-    /**
-     * set CustomVars for customers
-     *
-     * @param bool $accountIdAlt
-     *
-     * @return string
-     */
-    public function getCustomerVars($accountIdAlt = false)
+    protected function _getCustomerVars ($accountId2 = false)
     {
-        //set customer variable for the current visitor c=1
-        return "
-
-    _gaq.push(['_setCustomVar', 5, 'c', '1', 1]);
-    " . ($accountIdAlt ? "_gaq.push(['t2._setCustomVar', 5, 'c', '1', 1]);" : "");
+        //TODO: check if we hit the 5 custom var maximum when using with first touch tracking
+        //set customer variable for the current session c=1
+        //set returning customer variable onwards for this visitor rc=1
+        return '
+<script type="text/javascript">
+//<![CDATA[
+    _gaq.push(["_setCustomVar", 5, "c", "1", 2]);
+    _gaq.push(["_setCustomVar", 5, "rc", "1", 1]);
+    '.($accountId2?'
+    _gaq.push(["t2._setCustomVar", 5, "c", "1", 2]);
+    _gaq.push(["t2._setCustomVar", 5, "rc", "1", 1]);
+':'').'
+//]]>
+</script>
+';
     }
 
     /**
-     * @param          $accountId
-     * @param bool|int $accountIdAlt
-     *
+     * @param $accountId
+     * @param bool|int $accountId2
      * @return string
      */
-    public function getPageTrackingCode($accountId, $accountIdAlt = false)
+    protected function _getPageTrackingCode ($accountId, $accountId2 = false)
     {
         //url to track
-        $optPageURL = $this->getUrlToTrack();
-
-        //main profile tracking
-        $html= "_gaq.push(['_setAccount', '" . $this->jsQuoteEscape($accountId) . "']";
-        if ($domainName = Mage::getStoreConfig('google/analyticsplus_classic/domainname')) {
-            $html .= " ,['_setDomainName','" . $domainName . "']";
+        $optPageURL = trim($this->getPageName());
+        if ($optPageURL && preg_match('/^\/.*/i', $optPageURL)) {
+            $optPageURL = "{$this->jsQuoteEscape($optPageURL)}";
         }
 
-        //anonymise
-        $anonymise = Mage::getStoreConfigFlag('google/analyticsplus_classic/anonymise');
-        if ($anonymise) {
-            $html .= ", ['_gat._anonymizeIp']";
+        //main profile tracking including optional first touch tracking
+        $html = '
+            _gaq.push(["_setAccount", "' . $this->jsQuoteEscape($accountId) . '"]';
+        if ($domainName = Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('domainname')) {
+            $html .=' ,["_setDomainName","' . $domainName . '"]';
+        }
+        if($anonymise = Mage::getStoreConfigFlag('google/analyticsplus/anonymise')) {
+            $html .=', ["_gat._anonymizeIp"]';
+        }
+        if(Mage::getStoreConfigFlag('google/analyticsplus/firstouch')) {
+            $html .=');
+            asyncDistilledFirstTouch(_gaq);
+            _gaq.push(["_trackPageview","' . $optPageURL . '"]';
+        } else {
+            $html .=', ["_trackPageview","' . $optPageURL . '"]';
         }
 
-        //send track page view
-        $html .= ", ['_trackPageview','" . $optPageURL . "']";
-
-        $html .= ");";
-
+        if(Mage::getStoreConfigFlag('google/analyticsplus/trackpageloadtime')) {
+            $html .=', ["_trackPageLoadTime"]';
+        }        
+        $html .=');';
+        
         //track to alternative profile (optional)
-        if ($accountIdAlt) {
-            $html .= $this->getPageTrackingAlt($accountIdAlt, $optPageURL);
+        if($accountId2){
+            $html .= '
+            _gaq.push(["t2._setAccount", "' . $this->jsQuoteEscape($accountId2) . '"]';
+            if ($domainName2 = Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('domainname2')) {
+                $html .=' ,["t2._setDomainName","' . $domainName2 . '"]';
+            }
+            if($anonymise){
+                //anonymise requires the synchronous tracker object so likely not needed on this one
+                //$html .=', ["t2._anonymizeIp"]';
+            }
+            $html .=', ["t2._trackPageview","' . $optPageURL . '"]';
+            
+            if(Mage::getStoreConfigFlag('google/analyticsplus/trackpageloadtime')) {
+                $html .=', ["_trackPageLoadTime"]';
+            }        
+            $html .=');';            
         }
 
-        return $html;
-    }
-
-    /**
-     * get tracking code for alternative profile
-     *
-     * @param $accountIdAlt
-     * @param $optPageURL
-     *
-     * @return string
-     */
-    public function getPageTrackingAlt($accountIdAlt, $optPageURL)
-    {
-        $html = "
-            _gaq.push(['t2._setAccount', '" . $this->jsQuoteEscape($accountIdAlt) . "']";
-        $domainNameAlt = Mage::getStoreConfig('google/analyticsplus_classic/domainname2');
-        if ($domainNameAlt) {
-            $html .= " ,['t2._setDomainName','" . $domainNameAlt . "']";
-        }
-        $html .= ", ['t2._trackPageview','" . $optPageURL . "']";
-
-        $html .= ");";
         return $html;
     }
 
     /**
      * return code to track AJAX requests
      *
-     * @param bool|int $accountIdAlt
+     * @param bool|int $accountId2
      *
      * @return string
      */
-    public function getAjaxPageTracking($accountIdAlt = false)
-    {
-
-        $parts = parse_url($this->getPageName());
-        $query = '';
-        if (isset($parts['query']) && !empty($parts['query'])) {
-            $query = '?' . $parts['query'];
-        }
-        unset($parts['query']);
-        unset($parts['fragment']);
-        $baseUrl = Mage::getSingleton('core/url')->escape(
-            rtrim(
-                str_replace(
-                    'index/', '',
-                    Mage::app()->getRequest()->getBaseUrl() . Mage::app()->getRequest()->getRequestString()
-                ), '/'
-            )
-        );
-
-        return "
+    private function _getAjaxPageTracking($accountId2 = false) {
+    return '
 
             if(Ajax.Responders){
                 Ajax.Responders.register({
-                  onComplete: function(transport){
-                    if(!transport.url.include('progress') && !transport.url.include('getAdditional')){
-                        goto_section = false;
-                        if (transport && transport.transport.responseText){
-                            try{
-                                response = eval('(' + transport.transport.responseText + ')');
-                                if(response && response.goto_section){
-                                    goto_section = '/opc-' + encodeURIComponent(response.goto_section);
-                                }
-                            }
-                            catch (e) {
-                                goto_section = false;
-                            }
-                        }
-                        if(transport.url.include('saveOrder')){
-                            _gaq.push(['_trackPageview', '".$baseUrl."'
-                                + '/opc-review-placeOrderClicked".$query."']);"
-        .($accountIdAlt?"
-                            _gaq.push(['t2._trackPageview', '".$baseUrl."'
-                                + '/opc-review-placeOrderClicked".$query."']);":"")."
-                        }else if(goto_section){
-                            _gaq.push(['_trackPageview', '".$baseUrl."'
-                                + goto_section + '".$query."']);"
-        .($accountIdAlt?"
-                            _gaq.push(['t2._trackPageview', '".$baseUrl."'
-                                + goto_section + '".$query."']);":"")."
-                        }else if(accordion && accordion.currentSection){
-                            _gaq.push(['_trackPageview', '".$baseUrl."/'
-                                + accordion.currentSection + '".$query."']);"
-        .($accountIdAlt?"
-                            _gaq.push(['t2._trackPageview', '".$baseUrl."/'
-                                + accordion.currentSection + '".$query."']);":"")."
+                  onComplete: function(response){
+                    if(!response.url.include("progress")){
+                        if(response.url.include("saveOrder")){
+                            _gaq.push(["_trackPageview", "'.$this->getPageName().'"+ "/opc-review-placeOrderClicked"]);'
+                            .($accountId2?'
+                            _gaq.push(["t2._trackPageview", "'.$this->getPageName().'"+ "/opc-review-placeOrderClicked"]);':'').'
+                        }else if(accordion.currentSection){
+                            _gaq.push(["_trackPageview", "'.$this->getPageName().'/"+ accordion.currentSection]);'
+                            .($accountId2?'
+                            _gaq.push(["t2._trackPageview", "'.$this->getPageName().'/"+ accordion.currentSection]);':'').'
                         }
                     }
                   }
                 });
             }
-";
+';
     }
 
 }

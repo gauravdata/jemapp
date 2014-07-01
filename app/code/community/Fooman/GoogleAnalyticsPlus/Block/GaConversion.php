@@ -1,128 +1,85 @@
 <?php
 /**
- * Fooman GoogleAnalyticsPlus
+ * Magento
  *
- * @package   Fooman_GoogleAnalyticsPlus
- * @author    Kristof Ringleff <kristof@fooman.co.nz>
- * @copyright Copyright (c) 2010 Fooman Limited (http://www.fooman.co.nz)
+ * NOTICE OF LICENSE
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to kristof@fooman.co.nz so we can send you a copy immediately.
+ *
+ * @category   Fooman
+ * @package    Fooman_GoogleAnalyticsPlus
+ * @copyright  Copyright (c) 2010 Fooman Limited (http://www.fooman.co.nz)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class  Fooman_GoogleAnalyticsPlus_Block_GaConversion extends Fooman_GoogleAnalyticsPlus_Block_Common_Abstract
+/**
+ * Google Analytics block
+ *
+ * @category   Fooman
+ * @package    Fooman_GoogleAnalyticsPlus
+ * @author     Fooman, Kristof Ringleff <kristof@fooman.co.nz>
+ */
+class  Fooman_GoogleAnalyticsPlus_Block_GaConversion extends Mage_Core_Block_Template
 {
 
-    const URL_ADWORDS_CONVERSION = 'http://www.googleadservices.com/pagead/conversion.js';
-    const URL_ADWORDS_CONVERSION_SECURE = 'https://www.googleadservices.com/pagead/conversion.js';
+    private $_quote;
 
-    protected  $_quote;
-    protected  $_order;
-
-
-    /**
-     * helper to set the internal quote property
-     *
-     * @param $quote
-     */
-    public function setQuote($quote)
-    {
-        $this->_quote = $quote;
+    public function isEnabled(){
+        return Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('conversionenabled',true);
     }
 
-    /**
-     * is adwords conversion tracking enabled
-     *
-     * @return bool
-     */
-    public function isEnabled()
-    {
-        return Mage::getStoreConfigFlag('google/analyticsplus_classic/conversionenabled');
+    public function getLabel(){
+        return Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('conversionlabel');
     }
 
-    /**
-     * get Adword's conversion label from settings
-     * can't be chosen freely since assigned from Google
-     *
-     * @return string
-     */
-    public function getLabel()
-    {
-        return Mage::getStoreConfig('google/analyticsplus_classic/conversionlabel');
-    }
-
-    /**
-     * get a color - defaults to white
-     *
-     * @return string
-     */
-    public function getColor()
-    {
+    public function getColor(){
         return '#FFFFFF';
     }
 
-    /**
-     * get the entered language
-     *
-     * @return string
-     */
-    public function getLanguage()
-    {
-        return Mage::getStoreConfig('google/analyticsplus_classic/conversionlanguage');
+    public function getLanguage(){
+        return Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('conversionlanguage');
     }
 
-    /**
-     * get Google Adwords conversion id
-     *
-     * @return string
-     */
-    public function getConversionId()
-    {
-        return Mage::getStoreConfig('google/analyticsplus_classic/conversionid');
+    public function getConversionId(){
+        return Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('conversionid');
     }
 
-    /**
-     * get url for adwords conversion tracking secure/unsecure
-     *
-     * @return string
-     */
-    public function getConversionUrl()
-    {
-        return ($this->getRequest()->isSecure()) ? self::URL_ADWORDS_CONVERSION_SECURE
-            : self::URL_ADWORDS_CONVERSION;
+    public function getConversionUrl(){
+        return ($this->getRequest()->isSecure())? 'https://www.googleadservices.com/pagead/conversion.js': 'http://www.googleadservices.com/pagead/conversion.js';      
     }
 
-    /**
-     * get conversion value, convert if chosen to a differnt currency
-     *
-     * @return int|string
-     */
-    public function getValue()
-    {
+    public function getValue(){
         $order = $this->_getOrder();
-        if ($order) {
-            return Mage::helper('googleanalyticsplus')->convert($order, 'subtotal');
-        } else {
+        if($order){
+            if(Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrencyenabled')) {
+                $curconv = Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrency');
+                if ($curconv) {
+                    $basecur = $order->getBaseCurrency();
+                    if($basecur) {
+                        return sprintf("%01.4f",Mage::app()->getStore()->roundPrice($basecur->convert($order->getBaseGrandTotal(), $curconv)));
+                    }
+                }
+            }
+            return $order->getBaseGrandTotal();
+        }else {
             return 0;
         }
     }
 
-    /**
-     * get order from the last quote id
-     *
-     * @return mixed
-     */
-    protected function _getOrder()
-    {
-        if (!$this->_quote) {
+    private function _getOrder(){
+        if(!$this->_quote){
             $quoteId = Mage::getSingleton('checkout/session')->getLastQuoteId();
-            if ($quoteId) {
+            if($quoteId){
                 $this->_order = Mage::getModel('sales/order')->loadByAttribute('quote_id', $quoteId);
-            } else {
-                $this->_order = false;
+            }else{
+               $this->_order = false;
             }
-        } else {
-            $this->_order = Mage::getModel('sales/order')->loadByAttribute('quote_id', $this->_quote->getId());
         }
         return $this->_order;
     }
