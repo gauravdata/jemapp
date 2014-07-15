@@ -1,4 +1,17 @@
 /*= Text colors =*/
+#main-navbar .nav > li > a,
+#main-navbar .nav > li > .dropdown-menu li.active a,
+#main-navbar .nav > li > .dropdown-menu li a:hover,
+#main-navbar .nav > li > .dropdown-menu li a:focus,
+.navbar-default .navbar-nav > li:hover > a,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li.active > a,
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > li.dropdown-link > a,
+.catalog-product-view h1.product-name,
 p.title,
 aside > .block-white .title,
 aside > .block-white .sub-title,
@@ -7,13 +20,8 @@ aside > .block-white .sub-title,
 p.product-image .glyphicon {
 	color: #4c4c4c;
 }
-.navbar-default .navbar-nav > li:hover > a,
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-nav > li.active > a,
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
+#main-navbar .nav > li > .dropdown-menu li a,
+.navbar-default .navbar-nav > li > a {
 	color: #8b8b8b;
 }
 aside .block .list-group strong,
@@ -30,6 +38,9 @@ footer a:hover,
 footer a:focus {
 	color: #7f7f7f;
 }
+h1.product-name {
+	color: #4c4c4c;
+}
 
 /*= Background colors =*/
 h1,
@@ -38,8 +49,6 @@ legend,
 .legend,
 aside > .block,
 #discount-coupon-form,
-.navbar-default,
-.navbar-default .navbar-nav > li > .dropdown-menu,
 footer {
 	background-color: #4c4c4c;
 }
@@ -63,6 +72,12 @@ form fieldset.highlight,
 	background-color: #fff5ef;
 }
 
+.navbar-default .navbar-nav > li.seperator,
+#main-navbar .nav > li.parent > ul:before {
+	background: #404040;
+	border-right-color: #b5b5b5;
+}
+
 /*= Border color =*/
 .panel,
 .panel-default > .panel-heading,
@@ -80,6 +95,10 @@ a.thumbnail:focus,
 .table tbody > tr > td,
 .table tfoot > tr > td {
 	border-color: #aaa;
+}
+.navbar-default .navbar-nav > li > a .caret {
+	border-top-color: #4c4c4c;
+	border-bottom-color: #4c4c4c;
 }
 
 /*= Buttons =*/

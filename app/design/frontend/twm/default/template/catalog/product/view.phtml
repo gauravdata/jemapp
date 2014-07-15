@@ -63,8 +63,10 @@
 </script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
 <?php echo $this->getBlockHtml('formkey') ?>
-<?php echo Mage::app()->getLayout()->createBlock('previousnext/previousnext')->setTemplate("previousnext/links.phtml")->toHtml() ?>
-<h1 class="product-name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+<div class="clearfix">
+	<h1 class="product-name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+	<?php echo Mage::app()->getLayout()->createBlock('previousnext/previousnext')->setTemplate("previousnext/links.phtml")->toHtml() ?>
+</div>
 <div class="row">
 	<div class="col-sm-7" id="product-view">
 		<?php echo $this->getChildHtml('media') ?>
