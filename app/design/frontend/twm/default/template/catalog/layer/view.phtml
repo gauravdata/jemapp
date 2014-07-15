@@ -52,15 +52,15 @@ if ($topCategory->getLevel() > 2) {
 		</button>
 	</div>
 	<div class="collapse navbar-collapse" id="narrow-by-nav">
-		<ul class="nav navbar-nav">
+		<ul class="nav navbar-nav navbar-nav-categories">
 			<?php foreach ($topCategory->getParentCategory()->getChildrenCategories() as $category) : ?>
 				<li class="<?php echo $topCategory->getId() == $category->getId() ? 'active' : '' ?>"><a href="<?php echo Mage::helper('catalog/category')->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
 			<?php endforeach ?>
-				<li class="seperator">&nbsp;</li>
 			<?php foreach ($topCategory->getChildrenCategories() as $category) : ?>
 				<li class="<?php echo $currentCategory->getId() == $category->getId() ? 'active' : '' ?>"><a href="<?php echo Mage::helper('catalog/category')->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
 			<?php endforeach ?>
-
+		</ul>
+		<ul class="nav navbar-nav navbar-filter">
             <?php if($this->canShowBlock()): ?>
             <?php if($this->canShowOptions()): ?>
 			<?php $_filters = $this->getFilters() ?>
