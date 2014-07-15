@@ -590,12 +590,15 @@ button.navbar-toggle:hover .icon-bar {
     text-align: right;
     padding: 5px 15px;
 }
+.navbar-default .navbar-nav > li.dropdown-link > .dropdown-menu {
+	background: #fff;
+}
 .navbar-default .navbar-nav > li > .dropdown-menu ol {
     padding: 0;
     list-style: none;
 }
 .navbar-default .navbar-nav > li > .dropdown-menu a {
-    color: #fff;
+    color: #023e75;
     text-decoration: none;
     font-size: 17px;
 }
