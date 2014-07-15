@@ -592,6 +592,7 @@ button.navbar-toggle:hover .icon-bar {
 }
 .navbar-default .navbar-nav > li.dropdown-link > .dropdown-menu {
 	background: #fff;
+	padding-right: 0;
 }
 .navbar-default .navbar-nav > li > .dropdown-menu ol {
     padding: 0;
