@@ -120,6 +120,7 @@ Default layout, loads most of the pages
 
             <block type="core/text_list" name="before_body_end" as="before_body_end" translate="label">
                 <label>Page Bottom</label>
+				<block type="core/template" name="adcrowd" as="adcrowd" template="page/adcrowd.phtml" />
             </block>
         </block>
 
