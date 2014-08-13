@@ -9,6 +9,7 @@ media/*
 !media/.htaccess
 .idea/
 maintenance.flag
+app/etc/local.xml
 errors/local.xml
 downloader/*.cfg
 downloader/.cache/
