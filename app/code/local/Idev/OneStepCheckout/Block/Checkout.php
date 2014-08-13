@@ -314,7 +314,8 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
         if(!empty($rates)){
             foreach ($rates as $_code => $_rates){
                 foreach ($_rates as  $rate){
-                    $return[] = $rate->getCode();
+                    $return['codes'][] = $rate->getCode();
+                    $return['rates'][$rate->getCode()] = $rate;
                 }
             }
         }
@@ -330,23 +331,14 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
 
         $post = $this->getRequest()->getPost();
 
-
-
-
         if(!$post) return;
 
         // Save billing information
-        if( $this->_isLoggedInWithAddresses() && false )    {
-
-            // User is logged in and has addresses
-
-        }
-        else    {
+        if( !$this->_isLoggedInWithAddresses()){
 
             $checkoutHelper = Mage::helper('onestepcheckout/checkout');
 
             $payment_data = $this->getRequest()->getPost('payment');
-
 
             $billing_data = $this->getRequest()->getPost('billing', array());
             $shipping_data = $this->getRequest()->getPost('shipping', array());
@@ -361,6 +353,33 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
             if($this->differentShippingAvailable()) {
                 $this->getQuote()->getShippingAddress()->setCountryId($shipping_data['country_id'])->setCollectShippingRates(true);
             }
+
+            //handle comments and feedback
+            $enableComments = Mage::getStoreConfig('onestepcheckout/exclude_fields/enable_comments');
+            $enableCommentsDefault = Mage::getStoreConfig('onestepcheckout/exclude_fields/enable_comments_default');
+            $orderComment = $this->getRequest()->getPost('onestepcheckout_comments');
+            $orderComment = trim($orderComment);
+            if($enableComments && !$enableCommentsDefault) {
+                if ($orderComment != ""){
+                    $this->getQuote()->setOnestepcheckoutCustomercomment(Mage::helper('core')->escapeHtml($orderComment));
+                }
+            }
+
+            $enableFeedback = Mage::getStoreConfig('onestepcheckout/feedback/enable_feedback');
+            if($enableFeedback){
+                $feedbackValues = unserialize(Mage::getStoreConfig('onestepcheckout/feedback/feedback_values'));
+                $feedbackValue = $this->getRequest()->getPost('onestepcheckout-feedback');
+                $feedbackValueFreetext = $this->getRequest()->getPost('onestepcheckout-feedback-freetext');
+                if(!empty($feedbackValue)){
+                    if($feedbackValue!='freetext'){
+                        $feedbackValue = $feedbackValues[$feedbackValue]['value'];
+                    } else {
+                        $feedbackValue = $feedbackValueFreetext;
+                    }
+                    $this->getQuote()->setOnestepcheckoutCustomerfeedback(Mage::helper('core')->escapeHtml($feedbackValue));
+                }
+            }
+            //handle comments and feedback end
 
             if(isset($billing_data['email']))   {
                 $this->email = $billing_data['email'];
@@ -377,7 +396,6 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
                     $this->getQuote()->setData('password_hash',Mage::getModel('customer/customer')->encryptPassword($password));
 
                 }
-
 
                 if($registration_mode == 'require_registration' || $registration_mode == 'allow_guest')   {
                     if(!empty($billing_data['customer_password']) && !empty($billing_data['confirm_password']) && ($billing_data['customer_password'] == $billing_data['confirm_password'])){
@@ -413,10 +431,25 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
                 // Trick to allow saving of
                 $this->getOnepage()->saveCheckoutMethod('register');
                 $this->getQuote()->setCustomerId(0);
-                $customerData= array_intersect($billing_data, $this->getQuote()->getBillingAddress()->getData());
-                $this->getQuote()->getCustomer()->addData($customerData);
-                foreach($customerData as $key => $value){
-                    $this->getQuote()->setData('customer_'.$key, $value);
+                $customerData = '';
+                $tmpBilling = $billing_data;
+
+                if(!empty($tmpBilling['street']) && is_array($tmpBilling['street'])){
+                    $tmpBilling ['street'] = '';
+                }
+                $tmpBData = array();
+                foreach($this->getQuote()->getBillingAddress()->implodeStreetAddress()->getData() as $k=>$v){
+                    if(!empty($v) && !is_array($v)){
+                        $tmpBData[$k]=$v;
+                    }
+                }
+                $customerData= array_intersect($tmpBilling, $tmpBData);
+
+                if(!empty($customerData)){
+                    $this->getQuote()->getCustomer()->addData($customerData);
+                    foreach($customerData as $key => $value){
+                        $this->getQuote()->setData('customer_'.$key, $value);
+                    }
                 }
             }
 
@@ -591,8 +624,14 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
         if(!$this->isVirtual()){
             //additional checks if the rate is indeed available for chosen shippin address
             $availableRates = $this->getAvailableRates($this->getOnepage()->getQuote()->getShippingAddress()->getGroupedAllShippingRates());
-            if(empty($shipping_method) || !in_array($shipping_method,$availableRates)){
+            if(empty($shipping_method) || !in_array($shipping_method,$availableRates['codes'])){
                 $this->formErrors['shipping_method'] = true;
+            } else if (!$this->getOnepage()->getQuote()->getShippingAddress()->getShippingDescription()) {
+                if(!empty($availableRates['rates'][$shipping_method])){
+                    $rate = $availableRates['rates'][$shipping_method];
+                    $shippingDescription = $rate->getCarrierTitle() . ' - ' . $rate->getMethodTitle();
+                    $this->getOnepage()->getQuote()->getShippingAddress()->setShippingDescription(trim($shippingDescription, ' -'));
+                }
             }
         }
 
@@ -614,35 +653,13 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
         $payment = $this->getRequest()->getPost('payment', array());
         $paymentRedirect = false;
 
-        /**
-         * A fix for common one big form problem
-         * we rename the fields in template and iterate over subarrays
-         * to see if there's any values and set them to main scope
-         */
-        foreach($payment as $value){
-            if(is_array($value) && !empty($value)){
-                foreach($value as $key => $realValue){
-                    if(!empty($realValue)){
-                        $payment[$key]=$realValue;
-                    }
-                }
-            }
-        }
-
-        /**
-         * unset unnecessary fields
-         */
-        foreach ($payment as $key => $value){
-            if(is_array($value)){
-                unset($payment[$key]);
-            }
-        }
+        $payment = $this->filterPaymentData($payment);
 
         //echo '<pre>' . print_r($_POST,1) . '</pre>';
         //echo '<pre>' . print_r($payment,1) . '</pre>';
 
         try {
-            if(!empty($payment['method']) && $payment['method'] == 'free'){
+            if(!empty($payment['method']) && $payment['method'] == 'free' && $this->getOnepage()->getQuote()->getGrandTotal() > 0){
 
                 $instance = Mage::helper('payment')->getMethodInstance('free');
                 if ($instance->isAvailable($this->getOnepage()->getQuote())) {
@@ -692,8 +709,8 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
             }
 
             if($paymentRedirect && $paymentRedirect != '')  {
-                Header('Location: ' . $paymentRedirect);
-                die();
+                $response = Mage::app()->getResponse();
+                return $response->setRedirect($paymentRedirect);
             }
 
             if( $this->_isLoggedIn() )  {
@@ -726,8 +743,11 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
                             // This should not happen, because validation should handle it
                             die('Validation did not handle it');
                         }
-                    }
-                    else    {
+                    } elseif ($registration_mode == 'allow_guest') {
+                        $this->setCustomerAfterPlace($this->_getCustomer());
+                        $this->getOnepage()->saveCheckoutMethod('guest');
+                        $this->_saveOrder();
+                    } else {
                         $this->getOnepage()->saveCheckoutMethod('guest');
                         $this->_saveOrder();
                     }
@@ -736,11 +756,7 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
                     // Place order as customer with same e-mail address
                     $this->log[] = 'Save order on existing account with email address';
 
-
-
-
-                }
-                else    {
+                } else {
 
                     if($this->settings['registration_mode'] == 'require_registration')  {
 
@@ -792,11 +808,20 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
         $order_id = $this->getOnepage()->getLastOrderId();
         $order = Mage::getModel('sales/order')->loadByIncrementId($order_id);
 
-        if($customer)   {
-            $order->setCustomerId($customer->getId());
-            $order->setCustomerIsGuest(false);
-            $order->setCustomerGroupId($customer->getGroupId());
-            $order->save();
+        if($customer) {
+            $order
+                ->setCustomerId($customer->getId())
+                ->setCustomerIsGuest(false)
+                ->setCustomerGroupId($customer->getGroupId())
+                ->setCustomerEmail($customer->getEmail())
+                ->setCustomerFirstname($customer->getFirstname())
+                ->setCustomerLastname($customer->getLastname())
+                ->setCustomerMiddlename($customer->getMiddlename())
+                ->setCustomerPrefix($customer->getPrefix())
+                ->setCustomerSuffix($customer->getSuffix())
+                ->setCustomerTaxvat($customer->getTaxvat())
+                ->setCustomerGender($customer->getGender())
+            ->save();
         }
     }
 
@@ -856,29 +881,7 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
         // Hack to fix weird Magento payment behaviour
         $payment = $this->getRequest()->getPost('payment', false);
         if($payment) {
-            /**
-             * A fix for common one big form problem
-             * we rename the fields in template and iterate over subarrays
-             * to see if there's any values and set them to main scope
-             */
-            foreach($payment as $value){
-                if(is_array($value) && !empty($value)){
-                    foreach($value as $key => $realValue){
-                        if(!empty($realValue)){
-                            $payment[$key]=$realValue;
-                        }
-                    }
-                }
-            }
-
-            /**
-             * unset unnecessary fields
-             */
-            foreach ($payment as $key => $value){
-                if(is_array($value)){
-                    unset($payment[$key]);
-                }
-            }
+            $payment = $this->filterPaymentData($payment);
             $this->getOnepage()->getQuote()->getPayment()->importData($payment);
 
             $ccSaveAllowedMethods = array('ccsave');
@@ -893,7 +896,14 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
 
 
         try {
-            $this->getOnepage()->getQuote()->setTotalsCollectedFlag(false)->collectTotals();
+
+            if(!$this->getOnepage()->getQuote()->isVirtual() && !$this->getOnepage()->getQuote()->getShippingAddress()->getShippingDescription()){
+                Mage::throwException(Mage::helper('checkout')->__('Please choose a shipping method'));
+            }
+
+            if(!Mage::helper('customer')->isLoggedIn()){
+                $this->getOnepage()->getQuote()->setTotalsCollectedFlag(false)->collectTotals();
+            }
             $order = $this->getOnepage()->saveOrder();
         } catch(Exception $e)   {
             //need to activate
@@ -920,9 +930,41 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
             $redirect = $this->getUrl('checkout/onepage/success');
             //$this->_redirect('checkout/onepage/success', array('_secure'=>true));
         }
+        $response = Mage::app()->getResponse();
+        return $response->setRedirect($redirect);
+    }
 
-        Header('Location: ' . $redirect);
-        exit();
+    /**
+     * A fix for common one big form problem
+     * we rename the fields in template and iterate over subarrays
+     * to see if there's any values and set them to main scope
+     * while try to preserve _data keys
+     *
+     * @param mixed $payment
+     * @return mixed
+     */
+    protected function filterPaymentData($payment){
+        if($payment){
+
+            foreach($payment as $key => $value){
+
+                if(!strstr($key, '_data') && is_array($value) && !empty($value)){
+                    foreach($value as $subkey => $realValue){
+                        if(!empty($realValue)){
+                            $payment[$subkey]=$realValue;
+                        }
+                    }
+                }
+            }
+
+            foreach ($payment as $key => $value){
+                if(!strstr($key, '_data') && is_array($value)){
+                    unset($payment[$key]);
+                }
+            }
+        }
+
+        return $payment;
     }
 
     public function getOnepage()
@@ -1003,8 +1045,7 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
             'gender' => array(),
             'create_account' => array(),
             'password' => array('has_li' => 1, 'fields' => array('password','confirm_password')),
-            'save_in_address_book' => array('has_li' => 1),
-            'use_for_shipping_yes' => array(),
+            'save_in_address_book' => array('has_li' => 1)
         );
         $settings = $this->settings['sortordering_fields'];
         $tmp = array();

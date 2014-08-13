@@ -256,7 +256,13 @@ class Idev_OneStepCheckout_Helper_Checkout extends Mage_Core_Helper_Abstract
             $settings[$name] = Mage::getStoreConfig('onestepcheckout/' . $config);
         }
 
-        if(!$this->getOnePage()->getQuote()->isAllowedGuestCheckout()){
+        $isPersistent = false;
+
+        if(is_object(Mage::getConfig()->getNode('global/models/persistent'))){
+            $isPersistent = Mage::helper('persistent/session')->isPersistent();
+        }
+
+        if(!$isPersistent && !$this->getOnePage()->getQuote()->isAllowedGuestCheckout()){
             $settings['registration_mode'] = 'require_registration';
         }
 
@@ -491,6 +497,7 @@ class Idev_OneStepCheckout_Helper_Checkout extends Mage_Core_Helper_Abstract
             'co.uk',
             'com.au',
             'com.br',
+            'com.sg'
         );
 
         $count = count($temp);
