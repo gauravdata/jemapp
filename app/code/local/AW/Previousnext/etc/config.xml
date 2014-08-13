@@ -2,10 +2,9 @@
 <config>
     <modules>
         <AW_Previousnext>
-            <version>1.2.3</version><platform>ce</platform>
+            <version>1.3.0</version><platform>ce</platform>
         </AW_Previousnext>
     </modules>
-
     <frontend>
         <layout>
             <updates>
@@ -23,8 +22,16 @@
                 </args>
             </previousnext>
         </routers>
+        <translate>
+            <modules>
+                <AW_Pmatch>
+                    <files>
+                        <default>AW_Previousnext.csv</default>
+                    </files>
+                </AW_Pmatch>
+            </modules>
+        </translate>
     </frontend>
-
     <adminhtml>
         <acl>
             <resources>
@@ -48,6 +55,15 @@
                 </admin>
             </resources>
         </acl>
+        <translate>
+            <modules>
+                <AW_Pmatch>
+                    <files>
+                        <default>AW_Previousnext.csv</default>
+                    </files>
+                </AW_Pmatch>
+            </modules>
+        </translate>
     </adminhtml>
     <global>
         <blocks>
@@ -65,19 +81,18 @@
                 <class>AW_Previousnext_Model</class>                
             </previousnext>
         </models>
-        <events>            
+        <events>
             <catalog_block_product_list_collection>
                 <observers>
                     <provide_collection>
                         <type>singleton</type>
                         <class>previousnext/observer</class>
-                        <method>getfullcollectionsql</method>
+                        <method>memorizeProductCollection</method>
                     </provide_collection>
-                </observers>   
-            </catalog_block_product_list_collection>             
+                </observers>
+            </catalog_block_product_list_collection>
         </events>
     </global>
-
     <default>
         <previousnext>
             <general>
@@ -85,6 +100,9 @@
                 <loopproducts>1</loopproducts>
                 <symbolsnumber>40</symbolsnumber>
                 <ending>..</ending>
+                <display_product_thumbnails>0</display_product_thumbnails>
+                <product_thumbnail_width>100</product_thumbnail_width>
+                <product_thumbnail_height>100</product_thumbnail_height>
             </general>
             <previouscontrol>
                 <linktext><![CDATA[<<<  <b>Previous</b> (#PRODUCT#)]]>
@@ -98,8 +116,8 @@
                 <upcontrol>1</upcontrol>
                 <linktext><![CDATA[<b>Back</b> (#CATEGORY#)]]>
                 </linktext>
+                <display_category_thumbnails>0</display_category_thumbnails>
             </upcontrol>
         </previousnext>
     </default>
-
 </config>

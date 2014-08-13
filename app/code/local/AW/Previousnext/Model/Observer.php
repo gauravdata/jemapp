@@ -19,7 +19,7 @@
  *
  * @category   AW
  * @package    AW_Previousnext
- * @version    1.2.3
+ * @version    1.3.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
@@ -27,17 +27,32 @@
 
 class AW_Previousnext_Model_Observer
 {
-
-    public function getFullCollectionSQL($observer)
+    public function memorizeProductCollection($observer)
     {
         try {
-            $select = clone $observer->getCollection()->getSelect();
-            $select->reset(Zend_Db_Select::LIMIT_COUNT);
-            $select->reset(Zend_Db_Select::LIMIT_OFFSET);
-            Mage::getSingleton('core/session')->setData('aw_prevnext_sql', (string)$select);
-            $categoryId = null;
+            $productIds = array();
+            /** @var $productCollection Mage_Catalog_Model_Resource_Product_Collection */
+            $productCollection = $observer->getCollection();
+            $productCollection->load();
+            $productCollection->clear();
+
+            $productCollectionClone = clone $productCollection;
+            $productCollectionClone->setPageSize(1000);
+            $productCollectionClone->setCurPage(1);
+            $productCollectionClone->clear();
+
+            foreach($productCollectionClone as $product) {
+                $productIds[] = $product->getId();
+            }
+            Mage::getSingleton('core/session')->setData('aw_prevnext_pids', $productIds);
+
+            $request = Mage::app()->getRequest();
+            Mage::getSingleton('core/session')->setData('aw_prevnext_req', $request);
+
             if (Mage::registry('current_category')) {
                 $categoryId = (string)Mage::registry('current_category')->getData('entity_id');
+            } else {
+                $categoryId = null;
             }
             Mage::getSingleton('core/session')->setData('aw_prevnext_cat', $categoryId);
         } catch (Exception $e) {
