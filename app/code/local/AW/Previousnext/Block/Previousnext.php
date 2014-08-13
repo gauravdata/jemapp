@@ -19,7 +19,7 @@
  *
  * @category   AW
  * @package    AW_Previousnext
- * @version    1.2.3
+ * @version    1.3.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
@@ -31,6 +31,9 @@ class AW_Previousnext_Block_Previousnext extends Mage_Catalog_Block_Product_Abst
     const DISPLAY_CONTROLS = 'previousnext/general/displaycontrols';
     const STRING_LENGTH = 'previousnext/general/symbolsnumber';
     const STRING_ENDING = 'previousnext/general/ending';
+    const DISPLAY_PRODUCT_THUMBNAILS = 'previousnext/general/display_product_thumbnails';
+    const PRODUCT_THUMBNAIL_HEIGHT = 'previousnext/general/product_thumbnail_height';
+    const PRODUCT_THUMBNAIL_WIDTH = 'previousnext/general/product_thumbnail_width';
 
     const UP_ENABLED = 'previousnext/upcontrol/upcontrol';
 
@@ -41,12 +44,18 @@ class AW_Previousnext_Block_Previousnext extends Mage_Catalog_Block_Product_Abst
     const PREVIOUS_IMAGE = 'previousnext/previouscontrol/image';
     const NEXT_IMAGE = 'previousnext/nextcontrol/image';
     const UP_IMAGE = 'previousnext/upcontrol/image';
+    const DISPLAY_CATEGORY_THUMBNAILS = 'previousnext/upcontrol/display_category_thumbnails';
 
     const STRING_LENGTH_BY_DEFAULT = 40;
+    const PRODUCT_THUMBNAIL_HEIGHT_BY_DEFAULT = 100;
+    const PRODUCT_THUMBNAIL_WIDTH_BY_DEFAULT = 100;
     const FIRST_PAGE_INDEX = 1;
 
     protected $_previousProduct;
     protected $_nextProduct;
+    protected $_upCategory;
+    protected $_upLevelLink = '';
+    protected $_isSearch;
 
     protected function _toHtml()
     {
@@ -54,11 +63,11 @@ class AW_Previousnext_Block_Previousnext extends Mage_Catalog_Block_Product_Abst
          * block initialization from phtml. from_xml variable is a flag in xml file,
          * that means that block is calling from xml
          */
-        if ($this->getFromXml() == 'yes' && !Mage::getStoreConfig(self::DISPLAY_CONTROLS)) {
+        if ($this->getFromXml() == 'yes' && !$this->isDisplayControls()) {
             return parent::_toHtml();
         }
 
-        $this->setLinksforProduct();
+        $this->_setLinksforProduct();
         $this->setTemplate("previousnext/links.phtml");
         return parent::_toHtml();
     }
@@ -66,10 +75,9 @@ class AW_Previousnext_Block_Previousnext extends Mage_Catalog_Block_Product_Abst
     /**
      * Set $this->_previousProduct and $this->_nextProduct variables
      */
-    protected function setLinksforProduct()
+    protected function _setLinksforProduct()
     {
         $currentProduct = Mage::registry('current_product');
-        $category = Mage::registry('current_category');
 
         $products = $this->_getProducts($currentProduct);
         $productIds = $this->_getProductIds($products);
@@ -82,11 +90,15 @@ class AW_Previousnext_Block_Previousnext extends Mage_Catalog_Block_Product_Abst
             }
         }
         $currentStoreId = Mage::app()->getStore()->getId();
+        /** @var $links AW_Previousnext_Model_Previousnext */
         $links = Mage::getModel('previousnext/previousnext');
         $this->_previousProduct = Mage::getModel('catalog/product')->setStoreId($currentStoreId)->load(
             $links->getPrevID()
         );
         $this->_nextProduct = Mage::getModel('catalog/product')->setStoreId($currentStoreId)->load($links->getNextID());
+        $this->_upCategory = Mage::getModel('catalog/category')->setStoreId($currentStoreId)->load($links->getUpCategoryId());
+        $this->_upLevelLink = $links->getUpLevelLink();
+        $this->_isSearch = $links->isSearchRequest();
     }
 
     protected function _initPrevId($productIds, $index, $products)
@@ -273,10 +285,12 @@ class AW_Previousnext_Block_Previousnext extends Mage_Catalog_Block_Product_Abst
 
             $readyLink = str_replace('#PRODUCT#', $ready, $linkText);
         } else {
-            if (!Mage::registry('current_category')) {
-                return '';
+            if ($this->_isSearch) {
+                $categoryName = Mage::helper('previousnext')->__('Search Results');
+            } else {
+                $categoryName = $this->_upCategory->getName();
             }
-            $categoryName = Mage::registry('current_category')->getName();
+
             $origLength = strlen($categoryName);
             $ready = mb_substr($categoryName, 0, $this->getStringLength(), 'utf-8');
             $newLength = strlen($ready);
@@ -301,10 +315,12 @@ class AW_Previousnext_Block_Previousnext extends Mage_Catalog_Block_Product_Abst
 
     public function getUpCategoryLabel()
     {
-        if (!Mage::registry('current_category')) {
-            return '';
+        if ($this->_isSearch) {
+            return Mage::helper('previousnext')->__('Search Results');
+        } elseif ($this->_upCategory) {
+            return htmlspecialchars($this->_upCategory->getName());
         }
-        return htmlspecialchars(Mage::registry('current_category')->getName());
+        return '';
     }
 
     public function getPreviousProductImage()
@@ -357,8 +373,8 @@ class AW_Previousnext_Block_Previousnext extends Mage_Catalog_Block_Product_Abst
 
     public function getUpLevelLink()
     {
-        if (Mage::registry('current_category') && Mage::getStoreConfig(self::UP_ENABLED)) {
-            return Mage::registry('current_category')->getUrl();
+        if (Mage::getStoreConfig(self::UP_ENABLED)) {
+            return $this->_upLevelLink;
         }
         return '';
     }
@@ -378,6 +394,90 @@ class AW_Previousnext_Block_Previousnext extends Mage_Catalog_Block_Product_Abst
         }
         $url = $product->getUrlModel()->getUrl($product, $additional);
         return $url;
+    }
+
+    public function getPreviousProductThumbUrl()
+    {
+        if ($this->_previousProduct->getId()) {
+            return $this->getProductThumbUrl($this->_previousProduct);
+        }
+        return '';
+    }
+
+    public function getNextProductThumbUrl()
+    {
+        if ($this->_nextProduct->getId()) {
+            return $this->getProductThumbUrl($this->_nextProduct);
+        }
+        return '';
+    }
+
+    /**
+     * Get thumb image for product
+     */
+    protected function getProductThumbUrl($product)
+    {
+        if ($this->isDisplayProductThumbnails()) {
+            $thumb = $this->helper('catalog/image')
+                ->init(
+                    Mage::getModel('catalog/product')->load($product->getId()),
+                    'thumbnail'
+                )
+                ->resize(
+                    $this->getProductThumbnailWidth(),
+                    $this->getProductThumbnailHeight()
+                )
+            ;
+            return $thumb;
+        }
+        return '';
+    }
+
+    public function getUpCategoryThumbUrl()
+    {
+        if ($this->_isSearch) {
+            return '';
+        }
+        if ($this->isDisplayCategoryThumbnails()) {
+            if ($this->_upCategory->getThumbnail()) {
+                return Mage::getBaseUrl('media') . 'catalog/category/' . $this->_upCategory->getThumbnail();
+            } elseif ($this->_upCategory->getImage()) {
+                return Mage::getBaseUrl('media') . 'catalog/category/' . $this->_upCategory->getImage();
+            }
+        }
+        return '';
+    }
+
+    public function isDisplayProductThumbnails()
+    {
+        return Mage::getStoreConfig(self::DISPLAY_PRODUCT_THUMBNAILS);
+    }
+
+    public function isDisplayCategoryThumbnails()
+    {
+        return Mage::getStoreConfig(self::DISPLAY_CATEGORY_THUMBNAILS);
+    }
+
+    public function getProductThumbnailHeight()
+    {
+        $value = (int)Mage::getStoreConfig(self::PRODUCT_THUMBNAIL_HEIGHT);
+        if ($value == 0) {
+            $value = self::PRODUCT_THUMBNAIL_HEIGHT_BY_DEFAULT;
+        }
+        return $value;
+    }
+
+    public function getProductThumbnailWidth()
+    {
+        $value = (int)Mage::getStoreConfig(self::PRODUCT_THUMBNAIL_WIDTH);
+        if ($value == 0) {
+            $value = self::PRODUCT_THUMBNAIL_WIDTH_BY_DEFAULT;
+        }
+        return $value;
+    }
+
+    public function isDisplayControls() {
+        return Mage::getStoreConfig(self::DISPLAY_CONTROLS);
     }
 
 }

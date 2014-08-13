@@ -19,7 +19,7 @@
  *
  * @category   AW
  * @package    AW_Previousnext
- * @version    1.2.3
+ * @version    1.3.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
@@ -28,19 +28,23 @@
 class AW_Previousnext_Model_Previousnext extends Mage_Core_Model_Abstract
 {
     const LOOP = 'previousnext/general/loopproducts';
+
     private $_prev = 0;
     private $_next = 0;
+    private $_upCategory;
+    private $_lastRequest;
 
     protected function _construct()
     {
         $loop = Mage::getStoreConfig(self::LOOP);
-        $array = $this->_getDataArray();
-        $cnt = count($array);
-
-        if ($cnt > 1) {
-            $pos = array_search(Mage::app()->getRequest()->getParam('id'), $array);
-            $this->_prev = ($pos == 0) ? ($loop ? $array[$cnt - 1] : 0) : $array[$pos - 1];
-            $this->_next = ($pos == ($cnt - 1)) ? ($loop ? $array[0] : 0) : $array[$pos + 1];
+        $productIds = $this->_getProductIds();
+        if (is_array($productIds)) {
+            $cnt = count($productIds);
+            if ($cnt > 1) {
+                $pos = array_search(Mage::app()->getRequest()->getParam('id'), $productIds);
+                $this->_prev = ($pos == 0) ? ($loop ? $productIds[$cnt - 1] : 0) : $productIds[$pos - 1];
+                $this->_next = ($pos == ($cnt - 1)) ? ($loop ? $productIds[0] : 0) : $productIds[$pos + 1];
+            }
         }
     }
 
@@ -54,40 +58,67 @@ class AW_Previousnext_Model_Previousnext extends Mage_Core_Model_Abstract
         return (int)$this->_next;
     }
 
-    private function _getDataArray()
+    public function getUpCategoryId()
     {
-        $results = array();
-        $cat = Mage::getSingleton('core/session')->getData('aw_prevnext_cat');
-        $category = Mage::registry('current_category');
-        if ($category) {
-            $categoryId = $category->getData('entity_id');
-            if ($cat === $categoryId) {
-                $select = Mage::getSingleton('core/session')->getData('aw_prevnext_sql');
-            } else {
-                try {
-                    $productCollection = Mage::getModel('catalog/category')->load($categoryId)->getProductCollection();
-                    Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($productCollection);
-                    Mage::getSingleton('catalog/product_visibility')
-                        ->addVisibleInCatalogFilterToCollection($productCollection)
-                    ;
-                    $select = $productCollection->getSelect();
-                    $select->reset(Zend_Db_Select::LIMIT_COUNT);
-                    $select->reset(Zend_Db_Select::LIMIT_OFFSET);
-                } catch (Exception $e) {
-                    //
+        return (int)$this->_getUpCategory()->getId();
+    }
+
+    public function getUpLevelLink()
+    {
+        if ($this->isSearchRequest()) {
+            $s = Mage::getModel('core/url')->getUrl('catalogsearch/result');
+        } else {
+            $s = $this->_getUpCategory()->getUrl();
+        }
+        if ($this->_getUpQuery()) {
+            $s .= '?' . $this->_getUpQuery();
+        }
+        return $s;
+    }
+
+    public function isSearchRequest()
+    {
+        return $this->_getLastRequest()->getControllerModule() == 'Mage_CatalogSearch';
+    }
+
+    private function _getUpQuery()
+    {
+        return parse_url($this->_getLastRequest()->getRequestUri(), PHP_URL_QUERY);
+    }
+
+    private function _getUpCategory()
+    {
+        if ($this->_upCategory === null) {
+            $category = Mage::getModel('catalog/category');
+            $categoryId = Mage::getSingleton('core/session')->getAwPrevnextCat();
+            if ($categoryId === null) {
+                $currentCategory = Mage::registry('current_category');
+                if ($currentCategory !== null) {
+                    $categoryId = $currentCategory->getData('entity_id');
                 }
             }
-            if ($select) {
-                $resource = Mage::getSingleton('core/resource');
-                $readConnection = $resource->getConnection('core_read');
-                $rows = $readConnection->fetchAll((string)$select);
-                foreach ($rows as $item) {
-                    $results[] = $item['entity_id'];
-                }
+            if ($categoryId !== null) {
+                $category->load($categoryId);
+            }
+            $this->_upCategory = $category;
+        }
+        return $this->_upCategory;
+    }
+
+    private function _getLastRequest()
+    {
+        if ($this->_lastRequest === null) {
+            $this->_lastRequest = Mage::getSingleton('core/session')->getAwPrevnextReq();
+            if ($this->_lastRequest === null) {
+                $this->_lastRequest = clone Mage::app()->getRequest();
             }
         }
-        return $results;
+        return $this->_lastRequest;
+    }
+
+    private function _getProductIds()
+    {
+        return Mage::getSingleton('core/session')->getAwPrevnextPids();
     }
 
 }
-
