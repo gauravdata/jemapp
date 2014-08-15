@@ -6,7 +6,7 @@ $helper = Mage::helper('onestepcheckout/checkout');
 $dataHelper = Mage::helper('onestepcheckout');
     $shippingFields['firstname'] = '
         <div class="input-box input-firstname'.((in_array('firstname', $formErrors)) ? ' input-error' : '').'">
-            <label for="shipping:firstname">'.$this->__('First Name').' <span class="required">*</span></label><br />
+            <label for="shipping:firstname">'.$this->__('First Name').'<span class="required">*</span></label><br />
             <input class="required-entry input-text" type="text" name="shipping[firstname]" id="shipping:firstname" value="'.$dataHelper->clearDash($this->getQuote()->getShippingAddress()->getFirstname()).'" />
         </div>';
     $shippingFields['lastname'] = '
@@ -23,7 +23,7 @@ $dataHelper = Mage::helper('onestepcheckout');
             for ($_i=1, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++){
 
                     $addressFields .= '<div class="input-box input-address-short'.((in_array('address', $formErrors)) ? ' input-error' : '').'">
-                    <label for="shipping:street'.$_i.'">'.$this->__('Street Address '.$_i).' <span class="required">*</span></label><br />
+                    <label for="shipping:street'.$_i.'">'.$this->__('Street Address '.$_i).'<span class="required">*</span></label><br />
                     <input type="text" title="'.$this->__('Street Address '.$_i).'" name="shipping[street][]" id="shipping:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getShippingAddress()->getStreet($_i)).'" class="required-entry input-text onestepcheckout-address-line" />
                     </div>';
             }
@@ -39,7 +39,7 @@ $dataHelper = Mage::helper('onestepcheckout');
             }
             $shippingFields['street'] = '
                 <div class="input-box input-address'.((in_array('address', $formErrors)) ? ' input-error' : '').'">
-                    <label for="shipping:street1">'.$this->__('Address').' <span class="required">*</span></label><br />
+                    <label for="shipping:street1">'.$this->__('Address').'<span class="required">*</span></label><br />
                     '.$addressFields.'
                 </div>';
         ?>

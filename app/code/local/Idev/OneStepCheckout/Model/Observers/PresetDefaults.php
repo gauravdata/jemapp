@@ -120,7 +120,6 @@ class Idev_OneStepCheckout_Model_Observers_PresetDefaults extends Mage_Core_Mode
                 }
             }
 
-            $quote->getShippingAddress()->setCollectShippingRates(true);
         }
 
         return $this;
@@ -368,30 +367,31 @@ class Idev_OneStepCheckout_Model_Observers_PresetDefaults extends Mage_Core_Mode
      * @return Idev_OneStepCheckout_Model_Observers_PresetDefaults
      */
     public function setPaymentDefaults(Varien_Event_Observer $observer) {
+
         $quote = $observer->getEvent()->getQuote();
         $newCode = Mage::getStoreConfig('onestepcheckout/general/default_payment_method', $quote->getStore());
 
         if (empty($newCode)) {
-            return;
+            return $this;
         }
 
+        $oldCode = $quote->getPayment()->getMethod();
         $codes = $this->getPaymentMethods($quote);
 
-        if (empty($codes) || !is_object($quote)|| !$quote->getGrandTotal()) {
-            return;
+        if (empty($codes) || !is_object($quote) || !$quote->getGrandTotal()) {
+            return $this;
         }
 
         $codeCount = (int)count($codes);
 
         //if we have only one rate available select it no matter what the default is
-        if ($codeCount === 1 && current($codes) !='free') {
+        if ($codeCount === 1) {
             $newCode = current($codes);
         }
 
-        $oldCode = $quote->getPayment()->getMethod();
-
         if (!empty($codes) && (empty($oldCode) || !in_array($oldCode, $codes))) {
             if (in_array($newCode, $codes)) {
+
                 //only if method is actually active we can set this as default
                 if(Mage::getStoreConfig('payment/'.$newCode.'/active', $quote->getStore())){
                     if ($quote->isVirtual()) {
@@ -407,6 +407,8 @@ class Idev_OneStepCheckout_Model_Observers_PresetDefaults extends Mage_Core_Mode
                 }
             }
         }
+
+        return $this;
     }
 
     /**

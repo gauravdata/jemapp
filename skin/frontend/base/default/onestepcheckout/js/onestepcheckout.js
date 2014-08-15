@@ -220,8 +220,7 @@ var OneStepCheckoutLoginPopup = Class.create({
         this.popup = new Control.Modal(this.popup_container, {
             overlayOpacity: 0.65,
             fade: true,
-            fadeDuration: 0.3,
-            position: 'center_once'
+            fadeDuration: 0.3
         });
     }
 });
@@ -327,9 +326,9 @@ function get_save_methods_function(url, update_payments)
 
                     payment_methods.replace(data.payment_method);
 
-                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
+                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', get_separate_save_methods_function(url));
 
-                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
+                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', function() {
                         $$('div.onestepcheckout-payment-method-error').each(function(item) {
                             new Effect.Fade(item);
                         });
@@ -450,10 +449,8 @@ function get_save_billing_function(url, set_methods_url, update_payments, trigge
         parameters['payment_method'] = payment_method;
         parameters['payment[method]'] = payment_method;
 
-        if(update_payments){
-            var payment_methods = $$('div.payment-methods')[0];
-            payment_methods.update('<div class="loading-ajax">&nbsp;</div>');
-        }
+        var payment_methods = $$('div.payment-methods')[0];
+        payment_methods.update('<div class="loading-ajax">&nbsp;</div>');
 
         var totals = get_totals_element();
         totals.update('<div class="loading-ajax">&nbsp;</div>');
@@ -470,11 +467,7 @@ function get_save_billing_function(url, set_methods_url, update_payments, trigge
                 if(shipment_methods_found)  {
                     shipment_methods.update(data.shipping_method);
                 }
-
-                if(update_payments){
-                    payment_methods.replace(data.payment_method);
-                }
-
+                payment_methods.replace(data.payment_method);
                 totals.update(data.summary);
 
 
@@ -491,23 +484,21 @@ function get_save_billing_function(url, set_methods_url, update_payments, trigge
                     });
                 }
 
-                if(update_payments){
-                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(set_methods_url));
+                $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', get_separate_save_methods_function(set_methods_url));
 
-                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
-                        $$('div.onestepcheckout-payment-method-error').each(function(item) {
-                            new Effect.Fade(item);
-                        });
+                $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', function() {
+                    $$('div.onestepcheckout-payment-method-error').each(function(item) {
+                        new Effect.Fade(item);
                     });
+                });
 
-                    if($RF(form, 'payment[method]') != null)    {
-                        try    {
-                            var payment_method = $RF(form, 'payment[method]');
-                            $('container_payment_method_' + payment_method).show();
-                            $('payment_form_' + payment_method).show();
-                        } catch(err)    {
+                if($RF(form, 'payment[method]') != null)    {
+                    try    {
+                        var payment_method = $RF(form, 'payment[method]');
+                        $('container_payment_method_' + payment_method).show();
+                        $('payment_form_' + payment_method).show();
+                    } catch(err)    {
 
-                        }
                     }
                 }
             }
@@ -580,8 +571,8 @@ function get_separate_save_methods_function(url, update_payments)
 
                     payment_methods.replace(data.payment_method);
 
-                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
-                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
+                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', get_separate_save_methods_function(url));
+                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', function() {
                         $$('div.onestepcheckout-payment-method-error').each(function(item) {
                             new Effect.Fade(item);
                         });
@@ -614,8 +605,8 @@ function paymentrefresh(url) {
                     var data = transport.responseText.evalJSON();
                     payment_methods.replace(data.payment_method);
 
-                    $$('div.payment-methods input[name="payment\[method\]"]', 'div.payment-methods input[name="payment\[useProfile\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
-                    $$('div.payment-methods input[name="payment\[method\]"]', 'div.payment-methods input[name="payment\[useProfile\]"]').invoke('observe', 'click', function() {
+                    $$('div.payment-methods input[name^=payment\[method\]]', 'div.payment-methods input[name^=payment[useProfile]]').invoke('observe', 'click', get_separate_save_methods_function(url));
+                    $$('div.payment-methods input[name^=payment\[method\]]', 'div.payment-methods input[name^=payment[useProfile]]').invoke('observe', 'click', function() {
                         $$('div.onestepcheckout-payment-method-error').each(function(item) {
                             new Effect.Fade(item);
                         });
@@ -651,9 +642,8 @@ function addressPreview(templates, target) {
               } else {
                   value = s.getValue();
               }
-              if(value){
-                  value = '<span class="' + s.id.replace(':','-') + '">' + value.escapeHTML() + '</span>';
-              }
+              value = '<span class="' + s.id.replace(':','-') + '">' + value + '</span>';
+
               if(s.id == 'billing:region_id'){
                   bparams['billing:region'] = value;
               } else {
@@ -679,9 +669,9 @@ function addressPreview(templates, target) {
                 } else {
                     value = s.getValue();
                 }
-                if(value){
-                    value = '<span class="' + s.id.replace(':','-') + '">' + value.escapeHTML() + '</span>';
-                }
+
+                value = '<span class="' + s.id.replace(':','-') + '">' + value + '</span>';
+
                 if(s.id == 'shipping:region_id'){
                     sparams['shipping:region'] = value;
                 } else {
@@ -696,8 +686,8 @@ function addressPreview(templates, target) {
 
     var shipping_method = $RF(form, 'shipping_method');
     if(shipping_method){
-        var shipping_label = $('s_method_' + shipping_method).up('dt').down('label').innerHTML.stripScripts();
-        var shipping_title = $('s_method_' + shipping_method).up('dt').previous('dd').innerHTML.stripScripts();
+        var shipping_label = $('s_method_' + shipping_method).up('dt').down('label').innerHTML;
+        var shipping_title = $('s_method_' + shipping_method).up('dt').previous('dd').innerHTML;
         var shipping_row = shipping_title + ' - ' + shipping_label
     }
 
@@ -713,7 +703,7 @@ function addressPreview(templates, target) {
     var payment_method = payment.currentMethod;
 
     if(payment_method){
-        var payment_label = $('p_method_'+payment_method).up('dt').down('label').innerHTML.stripScripts();
+        var payment_label = $('p_method_'+payment_method).up('dt').down('label').innerHTML;
     }
 
     var targetelem = $(target + '_billinga').childElements()[1];

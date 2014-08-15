@@ -7,7 +7,7 @@ $dataHelper = Mage::helper('onestepcheckout');
 
     $billingFields['firstname'] = '
         <div class="input-box input-firstname'.((in_array('firstname', $formErrors)) ? ' input-error' : '').'">
-            <label for="billing:firstname">'.$this->__('First Name').' <span class="required">*</span></label><br />
+            <label for="billing:firstname">'.$this->__('First Name').'<span class="required">*</span></label><br />
             <input class="required-entry input-text" type="text" name="billing[firstname]" id="billing:firstname" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getFirstname()).'" />
         </div>';
     $billingFields['lastname'] = '
@@ -50,7 +50,7 @@ $dataHelper = Mage::helper('onestepcheckout');
         $addressFields = '';
             for ($_i=1, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++){
                     $addressFields .= '<div class="input-box input-address-short'.((in_array('address', $formErrors)) ? ' input-error' : '').'">
-                    <label for="billing:street'.$_i.'">'.$this->__('Street Address '.$_i).' <span class="required">*</span></label><br />
+                    <label for="billing:street'.$_i.'">'.$this->__('Street Address '.$_i).'<span class="required">*</span></label><br />
                     <input type="text" title="'.$this->__('Street Address '.$_i).'" name="billing[street][]" id="billing:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getStreet($_i)).'" class="required-entry input-text onestepcheckout-address-line" />
                     </div>';
             }
@@ -66,7 +66,7 @@ $dataHelper = Mage::helper('onestepcheckout');
             }
             $billingFields['street'] = '
                 <div class="input-box input-address'.((in_array('address', $formErrors)) ? ' input-error' : '').'">
-                    <label for="billing:street1">'.$this->__('Address').' <span class="required">*</span></label><br />
+                    <label for="billing:street1">'.$this->__('Address').'<span class="required">*</span></label><br />
                     '.$addressFields.'
                 </div>';
         ?>
@@ -148,7 +148,7 @@ $billingFields['country_id'] = '
         $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat');
     }
 ?>
-<?php if(is_object($_taxvat) && $_taxvat->isEnabled()  && !$this->isCustomerLoggedIn()): ?>
+<?php if(is_object($_taxvat) && $_taxvat->isEnabled()): ?>
     <?php $billingFields['taxvat'] =
             $_taxvat->setTaxvat($this->getQuote()->getCustomerTaxvat())
                 ->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml();
@@ -156,10 +156,12 @@ $billingFields['country_id'] = '
 <?php endif; ?>
 <?php if (method_exists(Mage::helper('customer/address'), 'isVatAttributeVisible') && Mage::helper('customer/address')->isVatAttributeVisible()) : ?>
     <?php $billingFields['taxvat'] = '
+        <li class="wide">
             <label for="billing:vat_id">'.$this->__('VAT Number').'</label>
             <div class="input-box">
                 <input type="text" id="billing:vat_id" name="billing[vat_id]" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getVatId()).'" title="'.$this->__('VAT Number').'" class="input-text '.Mage::helper('customer/address')->getAttributeValidationClass('vat_id').'" />
-            </div>';
+            </div>
+        </li>';
     ?>
 <?php endif; ?>
 <?php
@@ -177,14 +179,14 @@ $billingFields['country_id'] = '
     }
 ?>
 
-<?php if (is_object($_dob) && $_dob->isEnabled() && !$this->isCustomerLoggedIn()): ?>
+<?php if (is_object($_dob) && $_dob->isEnabled()): ?>
     <?php $billingFields['dob'] = '
         <div class="field">
             '.$_dob->setDate($this->getQuote()->getCustomerDob())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml().'
-        </div>';
+        </div>.';
     ?>
 <?php endif; ?>
-<?php if (is_object($_gender) && $_gender->isEnabled() && !$this->isCustomerLoggedIn()): ?>
+<?php if (is_object($_gender) && $_gender->isEnabled()): ?>
     <?php $billingFields['gender'] = '
         <div class="field">
             '.$_gender->setGender($this->getQuote()->getCustomerGender())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml().'
