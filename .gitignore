@@ -3,7 +3,6 @@
 *.DS_Store
 *.swp
 *.out
-app/etc/local.xml
 var/*
 !var/.htaccess
 media/*

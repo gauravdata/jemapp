@@ -153,7 +153,7 @@ $billingFields['country_id'] = '
         $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat');
     }
 ?>
-<?php if(is_object($_taxvat) && $_taxvat->isEnabled()  && !$this->isCustomerLoggedIn()): ?>
+<?php if(is_object($_taxvat) && $_taxvat->isEnabled()): ?>
     <?php $billingFields['taxvat'] =
             $_taxvat->setTaxvat($this->getQuote()->getCustomerTaxvat())
                 ->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml();
@@ -184,14 +184,14 @@ $billingFields['country_id'] = '
     }
 ?>
 
-<?php if (is_object($_dob) && $_dob->isEnabled() && !$this->isCustomerLoggedIn()): ?>
+<?php if (is_object($_dob) && $_dob->isEnabled()): ?>
     <?php $billingFields['dob'] = '
         <div class="form-group">
             '.$_dob->setDate($this->getQuote()->getCustomerDob())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml().'
         </div>.';
     ?>
 <?php endif; ?>
-<?php if (is_object($_gender) && $_gender->isEnabled() && !$this->isCustomerLoggedIn()): ?>
+<?php if (is_object($_gender) && $_gender->isEnabled()): ?>
     <?php $billingFields['gender'] = '
         <div class="form-group">
             '.$_gender->setGender($this->getQuote()->getCustomerGender())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml().'

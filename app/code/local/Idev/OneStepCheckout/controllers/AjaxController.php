@@ -30,6 +30,45 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
         $this->renderLayout();
     }
 
+    public function indexAction()
+    {
+        $resource = Mage::getResourceModel('sales/order_collection');
+
+        if(method_exists($resource, 'getEntity'))   {
+            echo 'Is using EAV';
+        }
+        else {
+            echo 'Not using EAV';
+        }
+
+        die();
+
+        var_dump($resource->getEntity());
+        var_dump(get_class_methods($resource->getEntity()));
+        var_dump($resource);
+
+        die();
+
+        var_dump(get_class_methods($resource));
+
+
+
+
+        echo get_class($collection);
+        echo '<br>';
+        echo get_class($sales);
+
+        var_dump(get_class_methods($collection));
+
+        var_dump(get_class_methods($sales));
+        var_dump($sales);
+
+        die('<br><br>ajaxcontroller!');
+
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+
     protected function _isEmailRegistered($email)
     {
         $model = Mage::getModel('customer/customer');
@@ -111,40 +150,22 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
 
         if(Mage::helper('onestepcheckout')->isEnterprise() && Mage::helper('customer')->isLoggedIn()){
 
-            if (Mage::helper('onestepcheckout')->hasEeCustomerbalanace()) {
-                $customerBalanceBlock = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance', array(
-                    'template' => 'onestepcheckout/customerbalance/payment/additional.phtml'
-                ));
-                $customerBalanceBlockScripts = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance_scripts', array(
-                    'template' => 'onestepcheckout/customerbalance/payment/scripts.phtml'
-                ));
-                $this->getLayout()
-                    ->getBlock('choose-payment-method')
-                    ->append($customerBalanceBlock)
-                    ->append($customerBalanceBlockScripts);
-            }
+            $customerBalanceBlock = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance', array('template'=>'onestepcheckout/customerbalance/payment/additional.phtml'));
+            $customerBalanceBlockScripts = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance_scripts', array('template'=>'onestepcheckout/customerbalance/payment/scripts.phtml'));
 
-            if (Mage::helper('onestepcheckout')->hasEeRewards()) {
-                $rewardPointsBlock = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.points', array(
-                    'template' => 'onestepcheckout/reward/payment/additional.phtml',
-                    'before' => '-'
-                ));
-                $rewardPointsBlockScripts = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.scripts', array(
-                    'template' => 'onestepcheckout/reward/payment/scripts.phtml',
-                    'after' => '-'
-                ));
-                $this->getLayout()
-                    ->getBlock('choose-payment-method')
-                    ->append($rewardPointsBlock)
-                    ->append($rewardPointsBlockScripts);
-            }
+            $rewardPointsBlock = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.points', array('template'=>'onestepcheckout/reward/payment/additional.phtml', 'before' => '-'));
+            $rewardPointsBlockScripts = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.scripts', array('template'=>'onestepcheckout/reward/payment/scripts.phtml', 'after' => '-'));
 
+            $this->getLayout()->getBlock('choose-payment-method')
+            ->append($customerBalanceBlock)
+            ->append($customerBalanceBlockScripts)
+            ->append($rewardPointsBlock)
+            ->append($rewardPointsBlockScripts)
+            ;
         }
 
-        if (Mage::helper('onestepcheckout')->isEnterprise() && Mage::helper('onestepcheckout')->hasEeGiftcards()) {
-            $giftcardScripts = $this->getLayout()->createBlock('enterprise_giftcardaccount/checkout_onepage_payment_additional', 'giftcardaccount_scripts', array(
-                'template' => 'onestepcheckout/giftcardaccount/onepage/payment/scripts.phtml'
-            ));
+        if(Mage::helper('onestepcheckout')->isEnterprise()){
+            $giftcardScripts = $this->getLayout()->createBlock('enterprise_giftcardaccount/checkout_onepage_payment_additional', 'giftcardaccount_scripts', array('template'=>'onestepcheckout/giftcardaccount/onepage/payment/scripts.phtml'));
             $html->append($giftcardScripts);
         }
 
@@ -262,10 +283,8 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
         ->createBlock('checkout/onepage_payment_methods')
         ->setTemplate('onestepcheckout/payment_method.phtml');
 
-        if (Mage::helper('onestepcheckout')->isEnterprise() && Mage::helper('onestepcheckout')->hasEeGiftcards()) {
-            $giftcardScripts = $this->getLayout()->createBlock('enterprise_giftcardaccount/checkout_onepage_payment_additional', 'giftcardaccount_scripts', array(
-                'template' => 'onestepcheckout/giftcardaccount/onepage/payment/scripts.phtml'
-            ));
+        if(Mage::helper('onestepcheckout')->isEnterprise()){
+            $giftcardScripts = $this->getLayout()->createBlock('enterprise_giftcardaccount/checkout_onepage_payment_additional', 'giftcardaccount_scripts', array('template'=>'onestepcheckout/giftcardaccount/onepage/payment/scripts.phtml'));
             $html->append($giftcardScripts);
         }
 
@@ -466,51 +485,31 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
            $helper->saveShippingMethod($shipping_method);
         }
 
-        if(!Mage::helper('customer')->isLoggedIn()){
-            $this->_getOnepage()->getQuote()->setTotalsCollectedFlag(false)->collectTotals();
-        }
+        $this->_getOnepage()->getQuote()->setTotalsCollectedFlag(false)->collectTotals();
 
         $this->loadLayout(false);
 
         if(Mage::helper('onestepcheckout')->isEnterprise() && Mage::helper('customer')->isLoggedIn()){
 
-            if (Mage::helper('onestepcheckout')->hasEeCustomerbalanace()) {
-                $customerBalanceBlock = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance', array(
-                    'template' => 'onestepcheckout/customerbalance/payment/additional.phtml'
-                ));
-                $customerBalanceBlockScripts = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance_scripts', array(
-                    'template' => 'onestepcheckout/customerbalance/payment/scripts.phtml'
-                ));
-                $this->getLayout()
-                    ->getBlock('choose-payment-method')
-                    ->append($customerBalanceBlock)
-                    ->append($customerBalanceBlockScripts);
-            }
+            $customerBalanceBlock = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance', array('template'=>'onestepcheckout/customerbalance/payment/additional.phtml'));
+            $customerBalanceBlockScripts = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance_scripts', array('template'=>'onestepcheckout/customerbalance/payment/scripts.phtml'));
 
-            if (Mage::helper('onestepcheckout')->hasEeRewards()) {
-                $rewardPointsBlock = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.points', array(
-                    'template' => 'onestepcheckout/reward/payment/additional.phtml',
-                    'before' => '-'
-                ));
-                $rewardPointsBlockScripts = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.scripts', array(
-                    'template' => 'onestepcheckout/reward/payment/scripts.phtml',
-                    'after' => '-'
-                ));
-                $this->getLayout()
-                    ->getBlock('choose-payment-method')
-                    ->append($rewardPointsBlock)
-                    ->append($rewardPointsBlockScripts);
-            }
+            $rewardPointsBlock = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.points', array('template'=>'onestepcheckout/reward/payment/additional.phtml', 'before' => '-'));
+            $rewardPointsBlockScripts = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.scripts', array('template'=>'onestepcheckout/reward/payment/scripts.phtml', 'after' => '-'));
+
+            $this->getLayout()->getBlock('choose-payment-method')
+            ->append($customerBalanceBlock)
+            ->append($customerBalanceBlockScripts)
+            ->append($rewardPointsBlock)
+            ->append($rewardPointsBlockScripts)
+            ;
 
         }
 
-        if (Mage::helper('onestepcheckout')->isEnterprise() && Mage::helper('onestepcheckout')->hasEeGiftcards()) {
-            $giftcardScripts = $this->getLayout()->createBlock('enterprise_giftcardaccount/checkout_onepage_payment_additional', 'giftcardaccount_scripts', array(
-                'template' => 'onestepcheckout/giftcardaccount/onepage/payment/scripts.phtml'
-            ));
-            $this->getLayout()
-                ->getBlock('choose-payment-method')
-                ->append($giftcardScripts);
+        if(Mage::helper('onestepcheckout')->isEnterprise()){
+            $giftcardScripts = $this->getLayout()->createBlock('enterprise_giftcardaccount/checkout_onepage_payment_additional', 'giftcardaccount_scripts', array('template'=>'onestepcheckout/giftcardaccount/onepage/payment/scripts.phtml'));
+            $this->getLayout()->getBlock('choose-payment-method')
+            ->append($giftcardScripts);
         }
 
         $this->renderLayout();
@@ -539,43 +538,18 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
 
         if(Mage::helper('onestepcheckout')->isEnterprise() && Mage::helper('customer')->isLoggedIn()){
 
-            if (Mage::helper('onestepcheckout')->hasEeCustomerbalanace()) {
-                $customerBalanceBlock = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance', array(
-                    'template' => 'onestepcheckout/customerbalance/payment/additional.phtml'
-                ));
-                $customerBalanceBlockScripts = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance_scripts', array(
-                    'template' => 'onestepcheckout/customerbalance/payment/scripts.phtml'
-                ));
-                $this->getLayout()
-                    ->getBlock('choose-payment-method')
-                    ->append($customerBalanceBlock)
-                    ->append($customerBalanceBlockScripts);
-            }
+            $customerBalanceBlock = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance', array('template'=>'onestepcheckout/customerbalance/payment/additional.phtml'));
+            $customerBalanceBlockScripts = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance_scripts', array('template'=>'onestepcheckout/customerbalance/payment/scripts.phtml'));
 
-            if (Mage::helper('onestepcheckout')->hasEeRewards()) {
-                $rewardPointsBlock = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.points', array(
-                    'template' => 'onestepcheckout/reward/payment/additional.phtml',
-                    'before' => '-'
-                ));
-                $rewardPointsBlockScripts = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.scripts', array(
-                    'template' => 'onestepcheckout/reward/payment/scripts.phtml',
-                    'after' => '-'
-                ));
-                $this->getLayout()
-                    ->getBlock('choose-payment-method')
-                    ->append($rewardPointsBlock)
-                    ->append($rewardPointsBlockScripts);
-            }
+            $rewardPointsBlock = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.points', array('template'=>'onestepcheckout/reward/payment/additional.phtml', 'before' => '-'));
+            $rewardPointsBlockScripts = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.scripts', array('template'=>'onestepcheckout/reward/payment/scripts.phtml', 'after' => '-'));
 
-        }
-
-        if (Mage::helper('onestepcheckout')->isEnterprise() && Mage::helper('onestepcheckout')->hasEeGiftcards()) {
-            $giftcardScripts = $this->getLayout()->createBlock('enterprise_giftcardaccount/checkout_onepage_payment_additional', 'giftcardaccount_scripts', array(
-                'template' => 'onestepcheckout/giftcardaccount/onepage/payment/scripts.phtml'
-            ));
-            $this->getLayout()
-            ->getBlock('choose-payment-method')
-            ->append($giftcardScripts);
+            $this->getLayout()->getBlock('choose-payment-method')
+            ->append($customerBalanceBlock)
+            ->append($customerBalanceBlockScripts)
+            ->append($rewardPointsBlock)
+            ->append($rewardPointsBlockScripts)
+            ;
         }
 
         $this->renderLayout();
@@ -612,6 +586,13 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
         try {
             $payment = $this->getRequest()->getPost('payment', array());
             //$payment = array();
+           //////////// MageWorx Fix ///////////////
+                if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit' || $paymentMethod=='customercredit' ) {
+                  Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
+                } else {
+                    Mage::getModel('checkout/session')->setUseInternalCredit(false);
+                }
+                //////////// MageWorx Fix ///////////////
             if(!empty($paymentMethod)){
                 $payment['method'] = $paymentMethod;
             }
@@ -627,42 +608,24 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
 
         if(Mage::helper('onestepcheckout')->isEnterprise() && Mage::helper('customer')->isLoggedIn()){
 
-            if (Mage::helper('onestepcheckout')->hasEeCustomerbalanace()) {
-                $customerBalanceBlock = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance', array(
-                    'template' => 'onestepcheckout/customerbalance/payment/additional.phtml'
-                ));
-                $customerBalanceBlockScripts = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance_scripts', array(
-                    'template' => 'onestepcheckout/customerbalance/payment/scripts.phtml'
-                ));
-                $this->getLayout()
-                    ->getBlock('choose-payment-method')
-                    ->append($customerBalanceBlock)
-                    ->append($customerBalanceBlockScripts);
-            }
+            $customerBalanceBlock = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance', array('template'=>'onestepcheckout/customerbalance/payment/additional.phtml'));
+            $customerBalanceBlockScripts = $this->getLayout()->createBlock('enterprise_customerbalance/checkout_onepage_payment_additional', 'customerbalance_scripts', array('template'=>'onestepcheckout/customerbalance/payment/scripts.phtml'));
 
-            if (Mage::helper('onestepcheckout')->hasEeRewards()) {
-                $rewardPointsBlock = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.points', array(
-                    'template' => 'onestepcheckout/reward/payment/additional.phtml',
-                    'before' => '-'
-                ));
-                $rewardPointsBlockScripts = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.scripts', array(
-                    'template' => 'onestepcheckout/reward/payment/scripts.phtml',
-                    'after' => '-'
-                ));
-                $this->getLayout()
-                    ->getBlock('choose-payment-method')
-                    ->append($rewardPointsBlock)
-                    ->append($rewardPointsBlockScripts);
-            }
+            $rewardPointsBlock = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.points', array('template'=>'onestepcheckout/reward/payment/additional.phtml', 'before' => '-'));
+            $rewardPointsBlockScripts = $this->getLayout()->createBlock('enterprise_reward/checkout_payment_additional', 'reward.scripts', array('template'=>'onestepcheckout/reward/payment/scripts.phtml', 'after' => '-'));
+
+            $this->getLayout()->getBlock('choose-payment-method')
+            ->append($customerBalanceBlock)
+            ->append($customerBalanceBlockScripts)
+            ->append($rewardPointsBlock)
+            ->append($rewardPointsBlockScripts)
+            ;
         }
 
-        if (Mage::helper('onestepcheckout')->isEnterprise() && Mage::helper('onestepcheckout')->hasEeGiftcards()) {
-            $giftcardScripts = $this->getLayout()->createBlock('enterprise_giftcardaccount/checkout_onepage_payment_additional', 'giftcardaccount_scripts', array(
-                'template' => 'onestepcheckout/giftcardaccount/onepage/payment/scripts.phtml'
-            ));
-            $this->getLayout()
-                ->getBlock('choose-payment-method')
-                ->append($giftcardScripts);
+        if(Mage::helper('onestepcheckout')->isEnterprise()){
+            $giftcardScripts = $this->getLayout()->createBlock('enterprise_giftcardaccount/checkout_onepage_payment_additional', 'giftcardaccount_scripts', array('template'=>'onestepcheckout/giftcardaccount/onepage/payment/scripts.phtml'));
+            $this->getLayout()->getBlock('choose-payment-method')
+            ->append($giftcardScripts);
         }
 
         $this->renderLayout();
@@ -684,6 +647,14 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
             try {
                 $payment = $this->getRequest()->getPost('payment', array());
                 $payment['method'] = $payment_method;
+                
+                //////////// MageWorx Fix ///////////////
+                if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit') {
+                  Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
+                } else {
+                    Mage::getModel('checkout/session')->setUseInternalCredit(false);
+                }
+                //////////// MageWorx Fix ///////////////
                 //$payment_result = $this->_getOnepage()->savePayment($payment);
                 $helper->savePayment($payment);
             }

@@ -139,20 +139,11 @@ Element.addMethods({
 //from PrototypeUI
 var IframeShim = Class.create({
     initialize: function() {
-        if(navigator.appVersion.match(/MSIE\s+(?:6|7|8)\./)){
-            this.element = new Element('iframe',{
-                style: 'position:absolute;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); display:none',
-                src: 'about:blank',
-                frameborder: 0,
-            });
-        } else {
-            this.element = new Element('iframe',{
-                //style: 'position:absolute;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); display:none',
-                src: 'about:blank',
-                frameborder: 0,
-            });
-        }
-
+        this.element = new Element('iframe',{
+            style: 'position:absolute;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);display:none',
+            src: 'javascript:void(0);',
+            frameborder: 0
+        });
         $(document.body).insert(this.element);
     },
     hide: function() {
@@ -173,15 +164,7 @@ var IframeShim = Class.create({
             width: dimensions.width + 'px',
             height: dimensions.height + 'px',
             zIndex: element.getStyle('zIndex') - 1
-        });
-        if(navigator.appVersion.match(/MSIE\s+(?:6|7|8)\./)){
-            this.element.setStyle({
-                position: 'absolute'
-            });
-        }
-        this.element.show();
-
-
+        }).show();
         return this;
     },
     setBounds: function(bounds) {
@@ -814,7 +797,7 @@ Object.extend(Control.Window,{
     windows: [],
     baseZIndex: 9999,
     indicatorTimeout: 250,
-    iframeTemplate: new Template('<iframe src="#{href}" width="100%" height="100%" frameborder="0" allowtransparency="true"></iframe>'),
+    iframeTemplate: new Template('<iframe src="#{href}" width="100%" height="100%" frameborder="0"></iframe>'),
     uriRegex: /^(\/|\#|https?\:\/\/|[\w]+\/)/,
     bringToFront: function(w){
         Control.Window.windows = Control.Window.windows.without(w);

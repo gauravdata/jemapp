@@ -209,8 +209,8 @@ $helper = Mage::helper('onestepcheckout/checkout');
             <label for="id_couponcode"><?php echo $this->__('Coupon code:'); ?></label><br/>
             <input class="input-text" type="text" name="onestepcheckout-couponcode" id="id_couponcode" value="<?php echo Mage::helper('core')->escapeHtml($_couponcode); ?>" />
             <br/>
-            <button id="onestepcheckout-coupon-add" class="form-button-alt button" type="button"><span><span><?php echo $this->__('Apply Coupon'); ?></span></span></button>
-            <button id="onestepcheckout-coupon-remove" class="form-button-alt button" type="button" style="<?php if($_couponcode == '') { echo 'display: none;'; } ?>"><span><span><?php echo $this->__('Cancel Coupon'); ?></span></span></button>
+            <button id="onestepcheckout-coupon-add" class="form-button-alt" type="button"><span><?php echo $this->__('Apply Coupon'); ?></span></button>
+            <button id="onestepcheckout-coupon-remove" class="form-button-alt" type="button" style="<?php if($_couponcode == '') { echo 'display: none;'; } ?>"><span><?php echo $this->__('Cancel Coupon'); ?></span></button>
             <script>
             Event.observe(window, 'load', function() {
                 $('onestepcheckout-coupon-add').observe('click', function(e)    {
@@ -278,8 +278,8 @@ $helper = Mage::helper('onestepcheckout/checkout');
                                     if(paymentForm != null){
                                         paymentForm.show();
                                     }
-                                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
-                                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
+                                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', get_separate_save_methods_function(url));
+                                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', function() {
                                         $$('div.onestepcheckout-payment-method-error').each(function(item) {
                                             new Effect.Fade(item);
                                         });
@@ -377,8 +377,8 @@ $helper = Mage::helper('onestepcheckout/checkout');
                                     if(paymentForm != null){
                                         paymentForm.show();
                                     }
-                                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
-                                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
+                                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', get_separate_save_methods_function(url));
+                                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', function() {
                                         $$('div.onestepcheckout-payment-method-error').each(function(item) {
                                             new Effect.Fade(item);
                                         });
@@ -412,8 +412,8 @@ $helper = Mage::helper('onestepcheckout/checkout');
             <label for="id_giftcardcode"><?php echo $this->__('giftcard code:'); ?></label><br/>
             <input class="input-text" type="text" name="onestepcheckout-giftcardcode" id="id_giftcardcode" value="<?php echo Mage::helper('core')->escapeHtml($_giftcardcode); ?>" />
             <br/>
-            <button id="onestepcheckout-giftcard-add" class="form-button-alt button" type="button"><span><span><?php echo $this->__('Apply gift card'); ?></span></span></button>
-            <button id="onestepcheckout-giftcard-remove" class="form-button-alt button" type="button" style="<?php if(empty($_hasGiftCards)) { echo 'display: none;'; } ?>"><span><span><?php echo $this->__('Cancel gift card'); ?></span></span></button>
+            <button id="onestepcheckout-giftcard-add" class="form-button-alt" type="button"><span><?php echo $this->__('Apply giftcard'); ?></span></button>
+            <button id="onestepcheckout-giftcard-remove" class="form-button-alt" type="button" style="<?php if(empty($_hasGiftCards)) { echo 'display: none;'; } ?>"><span><?php echo $this->__('Cancel giftcard'); ?></span></button>
             <script>
             document.observe('dom:loaded', function() {
                 $('onestepcheckout-giftcard-add').observe('click', function(e)    {
@@ -477,8 +477,8 @@ $helper = Mage::helper('onestepcheckout/checkout');
                                     if(paymentForm != null){
                                         paymentForm.show();
                                     }
-                                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
-                                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
+                                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', get_separate_save_methods_function(url));
+                                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', function() {
                                         $$('div.onestepcheckout-payment-method-error').each(function(item) {
                                             new Effect.Fade(item);
                                         });
@@ -550,8 +550,8 @@ $helper = Mage::helper('onestepcheckout/checkout');
                                 }
 
                                 if(payment_methods){
-                                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
-                                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
+                                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', get_separate_save_methods_function(url));
+                                    $$('div.payment-methods input[name^=payment\[method\]]').invoke('observe', 'click', function() {
                                         $$('div.onestepcheckout-payment-method-error').each(function(item) {
                                             new Effect.Fade(item);
                                         });
@@ -837,13 +837,18 @@ $('billing:email').observe('blur', function(e)    {
                     <?php if($this->settings['registration_order_without_password']): ?>
                     // Remove the password fields if the email exists in database
                     $('onestepcheckout-li-password').hide();
-                    <?php endif; ?>
+                    <?php else: ?>
+
                     $('onestepcheckout-email-error-message').update('<?php echo $this->__('Email address already registered. Please <a href="javascript:void(0);" onclick="login_popup.show(); return false;">login now</a> or use a different email address.'); ?>');
                     $('onestepcheckout-email-error').show();
+                    // Ask the user to login or change email address
+                    //login_popup.show();
                     $('id_onestepcheckout_username').value = email;
+                    <?php endif; ?>
                 }
                 else    {
                     $('onestepcheckout-email-error').hide();
+                    $('onestepcheckout-li-password').show();
                 }
             }
         }
@@ -867,11 +872,12 @@ Validation.add('validate-email', '<?php echo $this->__('This is a required field
                 } else if(result == 'exists') {
                     <?php if($this->settings['registration_order_without_password']): ?>
                     $('onestepcheckout-li-password').hide();
-                    <?php endif; ?>
+                    <?php else: ?>
                     $('onestepcheckout-email-error-message').update('<?php echo $this->__('Email address already registered. Please <a href="javascript:void(0);" onclick="login_popup.show(); return false;">login now</a> or use a different email address.'); ?>');
                     $('onestepcheckout-email-error').show();
                     $('id_onestepcheckout_username').value = email;
                     value =  false;
+                    <?php endif; ?>
                 }
             }
         }
@@ -880,6 +886,10 @@ Validation.add('validate-email', '<?php echo $this->__('This is a required field
 });
 </script>
 <?php endif; ?>
+
+
+
+
 
 <?php if($this->settings['enable_terms']): ?>
 <div id="onestepcheckout-toc-popup" style="display: none;">
@@ -1009,9 +1019,6 @@ Event.observe(window, 'load', function() {
                         already_placing_order = true;
 
                         var submitelement = $('onestepcheckout-place-order');
-                            /* Disable button to avoid multiple clicks */
-                            submitelement.removeClassName('orange').addClassName('grey');
-                            submitelement.disabled = true;
 
                         var loaderelement = new Element('div').
                             addClassName('onestepcheckout-place-order-loading').
@@ -1152,13 +1159,7 @@ Event.observe(window, 'load', function() {
         var euvat = $('euvat_action_validate_taxvat');
 
         if(euvat !== null){
-            euvat.observe('change', get_save_billing_function(url_save_billing, url_set_methods, update_payments, true));
-        }
-
-        var euvatid = $('billing:vat_id');
-
-        if(euvatid !== null){
-            euvatid.observe('change', get_save_billing_function(url_save_billing, url_set_methods, update_payments, true));
+            euvat.observe('click', get_save_billing_function(url_save_billing, url_set_methods, update_payments, true));
         }
 
         triggers = ['<?php echo implode ('\',\'',$triggers)?>'];
@@ -1193,42 +1194,25 @@ Event.observe(window, 'load', function() {
         batriggered = false;
         satriggered = false;
 
-        changeTimer = false;
-        changeInterval = 1000;
-
         triggers.each(function(item){
             var belement = $('billing:'+item);
             if(belement){
                 belement.observe('change', function(e){
-                    var element = e.element();
-                    var id = element.id;
-                    var tagname = element.tagName;
-                    if(tagname === 'SELECT'){
-                        clearTimeout(changeTimer);
-                        changeTimer = setTimeout(bcallbackEvent, changeInterval, id);
-                    } else {
-                        bcallbackEvent(id);
+                    id = e.element().id;
+                    if(!btriggered.include(id)){
+                        btriggered.push(id);
                     }
+                    if(btriggered.length >= triggers.length-1){
+                        batriggered = true;
+                    }
+                    get_save_billing_function(url_save_billing, url_set_methods, update_payments, batriggered)();
                 });
             }
 
             var selement = $('shipping:'+item);
             if(selement){
                 selement.observe('change', function(e){
-                    var element = e.element();
-                    var id = element.id;
-                    var tagname = element.tagName;
-                    if(tagname === 'SELECT'){
-                        clearTimeout(changeTimer);
-                        changeTimer = setTimeout(scallbackEvent, changeInterval, id);
-                    } else {
-                        scallbackEvent(id);
-                    }
-                });
-            }
-        });
-
-        function scallbackEvent (id){
+                    id = e.element().id;
                     if(!striggered.include(id)){
                         striggered.push(id);
                     }
@@ -1236,19 +1220,9 @@ Event.observe(window, 'load', function() {
                         satriggered = true;
                     }
                     get_save_billing_function(url_save_billing, url_set_methods, update_payments, satriggered)();
+                });
             }
-
-
-        function bcallbackEvent (id){
-            if(!btriggered.include(id)){
-                btriggered.push(id);
-            }
-            if(btriggered.length >= triggers.length-1){
-                batriggered = true;
-            }
-            get_save_billing_function(url_save_billing, url_set_methods, update_payments, batriggered)();
-        }
-
+        });
 
         <?php if($this->isCustomerLoggedIn()):?>
             var bselect = $('billing-address-select');
@@ -1270,7 +1244,9 @@ if($('payment-tool-tip-close')){
 }
 
 </script>
-
+<script type="text/javascript">
+	paymentrefresh('<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>');
+</script>
 
 <?php endif; ?>
 
