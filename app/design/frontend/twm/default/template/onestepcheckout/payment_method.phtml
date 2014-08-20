@@ -45,6 +45,9 @@ if($helper->settings['hide_nonfree_payment_methods'])   {
     }
 }
 
+$isPartial = $this->isPartialPayment();
+$isCheckedCustomercredit = Mage::getSingleton('checkout/session')->getUseInternalCredit();
+if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->setMethod('customercredit');
 
 ?>
 
@@ -63,7 +66,6 @@ if($helper->settings['hide_nonfree_payment_methods'])   {
     <?php endif;?>
 
     <?php if (count($this->getMethods())=='1' && Mage::getStoreConfig('onestepcheckout/general/hide_payment_method')):?>
-		bb
     <dl id="checkout-payment-method-load" style="display: none">
         <?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
 
@@ -73,25 +75,35 @@ if($helper->settings['hide_nonfree_payment_methods'])   {
         <?php endforeach; ?>
     </dl>
     <?php else:?>
+		<dl id="checkout-payment-method-load">
+			<?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+				<?php if($hide_nonfree_methods && $_code != 'free') continue; ?>
+				<dt>
+					<?php if( sizeof($this->getMethods()) > 1 ): ?>
 
-        <dl id="checkout-payment-method-load">
-        <?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
-        <?php if($hide_nonfree_methods && $_code != 'free') continue; ?>
-            <dt>
-            <?php if( sizeof($this->getMethods()) > 1 ): ?>
-                <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->escapeHtml($_method->getTitle()) ?>" class="radio validate-one-required-by-name" <?php if($this->getSelectedMethodCode()==$_code || ($hide_nonfree_methods && $_code == 'free')): ?> checked="checked"<?php endif; ?> />
-            <?php else: ?>
-                <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" /></span>
-            <?php endif; ?>
-                <label for="p_method_<?php echo $_code ?>"><?php echo $_method->getTitle() ?></label>
-            </dt>
-            <?php if($html = $this->getChildHtml('payment.method.'.$_code)): ?>
-            <dd id="container_payment_method_<?php echo $_code; ?>" class="payment-method">
-                <?php echo $html; ?>
-            </dd>
-            <?php endif; ?>
-        <?php endforeach; ?>
-        </dl>
+						<?php if ($_code=='customercredit' && $isPartial==1): ?>
+							<input id="p_method_<?php echo $_code ?>" value="1" type="checkbox" name="payment[use_internal_credit]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="checkbox" onclick="creditPayment.switchPMethod('<?php echo $_code ?>'); if (this.checked) this.value=1; else this.value=0;" <?php if ($isCheckedCustomercredit) { ?>checked="checked"<?php } ?> />
+						<?php elseif ($_code=='customercredit' && $isPartial==-1):  echo "</dt>";  continue; ?>
+							<input id="p_method_<?php echo $_code ?>_disabled" disabled="disabled" value="1" type="checkbox" name="payment[use_internal_credit]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="checkbox" />
+						<?php elseif ($_code=='customercredit' && $isPartial==0) :  echo "</dt>";  continue; ?>
+						<?php elseif ($_code=='customercredit' && $isPartial==-2) :  echo "</dt>";  continue; ?>
+							<input id="p_method_<?php echo $_code ?>_disabled" disabled="disabled" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="radio" />
+						<?php else: ?>
+							<input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="radio" onclick="creditPayment.switchPMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> />
+						<?php endif; ?>
+
+					<?php else: ?>
+						<span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" /></span>
+					<?php endif; ?>
+					<label for="p_method_<?php echo $_code ?>"><?php echo $_method->getTitle() ?></label>
+				</dt>
+				<?php if($html = $this->getChildHtml('payment.method.'.$_code)): ?>
+					<dd id="container_payment_method_<?php echo $_code; ?>" class="payment-method">
+						<?php echo $html;  ?>
+					</dd>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</dl>
     <?php endif;?>
 </div>
 <script type="text/javascript">
@@ -152,6 +164,44 @@ if(cBalance){
 <?php endif;?>
 
 payment.switchMethod(payment.currentMethod);
+
+el = $('p_method_customercredit');
+if (el) el.disabled = false;
+<?php if ($isPartial==1 && $isCheckedCustomercredit) { ?>payment.switchMethod('customercredit');<?php } ?>
+var creditPayment = {
+	switchPMethod: function(code) {
+		el = $('p_method_customercredit');
+		if (el && el.checked==true) {
+			payment.switchMethod('customercredit');
+		} else if(code=='customercredit') {
+			payment.switchMethod('');
+		} else {
+			payment.switchMethod(code);
+		}
+		setTimeout('creditPayment.showHide()', 300);
+
+	},
+	showHide: function() {
+		$$('dd[id^="container_payment_method_"]').each(function(form){
+			pCode = form.id.replace('container_payment_method_','');
+			if (!$('p_method_'+pCode) || !$('p_method_'+pCode).checked) {
+				form.hide();
+				var elements = form.getElementsByTagName('input');
+				for (var i=0; i<elements.length; i++) elements[i].disabled = true;
+				var elements = form.getElementsByTagName('select');
+				for (var i=0; i<elements.length; i++) elements[i].disabled = true;
+			} else {
+				form.show();
+				var elements = form.getElementsByTagName('input');
+				for (var i=0; i<elements.length; i++) elements[i].disabled = false;
+				var elements = form.getElementsByTagName('select');
+				for (var i=0; i<elements.length; i++) elements[i].disabled = false;
+			}
+		});
+	}
+};
+
+
 <?php echo $this->getChildHtml('giftcardaccount_scripts');?>
 //]]>
 </script>

@@ -40,6 +40,7 @@ class MageWorx_CustomerCredit_Model_Quote_Total_Customercredit extends Mage_Sale
         $address->setCustomerCreditAmount(0);
         $address->setBaseCustomerCreditAmount(0);
         $session = Mage::getSingleton('checkout/session');
+
         if(!$session->getUseInternalCredit() && !Mage::app()->getStore()->isAdmin()) {
              return $this;
         }
@@ -120,8 +121,6 @@ class MageWorx_CustomerCredit_Model_Quote_Total_Customercredit extends Mage_Sale
         $session = Mage::getSingleton('checkout/session');
         $useInternalCredit = $session->getUseInternalCredit();
         $session->setUseInternalCredit(false);
-        
-        
         
         $paymentData = Mage::app()->getRequest()->getPost('payment');
         $orderData = Mage::app()->getRequest()->getPost('order');
