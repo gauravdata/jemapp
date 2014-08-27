@@ -609,7 +609,7 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
              $paymentMethod = $selectedMethod;
         }
 
-        try {
+		try {
 			$payment = $this->getRequest()->getPost('payment', array());
 			//$payment = array();
 			//////////// MageWorx Fix ///////////////
@@ -624,7 +624,7 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
 			}
 			//$payment_result = $this->_getOnepage()->savePayment($payment);
 			$helper->savePayment($payment);
-        }
+		}
         catch(Exception $e) {
             //die('Error: ' . $e->getMessage());
             // Silently fail for now
@@ -687,8 +687,8 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
 
         $payment_method = $this->getRequest()->getPost('payment_method');
 
-        if($payment_method != '')   {
-            try {
+		if($payment_method != '')   {
+			try {
 				$payment = $this->getRequest()->getPost('payment', array());
 				$payment['method'] = $payment_method;
 
@@ -701,12 +701,12 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
 				//////////// MageWorx Fix ///////////////
 				//$payment_result = $this->_getOnepage()->savePayment($payment);
 				$helper->savePayment($payment);
-            }
-            catch(Exception $e) {
-                //die('Error: ' . $e->getMessage());
-                // Silently fail for now
-            }
-        }
+			}
+			catch(Exception $e) {
+				//die('Error: ' . $e->getMessage());
+				// Silently fail for now
+			}
+		}
 
         //$this->_getOnepage()->getQuote()->collectTotals()->save();
 

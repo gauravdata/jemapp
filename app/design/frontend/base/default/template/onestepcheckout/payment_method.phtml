@@ -63,7 +63,6 @@ if($helper->settings['hide_nonfree_payment_methods'])   {
     <?php endif;?>
 
     <?php if (count($this->getMethods())=='1' && Mage::getStoreConfig('onestepcheckout/general/hide_payment_method')):?>
-		bb
     <dl id="checkout-payment-method-load" style="display: none">
         <?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
 

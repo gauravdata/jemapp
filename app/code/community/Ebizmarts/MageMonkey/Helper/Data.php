@@ -6,7 +6,9 @@
  * @category   Ebizmarts
  * @package    Ebizmarts_MageMonkey
  * @author     Ebizmarts Team <info@ebizmarts.com>
+ * @license    http://opensource.org/licenses/osl-3.0.php
  */
+
 class Ebizmarts_MageMonkey_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
@@ -30,6 +32,17 @@ class Ebizmarts_MageMonkey_Helper_Data extends Mage_Core_Helper_Abstract
         return is_object(Mage::getConfig()->getNode('global/models/enterprise_enterprise'));
     }
 
+
+	/**
+	 * Whether Admin Notifications should be displayed or not in backend Admin
+	 *
+	 * @return bool
+	 */
+	public function isAdminNotificationEnabled()
+	{
+		return $this->config('adminhtml_notification');
+	}
+
 	/**
 	 * Return Webhooks security key for given store
 	 *
@@ -45,6 +58,9 @@ class Ebizmarts_MageMonkey_Helper_Data extends Mage_Core_Helper_Abstract
 
 		$crypt = md5((string)Mage::getConfig()->getNode('global/crypt/key'));
 		$key   = substr($crypt, 0, (strlen($crypt)/2));
+
+        // Prevent most cases to attach default in webhook url
+        if($store == 'default') $store = '';
 
 		return ($key . $store);
 	}
@@ -452,6 +468,7 @@ class Ebizmarts_MageMonkey_Helper_Data extends Mage_Core_Helper_Abstract
                         	->addFieldToFilter('customer_email', $customer->getEmail())
                         	->addFieldToFilter('state', array('in' => Mage::getSingleton('sales/order_config')->getVisibleOnFrontStates()))
                         	->setOrder('created_at', 'desc')
+                            ->setPageSize(1)
                         	->getFirstItem();
 	                    if ( $last_order->getId() ){
 	                    	$merge_vars[$key] = Mage::helper('core')->formatDate($last_order->getCreatedAt());
@@ -504,13 +521,16 @@ class Ebizmarts_MageMonkey_Helper_Data extends Mage_Core_Helper_Abstract
 		}
 
 		//GUEST
-		if( !$customer->getId() && (!$request->getPost('firstname') || !$request->getPost('lastname'))){
+		if( !$customer->getId() && !$request->getPost('firstname') ){
 			$guestFirstName = $this->config('guest_name', $customer->getStoreId());
-			$guestLastName  = $this->config('guest_lastname', $customer->getStoreId());
 
 			if($guestFirstName){
 				$merge_vars['FNAME'] = $guestFirstName;
 			}
+		}
+		if( !$customer->getId() && !$request->getPost('lastname') ){
+			$guestLastName  = $this->config('guest_lastname', $customer->getStoreId());
+			
 			if($guestLastName){
 				$merge_vars['LNAME'] = $guestLastName;
 			}
@@ -524,13 +544,30 @@ class Ebizmarts_MageMonkey_Helper_Data extends Mage_Core_Helper_Abstract
 		$groups = $customer->getListGroups();
 		$groupings = array();
 
-		if(is_array($groups) && count($groups)){
-			foreach($groups as $groupId => $grupoptions){
-				$groupings[] = array(
-									 'id' => $groupId,
-								     'groups' => (is_array($grupoptions) ? implode(', ', $grupoptions) : $grupoptions)
-								    );
-			}
+		if(is_array($groups) && count($groups)) {
+            foreach($groups as $groupId => $grupoptions)
+            {
+                if (is_array($grupoptions))
+                {
+                    $grupOptionsEscaped = array();
+                    foreach($grupoptions as $gopt)
+                    {
+                        $gopt = str_replace(",","%C%",$gopt);
+                        $grupOptionsEscaped[] = $gopt;
+                    }
+                    $groupings[] = array(
+                        'id' => $groupId,
+                        'groups' => str_replace('%C%','\\,',implode(', ', $grupOptionsEscaped))
+                    );
+                }
+                else
+                {
+                    $groupings[] = array(
+                        'id' => $groupId,
+                        'groups' => str_replace(',','\\,',$grupoptions)
+                    );
+                }
+            }
 		}
 
 		$merge_vars['GROUPINGS'] = $groupings;
