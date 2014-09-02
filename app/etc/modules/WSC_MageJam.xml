@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WSC_MageJam>
+            <active>true</active>
+            <codePool>local</codePool>
+        </WSC_MageJam>
+    </modules>
+</config>
