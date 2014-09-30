@@ -609,15 +609,22 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
              $paymentMethod = $selectedMethod;
         }
 
-        try {
-            $payment = $this->getRequest()->getPost('payment', array());
-            //$payment = array();
-            if(!empty($paymentMethod)){
-                $payment['method'] = $paymentMethod;
-            }
-            //$payment_result = $this->_getOnepage()->savePayment($payment);
-            $helper->savePayment($payment);
-        }
+		try {
+			$payment = $this->getRequest()->getPost('payment', array());
+			//$payment = array();
+			//////////// MageWorx Fix ///////////////
+			if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit' || $paymentMethod=='customercredit' ) {
+				Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
+			} else {
+				Mage::getModel('checkout/session')->setUseInternalCredit(false);
+			}
+			//////////// MageWorx Fix ///////////////
+			if(!empty($paymentMethod)){
+				$payment['method'] = $paymentMethod;
+			}
+			//$payment_result = $this->_getOnepage()->savePayment($payment);
+			$helper->savePayment($payment);
+		}
         catch(Exception $e) {
             //die('Error: ' . $e->getMessage());
             // Silently fail for now
@@ -680,18 +687,26 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
 
         $payment_method = $this->getRequest()->getPost('payment_method');
 
-        if($payment_method != '')   {
-            try {
-                $payment = $this->getRequest()->getPost('payment', array());
-                $payment['method'] = $payment_method;
-                //$payment_result = $this->_getOnepage()->savePayment($payment);
-                $helper->savePayment($payment);
-            }
-            catch(Exception $e) {
-                //die('Error: ' . $e->getMessage());
-                // Silently fail for now
-            }
-        }
+		if($payment_method != '')   {
+			try {
+				$payment = $this->getRequest()->getPost('payment', array());
+				$payment['method'] = $payment_method;
+
+				//////////// MageWorx Fix ///////////////
+				if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit') {
+					Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
+				} else {
+					Mage::getModel('checkout/session')->setUseInternalCredit(false);
+				}
+				//////////// MageWorx Fix ///////////////
+				//$payment_result = $this->_getOnepage()->savePayment($payment);
+				$helper->savePayment($payment);
+			}
+			catch(Exception $e) {
+				//die('Error: ' . $e->getMessage());
+				// Silently fail for now
+			}
+		}
 
         //$this->_getOnepage()->getQuote()->collectTotals()->save();
 

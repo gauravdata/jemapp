@@ -32,6 +32,7 @@ $isPartial = $this->isPartialPayment();
 $isCheckedCustomercredit = Mage::getSingleton('checkout/session')->getUseInternalCredit();
 if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->setMethod('customercredit');
 ?>
+
 <div class="payment-methods">
     <dl id="checkout-payment-method-load">
     <?php foreach ($this->getMethods() as $_method):
