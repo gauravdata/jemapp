@@ -2,7 +2,7 @@
 <config>
     <modules>
         <WSC_MageJam>
-            <version>1.2.0.2</version>
+            <version>1.2.4.0</version>
         </WSC_MageJam>
     </modules>
     <global>
@@ -42,9 +42,15 @@
         </routers>
         <layout>
             <updates>
-                <wsc_magejam>
+                <wsc_magejam_payment>
                     <file>magejam/payment.xml</file>
-                </wsc_magejam>
+                </wsc_magejam_payment>
+				<wsc_magejam_onepage>
+                    <file>magejam/onepage.xml</file>
+                </wsc_magejam_onepage>
+				<wsc_magejam_cart>
+                    <file>magejam/cart.xml</file>
+                </wsc_magejam_cart>
             </updates>
         </layout>
         <events>
@@ -80,7 +86,7 @@
     <default>
         <magejam>
             <settings>
-                <auth>1</auth>
+                <auth>0</auth>
                 <use_api_login>1</use_api_login>
             </settings>
         </magejam>

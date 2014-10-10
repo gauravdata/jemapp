@@ -450,6 +450,7 @@ header  {
     background: #fff;
     border-bottom: 1px #d0d0d0 solid;
     text-align: center;
+    z-index: 100;
 }
 footer {
     position: absolute;
@@ -465,6 +466,7 @@ h1 {
     line-height: 45px;
     font-weight: normal;
     color: #000;
+    white-space: nowrap;
 }
 .back {
     float: left;
@@ -519,6 +521,12 @@ input:focus, select:focus {
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+
+input[type="checkbox"], input[type="radio"] {
+    width: auto;
+    height: auto;
+    display: inline-block;
 }
 
 
@@ -589,9 +597,73 @@ button {
     user-select: none;
 }
 
+.messages {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+.messages ul {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+.messages li  {
+    list-style: none;
+    margin: 0;
+    display: inline-block;
+}
+.messages > li {
+    width: 100%;
+    box-sizing: border-box;
+}
+.error-msg {
+    border: 1px #f00 solid;
+    color: #f00;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
+
 footer em {
     display: block;
     color: #6d6d6d;
     margin: 0 0 5px;
     font-weight: bold;
+}
+
+#accordion{
+    position: relative;
+    border: 1px #ccc solid;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.accordion-toggle{
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px #ccc solid;
+    background-color: #ffffff;
+    background-image: -webkit-linear-gradient(top, #fff, #ccc);
+    background-image:         linear-gradient(to bottom, #fff, #ccc);
+}
+.accordion-toggle:last-of-type {
+    border-bottom: none;
+}
+
+.accordion-toggle-active{
+    border-bottom: 1px #ccc solid;
+}
+
+.accordion-content{
+    overflow: hidden;
+    padding: 10px;
+    border-bottom: 1px #ccc solid;
+}
+.validation-advice{
+    color: red;
 }

@@ -1,0 +1,33 @@
+<?php
+$methods = $this->getMethods();
+$oneMethod = count($methods) <= 1;
+?>
+<?php if (empty($methods) ): ?>
+    <dt>
+        <?php echo $this->__('No Payment Methods') ?>
+    </dt>
+<?php elseif ($this->getQuote()->getId() == null): ?>
+        <dt>
+            <?php echo $this->__('This quote no longer exists') ?>
+        </dt>
+<?php else:
+    foreach ($methods as $method):
+        $code = $method->getCode();
+        ?>
+        <dt>
+            <?php if(!$oneMethod): ?>
+                <input id="<?php echo $code ?>" value="<?php echo $code ?>" type="radio" name="payment[method]" title="<?php echo $this->escapeHtml($method->getTitle()) ?>" <?php if($this->getSelectedMethodCode()==$code): ?> checked="checked"<?php endif; ?> />
+            <?php else: ?>
+                <span ><input id="<?php echo $code ?>" value="<?php echo $code ?>" type="radio" name="payment[method]" checked="checked" /></span>
+            <?php endif; ?>
+            <label for="<?php echo $code ?>"><?php echo $this->escapeHtml($this->getMethodTitle($method)) ?> <?php echo $this->getMethodLabelAfterHtml($method) ?></label>
+        </dt>
+        <?php if ($html = $this->getPaymentMethodFormHtml($method)): ?>
+        <dd>
+            <?php echo $html; ?>
+        </dd>
+    <?php endif; ?>
+    <?php endforeach;
+endif; ?>
+<?php echo $this->getChildChildHtml('additional'); ?>
+

@@ -39,6 +39,7 @@ class WSC_MageJam_PaymentController extends Mage_Core_Controller_Front_Action
         /* @var $session Mage_Checkout_Model_Session */
         $session = Mage::getSingleton('checkout/session');
         $session->unsetData('success');
+        $session->unsetData('payment_url');
         $session->getMessages(true);
 
         $quoteId = $this->getRequest()->getParam('quote_id');
@@ -59,10 +60,27 @@ class WSC_MageJam_PaymentController extends Mage_Core_Controller_Front_Action
             $this->_fault('Requires payment method as param');
             return;
         }
-        $methodInstance = Mage::helper('magejam')->getMethod($methodCode);
+
+        /* @var $helper WSC_MageJam_Helper_Data */
+        $helper = Mage::helper('magejam');
+        $methodInstance = $helper->getMethod($methodCode);
         if(!$methodInstance) {
             $this->_fault('Invalid state for shopping cart');
             return;
+        }
+
+        $requiredAgreements = Mage::helper('checkout')->getRequiredAgreementIds();
+        if ($requiredAgreements) {
+            /* @var $session Mage_Checkout_Model_Session */
+            $session = Mage::getSingleton('checkout/session');
+            $currentUrl = Mage::helper('core/url')->getCurrentUrl();
+            $session->setPaymentUrl($currentUrl);
+
+            $postedAgreements = $session->getPostedAgreements(array());
+            if (!$postedAgreements || array_diff($requiredAgreements, $postedAgreements)) {
+                $this->_redirect('*/*/agreement', array('_secure' => true));
+                return;
+            }
         }
 
         $this->loadLayout();
@@ -70,7 +88,50 @@ class WSC_MageJam_PaymentController extends Mage_Core_Controller_Front_Action
         $this->renderLayout();
     }
 
-    public function backAction()
+    public function agreementAction()
+    {
+        $this->loadLayout();
+        $this->_initLayoutMessages('checkout/session');
+        $this->renderLayout();
+    }
+
+    public function agreementPostAction()
+    {
+        $requiredAgreements = Mage::helper('checkout')->getRequiredAgreementIds();
+        /* @var $session Mage_Checkout_Model_Session */
+        $session = Mage::getSingleton('checkout/session');
+
+        if ($requiredAgreements) {
+            $postedAgreements = array_keys($this->getRequest()->getPost('agreement', array()));
+            $diff = array_diff($requiredAgreements, $postedAgreements);
+
+            if ($diff) {
+                $session->addError($this->__('Please agree to all the terms and conditions before next step.'));
+                $this->_redirect('*/*/agreement', array('_secure' => true));
+                return;
+            }
+            $session->setData('posted_agreements', $postedAgreements);
+        }
+
+        $paymentUrl = $session->getPaymentUrl();
+        if($paymentUrl) {
+            $this->_redirectUrl($paymentUrl);
+            return;
+        }
+        $this->_fault('You need visit magejam/payment/index first');
+    }
+
+    public function backPaymentAction()
+    {
+        $requiredAgreements = Mage::helper('checkout')->getRequiredAgreementIds();
+        if ($requiredAgreements) {
+            $this->_redirect('*/*/agreement', array('_secure' => true));
+            return;
+        }
+        $this->_forward('backAgreement');
+    }
+
+    public function backAgreementAction()
     {
         /* @var $session Mage_Checkout_Model_Session */
         $session = Mage::getSingleton('checkout/session');
@@ -104,9 +165,7 @@ class WSC_MageJam_PaymentController extends Mage_Core_Controller_Front_Action
         $session = Mage::getSingleton('checkout/session');
         try {
             if (!$this->getRequest()->isPost()) {
-                $session->setSuccess(false);
-                $session->addError('HTTP Method must be post');
-                $this->_redirect('magejam/payment/result', array('_secure' => true));
+                $this->_fault('HTTP Method must be post');
                 return;
             }
 
@@ -132,16 +191,16 @@ class WSC_MageJam_PaymentController extends Mage_Core_Controller_Front_Action
                 $session->setData('fields', $e->getFields());
             }
             $session->addError($e->getMessage());
-            $this->_redirect('magejam/payment/result', array('_secure' => true));
+            $this->_fault($e->getMessage());
             return;
         } catch (Mage_Core_Exception $e) {
             $session->addError($e->getMessage());
-            $this->_redirect('magejam/payment/result', array('_secure' => true));
+            $this->_fault($e->getMessage());
             return;
         } catch (Exception $e) {
             Mage::logException($e);
             $session->addError($this->__('Unable to set Payment Method.'));
-            $this->_redirect('magejam/payment/result', array('_secure' => true));
+            $this->_fault($e->getMessage());
             return;
         }
 
@@ -164,23 +223,13 @@ class WSC_MageJam_PaymentController extends Mage_Core_Controller_Front_Action
         /* @var $session Mage_Checkout_Model_Session */
         $session = Mage::getSingleton('checkout/session');
         try {
-            $requiredAgreements = Mage::helper('checkout')->getRequiredAgreementIds();
-            if ($requiredAgreements) {
-                $postedAgreements = array_keys($this->getRequest()->getPost('agreement', array()));
-                $diff = array_diff($requiredAgreements, $postedAgreements);
-                if ($diff) {
-                    $session->addError($this->__('Please agree to all the terms and conditions before placing the order.'));
-                    return false;
-                }
-            }
-
             $data = $this->getRequest()->getPost('payment', array());
             if ($data) {
-                $data['checks'] = Mage_Payment_Model_Method_Abstract::CHECK_USE_CHECKOUT
-                    | Mage_Payment_Model_Method_Abstract::CHECK_USE_FOR_COUNTRY
-                    | Mage_Payment_Model_Method_Abstract::CHECK_USE_FOR_CURRENCY
-                    | Mage_Payment_Model_Method_Abstract::CHECK_ORDER_TOTAL_MIN_MAX
-                    | Mage_Payment_Model_Method_Abstract::CHECK_ZERO_TOTAL;
+                $data['checks'] = WSC_MageJam_Helper_Data::CHECK_USE_CHECKOUT
+                    | WSC_MageJam_Helper_Data::CHECK_USE_FOR_COUNTRY
+                    | WSC_MageJam_Helper_Data::CHECK_USE_FOR_CURRENCY
+                    | WSC_MageJam_Helper_Data::CHECK_ORDER_TOTAL_MIN_MAX
+                    | WSC_MageJam_Helper_Data::CHECK_ZERO_TOTAL;
                 $this->getOnepage()->getQuote()->getPayment()->importData($data);
             }
             $this->getOnepage()->saveOrder();
@@ -241,6 +290,7 @@ class WSC_MageJam_PaymentController extends Mage_Core_Controller_Front_Action
     {
         /* @var $session Mage_Checkout_Model_Session */
         $session = Mage::getSingleton('checkout/session');
+        $session->unsetData('posted_agreements');
         $result = array();
 
         if(is_null($session->getSuccess())) {

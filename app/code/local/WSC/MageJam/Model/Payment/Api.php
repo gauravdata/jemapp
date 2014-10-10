@@ -98,4 +98,36 @@ class WSC_MageJam_Model_Payment_Api extends Mage_Checkout_Model_Cart_Payment_Api
             | Mage_Payment_Model_Method_Abstract::CHECK_ORDER_TOTAL_MIN_MAX
         );
     }
+	
+	/**
+     * @param  $quoteId
+     * @param  $store
+     * @return array
+     */
+    public function getPaymentMethodList($quoteId, $store=null)
+    {
+        $quote = $this->_getQuote($quoteId, $store);
+        $store = $quote->getStoreId();
+
+        $total = $quote->getBaseSubtotal();
+
+        $methodsResult = array();
+        $methods = Mage::helper('payment')->getStoreMethods($store, $quote);
+        foreach ($methods as $key=>$method) {
+            /** @var $method Mage_Payment_Model_Method_Abstract */
+            if ($this->_canUsePaymentMethod($method, $quote)
+                    && ($total != 0
+                        || $method->getCode() == 'free'
+                        || ($quote->hasRecurringItems() && $method->canManageRecurringProfiles()))) {
+                $methodsResult[] =
+                        array(
+                            "code" => $method->getCode(),
+                            "title" => $method->getTitle(),
+                            "cc_types" => $this->_getPaymentMethodAvailableCcTypes($method)
+                        );
+            }
+        }
+
+        return $methodsResult;
+    }
 }

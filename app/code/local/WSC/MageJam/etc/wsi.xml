@@ -13,7 +13,32 @@
                     <xsd:element name="super_attribute" type="typens:associativeArray" minOccurs="0"/>
                 </xsd:sequence>
             </xsd:complexType>
-
+            <xsd:complexType name="shoppingCartPaymentMethodResponseEntity">
+                <xsd:sequence>
+                    <xsd:element name="code" type="xsd:string"/>
+                    <xsd:element name="title" type="xsd:string"/>
+                    <xsd:element name="cc_types" type="typens:associativeArray"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="shoppingCartPaymentMethodResponseEntityArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:shoppingCartPaymentMethodResponseEntity"/>
+                </xsd:sequence>
+            </xsd:complexType>
+			<xsd:complexType name="shoppingCartPaymentListResponseEntity">
+                <xsd:sequence>
+                    <xsd:element name="code" type="xsd:string"/>
+                    <xsd:element name="title" type="xsd:string"/>
+                    <xsd:element name="cc_types" type="typens:associativeArray"/>
+                </xsd:sequence>
+            </xsd:complexType>
+			<xsd:complexType name="paymentMethodListResponseEntity">
+                <xsd:sequence>
+                    <xsd:element name="code" type="xsd:string"/>
+                    <xsd:element name="title" type="xsd:string"/>
+                    <xsd:element name="cc_types" type="typens:associativeArray"/>
+                </xsd:sequence>
+            </xsd:complexType>
             <xsd:complexType name="paymentConfigListResponseEntity">
                 <xsd:sequence>
                     <xsd:element name="code" type="xsd:string"/>
@@ -99,6 +124,27 @@
                     <xsd:element name="active" type="xsd:string" minOccurs="0"/>
                 </xsd:sequence>
             </xsd:complexType>
+			<xsd:complexType name="paymentMethodListResponseEntityArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:paymentMethodListResponseEntity"/>
+                </xsd:sequence>
+            </xsd:complexType>
+			<xsd:element name="paymentMethodListRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="quoteId" type="xsd:int" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="store" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="paymentMethodListResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:paymentMethodListResponseEntityArray" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
             <xsd:complexType name="paymentConfigListResponseEntityArray">
                 <xsd:sequence>
                     <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:paymentConfigListResponseEntity"/>
@@ -138,6 +184,7 @@
             <xsd:complexType name="configInfoResponseEntity">
                 <xsd:sequence>
                     <xsd:element name="currency" type="typens:currencyInfo"/>
+                    <xsd:element name="general" type="typens:generalInfo" minOccurs="0"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="currencyInfo">
@@ -145,6 +192,18 @@
                     <xsd:element name="base" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="default" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="allow" type="xsd:string" minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="generalInfo">
+                <xsd:sequence>
+                    <xsd:element name="default_country" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="allow_countries" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="optional_zip_countries" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="state_required" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="display_not_required_state" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="timezone" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="locale" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="guest_checkout" type="xsd:string" minOccurs="0"/>
                 </xsd:sequence>
             </xsd:complexType>
             <xsd:complexType name="categoryAssignedProduct">
@@ -158,6 +217,7 @@
                     <xsd:element name="websites" type="typens:ArrayOfString" minOccurs="0"/>
                     <xsd:element name="media_info" type="typens:catalogProductImageEntityArray" minOccurs="0"/>
                     <xsd:element name="options" type="typens:categoryProductOptionArray" minOccurs="1"/>
+                    <xsd:element name="bundle_attributes" type="typens:bundleAttribute" minOccurs="0"/>
                     <xsd:element name="configurable_attributes" type="typens:configurableAttributeArray" minOccurs="0"/>
                     <xsd:element name="downloadable_info" type="typens:catalogProductDownloadableLinkListEntity" minOccurs="0"/>
                     <xsd:element name="grouped_items" type="typens:groupedItemArray" minOccurs="0"/>
@@ -237,12 +297,21 @@
                     <xsd:element name="position" type="xsd:int" minOccurs="1" maxOccurs="1" />
                     <xsd:element name="is_default" type="xsd:int" minOccurs="1" maxOccurs="1" />
                     <xsd:element name="price" type="xsd:string" minOccurs="1" maxOccurs="1" />
+                    <xsd:element name="price_type" type="xsd:string" minOccurs="1" maxOccurs="1" />
                     <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1" />
                     <xsd:element name="is_saleable" type="xsd:int" minOccurs="1" maxOccurs="1" />
                     <xsd:element name="qty" type="xsd:string" minOccurs="1" maxOccurs="1" />
                     <xsd:element name="can_change_qty" type="xsd:int" minOccurs="1" maxOccurs="1" />
                 </xsd:sequence>
             </xsd:complexType>
+            
+            <xsd:complexType name="bundleAttribute">
+                <xsd:sequence>
+                    <xsd:element name="price_type" type="xsd:string" minOccurs="1" maxOccurs="1" />
+                    <xsd:element name="price_view" type="xsd:string" minOccurs="1" maxOccurs="1" />
+                </xsd:sequence>
+            </xsd:complexType>
+            
             <xsd:complexType name="configurableAttributeArray">
                 <xsd:sequence>
                     <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:configurableAttribute"/>
@@ -467,6 +536,36 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
+            <xsd:element name="checkoutAgreementsRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="storeId" type="xsd:string" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="checkoutAgreementsResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:checkoutAgreementsArray" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:complexType name="checkoutAgreementsArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:checkoutAgreementsEntity"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="checkoutAgreementsEntity">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" maxOccurs="1" name="agreement_id" type="xsd:int" />
+                    <xsd:element minOccurs="1" maxOccurs="1" name="name" type="xsd:string" />
+                    <xsd:element minOccurs="1" maxOccurs="1" name="content" type="xsd:string" />
+                    <xsd:element minOccurs="1" maxOccurs="1" name="content_height" type="xsd:string" />
+                    <xsd:element minOccurs="1" maxOccurs="1" name="checkbox_text" type="xsd:string" />
+                    <xsd:element minOccurs="1" maxOccurs="1" name="is_html" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
             <xsd:element name="magejamVersionRequestParam">
                 <xsd:complexType>
                     <xsd:sequence>
@@ -483,6 +582,12 @@
             </xsd:element>
         </xsd:schema>
     </wsdl:types>
+	<wsdl:message name="paymentMethodListRequest">
+        <wsdl:part name="parameters" element="typens:paymentMethodListRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="paymentMethodListResponse">
+        <wsdl:part name="parameters" element="typens:paymentMethodListResponseParam" />
+    </wsdl:message>
     <wsdl:message name="paymentConfigListRequest">
         <wsdl:part name="parameters" element="typens:paymentConfigListRequestParam" />
     </wsdl:message>
@@ -531,6 +636,12 @@
     <wsdl:message name="cartCollectTotalsResponse">
         <wsdl:part name="parameters" element="typens:cartCollectTotalsResponseParam" />
     </wsdl:message>
+    <wsdl:message name="checkoutAgreementsRequest">
+        <wsdl:part name="parameters" element="typens:checkoutAgreementsRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="checkoutAgreementsResponse">
+        <wsdl:part name="parameters" element="typens:checkoutAgreementsResponseParam" />
+    </wsdl:message>
     <wsdl:message name="magejamVersionRequest">
         <wsdl:part name="parameters" element="typens:magejamVersionRequestParam" />
     </wsdl:message>
@@ -538,7 +649,12 @@
         <wsdl:part name="parameters" element="typens:magejamVersionResponseParam" />
     </wsdl:message>
     <wsdl:portType name="{{var wsdl.handler}}PortType">
-        <wsdl:operation name="paymentConfigList">
+        <wsdl:operation name="paymentMethodList">
+            <wsdl:documentation>Get list of payment available method for quote </wsdl:documentation>
+            <wsdl:input message="typens:paymentMethodListRequest"/>
+            <wsdl:output message="typens:paymentMethodListResponse"/>
+        </wsdl:operation>
+		<wsdl:operation name="paymentConfigList">
             <wsdl:documentation>Get list of payment methods configuration</wsdl:documentation>
             <wsdl:input message="typens:paymentConfigListRequest"/>
             <wsdl:output message="typens:paymentConfigListResponse"/>
@@ -578,6 +694,11 @@
             <wsdl:input message="typens:cartCollectTotalsRequest"/>
             <wsdl:output message="typens:cartCollectTotalsResponse"/>
         </wsdl:operation>
+        <wsdl:operation name="checkoutAgreements">
+            <wsdl:documentation>Returns current versions of MageJam Module</wsdl:documentation>
+            <wsdl:input message="typens:checkoutAgreementsRequest"/>
+            <wsdl:output message="typens:checkoutAgreementsResponse"/>
+        </wsdl:operation>
         <wsdl:operation name="magejamVersion">
             <wsdl:documentation>Returns current versions of MageJam Module</wsdl:documentation>
             <wsdl:input message="typens:magejamVersionRequest"/>
@@ -586,6 +707,15 @@
     </wsdl:portType>
     <wsdl:binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="paymentMethodList">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="paymentConfigList">
             <soap:operation soapAction=""/>
             <wsdl:input>
@@ -650,6 +780,15 @@
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="cartCollectTotals">
+            <soap:operation soapAction=""/>
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="checkoutAgreements">
             <soap:operation soapAction=""/>
             <wsdl:input>
                 <soap:body use="literal" />

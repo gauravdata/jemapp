@@ -1,0 +1,52 @@
+<?php $agreements = $this->getAgreements(); ?>
+<?php if (!$agreements) return; ?>
+
+<header>
+    <a class="back" href="<?php echo $this->getUrl('*/*/backAgreement', array('_secure' => true))?>">Back</a>
+    <h1>Terms and Conditions</h1>
+</header>
+<?php echo $this->getLayout()->getBlock('messages')->toHtml(); ?>
+<form action="<?php echo $this->getUrl('magejam/payment/agreementPost') ?>" id="checkout-agreements" method="POST" onsubmit="return validate()" >
+    <div id="accordion">
+        <?php foreach ($agreements as $_a): ?>
+        <h2 class="accordion-toggle"><?php echo $_a->getName(); ?></h2>
+        <div class="accordion-content">
+            <p>
+                <?php if ($_a->getIsHtml()):?>
+                    <?php echo $_a->getContent() ?>
+                <?php else:?>
+                    <?php echo nl2br($this->escapeHtml($_a->getContent())) ?>
+                <?php endif; ?>
+            </p>
+            <label for="agreement-<?php echo $_a->getId()?>">
+                <input type="checkbox" id="agreement-<?php echo $_a->getId()?>" name="agreement[<?php echo $_a->getId()?>]"
+                       value="1" title="<?php echo $this->escapeHtml($_a->getCheckboxText()) ?>" class="checkbox" <?php if($this->isChecked($_a->getId())) echo 'checked'?> />
+                <?php echo $_a->getIsHtml() ? $_a->getCheckboxText() : $this->escapeHtml($_a->getCheckboxText()) ?>
+            </label>
+        </div>
+        <?php endforeach ?>
+    </div>
+    <footer>
+        <em><?php echo $this->__('* Required Fields') ?></em>
+        <button type="submit"><?php echo $this->__('Continue') ?></button>
+    </footer>
+</form>
+
+<script>
+    function validate(form) {
+        $$('.validation-advice').each(function(item){item.remove();});
+        var checkboxes = $$('input:not(:checked)');
+        if (checkboxes.length) {
+            var h2 = checkboxes[0].up().up().previous();
+            if (!h2.hasClassName('accordion-toggle-active')) {
+                accordion.expand(h2);
+            }
+            var advice = '<div class="validation-advice">Please agree with it before proceeding to the next step</div>';
+            checkboxes.each(function(item) {
+                item.up().insert({after: advice});
+            })
+            return false;
+        }
+        return true;
+    }
+</script>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <layout version="0.1.0">
-    <magejam_payment_index>
+    <magejam_payment_default>
         <reference name="root">
             <action method="setTemplate"><template>magejam/page/content-only.phtml</template></action>
             <block type="page/html_head" name="head" as="head">
@@ -21,6 +21,10 @@
                 <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
             </block>
         </reference>
+    </magejam_payment_default>
+
+    <magejam_payment_index>
+        <update handle="magejam_payment_default"/>
         <reference name="content">
             <block type="checkout/onepage_payment" name="payment" as="payment"
                    template="magejam/checkout/payment.phtml">
@@ -34,4 +38,15 @@
             </block>
         </reference>
     </magejam_payment_index>
+
+    <magejam_payment_agreement>
+        <update handle="magejam_payment_default"/>
+        <reference name="head">
+            <action method="addJs"><script>magejam/accordion.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="magejam/agreements" name="agreements" as="agreements"
+                   template="magejam/checkout/agreements.phtml"/>
+        </reference>
+    </magejam_payment_agreement>
  </layout>

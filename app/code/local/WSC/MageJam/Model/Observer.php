@@ -17,7 +17,9 @@ class WSC_MageJam_Model_Observer
         }
         $session->setData('success', true);
         if(is_array($event->getOrderIds())) {
-            $session->setData('order_id', end($event->getOrderIds()));
+            $orderIds = $event->getOrderIds();
+            $orderId = end($orderIds);
+            $session->setData('order_id', $orderId);
         }
 
         $this->_redirect();

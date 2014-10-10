@@ -165,6 +165,7 @@ class WSC_MageJam_Helper_Product extends Mage_Core_Helper_Abstract
         }
         /* @var $helper WSC_MageJam_Helper_Product_Bundle */
         $helper = Mage::helper('magejam/product_bundle');
+        $result['bundle_attributes'] = $helper->getBundleAttributes($product);
         $result['bundle_items'] = $helper->getBundleItems($product);
     }
 

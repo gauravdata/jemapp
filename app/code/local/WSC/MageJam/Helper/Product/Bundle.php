@@ -2,8 +2,45 @@
 
 class WSC_MageJam_Helper_Product_Bundle extends Mage_Core_Helper_Abstract
 {
+	const PRICE_VIEW_PRICE_RANGE = 0;
+	
+	const PRICE_VIEW_AS_LOW_AS = 1;
+	
+	const SELECTION_PRICE_TYPE_FIXED = 0;
+	
+	const SELECTION_PRICE_TYPE_PERCENT = 1;
+	
     protected $_product = null;
 
+
+    /**
+     * Returns bundle attributes as array
+     *
+     * @param Mage_Catalog_Model_Product $product
+     * @return array
+     */
+    public function getBundleAttributes(Mage_Catalog_Model_Product $currentProduct)
+    {
+    	$priceType = '';
+    	if ($currentProduct->getPriceType() == Mage_Bundle_Model_Product_Price::PRICE_TYPE_FIXED){
+    		$priceType = 'fixed';
+    	}else if ($currentProduct->getPriceType() == Mage_Bundle_Model_Product_Price::PRICE_TYPE_DYNAMIC){
+    		$priceType = 'dynamic';
+    	}
+    	$priceView = '';
+    	if ($currentProduct->getPriceView() == self::PRICE_VIEW_AS_LOW_AS){
+    		$priceView = 'as_low_as';
+    	}else if ($currentProduct->getPriceView() == self::PRICE_VIEW_PRICE_RANGE){
+    		$priceView = 'price_range';
+    	}
+        $attributes = array(
+            'price_type'  => $priceType,
+            'price_view'  => $priceView
+        );
+
+        return $attributes;
+    }
+        
     /**
      * Returns bundle options as array
      *
@@ -101,6 +138,14 @@ class WSC_MageJam_Helper_Product_Bundle extends Mage_Core_Helper_Abstract
         $result['qty'] = $selection->getSelectionQty();
         $result['can_change_qty'] = (int)$selection->getData('selection_can_change_qty');
 
+    	$priceType = '';
+    	if ($selection->getSelectionPriceType() == self::SELECTION_PRICE_TYPE_FIXED){
+    		$priceType = 'fixed';
+    	}else if ($selection->getSelectionPriceType() == self::SELECTION_PRICE_TYPE_PERCENT){
+    		$priceType = 'percent';
+    	}
+    	$result['price_type'] = $priceType;
+        
         return $result;
     }
 

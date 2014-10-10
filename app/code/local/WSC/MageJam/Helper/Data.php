@@ -2,6 +2,15 @@
 
 class WSC_MageJam_Helper_Data extends Mage_Payment_Helper_Data
 {
+	const CHECK_USE_FOR_COUNTRY       = 1;
+    const CHECK_USE_FOR_CURRENCY      = 2;
+    const CHECK_USE_CHECKOUT          = 4;
+    const CHECK_USE_FOR_MULTISHIPPING = 8;
+    const CHECK_USE_INTERNAL          = 16;
+    const CHECK_ORDER_TOTAL_MIN_MAX   = 32;
+    const CHECK_RECURRING_PROFILES    = 64;
+    const CHECK_ZERO_TOTAL            = 128;
+    
     /**
      * Retrieve requested payment method
      *
@@ -9,6 +18,21 @@ class WSC_MageJam_Helper_Data extends Mage_Payment_Helper_Data
      * @return mixed|null
      */
     public function getMethod($code)
+    {
+        if($this->isMagentoVersion18Or19()) {
+        	return $this->_getMethodOnVersion18Or19($code);    
+        }else{
+        	return $this->_getMethodOnVersionLower($code);	
+        } 
+    }
+    
+	/**
+     * Retrieve requested payment method
+     *
+     * @param $code
+     * @return mixed|null
+     */
+    protected function _getMethodOnVersion18Or19($code)
     {
         $quote = $this->getQuote();
         $store = $quote ? $quote->getStoreId() : null;
@@ -18,14 +42,40 @@ class WSC_MageJam_Helper_Data extends Mage_Payment_Helper_Data
                 continue;
             }
             $canUse = $this->_canUseMethod($method);
-            $isApplicable = $method->isApplicableToQuote($quote, Mage_Payment_Model_Method_Abstract::CHECK_ZERO_TOTAL);
+            $isApplicable = $method->isApplicableToQuote($quote, self::CHECK_ZERO_TOTAL);
             if ($canUse && $isApplicable) {
                 return $method;
             }
         }
         return null;
     }
+    
+	/**
+     * Retrieve requested payment method
+     *
+     * @param $code
+     * @return mixed|null
+     */
+    protected function _getMethodOnVersionLower($code)
+    {
+        $quote = $this->getQuote();
+        $store = $quote ? $quote->getStoreId() : null;
 
+        $total = $quote->getBaseSubtotal() + $quote->getShippingAddress()->getBaseShippingAmount();
+        foreach (Mage::helper('payment')->getStoreMethods($store, $quote) as $method) {
+            if($method->getCode() != $code) {
+                continue;
+            }
+            $canUse = $this->_canUseMethod($method);
+            $isApplicable = $total != 0
+                        || $method->getCode() == 'free'
+                        || ($quote->hasRecurringItems() && $method->canManageRecurringProfiles());
+            if ($canUse && $isApplicable) {
+                return $method;
+            }
+        }
+        return null;
+    }
 
     /**
      * Returns Quote instance from session
@@ -42,20 +92,53 @@ class WSC_MageJam_Helper_Data extends Mage_Payment_Helper_Data
         return $quote;
     }
 
+	protected function canUseMethod1($method)
+    {
+        return $method->isApplicableToQuote($this->getQuote(), self::CHECK_USE_FOR_COUNTRY
+            | self::CHECK_USE_FOR_CURRENCY
+            | self::CHECK_ORDER_TOTAL_MIN_MAX
+        );
+    }
+    
     /**
      * Check payment method model
      *
      * @param Mage_Payment_Model_Method_Abstract $method
      * @return bool
      */
-    protected function _canUseMethod($method)
+    public function _canUseMethod($method)
     {
-        return $method && $method->canUseCheckout()
-        && $method->isApplicableToQuote(
-            $this->getQuote(), Mage_Payment_Model_Method_Abstract::CHECK_USE_FOR_COUNTRY
-            | Mage_Payment_Model_Method_Abstract::CHECK_USE_FOR_CURRENCY
-            | Mage_Payment_Model_Method_Abstract::CHECK_ORDER_TOTAL_MIN_MAX
-        );
+        if($this->isMagentoVersion18Or19()) {
+        	return $method && $method->canUseCheckout() && $this->canUseMethod1($method);    
+        }else{
+        	if (!$method || !$method->canUseCheckout()) {
+	            return false;
+	        }
+	        return $this->_canUseMethod1OnVersionLower($method);	
+        } 
+    }
+    
+    protected function _canUseMethod1OnVersionLower($method)
+    {
+        if (!$method->canUseForCountry($this->getQuote()->getBillingAddress()->getCountry())) {
+            return false;
+        }
+
+        if (!$method->canUseForCurrency($this->getQuote()->getStore()->getBaseCurrencyCode())) {
+            return false;
+        }
+
+        /**
+         * Checking for min/max order total for assigned payment method
+         */
+        $total = $this->getQuote()->getBaseGrandTotal();
+        $minTotal = $method->getConfigData('min_order_total');
+        $maxTotal = $method->getConfigData('max_order_total');
+
+        if((!empty($minTotal) && ($total < $minTotal)) || (!empty($maxTotal) && ($total > $maxTotal))) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -84,5 +167,11 @@ class WSC_MageJam_Helper_Data extends Mage_Payment_Helper_Data
     public function getMagejamVersion()
     {
         return (string) Mage::getConfig()->getNode('modules')->WSC_MageJam->version;
+    }
+    
+    public function isMagentoVersion18Or19()
+    {
+    	$version = Mage::getVersion();
+	    return (0 === strpos($version, '1.8') || 0 === strpos($version, '1.9'));
     }
 }
