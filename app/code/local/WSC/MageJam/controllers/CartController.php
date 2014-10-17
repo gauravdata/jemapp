@@ -175,4 +175,30 @@ class WSC_MageJam_CartController extends Mage_Checkout_CartController
         Mage::getSingleton('customer/session')->logout();
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
     }
+
+    /**
+     * Set back redirect url to response
+     *
+     * @return Mage_Checkout_CartController
+     * @throws Mage_Exception
+     */
+    protected function _goBack()
+    {
+        $returnUrl = $this->getRequest()->getParam('return_url');
+        if ($returnUrl) {
+
+            if (!$this->_isUrlInternal($returnUrl)) {
+                throw new Mage_Exception('External urls redirect to "' . $returnUrl . '" denied!');
+            }
+
+            $this->_getSession()->getMessages(true);
+            $this->getResponse()->setRedirect('magejam/cart/index/quote_id/'.$this->_getQuote()->getId());
+        } else {
+            if (($this->getRequest()->getActionName() == 'add') && !$this->getRequest()->getParam('in_cart')) {
+                $this->_getSession()->setContinueShoppingUrl($this->_getRefererUrl());
+            }
+            $this->_redirect('magejam/cart/index/quote_id/'.$this->_getQuote()->getId());
+        }
+        return $this;
+    }
 }

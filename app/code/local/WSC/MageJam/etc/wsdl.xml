@@ -398,9 +398,42 @@
                     <element minOccurs="1"  name="is_html" type="xsd:string" />
                 </all>
             </complexType>
+            <complexType name="shoppingCartGuestCustomerAddressEntity">
+                <all>
+                    <element name="mode" type="xsd:string" minOccurs="0"/>
+                    <element name="address_id" type="xsd:string" minOccurs="0"/>
+                    <element name="firstname" type="xsd:string" minOccurs="0"/>
+                    <element name="lastname" type="xsd:string" minOccurs="0"/>
+                    <element name="company" type="xsd:string" minOccurs="0"/>
+                    <element name="street" type="xsd:string" minOccurs="0"/>
+                    <element name="city" type="xsd:string" minOccurs="0"/>
+                    <element name="region" type="xsd:string" minOccurs="0"/>
+                    <element name="region_id" type="xsd:string" minOccurs="0"/>
+                    <element name="postcode" type="xsd:string" minOccurs="0"/>
+                    <element name="country_id" type="xsd:string" minOccurs="0"/>
+                    <element name="telephone" type="xsd:string" minOccurs="0"/>
+                    <element name="fax" type="xsd:string" minOccurs="0"/>
+                    <element name="email" type="xsd:string" minOccurs="0"/>
+                    <element name="is_default_billing" type="xsd:int" minOccurs="0"/>
+                    <element name="is_default_shipping" type="xsd:int" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="shoppingCartGuestCustomerAddressEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:shoppingCartGuestCustomerAddressEntity[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
         </schema>
     </types>
-	
+    <message name="cmsPageListRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="store" type="xsd:string"/>
+    </message>
+    <message name="cmsPageListResponse">
+        <part name="result" type="typens:cmsPageListResponseEntityArray"/>
+    </message>
 	<message name="paymentMethodListRequest">
         <part name="sessionId" type="xsd:string"/>
         <part name="quoteId" type="xsd:int"/>
@@ -495,7 +528,21 @@
     <message name="magejamVersionResponse">
         <part name="result" type="xsd:string"/>
     </message>
+	<message name="shoppingCartGuestCustomerAddressesRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="quoteId" type="xsd:int"/>
+        <part name="customer" type="typens:shoppingCartGuestCustomerAddressEntityArray"/>
+        <part name="storeId" type="xsd:string"/>
+    </message>
+    <message name="shoppingCartGuestCustomerAddressesResponse">
+        <part name="result" type="xsd:boolean"/>
+    </message>
     <portType name="{{var wsdl.handler}}PortType">
+        <operation name="cmsPageList">
+            <documentation>Get list of cms pages</documentation>
+            <input message="typens:cmsPageListRequest"/>
+            <output message="typens:cmsPageListResponse"/>
+        </operation>
         <operation name="paymentMethodList">
             <documentation>Get list of available payment methods</documentation>
             <input message="typens:paymentMethodListRequest"/>
@@ -551,6 +598,11 @@
             <input message="typens:magejamVersionRequest"/>
             <output message="typens:magejamVersionResponse"/>
         </operation>
+		<operation name="shoppingCartGuestCustomerAddresses">
+            <documentation>Set guest customer's addresses in shopping cart</documentation>
+            <input message="typens:shoppingCartGuestCustomerAddressesRequest"/>
+            <output message="typens:shoppingCartGuestCustomerAddressesResponse"/>
+        </operation>
     </portType>
 
     <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
@@ -578,6 +630,17 @@
             </output>
         </operation>
         <operation name="searchProducts">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="cmsPageList">
             <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
             <input>
                 <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
@@ -666,6 +729,17 @@
             </output>
         </operation>
         <operation name="magejamVersion">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+		<operation name="shoppingCartGuestCustomerAddresses">
             <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
             <input>
                 <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"

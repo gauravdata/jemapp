@@ -45,7 +45,6 @@ class WSC_MageJam_Model_Catalogsearch_Api extends Mage_Catalog_Model_Category_Ap
         }
         $collection->setPage($pageNumber, $pageSize);
         $collection->addAttributeToSelect('sku');
-        $collection->addAttributeToFilter('send_to_jmango', 1);
 
         /* @var $productHelper WSC_MageJam_Helper_Product */
         $productHelper = Mage::helper('magejam/product');

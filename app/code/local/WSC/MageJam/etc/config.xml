@@ -2,7 +2,7 @@
 <config>
     <modules>
         <WSC_MageJam>
-            <version>1.2.4.0</version>
+            <version>1.2.5.0</version>
         </WSC_MageJam>
     </modules>
     <global>

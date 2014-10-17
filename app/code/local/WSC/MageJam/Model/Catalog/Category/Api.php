@@ -34,7 +34,6 @@ class WSC_MageJam_Model_Catalog_Category_Api extends Mage_Catalog_Model_Category
         }
         $collection->setPage($pageNumber, $pageSize);
         $collection->addAttributeToSelect(Mage::getSingleton('catalog/config')->getProductAttributes());
-        $collection->addAttributeToFilter('send_to_jmango', 1);
         ($storeId == 0)? $collection->addOrder('position', 'asc') : $collection->setOrder('position', 'asc');
 
         /* @var $productHelper WSC_MageJam_Helper_Product */

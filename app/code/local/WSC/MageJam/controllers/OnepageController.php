@@ -37,8 +37,6 @@ class WSC_MageJam_OnepageController extends Mage_Checkout_OnepageController
      */
     public function indexAction()
     {
-    //	Mage::getSingleton('customer/session')->setBeforeAuthUrl(Mage::helper('core/url')->getCurrentUrl()); 
-    	
         /* @var $session Mage_Checkout_Model_Session */
         $session = Mage::getSingleton('checkout/session');
         $session->unsetData('success');
@@ -66,30 +64,15 @@ class WSC_MageJam_OnepageController extends Mage_Checkout_OnepageController
         }
         $session->replaceQuote($quote);
 
-/*        $methodCode = $this->getRequest()->getParam('method');
-        if(!$methodCode) {
-            $this->_fault('Requires payment method as param');
-            return;
-        }
-*/
-        /* @var $helper WSC_MageJam_Helper_Data */
-/*        $helper = Mage::helper('magejam');
-        $methodInstance = $helper->getMethod($methodCode);
-        if(!$methodInstance) {
-            $this->_fault('Invalid state for shopping cart');
-            return;
-        }
-*/		
 		Mage::getSingleton('customer/session')->setCustomer($quote->getCustomer());
 		$checkout = Mage::getSingleton('checkout/type_onepage');
+
 		/*
-         * One page checkout consists of following steps
-         * (1) Customer login method aka Checkout method
-         * (2) Billing information (address)
-         * (3) Shipping information (address)
-         * (4) Shipping method
-         * (5) Payment information
-         * (6) Order review, 
+         * Magejam checkout consists of following steps
+         * (1) Customer checkout method
+         * (2) Shipping method
+         * (3) Payment information
+         * (4) Order review,
          */
 
 		//STEP(1)
@@ -98,19 +81,6 @@ class WSC_MageJam_OnepageController extends Mage_Checkout_OnepageController
 		}else{
 			$checkout->saveCheckoutMethod('guest');	
 		}
-        
-        //STEP(2)
-        $checkout->saveBilling($quote->getBillingAddress(), false);
-
-        //STEP(3)
-        $checkout->saveShipping($quote->getShippingAddress(), false);
-
-         //STEP(4)
-        $checkout->saveShippingMethod($quote->getShippingAddress()->getShippingMethod());
-
-        //STEP(5)
-		//$quote->getPayment()->setMethod($methodCode)->getMethodInstance();
-       //$checkout->savePayment(array('method'=>$methodCode));
 
 		$this->loadLayout();
         $this->renderLayout();
@@ -196,6 +166,52 @@ class WSC_MageJam_OnepageController extends Mage_Checkout_OnepageController
         $session->unsetData('magejam');
         $session->unsetData('success');
         Mage::getSingleton('customer/session')->logout();
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
+    }
+
+    /**
+     * Save payment ajax action
+     *
+     * Sets either redirect or a JSON response
+     */
+    public function savePaymentAction()
+    {
+        if ($this->_expireAjax()) {
+            return;
+        }
+        try {
+            if (!$this->getRequest()->isPost()) {
+                $this->_ajaxRedirectResponse();
+                return;
+            }
+
+            $data = $this->getRequest()->getPost('payment', array());
+            $result = $this->getOnepage()->savePayment($data);
+
+            // get section and redirect data
+            $redirectUrl = $this->getOnepage()->getQuote()->getPayment()->getCheckoutRedirectUrl();
+            if (empty($result['error']) && !$redirectUrl) {
+                $this->loadLayout('magejam_onepage_review');
+                $result['goto_section'] = 'review';
+                $result['update_section'] = array(
+                    'name' => 'review',
+                    'html' => $this->_getReviewHtml()
+                );
+            }
+            if ($redirectUrl) {
+                $result['redirect'] = $redirectUrl;
+            }
+        } catch (Mage_Payment_Exception $e) {
+            if ($e->getFields()) {
+                $result['fields'] = $e->getFields();
+            }
+            $result['error'] = $e->getMessage();
+        } catch (Mage_Core_Exception $e) {
+            $result['error'] = $e->getMessage();
+        } catch (Exception $e) {
+            Mage::logException($e);
+            $result['error'] = $this->__('Unable to set Payment Method.');
+        }
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
     }
 }
