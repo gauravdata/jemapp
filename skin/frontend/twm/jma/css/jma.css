@@ -16,9 +16,10 @@
 p.title,
 aside > .block-white .title,
 aside > .block-white .sub-title,
-.price-box,
+.price-box .third-price span.price-label,
 .product-name a,
-p.product-image .glyphicon {
+p.product-image .glyphicon,
+#block-related .product-name {
 	color: #4c4c4c;
 }
 #main-navbar .nav > li > .dropdown-menu li a,
@@ -32,7 +33,8 @@ aside .block a:focus {
 }
 a:hover,
 a:focus,
-dt {
+dt,
+.review-rating {
 	color: #000;
 }
 footer a:hover,
@@ -57,19 +59,19 @@ aside > .block-white {
 	background: none;
 }
 .panel-default > .panel-heading,
-fieldset,
-form fieldset.highlight,
-.fieldset,
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-	background-color: #eee;
+	background-color: #ddd;
+}
+.nav-tabs > li > a {
+	background-color: #ddd;
 }
 .onestepcheckout-summary,
 .highlight {
 	background: #ffe6d8;
 }
 .onestepcheckout-summary .table-striped > tbody > tr:nth-child(odd) > td,
-.onestepcheckout-summary .table-striped > tbody > tr:nth-child(odd) > th {
+.onestepcheckout-summary .table-striped > tbody > tr:nth-child(odd) > th, {
 	background-color: #fff5ef;
 }
 
@@ -80,16 +82,25 @@ fieldset,
 .fieldset,
 .form-control,
 .input-text, input[type=text],
-a.thumbnail.active,
-a.thumbnail:hover,
-a.thumbnail:focus,
 .table thead > tr > th,
 .table tbody > tr > th,
 .table tfoot > tr > th,
 .table thead > tr > td,
 .table tbody > tr > td,
-.table tfoot > tr > td {
+.table tfoot > tr > td,
+.nav-tabs,
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li > a:hover,
+.tab-content,
+.nav-tabs > li > a {
 	border-color: #aaa;
+}
+a.thumbnail.active,
+a.thumbnail:hover,
+a.thumbnail:focus {
+	border-color: #999;
 }
 #main-navbar .nav > li a,
 .navbar-default .navbar-nav-categories > li > a {

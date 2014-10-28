@@ -33,25 +33,33 @@
     </div>
     <div class="product-details">
         <?php if( $this->getRating() && $this->getRating()->getSize()): ?>
-        <h3><?php echo ($this->isReviewOwner()) ? $this->__('Your Rating:') : $this->__('Rating:'); ?></h3>
-        <?php foreach ($this->getRating() as $_rating): ?>
-        <?php if($_rating->getPercent()): ?>
-                <?php echo $this->escapeHtml($_rating->getRatingCode()) ?>
-				<?php
-					$rating = ceil($_rating->getPercent());
-					if($rating < 33){
-						$class = 'progress-bar-danger';
-					} elseif($rating < 66) {
-						$class = 'progress-bar-warning';
-					} else {
-						$class = 'progress-bar-success';
-					}
-				?>
-				<div class="progress">
-					<div class="progress-bar <?=$class;?>" style="width:<?php echo $rating ?>%;"></div>
+       		<h3><?php echo ($this->isReviewOwner()) ? $this->__('Your Rating:') : $this->__('Rating:'); ?></h3>
+			<div class="progresses">
+			<?php foreach ($this->getRating() as $_rating): ?>
+				<?php if($_rating->getPercent()): ?>
+				<div class="row">
+					<div class="col-xs-3">
+						<strong class="review-rating"><?php echo $this->__($this->escapeHtml($_rating->getRatingCode())) ?>:</strong>
+					</div>
+					<div class="col-xs-9">
+						<?php
+						$rating = ceil($_rating->getPercent());
+						if($rating < 33){
+							$class = 'progress-bar-danger';
+						} elseif($rating < 66) {
+							$class = 'progress-bar-warning';
+						} else {
+							$class = 'progress-bar-success';
+						}
+						?>
+						<div class="progress">
+							<div class="progress-bar <?=$class;?>" style="width:<?=$rating;?>%;"></div>
+						</div>
+					</div>
 				</div>
-        <?php endif; ?>
-        <?php endforeach; ?>
+				<?php endif; ?>
+			<?php endforeach; ?>
+			</div>
         <?php endif; ?>
         <div class="panel panel-default">
             <div class="panel-heading">

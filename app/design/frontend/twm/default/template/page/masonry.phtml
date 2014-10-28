@@ -23,30 +23,29 @@
  * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
-/**
- * Product additional attributes template
- *
- * @see Mage_Catalog_Block_Product_View_Attributes
- */
 ?>
 <?php
-    $_helper = $this->helper('catalog/output');
-    $_product = $this->getProduct()
+/**
+ * Template for Mage_Page_Block_Html
+ */
 ?>
-<?php if($_additional = $this->getAdditionalData()): ?>
-	<h3><?php echo $_product->getName().' '.$this->__('Additional Information') ?></h3>
-	<table class="table table-striped" id="product-attribute-specs-table">
-        <tbody>
-        <?php foreach ($_additional as $_data): ?>
-			<?php if (!in_array($_data['value'], array('Nee','No'))): ?>
-				<tr>
-                    <th><?php echo $this->escapeHtml($this->__($_data['label'])) ?></th>
-                    <td class="data"><?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
-				</tr>
-			<?php endif; ?>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-    <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
-<?php endif;?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->getLang() ?>">
+	<head>
+		<?php echo $this->getChildHtml('head') ?>
+	</head>
+	<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+		<?php echo $this->getChildHtml('after_body_start') ?>
+		<?php echo $this->getChildHtml('global_notices') ?>
+		<div id="wrapper">
+			<?php echo $this->getChildHtml('header') ?>
+			<main id="main-container" class="masonry-wrapper">
+				<?php echo $this->getChildHtml('global_messages') ?>
+				<?php echo $this->getChildHtml('content') ?>
+			</main>
+			<?php echo $this->getChildHtml('footer') ?>
+		</div>
+		<?php echo $this->getChildHtml('before_body_end') ?>
+		<?php echo $this->getAbsoluteFooter() ?>
+	</body>
+</html>

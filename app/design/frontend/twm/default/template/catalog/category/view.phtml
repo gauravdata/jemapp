@@ -40,21 +40,23 @@
         $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
     }
 ?>
+<div class="container">
     <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
-<p><a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a></p>
+	<p><a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a></p>
     <?php endif; ?>
 
-<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+	<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 
-<?php if($_imgUrl): ?>
-    <?php echo $_imgHtml ?>
-<?php endif; ?>
+	<?php if($_imgUrl): ?>
+		<?php echo $_imgHtml ?>
+	<?php endif; ?>
 
-<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
-    <div class="category-description std">
-        <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
-    </div>
-    <?php endif; ?>
+	<?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+		<div class="category-description std">
+			<?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
+		</div>
+	<?php endif; ?>
+</div>
 
 <?php if($this->isContentMode()): ?>
     <?php echo $this->getCmsBlockHtml() ?>
