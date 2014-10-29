@@ -7,6 +7,43 @@
  */ 
 class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
 
+    public function handleValidation($observer)
+    {
+        parent::handleValidation($observer);
+
+        $address = $observer->getEvent()->getAddress();
+        foreach ($this->_getAllItems($address) as $item) {
+
+
+
+            /* @var $item Mage_Sales_Model_Quote_Item */
+            if ($item->getParentItemId()){
+                continue;
+            }
+            $appliedIds = $item->getAppliedRuleIds();
+            $item = ( $item->getParentItem() ? $item->getParentItem() : $item );
+
+            if ($item->getCustomPrice() != null) {
+                //continue;
+            }
+
+            $collection = Mage::getModel('salesrule/rule')->getCollection();
+            $collection->getSelect()->where('is_active = 1')
+                ->where("`main_table`.rule_id in (?)", explode(',',$appliedIds))
+                ->where("`main_table`.simple_action = 'price_attribute'");
+
+            if ($collection->count() <= 0) {
+                //$item->setCustomPrice(null);
+                //$item->setOriginalCustomPrice(null);
+                // Enable super mode on the product.
+                //$item->getProduct()->setIsSuperMode(false);
+//var_dump('reset price to '.$item->getId().'# '. $item->getProduct()->getPrice());
+                //$item->setPrice($item->getPrice());
+            }
+        }
+        return $this;
+    }
+
     protected function _initRule($rule, $address, $quote)
     {
         if ($rule->getSimpleAction() == Twm_ThreeIsOne_Helper_Rules_Data::TYPE_PRICE_ATTR
@@ -18,20 +55,28 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
             $attributeCode = $attributeModel->getAttributeCode();
             $r = array();
             foreach ($this->_getAllItems($address) as $item) {
-                if ($item->getParentItemId()){
-                    continue;
-                }
+                //if ($item->getParentItemId()){
+                //    continue;
+                //}
                 /* @var $item Mage_Sales_Model_Quote_Item */
+                $item = ( $item->getParentItem() ? $item->getParentItem() : $item );
+
                 /* @var $product Mage_Catalog_Model_Product */
                 $productId = $item->getProduct()->getId();
                 $price = Mage::getResourceModel('catalog/product')->getAttributeRawValue($productId, $attributeCode, $storeId);
 
-                $item = ( $item->getParentItem() ? $item->getParentItem() : $item );
+                if ($price <= 0) {
+                    continue;
+                }
+//var_dump("Set custom price {$price} (initrule) {$item->getId()} {$item->getProduct()->getId()}");
                 // Set the custom price
-                $item->setCustomPrice($price);
-                $item->setOriginalCustomPrice($price);
+                //$item->setCustomPrice($price);
+                //$item->setOriginalCustomPrice($price);
                 // Enable super mode on the product.
-                $item->getProduct()->setIsSuperMode(true);
+                //$item->getProduct()->setIsSuperMode(true);
+
+                $r[$item->getId()]['discount'] = 1;
+                $r[$item->getId()]['base_discount'] = 1;
             }
             return $r;
         }
@@ -40,43 +85,50 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
 
     public function handleFinalPrice($observer)
     {
+//var_dump("handle final price");
         $product = $observer->getProduct();
 
         $session = Mage::getModel('checkout/cart')->getCheckoutSession();
-        if ($session->hasQuote() && !$product->getIsSalesRulePriceAttrApplied()) {
+        if ($session->hasQuote()) {
             $appliedIds = $session->getQuote()->getAppliedRuleIds();
-            if (count($appliedIds) > 0) {
+//var_dump("Applied ids $appliedIds");
+            if ($appliedIds) {
                 $collection = Mage::getModel('salesrule/rule')->getCollection();
 
                 $collection->getSelect()->where('is_active = 1')
                     ->where("`main_table`.rule_id in (?)", explode(',',$appliedIds));
 
-                //$storeId = Mage::app()->getStore()->getStoreId();
-
                 foreach ($collection as $rule) {
                     if ($rule->getSimpleAction() == Twm_ThreeIsOne_Helper_Rules_Data::TYPE_PRICE_ATTR
                         || $rule->getSimpleAction() == Twm_ThreeIsOne_Helper_Rules_Data::TYPE_PRICE_ATTR)
                     {
-
                         $attributeId = (int)$rule->getDiscountAmount();
                         $attributeCode = $this->_attrCodeById($attributeId);
+//var_dump("Found attr $attributeCode");
                     }
                 }
             }
         }
 
-        if ($product && $attributeCode) {
+        if ($product) {
             /* @var $product Mage_Catalog_Model_Product */
-            //$productId = $product->getId();
-            //$price = Mage::getResourceModel('catalog/product')->getAttributeRawValue($productId, $attributeCode, $storeId);
-            $price = $this->getData($attributeCode);
-            // Set the custom price
-            $product->setCustomPrice($price);
-            $product->setOriginalCustomPrice($price);
-            $product->setFinalPrice($price);
-            // Enable super mode on the product.
-            $product->setIsSuperMode(true);
-            $product->setIsSalesRulePriceAttrApplied(true);
+            if (isset($attributeCode)) {
+                //$productId = $product->getId();
+                //$price = Mage::getResourceModel('catalog/product')->getAttributeRawValue($productId, $attributeCode, $storeId);
+                $price = $this->getData($attributeCode);
+
+//var_dump("Set custom price {$price} (finalprice)");
+                // Set the custom price
+                //$product->setCustomPrice($price);
+                //$product->setOriginalCustomPrice($price);
+                $product->setFinalPrice($price);
+                // Enable super mode on the product.
+                //$product->setIsSuperMode(true);
+            } else {
+                $price = $product->getPrice();
+//var_dump("Reset custom price {$price} (finalprice)");
+                $product->setFinalPrice($price);
+            }
         }
     }
 
