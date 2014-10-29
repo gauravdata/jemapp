@@ -35,6 +35,7 @@
         <?php if( $this->getRatings() && $this->getRatings()->getSize()): ?>
             <h4><?php echo $this->__('How do you rate this product?') ?> <em class="required">*</em></h4>
             <span id="input-message-box"></span>
+			<div class="table-responsive">
                 <table class="table" id="product-review-table">
                 <col />
                 <col width="1" />
@@ -45,12 +46,12 @@
                 <thead>
                     <tr>
                         <th>&nbsp;</th>
-                        <th><span class="nobr"><?php echo $this->__('1 star') ?></span></th>
-                        <th><span class="nobr"><?php echo $this->__('2 stars') ?></span></th>
-                        <th><span class="nobr"><?php echo $this->__('3 stars') ?></span></th>
-                        <th><span class="nobr"><?php echo $this->__('4 stars') ?></span></th>
-                        <th><span class="nobr"><?php echo $this->__('5 stars') ?></span></th>
-                    </tr>
+                        <th><?php echo $this->__('1') ?></th>
+                        <th><?php echo $this->__('2') ?></th>
+                        <th><?php echo $this->__('3') ?></th>
+                        <th><?php echo $this->__('4') ?></th>
+						<th><?php echo $this->__('5') ?></th>
+					</tr>
                 </thead>
                 <tbody>
                 <?php foreach ($this->getRatings() as $_rating): ?>
@@ -63,6 +64,8 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
+
+			</div>
             <input type="hidden" name="validate_rating" class="validate-rating" value="" />
             <script type="text/javascript">decorateTable('product-review-table')</script>
         <?php endif; ?>

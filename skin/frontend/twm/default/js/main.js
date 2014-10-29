@@ -23,7 +23,7 @@ jQuery(window).load(function(){
 	var $container = jQuery('.masonry-container');
 	// initialize
 	$container.masonry({
-		columnWidth: 290,
+		columnWidth: 280,
 		gutter: 20,
 		itemSelector: '.masonry-item',
 		isFitWidth: true

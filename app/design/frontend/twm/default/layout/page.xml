@@ -92,7 +92,7 @@ Default layout, loads most of the pages
                     <action method="setElementClass"><value>top-container</value></action>
                 </block>
                 <block type="page/html_welcome" name="welcome" as="welcome"/>
-				<block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+				<!--<block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>-->
             </block>
 
             <block type="core/text_list" name="left" as="left" translate="label">
