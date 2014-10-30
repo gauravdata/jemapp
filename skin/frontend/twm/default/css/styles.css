@@ -6,7 +6,7 @@ html, body {
     font-size: 17px;
     line-height: 21px;
     height: 100%;
-	color: #8b8b8b;
+	color: #4c4c4c;
 	background: #ece8e5;
 }
 
@@ -821,6 +821,11 @@ aside #block-cart .btn.btn-link:focus {
 	text-align: left;
 	font-size: 14px;
 }
+#block-related a.thumbnail .regular-price,
+#block-related a.thumbnail .old-price,
+#block-related a.thumbnail .special-price {
+	display: none;
+}
 #block-related a.thumbnail .price-box .third-price > span {
 	font-size: 14px;
 }
@@ -911,7 +916,8 @@ aside #block-cart .btn.btn-link:focus {
 	margin: 0 auto;
 }
 .masonry-item {
-	width: 290px;
+	width: 280px;
+	max-width: 100%;
 	margin-bottom: 20px;
 	border-bottom: 25px solid #f1f0ee;
 
@@ -1102,6 +1108,7 @@ p.no-rating a {
 	text-decoration: none;
 	background-color: #d7dbe6;
 	border-bottom-color: #023e75;
+	padding: 5px 10px;
 
 	border-radius: 0;
 	-webkit-border-radius: 0;
