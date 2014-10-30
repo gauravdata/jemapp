@@ -931,9 +931,10 @@ aside #block-cart .btn.btn-link:focus {
 }
 .masonry-item.item:hover {
 	width: 300px;
-	margin-top: -5px;
-	margin-left: -5px;
+	margin-top: -10px;
+	margin-left: -10px;
 	background: #fff;
+	z-index: 9999;
 }
 .masonry-item .thumbnail {
 	margin-bottom: 0;
