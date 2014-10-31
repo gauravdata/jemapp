@@ -791,7 +791,7 @@ aside #block-cart .btn.btn-link:focus {
 /*= Recently viewed =*/
 #recently-viewed-items {
     padding-bottom: 45px;
-    background: url('../images/life-is-good.gif') no-repeat bottom center;
+    background: url('../images/life-is-good.png') no-repeat bottom center;
 }
 #recently-viewed-items li {
     padding-bottom: 5px;
