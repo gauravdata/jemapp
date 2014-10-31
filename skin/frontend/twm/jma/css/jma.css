@@ -136,6 +136,9 @@ header .top-links a span {
 .pager {
 	background: url('../images/border-horizontal.png') repeat-x top left, url('../images/border-horizontal.png') repeat-x bottom left;
 }
+#recently-viewed-items {
+	background: url('../images/life-is-good.png') no-repeat bottom center;
+}
 #block-related,
 #recently-viewed-items li {
 	background-image: url('../images/border-horizontal.png');
