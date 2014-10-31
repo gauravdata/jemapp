@@ -812,7 +812,7 @@ aside #block-cart .btn.btn-link:focus {
 #block-related .product-name {
     text-decoration: none;
     display: block;
-    margin-bottom: 3px;
+    margin: 3px 0;
 	color: #023e75;
 }
 #block-related a.thumbnail {
