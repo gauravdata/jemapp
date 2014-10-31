@@ -907,8 +907,6 @@ aside #block-cart .btn.btn-link:focus {
 	padding-left: 20px;
 	padding-right: 20px;
 }
-.masonry-wrapper .category-image,
-.masonry-wrapper .category-description,
 .masonry-wrapper .toolbar {
 	display: none;
 }
