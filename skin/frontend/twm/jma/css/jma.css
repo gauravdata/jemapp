@@ -137,7 +137,8 @@ header .top-links a span {
 	background: url('../images/border-horizontal.png') repeat-x top left, url('../images/border-horizontal.png') repeat-x bottom left;
 }
 #recently-viewed-items {
-	background: url('../images/life-is-good.png') no-repeat bottom center;
+	background: none;
+	padding-bottom: 10px;
 }
 #block-related,
 #recently-viewed-items li {
