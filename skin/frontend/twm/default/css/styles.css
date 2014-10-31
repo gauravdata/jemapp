@@ -791,7 +791,7 @@ aside #block-cart .btn.btn-link:focus {
 /*= Recently viewed =*/
 #recently-viewed-items {
     padding-bottom: 45px;
-    background: url('../images/life-is-good.gif') no-repeat bottom center;
+    background: url('../images/life-is-good.png') no-repeat bottom center;
 }
 #recently-viewed-items li {
     padding-bottom: 5px;
@@ -812,7 +812,7 @@ aside #block-cart .btn.btn-link:focus {
 #block-related .product-name {
     text-decoration: none;
     display: block;
-    margin-bottom: 3px;
+    margin: 3px 0;
 	color: #023e75;
 }
 #block-related a.thumbnail {
@@ -907,8 +907,6 @@ aside #block-cart .btn.btn-link:focus {
 	padding-left: 20px;
 	padding-right: 20px;
 }
-.masonry-wrapper .category-image,
-.masonry-wrapper .category-description,
 .masonry-wrapper .toolbar {
 	display: none;
 }
@@ -931,9 +929,10 @@ aside #block-cart .btn.btn-link:focus {
 }
 .masonry-item.item:hover {
 	width: 300px;
-	margin-top: -5px;
-	margin-left: -5px;
+	margin-top: -10px;
+	margin-left: -10px;
 	background: #fff;
+	z-index: 9999;
 }
 .masonry-item .thumbnail {
 	margin-bottom: 0;
