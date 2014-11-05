@@ -428,6 +428,10 @@ dt {
 	font-size: 17px;
 }
 
+#shopping-cart-table .price-box .third-price {
+    font-size: 20px;
+}
+
 .nobr {
     white-space: nowrap;
 }
@@ -1005,7 +1009,7 @@ p.product-image .glyphicon {
     margin-bottom: 10px;
 }
 table a.product-image {
-    width: 100px;
+    width: 75px;
 }
 .more-views a {
     display: block;
