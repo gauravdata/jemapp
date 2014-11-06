@@ -95,7 +95,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
     }
     ?>
     <?php if ($price): ?>
-        <div class="price-box">
+        <!--<div class="price-box">
             <p<?php if ($showMinPrice): ?> class="minimal-price"<?php endif ?>>
                 <?php if ($showMinPrice): ?>
                     <span class="price-label"><?php echo $this->__('Starting at:') ?></span>
@@ -110,6 +110,6 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                     <?php echo $_coreHelper->currency($_showPrice, true, false) ?>
                 </span>
             </p>
-        </div>
+        </div>-->
     <?php endif; /* if ($this->getDisplayMinimalPrice() && $_minimalPrice): */ ?>
 <?php endif; /* if (!$_product->isGrouped()): */ ?>
