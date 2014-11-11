@@ -59,7 +59,7 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
                 $qty = $this->_getTotalQty($session->getQuote());
                 $address->setTotalQty($qty);
 
-                $validator->process($item);
+                $validator->initTotals($items, $address)->process($item);
                 $appliedIds = $item->getAppliedRuleIds();
                 if ($appliedIds) {
                     $collection = Mage::getModel('salesrule/rule')->getCollection();
