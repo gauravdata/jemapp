@@ -58,6 +58,10 @@
     $colorCountdown     = Mage::getStoreConfig('countdown/colors/text'); //
 
     $colorHeader        = Mage::getStoreConfig('countdown/colors/title'); // first line - title above countdown
+
+    $attributeSetModel = Mage::getModel("eav/entity_attribute_set");
+    $attributeSetModel->load('Sfeerafbeelding', 'attribute_set_name');
+
 ?>
 <?php if(!$_productCollection->count()): ?>
 	<div class="alert alert-danger"><?php echo $this->__('There are no products matching the selection.') ?></div>
@@ -67,13 +71,8 @@
 	</div>
 	<div id="product-list" class="thumbnails masonry-container">
 		<?php $i=0; foreach ($_productCollection as $_product): ?>
-			<?php
-				$attributeSetModel = Mage::getModel("eav/entity_attribute_set");
-				$attributeSetModel->load($_product->getAttributeSetId());
-				$attributeSetName = $attributeSetModel->getAttributeSetName();
-			?>
 			<?php $toDate = $_product->getSpecialTODate();?>
-			<?php if ($attributeSetName=='Sfeerafbeelding'): ?>
+			<?php if ($_product->getAttributeSetId() == $attributeSetModel->getId()): ?>
 				<div class="masonry-item sfeerafbeelding">
 					<div class="thumbnail">
 						<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->keepFrame(false)->resize(null,720); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
