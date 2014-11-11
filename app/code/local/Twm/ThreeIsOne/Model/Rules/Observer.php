@@ -57,7 +57,6 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
                 $address = $this->_getAddress($item);
                 // total not calculated
                 $qty = $this->_getTotalQty($session->getQuote());
-		$qty = (empty($qty)?0:$qty;
                 $address->setTotalQty($qty);
 
                 $validator->initTotals($items, $address)->process($item);
