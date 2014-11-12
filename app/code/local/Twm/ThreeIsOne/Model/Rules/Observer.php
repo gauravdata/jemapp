@@ -7,6 +7,8 @@
  */ 
 class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
 
+    protected $collectingTotals = false;
+
     protected function _initRule($rule, $address, $quote)
     {
         if ($rule->getSimpleAction() == Twm_ThreeIsOne_Helper_Rules_Data::TYPE_PRICE_ATTR
@@ -34,33 +36,29 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
                 $r[$item->getId()]['discount'] = 0;
                 $r[$item->getId()]['base_discount'] = 0;
             }
-            return $r;
         }
-        return parent::_initRule($rule, $address, $quote);
+        $return = parent::_initRule($rule, $address, $quote);
+        $return = $return + $r;
+        return $return;
     }
 
     public function handleFinalPrice($observer)
     {
+        if ($this->collectingTotals) return;
         $product = $observer->getProduct();
-
-        $websiteId = Mage::app()->getWebsite()->getId();
-        $customerGroupId = Mage::getSingleton('customer/session')->getCustomerGroupId();
-        $validator = Mage::getModel('salesrule/validator')->init($websiteId, $customerGroupId, '');
 
         $session = Mage::getModel('checkout/cart')->getCheckoutSession();
         if ($session->hasQuote()) {
-            $items = $session->getQuote()->getAllItems();
+            $this->collectingTotals = true;
+            $items = $session->getQuote()->collectTotals()->getAllItems();
+            $this->collectingTotals = false;
             foreach ($items as $item) {
                 if (!$item->getParentItemId()){
                     continue;
                 }
-                $address = $this->_getAddress($item);
-                // total not calculated
-                $qty = $this->_getTotalQty($session->getQuote());
-                $address->setTotalQty($qty);
-
-                $validator->initTotals($items, $address)->process($item);
+                $item = ( $item->getParentItem() ? $item->getParentItem() : $item );
                 $appliedIds = $item->getAppliedRuleIds();
+
                 if ($appliedIds) {
                     $collection = Mage::getModel('salesrule/rule')->getCollection();
 
@@ -75,7 +73,6 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
                 }
             }
         }
-
         if ($product) {
             /* @var $product Mage_Catalog_Model_Product */
             $productId = $product->getId();
