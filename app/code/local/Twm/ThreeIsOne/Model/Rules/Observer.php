@@ -33,13 +33,16 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
                 if ($price <= 0) {
                     continue;
                 }
-                $r[$item->getId()]['discount'] = 0;
-                $r[$item->getId()]['base_discount'] = 0;
+                $orgPrice = $item->getProduct()->getPrice();
+                $orgSpecialPrice = $item->getProduct()->getSpecialPrice();
+
+                $r[$item->getId()]['discount'] = 0; //($orgPrice - $price) * $item->getQty() * 2;//($orgPrice - $price);
+                $r[$item->getId()]['base_discount'] = 0; //($orgPrice - $price) * $item->getQty() * 2;//($orgPrice - $price);
             }
+
+            return $r;
         }
-        $return = parent::_initRule($rule, $address, $quote);
-        $return = $return + $r;
-        return $return;
+        return parent::_initRule($rule, $address, $quote);
     }
 
     public function handleFinalPrice($observer)
@@ -50,7 +53,8 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
         $session = Mage::getModel('checkout/cart')->getCheckoutSession();
         if ($session->hasQuote()) {
             $this->collectingTotals = true;
-            $items = $session->getQuote()->collectTotals()->getAllItems();
+            //->collectTotals()
+            $items = $session->getQuote()->getAllItems();
             $this->collectingTotals = false;
             foreach ($items as $item) {
                 if (!$item->getParentItemId()){
