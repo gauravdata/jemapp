@@ -19,7 +19,8 @@ aside > .block-white .sub-title,
 .price-box .third-price span.price-label,
 .product-name a,
 p.product-image .glyphicon,
-#block-related .product-name {
+#block-related .product-name,
+.carousel-item-container .thumbnail  .product-name {
 	color: #4c4c4c;
 }
 #main-navbar .nav > li > .dropdown-menu li a,
@@ -114,7 +115,6 @@ a.thumbnail:focus {
 
 /*= Buttons =*/
 #product_addtocart_form .btn-cart {
-	background-color: #ff6a17;
 	padding-left: 20px;
 	padding-right: 20px;
 }
@@ -141,6 +141,7 @@ header .top-links a span {
 	padding-bottom: 10px;
 }
 #block-related,
+#block-upsell,
 #recently-viewed-items li {
 	background-image: url('../images/border-horizontal.png');
 }
