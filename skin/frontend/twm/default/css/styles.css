@@ -188,15 +188,28 @@ textarea {
 .carousel-control.left,
 .carousel-control.right {
     background: none;
+	margin: 0 -30px;
 }
 .carousel-inner .item {
-    padding: 0 10px;
+	margin: 0 -15px;
 }
 .carousel-item-wrapper {
     float: left;
 }
 .carousel-item-container {
-    padding: 0 10px;
+    padding: 0 15px;
+}
+.carousel-item-container .thumbnail {
+	text-align: left;
+	text-decoration: none;
+}
+.carousel-item-container .thumbnail .product-name {
+	display: block;
+	margin: 3px 0;
+}
+.carousel-item-container .old-price,
+.carousel-item-container .special-price {
+	display: none;
 }
 
 #checkoutSteps .step {
@@ -806,20 +819,24 @@ aside #block-cart .btn.btn-link:focus {
     text-decoration: underline;
 }
 
-/*= Related =*/
-#block-related {
+/*= Related & upsell =*/
+#block-related,
+#block-upsell {
     background: url('../images/border-horizontal.png') repeat-x bottom left;
 }
-#block-related p.title {
+#block-related p.title,
+#block-upsell p.title {
 	margin-top: 20px;
 }
-#block-related .product-name {
+#block-related .product-name,
+#block-upsell .product-name {
     text-decoration: none;
     display: block;
     margin: 3px 0;
 	color: #023e75;
 }
-#block-related a.thumbnail {
+#block-related a.thumbnail,
+#block-upsell a.thumbnail {
     text-decoration: none;
     margin-bottom: 30px;
 	text-align: left;
@@ -827,13 +844,18 @@ aside #block-cart .btn.btn-link:focus {
 }
 #block-related a.thumbnail .regular-price,
 #block-related a.thumbnail .old-price,
-#block-related a.thumbnail .special-price {
+#block-related a.thumbnail .special-price,
+#block-upsell a.thumbnail .regular-price,
+#block-upsell a.thumbnail .old-price,
+#block-upsell a.thumbnail .special-price {
 	display: none;
 }
-#block-related a.thumbnail .price-box .third-price > span {
+#block-related a.thumbnail .price-box .third-price > span,
+#block-upsell a.thumbnail .price-box .third-price > span {
 	font-size: 14px;
 }
-#block-related a.thumbnail .price-box .third-price > span.price {
+#block-related a.thumbnail .price-box .third-price > span.price,
+#block-upsell a.thumbnail .price-box .third-price > span.price {
 	font-size: 16px;
 }
 
@@ -1055,7 +1077,7 @@ p.no-rating a {
 }
 #product_addtocart_form .btn-cart {
     min-height: 56px;
-    background: #023e75;
+    background: #f17569;
     box-shadow: none;
     border: none;
     border-radius: 0;
@@ -1080,7 +1102,7 @@ p.no-rating a {
     top: -30px;
 }
 #product_addtocart_form .btn-cart:hover {
-    background: #000;
+    background: #d7594b;
 }
 
 #product-view-details .fbintegrator-likebutton {
@@ -1177,6 +1199,7 @@ p.no-rating a {
     color: #fff;
     padding: 0 20px 3px;
     font-size: 27px;
+	margin-bottom: 20px;
 }
 
 .checkout-cart-index .btn-checkout:hover,

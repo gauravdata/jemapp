@@ -149,8 +149,18 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
             <?php else: ?>
                 <?php if ($_incl < $_baseIncl): ?>
 			<?php $_cart = $this->getLayout()->getBlock('checkout.cart'); ?>
-                    	<?php if ($_cart->hasTotal3is1()) { $_cart->setTotal3is1($_cart->getTotal3is1() + (($_baseIncl) * $this->getQty())); } else $_cart->setTotal3is1(($_baseIncl) * $this->getQty()); ?>
-			<?php if ($_cart->hasDiscount3is1()) { $_cart->setDiscount3is1($_cart->getDiscount3is1() + (($_baseIncl-$_incl) * $this->getQty())); } else $_cart->setDiscount3is1(($_baseIncl-$_incl) * $this->getQty()); ?>                    
+                    <?php
+                        if ($_cart->hasTotal3is1()) {
+                            $_cart->setTotal3is1($_cart->getTotal3is1() + (($_baseIncl) * $this->getQty()));
+                        } else
+                            $_cart->setTotal3is1(($_baseIncl) * $this->getQty());
+                    ?>
+			        <?php
+                        if ($_cart->hasDiscount3is1()) {
+                            $_cart->setDiscount3is1($_cart->getDiscount3is1() + (($_baseIncl-$_incl) * $this->getQty()));
+                        } else
+                            $_cart->setDiscount3is1(($_baseIncl-$_incl) * $this->getQty());
+                    ?>
                     <div class="price-box">
                         <p class="old-price"><?php echo $this->helper('checkout')->formatPrice($_baseIncl) ?></p>
                         <?php if ($_specIncl && $_specIncl > $_incl): ?>
