@@ -61,9 +61,11 @@
 <?php echo $this->helper('core/js')->getTranslatorScript() ?>
 <?php echo $this->getIncludes() ?>
 
-<?php if(Mage::app()->getStore()->getCode() == 'default' || Mage::app()->getStore()->getCode() == 'default_en' || Mage::app()->getStore()->getCode() == 'default_de') { ?>
-<!-- Facebook Conversion Code for Bestelling NT -->
-<script>(function() {
+
+<?php if (Mage::app()->getFrontController()->getAction()->getFullActionName() == 'checkout_onepage_success'): ?>
+	<?php if(Mage::app()->getStore()->getCode() == 'default' || Mage::app()->getStore()->getCode() == 'default_en' || Mage::app()->getStore()->getCode() == 'default_de') : ?>
+		<!-- Facebook Conversion Code for Bestelling NT -->
+		<script>(function() {
 		var _fbq = window._fbq || (window._fbq = []);
 		if (!_fbq.loaded) {
 			var fbds = document.createElement('script');
@@ -73,16 +75,16 @@
 			s.parentNode.insertBefore(fbds, s);
 			_fbq.loaded = true;
 		}
-	})();
-	window._fbq = window._fbq || [];
-	window._fbq.push(['track', '6017102528973', {'value':'0.00','currency':'EUR'}]);
-</script>
-<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6017102528973&amp;cd[value]=0.00&amp;cd[currency]=EUR&amp;noscript=1" /></noscript>
-<?php } ?>
+		})();
+		window._fbq = window._fbq || [];
+		window._fbq.push(['track', '6017102528973', {'value':'0.00','currency':'EUR'}]);
+		</script>
+		<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6017102528973&amp;cd[value]=0.00&amp;cd[currency]=EUR&amp;noscript=1" /></noscript>
+	<?php endif; ?>
 
-<?php if(Mage::app()->getStore()->getCode() == 'jma_be' || Mage::app()->getStore()->getCode() == 'jma_de' || Mage::app()->getStore()->getCode() == 'jma_nl') { ?>
-	<!-- Facebook Conversion Code for Bestelling JMA -->
-	<script>(function() {
+	<?php if(Mage::app()->getStore()->getCode() == 'jma_be' || Mage::app()->getStore()->getCode() == 'jma_de' || Mage::app()->getStore()->getCode() == 'jma_nl') : ?>
+		<!-- Facebook Conversion Code for Bestelling JMA -->
+		<script>(function() {
 			var _fbq = window._fbq || (window._fbq = []);
 			if (!_fbq.loaded) {
 				var fbds = document.createElement('script');
@@ -95,6 +97,7 @@
 		})();
 		window._fbq = window._fbq || [];
 		window._fbq.push(['track', '6007916391973', {'value':'0.00','currency':'EUR'}]);
-	</script>
-	<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6007916391973&amp;cd[value]=0.00&amp;cd[currency]=EUR&amp;noscript=1" /></noscript>
-<?php } ?>
+		</script>
+		<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6007916391973&amp;cd[value]=0.00&amp;cd[currency]=EUR&amp;noscript=1" /></noscript>
+	<?php endif; ?>
+<?php endif; ?>
