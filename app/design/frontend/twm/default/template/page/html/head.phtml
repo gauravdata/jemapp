@@ -61,6 +61,48 @@
 <?php echo $this->helper('core/js')->getTranslatorScript() ?>
 <?php echo $this->getIncludes() ?>
 
+
+<?php if (Mage::app()->getFrontController()->getAction()->getFullActionName() == 'checkout_onepage_success'): ?>
+	<?php if(Mage::app()->getStore()->getCode() == 'default' || Mage::app()->getStore()->getCode() == 'default_en' || Mage::app()->getStore()->getCode() == 'default_de') : ?>
+		<!-- Facebook Conversion Code for Bestelling NT -->
+		<script>(function() {
+		var _fbq = window._fbq || (window._fbq = []);
+		if (!_fbq.loaded) {
+			var fbds = document.createElement('script');
+			fbds.async = true;
+			fbds.src = '//connect.facebook.net/en_US/fbds.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(fbds, s);
+			_fbq.loaded = true;
+		}
+		})();
+		window._fbq = window._fbq || [];
+		window._fbq.push(['track', '6017102528973', {'value':'0.00','currency':'EUR'}]);
+		</script>
+		<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6017102528973&amp;cd[value]=0.00&amp;cd[currency]=EUR&amp;noscript=1" /></noscript>
+	<?php endif; ?>
+
+	<?php if(Mage::app()->getStore()->getCode() == 'jma_be' || Mage::app()->getStore()->getCode() == 'jma_de' || Mage::app()->getStore()->getCode() == 'jma_nl') : ?>
+		<!-- Facebook Conversion Code for Bestelling JMA -->
+		<script>(function() {
+			var _fbq = window._fbq || (window._fbq = []);
+			if (!_fbq.loaded) {
+				var fbds = document.createElement('script');
+				fbds.async = true;
+				fbds.src = '//connect.facebook.net/en_US/fbds.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(fbds, s);
+				_fbq.loaded = true;
+			}
+		})();
+		window._fbq = window._fbq || [];
+		window._fbq.push(['track', '6007916391973', {'value':'0.00','currency':'EUR'}]);
+		</script>
+		<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6007916391973&amp;cd[value]=0.00&amp;cd[currency]=EUR&amp;noscript=1" /></noscript>
+	<?php endif; ?>
+<?php endif; ?>
+
+<?php if(Mage::app()->getStore()->getCode() == 'jma_nl') : ?>
 <script>
 	(function() {
 		var _fbq = window._fbq || (window._fbq = []);
@@ -80,3 +122,17 @@
 <noscript>
 	<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=479143585558920&amp;ev=PixelInitialized" />
 </noscript>
+	<?php if (Mage::registry('current_product')) : ?>
+	<script type="text/javascript">
+		var _ac = {};
+		// _ac.value = '19.99';
+		_ac.product = '<?php echo  Mage::registry('current_product')->getId() ?>';
+
+		(function(d, t) {
+		var a = d.createElement(t), s = d.getElementsByTagName(t)[0];
+		a.async = a.src = '//pixel.adcrowd.com/smartpixel/c6036a69be21cb660499b75718a3ef24.js';
+		s.parentNode.insertBefore(a, s);
+		}(document, 'script'));
+	</script>
+	<?php endif; ?>
+<?php endif; ?>
