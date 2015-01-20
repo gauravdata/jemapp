@@ -38,54 +38,7 @@
 				<?=$this->getChildHtml('footer.newsletter');?>
 			</div>
 			<div class="col-md-2">
-				<?php if(Mage::app()->getLocale()->getLocaleCode() == 'nl_NL') { ?>
-				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('Kiyoh')->toHtml(); ?>
-				<!--Start of Zopim Live Chat Script-->
-				<script type="text/javascript">
-				window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-				d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-				_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-				$.src='//cdn.zopim.com/?1FLflW44wh11XqC97BDGtOGb5ihxiAzV';z.t=+new Date;$.
-				type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-				</script>
-				<!--End of Zopim Live Chat Script-->
-
-				<script type="text/javascript">$zopim(function() {
-				// Insert API calls below this line
-				// e.g. $zopim.livechat.setLanguage('en');
-				// Insert API calls above this line
-				})
-				</script>
-
-				<script type="text/javascript">$zopim(function() {
-				$zopim.livechat.bubble.setTitle('Bonjour!');
-				$zopim.livechat.bubble.setText('Kan ik je misschien helpen?');
-				})
-				</script>
-				<?php } elseif (Mage::app()->getLocale()->getLocaleCode() == 'de_DE') { ?>
-				<!--Start of Zopim Live Chat Script-->
-				<script type="text/javascript">
-				window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-				d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-				_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-				$.src='//cdn.zopim.com/?1FLflW44wh11XqC97BDGtOGb5ihxiAzV';z.t=+new Date;$.
-				type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-				</script>
-				<!--End of Zopim Live Chat Script-->
-
-				<script type="text/javascript">$zopim(function() {
-				// Insert API calls below this line
-				// e.g. $zopim.livechat.setLanguage('de');
-				// Insert API calls above this line
-				})
-				</script>
-
-				<script type="text/javascript">$zopim(function() {
-				$zopim.livechat.bubble.setTitle('Hi!');
-				$zopim.livechat.bubble.setText('Hast du eine Frage?');
-				})
-				</script>
-				<?php } ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_4')->toHtml(); ?>
 			</div>
 		</div>
 	</div>
