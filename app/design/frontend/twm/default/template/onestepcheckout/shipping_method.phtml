@@ -36,6 +36,7 @@
                    <?php if ($_rate->getErrorMessage()): ?>
                    <ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>
                    <?php else: ?>
+		   <div class="shippingmethod">
                    <input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>" checked="checked" />
                    <label for="s_method_<?php echo $_rate->getCode() ?>"><!--<b><?php echo $this->getCarrierName($code) ?>:</b>--> <?php echo $_rate->getMethodTitle() ?>
                         <strong>
@@ -47,6 +48,7 @@
                         <?php endif; ?>
                         </strong>
                     </label>
+		    </div>
                    <?php endif ?>
                 <?php endforeach; ?>
 		<?php echo Mage::helper('servicepointdhl')->getExtraHtml($code); ?>
@@ -60,6 +62,7 @@
 			<?php if ($_rate->getErrorMessage()): ?>
 			<ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>
 			<?php else: ?>
+			<div class="shippingmethod">
 			<input name="shipping_method" type="radio" class="validate-one-required-by-name" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> />
 			<label for="s_method_<?php echo $_rate->getCode() ?>"><!--<b><?php echo $this->getCarrierName($code) ?>:</b>--> <?php echo $_rate->getMethodTitle() ?>
 			<strong>
@@ -72,6 +75,7 @@
 			<?php endif; ?>
 			</strong>
 			</label>
+			</div>
 			<?php endif ?>
 		<?php endforeach; ?>
 		<?php echo Mage::helper('servicepointdhl')->getExtraHtml($code); ?>
