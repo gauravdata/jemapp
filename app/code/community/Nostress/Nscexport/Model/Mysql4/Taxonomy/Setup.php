@@ -1,0 +1,2 @@
+<?php class Nostress_Nscexport_Model_Mysql4_Taxonomy_Setup extends Mage_Core_Model_Mysql4_Abstract{public function _construct(){$this->_init("\x6e\x73c\x65\x78\x70o\x72\x74/tax\x6fn\x6fmy_se\x74up","\x65\x6e\x74ity_\x69d");}}
+?>

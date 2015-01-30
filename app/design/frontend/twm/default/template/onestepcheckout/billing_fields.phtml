@@ -65,15 +65,15 @@ $addressLabels = array(
         <?php
         $addressFields = '';
             for ($_i=1, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++){
-
-                    $addressFields .= '<input type="text" title="'.$this->__($addressLabels[$_i]).'" name="billing[street][]" id="billing:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getStreet($_i)).'" class="'.(($_i == 1)? 'required-entry ' : '').'form-control onestepcheckout-address-line" />';
-                    $addressFields .= (($_i != $this->helper('customer/address')->getStreetLines()) ? '<br/>': '');
+				$addressFields .= '<div class="form-group">';
+				$addressFields .= '<label>'.$this->__($addressLabels[$_i]).' *</label>';
+				$addressFields .= '<input type="text" title="'.$this->__($addressLabels[$_i]).'" name="billing[street][]" id="billing:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getStreet($_i)).'" class="'.(($_i == 1)? 'required-entry ' : '').'form-control onestepcheckout-address-line" />';
+				$addressFields .= '</div>';
             }
             $billingFields['street'] = '
-                <div class="form-group input-address'.((in_array('address', $formErrors)) ? ' input-error' : '').'">
-                    <label for="billing:street1">'.$this->__('Address').'<span class="required">*</span></label><br />
-                    '.$addressFields.'
-              </div>';
+			<div class="input-address'.((in_array('address', $formErrors)) ? ' input-error' : '').'">
+			'.$addressFields.'
+			</div>';
         ?>
     <?php endif; ?>
 <?php endif; ?>

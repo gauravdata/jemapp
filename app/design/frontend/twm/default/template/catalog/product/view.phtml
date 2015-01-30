@@ -63,7 +63,10 @@
 </script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
 <?php echo $this->getBlockHtml('formkey') ?>
-<h1 class="product-name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+<div class="clearfix">
+	<h1 class="product-name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+	<?php echo Mage::app()->getLayout()->createBlock('previousnext/previousnext')->setTemplate("previousnext/links.phtml")->toHtml() ?>
+</div>
 <div class="row">
 	<div class="col-sm-7" id="product-view">
 		<?php echo $this->getChildHtml('media') ?>
@@ -74,9 +77,9 @@
 				<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
 				<input type="hidden" name="related_product" id="related-products-field" value="" />
 			</div>
-			<?php echo $this->getChildHtml('description') ?>
+			<p><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?></p>
 
-			<?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+			<?php //echo $this->getReviewsSummaryHtml($_product, false, true)?>
 			<?php echo $this->getChildHtml('product_type_data') ?>
 			<?php if (!$this->hasOptions()):?>
 				<?php if($_product->isSaleable()): ?>
@@ -393,17 +396,35 @@
     </div>
 </div>
 
-<div class="product-collateral">
-	<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
-		<?php if ($alias == 'description') continue; ?>
-		<div class="box-collateral <?php echo "box-{$alias}"?>">
-			<?php if ($title = $this->getChildData($alias, 'title')):?>
-				<h2 class="rounded dark"><?php echo $this->escapeHtml($title); ?></h2>
-			<?php endif;?>
-			<?php echo $html; ?>
+<ul class="nav nav-tabs">
+	<?php if ($_additional = $this->getChildHtml('additional')):?>
+		<li class="active"><a href="#additional-tab" data-toggle="tab"><?php echo $this->__('Additional Information') ?></a></li>
+	<?php endif; ?>
+	<li><a href="#sizechart-tab" data-toggle="tab"><?php echo $this->__('Sizechart') ?></a></li>
+	<li><a href="#shipping-tab" data-toggle="tab"><?php echo $this->__('Shipping information') ?></a></li>
+	<?php if ($_reviews = $this->getChildHtml('reviews')): ?>
+		<li><a href="#reviews-tab" data-toggle="tab"><?php echo $this->__('Customer Reviews') ?></a></li>
+	<?php endif; ?>
+</ul>
+<div class="tab-content">
+	<?php if ($_additional = $this->getChildHtml('additional')):?>
+		<div id="additional-tab" class="tab-pane block additional active">
+			<h2><?php echo $this->__('Additional Information') ?></h2>
+			<?php echo $_additional ?>
 		</div>
-	<?php endforeach;?>
-	<?php echo $this->getChildHtml('product_additional_data') ?>
+	<?php endif;?>
+	<div id="sizechart-tab" class="tab-pane block sizechart">
+		<h2><?php echo $this->__('Sizechart') ?></h2>
+		<?php echo $_helper->productAttribute($_product, nl2br($_product->getSizechart()), 'sizechart') ?>
+	</div>
+	<div id="shipping-tab" class="tab-pane block shipping-information">
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('shipping-information')->toHtml(); ?>
+	</div>
+	<?php if ($_reviews = $this->getChildHtml('reviews')): ?>
+		<div id="reviews-tab" class="tab-pane block reviews">
+			<?php echo $_reviews; ?>
+		</div>
+	<?php endif; ?>
 </div>
 
 <?php echo $this->getChildHtml('alert_urls') ?>

@@ -1,0 +1,101 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Previousnext
+ * @version    1.3.0
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php if ($this->isDisplayControls()): ?>
+    <table class="aw_prevnext">
+        <?php if ($this->isDisplayProductThumbnails() || $this->isDisplayCategoryThumbnails()): ?>
+            <tr>
+                <td class="awpn_prev">
+                    <?php if ($this->isDisplayProductThumbnails()): ?>
+                        <?php if ($this->getPreviousProductLink() != ''): ?>
+                            <?php if ($this->getPreviousProductThumbUrl()): ?>
+                                <a id="awpn_prev_product_img" href=<?php echo $this->getPreviousProductLink() ?> title="<?php echo $this->getPreviousProductLabel() . " " . $this->__('(Ctrl+Right)') ?>">
+                                    <img src="<?php echo $this->getPreviousProductThumbUrl(); ?>" title="<?php echo $this->getPreviousProductLabel(); ?>" alt="<?php echo $this->getPreviousProductLabel(); ?>" style="width:<?php echo $this->getProductThumbnailWidth(); ?>px;height:<?php echo $this->getProductThumbnailHeight(); ?>px;" />
+                                </a>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </td>
+                <td class="awpn_up">
+                    <?php if ($this->isDisplayCategoryThumbnails()): ?>
+                        <?php if ($this->getUpLevelLink() != ''): ?>
+                            <?php if ($this->getUpCategoryThumbUrl()): ?>
+                                <a id="awpn_up" href=<?php echo $this->getUpLevelLink() ?> title="<?php echo $this->getUpCategoryLabel() . " " . $this->__('(Ctrl+Up)') ?>">
+                                    <img src="<?php echo $this->getUpCategoryThumbUrl(); ?>" title="<?php echo $this->getUpCategoryLabel(); ?>" alt="<?php echo $this->getUpCategoryLabel(); ?>" style="width:<?php echo $this->getProductThumbnailWidth(); ?>px;height:<?php echo $this->getProductThumbnailHeight(); ?>px;" />
+                                </a>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </td>
+                <td class="awpn_next">
+                    <?php if ($this->isDisplayProductThumbnails()): ?>
+                        <?php if ($this->getNextProductLink() != ''): ?>
+                            <?php if ($this->getNextProductThumbUrl()): ?>
+                                <a id="awpn_next_product_img" href=<?php echo $this->getNextProductLink() ?> title="<?php echo $this->getNextProductLabel() . " " . $this->__('(Ctrl+Right)') ?>">
+                                    <img src="<?php echo $this->getNextProductThumbUrl(); ?>" title="<?php echo $this->getNextProductLabel(); ?>" alt="<?php echo $this->getNextProductLabel(); ?>" style="width:<?php echo $this->getProductThumbnailWidth(); ?>px;height:<?php echo $this->getProductThumbnailHeight(); ?>px;" />
+                                </a>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endif; ?>
+        <tr>
+            <td class="awpn_prev">
+                <?php if ($this->getPreviousProductLink() != ''): ?>
+                    <a id="awpn_prev" href=<?php echo $this->getPreviousProductLink(); ?> title="<?php echo $this->getPreviousProductLabel() . " " . $this->__('(Ctrl+Left)') ?>">
+                        <?php if ($this->getPreviousProductImage()): ?>
+                            <img class="awpn_prev_img" src="<?php echo $this->getPreviousProductImage(); ?>" />
+                        <?php else: ?>
+                            <?php echo $this->getPreviousProductText(); ?>
+                        <?php endif; ?>
+                    </a>
+                <?php endif; ?>
+            </td>
+            <td class="awpn_up">
+                <?php if ($this->getUpLevelLink() != ''): ?>
+                    <a id="awpn_up" href=<?php echo $this->getUpLevelLink(); ?> title="<?php echo $this->getUpCategoryLabel() . " " . $this->__('(Ctrl+Up)') ?>">
+                        <?php if ($this->getUpLevelImage()): ?>
+                            <img class="awpn_up_img" src="<?php echo $this->getUpLevelImage(); ?>" />
+                        <?php else: ?>
+                            <?php echo $this->getUpLevelText(); ?>
+                        <?php endif; ?>
+                    </a>
+                <?php endif; ?>
+            </td>
+            <td class="awpn_next">
+                <?php if ($this->getNextProductLink() != ''): ?>
+                    <a id="awpn_next" href=<?php echo $this->getNextProductLink(); ?> title="<?php echo $this->getNextProductLabel() . " " . $this->__('(Ctrl+Right)') ?>">
+                        <?php if ($this->getNextProductImage()): ?>
+                            <img class="awpn_next_img" src="<?php echo $this->getNextProductImage(); ?>" />
+                        <?php else: ?>
+                            <?php echo $this->getNextProductText(); ?>
+                        <?php endif; ?>
+                    </a>
+                <?php endif; ?>
+            </td>
+        </tr>
+    </table>
+<?php endif; ?>

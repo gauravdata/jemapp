@@ -1,0 +1,732 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   Nostress
+ * @package    Nostress_Nscexport
+ * @copyright Copyright (c) 2012 NoStress Commerce (http://www.nostresscommerce.cz)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+/**
+ * @methods
+ * - getValue($key, $default)
+ * - getSelected($key, $value)
+ * - getChecked($key)
+ * - getAttributes()
+ * - getMappings()
+ * - getAddMapButtonHtml()
+ * - getRemoveMapButtonHtml()
+ */
+?>
+
+<script type="text/javascript">
+	function nscexportSubmit(url) {
+		this.errorSections = $H({});
+		this.canShowError = true;
+		this.submitUrl = url;
+		if (this.validator && this.validator.validate()) {
+			if (this.validationUrl) {
+				this._validate();
+			}
+			else {
+				this._submit();
+			}
+			return true;
+		}
+		return false;
+	};
+	
+	function getCategories(categoryProductsString) {
+		var tmpCat = Array(); 
+		if (!categoryProductsString || categoryProductsString == '')
+			return tmpCat;
+		
+		var members = categoryProductsString.split('|');
+		for (var i = 0; i < members.length; i++) {
+			var productIds = members[i].split(',');
+			var catId = 0;
+			for (var j = 0; j < productIds.length; j++) {
+				if (j == 0) {
+					catId = productIds[j];
+					tmpCat[catId] = Array();
+				}
+				else {
+					tmpCat[catId].push(productIds[j]);
+				}
+			}
+		}
+		return tmpCat;
+	};
+	
+	/*editForm = new editForm('edit_form');
+	
+	editForm.submit = function () {
+		while(1);
+		return false;
+		this._submit();
+		this.errorSections = $H({});
+		this.canShowError = true;
+		this.submitUrl = url;
+		if (this.validator && this.validator.validate()) {
+			if (this.validationUrl) {
+				this._validate();
+			}
+			else {
+				this._submit();
+			}
+			displayLoadingMask();
+			return true;
+		}
+		return false;
+	};*/
+	
+	var profileImportOnly = ['profile_number_of_records', 'profile_decimal_separator'];
+	
+	function showOption(select) {
+		select = $(select);
+		for (var i = 0, l = select.options.length; i<l; i++) {
+			$$('.'+select.id+'_'+select.options[i].value).each(function (el) {
+				elsearchengine.style.display = select.selectedIndex==i ? '' : 'none';
+			});
+		}
+	}
+
+	function addFieldMapping() {
+		var entityType = $('profile_entity_type').value;
+		new Insertion.Bottom($('map_container_'+entityType), $('map_template_'+entityType).innerHTML);
+	}
+	
+	function removeFieldMapping(button) {
+		Element.remove(button.parentNode);
+	}
+	
+	function setMapFileField(select) {
+		select.parentNode.getElementsByTagName('input')[0].value = select.value;
+	}
+	
+	function updateRun(select) {
+		if ($(select).value=='interactive') {
+			$('file_list').show();
+		}
+		else {
+			$('file_list').hide();
+		}
+	}
+	
+	Event.observe(window, 'load', function() {
+		if ($('profile_data_transfer')) {
+			updateRun('profile_data_transfer');
+		}
+	});
+</script>
+<?php
+	$storeId = $this->getStore()->getId();
+	if(Mage::registry("nscexport_storeid"))
+			Mage::unregister("nscexport_storeid");
+	Mage::register("nscexport_storeid",$storeId);
+	$this->initData();
+?>		
+<!--<div class="columns" id="columns" style="clear:all">-->
+<div id="columns" style="clear:all">
+	<table style="width:100%">
+		<tbody>
+			<tr>
+				<td style="padding-right:10px;border-right: solid 2px #e5e5e5;width:10%"> <!-- max-width:500px; 500px by melo stacit -->
+					<div class="categories-side-col" style="overflow:auto;">	
+						<span class="field-row">
+							<input type="hidden" name="category_product_ids" id="product_categories" value="<?php echo $this->getCategoryProductsIds() ?>">
+							<div id="product-categories" class="tree"></div>
+						</span> 
+					</div>					
+				</td>
+				<td >
+					<div class="main-col-inner" style="min-height:450px; padding:0px 20px 0px 5px;">
+						<?php echo $this->getCategoryGridHtml() ?>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+</div>
+<div id="info-categoryproductfilter-disabled">
+	<span><strong><?php echo $this->__("Filter disabled. If you want to use Filter set 'Use Category - Product Filter' to 'Yes'.");?></strong></span>
+</div>
+
+<script type="text/javascript">
+    var editForm = new varienForm('edit_form');
+</script>
+    <div class="no-display">
+<form id="hidden_form" action=""></form>
+</div>
+
+
+<?php $myBlock = $this->getLayout()->getBlock('nscexportCatalogCategoryProducts'); ?>
+   
+<?php if($this->getRootNode() && $this->getRootNode()->hasChildren()): ?>
+
+<script type="text/javascript"><!--
+var cur_category = '<?php echo $this->getRootNode()->getId() ?>';
+var cur_node = 0;
+var categories = getCategories('<?php echo $this->getCategoryProductsIds() ?>');
+var checkHandlerDisabled = false;
+
+Ext.EventManager.onDocumentReady(function() {
+	
+	select = document.getElementById('_productsuse_product_filter');
+	if (select.value == 1) {  // show
+		document.getElementById('columns').style.display = "block";
+		document.getElementById('info-categoryproductfilter-disabled').style.display = "none";
+	} else {// hide
+		document.getElementById('columns').style.display = "none";
+		document.getElementById('info-categoryproductfilter-disabled').style.display = "block";
+	}
+	
+    var categoryLoader = new Ext.tree.TreeLoader({
+       dataUrl: '<?php echo $this->getLoadTreeUrl()?>'
+    });
+
+    categoryLoader.createNode = function(config) {
+        config.uiProvider = Ext.tree.CheckboxNodeUI;
+        var node;
+        if (config.children && !config.children.length) {
+            delete(config.children);
+            node = new Ext.tree.AsyncTreeNode(config);
+
+        } else {
+            node = new Ext.tree.TreeNode(config);
+        }
+        return node;
+    };
+
+    categoryLoader.on("beforeload", function(treeLoader, node) {
+        treeLoader.baseParams.category = node.attributes.id;
+    });
+
+    categoryLoader.on("load", function(treeLoader, node, config) {
+        varienWindowOnload();
+    });
+
+    var tree = new Ext.tree.TreePanel('product-categories', {
+        animate:false,
+        loader: categoryLoader,
+        enableDD:false,
+        containerScroll: true,
+		rootUIProvider: Ext.tree.CheckboxNodeUI,
+		selModel: new Ext.tree.CheckNodeMultiSelectionModel(),
+		rootVisible: '<?php echo $this->getRootNode()->getIsVisible() ?>'
+	});
+    tree.on('check', checkHandler, tree);
+	// set the root node
+    var root = new Ext.tree.TreeNode({
+        text: '<?php echo $this->getRootNode()->getName() ?>',
+        draggable:false,
+        checked:'<?php echo $this->getRootNode()->getChecked() ?>',
+        id:'<?php echo $this->getRootNode()->getId() ?>',
+        uiProvider: Ext.tree.CheckboxNodeUI
+    });
+
+    tree.setRootNode(root);
+	bildCategoryTree(root, <?php echo $this->getTreeJson() ?>);
+    tree.addListener('click', categoryClick.createDelegate(this));
+
+    // render the tree
+    tree.render();
+    root.expand();
+    cur_node = root;
+    rewriteProductGridReloadFunction();
+});
+
+function bildCategoryTree(parent, config){
+    if (!config) return null;
+
+    if (parent && config && config.length){
+        for (var i = 0; i < config.length; i++){
+            config[i].uiProvider = Ext.tree.CheckboxNodeUI;
+            var node;
+            if (config[i].children && !config[i].children.length) {
+                delete(config[i].children);
+                node = new Ext.tree.AsyncTreeNode(config[i]);
+
+            } else {
+                node = new Ext.tree.TreeNode(config[i]);
+            }
+            parent.appendChild(node);
+            node.loader = node.getOwnerTree().loader;
+            if(config[i].children){
+                bildCategoryTree(node, config[i].children);
+            }
+        }
+    }
+}
+
+function addOrRemoveNode(node) 
+{	
+	if(cur_node != 0 && cur_node.id == node.id)
+	{
+		changeAllCheckboxesState(cur_node.attributes.checked);
+	}
+	addOrRemoveCategory(node.id,node.attributes.checked);
+
+	if(cur_node != 0 && cur_node.id == node.id && cur_node.attributes.checked)
+	{
+		if(cur_node.attributes.checked)
+        	categories[cur_category] = getAllGridIds();
+	}
+};
+
+function addOrRemoveCategory(categoryId,condition) 
+{	
+	if(condition) 
+	{
+    	categoryAdd(categoryId);
+	} 
+	else 
+	{
+    	categoryRemove(categoryId);
+	}	
+};
+
+
+function categoryClick(node, e)
+{
+    varienElementMethods.setHasChanges(Event.element(e), e);    
+    cur_category = node.id;
+    cur_node = node;
+    rewriteProductGridReloadFunction();
+    relaodProductGrid(node.id); 
+};
+
+function rewriteProductGridReloadFunction()
+{
+	var gridObject = <?php echo $myBlock->getJsObjectName() ?>;
+	<?php echo $myBlock->getJsObjectName() ?>.reload = function(url)
+	{		
+	    if (!gridObject.reloadParams) {
+	    	gridObject.reloadParams = {form_key: FORM_KEY};
+	    }
+	    else {
+	    	gridObject.reloadParams.form_key = FORM_KEY;
+	    }
+	    url = url || gridObject.url;		
+	    if(gridObject.useAjax)
+	    {
+	        url = url + (url.match(new RegExp('\\?')) ? '&ajax=true' : '?ajax=true' );
+	        new Ajax.Request(url, {
+	            loaderArea: gridObject.containerId,
+	            parameters: gridObject.reloadParams || {},
+	            evalScripts: true,
+	            onFailure:  function(transport) 
+	            { 
+	            	processResponse(transport,gridObject,url);      	 	              	
+	            },                                
+	            onComplete: function () {
+	            	gridObject.initGrid();
+	            	gridObject.initGridRows();
+	            },
+	            onSuccess: function(transport) 
+	            { 
+	            	processResponse(transport,gridObject,url);
+	            },
+	            on302: function(transport)
+	            {
+	            	alert('302 error');
+	            }
+	        });
+	        return;
+	    }
+	    else{
+	        if(gridObject.reloadParams){
+	            $H(gridObject.reloadParams).each(function(pair){
+	                url = gridObject.addVarToUrl(pair.key, pair.value);
+	            }.bind(gridObject));
+	        }
+	        location.href = url;
+	    }
+	}	
+}
+
+function relaodProductGrid(id){
+	var old = <?php echo $myBlock->getJsObjectName() ?>.reloadParams;
+	
+	if ( old.constructor.toString().indexOf("Array") == -1 ) {
+		old = new Array();
+	}
+	
+	var newparam = old.clone();
+	var p = new String(id);
+	
+	<?php 
+	// z nejakeho duvodu se nepamatuje filtr podle skupiny, nyni je zahrnut do url
+	?>
+	if( !<?php echo $myBlock->getJsObjectName() ?>.oldurl ) {
+		<?php echo $myBlock->getJsObjectName() ?>.oldurl = <?php echo $myBlock->getJsObjectName() ?>.url;
+	}
+	<?php echo $myBlock->getJsObjectName() ?>.url = <?php echo $myBlock->getJsObjectName() ?>.oldurl + 'id/'+p + '/store/'+'<?php echo $storeId?>' +'/';
+
+	<?php echo $myBlock->getJsObjectName() ?>.reloadParams = newparam;
+	<?php echo $myBlock->getJsObjectName() ?>.reload(<?php echo $myBlock->getJsObjectName() ?>.url);
+}
+
+function processResponse(transport,gridObject,url)
+{
+	if(transport.responseText == "")
+    {
+        var message = '<?php echo $this->__("Product grid reload failed.");?>';
+    	message = message + '\n' + '<?php echo $this->__("Response status");?>'+': '+transport.status + ' ' + transport.statusText;
+    	message = message + '\n' + '<?php echo $this->__("Request url");?>'+': '+url;   
+	 	alert(message); 		 	
+    }
+    else
+    {	
+        this.gridAjaxSuccess(transport).bind(gridObject);
+    } 
+}
+
+function gridAjaxSuccess(transport)
+{
+	var gridObject = <?php echo $myBlock->getJsObjectName() ?>;
+    try {
+        var responseText = transport.responseText.replace(/>\s+</g, '><');
+
+        if (transport.responseText.isJSON()) {
+            var response = transport.responseText.evalJSON()
+            if (response.error) {
+                alert(response.message);
+            }
+            if(response.ajaxExpired && response.ajaxRedirect) {
+                setLocation(response.ajaxRedirect);
+            }
+        } else {
+            /**
+             * For IE <= 7.
+             * If there are two elements, and first has name, that equals id of second.
+             * In this case, IE will choose one that is above
+             *
+             * @see https://prototype.lighthouseapp.com/projects/8886/tickets/994-id-selector-finds-elements-by-name-attribute-in-ie7
+             */
+            var divId = $(gridObject.containerId);
+            if (divId.id == gridObject.containerId) {
+                divId.update(responseText);
+            } else {
+                $$('div[id="'+gridObject.containerId+'"]')[0].update(responseText);
+            }
+        }          
+    } catch (e) {
+        var divId = $(gridObject.containerId);
+        if (divId.id == gridObject.containerId) {
+            divId.update(responseText);
+        } else {
+            $$('div[id="'+gridObject.containerId+'"]')[0].update(responseText);
+        }
+    }
+}
+
+
+function categoryAdd(id) {
+
+	if(!(id in categories))
+		categories[id] = Array();
+	else 
+	{
+		var curCat = categories[id];
+		if(curCat[0] == 'deleted')
+			categories[id] = Array();
+	}
+}
+function categoryRemove(id) {
+	if(id in categories)
+		categories[id] = Array("deleted");
+}
+
+function checkHandler(node)
+{
+	if(checkHandlerDisabled)
+		return; 
+	addOrRemoveNode(node);
+    if ( !node.isLeaf() && node.hasChildNodes() ) {
+        this.removeListener('check', checkHandler);
+        processChildren(node, node.attributes.checked);        
+        this.on('check', checkHandler);
+    }
+
+	/**if(node.attributes.checked == true && categories[node.id].length == 0 && cur_node.id == node.id)
+	{
+		checkCategoryNode(node,false);
+		addOrRemoveCategory(node.id,false); 
+	}*/
+}
+
+function processChildren(node, state)
+{	
+    if ( !node.hasChildNodes() ) return false;
+    for(var i = 0; i < node.childNodes.length; i++ ) {
+        node.childNodes[i].ui.check(state);
+        addOrRemoveNode(node.childNodes[i]);
+        if ( node.childNodes[i].hasChildNodes() ) {
+            processChildren(node.childNodes[i], state);
+        }
+    }
+    return true;
+}
+--></script>
+<?php else:?>
+<script type="text/javascript">
+// <!--
+var cur_category = '<?php echo $this->getRootNode()->getId() ?>';
+var cur_node = 0;
+var categories = [];
+var checkHandlerDisabled = false;
+// -->
+</script>
+<?php endif; ?>
+
+<script type="text/javascript">
+    $$('.option-control').each(showOption);
+    //changeEntityType();
+
+    function showFeildMapping() {
+    	//var direction = $('profile_direction').options[$('profile_direction').options.selectedIndex].value;
+        var value = $('parse_fieldnames').options[$('parse_fieldnames').options.selectedIndex].value;
+        var map = $('map_only_specified').options[$('map_only_specified').options.selectedIndex].value;
+
+        if (direction == 'nscexport') {
+	    	if (map) {
+	    		Element.show($('__fieldmapping'));
+	    	} else {
+	    		deleteAllAddedMappingFields();
+	    		Element.hide($('__fieldmapping'));
+	    	}
+        } else {
+	        if (value) {
+	            Element.hide($('__fieldmapping'));
+	            deleteAllAddedMappingFields();
+	        } else {
+	            Element.show($('__fieldmapping'));
+	        }
+        }
+
+    }
+
+    function deleteAllAddedMappingFields()
+    {
+        var type = $('profile_entity_type').options[$('profile_entity_type').options.selectedIndex].value;
+
+        var elems = $('map_container_'+type).childElements();
+        if (elems.length > 0) for (var idx in elems) {
+            if (elems[idx] != undefined && elems[idx].tagName != undefined) {
+                elems[idx].remove();
+            }
+        }
+    }
+    
+
+</script>
+
+ <?php if( is_object($myBlock) && $myBlock->getJsObjectName() ): ?>
+<script type="text/javascript">
+    var hidden_checkboxes_id<?php echo $myBlock->getJsObjectName() ?> = '<?php echo $myBlock->getCheckboxesName(); ?>';
+    $('hidden_form').innerHTML += '<div class="hidden"><input type="hidden" name="'+hidden_checkboxes_id<?php echo $myBlock->getJsObjectName() ?>+'"  id="'+hidden_checkboxes_id<?php echo $myBlock->getJsObjectName() ?>+'"  value=""/></div>';
+
+    var checkBoxes<?php echo $myBlock->getJsObjectName() ?> = $H(<?php echo "";//$myBlock->vratPrirazeneIds(true) ?>);
+
+    var warning = false;
+    if (checkBoxes<?php echo $myBlock->getJsObjectName() ?>.size() > 0) {
+        warning = true;
+    }
+
+    $(hidden_checkboxes_id<?php echo $myBlock->getJsObjectName() ?>).value = checkBoxes<?php echo $myBlock->getJsObjectName() ?>.toQueryString();
+
+    function addBox<?php echo $myBlock->getJsObjectName() ?>(grid, element, checked)
+    {
+    	
+        if (checked) {
+        	checkBoxes<?php echo $myBlock->getJsObjectName() ?>.set(element.value, 0);
+        } else {
+        	checkBoxes<?php echo $myBlock->getJsObjectName() ?>.unset(element.value);
+        }
+        $(hidden_checkboxes_id<?php echo $myBlock->getJsObjectName() ?>).value = checkBoxes<?php echo $myBlock->getJsObjectName() ?>.toQueryString();
+    	var a = new Array();
+    	a[hidden_checkboxes_id<?php echo $myBlock->getJsObjectName() ?>+'[]'] = checkBoxes<?php echo $myBlock->getJsObjectName() ?>.keys();
+    	grid.reloadParams = a;
+    }
+
+    function boxRowClick<?php echo $myBlock->getJsObjectName() ?>(grid, event)
+    {
+        var trElement = Event.findElement(event, 'tr');
+        var isInput   = Event.element(event).tagName == 'INPUT';
+        if (trElement) {
+            var checkbox = Element.getElementsBySelector(trElement, 'input');
+            if(checkbox[0]){
+                var checked = isInput ? checkbox[0].checked : !checkbox[0].checked;
+                if (checked) {
+                   	checkbox[0].checked = true;
+                    warning = false;
+                } else {
+                	checkbox[0].checked = false;
+                }
+                updateCategories(checkbox[0].value,checkbox[0].checked);
+            }
+        }
+    }
+
+    function boxRowInit<?php echo $myBlock->getJsObjectName() ?>(grid, row)
+    {    
+    	var mainCheckbox = document.getElementsByClassName('checkbox');
+    	mainCheckbox[0].checked = false;
+        if(cur_category in categories && categories[cur_category].length == 0)
+        {
+        	var ids = getAllGridIds();
+        	if($('chosen_product_ids'))
+        	{
+            	categories[cur_category] = ids;
+  			}
+        }
+        var checkbox = $(row).getElementsByClassName('checkbox')[0];
+        if (checkbox) 
+        {
+            
+            if(cur_category in categories && categories[cur_category].indexOf(checkbox.value) != -1) {
+        		checkbox.checked = true;
+        	} else {
+        		checkbox.checked = false;
+        	}
+        }
+    }
+
+    function myhandler<?php echo $myBlock->getJsObjectName() ?>(o)
+    {
+    	changeAllCheckboxesState(o.checked);
+    }
+
+    function changeAllCheckboxesState(condition)
+    {
+    	checkBoxes<?php echo $myBlock->getJsObjectName() ?>.each(function(el){
+      		  el.checked = true
+        });
+
+        checkbox = document.getElementsByClassName('checkbox');
+        for (i = 0; i < checkbox.length; i++) 
+        {
+            checkbox[i].checked = condition ;
+            if(checkbox[i].value != 'on')
+            {
+            	updateCategories(checkbox[i].value,checkbox[i].checked);
+            }
+            else if(checkbox.length == 1)
+            	checkbox[i].checked = false;      
+        }
+	}
+    
+	function updateCategories(value,condition)
+	{	
+		if(condition)
+		{
+			addOrRemoveCategory(cur_category,true); 				
+			checkRelatedCategoryNode(true);
+			if(categories[cur_category].indexOf(value) == -1)
+				categories[cur_category].push(value);
+		}
+		else
+		{
+			if(!(cur_category in categories))
+				return;
+			
+			var index = categories[cur_category].indexOf(value);
+			categories[cur_category].splice(index,1);
+			if(categories[cur_category].length == 0)
+			{
+				addOrRemoveCategory(cur_category,false); 
+				checkRelatedCategoryNode(false);
+			}
+		}
+			
+	}
+
+	function checkRelatedCategoryNode(condition)
+	{
+		checkCategoryNode(cur_node,condition);
+	}
+
+	function checkCategoryNode(node,condition)
+	{
+		checkHandlerDisabled = true;
+		node.getUI().check(condition);
+		checkHandlerDisabled = false;
+	}
+
+	function getAllGridIds()
+	{
+		var ids = Array();
+		if($('chosen_product_ids'))
+			ids = $('chosen_product_ids').value.split(',');
+		else
+		{	
+			var value = '<?php $this->getAllGridIds();?>';
+			ids = value.split(',');
+		}
+		if(ids.length == 1 && ids[0]== "")
+			ids = Array();
+		return ids;
+	}
+
+	function updateOutput()
+	{
+		var result = "";
+		var first = true;
+		if(categories && categories.length > 0)
+		{
+			for (var key in categories) 
+			{
+				if(key && !isNaN(Number(key)))
+				{
+					if(first)
+						first = false;
+					else
+					{
+						result = result + '|';
+					}
+					result = result + key +','+ categories[key].join(',');
+				}
+			}
+		}
+		$('product_categories').value = result;
+	}
+
+	function updateOutputAndSave()
+	{
+		updateOutput();
+		editForm.submit();
+	}		
+
+	function showHideCategoryProductFilter(select) {
+		if (select.value == 1) {  // show
+			document.getElementById('columns').style.display = "block";
+			document.getElementById('info-categoryproductfilter-disabled').style.display = "none";
+		} else {// hide
+			document.getElementById('columns').style.display = "none";
+			document.getElementById('info-categoryproductfilter-disabled').style.display = "block";
+		}
+			
+	}
+
+    
+    <?php echo $myBlock->getJsObjectName() ?>.rowClickCallback = boxRowClick<?php echo $myBlock->getJsObjectName() ?>;
+   <?php echo $myBlock->getJsObjectName() ?>.initRowCallback = boxRowInit<?php echo $myBlock->getJsObjectName() ?>;
+   <?php echo $myBlock->getJsObjectName() ?>.checkboxCheckCallback = addBox<?php echo $myBlock->getJsObjectName() ?>;
+   <?php echo $myBlock->getJsObjectName() ?>.checkCheckboxes = myhandler<?php echo $myBlock->getJsObjectName() ?>;
+    <?php echo $myBlock->getJsObjectName() ?>.rows.each(function(row){boxRowInit<?php echo $myBlock->getJsObjectName() ?>(<?php echo $myBlock->getJsObjectName() ?>, row)});
+</script>
+    <?php endif; ?>

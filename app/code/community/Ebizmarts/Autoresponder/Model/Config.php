@@ -1,11 +1,13 @@
 <?php
+
 /**
- * Author : Ebizmarts <info@ebizmarts.com>
- * Date   : 6/14/13
- * Time   : 5:10 PM
- * File   : Config.php
- * Module : Ebizmarts_Magemonkey
+ *
+ * @category   Ebizmarts
+ * @package    Ebizmarts_Autoresponder
+ * @author     Ebizmarts Team <info@ebizmarts.com>
+ * @license    http://opensource.org/licenses/osl-3.0.php
  */
+
 class Ebizmarts_Autoresponder_Model_Config
 {
     const GENERAL_ACTIVE                = 'ebizmarts_autoresponder/general/active';
@@ -25,6 +27,7 @@ class Ebizmarts_Autoresponder_Model_Config
     const RELATED_MANDRILL_TAG          = 'ebizmarts_autoresponder/related/mandrill-tag';
     const RELATED_SUBJECT               = 'ebizmarts_autoresponder/related/subject';
     const RELATED_MAX                   = 'ebizmarts_autoresponder/related/max-related';
+    const RELATED_STATUS                = 'ebizmarts_autoresponder/related/status';
 
     const REVIEW_ACTIVE                 = 'ebizmarts_autoresponder/review/active';
     const REVIEW_DAYS                   = 'ebizmarts_autoresponder/review/days';
@@ -32,6 +35,26 @@ class Ebizmarts_Autoresponder_Model_Config
     const REVIEW_TEMPLATE               = 'ebizmarts_autoresponder/review/template';
     const REVIEW_MANDRILL_TAG           = 'ebizmarts_autoresponder/review/mandrill-tag';
     const REVIEW_SUBJECT                = 'ebizmarts_autoresponder/review/subject';
+    const REVIEW_STATUS                 = 'ebizmarts_autoresponder/review/status';
+    const REVIEW_HAS_COUPON             = 'ebizmarts_autoresponder/review/coupon';
+    const REVIEW_COUPON_CUSTOMER_GROUP  = 'ebizmarts_autoresponder/review/customer_coupon';
+    const REVIEW_COUPON_AUTOMATIC       = 'ebizmarts_autoresponder/review/automatic';
+    const REVIEW_COUPON_CODE            = 'ebizmarts_autoresponder/review/coupon_code';
+    const REVIEW_COUPON_EXPIRE          = 'ebizmarts_autoresponder/review/expire';
+    const REVIEW_COUPON_LENGTH          = 'ebizmarts_autoresponder/review/length';
+    const REVIEW_COUPON_DISCOUNT_TYPE   = 'ebizmarts_autoresponder/review/discounttype';
+    const REVIEW_COUPON_DISCOUNT        = 'ebizmarts_autoresponder/review/discount';
+    const REVIEW_COUPON_LABEL           = 'ebizmarts_autoresponder/review/couponlabel';
+    const REVIEW_COUPON_COUNTER         = 'ebizmarts_autoresponder/review/coupon_counter';
+    const REVIEW_COUPON_GENERAL_QUANTITY = 'ebizmarts_autoresponder/review/coupon_general_quantity';
+    const REVIEW_COUPON_GENERAL_TYPE    = 'ebizmarts_autoresponder/review/coupon_general_type';
+    const REVIEW_COUPON_SPECIFIC_QUANTITY = 'ebizmarts_autoresponder/review/coupon_specific_quantity';
+    const REVIEW_COUPON_ORDER_COUNTER   = 'ebizmarts_autoresponder/review/coupon_order_counter';
+    const REVIEW_COUPON_ORDER_ALMOST    = 'ebizmarts_autoresponder/review/coupon_order_almost';
+    const REVIEW_COUPON_ORDER_MAX       = 'ebizmarts_autoresponder/review/coupon_order_max';
+    const REVIEW_COUPON_MANDRILL_TAG    = 'ebizmarts_autoresponder/review/coupon_mandrill_tag';
+    const REVIEW_COUPON_SUBJECT         = 'ebizmarts_autoresponder/review/coupon_mail_subject';
+    const REVIEW_COUPON_EMAIL           = 'ebizmarts_autoresponder/review/coupon_template';
 
     const BIRTHDAY_ACTIVE               = 'ebizmarts_autoresponder/birthday/active';
     const BIRTHDAY_DAYS                 = 'ebizmarts_autoresponder/birthday/days';
@@ -73,6 +96,18 @@ class Ebizmarts_Autoresponder_Model_Config
     const VISITED_TIME                = 'ebizmarts_autoresponder/visitedproducts/time';
     const VISITED_MAX                 = 'ebizmarts_autoresponder/visitedproducts/max_visited';
 
+    const BACKTOSTOCK_ACTIVE            = 'ebizmarts_autoresponder/backtostock/active';
+    const BACKTOSTOCK_TEMPLATE          = 'ebizmarts_autoresponder/backtostock/template';
+    const BACKTOSTOCK_SUBJECT           = 'ebizmarts_autoresponder/backtostock/subject';
+    const BACKTOSTOCK_MANDRILL_TAG      = 'ebizmarts_autoresponder/backtostock/mandrill_tag';
+    const BACKTOSTOCK_ALLOW_GUESTS      = 'ebizmarts_autoresponder/backtostock/allow_guests';
+    const BACKTOSTOCK_MAIL_TYPE_NAME    = 'back to stock';
+
     const COUPON_AUTOMATIC            = 2;
     const COUPON_MANUAL               = 1;
+    const COUPON_GENERAL              = 2;
+    const COUPON_PER_ORDER            = 1;
+    const TYPE_EACH                   = 1;
+    const TYPE_ONCE                   = 2;
+    const TYPE_SPECIFIC               = 3;
 }

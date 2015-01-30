@@ -1,0 +1,18 @@
+<?php /* @var $this Mage_Checkout_Block_Onepage_Payment_Methods */ ?>
+
+<?php $method = $this->getMethod(); ?>
+<?php if (empty($method) ): ?>
+    <h1><?php echo $this->__('No Payment Method') ?></h1>
+<?php elseif ($this->getQuote()->getId() == null): ?>
+    <h1><?php echo $this->__('This quote no longer exists') ?></h1>
+<?php else: ?>
+    <input value="<?php echo $method->getCode() ?>" type="hidden" name="payment[method]" />
+    <h2><?php echo $this->escapeHtml($this->getMethodTitle($method)) ?> <?php echo $this->getMethodLabelAfterHtml($method) ?></h2>
+    <?php if ($html = $this->getPaymentMethodFormHtml($method)): ?>
+    <div>
+        <?php echo $html; ?>
+    </div>
+    <?php endif; ?>
+<?php endif; ?>
+<?php echo $this->getChildChildHtml('additional'); ?>
+

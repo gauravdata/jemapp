@@ -25,4 +25,12 @@
             </ajaxaddtocart>
         </routers>
     </frontend>
+
+    <global>
+        <helpers>
+            <ajaxaddtocart>
+                <class>Twm_AjaxAddtocart_Helper</class>
+            </ajaxaddtocart>
+        </helpers>
+    </global>
 </config>

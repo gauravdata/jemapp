@@ -19,4 +19,13 @@ jQuery(window).load(function(){
 	}).mouseleave(function(){
 		jQuery(this).find('.dropdown-menu').stop(true, true).delay(500).fadeOut();
 	});
+
+	var $container = jQuery('.masonry-container');
+	// initialize
+	$container.masonry({
+		columnWidth: 280,
+		gutter: 20,
+		itemSelector: '.masonry-item',
+		isFitWidth: true
+	});
 });

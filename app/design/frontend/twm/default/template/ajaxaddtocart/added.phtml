@@ -22,7 +22,7 @@
 		<?php $_cartQty = $this->getSummaryCount() ?>
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title"><?php echo $this->__('My Cart') ?></h4>
+				<h4 class="modal-title"><?php echo Mage::helper('ajaxaddtocart')->__('My Cart') ?></h4>
 			</div>
 			<div class="modal-body">
 			<?php /*if ($_cartQty > 0): ?>

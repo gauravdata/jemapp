@@ -68,6 +68,7 @@ Default layout, loads most of the pages
 				<action method="addItem"><type>skin_js</type><name>js/jquery.elevateZoom.js</name><params/></action>
                 <action method="addItem"><type>skin_js</type><name>js/syncheight.js</name><params/></action>
                 <action method="addItem"><type>skin_js</type><name>js/nav.js</name><params/></action>
+				<action method="addItem"><type>skin_js</type><name>js/masonry.js</name><params/></action>
 				<action method="addItem"><type>skin_js</type><name>js/main.js</name><params/></action>
 
 				<block type="core/template" name="googleanalytics" as="googleanalytics" template="page/html/googleanalytics.phtml" />
@@ -91,7 +92,7 @@ Default layout, loads most of the pages
                     <action method="setElementClass"><value>top-container</value></action>
                 </block>
                 <block type="page/html_welcome" name="welcome" as="welcome"/>
-				<block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+				<!--<block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>-->
             </block>
 
             <block type="core/text_list" name="left" as="left" translate="label">
@@ -120,6 +121,8 @@ Default layout, loads most of the pages
 
             <block type="core/text_list" name="before_body_end" as="before_body_end" translate="label">
                 <label>Page Bottom</label>
+				<block type="core/template" name="googleanalytics" as="googleanalytics" template="page/html/googleanalytics.phtml" />
+				<block type="core/template" name="adcrowd" as="adcrowd" template="page/adcrowd.phtml" />
             </block>
         </block>
 

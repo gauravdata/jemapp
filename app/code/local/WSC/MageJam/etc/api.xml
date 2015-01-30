@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+			<magejam_payment_method translate="title" module="magejam">
+                <model>magejam/payment_api</model>
+                <title>WSC MageJam Payment API</title>
+                <acl>magejam_payment_data</acl>
+                <methods>
+                    <list translate="title" module="magejam">
+                        <title>Retrieve payment method</title>
+                        <method>getPaymentMethodList</method>
+                    </list>
+                </methods>
+                <faults module="magejam">
+                    <store_not_exists>
+                        <code>101</code>
+                        <message>Can not make operation because store is not exists</message>
+                    </store_not_exists>
+                    <quote_not_exists>
+                        <code>102</code>
+                        <message>Can not make operation because quote is not exists</message>
+                    </quote_not_exists>
+                </faults>
+            </magejam_payment_method>
+            <magejam_payment_config translate="title" module="magejam">
+                <model>magejam/payment_api</model>
+                <title>WSC MageJam Payment API</title>
+                <acl>magejam_payment_data</acl>
+                <methods>
+                    <list translate="title" module="magejam">
+                        <title>Retrieve payment config</title>
+                        <method>getPaymentConfigList</method>
+                    </list>
+                </methods>
+                <faults module="magejam">
+                    <store_not_exists>
+                        <code>101</code>
+                        <message>Can not make operation because store is not exists</message>
+                    </store_not_exists>
+                    <quote_not_exists>
+                        <code>102</code>
+                        <message>Can not make operation because quote is not exists</message>
+                    </quote_not_exists>
+                </faults>
+            </magejam_payment_config>
+            <magejam_config translate="title" module="magejam">
+                <model>magejam/config_api</model>
+                <title>WSC MageJam Config API</title>
+                <acl>magejam_config_data</acl>
+                <methods>
+                    <info translate="title" module="magejam">
+                        <title>Retrieve config info</title>
+                        <method>info</method>
+                    </info>
+                </methods>
+                <faults module="magejam">
+                    <store_not_exists>
+                        <code>101</code>
+                        <message>Can not make operation because store is not exists</message>
+                    </store_not_exists>
+                </faults>
+            </magejam_config>
+            <magejam_category translate="title" module="magejam">
+                <model>magejam/catalog_category_api</model>
+                <title>Category Assigned Products API</title>
+                <acl>catalog/category</acl>
+                <methods>
+                    <assignedProducts translate="title" module="magejam">
+                        <title>Retrieve list of assigned products info</title>
+                        <method>assignedProducts</method>
+                        <acl>catalog/category/product</acl>
+                    </assignedProducts>
+                </methods>
+                <faults module="magejam">
+                    <store_not_exists>
+                        <code>100</code>
+                        <message>Requested store view not found.</message>
+                    </store_not_exists>
+                    <website_not_exists>
+                        <code>101</code>
+                        <message>Requested website not found.</message>
+                    </website_not_exists>
+                    <not_exists>
+                        <code>102</code>
+                        <message>Category not exists.</message>
+                    </not_exists>
+                    <data_invalid>
+                        <code>103</code>
+                        <message>Invalid data given. Details in error message.</message>
+                    </data_invalid>
+                    <filters_invalid>
+                        <code>104</code>
+                        <message>Invalid filters specified. Details in error message.</message>
+                    </filters_invalid>
+                </faults>
+            </magejam_category>
+			<magejam_cart translate="title" module="magejam">
+                <model>magejam/cart_api</model>
+                <title>Customer Information</title>
+                <acl>cart</acl>
+                <methods>
+                    <set translate="title" module="magejam">
+                        <title>Set customer for shopping cart</title>
+                        <method>set</method>
+                        <acl>cart/set</acl>
+                    </set>
+                </methods>
+            </magejam_cart>
+            <magejam_search translate="title" module="magejam">
+                <model>magejam/catalogsearch_api</model>
+                <title>Catalog Search API</title>
+                <acl>magejam_search</acl>
+                <methods>
+                    <products translate="title" module="magejam">
+                        <title>Catalog Search Products</title>
+                        <method>products</method>
+                        <acl>catalog/search/products</acl>
+                    </products>
+                </methods>
+                <faults module="magejam">
+                    <store_not_exists>
+                        <code>100</code>
+                        <message>Requested store view not found.</message>
+                    </store_not_exists>
+                    <website_not_exists>
+                        <code>101</code>
+                        <message>Requested website not found.</message>
+                    </website_not_exists>
+                    <data_invalid>
+                        <code>103</code>
+                        <message>Invalid data given. Details in error message.</message>
+                    </data_invalid>
+                    <min_query_length>
+                        <code>104</code>
+                        <message>Query length does not meets server configuration.</message>
+                    </min_query_length>
+                    <max_query_length>
+                        <code>105</code>
+                        <message>Query length does not meets server configuration.</message>
+                    </max_query_length>
+                </faults>
+            </magejam_search>
+
+            <magejam_layer translate="title" module="magejam">
+                <model>magejam/catalog_layer_api</model>
+                <title>Category Layer Filters API</title>
+                <acl>catalog/category</acl>
+                <methods>
+                    <filters translate="title" module="magejam">
+                        <title>Retrieve list of layer filters</title>
+                        <method>getLayerFilter</method>
+                        <acl>catalog/category/product</acl>
+                    </filters>
+                </methods>
+                <faults module="magejam">
+                    <store_not_exists>
+                        <code>100</code>
+                        <message>Requested store view not found.</message>
+                    </store_not_exists>
+                    <website_not_exists>
+                        <code>101</code>
+                        <message>Requested website not found.</message>
+                    </website_not_exists>
+                    <not_exists>
+                        <code>102</code>
+                        <message>Category not exists.</message>
+                    </not_exists>
+                    <data_invalid>
+                        <code>103</code>
+                        <message>Invalid data given. Details in error message.</message>
+                    </data_invalid>
+                </faults>
+            </magejam_layer>
+            <magejam_checkout>
+                <model>magejam/checkout_agreement_api</model>
+                <title>WSC MageJam Checkout Agreement API</title>
+                <acl>cart/customer</acl>
+                <methods>
+                    <agreements translate="title" module="magejam">
+                        <title>Return agreements</title>
+                        <method>getAgreements</method>
+                    </agreements>
+                </methods>
+            </magejam_checkout>
+            <magejam_version translate="title" module="magejam">
+                <model>magejam/version_api</model>
+                <title>WSC MageJam Version API</title>
+                <acl>magejam/version</acl>
+                <methods>
+                    <version translate="title" module="magejam">
+                        <title>Return current version of magejam module</title>
+                        <method>magejamVersion</method>
+                    </version>
+                </methods>
+            </magejam_version>
+			
+			<magejam_cart_customer translate="title" module="magejam">
+                <model>magejam/cart_customer_api</model>
+                <title>WSC MageJam Guest Customer API</title>
+                <acl>magejam/cart_customer</acl>
+                <methods>
+                    <addresses translate="title" module="magejam">
+                        <title>Set guest customer's addresses in shopping cart</title>
+                        <method>setAddresses</method>
+                        <acl>magejam/cart_customer/addresses</acl>
+                    </addresses>
+                </methods>
+				<faults module="magejam">
+                    <store_not_exists>
+                        <code>1001</code>
+                        <message>Can not make operation because store is not exists</message>
+                    </store_not_exists>
+                    <quote_not_exists>
+                        <code>1002</code>
+                        <message>Can not make operation because quote is not exists</message>
+                    </quote_not_exists>
+                    <customer_not_set>
+                        <code>1041</code>
+                        <message>Customer is not set. </message>
+                    </customer_not_set>
+                    <customer_not_exists>
+                        <code>1042</code>
+                        <message>The customer's identifier is not valid or customer is not existed</message>
+                    </customer_not_exists>
+                    <customer_not_created>
+                        <code>1043</code>
+                        <message>Customer could not be created. </message>
+                    </customer_not_created>
+                    <customer_data_invalid>
+                        <code>1044</code>
+                        <message>Customer data is not valid. </message>
+                    </customer_data_invalid>
+                    <customer_mode_is_unknown>
+                        <code>1045</code>
+                        <message>Customer's mode is unknown</message>
+                    </customer_mode_is_unknown>
+                    <customer_address_data_empty>
+                        <code>1051</code>
+                        <message>Customer address data is empty.</message>
+                    </customer_address_data_empty>
+                    <customer_address_invalid>
+                        <code>1052</code>
+                        <message>Customer's address data is not valid.</message>
+                    </customer_address_invalid>
+                    <invalid_address_id>
+                        <code>1053</code>
+                        <message>The customer's address identifier is not valid</message>
+                    </invalid_address_id>
+                    <address_is_not_set>
+                        <code>1054</code>
+                        <message>Customer address is not set.</message>
+                    </address_is_not_set>
+                    <address_not_belong_customer>
+                        <code>1055</code>
+                        <message>Customer address identifier do not belong customer, which set in quote</message>
+                    </address_not_belong_customer>
+                </faults>
+            </magejam_cart_customer>
+            <magejam_cms translate="title" module="magejam">
+                <model>magejam/cms_api</model>
+                <title>WSC MageJam CMS API</title>
+                <acl>magejam/cms</acl>
+                <methods>
+                    <pageList translate="title" module="magejam">
+                        <title>Retrieve cms pages</title>
+                        <method>getPageList</method>
+                    </pageList>
+                </methods>
+                <faults module="magejam">
+                    <store_not_exists>
+                        <code>101</code>
+                        <message>Can not make operation because store is not exists</message>
+                    </store_not_exists>
+                </faults>
+            </magejam_cms>
+        </resources>
+        <v2>
+            <resources_function_prefix>
+				<magejam_payment_method>paymentMethod</magejam_payment_method>
+                <magejam_payment_config>paymentConfig</magejam_payment_config>
+                <magejam_category>category</magejam_category>
+                <magejam_cart>cart</magejam_cart>
+                <magejam_checkout>checkout</magejam_checkout>
+                <magejam_version>magejam</magejam_version>
+                <magejam_cart_customer>shoppingCartGuestCustomer</magejam_cart_customer>
+                <magejam_layer>layer</magejam_layer>
+                <magejam_search>search</magejam_search>
+                <magejam_config>config</magejam_config>
+                <magejam_cms>cms</magejam_cms>
+            </resources_function_prefix>
+        </v2>
+
+        <acl>
+            <resources>
+                <magejam_search translate="title" module="magejam">
+                    <title>Catalog Search Products</title>
+                    <sort_order>690</sort_order>
+                </magejam_search>
+                <magejam_config_data translate="title" module="magejam">
+                    <title>Config Data</title>
+                    <sort_order>695</sort_order>
+                </magejam_config_data>
+                <magejam_payment_data translate="title" module="magejam">
+                    <title>Payment Config Data</title>
+                    <sort_order>700</sort_order>
+                </magejam_payment_data>
+                <magejam_version translate="title" module="magejam">
+                    <title>Magejam Version Information</title>
+                    <sort_order>710</sort_order>
+                </magejam_version>
+
+                <magejam_cms translate="title" module="magejam">
+                    <title>CMS Data</title>
+                    <sort_order>715</sort_order>
+                </magejam_cms>
+                <magejam_cart_customer translate="title" module="magejam">
+                    <title>Customer's information</title>
+                    <addresses translate="title" module="magejam">
+                        <title>Set customer's addresses in shopping cart</title>
+                    </addresses>
+                </magejam_cart_customer>
+            </resources>
+        </acl>
+    </api>
+</config>

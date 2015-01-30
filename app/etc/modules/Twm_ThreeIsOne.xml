@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_ThreeIsOne>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Amasty_Rules/>
+            </depends>
+        </Twm_ThreeIsOne>
+    </modules>
+</config>

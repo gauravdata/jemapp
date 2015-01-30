@@ -38,55 +38,53 @@
 				<?=$this->getChildHtml('footer.newsletter');?>
 			</div>
 			<div class="col-md-2">
-				<?php if(Mage::app()->getLocale()->getLocaleCode() == 'nl_NL') { ?>
-				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('Kiyoh')->toHtml(); ?>
-				<!--Start of Zopim Live Chat Script-->
-				<script type="text/javascript">
-				window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-				d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-				_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-				$.src='//cdn.zopim.com/?1FLflW44wh11XqC97BDGtOGb5ihxiAzV';z.t=+new Date;$.
-				type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-				</script>
-				<!--End of Zopim Live Chat Script-->
-
-				<script type="text/javascript">$zopim(function() {
-				// Insert API calls below this line
-				// e.g. $zopim.livechat.setLanguage('en');
-				// Insert API calls above this line
-				})
-				</script>
-
-				<script type="text/javascript">$zopim(function() {
-				$zopim.livechat.bubble.setTitle('Bonjour!');
-				$zopim.livechat.bubble.setText('Kan ik je misschien helpen?');
-				})
-				</script>
-				<?php } elseif (Mage::app()->getLocale()->getLocaleCode() == 'de_DE') { ?>
-				<!--Start of Zopim Live Chat Script-->
-				<script type="text/javascript">
-				window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-				d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-				_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-				$.src='//cdn.zopim.com/?1FLflW44wh11XqC97BDGtOGb5ihxiAzV';z.t=+new Date;$.
-				type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-				</script>
-				<!--End of Zopim Live Chat Script-->
-
-				<script type="text/javascript">$zopim(function() {
-				// Insert API calls below this line
-				// e.g. $zopim.livechat.setLanguage('de');
-				// Insert API calls above this line
-				})
-				</script>
-
-				<script type="text/javascript">$zopim(function() {
-				$zopim.livechat.bubble.setTitle('Hi!');
-				$zopim.livechat.bubble.setText('Hast du eine Frage?');
-				})
-				</script>
-				<?php } ?>
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_4')->toHtml(); ?>
 			</div>
 		</div>
 	</div>
 </footer>
+
+<?php if(Mage::app()->getStore()->getCode() == 'jma_nl' || Mage::app()->getStore()->getCode() == 'jma_de') { ?>
+    <!-- Google-code voor remarketingtag -->
+    <script type="text/javascript">
+        var google_tag_params = {
+            ecomm_prodid: 'REPLACE_WITH_VALUE',
+            ecomm_pagetype: 'REPLACE_WITH_VALUE',
+            ecomm_totalvalue: 'REPLACE_WITH_VALUE',
+        };
+    </script>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var google_conversion_id = 962945563;
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/962945563/?value=0&amp;guid=ON&amp;script=0"/>
+        </div>
+    </noscript>
+<?php } ?>
+
+<?php if(Mage::app()->getStore()->getCode() == 'jma_de') { ?>
+<script type="text/javascript">
+    (function () {
+        var _tsid = 'X4627E49FE043182CCB0A5B15B5F06E23';
+        _tsConfig = {
+            'yOffset': '0', //offset from page bottom
+            'variant': 'reviews' //text, default, small, reviews
+        };
+        var _ts = document.createElement('script');
+        _ts.type = 'text/javascript';
+        _ts.async = true;
+        _ts.charset = 'utf-8';
+        _ts.src = '//widgets.trustedshops.com/js/' + _tsid + '.js';
+        var __ts = document.getElementsByTagName('script')[0];
+        __ts.parentNode.insertBefore(_ts, __ts);
+    })();
+</script>
+<noscript><a href="https://www.trustedshops.de/shop/certificate.php?shop_id=X4627E49FE043182CCB0A5B15B5F06E23"><img title="Trusted Shops Keurmerk - Controleer hier de geldigheid!" src="//widgets.trustedshops.com/images/badge.png" style="position:fixed;bottom:0;right:0;" /></a></noscript>
+<?php } ?>

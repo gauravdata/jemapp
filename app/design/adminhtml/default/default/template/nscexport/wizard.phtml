@@ -12,9 +12,9 @@
  * obtain it through the world-wide-web, please send an email
  * to license@magentocommerce.com so we can send you a copy immediately.
  *
- * @category   design_default
- * @package    Mage
- * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @category   Nostress
+ * @package    Nostress_Nscexport
+ * @copyright Copyright (c) 2012 NoStress Commerce (http://www.nostresscommerce.cz)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 ?>
@@ -32,120 +32,108 @@
 ?>
 
 <script type="text/javascript">
- 	function nscexportSubmit(url)
- 	{
- 		this.errorSections = $H({});
-        this.canShowError = true;
-        this.submitUrl = url;
-        if(this.validator && this.validator.validate()){
-            if(this.validationUrl){
-                this._validate();
-            }
-            else{
-                this._submit();
-            }
-            return true;
-        }
-        return false;
-    };
-
-	function getCategories(categoryProductsString)
-	{
+	function nscexportSubmit(url) {
+		this.errorSections = $H({});
+		this.canShowError = true;
+		this.submitUrl = url;
+		if (this.validator && this.validator.validate()) {
+			if (this.validationUrl) {
+				this._validate();
+			}
+			else {
+				this._submit();
+			}
+			return true;
+		}
+		return false;
+	};
+	
+	function getCategories(categoryProductsString) {
 		var tmpCat = Array(); 
-		if(!categoryProductsString || categoryProductsString == '')
+		if (!categoryProductsString || categoryProductsString == '')
 			return tmpCat;
-
+		
 		var members = categoryProductsString.split('|');
-		for (var i = 0; i < members.length; i++) 
-		{
+		for (var i = 0; i < members.length; i++) {
 			var productIds = members[i].split(',');
 			var catId = 0;
-			for (var j = 0; j < productIds.length; j++) 
-			{
-				if(j == 0)
-				{
+			for (var j = 0; j < productIds.length; j++) {
+				if (j == 0) {
 					catId = productIds[j];
 					tmpCat[catId] = Array();
 				}
-				else
-				{
+				else {
 					tmpCat[catId].push(productIds[j]);
 				}
 			}
 		}
 		return tmpCat;
 	};
+	
+	/*editForm = new editForm('edit_form');
+	
+	editForm.submit = function () {
+		while(1);
+		return false;
+		this._submit();
+		this.errorSections = $H({});
+		this.canShowError = true;
+		this.submitUrl = url;
+		if (this.validator && this.validator.validate()) {
+			if (this.validationUrl) {
+				this._validate();
+			}
+			else {
+				this._submit();
+			}
+			displayLoadingMask();
+			return true;
+		}
+		return false;
+	};*/
+	
+	var profileImportOnly = ['profile_number_of_records', 'profile_decimal_separator'];
+	
+	function showOption(select) {
+		select = $(select);
+		for (var i = 0, l = select.options.length; i<l; i++) {
+			$$('.'+select.id+'_'+select.options[i].value).each(function (el) {
+				elsearchengine.style.display = select.selectedIndex==i ? '' : 'none';
+			});
+		}
+	}
 
-//editForm = new editForm('edit_form');
-
-//editForm.submit = function () 
-//{
-	//	while(1);
-		//return false;
-    	//this._submit();
-        /*this.errorSections = $H({});
-        this.canShowError = true;
-        this.submitUrl = url;
-        if (this.validator && this.validator.validate()) {
-            if(this.validationUrl){
-                this._validate();
-            }
-            else{
-                this._submit();
-            }
-            displayLoadingMask();
-            return true;
-        }
-        return false;*/
-//};
+	function addFieldMapping() {
+		var entityType = $('profile_entity_type').value;
+		new Insertion.Bottom($('map_container_'+entityType), $('map_template_'+entityType).innerHTML);
+	}
+	
+	function removeFieldMapping(button) {
+		Element.remove(button.parentNode);
+	}
+	
+	function setMapFileField(select) {
+		select.parentNode.getElementsByTagName('input')[0].value = select.value;
+	}
+	
+	function updateRun(select) {
+		if ($(select).value=='interactive') {
+			$('file_list').show();
+		}
+		else {
+			$('file_list').hide();
+		}
+	}
+	
+	Event.observe(window, 'load', function() {
+		if ($('profile_data_transfer')) {
+			updateRun('profile_data_transfer');
+		}
+	});
 </script>
-<script type="text/javascript">
-var profileImportOnly = ['profile_number_of_records', 'profile_decimal_separator'];
-function showOption(select)
-{
-    select = $(select);
-    for (var i = 0, l = select.options.length; i<l; i++) {
-        $$('.'+select.id+'_'+select.options[i].value).each(function (el) {
-            el.style.display = select.selectedIndex==i ? '' : 'none';
-        });
-    }
-
-}
-
-function addFieldMapping()
-{
-    var entityType = $('profile_entity_type').value;
-    new Insertion.Bottom($('map_container_'+entityType), $('map_template_'+entityType).innerHTML);
-}
-
-function removeFieldMapping(button)
-{
-    Element.remove(button.parentNode);
-}
-
-function setMapFileField(select)
-{
-    select.parentNode.getElementsByTagName('input')[0].value = select.value;
-}
-
-function updateRun(select)
-{
-    if ($(select).value=='interactive') {
-        $('file_list').show();
-    } else {
-        $('file_list').hide();
-    }
-}
-
-Event.observe(window, 'load', function(){
-    if($('profile_data_transfer')) {
-        updateRun('profile_data_transfer');
-    }
-});
-</script>
-<?php     	
-	$storeId = $this->getStore()->getId();
-    Mage::register("nscexport_storeid",$storeId);
+<?php
+	Mage::register("nscexport_storeid",$storeId);
+	$this->initData();
 ?>
     
 <div class="entry-edit">
@@ -157,133 +145,16 @@ Event.observe(window, 'load', function(){
         <a id="nscexport_basic_settings-head" class="" href="#" onclick="Fieldset.toggleCollapse('nscexport_basic_settings', '<?php echo $this->getUrl('adminhtml/system_config/state/') ?>'); return false;"><?php echo $this->__("Export Profile Settings") ?>
         </a>
     </div>
-    <input id="nscexport_basic_settings-state" name="config_state[nscexport_basic_settings]" type="hidden" value="1" />
     
     <fieldset id="nscexport_basic_settings" class="config collapseable" style="">
-        <legend><?php echo $this->__("Export Profile Settings") ?></legend>      
-        <input  type="hidden" id="store_id" name="store_id" value="<?php echo $storeId;    ?>"/>
+        <legend><?php echo $this->__("Export Profile Settings") ?></legend>
         <span class="field-row">
-            <label for="nscexport_store_label"><?php echo $this->__("Store-view").$this->__(":") ?> </label>
-            <label id="nscexport_store_label"><?php echo $this->getStoreName($storeId); ?></label>
-            <input class="input-text" id="nscexport_store" name="store_name" type="hidden" value="<?php echo $this->getStoreName($storeId); ?>" READONLY/>
-        </span>           
-        <span class="field-row">
-            <label for="nscexport_profile_name"><?php echo $this->__("Profile Name").$this->__(":") ?> <span class="required">*</span></label>
-            <input class="required-entry required-entry input-text" id="nscexport_profile_name" name="nscexport_profile_name" value="<?php echo $this->getValue('name') ?>"/>
-        </span>                 
-        <span class="field-row">
-            <label for="nscexport_enabled"><?php echo $this->__("Enabled").$this->__(":") ?></label>
-			<span class="with-tip">
-	            <select id="nscexport_enabled" name="enabled" class="option-control">	                
-	            	<option value="1" <?php echo $this->getSelected('enabled', '1'); ?> ><?php echo $this->__("Yes") ?></option>
-	                <option value="0" <?php echo $this->getSelected('enabled', '0'); ?> ><?php echo $this->__("No") ?></option>	                
-	            </select>				
-			</span>
-        </span>                           
-        <span class="field-row">
-            <label for="start_time"><?php echo $this->__("Start time").$this->__(":") ?></label> 
-			<span class="with-tip">
-         		<select id="nscexport_hour" name="start_time_hour" class="option-control" style="width:40px" >	                
-	                <?php 
-	                	for( $i=0;$i<24;$i++ ) 
-	                	{
-	                		$hour = str_pad($i, 2, '0', STR_PAD_LEFT);
-	                		echo '<option value="'.$hour.'" '. $this->getSelected('start_time_hour',$i) .' >'.$hour . '</option>';
-	                	}
-	                ?>	                
-	            </select>
-	            :
-	            <select id="nscexport_minute" name="start_time_minute" class="option-control" style="width:40px" >	                
-	                <?php 
-	                	for( $i=0;$i<60;$i++ ) 
-	                	{
-	                		$minute = str_pad($i, 2, '0', STR_PAD_LEFT);
-	                		echo '<option value="'.$minute.'" '. $this->getSelected('start_time_minute',$i) .' >'.$minute . '</option>';
-	                	}
-	                ?>	                
-	            </select>
-	            :
-	            <select id="nscexport_second" name="start_time_second" class="option-control" style="width:40px" >	                
-	                <?php 
-	                	for( $i=0;$i<60;$i++ ) 
-	                	{
-	                		$second = str_pad($i, 2, '0', STR_PAD_LEFT);
-	                		echo '<option value="'.$second.'" '. $this->getSelected('start_time_second',$i) .' >'.$second . '</option>';
-	                	}
-	                ?>	                
-	            </select>
-                <small class="nscexport_start_time">
-	                    <?php echo '('.$this->__("Hour").':'.$this->__("Minute").':'.$this->__("Second").')' ?>
-	            </small>		         		
-        	</span>          	     	 
-        </span>         
-        <span class="field-row">
-            <label for="nscexport_frequency"><?php echo $this->__("Frequency").':' ?></label>
-			<span class="with-tip">
-         		<select id="nscexport_frequency" name="frequency" onchange="showFeildMapping();showOption(this)" class="option-control" >
-	                <?php
-	                	$freqItem = new Mage_Adminhtml_Model_System_Config_Source_Cron_Frequency();
-      					$freqArr = $freqItem->toOptionArray();
-      					foreach($freqArr as $value)
-      					{
-      						echo '<option value="'.$value['value'].'" ';
-      						echo $this->getSelected('frequency', $value['value']);
-      						echo ' >'.$this->__($value['label']).'</option>';      						
-      					}
-      				?>	                	                
-	            </select>         			
-        	</span>
-        </span>                               
-        <span class="field-row">
-            <label for="nscexport_searchengine"><?php echo $this->__("Search engine").':' ?></label>
-			<span class="with-tip">
-	            <select id="nscexport_searchengine" name="searchengine" onchange="showOption(this)" class="option-control required-entry">	                
-	                <?php
-	                    $centrumIncluded = false;
-	                    $engines = $this->getAllowedEnginesCollection();       
-								
-	                    echo '<option value="">'.$this->__("Please select").'</option>';
-						foreach($engines as $code => $engine)
-						{
-							$engineName = $engine['title'];							 	
-							if($code == "centrum")
-								$centrumIncluded = true;
-								
-							echo '<option value="'.$code.'" ';
-      						echo $this->getSelected('searchengine', $code);
-      						echo ' >'.$this->__($engineName).'</option>'; 
-						}
-	                ?>	                	                
-	            </select>				
-			</span>
-        </span>
-        
-        <?php 
-        if($centrumIncluded)
-        {
-        	echo '<div class="nscexport_searchengine_centrum">
-            		<span class="field-row">
-                		<label for="centrumcategory">'.$this->__("Centrum category").':'.'</label>'.
-        	  			'<select id="centrumcategory" name="centrumcategory" class="option-control">';
-            $categories = Nostress_Nscexport_Helper_Data::getCentrumCategory();
-        	foreach($categories as $keyvalue => $label)
-			{
-				echo '<option value="'.$keyvalue.'" ';
-      			echo $this->getSelected('centrumcategory', $keyvalue);
-      			echo ' >'.$this->__($label /*iconv("windows-1250", "UTF-8", $label)*/).' </option>'; 
-			}
-			echo 			'</select>
-               			</span>            
-        			</div>';
-        }
-        ?>         
-        <span class="field-row">
-            <label for="nscexport_filename"><?php echo $this->__("Export File Name").':' ?> <span class="required">*</span></label>
+            <label for="nscexport_producturlparams"><?php echo $this->__("Url params").':' ?> </label>
             <span class="with-tip">
-            	<input class="required-entry required-entry input-text" id="nscexport_filename" name="filename" value="<?php echo $this->getFilename(); ?>"/>
-        		<small><?php echo '('.$this->__('File Name without suffix - . xml or .csv will be added according to selected feed type.').')';?></small>         	
+            	<input class="input-text" id="nscexport_producturlparams" name="product_url_params" value="<?php echo $this->getProductUrlParams(); ?>"/>
+        		<small><?php echo '('.$this->__('Parameters will be added to product url. Use following format: paramA:valueA&ampparamB:valueB').')';?></small>         	
         	</span>
-        </span>                        
+        </span>                     
     </fieldset>
 	</div>  
 	

@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:typens="urn:{{var wsdl.name}}" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+            <complexType name="shoppingCartProductEntity">
+                <all>
+                    <element name="super_attribute" type="typens:associativeArray" minOccurs="0"/>
+                </all>
+            </complexType>
+     <!--       <complexType name="shoppingCartPaymentMethodResponseEntity">
+                <all>
+                    <element name="code" type="xsd:string"/>
+                    <element name="title" type="xsd:string"/>
+                    <element name="cc_types" type="typens:associativeArray"/>
+                </all>
+            </complexType>
+            <complexType name="shoppingCartPaymentMethodResponseEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:shoppingCartPaymentMethodResponseEntity[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>-->
+			<complexType name="shoppingCartPaymentListResponseEntity">
+                <all>
+                    <element name="code" type="xsd:string"/>
+                    <element name="title" type="xsd:string"/>
+                    <element name="cc_types" type="typens:associativeArray"/>
+                </all>
+            </complexType>
+			<complexType name="paymentMethodListResponseEntityArray">
+			    <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:shoppingCartPaymentListResponseEntity[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="paymentConfigListResponseEntity">
+                <all>
+                    <element name="code" type="xsd:string"/>
+                    <element name="title" type="xsd:string"/>
+                    <element name="cc_types" type="typens:associativeArray"/>
+                    <element name="active" type="xsd:string" minOccurs="0"/>
+                    <element name="cctypes" type="xsd:string" minOccurs="0"/>
+                    <element name="model" type="xsd:string" minOccurs="0"/>
+                    <element name="order_status" type="xsd:string" minOccurs="0"/>
+                    <element name="allowspecific" type="xsd:string" minOccurs="0"/>
+                    <element name="group" type="xsd:string" minOccurs="0"/>
+                    <element name="useccv" type="xsd:string" minOccurs="0"/>
+                    <element name="centinel" type="xsd:string" minOccurs="0"/>
+                    <element name="min_order_total" type="xsd:string" minOccurs="0"/>
+                    <element name="max_order_total" type="xsd:string" minOccurs="0"/>
+                    <element name="sort_order" type="xsd:string" minOccurs="0"/>
+                    <element name="specificcountry" type="xsd:string" minOccurs="0"/>
+                    <element name="payable_to" type="xsd:string" minOccurs="0"/>
+                    <element name="mailing_address" type="xsd:string" minOccurs="0"/>
+                    <element name="allow_billing_agreement_wizard" type="xsd:string" minOccurs="0"/>
+                    <element name="verify_peer" type="xsd:string" minOccurs="0"/>
+                    <element name="payment_action" type="xsd:string" minOccurs="0"/>
+                    <element name="debug" type="xsd:string" minOccurs="0"/>
+                    <element name="line_items_enabled" type="xsd:string" minOccurs="0"/>
+                    <element name="solution_type" type="xsd:string" minOccurs="0"/>
+                    <element name="authorization_honor_period" type="xsd:string" minOccurs="0"/>
+                    <element name="order_valid_period" type="xsd:string" minOccurs="0"/>
+                    <element name="child_authorization_number" type="xsd:string" minOccurs="0"/>
+                    <element name="paypal_config" type="typens:paypalConfigEntity" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="paypalConfigEntity">
+                 <all>
+                     <element name="general" type="typens:paypalConfigGeneral" minOccurs="0"/>
+                     <element name="style" type="typens:paypalConfigStyle" minOccurs="0"/>
+                     <element name="wpp" type="typens:paypalConfigWpp" minOccurs="0"/>
+                     <element name="wpuk" type="typens:paypalConfigWpuk" minOccurs="0"/>
+                     <element name="fetchReports" type="typens:paypalConfigFetchReports" minOccurs="0"/>
+                 </all>
+            </complexType>
+            <complexType name="paypalConfigGeneral">
+                <all>
+                    <element name="merchant_country" type="xsd:string" minOccurs="0"/>
+                    <element name="business_account" type="xsd:string" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="paypalConfigStyle">
+                <all>
+                    <element name="logo" type="xsd:string" minOccurs="0"/>
+                    <element name="page_style" type="xsd:string" minOccurs="0"/>
+                    <element name="paypal_hdrimg" type="xsd:string" minOccurs="0"/>
+                    <element name="paypal_hdrbackcolor" type="xsd:string" minOccurs="0"/>
+                    <element name="paypal_hdrbordercolor" type="xsd:string" minOccurs="0"/>
+                    <element name="paypal_payflowcolor" type="xsd:string" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="paypalConfigWpp">
+                <all>
+                    <element name="api_password" type="xsd:string" minOccurs="0"/>
+                    <element name="api_signature" type="xsd:string" minOccurs="0"/>
+                    <element name="api_username" type="xsd:string" minOccurs="0"/>
+                    <element name="button_flavor" type="xsd:string" minOccurs="0"/>
+                    <element name="api_authentication" type="xsd:string" minOccurs="0"/>
+                    <element name="sandbox_flag" type="xsd:string" minOccurs="0"/>
+                    <element name="use_proxy" type="xsd:string" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="paypalConfigWpuk">
+                <all>
+                    <element name="user" type="xsd:string" minOccurs="0"/>
+                    <element name="pwd" type="xsd:string" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="paypalConfigFetchReports">
+                <all>
+                    <element name="ftp_login" type="xsd:string" minOccurs="0"/>
+                    <element name="ftp_password" type="xsd:string" minOccurs="0"/>
+                    <element name="schedule" type="xsd:string" minOccurs="0"/>
+                    <element name="time" type="xsd:string" minOccurs="0"/>
+                    <element name="ftp_sandbox" type="xsd:string" minOccurs="0"/>
+                    <element name="ftp_ip" type="xsd:string" minOccurs="0"/>
+                    <element name="ftp_path" type="xsd:string" minOccurs="0"/>
+                    <element name="active" type="xsd:string" minOccurs="0"/>
+                </all>
+            </complexType>
+
+            <complexType name="paymentConfigListResponseEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:paymentConfigListResponseEntity[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+
+            <complexType name="configInfoEntity">
+                <all>
+                    <element name="currency" type="typens:currencyInfoEntity" minOccurs="0"/>
+                    <element name="general" type="typens:generalInfoEntity" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="currencyInfoEntity">
+                <all>
+                    <element name="base" type="xsd:string" minOccurs="0"/>
+                    <element name="default" type="xsd:string" minOccurs="0"/>
+                    <element name="allow" type="xsd:string" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="generalInfoEntity">
+                <all>
+                    <element name="default_country" type="xsd:string" minOccurs="0"/>
+                    <element name="allow_countries" type="xsd:string" minOccurs="0"/>
+                    <element name="optional_zip_countries" type="xsd:string" minOccurs="0"/>
+                    <element name="state_required" type="xsd:string" minOccurs="0"/>
+                    <element name="display_not_required_state" type="xsd:string" minOccurs="0"/>
+                    <element name="timezone" type="xsd:string" minOccurs="0"/>
+                    <element name="locale" type="xsd:string" minOccurs="0"/>
+                    <element name="guest_checkout" type="xsd:string" minOccurs="0"/>
+                </all>
+            </complexType>
+            
+            <complexType name="categoryAssignedProduct">
+                <all>
+                    <element name="product_id" type="xsd:int"/>
+                    <element name="type" type="xsd:string"/>
+                    <element name="set" type="xsd:int"/>
+                    <element name="sku" type="xsd:string"/>
+                    <element name="position" type="xsd:int"/>
+                    <element name="categories" type="typens:ArrayOfString" minOccurs="0"/>
+                    <element name="websites" type="typens:ArrayOfString" minOccurs="0"/>
+                    <element name="media_info" type="typens:catalogProductImageEntityArray" minOccurs="0"/>
+                    <element name="options" type="typens:categoryProductOptionArray" minOccurs="0"/>
+                    <element name="bundle_attributes" type="typens:bundleAttribute" minOccurs="0"/>
+                    <element name="configurable_attributes" type="typens:configurableAttributeArray" minOccurs="0"/>
+                    <element name="downloadable_info" type="typens:catalogProductDownloadableLinkInfoEntity" minOccurs="0"/>
+                    <element name="bundle_items" type="typens:bundleOptionArray" minOccurs="0"/>
+                    <element name="grouped_items" type="typens:groupedItemArray" minOccurs="0"/>
+                    <element name="created_at" type="xsd:string" minOccurs="0"/>
+                    <element name="updated_at" type="xsd:string" minOccurs="0"/>
+                    <element name="type_id" type="xsd:string" minOccurs="0"/>
+                    <element name="name" type="xsd:string" minOccurs="0"/>
+                    <element name="description" type="xsd:string" minOccurs="0"/>
+                    <element name="short_description" type="xsd:string" minOccurs="0"/>
+                    <element name="weight" type="xsd:string" minOccurs="0"/>
+                    <element name="status" type="xsd:string" minOccurs="0"/>
+                    <element name="url_key" type="xsd:string" minOccurs="0"/>
+                    <element name="url_path" type="xsd:string" minOccurs="0"/>
+                    <element name="visibility" type="xsd:string" minOccurs="0"/>
+                    <element name="category_ids" type="typens:ArrayOfString" minOccurs="0"/>
+                    <element name="website_ids" type="typens:ArrayOfString" minOccurs="0"/>
+                    <element name="has_options" type="xsd:string" minOccurs="0"/>
+                    <element name="gift_message_available" type="xsd:string" minOccurs="0"/>
+                    <element name="price" type="xsd:string" minOccurs="0"/>
+                    <!--<element name="minimal_price" type="xsd:string" minOccurs="0"/>-->
+                    <element name="special_price" type="xsd:string" minOccurs="0"/>
+                    <element name="special_from_date" type="xsd:string" minOccurs="0"/>
+                    <element name="special_to_date" type="xsd:string" minOccurs="0"/>
+                    <element name="tax_class_id" type="xsd:string" minOccurs="0"/>
+                    <element name="tier_price" type="typens:catalogProductTierPriceEntityArray" minOccurs="0"/>
+                    <element name="meta_title" type="xsd:string" minOccurs="0"/>
+                    <element name="meta_keyword" type="xsd:string" minOccurs="0"/>
+                    <element name="meta_description" type="xsd:string" minOccurs="0"/>
+                    <element name="custom_design" type="xsd:string" minOccurs="0"/>
+                    <element name="custom_layout_update" type="xsd:string" minOccurs="0"/>
+                    <element name="options_container" type="xsd:string" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="groupedItemArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:groupedItem[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="groupedItem">
+                <all>
+                    <element name="product_id" type="xsd:int" minOccurs="1"/>
+                    <element name="sku" type="xsd:string" minOccurs="1"/>
+                    <element name="price" type="xsd:string" minOccurs="1"/>
+                    <element name="name" type="xsd:string" minOccurs="1"/>
+                    <element name="is_saleable" type="xsd:int" minOccurs="1"/>
+                    <element name="position" type="xsd:int" minOccurs="1"/>
+                    <element name="qty" type="xsd:string" minOccurs="1"/>
+                </all>
+            </complexType>
+            <complexType name="bundleOptionArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:bundleOption[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="bundleOption">
+                <all>
+                    <element name="option_id" type="xsd:int" minOccurs="1" />
+                    <element name="required" type="xsd:int" minOccurs="1"/>
+                    <element name="position" type="xsd:int" minOccurs="1"/>
+                    <element name="type" type="xsd:string" minOccurs="1"/>
+                    <element name="default_title" type="xsd:string" minOccurs="1"/>
+                    <element name="title" type="xsd:string" minOccurs="1"/>
+                    <element name="selections" type="typens:bundleOptionSelectionArray" minOccurs="1"/>
+                </all>
+            </complexType>
+            <complexType name="bundleOptionSelectionArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:bundleOptionSelection[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="bundleOptionSelection">
+                <all>
+                    <element name="product_id" type="xsd:int" minOccurs="1"/>
+                    <element name="selection_id" type="xsd:int" minOccurs="1"/>
+                    <element name="sku" type="xsd:string" minOccurs="1"/>
+                    <element name="position" type="xsd:int" minOccurs="1"/>
+                    <element name="is_default" type="xsd:int" minOccurs="1"/>
+                    <element name="price" type="xsd:string" minOccurs="1"/>
+                    <element name="price_type" type="xsd:string" minOccurs="1"/>
+                    <element name="name" type="xsd:string" minOccurs="1"/>
+                    <element name="is_saleable" type="xsd:int" minOccurs="1"/>
+                    <element name="qty" type="xsd:string" minOccurs="1"/>
+                    <element name="can_change_qty" type="xsd:int" minOccurs="1"/>
+                </all>
+            </complexType>
+                        
+            <complexType name="bundleAttribute">
+                <all>
+                    <element name="price_type" type="xsd:string" minOccurs="1"/>
+                    <element name="price_view" type="xsd:string" minOccurs="1"/>
+                </all>
+            </complexType>
+            
+            <complexType name="configurableAttributeArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:configurableAttribute[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+
+            <complexType name="configurableAttribute">
+                <all>
+                    <element name="id" type="xsd:int" minOccurs="1"/>
+                    <element name="code" type="xsd:string" minOccurs="1"/>
+                    <element name="label" type="xsd:string" minOccurs="1"/>
+                    <element name="options" type="typens:configurableAttributeOptionArray" minOccurs="1"/>
+                </all>
+            </complexType>
+
+            <complexType name="configurableAttributeOptionArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:configurableAttributeOption[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+
+            <complexType name="configurableAttributeOption">
+                <all>
+                    <element name="id" type="xsd:int" minOccurs="1"/>
+                    <element name="label" type="xsd:string" minOccurs="1"/>
+                    <element name="price" type="xsd:string" minOccurs="1"/>
+                    <element name="oldPrice" type="xsd:string" minOccurs="1"/>
+                    <element name="products" type="typens:configurableOptionProductArray" minOccurs="1"/>
+                </all>
+            </complexType>
+
+            <complexType name="configurableOptionProductArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:configurableOptionProduct[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+
+            <complexType name="configurableOptionProduct">
+                <all>
+                    <element name="id" type="xsd:int" minOccurs="1"/>
+                    <element name="sku" type="xsd:string" minOccurs="1"/>
+                </all>
+            </complexType>
+
+            <complexType name="categoryProductOptionArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:categoryProductOption[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+
+            <complexType name="categoryProductOption">
+                <all>
+                    <element name="option_id" type="xsd:string" minOccurs="1"/>
+                    <element name="title" type="xsd:string" minOccurs="1"/>
+                    <element name="type" type="xsd:string" minOccurs="1"/>
+                    <element name="sort_order" type="xsd:string" minOccurs="1"/>
+                    <element name="is_require" type="xsd:int" minOccurs="1"/>
+                    <element name="additional_fields" type="typens:catalogProductCustomOptionAdditionalFieldsArray" minOccurs="1"/>
+                </all>
+            </complexType>
+
+            <complexType name="categoryAssignedProductsArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:categoryAssignedProduct[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="layerFilterArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:layerFilter[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="layerFilter">
+                <all>
+                    <element name="name" type="xsd:string" minOccurs="1"/>
+                    <element name="code" type="xsd:string" minOccurs="1"/>
+                    <element name="items" type="typens:layerFilterItemArray" minOccurs="1"/>
+                </all>
+            </complexType>
+            <complexType name="layerFilterItemArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:layerFilterItem[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="layerFilterItem">
+                <all>
+                    <element name="count" type="xsd:int" minOccurs="1"/>
+                    <element name="label" type="xsd:string" minOccurs="1"/>
+                    <element name="value" type="xsd:string" minOccurs="1"/>
+                </all>
+            </complexType>
+            <complexType name="searchProductsResult">
+                <all>
+                    <element name="products" type="typens:categoryAssignedProductsArray" minOccurs="1"/>
+                    <element name="layer_filters" type="typens:layerFilterArray" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="checkoutAgreementsArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:checkoutAgreementsEntity[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>  
+            <complexType name="checkoutAgreementsEntity">
+                <all>
+                    <element minOccurs="1"  name="agreement_id" type="xsd:int" />
+                    <element minOccurs="1"  name="name" type="xsd:string" />
+                    <element minOccurs="1"  name="content" type="xsd:string" />
+                    <element minOccurs="1"  name="content_height" type="xsd:string" />
+                    <element minOccurs="1"  name="checkbox_text" type="xsd:string" />
+                    <element minOccurs="1"  name="is_html" type="xsd:string" />
+                </all>
+            </complexType>
+            <complexType name="shoppingCartGuestCustomerAddressEntity">
+                <all>
+                    <element name="mode" type="xsd:string" minOccurs="0"/>
+                    <element name="address_id" type="xsd:string" minOccurs="0"/>
+                    <element name="firstname" type="xsd:string" minOccurs="0"/>
+                    <element name="lastname" type="xsd:string" minOccurs="0"/>
+                    <element name="company" type="xsd:string" minOccurs="0"/>
+                    <element name="street" type="xsd:string" minOccurs="0"/>
+                    <element name="city" type="xsd:string" minOccurs="0"/>
+                    <element name="region" type="xsd:string" minOccurs="0"/>
+                    <element name="region_id" type="xsd:string" minOccurs="0"/>
+                    <element name="postcode" type="xsd:string" minOccurs="0"/>
+                    <element name="country_id" type="xsd:string" minOccurs="0"/>
+                    <element name="telephone" type="xsd:string" minOccurs="0"/>
+                    <element name="fax" type="xsd:string" minOccurs="0"/>
+                    <element name="email" type="xsd:string" minOccurs="0"/>
+                    <element name="is_default_billing" type="xsd:int" minOccurs="0"/>
+                    <element name="is_default_shipping" type="xsd:int" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="shoppingCartGuestCustomerAddressEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:shoppingCartGuestCustomerAddressEntity[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+        </schema>
+    </types>
+    <message name="cmsPageListRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="store" type="xsd:string"/>
+    </message>
+    <message name="cmsPageListResponse">
+        <part name="result" type="typens:cmsPageListResponseEntityArray"/>
+    </message>
+	<message name="paymentMethodListRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="quoteId" type="xsd:int"/>
+        <part name="store" type="xsd:string"/>
+    </message>
+    <message name="paymentMethodListResponse">
+        <part name="result" type="typens:paymentMethodListResponseEntityArray"/>
+    </message>
+    <message name="paymentConfigListRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="quoteId" type="xsd:int"/>
+        <part name="store" type="xsd:string"/>
+    </message>
+    <message name="paymentConfigListResponse">
+        <part name="result" type="typens:paymentConfigListResponseEntityArray"/>
+    </message>
+    <message name="configInfoRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="store" type="xsd:string"/>
+    </message>
+    <message name="configInfoResponse">
+        <part name="result" type="typens:configInfoEntity"/>
+    </message>
+    <message name="categoryAssignedProductsRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="categoryId" type="xsd:int"/>
+        <part name="filters" type="typens:filters"/>
+        <part name="customerId" type="xsd:int"/>
+        <part name="pageNumber" type="xsd:int"/>
+        <part name="pageSize" type="xsd:int"/>
+        <part name="store" type="xsd:string"/>
+    </message>
+    <message name="categoryAssignedProductsResponse">
+        <part name="result" type="typens:categoryAssignedProductsArray"/>
+    </message>
+    <message name="layerFiltersRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="categoryId" type="xsd:int"/>
+        <part name="appliedFilters" type="typens:associativeArray"/>
+        <part name="store" type="xsd:string"/>
+    </message>
+    <message name="layerFiltersResponse">
+        <part name="result" type="typens:layerFilterArray"/>
+    </message>
+    <message name="searchProductsRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="query" type="xsd:string"/>
+        <part name="filters" type="typens:associativeArray"/>
+        <part name="pageNumber" type="xsd:int"/>
+        <part name="pageSize" type="xsd:int"/>
+        <part name="store" type="xsd:string"/>
+        <part name="useLayerNavigation" type="xsd:boolean"/>
+    </message>
+    <message name="searchProductsResponse">
+        <part name="result" type="typens:searchProductsResult"/>
+    </message>
+    <message name="cartCreateRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="storeId" type="xsd:string"/>
+        <part name="customerId" type="xsd:int"/>
+    </message>
+    <message name="cartCreateResponse">
+        <part name="quoteId" type="xsd:int"/>
+    </message>
+    <message name="cartMergeRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="guestQuoteId" type="xsd:int"/>
+        <part name="customerQuoteId" type="xsd:int"/>
+        <part name="storeId" type="xsd:string"/>
+    </message>
+    <message name="cartMergeResponse">
+        <part name="result" type="typens:shoppingCartInfoEntity"/>
+    </message>
+    <message name="cartCollectTotalsRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="quoteId" type="xsd:int"/>
+        <part name="storeId" type="xsd:string"/>
+    </message>
+    <message name="cartCollectTotalsResponse">
+        <part name="result" type="typens:shoppingCartInfoEntity"/>
+    </message>
+    <message name="checkoutAgreementsRequestParam">
+        <part minOccurs="1"  name="sessionId" type="xsd:string" />
+        <part minOccurs="0"  name="storeId" type="xsd:string" />
+    </message>
+    <message name="checkoutAgreementsResponseParam">
+        <part minOccurs="0"  name="result" type="typens:checkoutAgreementsArray" />
+    </message>
+    <message name="magejamVersionRequest">
+        <part name="sessionId" type="xsd:string"/>
+    </message>
+    <message name="magejamVersionResponse">
+        <part name="result" type="xsd:string"/>
+    </message>
+	<message name="shoppingCartGuestCustomerAddressesRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="quoteId" type="xsd:int"/>
+        <part name="customer" type="typens:shoppingCartGuestCustomerAddressEntityArray"/>
+        <part name="storeId" type="xsd:string"/>
+    </message>
+    <message name="shoppingCartGuestCustomerAddressesResponse">
+        <part name="result" type="xsd:boolean"/>
+    </message>
+    <portType name="{{var wsdl.handler}}PortType">
+        <operation name="cmsPageList">
+            <documentation>Get list of cms pages</documentation>
+            <input message="typens:cmsPageListRequest"/>
+            <output message="typens:cmsPageListResponse"/>
+        </operation>
+        <operation name="paymentMethodList">
+            <documentation>Get list of available payment methods</documentation>
+            <input message="typens:paymentMethodListRequest"/>
+            <output message="typens:paymentMethodListResponse"/>
+        </operation>
+        <operation name="paymentConfigList">
+            <documentation>Get config list of available payment methods</documentation>
+            <input message="typens:paymentConfigListRequest"/>
+            <output message="typens:paymentConfigListResponse"/>
+        </operation>
+        <operation name="configInfo">
+            <documentation>Get config info</documentation>
+            <input message="typens:configInfoRequest"/>
+            <output message="typens:configInfoResponse"/>
+        </operation>
+        <operation name="categoryAssignedProducts">
+            <documentation>Retrieve list of assigned products with details</documentation>
+            <input message="typens:categoryAssignedProductsRequest"/>
+            <output message="typens:categoryAssignedProductsResponse"/>
+        </operation>
+        <operation name="layerFilters">
+            <documentation>Retrieve list of assigned products with details</documentation>
+            <input message="typens:layerFiltersRequest"/>
+            <output message="typens:layerFiltersResponse"/>
+        </operation>
+        <operation name="searchProducts">
+            <documentation>Catalog Search Products</documentation>
+            <input message="typens:searchProductsRequest"/>
+            <output message="typens:searchProductsResponse"/>
+        </operation>
+        <operation name="cartCreate">
+            <documentation>Returns active quoteId or creates new</documentation>
+            <input message="typens:cartCreateRequest"/>
+            <output message="typens:cartCreateResponse"/>
+        </operation>
+        <operation name="cartMerge">
+            <documentation>Merges guest quote with customer quote, makes guest quote not-active</documentation>
+            <input message="typens:cartMergeRequest"/>
+            <output message="typens:cartMergeResponse"/>
+        </operation>
+        <operation name="cartCollectTotals">
+            <documentation>Returns active quoteId or creates new</documentation>
+            <input message="typens:cartCollectTotalsRequest"/>
+            <output message="typens:cartCollectTotalsResponse"/>
+        </operation>
+        <operation name="checkoutAgreements">
+            <documentation>Returns current versions of MageJam Module</documentation>
+            <input message="typens:checkoutAgreementsRequest"/>
+            <output message="typens:checkoutAgreementsResponse"/>
+        </operation>
+        <operation name="magejamVersion">
+            <documentation>Returns current versions of MageJam Module</documentation>
+            <input message="typens:magejamVersionRequest"/>
+            <output message="typens:magejamVersionResponse"/>
+        </operation>
+		<operation name="shoppingCartGuestCustomerAddresses">
+            <documentation>Set guest customer's addresses in shopping cart</documentation>
+            <input message="typens:shoppingCartGuestCustomerAddressesRequest"/>
+            <output message="typens:shoppingCartGuestCustomerAddressesResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="categoryAssignedProducts">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="layerFilters">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="searchProducts">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="cmsPageList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="paymentMethodList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="paymentConfigList">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="configInfo">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="cartCreate">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="cartMerge">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="cartCollectTotals">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="checkoutAgreements">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="magejamVersion">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+		<operation name="shoppingCartGuestCustomerAddresses">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+    </binding>
+</definitions>

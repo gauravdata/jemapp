@@ -18,8 +18,8 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_ShippingPrice
- * @version    1.0.2
+ * @package    AW_Previousnext
+ * @version    1.3.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */

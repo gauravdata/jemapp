@@ -21,7 +21,7 @@ ol.checkout-agreements {
 
 /* Button CSS */
 .onestepcheckout-button, .onestepcheckout-button:visited {
-    background: #222 url(../../../base/default/onestepcheckout/images/button-background.png) repeat-x;
+    background: #222 url(images/button-background.png) repeat-x;
     display: inline-block;
     padding: 5px 10px 6px;
     color: #fff;
@@ -39,7 +39,7 @@ ol.checkout-agreements {
 
     .onestepcheckout-button:hover                          { background-color: #111; color: #fff; }
     .onestepcheckout-button:active                         { top: 1px; }
-    .small.onestepcheckout-button, .small.onestepcheckout-button:visited          { font-size: 11px; padding: ; }
+    .small.onestepcheckout-button, .small.onestepcheckout-button:visited          { font-size: 11px;}
     .onestepcheckout-button, .onestepcheckout-button:visited,
     .medium.onestepcheckout-button, .medium.onestepcheckout-button:visited        { font-size: 13px; font-weight: bold; line-height: 1; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
     .large.onestepcheckout-button, .large.onestepcheckout-button:visited          { font-size: 16px; padding: 8px 30px 9px; }
@@ -61,21 +61,18 @@ ol.checkout-agreements {
     .grey.onestepcheckout-button:hover                           { background-color: #cccccc; }
 
 
-
 .onestepcheckout-place-order-loading {
     text-align: right;
     margin-top: 10px;
+    padding-left: 20px;
     font-style: italic;
+    background: url("images/ajax-loader.gif") no-repeat;
+    display: inline-block;
 }
 
 select.address-select {
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin: 3px 0 3px 0;
     width: 95% !important;
-}
-
-.onestepcheckout-enterprise {
-
 }
 
 .onestepcheckout-enterprise span.validation-error,.onestepcheckout-enterprise div.validation-error
@@ -84,9 +81,8 @@ select.address-select {
 }
 
 ul.onestepcheckout-custom-options {
-    margin: 0;
+    margin: 0 0 0 20px;
     padding: 0;
-    margin-left: 20px;
     list-style-type: disc;
 }
 
@@ -144,7 +140,7 @@ div.onestepcheckout-threecolumns {
 }
 
 div.onestepcheckout-threecolumns h1 {
-    font-family: Arial;
+    font-family: Arial,serif;
     font-size: 18px;
     font-weight: bold;
 }
@@ -153,7 +149,7 @@ div.onestepcheckout-threecolumns div.onestepcheckout-column-left {
     width: 33%;
     float: left;
     margin-right: 15px;
-    background: transparent url(../../../base/default/onestepcheckout/images/line-gradient.gif) no-repeat scroll
+    background: transparent url(images/line-gradient.gif) no-repeat scroll
         right top;
     padding-top: 15px;
 }
@@ -163,7 +159,7 @@ div.onestepcheckout-threecolumns div.onestepcheckout-column-middle {
     float: left;
     margin-right: 15px;
     padding-right: 15px;
-    background: transparent url(../../../base/default/onestepcheckout/images/line-gradient.gif) no-repeat scroll
+    background: transparent url(images/line-gradient.gif) no-repeat scroll
         right top;
     padding-top: 15px;
 }
@@ -185,7 +181,6 @@ p.onestepcheckout-login-link {
 }
 
 div.onestepcheckout-error {
-    background-color: #FAEBE7;
     color: #DF280A;
     border: 1px solid #DF280A;
     margin-top: 5px;
@@ -194,9 +189,7 @@ div.onestepcheckout-error {
     padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 25px;
-    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-error.jpg);
-    background-repeat: no-repeat;
-    background-position: 5px 5px;
+    background: #FAEBE7 url(images/onestepcheckout-error.jpg) no-repeat 5px 5px;
 }
 
 .onestepcheckout-column-left .onestepcheckout-error {
@@ -270,7 +263,7 @@ div.checkoutcontainer {
 div.checkoutcontainer .checkout-error-message {
     font-size: 14px;
     margin-left: 10px;
-    color: red;
+    color: #ff0000;
 }
 
 div.checkoutcontainer .payment-methods .form-list label {
@@ -278,12 +271,12 @@ div.checkoutcontainer .payment-methods .form-list label {
 }
 
 div.checkoutcontainer div.input-error label {
-    color: red !important;
+    color: #ff0000 !important;
 }
 
 div.checkoutcontainer div.input-error input,div.checkoutcontainer div.input-error select
     {
-    border: 1px solid red !important;
+    border: 1px solid #ff0000 !important;
 }
 
 div.checkoutcontainer div.input-different-shipping {
@@ -356,8 +349,6 @@ fieldset.group-select {
 .shipment-methods dd {
     font-weight: bold;
     margin: 0 !important;
-    margin-bottom: 3px;
-    margin-top: 7px;
 }
 
 p.checkout-choose-payment-method,p.checkout-choose-shipping-method {
@@ -372,8 +363,7 @@ p.checkout-choose-payment-method {
 }
 
 .payment-methods dd {
-    padding: 0;
-    padding-left: 20px;
+    padding: 0 0 0 20px;
 }
 
 .payment-methods dd li {
@@ -387,9 +377,7 @@ div.onestepcheckout-shipping-method {
 div.loading-ajax, div.loading-ajax-login {
     height: 50px;
     text-align: center;
-    background-image: url(../../../base/default/onestepcheckout/images/ajax-loader.gif);
-    background-repeat: no-repeat;
-    background-position: center center;
+    background: url(images/ajax-loader.gif) no-repeat center center;
 }
 
 p.onestepcheckout-numbers {
@@ -404,23 +392,23 @@ p.onestepcheckout-numbers {
 }
 
 p.onestepcheckout-numbers-1 {
-    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-numbers-1.png);
+    background-image: url(images/onestepcheckout-numbers-1.png);
 }
 
 p.onestepcheckout-numbers-2 {
-    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-numbers-2.png);
+    background-image: url(images/onestepcheckout-numbers-2.png);
 }
 
 p.onestepcheckout-numbers-3 {
-    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-numbers-3.png);
+    background-image: url(images/onestepcheckout-numbers-3.png);
 }
 
 p.onestepcheckout-numbers-4 {
-    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-numbers-4.png);
+    background-image: url(images/onestepcheckout-numbers-4.png);
 }
 
 div.onestepcheckout-skin-magento .onestepcheckout-numbers {
-    padding-top: 0px !important;
+    padding-top: 0;
     padding-left: 28px !important;
     height: 25px !important;
     text-transform: capitalize !important;
@@ -429,29 +417,29 @@ div.onestepcheckout-skin-magento .onestepcheckout-numbers {
 }
 
 div.onestepcheckout-skin-magento p.onestepcheckout-numbers-1 {
-    background-image: url(../../../base/default/onestepcheckout/images/skin-magento/onestepcheckout-numbers-1.png)
+    background-image: url(images/skin-magento/onestepcheckout-numbers-1.png)
         !important;
 }
 
 div.onestepcheckout-skin-magento p.onestepcheckout-numbers-2 {
-    background-image: url(../../../base/default/onestepcheckout/images/skin-magento/onestepcheckout-numbers-2.png)
+    background-image: url(images/skin-magento/onestepcheckout-numbers-2.png)
         !important;
 }
 
 div.onestepcheckout-skin-magento p.onestepcheckout-numbers-3 {
-    background-image: url(../../../base/default/onestepcheckout/images/skin-magento/onestepcheckout-numbers-3.png)
+    background-image: url(images/skin-magento/onestepcheckout-numbers-3.png)
         !important;
 }
 
 div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
-    background-image: url(../../../base/default/onestepcheckout/images/skin-magento/onestepcheckout-numbers-4.png)
+    background-image: url(images/skin-magento/onestepcheckout-numbers-4.png)
         !important;
 }
 
 /* Popup CSS */
 #onestepcheckout_popup_overlay_iframe {
     z-index: 100000;
-    background-color: black;
+    background-color: #000000;
     opacity: 0.8;
     filter: alpha(opacity =   80);
     position: absolute;
@@ -464,7 +452,7 @@ div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
 
 #onestepcheckout_popup_overlay {
     z-index: 1000000;
-    background-color: black;
+    background-color: #000000;
     opacity: 0.8;
     filter: alpha(opacity =   80);
     position: absolute;
@@ -497,8 +485,7 @@ div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
 }
 
 #onestepcheckout-toc-popup .onestepcheckout-toc-terms {
-    margin: 20px;
-    margin-top: 0 !important;
+    margin: 0 20px 20px;
     height: 440px !important;
     overflow: auto;
     padding-right: 10px;
@@ -509,16 +496,14 @@ div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
 }
 
 .onestepcheckout-popup-footer {
-    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-popup-footer.png);
-    background-repeat: no-repeat;
+    background: url(images/onestepcheckout-popup-footer.png) no-repeat;
     height: 13px;
 }
 
 .onestepcheckout-popup-wrapper {
-    background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-popup-header.png);
-    *background-image: url(../../../base/default/onestepcheckout/images/onestepcheckout-popup-header.png)
+    *background-image: url(images/onestepcheckout-popup-header.png)
         !important;
-    background-repeat: no-repeat;
+    background: url(images/onestepcheckout-popup-header.png) no-repeat;
 }
 
 .onestepcheckout-popup-wrapper h1 {
@@ -584,7 +569,7 @@ div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
 #onestepcheckout-login-popup p.close a,#onestepcheckout-login-popup p.close a:link,#onestepcheckout-login-popup p.close a:visited,#onestepcheckout-toc-popup p.close a,#onestepcheckout-toc-popup p.close a:link,#onestepcheckout-toc-popup p.close a:visited
     {
     text-decoration: none;
-    color: black;
+    color: #000000;
 }
 
 #onestepcheckout-login-popup p.close a:hover,#onestepcheckout-toc-popup p.close a:hover
@@ -593,7 +578,7 @@ div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
 }
 
 #onestepcheckout-login-error,#onestepcheckout-forgot-error {
-    color: red;
+    color: #ff0000;
     margin-bottom: 10px;
 }
 
@@ -612,7 +597,7 @@ div.onestepcheckout-comments textarea {
     width: 47%;
     float: left;
     margin-right: 30px;
-    background: transparent url(../../../base/default/onestepcheckout/images/line-gradient.gif) no-repeat scroll
+    background: transparent url(images/line-gradient.gif) no-repeat scroll
         right top;
 }
 
@@ -658,7 +643,7 @@ div.onestepcheckout-comments textarea {
 }
 
 .checkoutcontainer li.shipping-address-title {
-    font-family: Arial;
+    font-family: Arial,sans-serif;
     font-size: 16px;
     text-transform: uppercase;
     color: #404040;
@@ -750,7 +735,7 @@ div.onestepcheckout-comments textarea {
     background-color:#000;
 }
 
-.modal {
+.oscmodal {
     background-color:#fff;
     padding:10px;
     border:1px solid #333;
@@ -792,7 +777,12 @@ div.onestepcheckout-comments textarea {
 #addressreview #buttons div {
     float: left;
     zoom: 1;
-    margin: 0px 10px 0px 10px;
+    margin: 0 10px 0 10px;
+}
+#addressreview_summary div.data {
+    height: 375px;
+    overflow-y: auto;
+    padding-right: 2px;
 }
 .checkout-agreements li {
     margin: 0;
@@ -804,4 +794,10 @@ div.onestepcheckout-comments textarea {
 .agreement-content {
     overflow: auto;
     text-align:left;
+}
+label.required:after, span.required:after {
+    content: '' !important;
+}
+span.required {
+    color: #F00;
 }

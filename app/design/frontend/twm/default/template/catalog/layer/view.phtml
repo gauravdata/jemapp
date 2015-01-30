@@ -40,46 +40,50 @@ if ($topCategory->getLevel() > 2) {
 	} while ($topCategory->getLevel() != 2);
 }
 ?>
-<div class="navbar navbar-default" role="navigation">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle clearfix" data-toggle="collapse" data-target="#narrow-by-nav">
-			<div class="toggle-text pull-left"><?=$this->__('Menu');?></div>
-			<div class="toggle-bars pull-right">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
+<div class="category-nav-wrapper">
+	<div class="container">
+		<div class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle clearfix" data-toggle="collapse" data-target="#narrow-by-nav">
+					<div class="toggle-text pull-left"><?=$this->__('Menu');?></div>
+					<div class="toggle-bars pull-right">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</button>
 			</div>
-		</button>
-	</div>
-	<div class="collapse navbar-collapse" id="narrow-by-nav">
-		<ul class="nav navbar-nav">
-			<?php foreach ($topCategory->getParentCategory()->getChildrenCategories() as $category) : ?>
-				<li class="<?php echo $topCategory->getId() == $category->getId() ? 'active' : '' ?>"><a href="<?php echo Mage::helper('catalog/category')->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
-			<?php endforeach ?>
-				<li class="seperator">&nbsp;</li>
-			<?php foreach ($topCategory->getChildrenCategories() as $category) : ?>
-				<li class="<?php echo $currentCategory->getId() == $category->getId() ? 'active' : '' ?>"><a href="<?php echo Mage::helper('catalog/category')->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
-			<?php endforeach ?>
-
-            <?php if($this->canShowBlock()): ?>
-            <?php if($this->canShowOptions()): ?>
-			<?php $_filters = $this->getFilters() ?>
-			<?php foreach ($_filters as $_filter): ?>
-			<?php if($_filter->getItemsCount()): ?>
-				<?php if($_filter instanceof Mage_Catalog_Block_Layer_Filter_Category) continue ?>
-				<li class="dropdown-link pull-right">
-					<a href="#">
-						<?php echo $this->__($_filter->getName()) ?> <b class="caret"></b>
-					</a>
-					<ul class="dropdown-menu">
-						<?php echo $_filter->getHtml() ?>
-					</ul>
-				</li>
-			<?php endif; ?>
-			<?php endforeach; ?>
-            <?php endif; ?>
-            <?php endif; ?>
-		</ul>
+			<div class="collapse navbar-collapse" id="narrow-by-nav">
+				<ul class="nav navbar-nav navbar-nav-categories">
+					<?php foreach ($topCategory->getParentCategory()->getChildrenCategories() as $category) : ?>
+						<li class="<?php echo $topCategory->getId() == $category->getId() ? 'active' : '' ?>"><a href="<?php echo Mage::helper('catalog/category')->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
+					<?php endforeach ?>
+					<?php foreach ($topCategory->getChildrenCategories() as $category) : ?>
+						<li class="<?php echo $currentCategory->getId() == $category->getId() ? 'active' : '' ?>"><a href="<?php echo Mage::helper('catalog/category')->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
+					<?php endforeach ?>
+				</ul>
+				<ul class="nav navbar-nav navbar-filter">
+					<?php if($this->canShowBlock()): ?>
+					<?php if($this->canShowOptions()): ?>
+					<?php $_filters = $this->getFilters() ?>
+					<?php foreach ($_filters as $_filter): ?>
+					<?php if($_filter->getItemsCount()): ?>
+						<?php if($_filter instanceof Mage_Catalog_Block_Layer_Filter_Category) continue ?>
+						<li class="dropdown-link pull-right">
+							<a href="#">
+								<?php echo $this->__($_filter->getName()) ?> <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<?php echo $_filter->getHtml() ?>
+							</ul>
+						</li>
+					<?php endif; ?>
+					<?php endforeach; ?>
+					<?php endif; ?>
+					<?php endif; ?>
+				</ul>
+			</div>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">decorateDataList('narrow-by-list')</script>

@@ -1,0 +1,20 @@
+<?php /* @var $this Mage_Checkout_Block_Onepage_Payment */ ?>
+<header>
+    <a class="back" href="<?php echo $this->getUrl('*/*/backPayment', array('_secure' => true))?>">Back</a>
+    <h1>Payment Info</h1>
+</header>
+<form action="<?php echo Mage::getUrl('magejam/payment/save', array('_secure' => true)) ?>" id="co-payment-form" method="post">
+    <input type="hidden" name="quote_id" value="<?php echo $this->getQuote()->getId() ?>">
+    <?php echo $this->getChildHtml('methods') ?>
+<footer>
+    <em><?php echo $this->__('* Required Fields') ?></em>
+    <button type="submit"><?php echo $this->__('Continue') ?></button>
+</footer>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var form = new VarienForm('co-payment-form', '<?php echo $this->getUrl('checkout/onepage/savePayment') ?>');
+    var ul = $('co-payment-form').down('UL');
+    if (ul) ul.show();
+    //]]>
+</script>

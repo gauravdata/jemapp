@@ -18,8 +18,8 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_ShippingPrice
- * @version    1.0.2
+ * @package    AW_Previousnext
+ * @version    1.3.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
@@ -31,7 +31,7 @@ class AW_All_Model_Observer
         $tabsBlock = $observer->getBlock();
         if ($tabsBlock instanceof Mage_Adminhtml_Block_System_Config_Tabs) {
             foreach ($tabsBlock->getTabs() as $tab) {
-                if ($tab->getId() != 'awall') {
+                if ($tab->getId() != 'awall' || null === $tab->getSections()) {
                     continue;
                 }
                 $_sections = $tab->getSections()->getItems();

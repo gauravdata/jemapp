@@ -1,0 +1,2221 @@
+/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+
+html {
+    font-family: sans-serif; /* 1 */
+    -ms-text-size-adjust: 100%; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {
+    margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11 and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+
+audio,
+canvas,
+progress,
+video {
+    display: inline-block; /* 1 */
+    vertical-align: baseline; /* 2 */
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ */
+
+[hidden],
+template {
+    display: none;
+}
+
+/* Links
+   ========================================================================== */
+
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+
+a {
+    background: transparent;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+
+b,
+strong {
+    font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+
+dfn {
+    font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+
+mark {
+    background: #ff0;
+    color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+    font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+
+img {
+    border: 0;
+}
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+
+figure {
+    margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+
+pre {
+    overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    color: inherit; /* 1 */
+    font: inherit; /* 2 */
+    margin: 0; /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+    overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+    text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+    cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input {
+    line-height: normal;
+}
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+
+legend {
+    border: 0; /* 1 */
+    padding: 0; /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+
+textarea {
+    overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+
+optgroup {
+    font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td,
+th {
+    padding: 0;
+}
+
+
+/* MAIN */
+html {
+    height: 100%;
+}
+
+body {
+    background: #f6f6f6;
+    min-height: 100%;
+    padding: 50px 10px 90px;
+    box-sizing: border-box;
+    position: relative;
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #383838;
+}
+
+header  {
+    position: fixed;
+    height: 45px;
+    top:0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px #d0d0d0 solid;
+    text-align: center;
+    z-index: 100;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 10px 10px;
+}
+
+h1 {
+    margin: 0 70px;
+    font-size: 20px;
+    line-height: 45px;
+    font-weight: normal;
+    color: #000;
+    white-space: nowrap;
+}
+.back {
+    float: left;
+    height: 45px;
+    margin: 0 0 0 10px;
+    padding: 0 0 0 15px;
+    font-size: 14px;
+    line-height: 45px;
+    color: #838383;
+    text-decoration: none;
+    background: url(../images/magejam/back.png) no-repeat 0 50%;
+    background-size: 11px 15px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #6d6d6d;
+    margin: 0 0 5px;
+}
+
+label em {
+    font-style: normal;
+}
+
+input, select {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    box-sizing: border-box;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+input:focus, select:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}
+
+input[type="checkbox"], input[type="radio"] {
+    width: auto;
+    height: auto;
+    display: inline-block;
+}
+
+
+.form-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.form-list li {
+    margin: 0 0 22px;
+}
+
+.fields select {
+    width: 49%;
+    margin: 0 0 0 1%;
+    display: inline-block;
+}
+
+.fields select:first-of-type {
+    margin: 0 1% 0 0;
+}
+
+label[for="ccsave_expiration"]+.input-box .v-fix:first-of-type {
+    float:left;
+    width: 49%;
+    margin: 0 1% 22px 0;
+}
+
+label[for="ccsave_expiration"]+.input-box .v-fix:nth-of-type(2) {
+    float: left;
+    width: 49%;
+    margin: 0 0 22px 1%;
+}
+
+label[for="ccsave_cc_cid"]+.input-box {
+    position: relative;
+}
+
+label[for="ccsave_cc_cid"]+.input-box .v-fix {
+    float: none;
+    margin-right: 100px;
+    width: auto;
+}
+
+label[for="ccsave_cc_cid"]+.input-box .cvv-what-is-this {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
+
+button {
+    border: none;
+    color: #fff;
+    text-align: center;
+    height: 45px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #4a90e2;
+    display: block;
+    margin-bottom: 0;
+    font-weight: 400;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 45px;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.messages {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+.messages ul {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+.messages li  {
+    list-style: none;
+    margin: 0;
+    display: inline-block;
+}
+.messages > li {
+    width: 100%;
+    box-sizing: border-box;
+}
+.error-msg {
+    border: 1px #f00 solid;
+    color: #f00;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
+
+footer em {
+    display: block;
+    color: #6d6d6d;
+    margin: 0 0 5px;
+    font-weight: bold;
+}
+
+#accordion{
+    position: relative;
+    border: 1px #ccc solid;
+    border-radius: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.accordion-toggle{
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px #ccc solid;
+    background-color: #ffffff;
+    background-image: -webkit-linear-gradient(top, #fff, #ccc);
+    background-image:         linear-gradient(to bottom, #fff, #ccc);
+}
+.accordion-toggle:last-of-type {
+    border-bottom: none;
+}
+
+.accordion-toggle-active{
+    border-bottom: 1px #ccc solid;
+}
+
+.accordion-content{
+    overflow: hidden;
+    padding: 10px;
+    border-bottom: 1px #ccc solid;
+}
+.validation-advice{
+    color: red;
+}
+
+<!-- style checkout onepage -->
+/* ============================================ *
+ * Checkout - One Page
+ * ============================================ */
+.checkout-onepage-index .col-right,
+.checkout-onepage-index .col-left {
+    display: none;
+}
+
+.checkout-onepage-index .col-main {
+    width: auto;
+    float: none;
+}
+
+@media only screen and (min-width: 980px) {
+    .checkout-onepage-index .col-main {
+        float: left;
+        width: 68.75%;
+        padding-right: 20px;
+    }
+    .checkout-onepage-index .col-right,
+    .checkout-onepage-index .col-left {
+        width: 31.25%;
+        display: block;
+    }
+    .checkout-onepage-index .col-right {
+        padding-left: 0;
+    }
+}
+.opc select {
+    width: 365px;
+}
+
+/* -------------------------------------------- *
+ * Section Styling - Default
+ */
+.opc .section .step-title {
+    width: 100%;
+    border-top: 1px solid #ececec;
+    position: relative;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.opc .section .step-title:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.opc .section.allow:not(.active) .step-title {
+    cursor: pointer;
+}
+
+/* Using .no-touch since touch devices emulate hover, thereby making steps look active that are not */
+.no-touch .opc .section.allow:not(.active) .step-title:hover {
+    background-color: #f4f4f4;
+}
+
+.opc .section.active .step-title {
+    border-bottom: 1px solid #ececec;
+}
+
+.opc .section .step-title a {
+    display: none;
+}
+
+.opc .section.allow:not(.active) .step-title a {
+    display: block;
+    float: right;
+    line-height: 40px;
+    height: 40px;
+    padding: 0px 10px;
+}
+
+.no-touch .opc .section .step-title a:hover {
+    text-decoration: none;
+}
+
+.opc .section .step-title .number,
+.opc .section.allow.active .step-title .number,
+.no-touch .opc .section.allow:hover .step-title .number {
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    color: #FFFFFF;
+    line-height: 26px;
+    background-color: #3399cc;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    margin-top: -13px;
+}
+
+.opc .section.allow .step-title .number {
+    background-color: #99cce5;
+}
+
+.opc .section.allow .step-title h2 {
+    color: #a0a0a0;
+}
+
+.opc .section.allow .step-title:hover h2,
+.opc .section.active .step-title h2 {
+    color: #3399cc;
+}
+
+.opc .section .step-title h2 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 40px;
+    height: 40px;
+    float: left;
+    margin: 0px 4px 0px 45px;
+}
+
+.opc .section .step {
+    padding: 20px;
+}
+.opc .section .step:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+@media only screen and (max-width: 979px) {
+    .opc .section .step {
+        padding: 10px;
+    }
+}
+
+.opc h3 {
+    font-weight: 500;
+}
+
+.opc .buttons-set {
+    text-align: left;
+}
+.opc .buttons-set button.button {
+    float: left;
+    margin-left: 0;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+.opc .buttons-set p.required {
+    float: right;
+    margin-left: 5px;
+    margin-bottom: 0;
+}
+.opc .buttons-set .back-link {
+    float: right;
+    margin: 0;
+}
+.opc .buttons-set a {
+    line-height: 20px;
+    display: inline-block;
+    padding: 5px 5px 5px 0;
+}
+
+@media only screen and (max-width: 479px) {
+    .opc .buttons-set .button + .buttons-set .button,
+    .paypal-express-review .buttons-set .button + .buttons-set .button {
+        margin-left: 0;
+    }
+}
+.opc #opc-login .step {
+    padding: 0px;
+}
+.opc #opc-login .buttons-set {
+    border-top: 0;
+    padding-top: 5px;
+}
+
+@media only screen and (max-width: 770px) {
+    .opc #opc-login .description,
+    .opc #opc-login p.required {
+        display: none;
+    }
+}
+#opc-payment .note {
+    padding: 10px;
+}
+
+/* -------------------------------------------- *
+ * This section hides everything but the "Checkout Method" step of the checkout process and fades in the content
+ * once the customer progresses to the next step. The purpose of this is to simplify what the customer has to focus on.
+ * It is limited to larger viewports since smaller devices are inherently going to be focused solely on the
+ * "Checkout Method" step.
+ */
+.opc.opc-firststep-login .section:not(#opc-login) .step-title,
+.opc-block-progress-step-login {
+    -webkit-transition: opacity 300ms linear;
+    -webkit-transition-delay: 0;
+    -moz-transition: opacity 300ms linear 0;
+    -o-transition: opacity 300ms linear 0;
+    transition: opacity 300ms linear 0;
+}
+
+.opc.opc-firststep-login .section#opc-login .step-title .number {
+    -webkit-transition: width 80ms linear;
+    -webkit-transition-delay: 0;
+    -moz-transition: width 80ms linear 0;
+    -o-transition: width 80ms linear 0;
+    transition: width 80ms linear 0;
+}
+
+.opc.opc-firststep-login .section#opc-login .step-title h2 {
+    -webkit-transition: margin-left 80ms linear;
+    -webkit-transition-delay: 0;
+    -moz-transition: margin-left 80ms linear 0;
+    -o-transition: margin-left 80ms linear 0;
+    transition: margin-left 80ms linear 0;
+}
+
+/* When a user progresses from the "Checkout Method" to "Billing Information" for the first time, the              */
+/* "opc-has-progressed-from-login" class gets added to the body. Also, the .opc element will only have the         */
+/* "opc-firststep-login" class if the first step of the checkout is the "Checkout Method" (eg, not when logged in) */
+body:not(.opc-has-progressed-from-login) .opc.opc-firststep-login .section:not(#opc-login) .step-title,
+body:not(.opc-has-progressed-from-login) .opc-block-progress-step-login {
+    opacity: 0;
+}
+
+body:not(.opc-has-progressed-from-login) .opc.opc-firststep-login .section#opc-login .step-title .number {
+    width: 0px;
+    overflow: hidden;
+}
+
+body:not(.opc-has-progressed-from-login) .opc.opc-firststep-login .section#opc-login .step-title h2 {
+    margin-left: 0px;
+}
+
+/* -------------------------------------------- *
+ * Shipping and Payment methods
+ */
+.sp-methods {
+    margin: 0 0 8px;
+}
+.sp-methods dt {
+    margin: 13px 0 5px;
+    font-weight: bold;
+}
+.sp-methods dt:first-child {
+    margin: 0 0 5px;
+}
+.sp-methods dd li {
+    margin: 5px 0;
+}
+.sp-methods label img {
+    float: left;
+}
+.sp-methods label a {
+    margin-top: 6px;
+    float: right;
+    margin-left: 10px;
+}
+.sp-methods .price {
+    font-weight: bold;
+}
+.sp-methods .form-list {
+    padding-left: 20px;
+}
+.sp-methods .form-list li {
+    margin: 0 0 8px;
+}
+.sp-methods select.month {
+    width: 120px;
+    margin-right: 10px;
+}
+.sp-methods select.year {
+    width: 96px;
+}
+.sp-methods input.cvv {
+    width: 4em !important;
+}
+.sp-methods .checkmo-list li {
+    margin: 0 0 5px;
+    content: '';
+    display: table;
+    clear: both;
+}
+.sp-methods .checkmo-list label {
+    width: 165px;
+    padding-right: 15px;
+    text-align: right;
+    float: left;
+}
+.sp-methods .checkmo-list address {
+    float: left;
+}
+@media only screen and (max-width: 479px) {
+    .sp-methods .checkmo-list {
+        padding-left: 0;
+    }
+    .sp-methods .checkmo-list label {
+        width: 135px;
+    }
+}
+.sp-methods .release-amounts {
+    margin: 0.5em 0;
+}
+.sp-methods .release-amounts button {
+    float: left;
+    margin: 5px 10px 0 0;
+}
+
+/* One Page Checkout */
+.block-progress {
+    border: 0;
+    margin: 0;
+    border-left: 1px solid #cccccc;
+    padding-left: 20px;
+}
+.block-progress .block-content {
+    font-size: 13px;
+}
+.block-progress dt {
+    padding-top: 6px;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #636363;
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 1.4;
+    text-rendering: optimizeSpeed;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    font-weight: normal;
+    color: #a0a0a0;
+}
+.block-progress dt.complete {
+    color: #636363;
+}
+.block-progress dd {
+    padding-left: 15px;
+    margin-bottom: 10px;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-style: italic;
+}
+.block-progress dd address {
+    font-style: italic;
+}
+.block-progress #payment-progress-opcheckout .subtitle {
+    margin-bottom: 3px;
+}
+.block-progress .payment-info dt {
+    padding: 0;
+    margin: 0 0 3px 0;
+    color: #636363;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    text-transform: none;
+    font-style: italic;
+    float: left;
+    clear: both;
+    font-size: 13px;
+}
+.block-progress .payment-info dt:after {
+    content: ': ';
+}
+.block-progress .payment-info dd {
+    float: left;
+    margin-bottom: 3px;
+    font-size: 13px;
+}
+.block-progress .payment-info:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* review step */
+#checkout-review-table .btn-remove img {
+    display: none;
+}
+
+/* show/hide "change" link for progress step depend on complete status
+ * should be placed in .css file */
+.opc-block-progress dt.complete a,
+.opc-block-progress dt.complete .separator {
+    display: inline;
+}
+
+.opc-block-progress dt a,
+.opc-block-progress dt .separator {
+    display: none;
+}
+
+/* On small screens, the progress review content will be moved to the review step via JS. Styled via this CSS: */
+#checkout-step-review .opc-block-progress {
+    border-left: none;
+    padding-left: 0;
+}
+#checkout-step-review .opc-block-progress .block-title {
+    display: none;
+}
+#checkout-step-review .opc-block-progress .block-content {
+    display: block !important;
+    padding: 0;
+}
+#checkout-step-review .opc-block-progress .block-content > dl > div {
+    float: left;
+    width: 50%;
+}
+@media only screen and (max-width: 479px) {
+    #checkout-step-review .opc-block-progress .block-content > dl > div {
+        float: none;
+        width: auto;
+    }
+}
+#checkout-step-review .opc-block-progress .block-content .changelink {
+    display: none;
+}
+
+@media only screen and (max-width: 479px) {
+    #checkout-review-table thead > tr > th {
+        display: none;
+    }
+    #checkout-review-table thead > tr > th:first-child {
+        display: block;
+    }
+
+    #checkout-review-table thead > tr > th:first-child {
+        display: block;
+    }
+}
+#checkout-step-review .centinel > p {
+    margin-bottom: 10px;
+}
+#checkout-step-review .centinel iframe {
+    width: 100%;
+    min-height: 400px;
+}
+
+/* Gift options */
+.gift-messages-form .item {
+    content: '';
+    display: table;
+    clear: both;
+    margin-top: 30px;
+}
+.gift-messages-form .item h5 {
+    font-weight: bold;
+}
+.gift-messages-form .item .product-img-box {
+    width: auto;
+    float: left;
+    padding-right: 15px;
+}
+.gift-messages-form .item .details {
+    float: left;
+}
+
+.gift-message-form .inner-box > div {
+    content: '';
+    display: table;
+    clear: both;
+    width: 100%;
+    margin-top: 15px;
+}
+.gift-message-form .inner-box > div.extra-options-container p {
+    margin-bottom: 15px;
+}
+.gift-message-form .gift-wrapping-form label {
+    margin-right: 10px;
+}
+.gift-message-form .gift-wrapping-form img {
+    float: left;
+}
+
+/* ============================================ *
+ * Checkout - Success
+ * ============================================ */
+.checkout-onepage-success .col-main {
+    padding: 0;
+    text-align: center;
+}
+.checkout-onepage-success .buttons-set {
+    margin: 10px 0;
+    text-align: center;
+}
+.checkout-onepage-success .buttons-set button {
+    float: none;
+}
+.gift-message-form .gift-wrapping-form .gift-wrapping-design {
+    height: 75px;
+}
+.gift-message-form .gift-wrapping-form .gift-wrapping-design:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.gift-message-form .gift-wrapping-form .gift-wrapping-design .image-box {
+    margin-right: 5px;
+}
+.gift-message-form .gift-item {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #ececec;
+}
+.gift-message-form .gift-item:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.gift-message-form .gift-item .product-img-box {
+    width: 200px;
+}
+.gift-message-form .gift-item .product-img-box .product-image {
+    width: 75px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.gift-message-form .gift-item .product-img-box .product-name {
+    display: block;
+}
+.gift-message-form .gift-item .fieldset {
+    margin-left: 200px;
+}
+
+@media only screen and (max-width: 770px) {
+    .gift-message-form .gift-item .product-img-box {
+        width: 100%;
+        float: none;
+    }
+    .gift-message-form .gift-item .fieldset {
+        margin-left: 0px;
+    }
+    .gift-message-form .gift-item .fieldset textarea {
+        width: 100%;
+    }
+}
+
+sp-methods dt label,
+#checkout-shipping-method-load .sp-methods dd label,
+#co-shipping-method-form .sp-methods dd label,
+label {
+    color: #636363;
+    background-color: #f4f4f4;
+    padding: 5px 10px;
+    display: inline-block;
+    width: auto;
+    max-width: none;
+    min-width: 250px;
+    float: none;
+    padding: 6px 10px 6px 40px;
+}
+.form-list .control label:hover,
+.sp-methods dt label:hover,
+#checkout-shipping-method-load .sp-methods dd label:hover,
+#co-shipping-method-form .sp-methods dd label:hover,
+label{
+    background-color: #e7e7e7;
+}
+.form-list .control .no-display + label,
+.sp-methods dt .no-display + label,
+#checkout-shipping-method-load .sp-methods dd .no-display + label,
+#co-shipping-method-form .sp-methods dd .no-display + label,
+label{
+    padding-left: 10px;
+    background-color: transparent;
+}
+.form-list .control .no-display + label:hover,
+.sp-methods dt .no-display + label:hover,
+#checkout-shipping-method-load .sp-methods dd .no-display + label:hover,
+#co-shipping-method-form .sp-methods dd .no-display + label:hover,
+label{
+    background-color: transparent;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+ol, ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+.page-title h1, .page-title h2{
+    border-bottom: 1px solid #ededed;
+    color: #636363;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-left:0;
+    margin-right: 0;
+    padding-bottom: 3px;
+    text-transform: uppercase;
+}
+
+.opc .active .step-title {
+    background: none repeat scroll 0 0 #f9f3e3;
+    border: 1px solid #bbafa0;
+    color: #f18200;
+    cursor: default;
+    padding-bottom: 5px;
+}
+
+label {
+    display: inline-block;
+ }
+
+
+/* ============================================ *
+ * Data Table
+ * ============================================ */
+.data-table {
+  width: 100%;
+}
+
+.data-table td,
+.data-table th {
+  padding: 10px;
+  vertical-align: top;
+}
+
+.data-table th {
+  background: #f4f4f4;
+  text-transform: uppercase;
+  font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.data-table thead th,
+.data-table tbody td {
+  border-bottom: 1px solid silver;
+}
+
+.data-table tbody td,
+.data-table tfoot td {
+  font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.data-table tfoot tr {
+  background: #f4f4f4;
+}
+
+.data-table tbody td .item-options {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.data-table tbody td .item-options dt:after {
+  content: ':';
+}
+
+.a-center{
+	text-align:center;
+}
+.a-right{
+	text-align:right;
+}
+
+/* -------------------------------------------- *
+ * Please Wait (Loading Indicator)
+ */
+.please-wait {
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 5px;
+  line-height: 24px;
+  height: 24px;
+  white-space: nowrap;
+  /* Prevent the linebreak in the HTML from causing layout issues */
+}
+.please-wait img {
+  float: left;
+  margin-right: 5px;
+  width: 24px;
+}
+
+.buttons-set p.required {
+    float: right;
+    line-height: 33px;
+    margin: 0 0 0 10px;
+}
+p.required, .validation-advice {
+    color: red;
+    font-size: 13px;
+    margin: 5px 0 0;
+}
+
+.button2 {
+    border: 0;
+    padding: 0 5px;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.button2:focus {
+    outline: none;
+}
+
+.button2 span,
+.button2 span span {
+    line-height: 30px;
+    height: 30px;
+    text-decoration: underline;
+    text-transform: uppercase;
+    display: inline-block;
+    color: #3399cc;
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+.button2 span:hover,
+.button2 span span:hover {
+    text-decoration: none;
+    color: #246b8f;
+}
+
+.buttons-set:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+/* ============================================ *
+ * Buttons
+ * ============================================ */
+/* Secondary Buttons */
+.cart .buttons-set .button,
+.cart-table .button,
+.sidebar .actions .button,
+.button.button-secondary {
+    background: #dddddd;
+    color: #636363;
+    padding: 7px 15px;
+}
+.cart .buttons-set .button:hover,
+.cart-table .button:hover,
+.sidebar .actions .button:hover,
+.button.button-secondary:hover {
+    background: #d0d0d0;
+    cursor: pointer;
+}
+.cart .buttons-set .button:active,
+.cart-table .button:active,
+.sidebar .actions .button:active,
+.button.button-secondary:active {
+    background: #c4c4c4;
+    color: #636363;
+}
+.cart .buttons-set .button:focus,
+.cart-table .button:focus,
+.sidebar .actions .button:focus,
+.button.button-secondary:focus {
+    color: #636363;
+    background: #c4c4c4;
+    outline: none;
+}
+
+/* Primary Buttons */
+.button,
+.cart-table .product-cart-actions .button,
+#co-shipping-method-form .buttons-set .button,
+.footer .button {
+    background: #3399cc;
+    display: inline-block;
+    padding: 7px 15px;
+    border: 0;
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: normal;
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+    line-height: 19px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.button:hover,
+.cart-table .product-cart-actions .button:hover,
+#co-shipping-method-form .buttons-set .button:hover,
+.footer .button:hover {
+    background: #2e8ab8;
+    cursor: pointer;
+}
+.button:active,
+.cart-table .product-cart-actions .button:active,
+#co-shipping-method-form .buttons-set .button:active,
+.footer .button:active {
+    background: #297aa3;
+    color: #FFFFFF;
+}
+.button:focus,
+.cart-table .product-cart-actions .button:focus,
+#co-shipping-method-form .buttons-set .button:focus,
+.footer .button:focus {
+    background-color: #297aa3;
+    outline: none;
+    color: #FFFFFF;
+}
+
+/* ============================================ *
+ * Checkout - Layout
+ * ============================================ */
+.cart-table {
+    float: left;
+    width: 100%;
+}
+
+.cart-forms,
+.cart-totals-wrapper,
+.crosssell {
+    float: right;
+    clear: right;
+    width: 40%;
+    padding-left: 20px;
+}
+
+.cart-totals,
+.cart-forms .discount,
+.cart-forms .giftcard,
+.cart-forms .shipping {
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #cccccc;
+}
+
+.cart-table,
+.cart-totals,
+.cart-forms .discount,
+.cart-forms .giftcard,
+.cart-forms .shipping {
+    margin-bottom: 20px;
+}
+
+.display-both-prices .cart-table {
+    float: none;
+    width: 100%;
+}
+.display-both-prices .cart-forms {
+    float: left;
+    padding-right: 10px;
+    padding-left: 0;
+}
+.display-both-prices .cart-totals-wrapper,
+.display-both-prices .crosssell {
+    padding-left: 10px;
+}
+.display-both-prices .cart-forms,
+.display-both-prices .cart-totals-wrapper,
+.display-both-prices .crosssell {
+    width: 50%;
+}
+.display-both-prices .crosssell {
+    clear: right;
+    float: right;
+}
+
+@media only screen and (max-width: 979px) {
+    .display-single-price .cart-table {
+        float: none;
+        width: 100%;
+    }
+    .display-single-price .cart-forms {
+        float: left;
+        padding-right: 10px;
+        padding-left: 0;
+    }
+    .display-single-price .cart-totals-wrapper,
+    .display-single-price .crosssell {
+        padding-left: 10px;
+    }
+    .display-single-price .cart-forms,
+    .display-single-price .cart-totals-wrapper,
+    .display-single-price .crosssell {
+        width: 50%;
+    }
+    .display-single-price .crosssell {
+        clear: right;
+        float: right;
+    }
+}
+@media only screen and (max-width: 599px) {
+    .product-cart-sku {
+        display: none;
+    }
+
+    .display-both-prices .cart-forms,
+    .display-both-prices .cart-totals-wrapper,
+    .display-both-prices .crosssell,
+    .display-single-price .cart-forms,
+    .display-single-price .cart-totals-wrapper,
+    .display-single-price .crosssell {
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+        float: none;
+        width: 100%;
+    }
+}
+
+/* ============================================ *
+ * Checkout - Cart
+ * ============================================ */
+.cart .page-title {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ededed;
+}
+.cart .page-title:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.cart .page-title h1 {
+    float: left;
+    border-bottom: none;
+    margin-bottom: 6px;
+    margin-right: 10px;
+}
+
+.checkout-types {
+    float: right;
+    text-align: right;
+    max-width: 100%;
+    /* We always want this shipping method to display on its own line */
+}
+.checkout-types li {
+    vertical-align: top;
+    margin: 0 0 5px 5px;
+}
+.checkout-types li:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.checkout-types li img {
+    display: inline;
+    vertical-align: top;
+}
+.checkout-types li:first-child {
+    margin-left: 0;
+}
+.checkout-types .method-checkout-cart-methods-multishipping {
+    display: block;
+}
+.checkout-types.top li {
+    display: inline-block;
+}
+.checkout-types.top .bml_button {
+    display: inline-block;
+    vertical-align: top;
+}
+.checkout-types.top .bml_button img {
+    display: block;
+}
+.checkout-types.bottom .paypal-logo a, .checkout-types.minicart .paypal-logo a {
+    display: block;
+}
+.checkout-types.bottom .paypal-or, .checkout-types.minicart .paypal-or {
+    margin: 0px;
+    width: 150px;
+    display: block;
+    text-align: center;
+    float: right;
+}
+
+.cart-totals .checkout-types .btn-checkout {
+    margin-bottom: 7px;
+}
+
+@media only screen and (max-width: 670px) {
+    .checkout-types {
+        float: none;
+        text-align: center;
+    }
+    .checkout-types.bottom .paypal-or, .checkout-types.minicart .paypal-or {
+        width: auto;
+        float: none;
+    }
+
+    .checkout-types li {
+        float: none;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .btn-checkout {
+        width: 100%;
+    }
+}
+.cart-table {
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+.cart-table th,
+.cart-table td,
+.cart-table tbody td {
+    border-bottom: none;
+    vertical-align: top;
+}
+.cart-table h2 {
+    color: #636363;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.cart-table thead th,
+.cart-table tbody td {
+    background-color: transparent;
+    padding: 10px 5px;
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+.cart-table .product-cart-info,
+.cart-table .product-cart-actions {
+    padding-left: 15px;
+}
+.cart-table tr {
+    border-bottom: 1px solid silver;
+}
+.cart-table tfoot tr {
+    background: none;
+}
+.cart-table tfoot tr > td:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.cart-table span.or {
+    font-size: 9px;
+    padding: 0 5px;
+    text-transform: uppercase;
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+.cart-table .product-cart-image .cart-links,
+.cart-table .product-cart-info .btn-remove,
+.cart-table .product-cart-actions .button {
+    display: none;
+}
+.cart-table .product-cart-image {
+    padding-left: 0;
+    padding-right: 0;
+}
+.cart-table .product-cart-image .product-image img {
+    max-width: 100%;
+    width: 100%;
+}
+.cart-table .product-cart-image a.cart-edit {
+    display: none;
+}
+.cart-table .product-cart-sku {
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 12px;
+    margin: 5px 0 12px;
+}
+.cart-table .product-cart-sku .label {
+    font-weight: 600;
+}
+.cart-table .btn-empty {
+    float: left;
+}
+.cart-table .product-cart-total,
+.cart-table .product-cart-price {
+    text-align: center;
+}
+.cart-table .cart-tax-total {
+    position: relative;
+    cursor: pointer;
+}
+.cart-table .cart-tax-total:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: block;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid #3399cc;
+    border-left: none;
+    position: absolute;
+    top: 3px;
+    right: -11px;
+}
+.cart-table .cart-tax-total.cart-tax-total-expanded:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: block;
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    border-top: 6px solid #3399cc;
+    border-bottom: none;
+    right: -15px;
+    top: 6px;
+}
+.cart-table .cart-links > li {
+    white-space: nowrap;
+    line-height: 1.3;
+    margin-bottom: 5px;
+    min-width: 65px;
+    font-size: 13px;
+}
+.cart-table .cart-links > li > a {
+    display: block;
+}
+.cart-table .cart-links > li:last-child {
+    margin-bottom: 0;
+}
+.cart-table .product-cart-actions {
+    min-width: 60px;
+    text-align: center;
+}
+.cart-table .product-cart-actions .qty {
+    height: 30px;
+    border-color: silver;
+    border-radius: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 3em;
+}
+.cart-table .product-cart-actions .button {
+    margin-bottom: 5px;
+}
+.cart-table .item-options {
+    padding-left: 15px;
+}
+
+@media only screen and (max-width: 770px) {
+    .cart-table th {
+        font-size: 12px;
+    }
+    .cart-table th,
+    .cart-table td {
+        padding: 7px 6px;
+    }
+    .cart-table .product-cart-actions > li {
+        white-space: inherit;
+    }
+}
+@media only screen and (max-width: 699px) {
+    .display-both-prices .cart-table thead th.cart-total-head,
+    .display-both-prices .cart-table td.product-cart-total {
+        display: none;
+    }
+}
+@media only screen and (max-width: 599px) {
+    .cart-table colgroup, .cart-table thead {
+        display: none;
+    }
+    .cart-table tr {
+        display: block;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+    .cart-table tr:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+    .cart-table tr:last-child {
+        margin-bottom: 0;
+    }
+    .cart-table tfoot tr {
+        padding-bottom: 0;
+    }
+    .cart-table td {
+        border: none;
+        display: block;
+    }
+    .cart-table td[data-rwd-label] {
+        padding-left: 15px;
+        margin-bottom: 6px;
+    }
+    .cart-table td[data-rwd-label] .price {
+        font-weight: normal;
+    }
+    .cart-table td[data-rwd-label]:before {
+        content: attr(data-rwd-label) ":";
+        font-size: 12px;
+        font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+        padding-right: 5px;
+        text-transform: uppercase;
+    }
+    .cart-table td.product-cart-price {
+        text-align: left;
+    }
+    .cart-table h2 {
+        font-size: 12px;
+    }
+    .cart-table .cart-links {
+        padding-top: 5px;
+        padding-right: 5px;
+    }
+    .cart-table .cart-links > li {
+        white-space: normal;
+        text-align: center;
+    }
+    .cart-table .cart-links > li > a {
+        padding: 2px 0px;
+    }
+    .cart-table .cart-tax-info {
+        font-style: italic;
+        padding-left: 15px;
+        font-size: 13px;
+    }
+    .cart-table .cart-tax-info .price {
+        font-size: 13px;
+    }
+    .cart-table .product-cart-image {
+        width: 25%;
+        float: left;
+        padding-bottom: 0;
+    }
+    .cart-table .product-cart-image a.cart-edit {
+        display: block;
+        font-size: 16px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    .cart-table .product-cart-info,
+    .cart-table td[data-rwd-label] {
+        float: right;
+        width: 75%;
+    }
+    .cart-table .product-cart-actions,
+    .cart-table .product-cart-price {
+        padding-bottom: 0;
+        padding-top: 0;
+        float: right;
+    }
+    .cart-table .product-cart-remove,
+    .cart-table .product-cart-total,
+    .cart-table .product-cart-actions .cart-links {
+        display: none;
+    }
+    .cart-table .product-cart-image .cart-links,
+    .cart-table .product-cart-info .btn-remove {
+        display: block;
+    }
+    .cart-table .product-cart-actions .button {
+        display: none;
+    }
+    .cart-table .product-cart-info .btn-remove {
+        float: right;
+        margin: -4px 0px 2px 7px;
+    }
+    .cart-table .product-cart-info .product-cart-sku {
+        margin-bottom: 5px;
+    }
+    .cart-table .product-cart-actions {
+        text-align: left;
+    }
+    .cart-table .product-cart-actions .qty {
+        margin-right: 7px;
+        margin-bottom: 7px;
+    }
+    .cart-table .price,
+    .cart-table .product-cart-price:before {
+        font-weight: 500;
+        font-size: 15px;
+        font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+    }
+    .cart-table .cart-footer-actions {
+        text-align: center;
+        width: 100%;
+    }
+    .cart-table .cart-footer-actions #empty_cart_button {
+        float: right;
+    }
+    .cart-table .cart-footer-actions .btn-continue {
+        float: left;
+    }
+    .cart-table .cart-footer-actions .btn-update,
+    .cart-table .cart-footer-actions span.or {
+        display: none;
+    }
+
+    .display-both-prices .cart-table td[data-rwd-tax-label]:before {
+        content: attr(data-rwd-tax-label) ":";
+    }
+}
+/* ============================================ *
+ * Checkout - Estimate Shipping and Tax
+ * ============================================ */
+.shipping h2 {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+.shipping select {
+    max-width: 100%;
+    height: 30px;
+    display: block;
+    border: 1px solid silver;
+}
+.shipping select.validation-failed {
+    border-color: red;
+}
+.shipping .shipping-desc {
+    display: none;
+}
+.shipping .buttons-set {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.shipping .form-list:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.shipping .form-list li {
+    float: left;
+    margin: 5px 2% 10px 0;
+}
+.shipping .form-list .shipping-country {
+    width: 37%;
+}
+.shipping .form-list .shipping-region {
+    width: 41%;
+}
+.shipping .form-list .shipping-postcode {
+    margin-right: 0;
+    width: 18%;
+}
+.shipping .form-list .shipping-postcode input {
+    margin-top: 4px;
+}
+.shipping .form-list .input-box {
+    padding-top: 0;
+}
+.shipping .form-list input {
+    height: 30px;
+    margin-top: 4px;
+}
+.shipping .form-list label {
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.shipping .sp-methods {
+    padding: 10px 0 0;
+    text-align: left;
+}
+.shipping .sp-methods dd {
+    margin-bottom: 10px;
+}
+.shipping .sp-methods label {
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-size: 12px;
+    font-style: italic;
+    min-width: 100px;
+}
+.shipping .sp-methods label span {
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-weight: bold;
+    font-style: normal;
+}
+.shipping #co-shipping-method-form .buttons-set .button {
+    float: left;
+    margin-left: 0;
+}
+.shipping #co-shipping-method-form .sp-methods dd label {
+    border: 1px solid #cccccc;
+    background-color: #e7e7e7;
+    min-width: 220px;
+}
+.shipping #co-shipping-method-form .sp-methods dd label:hover {
+    background-color: #dbdbdb;
+}
+
+@media only screen and (max-width: 770px) {
+    .shipping .shipping-form .form-list > li {
+        width: 100%;
+        float: none;
+    }
+    .shipping .shipping-form .form-list > li label {
+        display: block;
+    }
+    .shipping .shipping-form .form-list > li input,
+    .shipping .shipping-form .form-list > li select {
+        width: 100%;
+    }
+}
+.cart .cart-totals {
+    text-align: right;
+}
+.cart .cart-totals:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.cart .cart-totals table {
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-size: 12px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    width: 100%;
+}
+.cart .cart-totals table td {
+    padding: 2px 0px;
+}
+.cart .cart-totals table td:first-child {
+    padding-right: 10px;
+    min-width: 120px;
+}
+.cart .cart-totals table tbody tr:last-child td,
+.cart .cart-totals table tbody tr:last-child th {
+    padding-bottom: 10px;
+}
+.cart .cart-totals table tfoot {
+    border-top: 1px solid #E6E6E6;
+    border-bottom: 1px solid #E6E6E6;
+}
+.cart .cart-totals table tfoot td {
+    font-size: 24px;
+    padding: 2px 5px;
+    vertical-align: top;
+}
+.cart .cart-totals table tfoot strong span,
+.cart .cart-totals table tfoot span.price {
+    font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+.cart .cart-totals table tfoot strong {
+    font-weight: 400;
+}
+
+@media only screen and (max-width: 600px) {
+    .cart-totals {
+        text-align: right;
+    }
+}
+@media only screen and (max-width: 770px) {
+    .cart .cart-totals table tfoot td {
+        font-size: 18px;
+    }
+}
+.discount-form:after,
+#giftcard-form:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+#discount-coupon-form,
+.cart .giftcard {
+    width: 100%;
+}
+#discount-coupon-form h2,
+.cart .giftcard h2 {
+    display: none;
+}
+#discount-coupon-form label,
+.cart .giftcard label {
+    font-family: "Raleway", "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: left;
+    text-transform: uppercase;
+    min-width: 105px;
+    display: inline-block;
+    margin-right: 10px;
+}
+#discount-coupon-form .field-wrapper,
+.cart .giftcard .field-wrapper {
+    display: inline-block;
+}
+#discount-coupon-form .validation-advice,
+.cart .giftcard .validation-advice {
+    display: inline;
+}
+#discount-coupon-form .button-wrapper,
+.cart .giftcard .button-wrapper {
+    display: inline-block;
+    vertical-align: bottom;
+}
+#discount-coupon-form .button-wrapper > button,
+.cart .giftcard .button-wrapper > button {
+    float: left;
+}
+#discount-coupon-form .input-text,
+.cart .giftcard .input-text {
+    border-radius: 0;
+    height: 30px;
+    margin: 4px 10px 0 0;
+    width: 190px;
+}
+
+.cart .giftcard p {
+    margin-bottom: 7px;
+}
+
+.cart .giftcard .check-gc-status {
+    float: left;
+    padding: 0px;
+}
+.cart .giftcard .check-gc-status > span > span {
+    font-size: 14px;
+    text-transform: none;
+}
+
+/* ============================================ *
+ * Checkout - Cart Cross sell
+ * ============================================ */
+.crosssell h2 {
+    color: #3399cc;
+}
+.crosssell #crosssell-products-list .button,
+.crosssell #crosssell-products-list .add-to-links {
+    display: none;
+}
+
+/* Change the layout to 2 columns at a breakpoint that is higher than a 3 columns layout would normally break */
+@media only screen and (max-width: 979px) {
+    .crosssell {
+        /* Undo three-column config */
+    }
+    .crosssell .products-grid > li:nth-child(even),
+    .crosssell .products-grid > li:nth-child(3n),
+    .crosssell .products-grid > li {
+        width: 47.72727%;
+        margin-right: 4.54545%;
+    }
+    .crosssell .products-grid > li:nth-child(odd) {
+        clear: left;
+    }
+    .crosssell .products-grid > li:nth-child(even) {
+        margin-right: 0;
+    }
+    .crosssell .products-grid > li:nth-child(3n+1) {
+        clear: none;
+    }
+}
+@media only screen and (max-width: 320px) {
+    .crosssell ul .item {
+        padding: 0 0px 40px;
+    }
+    .crosssell ul .product-details .crosssell-actions {
+        padding: 0 5px;
+    }
+}

@@ -1,0 +1,17 @@
+#row_customsmtp_smtp_testconnection td.scope-label {
+    display: none;
+}
+
+div.awcsmtp-message {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+div.awcsmtp-message-success {
+    color: #468847;
+}
+
+div.awcsmtp-message-error {
+    color: #b94a48;
+}

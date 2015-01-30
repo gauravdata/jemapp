@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <magejam_cart_default>
+        <reference name="root">
+            <action method="setTemplate"><template>magejam/page/content-only.phtml</template></action>
+            <block type="page/html_head" name="head" as="head">
+                <block type="core/text" name="viewport≤">
+                    <action method="setText">
+                        <text><![CDATA[<meta name="viewport" content="width=device-width, user-scalable=no">]]></text>
+                    </action>
+                </block>
+                <action method="addCss"><stylesheet>css/magejam.css</stylesheet></action>
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>lib/ccard.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>scriptaculous/effects.js</script></action>
+                <action method="addJs"><script>varien/form.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/cookies.js</script></action>
+                <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
+            </block>
+        </reference>
+    </magejam_cart_default>
+
+    <magejam_cart_index>
+        <update handle="magejam_cart_default"/>
+        <reference name="content">
+            <block type="checkout/cart" name="checkout.cart">
+                <action method="setCartTemplate"><value>magejam/checkout/cart.phtml</value></action>
+                <action method="setEmptyTemplate"><value>magejam/checkout/cart/noItems.phtml</value></action>
+                <action method="chooseTemplate"/>
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>magejam/checkout/cart/item/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>magejam/checkout/cart/item/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>magejam/checkout/cart/item/default.phtml</template></action>
+
+                <block type="core/text_list" name="checkout.cart.top_methods" as="top_methods" translate="label">
+                    <label>Payment Methods Before Checkout Button</label>
+                    <block type="checkout/onepage_link" name="checkout.cart.methods.onepage" template="magejam/checkout/onepage/link.phtml"/>
+                </block>
+
+                <block type="page/html_wrapper" name="checkout.cart.form.before" as="form_before" translate="label">
+                    <label>Shopping Cart Form Before</label>
+                </block>
+
+            </block>
+        </reference>
+        <block type="core/text_list" name="additional.product.info" translate="label">
+            <label>Additional Product Info</label>
+        </block>
+    </magejam_cart_index>
+</layout>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/** 
+* Magento Module developed by NoStress Commerce 
+* 
+* NOTICE OF LICENSE 
+* 
+* This source file is subject to the Open Software License (OSL 3.0) 
+* that is bundled with this package in the file LICENSE.txt. 
+* It is also available through the world-wide-web at this URL: 
+* http://opensource.org/licenses/osl-3.0.php 
+* If you did of the license and are unable to 
+* obtain it through the world-wide-web, please send an email 
+* to info@nostresscommerce.cz so we can send you a copy immediately. 
+* 
+* @copyright Copyright (c) 2009 NoStress Commerce (http://www.nostresscommerce.cz) 
+* 
+*/ 
+
+/**
+ * Defines interface for exports script execution settings
+ *
+ * @category   Nostress
+ * @package    Nostress_Nscexport 
+ */
+-->
+<config>
+    <tabs>
+        <koongo translate="label" module="nscexport">
+            <label>Koongo</label>            
+            <sort_order>150</sort_order>
+        </koongo>
+    </tabs>   
+	<sections>		
+        <koongo_config translate="label" module="nscexport">
+            <label>Configuration</label>
+            <tab>koongo</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>20</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>   
+            	<general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[	                    				
+						<a href="https://docs.koongo.com/display/KoongoConnector/Connector+Configuration" target="_blank" style="color:orange;padding-left: 200px;">
+	                    	<font size="4px">See connector documentation</font>
+	                    </a>	                   
+	                    ]]></comment>
+                    <fields>
+                    	<add_products translate="label">
+                            <label>Automaticaly add new products to export profiles</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                    		<show_in_website>0</show_in_website>
+                    		<show_in_store></show_in_store>
+                       </add_products>                             
+                       <batch_size translate="label">
+                            <label>Number of products loaded from db in one batch</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>nscexport/config_source_productgroupsize</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </batch_size> 
+                        <image_folder translate="label">
+                            <label>Product image folder</label>
+                            <frontend_type>text</frontend_type>                            
+                            <sort_order>65</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </image_folder>  
+                        <debug_mode translate="label">
+                        	<label>Debug mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                    		<show_in_website>0</show_in_website>
+                    		<show_in_store>0</show_in_store>
+                        </debug_mode>
+                        <log_events translate="label">
+                        	<label>Provide Feed Usage Log</label>
+                        	<comment><![CDATA[Please help us to find out which Feed Authorities are the most popular among Koongo users. More information you may find <a target="_blank" href="https://docs.koongo.com/display/KoongoConnector/Feed+Usage+Tracking">here</a>.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>73</sort_order>
+                            <show_in_default>1</show_in_default>
+                    		<show_in_website>0</show_in_website>
+                    		<show_in_store>0</show_in_store>
+                        </log_events>                         
+                        <remove_illegal_chars_reg_expression translate="label comment">
+                            <label>Regular expression for illegal characters removal</label>
+                            <comment>This reg. expression will be used for removal of illegal characters from product data during export process. Illegal cahracters can cause errors during export process. </comment>
+                            <frontend_type>text</frontend_type>                            
+                            <sort_order>75</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </remove_illegal_chars_reg_expression>        
+                        <render_taxonomies translate="label comment">
+                        	<label>Enable taxonomies rendering</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>77</sort_order>
+                            <show_in_default>1</show_in_default>
+                    		<show_in_website>0</show_in_website>
+                    		<show_in_store>0</show_in_store>
+                    		<comment>Enable rendering of taxonomy dropdown menus in Magento category detail.</comment>
+                        </render_taxonomies> 
+                        <allow_inactive_categories_export translate="label comment">
+                        	<label>Allow inactive categories export</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                    		<show_in_website>0</show_in_website>
+                    		<show_in_store>0</show_in_store>
+                    		<comment>Enable export of inactive categories and export of products from these categories.</comment>
+                        </allow_inactive_categories_export> 
+                        <allow_child_products_export translate="label comment">
+                        	<label>Allow export of child products of selected parent products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>85</sort_order>
+                            <show_in_default>1</show_in_default>
+                    		<show_in_website>0</show_in_website>
+                    		<show_in_store>0</show_in_store>
+                    		<comment>Enable export of child products together with parent products selected in category-product filter. </comment>
+                        </allow_child_products_export> 
+                        <allow_excluded_images_export translate="label comment">
+                        	<label>Allow excluded images export</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                    		<show_in_website>0</show_in_website>
+                    		<show_in_store>0</show_in_store>
+                    		<comment>Enable export of excluded images from product's media gallery.</comment>
+                        </allow_excluded_images_export>         
+                        <conditions_disabled_attributes translate="label">
+                            <label>Disabled Attributes for Attribute Filters</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>nscexport/config_source_conditionsdisabledattributes</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                        </conditions_disabled_attributes>                                                                                                                                                                                                 
+                    </fields>
+                </general>               	              
+                <engines translate="label">
+                    <label>Feed Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store></show_in_store>
+                    <fields>
+                    	<allow translate="label">
+                            <label>Allow feeds</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <backend_model>nscexport/config_backend_feed</backend_model>
+                            <source_model>nscexport/config_source_feed</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                        </allow>
+                	</fields>
+                </engines>                                              
+            </groups>
+        </koongo_config>
+        <koongo_license_and_plugins translate="label" module="nscexport">
+            <class>separator-top</class>
+            <label>License &amp; Plugins</label>
+            <tab>koongo</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>                
+                <license translate="label">
+                    <label>License Key</label>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<top translate="label comment">               
+                            <label>Your Server ID:</label>
+                            <frontend_type>label</frontend_type>                                                  
+                            <frontend_model>nscexport/version_server</frontend_model>
+                            <comment><![CDATA[Server ID for Koongo Connector license.<br/><a href="https://docs.koongo.com/display/KoongoConnector/Activation#Activation-FindyourServerID" target="_blank">How to use Server ID?</a>]]></comment>
+                            <sort_order>-5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </top>
+                    	<header translate="label">               
+                            <frontend_model>nscexport/version_header</frontend_model>
+                            <sort_order>-1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </header>
+         				<license_key_Nostress_Nscexport translate="label">                 
+                            <frontend_model>nscexport/version_version</frontend_model>
+                            <backend_model>nscexport/config_backend_license</backend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </license_key_Nostress_Nscexport>
+                        <footer translate="label">
+                            <frontend_model>nscexport/version_footer</frontend_model>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </footer>
+                    </fields>
+                </license>
+                <plugins translate="label">
+                    <label>Plugins</label>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<header translate="label">               
+                            <frontend_model>nscexport/plugin_header</frontend_model>
+                            <sort_order>-1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </header>
+         				<nscexport translate="label">                 
+                            <frontend_model>nscexport/plugin_list</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </nscexport>
+                        <footer translate="label">
+                            <frontend_model>nscexport/plugin_footer</frontend_model>
+                            <sort_order>99</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </footer>
+                    </fields>
+                </plugins>
+            </groups>
+        </koongo_license_and_plugins>
+	</sections>   
+</config>

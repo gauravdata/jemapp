@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <magejam_payment_default>
+        <reference name="root">
+            <action method="setTemplate"><template>magejam/page/content-only.phtml</template></action>
+            <block type="page/html_head" name="head" as="head">
+                <block type="core/text" name="viewport≤">
+                    <action method="setText">
+                        <text><![CDATA[<meta name="viewport" content="width=device-width, user-scalable=no">]]></text>
+                    </action>
+                </block>
+                <action method="addCss"><stylesheet>css/magejam.css</stylesheet></action>
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>lib/ccard.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>scriptaculous/effects.js</script></action>
+                <action method="addJs"><script>varien/form.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/cookies.js</script></action>
+                <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
+            </block>
+        </reference>
+    </magejam_payment_default>
+
+    <magejam_payment_index>
+        <update handle="magejam_payment_default"/>
+        <reference name="content">
+            <block type="checkout/onepage_payment" name="payment" as="payment"
+                   template="magejam/checkout/payment.phtml">
+                <block type="checkout/onepage_payment_methods" name="checkout.payment.method" as="methods"
+                       template="magejam/checkout/payment/method.phtml">
+                    <action method="setMethodFormTemplate">
+                        <method>purchaseorder</method>
+                        <template>payment/form/purchaseorder.phtml</template>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </magejam_payment_index>
+
+    <magejam_payment_agreement>
+        <update handle="magejam_payment_default"/>
+        <reference name="head">
+            <action method="addJs"><script>magejam/accordion.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="magejam/agreements" name="agreements" as="agreements"
+                   template="magejam/checkout/agreements.phtml"/>
+        </reference>
+    </magejam_payment_agreement>
+ </layout>
