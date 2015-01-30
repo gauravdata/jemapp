@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<config>
+    <default>
+        <carriers>
+            <servicepointdhl>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Twm_ServicepointDHL_Model_Carrier_ShippingMethod</model>
+                <name>Twm Servicepoint DHL shipping</name>
+                <title>Twm Servicepoint DHL shipping</title>
+            </servicepointdhl>
+        </carriers>
+    </default>
+    <modules>
+        <Twm_ServicepointDHL>
+            <version>0.1.0</version>
+        </Twm_ServicepointDHL>
+    </modules>
+    <global>
+		<blocks>
+            <servicepointdhl>
+                <class>Twm_ServicepointDHL_Block</class>
+            </servicepointdhl>
+        </blocks>
+        <models>
+            <servicepointdhl>
+                <class>Twm_ServicepointDHL_Model</class>
+            </servicepointdhl>
+        </models>
+        <helpers>
+            <servicepointdhl>
+                <class>Twm_ServicepointDHL_Helper</class>
+            </servicepointdhl>
+        </helpers>
+        <events>
+            <checkout_controller_onepage_save_shipping_method>
+                <observers>
+                    <servicepointdhl>
+                        <type>singleton</type>
+                        <class>Twm_ServicepointDHL_Model_Observer</class>
+                        <method>saveShippingMethod</method>
+                    </servicepointdhl>
+                </observers>
+            </checkout_controller_onepage_save_shipping_method>
+        </events>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <servicepointdhl module="servicepointdhl">
+                    <file>servicepointdhl.xml</file>
+                </servicepointdhl>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <servicepointdhl>
+                <use>admin</use>
+                <args>
+                    <module>Twm_ServicepointDHL</module>
+                    <frontName>servicepointdhl</frontName>
+                </args>
+            </servicepointdhl>
+        </routers>
+    </admin>
+</config>
