@@ -90,7 +90,7 @@ function createInfoWindow(marker,item,title,moretext,callback) {
         //more link, scrolls to div
         if (!callback) {
             callback = function() {
-                var base_url = BLANK_URL.replace('js/blank.html', '');
+                var base_url = onestepcheckout_login_popup.options.login_url.replace('onestepcheckout/ajax/login/', '');
                 var url_save_billing = base_url + '/onestepcheckout/ajax/save_billing/';
                 var url_set_methods = base_url + '/onestepcheckout/ajax/set_methods_separate/';
 
