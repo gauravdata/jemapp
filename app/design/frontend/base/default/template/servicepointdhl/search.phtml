@@ -36,6 +36,12 @@
 </div>
 <script type="text/javascript">
     jQuery('input[name="shipping_method"]:first').attr('checked', 'checked');
+    jQuery('.shippingmethod label strong').each(function(){
+       if (jQuery(this).text().indexOf('0.00') > 0 || jQuery(this).text().indexOf('0,00') > 0) {
+           jQuery(this).hide();
+       }
+    });
+    jQuery('.shippingmethod label a[data-toggle="popover"]').popover();
 
     jQuery('#servicepointdhl_postcode,#servicepointdhl_city').change(function(){
         searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?=Mage::getUrl('servicepointdhl/index/index')?>');
