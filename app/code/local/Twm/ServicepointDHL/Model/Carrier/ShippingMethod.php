@@ -81,7 +81,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
             $postcode = $quote->getShippingAddress()->getPostcode();
             $city = $quote->getShippingAddress()->getCity();
 		}
-var_dump($postcode); die();
+
         $result = Mage::getModel('servicepointdhl/rate_result');
 
         $price = Mage::getStoreConfig("carriers/{$this->_code}/price");
