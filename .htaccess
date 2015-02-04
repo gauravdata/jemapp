@@ -113,7 +113,7 @@
 ############################################
 ## enable rewrites
 
-    Options +FollowSymLinks
+    Options +SymLinksifOwnerMatch 
     RewriteEngine on
 
 ############################################
@@ -125,7 +125,6 @@
 
 RewriteCond %{HTTP_HOST} ^(www\.)?jemappelle\.nl
 RewriteRule ^retour\.pdf retour-jma.pdf [L]
-
 RewriteRule ^retour\.pdf retour-nt.pdf [L]
 
 ############################################
@@ -256,6 +255,7 @@ RewriteRule ^retour\.pdf retour-nt.pdf [L]
     ExpiresByType image/gif                             "access plus 1 month"
     ExpiresByType image/jpeg                            "access plus 1 month"
     ExpiresByType image/png                             "access plus 1 month"
+    ExpiresByType image/webp                            "access plus 1 month"
     ExpiresByType video/mp4                             "access plus 1 month"
     ExpiresByType video/ogg                             "access plus 1 month"
     ExpiresByType video/webm                            "access plus 1 month"
@@ -273,10 +273,4 @@ RewriteRule ^retour\.pdf retour-nt.pdf [L]
 
 </IfModule>
 
-SetEnvIf Host no\-tomatoes\.de MAGE_RUN_CODE=default_de
-
-SetEnvIf Host jemappelle\.nl MAGE_RUN_CODE=jma_nl
-SetEnvIf Host jemappelle\.be MAGE_RUN_CODE=jma_be
-SetEnvIf Host jemappelle\.de MAGE_RUN_CODE=jma_de
-
-#SetEnv MAGE_RUN_CODE jma_de
+SetEnv MAGE_RUN_CODE jma_nl
