@@ -4,7 +4,7 @@
 		<reference name="head">
 			<action method="addCss"><stylesheet>css/jma.css</stylesheet></action>
 		</reference>
-		<reference name="before_body_end">
+		<reference name="after_body_start">
             <block type="core/template" name="veinteractive" template="page/html/veinteractive.phtml" />
         </reference>
 	</default>
