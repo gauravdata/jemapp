@@ -85,4 +85,8 @@
         <img src="https://ad.zanox.com/pps/?15071C778574155&mode=[[2]]&CID=[[NL]]&CustomerID=[[<?php echo $_customerId; ?>]]&OrderID=[[<?php echo $_order->getIncrementId(); ?>]]&CurrencySymbol=[[EUR]]&TotalPrice=[[<?php echo $_order->getSubtotal();?>]]" width="1" height="1" />
     </noscript>
     <!-- END zanox-affiliate HTML-Code -->
+    
+    <?php if(Mage::app()->getStore()->getCode() == 'jma_nl'): ?>
+        <img src="//drs2.veinteractive.com/DataReceiverService.asmx/Pixel?journeycode=C8C91B0B-18FC-4673-9BD5-4A499985F786" width="1" height="1"/>
+    <?php endif; ?>
 <?php endif;?>
