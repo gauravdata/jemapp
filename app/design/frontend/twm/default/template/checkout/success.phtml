@@ -86,3 +86,40 @@
     </noscript>
     <!-- END zanox-affiliate HTML-Code -->
 <?php endif;?>
+
+<?php if(Mage::app()->getStore()->getCode() == 'jma_nl' || Mage::app()->getStore()->getCode() == 'jma_de') { ?>
+	<?php
+	$orderItems = $_order->getAllItems();
+	$purchasedSkus = array();
+	foreach($orderItems as $orderItem) {
+		$purchasedSkus[] = $orderItem->getSku();
+	}
+	?>
+	<!-- Google Code for Ecommerce -->
+	<script type="text/javascript">
+		var google_tag_params = {
+			ecomm_prodid: <?php echo json_encode($purchasedSkus); ?>,
+			ecomm_pagetype: 'purchase',
+			ecomm_totalvalue: '<?=$_order->subtotal?>'
+		};
+	</script>
+
+	<!-- Google Code for Verkoop jemappelle.nl Conversion Page -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 962945563;
+		var google_conversion_language = "en";
+		var google_conversion_format = "2";
+		var google_conversion_color = "ffffff";
+		var google_conversion_label = "4GcHCNyZtVkQm8SVywM";
+		var google_remarketing_only = false;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/962945563/?label=4GcHCNyZtVkQm8SVywM&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+<?php } ?>
