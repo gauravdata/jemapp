@@ -182,6 +182,7 @@ class Icreators_Emalo_Model_Observer
 
 						$client = new SoapClient($icUrl);
 						$result = $client->gbCallCustomerBusinessLinkMethod($params);
+                        Mage::log("Order #{$incrementId} pushed with result: " . Zend_Json::encode($result), Zend_Log::DEBUG, 'emalo.log');
 					}
 					catch(Exception $e)
 					{
