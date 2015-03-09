@@ -29,17 +29,17 @@
  * @author     MageWorx Dev Team
  */
 
-class MageWorx_Customercredit_Model_Payment_Method_Customercredit extends Mage_Payment_Model_Method_Abstract
+class MageWorx_CustomerCredit_Model_Payment_Method_Customercredit extends Mage_Payment_Model_Method_Abstract
 {
     protected $_code            = 'customercredit';
     protected $_formBlockType   = 'customercredit/payment_form';
     protected $_canRefund       = false;
 
-//    public function assignData($data) {
-//        return parent::assignData($data);
-//    }
-
-    // @param $quote Mage_Sales_Model_Quote    
+    /**
+     * Is Credit Availible
+     * @param Mage_Sales_Model_Quote $quote
+     * @return boolean
+     */
     public function isAvailable($quote=null) {
         if (!Mage::getSingleton('customer/session')->getCustomerId() && !Mage::getSingleton('admin/session')->getUser()) {
             return false;
@@ -49,28 +49,39 @@ class MageWorx_Customercredit_Model_Payment_Method_Customercredit extends Mage_P
         }
         return true;
     }
+    
+    public function isApplicableToQuote($quote,$checks) {
+        if (!Mage::getSingleton('customer/session')->getCustomerId() && !Mage::getSingleton('admin/session')->getUser()) {
+            return false;
+        }
+        if (!$this->_getHelper()->isEnabled()) { // || $credit <= 0
+            return false;
+        }
+        return true;
+    }
 
-//    public function isInputTypeCheckbox() {
-//        $quote = $this->getQuote();
-//        $credit = $this->_getCreditModel()->getValue();
-//        if($credit > 0 && $credit < $quote->getGrandTotal()){
-//            return true;
-//        }
-//        return false;
-//    }
-
+    /**
+     * Validate Credit
+     * @return MageWorx_CustomerCredit_Model_Payment_Method_Customercredit
+     */
     public function validate() {
         parent::validate();
         $errorMsg = false;
 
         if ($this->getInfoInstance() instanceof Mage_Sales_Model_Quote_Payment) {
-            if (!$this->_checkCredit($this->getInfoInstance()->getQuote()))
+            $result = $this->_checkCredit($this->getInfoInstance()->getQuote());
+            if (!$result)
                 $errorMsg = $this->_getHelper()->__('Not enough Credit Amount to complete this operation.');
         }
         if ($errorMsg) Mage::throwException($errorMsg);
         return $this;
     }
 
+    /**
+     * Check Credit type
+     * @param Mage_Sales_Model_Quote $quote
+     * @return boolean
+     */
     protected function _checkCredit($quote) {
         if (!Mage::getSingleton('admin/session')->getUser()) {
             $customerId = Mage::getSingleton('customer/session')->getCustomerId();
@@ -88,32 +99,9 @@ class MageWorx_Customercredit_Model_Payment_Method_Customercredit extends Mage_P
         // 1 - checkbox (partial payment)
         // 2 - radio (full payment)
         
-        if ($flag > 1) return true; else return false;
+        if ($flag >= 1) return true; else return false;
         
     }
-
-//    protected function _getCreditValue() {
-//        if (!Mage::getSingleton('admin/session')->getUser())  {
-//            $customerId = Mage::getSingleton('customer/session')->getCustomerId();
-//            $websiteId  = Mage::app()->getStore()->getWebsiteId();
-//        } else {
-//            if ($order = Mage::registry('current_order')) {
-//                $customerId = $order->getCustomerId();
-//                $websiteId = Mage::app()->getStore($order->getStoreId())->getWebsiteId();
-//            } elseif ($invoice = Mage::registry('current_invoice')) {
-//                $customerId = $invoice->getCustomerId();
-//                $websiteId = Mage::app()->getStore($invoice->getStoreId())->getWebsiteId();
-//            } else {
-//            	$customerId = Mage::getSingleton('adminhtml/session_quote')->getCustomerId();
-//            	$websiteId = Mage::app()->getStore(Mage::getSingleton('adminhtml/session_quote')->getStoreId())->getWebsiteId();
-//            }
-//        }        
-//        return $this->_getHelper->getCreditValue($customerId, $websiteId);                
-//    }
-
-//    public function getInternalCredit(){
-//        return $this->_getCreditModel()->getValue();
-//    }
 
     /**
      * Retrieve model helper

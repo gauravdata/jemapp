@@ -34,38 +34,32 @@
  * @author     MageWorx Dev Team <dev@mageworx.com>
  */
  
-class MageWorx_Customercredit_Adminhtml_CreditController extends Mage_Adminhtml_Controller_Action
+class MageWorx_CustomerCredit_Adminhtml_CreditController extends Mage_Adminhtml_Controller_Action
 {
     protected function _isAllowed() {
         return Mage::getSingleton('admin/session')->isAllowed('customer/manage');
     }
     
-    protected function _initCustomer($idFieldName = 'id')
-    {
+    protected function _initCustomer($idFieldName = 'id') {
         $customerId = (int) $this->getRequest()->getParam($idFieldName);
         $customerModel = Mage::getModel('customer/customer');
-        if ($customerId)
-        {
+        if ($customerId) {
             $customerModel->load($customerId);
         }
-
         if (!$customerModel->getId()) {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('customercredit')->__('The customer not found'));
         }
-
         Mage::register('current_customer', $customerModel);
         return $this;
     }
     
-    public function indexAction()
-    {
+    public function indexAction() {
         $this->_initCustomer();
         $this->loadLayout()
             ->renderLayout();
     }
     
-    public function logGridAction()
-    {
+    public function logGridAction() {
         $this->_initCustomer();
         $this->loadLayout();
         $this->getResponse()->setBody(
@@ -73,8 +67,7 @@ class MageWorx_Customercredit_Adminhtml_CreditController extends Mage_Adminhtml_
         );
     }
     
-    public function createProductAction()
-    {        
+    public function createProductAction() {        
         if (!Mage::getModel('catalog/product')->setStoreId(Mage::app()->getStore()->getId())->getIdBySku('customercredit')) {
             $productId = Mage::helper('customercredit')->createCreditProduct();
 
@@ -91,5 +84,30 @@ class MageWorx_Customercredit_Adminhtml_CreditController extends Mage_Adminhtml_
         $this->_redirectReferer();
     }
     
-    
+    public function syncAction() {
+        $syncType = $this->getRequest()->getParam('sync_type',MageWorx_CustomerCredit_Model_System_Config_Source_Sync::ACTION_TYPE_APPEND);
+        $rewardPointCollection = Mage::getResourceModel('enterprise_reward/reward_collection');
+        if(!$rewardPointCollection) {
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('customercredit')->__('Failed to sync credit balances. Please check Magento version.'));
+            return $this->_redirectReferer();
+        }
+        $comment = "";
+        foreach ($rewardPointCollection as $item) {
+            $customerCredit = Mage::getModel('customercredit/credit');
+            $customerCredit->setCustomerId($item->getCustomerId())
+                    ->setWebsiteId($item->getWebsiteId())
+                    ->setComment($comment)
+                    ->loadCredit();
+            if($syncType==MageWorx_CustomerCredit_Model_System_Config_Source_Sync::ACTION_TYPE_APPEND) {
+                $customerCredit->setValueChange($item->getPointsBalance());
+            } 
+            if($syncType==MageWorx_CustomerCredit_Model_System_Config_Source_Sync::ACTION_TYPE_REPLACE) {
+                $customerCredit->setValueChange(0 - floatval($customerCredit->getValue()) + floatval($item->getPointsBalance()));
+            }
+            $customerCredit->getLogModel()->setActionType(MageWorx_CustomerCredit_Model_Credit_Log::ACTION_TYPE_SYNC)->setComment($comment);
+            $customerCredit->save();
+        }
+        Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('customercredit')->__('All data were synchronized.'));
+        return $this->_redirectReferer();
+    }
 }

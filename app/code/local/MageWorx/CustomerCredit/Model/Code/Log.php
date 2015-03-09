@@ -40,13 +40,11 @@ class MageWorx_CustomerCredit_Model_Code_Log extends Mage_Core_Model_Abstract
     const ACTION_TYPE_UPDATED = 1;
     const ACTION_TYPE_USED    = 2;
 
-    protected function _construct()
-    {
+    protected function _construct() {
         $this->_init('customercredit/code_log');
     }
 
-    public function getActionTypesOptions()
-    {
+    public function getActionTypesOptions() {
         return array(
             self::ACTION_TYPE_CREATED => Mage::helper('customercredit')->__('Created'),
             self::ACTION_TYPE_UPDATED => Mage::helper('customercredit')->__('Updated'),
@@ -54,34 +52,22 @@ class MageWorx_CustomerCredit_Model_Code_Log extends Mage_Core_Model_Abstract
         );
     }
 
-    protected function _beforeSave()
-    {
-        if (!$this->hasCodeModel())
-            Mage::throwException(Mage::helper('customercredit')->__('Recharge code hasn\'t assigned.'));
+    protected function _beforeSave() {
+        if (!$this->hasCodeModel()) Mage::throwException(Mage::helper('customercredit')->__('Recharge code hasn\'t assigned.'));
 
         $this->setCodeId($this->getCodeModel()->getId());
         $this->setComment($this->_getComment());
         return parent::_beforeSave();
     }
 
-    protected function _getComment()
-    {
+    protected function _getComment() {
         $comment = '';
-        switch ($this->getActionType())
-        {
+        switch ($this->getActionType()) {
             case self::ACTION_TYPE_CREATED :
             case self::ACTION_TYPE_UPDATED :
-                /*if ($user = Mage::getSingleton('admin/session')->getUser())
-                {
-                    $username = $user->getUsername();
-                    if ($username) {
-                        $comment =  Mage::helper('customercredit')->__('By Administrator %s', $username);
-                    }
-                }*/
                 break;
             case self::ACTION_TYPE_USED :
-                if ($customerId = $this->getCodeModel()->getCustomerId())
-                {
+                if ($customerId = $this->getCodeModel()->getCustomerId()) {
                     $comment =  Mage::helper('customercredit')->__('By Customer #%s', $customerId);
                 }
                 break;

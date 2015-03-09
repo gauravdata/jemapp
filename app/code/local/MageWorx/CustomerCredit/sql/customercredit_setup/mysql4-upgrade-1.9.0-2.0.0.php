@@ -35,30 +35,6 @@
  */
 
 $installer = $this;
-
-$templateCode = 'Internal Ballance Changed';                        #required 
-$templateOrigCode = 'customercredit_email_credit_changed_template'; #required 
-
-$templateOrigVars = '{"store url=\"\"":"Store Url","skin url=\"images/logo_email.gif\" _area=\'frontend\'":"Email Logo Image","htmlescape var=$customerName":"Customer Name","store url=\"customer/account/\"":"Customer Account Url","var comment":"Comment","var store.getFrontendName()":"Store Name"}';
-$templateSubject = '{{var store.getFrontendName()}}: Internal Balance has been Changed';
-
-try {
-    $template = Mage::getModel('adminhtml/email_template');
-    $template
-        ->loadDefault($templateOrigCode,'en_US')
-        ->setId(null)
-        ->setTemplateSubject($templateSubject)
-        ->setTemplateCode($templateCode)
-        ->setModifiedAt(Mage::getSingleton('core/date')->gmtDate())
-        ->setOrigTemplateCode($templateOrigCode)
-        ->setOrigTemplateVariables($templateOrigVars)
-        ->setTemplateType(Mage_Core_Model_Email_Template::TYPE_HTML);
-
-    $template->save();
-}
- catch (Exception $e) {
-     #   echo "<pre>"; print_r($e); exit;
- }
  
 $installer->startSetup();
 

@@ -58,7 +58,7 @@ class Icreators_Emalo_Model_Observer
 				<COUNTRY>".$shippingAddress->getCountryId()."</COUNTRY>
 				<LANGUAGE>NL</LANGUAGE>
 				<FIRSTNAME>".htmlspecialchars($shippingAddress->getFirstname())."</FIRSTNAME>
-				<PREFIX/>
+				<PREFIX>".htmlspecialchars($shippingAddress->getPrefix())."</PREFIX>
 				<LASTNAME>".htmlspecialchars($shippingAddress->getLastname())."</LASTNAME>
 				<PHONENR>".htmlspecialchars($billingAddress->getTelephone())."</PHONENR>
 				<MOBILEPHONE></MOBILEPHONE>

@@ -36,34 +36,30 @@
  
 class MageWorx_CustomerCredit_Adminhtml_ReportController extends Mage_Adminhtml_Controller_Action
 {
-    public function indexAction()
-    {
+    public function indexAction() {
         $this->loadLayout()
             ->_setActiveMenu('report');
       $this->_title($this->__('Reports'))->_title($this->__('Customer Credit Report'));
         $this->_addContent($this->getLayout()->createBlock('customercredit/adminhtml_report'));
         $this->renderLayout();
     }
-    public function gridAction()
-    {
+    
+    public function gridAction() {
         $this->loadLayout();
         $this->renderLayout();
     }
     
-    public function exportCsvAction()
-    {
+    public function exportCsvAction() {
         $fileName   = 'custmer_credit.csv';
         $content    = $this->getLayout()->createBlock('customercredit/adminhtml_report_grid')
             ->getCsv();
-
         $this->_prepareDownloadResponse($fileName, $content);
     }
 
     /**
      * Export new accounts report grid to Excel XML format
      */
-    public function exportExcelAction()
-    {
+    public function exportExcelAction() {
         $fileName   = 'custmer_credit.xml';
         $content    = $this->getLayout()->createBlock('customercredit/adminhtml_report_grid')
             ->getExcel($fileName);

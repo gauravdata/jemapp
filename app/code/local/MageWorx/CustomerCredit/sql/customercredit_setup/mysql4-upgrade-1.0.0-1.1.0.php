@@ -39,7 +39,7 @@ $installer->startSetup();
 $installer->run("
 
 DROP TABLE IF EXISTS {$this->getTable('customercredit_rules')};
-CREATE TABLE {$this->getTable('customercredit_rules')} (
+CREATE TABLE IF NOT EXISTS {$this->getTable('customercredit_rules')} (
   `rule_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET cp1251 NOT NULL,
   `description` varchar(255) CHARACTER SET cp1251 NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE {$this->getTable('customercredit_rules')} (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS {$this->getTable('customercredit_rules_customer')};
-CREATE TABLE {$this->getTable('customercredit_rules_customer')} (
+CREATE TABLE IF NOT EXISTS {$this->getTable('customercredit_rules_customer')} (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `rule_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,

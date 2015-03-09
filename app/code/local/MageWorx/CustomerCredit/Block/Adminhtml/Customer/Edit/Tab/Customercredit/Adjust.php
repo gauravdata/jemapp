@@ -38,13 +38,14 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Edit_Tab_CustomerCredit_A
         
         
         $helper = Mage::helper('customercredit');
-        $creditValue = $helper->getCreditValue($customerId, $model->getWebsiteId());        
-        $data['credit_value'] = $creditValue;        
-        
+        $creditValue    = (float)$helper->getCreditValue($customerId, $model->getWebsiteId());        
+        $expirationTime = $helper->getExpirationTime($customerId, $model->getWebsiteId());
+        $data['credit_value']    = $creditValue;        
+        $data['expiration_time'] = $expirationTime;
         $form = new Varien_Data_Form();
         $form->setHtmlIdPrefix('customercredit_');
         $form->setFieldNameSuffix('customercredit');
-                
+              
         $fieldset = $form->addFieldset('adjust_fieldset', array('legend'=>$helper->__('Adjust Credit')));        
         $expired = '';
         
@@ -60,24 +61,38 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Edit_Tab_CustomerCredit_A
             'name'     => 'credit_value',            
             'after_element_html' => '</td></tr><tr><td class="label">'.$helper->__('Current Balance').'</td>
                                      <td id="customercredit_credit_website_value" class="value">
-                                     '.Mage::helper('core')->currency($creditValue).$expired,
+                                     '.$creditValue.$expired,
         ));
+        if(Mage::getStoreConfig('mageworx_customers/customercredit_expiration/expiration_enable') && $creditValue) {
+            $outputFormat = Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT);
+            $fieldset->addField('expiration_time', 'date', array(
+                'name'     => 'expiration_time',
+                'time'     =>    false,
+                'format'   =>    $outputFormat,
+                'image'  => $this->getSkinUrl('images/grid-cal.gif'),
+                'input_format' => Varien_Date::DATE_INTERNAL_FORMAT,
+                'label'    => $helper->__('Expiration Date'),
+                'title'    => $helper->__('Expiration Date'),
+                'note'     => $helper->__('Change date to this customer'),
+            ));
+        }
         
         $fieldset->addField('value_change', 'text', array(
             'name'     => 'value_change',
             'label'    => $helper->__('Credit Value'),
             'title'    => $helper->__('Credit Value'),
             'note'     => $helper->__('A negative value subtracts from the credit balance'),
-            'class'    => 'validate-currency-dollar',
-            'after_element_html' => '<div id="customercredit_currency_code"></div>',
         ));
 
         
         if ($helper->isScopePerWebsite()) {
-            // js change balance
             $script = '';
             foreach (Mage::app()->getWebsites() as $website) {
-                $script .= 'vs['.$website->getId().']=\''.$this->htmlEscape(Mage::helper('core')->currency($helper->getCreditValue($customerId, $website->getId()))).'\';';
+                $value  =(float)$helper->getCreditValue($customerId, $website->getId());
+                if($value) {
+                    $value .= $expired;
+                }
+                $script .= 'vs['.$website->getId().']=\''.$value.'\';';
             }
             $fieldset->addField('website_id', 'select', array(
                 'name'     => 'website_id',
@@ -99,18 +114,6 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Edit_Tab_CustomerCredit_A
         $this->setForm($form);
         
         return parent::_prepareForm();
-    }
-    
-    protected function _prepareLayout() {
-        parent::_prepareLayout();
-        $jsCusrrency = $this->getLayout()->createBlock('core/template')->setTemplate('customercredit/currency_js.phtml');
-        $this->setChild('js_currency', $jsCusrrency);
-    }
-    
-    protected function _toHtml() {
-        $html = parent::_toHtml();
-        $html .= $this->getChild('js_currency')->toHtml();;
-        return $html;
     }
     
     public function getWebsiteHtmlId() {

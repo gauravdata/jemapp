@@ -36,6 +36,7 @@
                    <?php if ($_rate->getErrorMessage()): ?>
                    <ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>
                    <?php else: ?>
+		   <div class="shippingmethod">
                    <input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>" checked="checked" />
                    <label for="s_method_<?php echo $_rate->getCode() ?>"><!--<b><?php echo $this->getCarrierName($code) ?>:</b>--> <?php echo $_rate->getMethodTitle() ?>
                         <strong>
@@ -47,33 +48,45 @@
                         <?php endif; ?>
                         </strong>
                     </label>
+		    </div>
                    <?php endif ?>
                 <?php endforeach; ?>
+		<?php echo Mage::helper('servicepointdhl')->getExtraHtml($code); ?>
             <?php endforeach; ?>
         </div>
     <?php else: ?>
         <div class="form-group shipment-methods">
-            <?php foreach ($_shippingRateGroups as $code => $_rates): ?>
-			<p class="form-label"><?php echo $this->getCarrierName($code) ?></p>
-			<?php foreach ($_rates as $_rate): ?>
-			<?php if ($_rate->getErrorMessage()): ?>
-			<ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>
-			<?php else: ?>
-			<input name="shipping_method" type="radio" class="validate-one-required-by-name" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> />
-			<label for="s_method_<?php echo $_rate->getCode() ?>"><!--<b><?php echo $this->getCarrierName($code) ?>:</b>--> <?php echo $_rate->getMethodTitle() ?>
-			<strong>
-			<?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
-			<?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+			<ul class="nav nav-tabs">
+            	<?php $i=0; foreach ($_shippingRateGroups as $code => $_rates): ?>
+				<li<?php if($i==0) { echo ' class="active"'; } ?>><a href="#tab-<?=$i;?>" data-toggle="tab"><?php echo $this->getCarrierName($code) ?></a></li>
+				<?php $i++; endforeach; ?>
+			</ul>
+			<div class="tab-content">
+				<?php $i=0; foreach ($_shippingRateGroups as $code => $_rates): ?>
+				<div id="tab-<?=$i;?>" class="tab-pane block<?php if($i==0) { echo ' active'; } ?>">
+					<?php foreach ($_rates as $_rate): ?>
+						<?php if ($_rate->getErrorMessage()): ?>
+							<ul class="messages"><li class="error-msg"><ul><li><?php echo $_rate->getErrorMessage() ?></li></ul></li></ul>
+						<?php else: ?>
+							<div class="shippingmethod">
+								<input name="shipping_method" type="radio" class="validate-one-required-by-name" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> />
+								<label for="s_method_<?php echo $_rate->getCode() ?>"><!--<b><?php echo $this->getCarrierName($code) ?>:</b>--> <?php echo $_rate->getMethodTitle() ?>
+									<strong>
+										<?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+										<?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
 
-			<?php echo $_excl; ?>
-			<?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
-			(<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
-			<?php endif; ?>
-			</strong>
-			</label>
-			<?php endif ?>
-			<?php endforeach; ?>
-            <?php endforeach; ?>
+										<?php echo $_excl; ?>
+										<?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+											(<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+										<?php endif; ?>
+									</strong>
+								</label>
+							</div>
+						<?php endif ?>
+					<?php endforeach; ?>
+				</div>
+				<?php $i++; endforeach; ?>
+			</div>
         </div>
     <?php endif; ?>
 <?php endif; ?>

@@ -32,38 +32,36 @@
 class MageWorx_CustomerCredit_RefferalsController extends Mage_Core_Controller_Front_Action {
 
     private $_customerCredit = 0;
-    public function indexAction()
-    {
+    
+    public function indexAction() {
         $this->loadLayout();
         $this->getLayout()->getBlock('head')->setTitle(Mage::helper('customercredit')->__('My Sharring List'));
         $this->renderLayout();
     }
     
-    public function generateAction()
-    {
-       // echo "<pre>"; print_r($this->getRequest()->getParams()); exit;
+    /**
+     * Generate codes
+     * @return url
+     */
+    public function generateAction() {
         $credit = (float)$this->getRequest()->getParam('credit_value');
         $qty    = 1;
         
-        if(!$credit)
-        {
+        if(!$credit) {
              Mage::getSingleton('core/session')->addError($this->__("Credit value is required value."));
             return $this->_redirectReferer();
         }
         
-        if($credit<MageWorx_CustomerCredit_Block_Customer_Refferals_Details::CC_MIN_CREDIT_CODE)
-        {
+        if($credit<MageWorx_CustomerCredit_Block_Customer_Refferals_Details::CC_MIN_CREDIT_CODE) {
             Mage::getSingleton('core/session')->addError($this->__("Please increase code value."));
             return $this->_redirectReferer();
         }
-        if($credit>MageWorx_CustomerCredit_Block_Customer_Refferals_Details::CC_MAX_CREDIT_CODE)
-        {
+        if($credit>MageWorx_CustomerCredit_Block_Customer_Refferals_Details::CC_MAX_CREDIT_CODE) {
             Mage::getSingleton('core/session')->addError($this->__("Please decrease code value."));
             return $this->_redirectReferer();
         }
         
-        if($qty>MageWorx_CustomerCredit_Block_Customer_Refferals_Details::CC_MAX_QTY)
-        {
+        if($qty>MageWorx_CustomerCredit_Block_Customer_Refferals_Details::CC_MAX_QTY) {
             Mage::getSingleton('core/session')->addNotice($this->__("Max code number is %s. Value was changed to maximum.",MageWorx_CustomerCredit_Block_Customer_Refferals_Details::CC_MAX_QTY));
             $qty = MageWorx_CustomerCredit_Block_Customer_Refferals_Details::CC_MAX_QTY;
         }
@@ -71,8 +69,7 @@ class MageWorx_CustomerCredit_RefferalsController extends Mage_Core_Controller_F
         $customerId = Mage::getModel('customer/session')->getCustomerId();
         $qty = $this->checkCustomerBalance($customerId,$credit,$qty);
         
-        if($qty<1)
-        {
+        if($qty<1) {
             Mage::getSingleton('core/session')->addError($this->__("You can't create code with %s value. Your balance is %s", Mage::helper('core')->currency($credit), Mage::helper('core')->currency($this->_customerCredit)));
             return $this->_redirectReferer();
         }
@@ -89,7 +86,7 @@ class MageWorx_CustomerCredit_RefferalsController extends Mage_Core_Controller_F
                 ->setIsActive(true)
                 ->setOwnerId($customerId)
                 ->setGenerate($data);
-        try{
+        try {
             $codeModel->generate();
             $lastItem = $codeModel->getCollection()->getLastItem();
         } catch (Mage_Core_Exception $e) {
@@ -101,27 +98,36 @@ class MageWorx_CustomerCredit_RefferalsController extends Mage_Core_Controller_F
         return $this->_redirectReferer();
     }
     
-    public function checkCustomerBalance($customerId,$credit,$qty)
-    {
+    /**
+     * Check balance
+     * @param int $customerId
+     * @param flaot $credit
+     * @param int $qty
+     * @return int
+     */
+    public function checkCustomerBalance($customerId,$credit,$qty) {
         $customerCredit = Mage::getModel('customercredit/credit')->setCustomerId($customerId)->loadCredit()->getValue();
         $this->_customerCredit = $customerCredit;
-        $codeCredit     = $credit*$qty;
-        if($customerCredit>=$codeCredit)
-        {
+        $codeCredit = $credit*$qty;
+        if($customerCredit>=$codeCredit) {
             return $qty;
-        }
-        else {
+        } else {
             $qty = $customerCredit/$credit;
             $qty = (int)$qty;
-            if($qty>0){
+            if($qty>0) {
                 Mage::getSingleton('core/session')->addNotice($this->__('Number of codes was changed to %s.',$qty));
             }
             return $qty;
         }
     }
     
-    public function decreaseCustomerCredit($customerId,$credit)
-    {
+    /**
+     * Decrease customer credit
+     * @param int $customerId
+     * @param float $credit
+     * @return boolean
+     */
+    public function decreaseCustomerCredit($customerId,$credit) {
         $credit = 0-$credit;
         $creditLog = Mage::getModel('customercredit/credit_log');                   
         Mage::getModel('customercredit/credit')

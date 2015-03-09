@@ -38,8 +38,7 @@ class MageWorx_CustomerCredit_Adminhtml_RulesController extends Mage_Adminhtml_C
         }
     }
 
-    protected function _initAction()
-    {
+    protected function _initAction() {
         $this->loadLayout()
             ->_setActiveMenu('promo');
         return $this;
@@ -52,9 +51,13 @@ class MageWorx_CustomerCredit_Adminhtml_RulesController extends Mage_Adminhtml_C
             ->renderLayout();
     }
 
-    public function newAction()
-    {
+    public function newAction() {
         $this->_forward('edit');
+    }
+    
+    public function infoAction() {
+        $this->loadLayout();
+        $this->renderLayout();
     }
 
     public function editAction() {
@@ -69,9 +72,7 @@ class MageWorx_CustomerCredit_Adminhtml_RulesController extends Mage_Adminhtml_C
                 return;
             }
         }
-      
-        //    $this->getRequest()->setParam('current_rule_type', $model->getRuleType());
-
+    
         // set entered data if was error when we do save
         $data = Mage::getSingleton('adminhtml/session')->getPageData(true);
         if (!empty($data)) {
@@ -97,7 +98,6 @@ class MageWorx_CustomerCredit_Adminhtml_RulesController extends Mage_Adminhtml_C
         $this->_addContent($block)
             ->_addLeft($this->getLayout()->createBlock('customercredit/adminhtml_rules_edit_tabs'))
             ->renderLayout();
-
     }
 
     public function saveAction() {
@@ -111,7 +111,6 @@ class MageWorx_CustomerCredit_Adminhtml_RulesController extends Mage_Adminhtml_C
                         Mage::throwException(Mage::helper('salesrule')->__('Wrong rule specified.'));
                     }
                 }
-
                 
                 
                 if (isset($data['rule']['conditions'])) {
@@ -128,14 +127,17 @@ class MageWorx_CustomerCredit_Adminhtml_RulesController extends Mage_Adminhtml_C
                        }
                     }
                 }
-             //   echo "<pre>"; print_r($data['conditions']); exit;
-                                
+                               
                 unset($data['rule']);
                 $model->loadPost($data);
 
+                if(!$model->getId()) {
+                    $model->setCreatedAt(date("Y-m-d"));
+                }
+              
                 Mage::getSingleton('adminhtml/session')->setPageData($model->getData());
                 $model->save();
-                
+             
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('salesrule')->__('Rule was successfully saved'));
                 Mage::getSingleton('adminhtml/session')->setPageData(false);
                 $this->_redirect('*/*/');
@@ -150,8 +152,7 @@ class MageWorx_CustomerCredit_Adminhtml_RulesController extends Mage_Adminhtml_C
         $this->_redirect('*/*/');
     }
 
-    public function deleteAction()
-    {
+    public function deleteAction() {
         if ($id = $this->getRequest()->getParam('id')) {
             try {
                 $model = Mage::getModel('customercredit/rules');
@@ -172,8 +173,7 @@ class MageWorx_CustomerCredit_Adminhtml_RulesController extends Mage_Adminhtml_C
         $this->_redirect('*/*/');
     }
 
-    public function newConditionHtmlAction()
-    {
+    public function newConditionHtmlAction() {
         $id = $this->getRequest()->getParam('id');
         $typeArr = explode('|', str_replace('-', '/', $this->getRequest()->getParam('type')));
         $type = $typeArr[0];                
@@ -206,8 +206,7 @@ class MageWorx_CustomerCredit_Adminhtml_RulesController extends Mage_Adminhtml_C
         
     }
 
-    public function gridAction()
-    {
+    public function gridAction() {
         $this->_initRule();
         $this->getResponse()->setBody(
             $this->getLayout()->createBlock('customercredit/adminhtml_rules_grid', 'customercredit.rules.grid')
@@ -216,19 +215,15 @@ class MageWorx_CustomerCredit_Adminhtml_RulesController extends Mage_Adminhtml_C
     }
 
     
-    public function getConditionsAction()
-    {
+    public function getConditionsAction() {
         $this->_initRule();
-        // echo "<pre>"; print_r($this->getRequest()->getParams()); exit;
         $this->getResponse()->setBody(
                 $this->getLayout()->createBlock('customercredit/adminhtml_rules_edit_tab_conditions','customercredit.rules.conditions')->toHtml()
         );
     }
     
-    public function getActionsAction()
-    {
+    public function getActionsAction() {
         $this->_initRule();
-        // echo "<pre>"; print_r($this->getRequest()->getParams()); exit;
         $this->getResponse()->setBody(
                 $this->getLayout()->createBlock('customercredit/adminhtml_rules_edit_tab_actions','customercredit.rules.actions')->toHtml()
         );

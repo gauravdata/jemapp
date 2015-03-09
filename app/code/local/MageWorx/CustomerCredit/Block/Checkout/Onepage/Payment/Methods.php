@@ -35,41 +35,6 @@ class MageWorx_CustomerCredit_Block_Checkout_Onepage_Payment_Methods extends Mag
         return Mage::helper('customercredit')->isPartialPayment($this->getQuote(), Mage::getSingleton('customer/session')->getCustomerId(), Mage::app()->getStore()->getWebsiteId());
     }
     
-//    public function getMethodsWithCustomercredit() {
-//        if(version_compare(Mage::getVersion(), '1.6.0.0', '<')){
-//            return parent::getMethods();
-//        }
-//        
-//        $methods = $this->getData('methods');
-//        if (is_null($methods)) {
-//            $quote = $this->getQuote();
-//            $store = $quote ? $quote->getStoreId() : null;
-//            $methods = $this->helper('payment')->getStoreMethods($store, $quote);
-//            $total = $quote->getGrandTotal();
-//            foreach ($methods as $key => $method) {
-//                if ($this->_canUseMethod($method)
-//                    && ($total >= 0
-//                        || $method->getCode() == 'free'
-//                        || ($quote->hasRecurringItems() && $method->canManageRecurringProfiles()))) {
-//                    $this->_assignMethod($method);
-//                } else {
-//                    unset($methods[$key]);
-//                }
-//            }            
-//            
-//            if (count($methods)==1) {
-//                foreach($methods as $item){
-//                    if($item->getCode() == 'customercredit' && $this->isPartialPayment()!=2){
-//                        $methods = array();
-//                    }
-//                }
-//            }
-//            
-//            $this->setData('methods', $methods);            
-//        }
-//        return $methods;
-//    }
-    
     public function getMethods() {
         //$origMethods = $this->getMethodsWithCustomercredit();
         $origMethods = parent::getMethods();
@@ -82,5 +47,14 @@ class MageWorx_CustomerCredit_Block_Checkout_Onepage_Payment_Methods extends Mag
             if ($code=='customercredit') array_unshift($methods, $method); else $methods[] = $method;
         }
         return $methods;
+    }
+    
+    public function needShowRechageLink() {
+        $marker = $this->isPartialPayment();
+     
+        if($marker<2) {
+            return true;
+        }
+        return false;
     }
 }

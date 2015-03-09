@@ -34,7 +34,7 @@
  * @author     MageWorx Dev Team <dev@mageworx.com>
  */
  
-class MageWorx_CustomerCredit_Block_Customer_View_Credit extends Mage_Core_Block_Template 
+class MageWorx_CustomerCredit_Block_Customer_View_Credit extends MageWorx_CustomerCredit_Block_Customer_View_Abstract 
 {
     public function getCredit() {
         if (!($customerId = Mage::getSingleton('customer/session')->getCustomerId())) {
@@ -44,7 +44,7 @@ class MageWorx_CustomerCredit_Block_Customer_View_Credit extends Mage_Core_Block
     }
 
     public function getFormAction() {
-        return $this->getUrl('customercredit/index/refill');
+        return $this->getUrl('customercredit/index/refill',array('_secure'=>true));
     }
 
     public function getCustomerCreditCode() {
@@ -63,4 +63,31 @@ class MageWorx_CustomerCredit_Block_Customer_View_Credit extends Mage_Core_Block
         }
         return Mage::helper('customercredit')->getCreditExpired($customerId, Mage::app()->getStore()->getWebsiteId());
     }
+    
+    /**
+     * Retrieve url for add product to cart
+     *
+     * @return string
+     */
+    public function getAddToCartFormUrl()
+    {
+        $magentoVersion = Mage::getVersion();
+        $creditProduct = Mage::helper('customercredit')->getCreditProduct(true);
+        if (version_compare($magentoVersion, '1.8', '>=')) {
+            return $this->getSubmitUrl($creditProduct);
+        }
+        return Mage::helper('checkout/cart')->getAddUrl($creditProduct);
+    }
+    
+    /**
+     * Checks if Add to Cart section is available
+     *
+     * @return bool
+     */
+    public function isAllowAddToCart()
+    {
+        $creditProduct = Mage::helper('customercredit')->getCreditProduct(true);
+        return $creditProduct && $creditProduct->isSalable();
+    }
+    
 }

@@ -36,16 +36,13 @@
 
 class MageWorx_CustomerCredit_Model_Rules_Condition_Address extends MageWorx_CustomerCredit_Model_Rules_Condition_Abstract
 {
-    public function loadAttributeOptions()
-    {
+    public function loadAttributeOptions() {
         $attributes = array(
             'total_amount' => Mage::helper('salesrule')->__('Purchased amount'),
             'registration' => Mage::helper('salesrule')->__('Registration date'),
             'birthday'          => Mage::helper('salesrule')->__('Birthday'),
         );
-
         $this->setAttributeOption($attributes);
-
         return $this;
     }
 
