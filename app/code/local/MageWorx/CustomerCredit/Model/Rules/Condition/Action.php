@@ -36,24 +36,21 @@
 
 class MageWorx_CustomerCredit_Model_Rules_Condition_Action extends MageWorx_CustomerCredit_Model_Rules_Condition_Abstract
 {
-    public function loadAttributeOptions()
-    {
+    public function loadAttributeOptions() {
         $attributes = array(
             'review_product'    => Mage::helper('salesrule')->__('Review product'),
             'tag_product'       => Mage::helper('salesrule')->__('Tag product'),
             'fb_like'           => Mage::helper('salesrule')->__('Facebook Like'),
             'newsletter_signup' => Mage::helper('salesrule')->__('Newsletter signup'),
-            'place_order' => Mage::helper('salesrule')->__('Place Order Profit'),
+//            'place_order'       => Mage::helper('salesrule')->__('Place Order Profit'), # DEPRICATED 2.6.0 -> Use 50% in other actions
+            'first_order'         => Mage::helper('salesrule')->__('Place First Order'),
             
         );
-
         $this->setAttributeOption($attributes);
-
         return $this;
     }
     
-    public function loadOperatorOptions()
-    {
+    public function loadOperatorOptions() {
         $this->setOperatorOption(array(
             '=='  => Mage::helper('rule')->__('is'),
             '>='  => Mage::helper('rule')->__('equals or greater than'),

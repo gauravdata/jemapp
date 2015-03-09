@@ -38,11 +38,9 @@ class MageWorx_CustomerCredit_Adminhtml_Import_CreditController extends MageWorx
 {
     /**
      * Index action.
-     *
-     * @return void
+      * @return void
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $maxUploadSize = Mage::helper('importexport')->getMaxUploadSize();
         $this->_getSession()->addNotice(
             $this->__('Total size of uploadable files must not exceed %s', $maxUploadSize)
@@ -63,8 +61,7 @@ class MageWorx_CustomerCredit_Adminhtml_Import_CreditController extends MageWorx
         if($next<=$import->totalRecords) {
             array_push($this->errors,$import->errors);
             $result['url'] = $this->getUrl('*/*/runGenerate/', array('next'=>$next));
-        }
-        else {
+        } else {
             $result['stop']= 1;
             $result['url'] = $this->getUrl('*/*/index/');
             $error = $this->errors;

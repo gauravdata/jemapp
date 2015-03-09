@@ -36,8 +36,12 @@
  */
 class MageWorx_CustomerCredit_Model_Checkout_Type_Onepage extends Mage_Checkout_Model_Type_Onepage {
 
+    /**
+     * Save Payment
+     * @param array $data
+     * @return Mage_Checkout_Model_Type_Onepage
+     */
     public function savePayment($data) {
-
         if (!empty($data['use_internal_credit']) || $data['method']=='customercredit') {
             Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
         } else {

@@ -47,7 +47,7 @@
     <?php if ($this->helper('customercredit')->isEnabledCreditMemoReturn() && $_source->getCustomerId()>0) { ?>
         <tr>
             <td class="label"><?php echo $this->helper('customercredit')->__('Credit Memo Return in Credits') ?></td>
-            <td><input type="text" name="creditmemo[credit_return]" value="<?php echo $_source->getBaseGrandTotal()+$_source->getBaseCustomerCreditAmount() ?>" class="input-text not-negative-amount" style="width:60px;text-align:right" id="credit_return" onchange="checkCreditReturnAmount(this);" /></td>
+            <td><input type="text" name="creditmemo[credit_return]" value="<?php echo $_source->getBaseCustomerCreditAmount() ?>" class="input-text not-negative-amount" style="width:60px;text-align:right" id="credit_return" onchange="checkCreditReturnAmount(this);" /></td>
         </tr>
     <?php } ?>
     <tr>

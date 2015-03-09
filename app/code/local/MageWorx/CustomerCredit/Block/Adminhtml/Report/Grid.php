@@ -63,45 +63,47 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Report_Grid extends Mage_Adminhtml
            $totalCredits            = 0;
            $totalUsed               = 0;
            $customers               = array();
-           $customersWithCredits    = 0;
            
-           $collection = Mage::getResourceModel('customercredit/credit_log_collection'); 
+           $collection = Mage::getResourceModel('customercredit/credit_log_collection');
+           $collectionTotal = Mage::getResourceModel('customercredit/credit_collection');
+           $collectionTotal->getSelect()->where('value>0');
+           foreach ($collectionTotal as $item) {
+               if(!isset($customers[$item->getWebsiteId()])) {
+                   $customers[$item->getWebsiteId()] = array();
+               }
+          
+               $totalCredits += $item->getValue();
+               if($item->getValue()>0) {
+                   $customers[$item->getWebsiteId()][]=$item->getCustomerId();
+               }
+           }
            foreach ($collection as $item)
            {
                $value = $item->getValueChange();
-               if(!isset($customers[$item->getCustomerId()]))
-               {
-                   $customers[$item->getCustomerId()] = array();
-               }
-               $customers[$item->getCustomerId()][] = $value;
-               if($value >=0)
-               {
-                   $totalCredits += $value;
-                   continue;
-               }
-               if(in_array($item->getActionType(),array(1,5))) {
+               if(in_array($item->getActionType(),array(MageWorx_CustomerCredit_Model_Credit_Log::ACTION_TYPE_USED,MageWorx_CustomerCredit_Model_Credit_Log::ACTION_TYPE_CREDIT_PRODUCT))) {
                     $totalUsed += $value;
-               }
-               elseif(!in_array($item->getActionType(),array(7))) {
-                   $totalCredits += $value;
-               }
-           }
-           foreach ($customers as $customer)
-           {
-               if(array_sum($customer)>0)
-               {
-                   $customersWithCredits++;
                }
            }
            
-           $totalCredits    = Mage::helper('core')->currency($totalCredits,true,false);
-           $totalUsed       = Mage::helper('core')->currency(abs($totalUsed),true,false);
+           $totalCredits    = $totalCredits;
+           $totalUsed       = round(abs($totalUsed),2);
            $totalCustomers  = (int) Mage::getResourceModel('customer/customer_collection')->getSize();
-           $persent         = $customersWithCredits / $totalCustomers *100;
+           ksort($customers);
+           $customerStatistic = array();
+//           echo "<pre>"; print_r($customers); exit;
+           foreach ($customers as $key=>$website) {
+               if($key==0) {
+                   $websiteName = $this->__("Global");
+               } else {
+                   $websiteName = Mage::app()->getWebsite($key)->getName();
+               }
+               $persent         = sizeof($website) / $totalCustomers *100;
+               $customerStatistic[] = $websiteName .": ". sizeof($website) . " (".$this->__('%s of all customers',round($persent,2)."%").")";
+           }
            return "<div id='customercredit'>
-                    <div class='notification-global' style='padding-right:50px; padding-left:20px; border:1px solid #EEE2BE; background:#FFF9E9; width: 300px;'><span class='label'>".$this->__('Total credits in system')."</span>: <span style='float:right;'>$totalCredits</span></div>
-                    <div class='notification-global' style='padding-right:50px; padding-left:20px; border:1px solid #EEE2BE; background:#FFF9E9; width: 300px;'><span class='label'>".$this->__('Total credits used')."</span>: <span style='float:right;'>$totalUsed</span></div>
-                    <div class='notification-global' style='padding-right:50px; padding-left:20px; border:1px solid #EEE2BE; background:#FFF9E9; width: 300px;'><span class='label'>".$this->__('Customers with credits')."</span>: <span style='float:right;'>$customersWithCredits (".$this->__('%s of all customers',round($persent,2)."%").")</span></div>
+                    <div class='notification-global' style='padding-right:50px; padding-left:20px; border:1px solid #EEE2BE; background:#FFF9E9; width: 400px;'><span class='label'>".$this->__('Total credits in system')."</span>: <span style='float:right;'>$totalCredits</span></div>
+                    <div class='notification-global' style='padding-right:50px; padding-left:20px; border:1px solid #EEE2BE; background:#FFF9E9; width: 400px;'><span class='label'>".$this->__('Total credits used')."</span>: <span style='float:right;'>$totalUsed</span></div>
+                    <div class='notification-global' style='padding-right:50px; padding-left:20px; border:1px solid #EEE2BE; background:#FFF9E9; width: 400px;'><span class='label'>".$this->__('Customers with credits')."</span>: <span style='float:right;'>".join(",<br>",$customerStatistic)."</span></div>
                   </div>";
        }
 
@@ -117,12 +119,14 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Report_Grid extends Mage_Adminhtml
             'width'     => '50px',
             'totals_label'  => Mage::helper('sales')->__('Total'),
         ));
+        
         $this->addColumn('customer_id', array(
             'header'    => $helper->__('Customer Id'),
             'index'     => 'customer_id',
             'type'      => 'int',
             'width'     => '50px',
         ));
+        
         $this->addColumn('customer_name', array(
             'header'    => $helper->__('Customer Name'),
             'index'     => 'customer_name',
@@ -131,16 +135,19 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Report_Grid extends Mage_Adminhtml
        //     'sortable'  => false,
             'filter'    => false,
         ));
+        
         $this->addColumn('email', array(
             'header'    => $helper->__('Customer Email'),
             'index'     => 'email',
             'type'      => 'text',
             'nl2br'     => true,
         ));
+        
         $groups = Mage::getResourceModel('customer/group_collection')
             ->addFieldToFilter('customer_group_id', array('gt'=> 0))
             ->load()
             ->toOptionHash();
+        
         $this->addColumn('group_id', array(
             'header'    =>  $helper->__('Customer Group'),
             'width'     =>  '100',
@@ -148,21 +155,23 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Report_Grid extends Mage_Adminhtml
             'type'      =>  'options',
             'options'   =>  $groups,
         ));
-        $this->addColumn('credit_ballance', array(
-            'header'        => $helper->__('Credit Balance'),
-            'index'         => 'credit_ballance',
-            'type'          => 'currency',
-            'filter_index'  => 'main_table.value',
-            'width'         => '50px',
-            'renderer'      => 'customercredit/adminhtml_widget_grid_column_renderer_currency'
-        ));       
+        
         $this->addColumn('value_change', array(
             'header'    => $helper->__('Added/Deducted'),
             'index'     => 'value_change',
             'width'     => '50px',
-            'type'      => 'currency',
-            'renderer'  => 'customercredit/adminhtml_widget_grid_column_renderer_currency'
+            'renderer'  => 'customercredit/adminhtml_widget_grid_column_renderer_currencychange'
         ));
+        
+        $this->addColumn('credit_balance', array(
+            'header'        => $helper->__('Credit Balance'),
+            'index'         => 'credit_balance',
+            'type'          => 'int',
+            'filter_index'  => 'main_table.value',
+            'width'         => '50px',
+            'renderer'      => 'customercredit/adminhtml_widget_grid_column_renderer_currency'
+        ));       
+        
         $this->addColumn('action_date', array(
             'header'   => $helper->__('Modified On'),
             'index'    => 'action_date',
@@ -178,6 +187,7 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Report_Grid extends Mage_Adminhtml
             'width'    => '150px',
         //    'filter'   => false,
         ));
+        
         $websites = Mage::getResourceModel('core/website_collection')
             ->addFieldToFilter('website_id', array('gt'=> 0))
             ->load()
@@ -199,6 +209,15 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Report_Grid extends Mage_Adminhtml
             'nl2br'     => true,
             'sortable'  => false,
             'filter'   => false,
+        ));
+        
+        $this->addColumn('action_type', array(
+            'header'    => $helper->__('Action Type'),
+            'width'     => '50px',
+            'index'     => 'action_type',
+            'sortable'  => false,
+            'type'      => 'options',
+            'options'   => Mage::getSingleton('customercredit/credit_log')->getActionTypesOptions(),
         ));
         
         $this->addColumn('action',
@@ -229,7 +248,6 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Report_Grid extends Mage_Adminhtml
         $collection = Mage::getResourceModel('customercredit/credit_log_collection')
                 ->addCustomerToSelect();
         //$collection->getSelect()->order('main_table.log_id DESC');
-        //echo $collection->getSelect()->__toString();
         $this->setCollection($collection);
 
         return parent::_prepareCollection();
@@ -255,31 +273,46 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Report_Grid extends Mage_Adminhtml
     public function getCsv()
     {
         $csv = '';
-        $this->_prepareCollection();
-        $this->_prepareColumns();
+        $this->_isExport = true;
+        $this->_prepareGrid();
+        $this->getCollection()->getSelect()->limit();
+        $this->getCollection()->setPageSize(0);
+        $this->getCollection()->load();
+        $this->_afterLoadCollection();
 
+        $data = array();
         foreach ($this->_columns as $column) {
             if (!$column->getIsSystem()) {
-                $data[] = '"'.$column->getHeader().'"';
+                $data[] = '"'.$column->getExportHeader().'"';
             }
         }
+          array_pop($data);                                     // Remove Action Title
         $csv.= implode(',', $data)."\n";
 
-        foreach ($this->getCollection() as $_item) {
+        foreach ($this->getCollection() as $item) {
             $data = array();
-                foreach ($this->_columns as $column) {
-                    
-                    if (!$column->getIsSystem()) {
-                        $data[] = '"' . str_replace(
-                            array('"', '\\'),
-                            array('""', '\\\\'),
-                            $_item->getData($column->getId())
-                        ) . '"';
-                    }
-                 }
-             $csv.= implode(',', $data)."\n";
+            foreach ($this->_columns as $column) {
+                if (!$column->getIsSystem()) {
+                    $data[] = '"' . str_replace(array('"', '\\'), array('""', '\\\\'),
+                        $column->getRowFieldExport($item)) . '"';
+                }
+            }
+              array_pop($data);                                     // Remove Action Data
+            $csv.= implode(',', $data)."\n";
         }
-        //echo "<pre>"; print_r($csv); exit;
+
+        if ($this->getCountTotals())
+        {
+            $data = array();
+            foreach ($this->_columns as $column) {
+                if (!$column->getIsSystem()) {
+                    $data[] = '"' . str_replace(array('"', '\\'), array('""', '\\\\'),
+                        $column->getRowFieldExport($this->getTotals())) . '"';
+                }
+            }
+            $csv.= implode(',', $data)."\n";
+        }
+       
         return $csv;
     }
 

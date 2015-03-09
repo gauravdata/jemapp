@@ -31,8 +31,12 @@
 
 class MageWorx_CustomerCredit_Model_Import_Credit extends MageWorx_CustomerCredit_Model_Import_Abstract
 {
-    protected function _changeData($entity = array())
-    {
+    /**
+     * Change data
+     * @param array $entity
+     * @return boolean
+     */
+    protected function _changeData($entity = array()) {
         try {
             $website_code   = $entity[0];
             $customerEmail  = $entity[1];
@@ -61,7 +65,8 @@ class MageWorx_CustomerCredit_Model_Import_Credit extends MageWorx_CustomerCredi
             $customerCredit->save();
             $customer->setData('customer_credit_data',$customerCredit->getData());
             
-            if (Mage::helper('customercredit')->isSendNotificationBalanceChanged()) {  
+            // if send email
+            if (Mage::helper('customercredit')->isSendNotificationBalanceChanged()) {                
                 Mage::helper('customercredit')->sendNotificationBalanceChangedEmail($customer);
             }
        } catch (Exception $e) {

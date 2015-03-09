@@ -49,6 +49,9 @@ class MageWorx_CustomerCredit_Model_Paypal_Standard extends Mage_Paypal_Model_St
         } else {
             $rArr['discount_amount'] = sprintf('%.2f', $credit);
         }        
+        if($rArr['amount']>$order->getSubtotal()) {
+                $rArr['amount'] -= $rArr['shipping'];
+        }
         //print_r($rArr); exit;        
         return $rArr;
     }

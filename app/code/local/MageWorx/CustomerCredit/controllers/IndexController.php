@@ -31,11 +31,23 @@
 
 class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front_Action {
 
+    /**
+     * Action predispatch
+     * Check customer authentication for some actions
+     * @return MageWorx_CustomerCredit_IndexController
+     */
     public function preDispatch() {
         parent::preDispatch();
+        $action = $this->getRequest()->getActionName();
+        $loginUrl = Mage::helper('customer')->getLoginUrl();
 
+        if (!Mage::getSingleton('customer/session')->authenticate($this, $loginUrl)) {
+            $this->setFlag('', self::FLAG_NO_DISPATCH, true);
+            return;
+        }
         if (!Mage::getSingleton('customer/session')->authenticate($this)) {
             $this->setFlag('', 'no-dispatch', true);
+            return;
         }
         if (!Mage::helper('customercredit')->isShowCustomerCredit())
         {
@@ -99,10 +111,8 @@ class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front
         }
     }
     
-    public function removeCodeAction()
-    {
+    public function removeCodeAction() {
         $codeId = $this->getRequest()->getParam('code_id');
-        
         $codeModel = Mage::getModel('customercredit/code')->load($codeId);
         $codeModel->setCustomerId($codeModel->getOwnerId());
         $code = $codeModel->getCode();
@@ -127,6 +137,7 @@ class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front
 
     public function removeCreditUseAction() {
         Mage::getSingleton('checkout/session')->setUseInternalCredit(false);
+        Mage::getSingleton('customer/session')->unsCustomCreditValue();
         $this->_redirect('checkout/cart');
     }
     
@@ -147,14 +158,10 @@ class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front
         $model = Mage::getModel('customercredit/rules_customer_action');
         $collection = $model->getCollection();
         
-        $actionTag = MageWorx_Customercredit_Model_Rules_Customer_Action::MAGEWORX_CUSTOMER_ACTION_FBLIKE;
+        $actionTag = MageWorx_CustomerCredit_Model_Rules_Customer_Action::MAGEWORX_CUSTOMER_ACTION_FBLIKE;
         $log = Mage::getModel('customercredit/rules_customer_log');
         $logCollectionModel = $log->getCollection()->setActionTag($actionTag);
         
-//        $reviewProductCollection = Mage::getResourceModel('review/review_product_collection');
-//
-//        $reviewProductCollection->getSelect()->where('rt.review_id=?',$object->getReviewId());
-             //   echo $reviewProductCollection->getSelect()->__toString(); exit;
         foreach ($ruleModel->getData() as $rule) {   
             $customerActions = array();
             $conditions = unserialize($rule['conditions_serialized']);  
@@ -162,20 +169,16 @@ class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front
                 $coff = 1;
                 $rest = 0;
                 $skipUrl = false;
-                if($actionTag)
-                {
+                if($actionTag) {
                     if ($condition['attribute']=='fb_like') {
                         $skipUrl = false;
                         $logCollection = $logCollectionModel->loadByRuleAndCustomer($rule['rule_id'], $customerId);
-                      //  echo $logCollection->getSelect()->__toString(); exit;
-                        foreach ($logCollection as $item)
-                        {
+                        foreach ($logCollection as $item) {
                             if($item->getValue() == $currentUrl) {
                                 $success[$key] = false;
                                 $skipUrl = true;
                             }
                         }
-                        
                         
                         $action = $collection->loadByRuleAndCustomer($rule['rule_id'], $customerId)->getFirstItem();
                         if ($action->getId()) {
@@ -184,32 +187,17 @@ class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front
                             $currentValue = 0;
                         }
                         $nextValue = $currentValue+1;
-                        if($nextValue >= $condition['value'])
-                        {
+                        if($nextValue >= $condition['value']) {
                            $coff = $nextValue / $condition['value'];
                            $coff = (int) $coff;
                            $rest = $nextValue - $condition['value']*$coff;
                            $success[$key] = true;
-                        }
-                        else {
+                        } else {
                             $rest = $nextValue;
                             $success[$key] = false;
                         }
                         $customerActions[] = array('rule'=>$rule,'rule_id'=>$rule['rule_id'],'customerId'=>$customerId,'actionTag'=>$actionTag,'rest'=>$rest,'coff'=>$coff,'nextValue'=>$nextValue); 
                     }
-//                    else {
-//                        $success[$key] = false;  
-//                        $products = $reviewProductCollection->getItems();
-//                        $conditionProductModel = Mage::getModel($condition['type'])->loadArray($condition);                                                                                                
-//                        foreach($products as $item) {
-//                           // print_r($item->getData()); exit;
-//                            $product = Mage::getModel('catalog/product')->loadByAttribute('sku',$item->getSku());
-//                            if ($conditionProductModel->validateProduct($product)) {                            
-//                                $success[$key] = true;
-//                                break;
-//                            }                                    
-//                        } 
-//                    }
                 }
             }
 
@@ -245,7 +233,6 @@ class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front
                     break;
             }
             if(count($customerActions)) {
-                  //    echo "<pre>"; print_r($customerActions); exit;
                 foreach ($customerActions as $actionValue) {
                     if(!$skipUrl) {
                         $log->setId(null)
@@ -255,7 +242,6 @@ class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front
                           ->setValue($currentUrl)
                           ->save();
                     }
-                    
                     $action->setRuleId($actionValue['rule_id'])
                         ->setCustomerId($actionValue['customerId'])
                         ->setActionTag($actionValue['actionTag']);
@@ -265,10 +251,8 @@ class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front
                         $action->setValue($actionValue['nextValue']);
                     }
                     $action->save();
-                  
-                
-               
-                if (!$result) continue;
+             
+                    if (!$result) continue;
 
                 // if onetime
                 if (isset($rule['is_onetime'])) $isOnetime = $rule['is_onetime']; else $isOnetime = 1;
@@ -279,8 +263,6 @@ class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front
                 } else {
                     if ($isOnetime) continue;
                 }
-
-                
                 $creditLog = Mage::getModel('customercredit/credit_log');                   
                 Mage::getModel('customercredit/credit')
                         ->setCustomerId($customerId)
@@ -293,8 +275,78 @@ class MageWorx_CustomerCredit_IndexController extends Mage_Core_Controller_Front
                 }
             }
         }
-       
         return $this;
     }
-
+    
+    /**
+     * Change patyment credit
+     */
+    private function _changeCredit() {
+        $creditValue    = $this->getRequest()->getParam('custmer_credit_value');
+        $credit         = $creditValue/Mage::getStoreConfig('mageworx_customers/customercredit_credit/exchange_rate');
+        $realCreditValue= Mage::helper('customercredit')->getRealCreditValue();
+        
+        $shippingAddress= Mage::getModel('checkout/cart')->getQuote()->getShippingAddress();
+        $shipping       = floatval($shippingAddress->getShippingAmount() - $shippingAddress->getShippingTaxAmount());
+        $subtotal       = floatval(Mage::getModel('checkout/cart')->getQuote()->getSubtotalWithDiscount());
+        $tax            = floatval($shippingAddress->getTaxAmount());    
+        $total          = $subtotal+$shipping+$tax;
+        
+        $creditTotals = Mage::helper('customercredit')->getCreditTotals();
+        if (count($creditTotals)<3) {
+            $creditLeft = 0;
+            foreach ($creditTotals as $field) {
+                switch ($field) {
+                    case 'subtotal':                            
+                        $creditLeft += $subtotal;
+                        break;
+                    case 'shipping':
+                        $creditLeft += $shipping;                   
+                        break;
+                    case 'tax':
+                        $creditLeft += $tax;
+                        break;    
+                    case 'fees':
+                        $baseCreditLeft += $shippingAddress->getBaseMultifeesAmount();
+                        $creditLeft += $shippingAddress->getMultifeesAmount();
+                        break;  
+                }
+            }
+        } else {
+            $creditLeft = $total;
+        }
+        if($credit>$creditLeft) {
+            $credit = $creditLeft;
+        }
+        
+        $creditValue = $credit*Mage::getStoreConfig('mageworx_customers/customercredit_credit/exchange_rate');
+        if($creditValue>$realCreditValue) {
+            $creditValue = $realCreditValue;
+        }
+        Mage::getSingleton('customer/session')->setCustomCreditValue($creditValue);
+        return true;
+    }
+    
+    public function reload_paymentAction()
+    {
+        $this->_changeCredit();
+        $session = Mage::getSingleton('checkout/session');
+        $session->setUseInternalCredit(true);
+        Mage::getModel('checkout/cart')->getQuote()->collectTotals();
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+    
+    public function reload_payment_ajaxAction()
+    {
+        $this->_changeCredit();
+        $session = Mage::getSingleton('checkout/session');
+        $session->setUseInternalCredit(true);
+        Mage::getModel('checkout/cart')->getQuote()->collectTotals();
+    }
+    
+    public function reloadCartAction() {
+        $this->_changeCredit();
+        return $this->_redirect('checkout/cart/');
+    }
 }

@@ -29,41 +29,39 @@
  * @author     MageWorx Dev Team
  */
 
-class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Controller_Action
+class MageWorx_CustomerCredit_Adminhtml_CodeController extends Mage_Adminhtml_Controller_Action
 {
-	/**
-	 * Action initialization 
-	 */
-	protected function _initAction() {
-            $this->loadLayout();
-            $this->_setActiveMenu('promo');
-	}
-	/**
-	 * Default Action
-	 */
-	public function indexAction() {
-            $this->_title($this->__('Recharge Codes'))->_title($this->__('Manage'));
-            
-	    $block = $this->getLayout()->createBlock('customercredit/adminhtml_code');
-		$this->_initAction();
-		$this->_addContent($block)
-		  ->renderLayout();
-	}
-	
-	public function gridAction()
-	{
-	    $this->getResponse()->setBody(
-            $this->getLayout()->createBlock('customercredit/adminhtml_code_grid', 'customercredit.code.grid')
-                ->toHtml()
-        );
-	}
-	
-	public function newAction()
-	{
-	    $this->_forward('edit');
-	}
-	
-	public function editAction() {
+    /**
+     * Action initialization 
+     */
+    protected function _initAction() {
+        $this->loadLayout();
+        $this->_setActiveMenu('promo');
+    }
+    /**
+     * Default Action
+     */
+    public function indexAction() {
+        $this->_title($this->__('Recharge Codes'))->_title($this->__('Manage'));
+
+        $block = $this->getLayout()->createBlock('customercredit/adminhtml_code');
+            $this->_initAction();
+            $this->_addContent($block)
+              ->renderLayout();
+    }
+
+    public function gridAction() {
+        $this->getResponse()->setBody(
+        $this->getLayout()->createBlock('customercredit/adminhtml_code_grid', 'customercredit.code.grid')
+            ->toHtml()
+    );
+    }
+
+    public function newAction() {
+        $this->_forward('edit');
+    }
+
+    public function editAction() {
         try {
     	   $code = $this->_initCode();
             $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
@@ -97,8 +95,7 @@ class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Co
         }
     }
     
-    public function saveAction()
-    {
+    public function saveAction() {
         if ($data = $this->getRequest()->getPost()) {
             try {
                 $dataDetails = $this->getRequest()->getPost('details');
@@ -116,13 +113,10 @@ class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Co
                 }
                 $codeModel->loadPost($data);
                
-                if ($codeModel->getIsNew())
-                {
+                if ($codeModel->getIsNew()) {
                     $codeModel->generate();
                     $successMessage = $this->_helper()->__('%d Recharge Code(s) was successfully generated', $codeModel->getData('generate','qty'));
-                }
-                else 
-                {
+                } else {
                     $codeModel->save();
                     $successMessage = $this->_helper()->__('Recharge Code was successfully saved');
                 }
@@ -135,8 +129,7 @@ class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Co
             catch (Mage_Core_Exception $e) {
                 $this->_getSession()->addError($e->getMessage());
             }
-            catch (Exception $e)
-            {
+            catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
                 Mage::getSingleton('adminhtml/session')->setFormData($data);
                 $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
@@ -145,8 +138,7 @@ class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Co
         }
     }
     
-    public function logGridAction()
-    {
+    public function logGridAction() {
         try {
             $code = $this->_initCode(false);
             $this->_initAction();
@@ -154,16 +146,14 @@ class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Co
                 $this->getLayout()->createBlock('customercredit/adminhtml_code_edit_tab_log')->toHtml()
             );
         }
-        catch (Exception $e)
-        {
+        catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
             $this->_redirect('*/*');
             return false;
         }
     }
     
-    public function deleteAction()
-    {
+    public function deleteAction() {
         try {
             $code = $this->_initCode(false);
             if ($code->isDeletable()) {
@@ -171,18 +161,15 @@ class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Co
                 Mage::getSingleton('adminhtml/session')->addSuccess($this->_helper()->__('Code was successfully deleted'));
                 $this->_redirect('*/*/');
                 return;
-            }
-            else {
+            } else {
                 Mage::throwException($this->_helper()->__('Recharge Code can not be deleted.'));
             }
         }
-        catch (Exception $e)
-        {
+        catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
             if ($id = $code->getId()) {
                 $this->_redirect('*/*/edit', array('id' => $id));
-            }
-            else {
+            } else {
                 $this->_redirect('*/*');
             }
             return false;
@@ -194,30 +181,21 @@ class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Co
      *
      * @return MageWorx_CustomerCredit_Model_Code
      */
-    protected function _initCode($bInitNew = true)
-    {
+    protected function _initCode($bInitNew = true) {
     	$codeId    = (int) $this->getRequest()->getParam('id');
         $codeModel = Mage::getModel('customercredit/code');
         $bWrongCode = false;
-        if (!$codeId && $bInitNew)
-        {
+        if (!$codeId && $bInitNew) {
             $codeModel->setIsNew(true);
-        }
-        elseif ($codeId)
-        {
+        } elseif ($codeId) {
             $codeModel->load($codeId);
-            if ($codeModel->getId() != $codeId)
-            {
+            if ($codeModel->getId() != $codeId) {
                 $bWrongCode = true;
             }
-            
+        } else {
+            $bWrongCode = true;// $bInitNew == false
         }
-        else // $bInitNew == false
-        {
-            $bWrongCode = true;
-        }
-        if ($bWrongCode)
-        {
+        if ($bWrongCode) {
             Mage::throwException($this->_helper()->__('Wrong Recharge Code specified.'));
             //Mage::getSingleton('adminhtml/session')->addError($this->_helper()->__('Wrong Recharge Code specified.'));
             //$this->_redirect('*/*');
@@ -231,13 +209,11 @@ class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Co
      * 
      * @return MageWorx_CustomerCredit_Helper_Data
      */
-    protected function _helper()
-    {
+    protected function _helper() {
     	return Mage::helper('customercredit');
     }
     
-    public static function getWorkingDir()
-    {
+    public static function getWorkingDir() {
         return Mage::getBaseDir('var') . DS;
     }
     
@@ -272,7 +248,6 @@ class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Co
                 $rows += $dataList;  
             }
         } 
-    //echo "<pre>"; print_r($rows); exit;
         $this->_generateCsv($file_path,$rows);
         $name = pathinfo($file_path, PATHINFO_BASENAME);
         $this->_prepareDownloadResponse($name, array(
@@ -282,7 +257,6 @@ class MageWorx_Customercredit_Adminhtml_CodeController extends Mage_Adminhtml_Co
     }
     
     private function _generateCsv($file_path,$data=array()) {
-       // 
         $mage_csv = new Varien_File_Csv(); //mage CSV  
            //write to csv file
         $mage_csv->saveData($file_path, $data); //note $products_row will be two dimensional array
