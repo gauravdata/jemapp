@@ -92,7 +92,7 @@
         <?php endif; ?>
         <?php if ($_creditmemo->getCustomerCreditAmount()):?>
             <tr>
-                <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Internal Credit') ?></td>
+                <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Jouw tegoed') ?></td>
                 <td align="right" style="padding:3px 9px">-<?php echo $_order->formatPrice($_creditmemo->getCustomerCreditAmount()) ?></td>
             </tr>
         <?php endif;?>

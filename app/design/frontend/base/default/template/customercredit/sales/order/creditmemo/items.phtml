@@ -111,7 +111,7 @@
         <?php endif; ?>
         <?php if ($_creditmemo->getCustomerCreditAmount()):?>
             <tr>
-                <td colspan="6" class="a-right"><?php echo $this->__('Jouw tegoed') ?></td>
+                <td colspan="6" class="a-right"><?php echo $this->__('Internal Credit') ?></td>
                 <td class="last a-right">-<?php echo $_order->formatPrice($_creditmemo->getCustomerCreditAmount()) ?></td>
             </tr>
         <?php endif;?>

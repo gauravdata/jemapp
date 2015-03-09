@@ -560,7 +560,7 @@
                 <active>1</active>
                 <model>customercredit/payment_method_customercredit</model>
                 <order_status>pending</order_status>
-                <title>Internal Credit</title>
+                <title>Jouw tegoed</title>
                 <allowspecific>0</allowspecific>
             </customercredit>
         </payment>

@@ -41,9 +41,9 @@
             <default_setup>
                 <connection>
 					<host><![CDATA[127.0.0.1]]></host>
-					<dbname><![CDATA[dbtest]]></dbname>
-					<username><![CDATA[test]]></username>
-					<password><![CDATA[J0GXB6Odn0]]></password>
+					<dbname><![CDATA[notomatoes_shop]]></dbname>
+					<username><![CDATA[notomatoes]]></username>
+					<password><![CDATA[trAs3ubr]]></password>
 					<!--<host><![CDATA[localhost]]></host>
 					<dbname><![CDATA[notomatoes-shop]]></dbname>
 					<username><![CDATA[root]]></username>
@@ -53,6 +53,7 @@
             </default_setup>
         </resources>
         <session_save><![CDATA[files]]></session_save>
+	
 	<!-- example of redis cache -->
         <cache>
             <backend>Cm_Cache_Backend_Redis</backend>
@@ -72,7 +73,7 @@
             </backend_options>
         </cache>
 
-        <!-- example of redis full page cache -->
+	<!-- example of redis full page cache -->
         <full_page_cache>
             <backend>Cm_Cache_Backend_Redis</backend>
             <backend_options>
@@ -91,7 +92,8 @@
                 <lifetimelimit>43200</lifetimelimit> <!-- set lifetime for keys without TTL -->
                 <persistent>2</persistent>
             </backend_options>
-        </full_page_cache>	
+        </full_page_cache>
+
     </global>
     <admin>
         <routers>
