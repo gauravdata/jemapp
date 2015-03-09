@@ -132,19 +132,19 @@ if ($customFields->count()):
 <div class="fieldset">
     <h2 class="legend"><?php echo $this->__("Additional Information") ?></h2>
     <ul class="form-list">
-        <li class="wide">
+        <li class="wide" style="list-style: none;">
             <div class="input-box">
                 <textarea name="comment" id="comment" class="input-text"></textarea>
             </div>
         </li>
-        <li class="wide">
+        <!--<li class="wide" style="list-style: none;">
             <label for="attachment"><?php echo $this->__("Attach files") ?>
             </label>
             <div class="input-box">
                 <?php echo Mage::helper('mstcore/attachment')->getFileInputHtml(Mage::helper('rma/attachment')->getAllowedExtensions()) ?>
             </div>
             <?php echo Mage::helper('rma/attachment')->getAttachmentLimits() ?>
-        </li>
+        </li>-->
     </ul>
 </div>
 
