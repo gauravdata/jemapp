@@ -42,8 +42,12 @@ class MageWorx_CustomerCredit_Model_Invoice_Total_Customercredit extends Mage_Sa
         {
             return $this;
         }
+        
         $order = $invoice->getOrder();
-        if (!$order->getBaseCustomerCreditAmount() || $order->getBaseCustomerCreditAmount() == $order->getBaseCustomerCreditInvoiced())
+//        echo "<pre>"; print_r($order->toArray()); exit;
+        if (!$order->getBaseCustomerCreditAmount() || ($order->getBaseCustomerCreditAmount() == $order->getBaseCustomerCreditInvoiced()) ||
+           ($order->getGrandTotal()-$order->getSubtotal()==$order->getCustomerCreditAmount())
+                )
         {
             return $this;
         }
@@ -57,6 +61,9 @@ class MageWorx_CustomerCredit_Model_Invoice_Total_Customercredit extends Mage_Sa
         if ($invoiceBaseRemainder < $invoice->getBaseGrandTotal()) {
             $invoice->setGrandTotal($invoice->getGrandTotal()-$used);
             $invoice->setBaseGrandTotal($invoice->getBaseGrandTotal()-$baseUsed);
+        }elseif($invoiceBaseRemainder && $invoice->getBaseGrandTotal()) {
+            $invoice->setGrandTotal($invoice->getGrandTotal());
+            $invoice->setBaseGrandTotal($invoice->getBaseGrandTotal());
         } else {
             $invoice->setBaseGrandTotal(0);
             $invoice->setGrandTotal(0);

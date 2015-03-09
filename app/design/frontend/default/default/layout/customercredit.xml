@@ -48,7 +48,7 @@
             <action method="addLinkBlock" ifconfig="mageworx_customers/customercredit_credit/display_credit_link_in_top_menu"><blockName>customercredit_link</blockName><liParams>class='mini-top-cart'</liParams></action>
         </reference>        
     </default>
-    
+  
     <customercredit_index_index>
         <reference name="head">
             <action method="addCss"><stylesheet>css/customercredit.css</stylesheet></action>
@@ -128,10 +128,6 @@
         <reference name="head">
             <action method="addCss"><stylesheet>css/customercredit.css</stylesheet></action>
         </reference>
-        <reference name="checkout.cart">
-            <action method="chooseTemplate"/>
-            <block type="customercredit/checkout_cart_credit" name="checkout.cart.credit" as="cart_credit" template="customercredit/checkout/cart_credit.phtml" />
-        </reference>
     </checkout_cart_index>
     
     <checkout_onepage_index>
@@ -143,6 +139,7 @@
     <checkout_onepage_paymentmethod>
         <reference name="root">
             <action method="setTemplate"><template>customercredit/checkout/onepage_payment_methods.phtml</template></action>
+            <block type="customercredit/payment_form" name="payment.custom.value" as="payment.custom.value" template="customercredit/checkout/custom_value.phtml"></block>
         </reference>
     </checkout_onepage_paymentmethod>
     
@@ -151,4 +148,18 @@
             <action method="setTemplate"><template>customercredit/checkout/multishipping/billing.phtml</template></action>
         </reference>
     </checkout_multishipping_billing>
+    
+     <!--
+    REWRITE One page checkout payment methods block
+    -->
+    <customercredit_index_reload_payment>
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <block type="checkout/onepage_payment_methods" name="root" output="toHtml" template="customercredit/checkout/onepage_payment_methods.phtml">
+            <block type="customercredit/payment_form" name="payment.custom.value" as="payment.custom.value" template="customercredit/checkout/custom_value.phtml"></block>
+            <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+        </block>
+    </customercredit_index_reload_payment>
+    
 </layout>

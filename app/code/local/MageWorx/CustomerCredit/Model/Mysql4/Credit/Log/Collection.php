@@ -67,7 +67,7 @@ class MageWorx_CustomerCredit_Model_Mysql4_Credit_Log_Collection extends Mage_Co
 
         $this->getSelect()
           //   ->joinLeft(array('cc'=>$this->getTable('customercredit/credit')), 'main_table.credit_id=cc.credit_id', 'customer_id')
-             ->join(array('c'=>$this->getTable('customer/entity')), 'c.entity_id=credit.customer_id', array('email','group_id','credit_ballance'=>'main_table.value'))
+             ->join(array('c'=>$this->getTable('customer/entity')), 'c.entity_id=credit.customer_id', array('email','group_id','credit_balance'=>'main_table.value'))
              ->joinLeft(array('lname'=>$customer_lastname_table),'credit.customer_id = lname.entity_id AND lname.attribute_id = '.$customer_lastname->getId(),'')
              ->joinLeft(array('fname'=>$customer_lastname_table),'credit.customer_id = fname.entity_id AND fname.attribute_id = '.$customer_firstname->getId(),array('customer_name'=>"CONCAT(fname.value,' ',lname.value)"))
                 ;
@@ -102,7 +102,7 @@ class MageWorx_CustomerCredit_Model_Mysql4_Credit_Log_Collection extends Mage_Co
         parent::_initSelect();
         $this->getSelect()
                 ->joinInner(array('credit' => $this->getTable('customercredit/credit')), 'main_table.credit_id = credit.credit_id', 
-                    array('customer_id' => 'credit.customer_id') //'website_id' => 'credit.website_id',
+                    array('customer_id' => 'credit.customer_id','real_credit'=>'credit.value') //'website_id' => 'credit.website_id',
                 )
                 ;//->order('log_id DESC');
         ;

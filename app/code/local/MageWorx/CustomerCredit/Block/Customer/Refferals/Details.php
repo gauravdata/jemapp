@@ -29,7 +29,7 @@
  * @author     MageWorx Dev Team
  */
 
-class MageWorx_CustomerCredit_Block_Customer_Refferals_Details extends Mage_Core_Block_Template
+class MageWorx_CustomerCredit_Block_Customer_Refferals_Details extends MageWorx_CustomerCredit_Block_Customer_View_Credit
 {
     const CC_MIN_CREDIT_CODE    = 1;
     const CC_MAX_CREDIT_CODE    = 1000;

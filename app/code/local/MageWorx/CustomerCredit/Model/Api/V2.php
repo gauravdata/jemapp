@@ -34,6 +34,4 @@
  * @author     MageWorx Dev Team <dev@mageworx.com>
  */
 
-class MageWorx_CustomerCredit_Model_Api_V2 extends MageWorx_CustomerCredit_Model_Api
-{
-}
+class MageWorx_CustomerCredit_Model_Api_V2 extends MageWorx_CustomerCredit_Model_Api { }

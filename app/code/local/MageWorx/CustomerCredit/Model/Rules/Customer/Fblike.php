@@ -33,17 +33,15 @@
  * @package    MageWorx_CustomerCredit
  * @author     MageWorx Dev Team <dev@mageworx.com>
  */
-class MageWorx_Customercredit_Model_Rules_Customer_Fblike extends Mage_Rule_Model_Rule
+class MageWorx_CustomerCredit_Model_Rules_Customer_Fblike extends Mage_Rule_Model_Rule
 {
-    protected function _construct()
-    {
+    protected function _construct() {
         parent::_construct();
         $this->_init('customercredit/rules_customer_fblike');
         $this->setIdFieldName('id');
     }
     
-    public function loadByRuleAndCustomer($ruleId, $customerId)
-    {
+    public function loadByRuleAndCustomer($ruleId, $customerId) {
 	$this->getResource()->loadByRuleAndCustomer($this, $ruleId, $customerId);
         return $this;
     }

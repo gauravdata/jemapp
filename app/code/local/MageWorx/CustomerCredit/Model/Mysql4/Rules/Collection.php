@@ -41,22 +41,25 @@ class MageWorx_CustomerCredit_Model_Mysql4_Rules_Collection extends Mage_Core_Mo
         parent::_construct();
         $this->_init('customercredit/rules');
     }
+    
+    public function setRuleTypeFilter($type=2){
+        $this->getSelect()->where("rule_type=?",$type);
+        return $this;
+    }
 
     public function setValidationFilter($websiteId, $customerGroupId)
     {
         $this->getSelect()->where('is_active=1');
         $this->getSelect()->where('find_in_set(?, website_ids)', (int)$websiteId);
         $this->getSelect()->where('find_in_set(?, customer_group_ids)', (int)$customerGroupId);
-     	
-	    return $this;
+     	return $this;
     }
 
     public function setValidationByCustomerGroup($customerGroupId)
     {
         $this->getSelect()->where('is_active=1');
         $this->getSelect()->where('find_in_set(?, customer_group_ids)', (int)$customerGroupId);
-     	
-	    return $this;
+     	return $this;
     }
     
     public function addCounts()
@@ -64,7 +67,6 @@ class MageWorx_CustomerCredit_Model_Mysql4_Rules_Collection extends Mage_Core_Mo
         $this->getSelect()
                 ->joinLeft(array('log'=>$this->getTable('customercredit/credit_log')), 'main_table.rule_id=log.rule_id', array('count_rule'=>'COUNT(log.log_id)'))
                 ->group('main_table.rule_id');
-    //    echo $this->getSelect()->__toString(); exit;
         return $this;
     }
     /**
