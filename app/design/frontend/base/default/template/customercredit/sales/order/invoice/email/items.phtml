@@ -79,7 +79,7 @@
         <?php endif; ?>
         <?php if ($_invoice->getCustomerCreditAmount()):?>
             <tr>
-                <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Jouw tegoed') ?></td>
+                <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Internal Credit') ?></td>
                 <td align="right" style="padding:3px 9px">-<?php echo $_order->formatPrice($_invoice->getCustomerCreditAmount()) ?></td>
             </tr>
         <?php endif;?>

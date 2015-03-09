@@ -105,7 +105,7 @@
         <?php endif; ?>
         <?php if ($_order->getCustomerCreditAmount()):?>
             <tr>
-                <td colspan="<?php echo $colspan; ?>" class="a-right"><?php echo $this->__('Jouw tegoed') ?></td>
+                <td colspan="<?php echo $colspan; ?>" class="a-right"><?php echo $this->__('Internal Credit') ?></td>
                 <td class="last a-right">-<?php echo $_order->formatPrice($_order->getCustomerCreditAmount()) ?></td>
             </tr>
         <?php endif;?>

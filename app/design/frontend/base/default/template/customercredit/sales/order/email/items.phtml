@@ -34,9 +34,7 @@
  * @author     MageWorx Dev Team <dev@mageworx.com>
  */
 ?>
-<?php $_invoice = $this->getInvoice() ?>
-<?php $_order   = $this->getOrder() ?>
-<?php if ($_invoice && $_order): ?>
+<?php $_order = $this->getOrder() ?>
 <table cellspacing="0" cellpadding="0" border="0" width="100%" style="border:1px solid #bebcb7; background:#f8f7f5;">
     <thead>
         <tr>
@@ -47,46 +45,56 @@
         </tr>
     </thead>
 
-    <?php $i=0; foreach ($_invoice->getAllItems() as $_item): ?>
-    <?php if($_item->getOrderItem()->getParentItem()) continue; else $i++; ?>
+    <?php $i=0; foreach ($_order->getAllItems() as $_item): ?>
+    <?php if($_item->getParentItem()) continue; else $i++; ?>
     <tbody<?php echo $i%2 ? ' bgcolor="#eeeded"' : '' ?>>
         <?php echo $this->getItemHtml($_item) ?>
     </tbody>
     <?php endforeach; ?>
 
     <tfoot>
+        <?php if($_order->getGiftMessageId() && $_giftMessage = $this->helper('giftmessage/message')->getGiftMessage($_order->getGiftMessageId())): ?>
+        <tr>
+            <td colspan="4" align="left" style="padding:3px 9px">
+            <strong><?php echo $this->__('Gift Message for this Order') ?></strong>
+            <br /><?php echo $this->__('From:'); ?> <?php echo $this->htmlEscape($_giftMessage->getSender()) ?>
+            <br /><?php echo $this->__('To:'); ?> <?php echo $this->htmlEscape($_giftMessage->getRecipient()) ?>
+            <br /><?php echo $this->__('Message:'); ?><br /> <?php echo $this->htmlEscape($_giftMessage->getMessage()) ?>
+            </td>
+        </tr>
+        <?php endif; ?>
         <tr>
             <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Subtotal') ?></td>
-            <td align="right" style="padding:3px 9px"><?php echo $_order->formatPrice($_invoice->getSubtotal()) ?></td>
+            <td align="right" style="padding:3px 9px"><?php echo $_order->formatPrice($_order->getSubtotal()) ?></td>
         </tr>
-        <?php if ($_invoice->getDiscountAmount() > 0): ?>
+        <?php if ($_order->getDiscountAmount() > 0): ?>
         <tr>
-            <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Discount%s', $_order->getCouponCode() ? ' ('.$_order->getCouponCode().')' : '') ?></td>
-            <td align="right" style="padding:3px 9px"><?php echo $_order->formatPrice(0.00 - $_invoice->getDiscountAmount()) ?></td>
+            <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Discount '.($_order->getCouponCode()?'('.$_order->getCouponCode().')':'')) ?></td>
+            <td align="right" style="padding:3px 9px"><?php echo $_order->formatPrice(0.00 - $_order->getDiscountAmount()) ?></td>
         </tr>
         <?php endif; ?>
-        <?php if ($_invoice->getShippingAmount()): ?>
+        <?php if ($_order->getShippingAmount() || $_order->getShippingDescription()): ?>
         <tr>
             <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Shipping & Handling') ?></td>
-            <td align="right" style="padding:3px 9px"><?php echo $_order->formatPrice($_invoice->getShippingAmount()) ?></td>
+            <td align="right" style="padding:3px 9px"><?php echo $_order->formatPrice($_order->getShippingAmount()) ?></td>
         </tr>
         <?php endif; ?>
-        <?php if (($_invoice->getTaxAmount() > 0)||(Mage::helper('tax')->displayZeroTax())): ?>
+         <?php if (($_order->getTaxAmount() > 0)||(Mage::helper('tax')->displayZeroTax())): ?>
         <tr>
             <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Tax') ?></td>
-            <td align="right" style="padding:3px 9px"><?php echo $_order->formatPrice($_invoice->getTaxAmount()) ?></td>
+            <td align="right" style="padding:3px 9px"><?php echo $_order->formatPrice($_order->getTaxAmount()) ?></td>
         </tr>
         <?php endif; ?>
-        <?php if ($_invoice->getCustomerCreditAmount()):?>
+        <?php if ($_order->getCustomerCreditAmount()):?>
             <tr>
-                <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Jouw tegoed') ?></td>
-                <td align="right" style="padding:3px 9px">-<?php echo $_order->formatPrice($_invoice->getCustomerCreditAmount()) ?></td>
+                <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Internal Credit') ?></td>
+                <td align="right" style="padding:3px 9px">-<?php echo $_order->formatPrice($_order->getCustomerCreditAmount()) ?></td>
             </tr>
         <?php endif;?>
         <tr bgcolor="#DEE5E8">
             <td colspan="3" align="right" style="padding:3px 9px"><strong><big><?php echo $this->__('Grand Total') ?></big></strong></td>
-            <td align="right" style="padding:6px 9px"><strong><big><?php echo $_order->formatPrice($_invoice->getGrandTotal()) ?></big></strong></td>
+            <td align="right" style="padding:6px 9px"><strong><big><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></big></strong></td>
         </tr>
     </tfoot>
+
 </table>
-<?php endif; ?>
