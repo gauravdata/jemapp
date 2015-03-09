@@ -1,123 +1,52 @@
-<html>
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-  <title></title>
-</head>
-
-<!--@subject Je tegoed in {{var store.getFrontendName()}} is bijgewerkt! @-->
+<!--@subject {{var store.getFrontendName()}}: Internal Balance has been Changed @-->
 <!--@vars
 {"store url=\"\"":"Store Url",
 "skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
 "htmlescape var=$customerName":"Customer Name",
-"htmlescape var=$customerEmail":"Customer Email",
 "store url=\"customer/account/\"":"Customer Account Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
 "var comment":"Comment",
 "var store.getFrontendName()":"Store Name"}
 @-->
 <!--@styles
 body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
 @-->
-<body
-style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
 
-<div
-style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
-
-<table cellspacing="0" cellpadding="0" border="0" width="100%">
-  <tbody>
-    <tr>
-      <td align="center" valign="top" style="padding:20px 0 20px 0"><!-- [ header starts here] -->
-
-        <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0"
-        width="650" style="border:1px solid #E0E0E0;">
-          <tbody>
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+<tr>
+    <td align="center" valign="top" style="padding:20px 0 20px 0">
+        <!-- [ header starts here] -->
+        <table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
             <tr>
-              <td valign="top"><a href="{{store url='' _autologin='1' _autologin_customer=$order.getCustomerEmail()}}"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/></a></td>
+                <td valign="top">
+                    <a href="{{store url=""}}"><img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom:10px;" border="0"/></a>
+                </td>
             </tr>
             <!-- [ middle starts here] -->
             <tr>
-              <td valign="top"><h2
-                style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Goed nieuws,
-                {{htmlescape var=$customerName}},</h2>
-
-                <p
-                style="font-size:12px; line-height:16px; margin:0 0 10px 0;"><span
-                style="font-size: 10pt"><br>
-                Je tegoed in <strong><a
-                href="{{store url='' _autologin='1' _autologin_customer=$customerEmail}}">{{var
-                store.getFrontendName()}}</a></strong> is bijgewerkt!
-                </span></p>
-
-                <p
-                style="font-size:12px; line-height:16px; margin:0 0 10px 0;"><span
-                style="font-size: 10pt">Je hebt op dit moment
-                <strong>{{htmlescape var=$balance}}</strong> om te besteden in
-                de webshop.</span></p>
-
-                <p></p>
-
-                <p style="font-size: 10pt">Wat moet je doen:</p>
-
-                <p style="font-size: 10pt">1. <a name="Klik" id="Klik"
-                href="{{store url='' _autologin='1' _autologin_customer=$customerEmail}}">Klik
-                hier om naar de site te gaan en direct in te loggen.</a></p>
-
-                <p style="font-size: 10pt">2. Je bent nu ingelogd. Plaats de
-                producten die je wilt bestellen in je shoppingbag en ga naar je
-                shoppingcart. Omdat je nu ook 1 of 2 artikelen mag omruilen,
-                wordt de korting van de 3=1 deal pas berekend wanneer je een
-                code hebt ingevuld. </p>
-
-                <p style="font-size: 10pt">Vul bij het veld OMRUILCODE de code
-                '<strong>RETURN</strong>' in en klik op 'Omruilcode toepassen'.
-                Dan wordt de 3=1 deal voor jouw producten in werking gesteld.
-                Klik daarna op 'AFREKENEN".</p>
-
-                <p style="font-size: 10pt">3. Kies bij BETAALWIJZE op 'Mijn
-                tegoed'. Je ziet hier het bedrag wat je tegoed hebt in
-                <strong><a
-                href="{{store url='' _autologin='1' _autologin_customer=$customerEmail}}">{{var
-                store.getFrontendName()}}</a></strong>. Wanneer je deze optie
-                aanklikt, wordt het tegoed besteedt aan je bestelling en kun je
-                je bestelling plaatsen!</p>
-
-                <p
-                style=" line-height:16px; margin:0 0 10px 0;font-size: 10pt"></p>
-
-                <p
-                style=" line-height:16px; margin:0;font-size: 10pt">Shopze!</p>
-
-                <p>{{var store.getFrontendName()}}</p>
-
-                <p style="font-size: 10pt"></p>
-
-                <p style="font-size: 10pt"></p>
-
-                <p style="font-size: 10pt"></p>
-
-                <p style="font-size: 10pt"><span
-                style="font-size: 10pt">Referentie: {{htmlescape
-                var=$comment}}</span></p>
-
-                <p></p>
-              </td>
+                <td valign="top">
+                    <h1 style="font-size:22px; font-weight:normal; line-height:22px; margin:0 0 11px 0;">Dear {{htmlescape var=$customerName}},</h1>
+                    <p style="font-size:12px; line-height:16px; margin:0 0 10px 0;">
+                        Your internal balance has been changed by admin to {{htmlescape var=$balance}}.
+                    </p>
+                    <p style="font-size:12px; line-height:16px; margin:0 0 10px 0;">You can check your internal balance by <a href="{{store url="customer/account/"}}" style="color:#1E7EC8;">logging into your account</a>.</p>
+                    <p style="font-size:12px; line-height:16px; margin:0 0 10px 0;">{{htmlescape var=$comment}}</p>
+                    <p style="font-size:12px; line-height:16px; margin:0;">
+                        If you have any questions, please feel free to contact us at
+                        <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a>
+                        or by phone at {{config path='general/store_information/phone'}}.
+                    </p>
+                </td>
             </tr>
             <tr>
-              <td bgcolor="#EAEAEA" align="center"
-              style="background:#EAEAEA; text-align:center;">
-                <center>
-                <p style="font-size:12px; margin:0;"><strong><a
-                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customer=&#x2019;customer_email&#x2019;}}">{{var
-                store.getFrontendName()}}</a></strong></p>
-                </center>
-              </td>
+                <td bgcolor="#EAEAEA" align="center" style="background:#EAEAEA; text-align:center;"><center><p style="font-size:12px; margin:0;">Thank you again, <strong>{{var store.getFrontendName()}}</strong></p></center></td>
             </tr>
-          </tbody>
         </table>
-      </td>
-    </tr>
-  </tbody>
+    </td>
+</tr>
 </table>
 </div>
 </body>
-</html>

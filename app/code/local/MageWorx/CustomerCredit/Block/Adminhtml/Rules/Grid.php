@@ -36,19 +36,19 @@
  
 class MageWorx_CustomerCredit_Block_Adminhtml_Rules_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
-	public function __construct()
-	{
-            parent::__construct();
-            $this->setId('codeGrid');
-            $this->setSaveParametersInSession(true);
-            $this->setDefaultSort('rule_id');
-            $this->setDefaultDir('desc');
-            $this->setUseAjax(true);
-	}
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setId('codeGrid');
+        $this->setSaveParametersInSession(true);
+        $this->setDefaultSort('rule_id');
+        $this->setDefaultDir('desc');
+        $this->setUseAjax(true);
+    }
 	
-        protected function _prepareColumns()
-	{
-		$this->addColumn('rule_id',
+    protected function _prepareColumns()
+    {
+	$this->addColumn('rule_id',
             array(
                 'header'=> $this->_helper()->__('ID'),
                 'width' => '50px',
@@ -78,11 +78,12 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Rules_Grid extends Mage_Adminhtml_
 
         $this->addColumn('website_ids',
             array(
-                'header'=> $this->_helper()->__('Website'),
+                'header'=> $this->_helper()->__('Website(s)'),
                 'type'  => 'options',
                  'width' => '200px',
                 'index' => 'website_ids',
             	'options' => Mage::getSingleton('adminhtml/system_store')->getWebsiteOptionHash(),
+                'renderer'=> 'customercredit/adminhtml_rules_grid_website'
         ));
         
         $this->addColumn('is_active',
@@ -102,26 +103,35 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Rules_Grid extends Mage_Adminhtml_
                 'type'  => 'int',
                 'width' => '100px',
                 'index' => 'count_rule',
+                'renderer'=> 'customercredit/adminhtml_rules_grid_count'
         ));
-        return parent::_prepareColumns();
-	}
-	
-	protected function _prepareCollection()
-	{
-		$collection = Mage::getResourceModel('customercredit/rules_collection')
-                        ->addCounts();
-          //      echo $collection->getSelect()->__toString();
-		$this->setCollection($collection);
+        $this->addColumn('created_at',
+            array(
+                'header'=> $this->_helper()->__('Created At'),
+                'type'  => 'date',
+                'width' => '100px',
+                'index' => 'created_at',
+                'renderer'=> 'customercredit/adminhtml_rules_grid_date'
+        ));
+    return parent::_prepareColumns();
+    }
+
+    protected function _prepareCollection()
+    {
+        $collection = Mage::getResourceModel('customercredit/rules_collection')
+                ->addCounts();
+    //               echo $collection->getSelect()->__toString();
+        $this->setCollection($collection);
         
-        return parent::_prepareCollection();
-	}
+    return parent::_prepareCollection();
+    }
 	
-	public function getGridUrl()
+    public function getGridUrl()
     {
         return $this->getUrl('*/*/grid', array('_current'=>true));
     }
     
-	public function getRowUrl($row)
+    public function getRowUrl($row)
     {
         return $this->getUrl('*/*/edit', array(
             'id'    => $row->getId()

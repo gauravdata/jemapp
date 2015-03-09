@@ -43,15 +43,20 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Grid extends Mage_Adminht
 
             $joinCond = 'credit_tbl.customer_id = e.entity_id';
             if (!Mage::helper('customercredit')->isScopePerWebsite()) {
-                $joinCond .= ' and credit_tbl.website_id = 0';
+                $joinCond .= ' AND credit_tbl.website_id = 0';
             } else if(!Mage::app()->isSingleStoreMode()){
-                $joinCond .= ' and credit_tbl.website_id = e.website_id';
+                $joinCond .= ' AND credit_tbl.website_id = e.website_id';
+//                $joinCond .= ' AND credit_tbl.website_id != 0';
             }
-            $collection->getSelect()->joinLeft(array('credit_tbl'=>$collection->getTable('customercredit/credit')),
-                $joinCond
-            );        
-            $collection->addExpressionAttributeToSelect('credit_value', 'IFNULL(credit_tbl.`value`, 0)', $fields);
-            //$sql = $collection->getSelect()->assemble();
+            $collection->getSelect()->joinLeft(array('credit_tbl'=>$collection->getTable('customercredit/credit')),"(".$joinCond.")",'');        
+//            if (!Mage::helper('customercredit')->isScopePerWebsite()) {
+//                $collection->addExpressionAttributeToSelect('credit_value', 'IFNULL(credit_tbl.`value`, 0)', $fields);
+//            } else {
+                $collection->addExpressionAttributeToSelect('credit_value', 'IFNULL(credit_tbl.`value`, 0)', $fields); 
+//            }
+            
+//echo $collection->getSelect()->__toString();
+//$sql = $collection->getSelect()->assemble();
             //$collection->getSelect()->reset()->from(array('e' => new Zend_Db_Expr('('.$sql.')')), '*');
         }
         return parent::setCollection($collection);
@@ -60,14 +65,12 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Grid extends Mage_Adminht
 
     protected function _prepareColumns() {        
         if (Mage::helper('customercredit')->isEnabled() && Mage::helper('customercredit')->isEnabledCustomerBalanceGridColumn()) {
-            $currencyCode = $this->getCurrentCurrencyCode();
             $this->addColumnAfter('credit_value', array(            
                 //'renderer'  => 'mageworx/tweaks_adminhtml_sales_order_grid_renderer_products',
-                'type'  => 'currency',
-                'currency_code' => $currencyCode,
                 'header' => Mage::helper('customercredit')->__('Credit Balance'),
                 'index' => 'credit_value',
                 'width' => '100px',
+                'renderer'  => 'customercredit/adminhtml_widget_grid_column_renderer_currency'
                 ), 'group');
         }    
         return parent::_prepareColumns();

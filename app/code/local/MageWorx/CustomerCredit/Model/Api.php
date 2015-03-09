@@ -38,8 +38,12 @@ class MageWorx_CustomerCredit_Model_Api extends Mage_Customer_Model_Api_Resource
 {
     private $_customer = null;
 
-    private function _getCustomer($id)
-    {
+    /**
+     * Get Customer Object
+     * @param int $id
+     * @return Mage_Customer_Model_Customer
+     */
+    private function _getCustomer($id) {
         if (!$id) {
             $this->_fault('data_invalid', $e->getMessage());
         }
@@ -54,6 +58,10 @@ class MageWorx_CustomerCredit_Model_Api extends Mage_Customer_Model_Api_Resource
         return $this->_customer;
     }
     
+    /**
+     * Get Cedit list
+     * @return array
+     */
     public function listCredit() {
         $model = Mage::getModel('customercredit/credit')->setIsApi(true);
         $collection = $model->getCollection();
@@ -64,11 +72,13 @@ class MageWorx_CustomerCredit_Model_Api extends Mage_Customer_Model_Api_Resource
         return $list;
     }
 
-
-    public function getCredit($customerId)
-    {
-      if($customer = $this->_getCustomer($customerId))
-        {
+    /**
+     * Get credit by customer id
+     * @param int $customerId
+     * @return int|boolean
+     */
+    public function getCredit($customerId) {
+        if($customer = $this->_getCustomer($customerId)) {
             try {
                 $model = Mage::getModel('customercredit/credit')->setCustomerId($customerId)->setIsApi(true);
                 $customerCredit = $model->loadCredit();
@@ -80,6 +90,12 @@ class MageWorx_CustomerCredit_Model_Api extends Mage_Customer_Model_Api_Resource
         return false;
     }
     
+    /**
+     * Set credit
+     * @param int $customerId
+     * @param float $value
+     * @return boolean
+     */
     public function setCredit($customerId,$value)
     {
         if($customer = $this->_getCustomer($customerId))
@@ -99,10 +115,14 @@ class MageWorx_CustomerCredit_Model_Api extends Mage_Customer_Model_Api_Resource
         return FALSE;
     }
     
-    public function increaseCredit($customerId,$value)
-    {
-        if($customer = $this->_getCustomer($customerId))
-        {
+    /**
+     * Increase Credit Value
+     * @param int $customerId
+     * @param float $value
+     * @return boolean
+     */
+    public function increaseCredit($customerId,$value) {
+        if($customer = $this->_getCustomer($customerId)) {
             try {
                 $customerCredit = Mage::getModel('customercredit/credit')->setCustomerId($customerId)->setIsApi(true)->loadCredit();
                 $customerCredit->setValueChange($value)->save();
@@ -115,10 +135,14 @@ class MageWorx_CustomerCredit_Model_Api extends Mage_Customer_Model_Api_Resource
         return false;
     }
     
-    public function decreaseCredit($customerId,$value)
-    {
-        if($customer = $this->_getCustomer($customerId))
-        {
+    /**
+     * Decrease Credit value
+     * @param int $customerId
+     * @param float $value
+     * @return boolean
+     */
+    public function decreaseCredit($customerId,$value) {
+        if($customer = $this->_getCustomer($customerId)) {
             try {
                 $value = 0 - $value;
                 $customerCredit = Mage::getModel('customercredit/credit')->setCustomerId($customerId)->setIsApi(true)->loadCredit();
@@ -132,9 +156,21 @@ class MageWorx_CustomerCredit_Model_Api extends Mage_Customer_Model_Api_Resource
         return false;
     }
     
-    
-    public function generateNewCodes($credit_value=1,$website_id=1,$qty=1,$from_date,$to_date,$is_active=true,$code_length=null,$group_length=null,$group_separator=null,$code_format=null)
-    {
+    /**
+     * Generate new credit codes
+     * @param float $credit_value
+     * @param int $website_id
+     * @param int $qty
+     * @param date $from_date
+     * @param date $to_date
+     * @param boolean $is_active
+     * @param int $code_length
+     * @param int $group_length
+     * @param string $group_separator
+     * @param string $code_format
+     * @return boolean
+     */
+    public function generateNewCodes($credit_value=1,$website_id=1,$qty=1,$from_date,$to_date,$is_active=true,$code_length=null,$group_length=null,$group_separator=null,$code_format=null) {
         if(!$code_length) $code_length=Mage::getStoreConfig('mageworx_customers/customercredit_recharge_codes/code_length');
         if(!$group_length) $group_length=Mage::getStoreConfig('mageworx_customers/customercredit_recharge_codes/group_length');
         if(!$group_separator) $group_separator=Mage::getStoreConfig('mageworx_customers/customercredit_recharge_codes/group_separator');

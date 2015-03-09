@@ -20,3 +20,41 @@ function createRequest(elId,value,url)
         }
     );
 }
+
+function openInfoGrid(url,current_rule)
+{
+    new Ajax.Updater(
+        'diallog_box_group-select', 
+        url, 
+        {
+            method: "post", 
+            evalScripts: true,
+            parameters: {'rule':current_rule}
+        }
+            
+    );
+
+    Ajax.Responders.register({
+        onCreate: function(){
+            $$('.loader').each(function(el) {
+              eel = el.up();
+              eel.style.zIndex=5500;
+              eel.show();
+           });
+      //    alert('a request has been initialized!');
+        }, 
+        onComplete: function(transport){
+            if(!transport.options.parameters.rule) return true;
+            $('diallog_box-wrapper').show();
+            $$('.loader').each(function(el) {
+                el.up().hide();
+             });
+            $$('#diallog_box_group-select .footer').each(function(el){
+                el.hide();
+            })
+            $$('#diallog_box_group-select .middle').each(function(el){
+                el.style ="background:none";
+            })
+        }
+    });
+}

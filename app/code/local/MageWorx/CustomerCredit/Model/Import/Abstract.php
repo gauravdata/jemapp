@@ -37,17 +37,20 @@ class MageWorx_CustomerCredit_Model_Import_Abstract extends Mage_ImportExport_Mo
     public  $customerEmail;
     private $_fileContent;
     
-    
-    
-    private function _init()
-    {
+    /**
+     * Init import
+     */
+    private function _init() {
         $content = Mage::getSingleton('admin/session')->getCustomerCreditImportFileContent();
         $this->_fileContent = $content;
         $this->totalRecords = sizeof($this->_fileContent);
     }
-   
-    public function run() 
-    {
+    
+    /**
+     * Run import
+     * @return MageWorx_CustomerCredit_Model_Import_Abstract
+     */
+    public function run() {
         $this->_init();
         $content = $this->_fileContent;
         $currentValueId = Mage::app()->getRequest()->getParam('next',1);
