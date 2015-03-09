@@ -12,7 +12,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
             return $result;
         }
 
-        $uri = 'https://dhlforyounl-dhlforyounl-service-point-locator.p.mashape.com/datamoduleAPI.jsp?action=public.splist&ot=n&spid=' . urlencode($code) . '&v=2';
+        $uri = 'https://dhlforyounl-dhlforyounl-service-point-locator.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&spid=' . urlencode($code) . '&v=2';
         $client = new Zend_Http_Client($uri);
         $client->setHeaders(array(
             'X-Mashape-Key' => '2mkhycZJq1msh6dAfgbllXxrSr5Wp1rotFHjsnEknupB8oHZcD',
@@ -42,7 +42,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
 
         $query = !empty($postcode) ? $postcode : $city;
 
-        $uri = 'https://dhlforyounl-dhlforyounl-service-point-locator.p.mashape.com/datamoduleAPI.jsp?action=public.splist&ot=y&v=2&s=' . urlencode($query);
+        $uri = 'https://dhlforyounl-dhlforyounl-service-point-locator.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s=' . urlencode($query);
         $client = new Zend_Http_Client($uri);
         $client->setHeaders(array(
             'X-Mashape-Key' => '2mkhycZJq1msh6dAfgbllXxrSr5Wp1rotFHjsnEknupB8oHZcD',
@@ -50,11 +50,13 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
         ));
 
         $response = $client->request();
-
         if ($response->isSuccessful()) {
-            $cached->save($response->getBody(), $key, array("dhl"), 30 * 24 * 3600);
             $result = Zend_Json::decode($response->getBody());
 
+	    if (isset($result['status_msg'])) {
+		//Mage::getSingleton('core/session')->addNotice($result['status_msg']);	
+	    }
+            $cached->save($response->getBody(), $key, array("dhl"), 30 * 24 * 3600);
             $result = array_slice($result['data']['items'], 0, 3);
             return $result;
         }
