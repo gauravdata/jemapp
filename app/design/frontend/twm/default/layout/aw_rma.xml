@@ -2,17 +2,17 @@
 <layout version="0.1.0">
     <default>
         <reference name="footer_links">
-            <block type="awrma/customer_footerlinkadder" name="awrma.customer.footerlinkadder" as="awrma_footerlinkadder">
-                <action method="addLink"></action>
-            </block>
+            <!--<block type="awrma/customer_footerlinkadder" name="awrma.customer.footerlinkadder" as="awrma_footerlinkadder">-->
+                <!--<action method="addLink"></action>-->
+            <!--</block>-->
         </reference>
     </default>
 
     <customer_account>
         <reference name="customer_account_navigation">
-            <block type="awrma/customer_accountlink" name="awrma.customer.account.checker" as="awrma_customer_account_checker">
-                <action method="addLink"></action>
-            </block>
+            <!--<block type="awrma/customer_accountlink" name="awrma.customer.account.checker" as="awrma_customer_account_checker">-->
+                <!--<action method="addLink"></action>-->
+            <!--</block>-->
         </reference>
     </customer_account>
 
