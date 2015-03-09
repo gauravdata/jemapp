@@ -125,13 +125,13 @@
     </sales_email_order_creditmemo_items>
     
     <checkout_cart_index>
-        <reference name="head">
-            <action method="addCss"><stylesheet>css/customercredit.css</stylesheet></action>
-        </reference>
-        <reference name="checkout.cart">
-            <action method="chooseTemplate"/>
-            <block type="customercredit/checkout_cart_credit" name="checkout.cart.credit" as="cart_credit" template="customercredit/checkout/cart_credit.phtml" />
-        </reference>
+        <!--<reference name="head">-->
+            <!--<action method="addCss"><stylesheet>css/customercredit.css</stylesheet></action>-->
+        <!--</reference>-->
+        <!--<reference name="checkout.cart">-->
+            <!--<action method="chooseTemplate"/>-->
+            <!--<block type="customercredit/checkout_cart_credit" name="checkout.cart.credit" as="cart_credit" template="customercredit/checkout/cart_credit.phtml" />-->
+        <!--</reference>-->
     </checkout_cart_index>
     
     <checkout_onepage_index>
