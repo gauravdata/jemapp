@@ -84,6 +84,7 @@
 							</div>
 						<?php endif ?>
 					<?php endforeach; ?>
+					<?php echo Mage::helper('servicepointdhl')->getExtraHtml($code); ?>
 				</div>
 				<?php $i++; endforeach; ?>
 			</div>
