@@ -49,7 +49,6 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Edit_Tab_CustomerCredit_L
         $this->addColumn('value', array(
             'header'    => $helper->__('Credit Balance'),
             'index'     => 'value',
-            'type'      => 'currency',
             'sortable'  => false,
             'filter'    => false,
             'width'     => '50px',
@@ -61,7 +60,7 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Edit_Tab_CustomerCredit_L
             'sortable'  => false,
             'filter'    => false,
             'width'     => '50px',
-            'renderer'  => 'customercredit/adminhtml_widget_grid_column_renderer_currency'
+            'renderer'  => 'customercredit/adminhtml_widget_grid_column_renderer_currencychange'
         ));
         $this->addColumn('website_id', array(
             'header'    => $helper->__('Website'),
@@ -70,18 +69,19 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Edit_Tab_CustomerCredit_L
             'options'   => $this->getWebsiteOptions(),
             'sortable'  => false,
             'width'     => '120px',
+            'filter_index'=>'main_table.website_id',
             'align'      => 'center'
         ));
         $this->addColumn('action_date', array(
             'header'   => $helper->__('Modified On'),
             'index'    => 'action_date',
             'type'     => 'datetime',
-            'width'    => '150px',
+            'width'    => '160px',
             'filter'   => false,
         ));
         $this->addColumn('action_type', array(
             'header'    => $helper->__('Action'),
-            'width'     => '50px',
+            'width'     => '70px',
             'index'     => 'action_type',
             'sortable'  => false,
             'type'      => 'options',
@@ -104,8 +104,8 @@ class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Edit_Tab_CustomerCredit_L
         $collection = Mage::getModel('customercredit/credit_log')
             ->getCollection()
             ->addCustomerFilter(Mage::registry('current_customer')->getId());
+      
         $this->setCollection($collection);
-//echo $collection->getSelect()->__toString();
         return parent::_prepareCollection();
     }
     

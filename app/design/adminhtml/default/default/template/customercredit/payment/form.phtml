@@ -45,6 +45,6 @@ payment.switchMethod= order.switchPaymentMethod.bind(order);
 </script>
 <ul id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none">
     <li>
-        <label>Available <?php echo Mage::helper('core')->currency($this->getCreditValue(), true, false)?></label>
+        <label>Available <?php echo Mage::helper('core')->currency($this->getCreditValue()/Mage::getStoreConfig('mageworx_customers/customercredit_credit/exchange_rate')).' ('.$this->getCreditValue()." ".Mage::helper('core')->__('credits')?>)</label>
     </li>
 </ul>

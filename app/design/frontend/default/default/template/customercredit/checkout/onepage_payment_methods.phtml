@@ -36,12 +36,14 @@ if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->
     <dl id="checkout-payment-method-load">
     <?php foreach ($this->getMethods() as $_method):
             $_code = $_method->getCode();
-            if ($_code=='customercredit' && $isPartial == -2) continue; // hide customer credit
+            if ($_code=='customercredit' && ($isPartial == -2 || $isPartial == -3)) continue; // hide customer credit
     ?>
         <dt>
         <?php if (sizeof($this->getMethods()) > 1): ?>
             <?php if ($_code=='customercredit' && $isPartial==1): ?>
                 <input id="p_method_<?php echo $_code ?>" value="1" type="checkbox" name="payment[use_internal_credit]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="checkbox" onclick="creditPayment.switchPMethod('<?php echo $_code ?>');" <?php if ($isCheckedCustomercredit) { ?>checked="checked"<?php } ?> />
+            <?php elseif ($_code=='customercredit' && $isPartial==-3): ?>
+                <input id="p_method_<?php echo $_code ?>_disabled" disabled="disabled" value="1" type="checkbox" name="payment[use_internal_credit]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="checkbox" />
             <?php elseif ($_code=='customercredit' && $isPartial==-1): ?>
                 <input id="p_method_<?php echo $_code ?>_disabled" disabled="disabled" value="1" type="checkbox" name="payment[use_internal_credit]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="checkbox" />
             <?php elseif ($_code=='customercredit' && $isPartial==0) : ?>
@@ -53,11 +55,14 @@ if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->
             <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" /></span>
         <?php endif; ?>
             <label for="p_method_<?php echo $_code ?>">
-                <?php echo $this->__($_method->getTitle()); 
-                if ($_code=='customercredit' && Mage::helper('customercredit')->isEnabledCodes()) {?>
+                <?php echo $this->__($_method->getTitle()); ?>
+                <?php if ($_code=='customercredit' && (Mage::helper('customercredit')->isEnabledCodes() || $this->needShowRechageLink())):?>
                     (<a href="<?php echo $this->getUrl('customercredit/') ?>" target="_blank"><?php echo Mage::helper('customercredit')->__('Recharge') ?></a>)
-                <?php } ?>
+                <?php endif; ?>
             </label>
+            <?php if (($_code=='customercredit') && Mage::getStoreConfig('mageworx_customers/customercredit_credit/enable_custom_value')): ?>
+                <?php echo $this->getChildHtml('payment.custom.value'); ?>
+            <?php endif; ?>
         </dt>
         <?php if($html = $this->getChildHtml('payment.method.'.$_code)): ?>
         <dd>

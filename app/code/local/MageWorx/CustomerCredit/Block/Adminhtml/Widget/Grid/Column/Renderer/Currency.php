@@ -39,17 +39,15 @@
  *
  */
 class MageWorx_CustomerCredit_Block_Adminhtml_Widget_Grid_Column_Renderer_Currency
-extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency
+extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
 {
-    /**
-     * @param Varien_Object $row
-     * @return string
-     */
-    protected function _getCurrencyCode($row)
+    public function render(Varien_Object $row)
     {
-        $websiteId = $row->getData('website_id');
-        $code = Mage::app()->getWebsite($websiteId)->getBaseCurrencyCode();
-        
-        return $code;
+        $value = $this->_getValue($row);
+        $value = round($value,2);
+        if(!$value) {
+            $value = "0";
+        }
+        return $value;
     }
 }

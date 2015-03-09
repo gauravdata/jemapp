@@ -1,0 +1,49 @@
+<p>
+    <button type="button" class="btn" data-toggle="modal" data-target="#servicepointdhl_modal">
+        Afhaalpunt zoeken
+    </button>
+    <input type="hidden" name="longitude" value="<?=$this->htmlEscape($this->getRequest()->getParam('longitude'))?>" />
+    <input type="hidden" name="latitude" value="<?=$this->htmlEscape($this->getRequest()->getParam('latitude'))?>" />
+</p>
+<div class="modal fade" id="servicepointdhl_modal" tabindex="-1" role="dialog" aria-labelledby="servicepointdhl_modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="servicepointdhl_modal-label">Zoek een afhaalpunt</h4>
+            </div>
+            <div class="modal-body">
+                <p>Vul &eacute;&eacute;n van de volgende velden in.</p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="servicepointdhl_postcode">Postcode</label>
+                        <input type="text" name="servicepointdhl_postcode" id="servicepointdhl_postcode" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="servicepointdhl_city">Plaats</label>
+                        <input type="text" name="servicepointdhl_city" id="servicepointdhl_city" class="form-control">
+                    </div>
+                </div>
+                <br />
+                <div id="servicepointdhl_maps"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" title="Zoeken" name="searchdhl" id="searchdhl" onclick="searchServicepointDHL(this, 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?=Mage::getUrl('servicepointdhl/index/index')?>')">Zoeken</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //jQuery('input[name="shipping_method"]:first').attr('checked', 'checked');
+    jQuery('.shippingmethod label strong').each(function(){
+       if (jQuery(this).text().indexOf('0.00') > 0 || jQuery(this).text().indexOf('0,00') > 0) {
+           jQuery(this).hide();
+       }
+    });
+    jQuery('.shippingmethod label a[data-toggle="popover"]').popover();
+
+    jQuery('#servicepointdhl_postcode,#servicepointdhl_city').change(function(){
+        searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?=Mage::getUrl('servicepointdhl/index/index')?>');
+    });
+</script>

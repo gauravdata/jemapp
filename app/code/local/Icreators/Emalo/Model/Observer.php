@@ -58,7 +58,7 @@ class Icreators_Emalo_Model_Observer
 				<COUNTRY>".$shippingAddress->getCountryId()."</COUNTRY>
 				<LANGUAGE>NL</LANGUAGE>
 				<FIRSTNAME>".htmlspecialchars($shippingAddress->getFirstname())."</FIRSTNAME>
-				<PREFIX/>
+				<PREFIX>".htmlspecialchars($shippingAddress->getPrefix())."</PREFIX>
 				<LASTNAME>".htmlspecialchars($shippingAddress->getLastname())."</LASTNAME>
 				<PHONENR>".htmlspecialchars($billingAddress->getTelephone())."</PHONENR>
 				<MOBILEPHONE></MOBILEPHONE>
@@ -182,6 +182,7 @@ class Icreators_Emalo_Model_Observer
 
 						$client = new SoapClient($icUrl);
 						$result = $client->gbCallCustomerBusinessLinkMethod($params);
+                        Mage::log("Order #{$incrementId} pushed with result: " . Zend_Json::encode($result), Zend_Log::DEBUG, 'emalo.log');
 					}
 					catch(Exception $e)
 					{

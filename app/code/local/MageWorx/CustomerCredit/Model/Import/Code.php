@@ -33,8 +33,12 @@ class MageWorx_CustomerCredit_Model_Import_Code extends MageWorx_CustomerCredit_
 {
     public $code;
     
-    protected function _changeData($entity = array())
-    {
+    /**
+     * Change data
+     * @param array $entity
+     * @return boolean
+     */
+    protected function _changeData($entity = array()) {
         try {
             $code         = $entity[0];
             $credit_value = $entity[1];
