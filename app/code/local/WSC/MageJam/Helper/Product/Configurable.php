@@ -44,7 +44,7 @@ class WSC_MageJam_Helper_Product_Configurable extends Mage_Core_Helper_Abstract
     public function getAllowProducts(Mage_Catalog_Model_Product $product)
     {
         $products = array();
-        $skipSaleableCheck = $this->getSkipSaleableCheck();
+        $skipSaleableCheck = true;//$this->getSkipSaleableCheck();
         $allProducts = $product->getTypeInstance(true)
             ->getUsedProducts(null, $product);
         foreach ($allProducts as $product) {
@@ -105,7 +105,10 @@ class WSC_MageJam_Helper_Product_Configurable extends Mage_Core_Helper_Abstract
                 if (!isset($options[$productAttributeId][$attributeValue])) {
                     $options[$productAttributeId][$attributeValue] = array();
                 }
-                $options[$productAttributeId][$attributeValue][] = array('id' => $productId, 'sku' => $product->getSku());
+                $options[$productAttributeId][$attributeValue][] = array('id' => $productId,
+                                                                        'sku' => $product->getSku(),
+                                                                        'stock'        => $product->getStockItem()->getQty(),
+                                                                        'is_in_stock'=> $product->getStockItem()->getIsInStock() );
             }
         }
 
@@ -121,8 +124,10 @@ class WSC_MageJam_Helper_Product_Configurable extends Mage_Core_Helper_Abstract
 
             $optionPrices = array();
             $prices = $attribute->getPrices();
+
             if (is_array($prices)) {
                 foreach ($prices as $value) {
+
                     if(!$this->_validateAttributeValue($attributeId, $value, $options)) {
                         continue;
                     }
@@ -204,7 +209,10 @@ class WSC_MageJam_Helper_Product_Configurable extends Mage_Core_Helper_Abstract
             $price = $product->getFinalPrice() * $price / 100;
         }
 
-        return $this->_registerJsPrice($this->_convertPrice($price, true));
+        /* @var $taxHelper MageJam_Product_Helper */
+        $configurableItemPriceWithTax = Mage::helper('magejam/product')->calculatePriceIncludeTax($product, $price);
+
+        return $this->_registerJsPrice($this->_convertPrice($configurableItemPriceWithTax, true));
     }
 
     /**
@@ -221,7 +229,11 @@ class WSC_MageJam_Helper_Product_Configurable extends Mage_Core_Helper_Abstract
             $price = $product->getPrice() * $price / 100;
         }
 
-        return $this->_registerJsPrice($this->_convertPrice($price, true));
+        /* @var $taxHelper MageJam_Product_Helper */
+        $configurableItemPriceWithTax = Mage::helper('magejam/product')->calculatePriceIncludeTax($product, $price);
+
+
+        return $this->_registerJsPrice($this->_convertPrice($configurableItemPriceWithTax, true));
     }
 
     /**

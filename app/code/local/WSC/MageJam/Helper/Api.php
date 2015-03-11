@@ -54,6 +54,42 @@ class WSC_MageJam_Helper_Api extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Parse complex filters and format them to be applicable for collection filtration
+     *
+     * @param null|object|array $complexFilters
+     * @param array $fieldsMap Map of field names in format: array('field_name_in_filter' => 'field_name_in_db')
+     * @return array
+     */
+    public function parseComplexFilters($complexFilters, $fieldsMap = null)
+    {
+        $filters = null;
+        // if filters are used in SOAP they must be represented in array format to be used for collection filtration
+        if (isset($complexFilters) && is_array($complexFilters)) {
+            $parsedFilters = array();
+
+            // parse complex filter
+            $parsedFilters += $this->_parseComplexFilter($complexFilters);
+
+            $filters = $parsedFilters;
+        }
+        // make sure that method result is always array
+        if (!is_array($filters)) {
+            $filters = array();
+        }
+        // apply fields mapping
+        if (isset($fieldsMap) && is_array($fieldsMap)) {
+            foreach ($filters as $field => $value) {
+                if (isset($fieldsMap[$field])) {
+                    unset($filters[$field]);
+                    $field = $fieldsMap[$field];
+                    $filters[$field] = $value;
+                }
+            }
+        }
+        return $filters;
+    }
+
+    /**
      * Parses complex filter, which may contain several nodes, e.g. when user want to fetch orders which were updated
      * between two dates.
      *

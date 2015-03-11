@@ -1,0 +1,81 @@
+<script type="text/javascript">
+    //<![CDATA[
+    function checkPlugin() {
+        var customerId = $('magejam_testing_customer').value;
+        var storeId = $('magejam_testing_store').value;
+        if (customerId && storeId){
+            hideMessage();
+            var data = "customerId=" + customerId + "&storeId=" + storeId;
+            new Ajax.Request('<?php echo $this->getAjaxCheckUrl() ?>', {
+                method:     'post',
+                parameters: data,
+                onSuccess: function(transport){
+                    if (transport.responseText){
+                        var result = eval("(" + transport.responseText + ')');
+						
+                        if (result.wsi){
+                            $('msgWsi').hide();
+                        }else{
+                            $('msgWsi').show();
+							return;
+                        }
+						
+                        if (result.cache){
+                            $('msgCache').hide();
+                        }else{
+                            $('msgCache').show();
+                        }
+						
+                        if (result.customer_error){
+                            $('msgCustomerError').update(result.customer_error);
+                            $('msgCustomerError').show();
+                        }else{
+                            $('msgCustomerError').empty();
+                            $('msgCustomerError').hide();
+
+                            if (result.shippingMethods){
+                                $('lstShipping').update(result.shippingMethods);
+                                $('shippingMethods').show();
+                                $('msgShippingMethodError').hide();
+                            }else{
+                                $('lstShipping').empty();
+                                $('shippingMethods').hide();
+                                $('msgShippingMethodError').show();
+                            }
+                            if (result.paymentMethods){
+                                $('lstPayment').update(result.paymentMethods);
+                                $('paymentMethods').show();
+                                $('msgPaymentMethodError').hide();
+                            }else{
+                                $('lstPayment').empty();
+                                $('paymentMethods').hide();
+                                $('msgPaymentMethodError').show();
+                            }
+                        }
+                    }
+                }
+            });
+        }else{
+            showMessage('Please choose a customer with valid default shipping and billing address for testing shopping cart function', 'error');
+        }
+    }
+
+    function showMessage(txt, type) {
+        var html = '<ul class="messages"><li class="'+type+'-msg"><ul><li>' + txt + '</li></ul></li></ul>';
+        $('messages').update(html);
+    }
+
+    function hideMessage() {
+        $('messages').update('');
+    }
+    //]]>
+</script>
+
+<?php echo $this->getButtonHtml() ?><br><br>
+<div id="msgWsi" class="error" style="display: none"><?php echo $this->__('WS-I Compliance is not set to Yes, please check Magento Core API settings.') ?></div>
+<div id="msgCache" style="display: none"><?php echo $this->__('WSDL Cache is not set to Yes, please check Magento Core API settings.') ?></div>
+<div id="msgCustomerError" class="error" style="display: none"></div>
+<div id="shippingMethods" style="display: none"><b>Shipping Methods</b><br><ol id="lstShipping" style="list-style: disc; margin-left: 20px;"></ol></div>
+<div id="msgShippingMethodError" class="error" style="display: none"><?php echo $this->__('MageJam plugin cannot detect shipping methods of the selected store, when integrate JMango360 app please select checkout with Cart option or contact JMango360 support for help.') ?></div>
+<div id="paymentMethods" style="display: none"><b>Payment Methods</b><br><ol id="lstPayment" style="list-style: disc; margin-left: 20px;"></ol></div>
+<div id="msgPaymentMethodError" class="error" style="display: none"><?php echo $this->__('MageJam plugin cannot detect payment methods of the selected store, when integrate JMango360 app please select checkout with Cart option or contact JMango360 support for help.') ?></div>

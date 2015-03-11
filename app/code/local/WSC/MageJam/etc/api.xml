@@ -107,6 +107,53 @@
                     </set>
                 </methods>
             </magejam_cart>
+            <magejam_cart_product translate="title" module="magejam">
+                <model>magejam/cart_product_api</model>
+                <title>Magejam Cart Product API</title>
+                <acl>magejam/cart/product</acl>
+                <methods>
+                    <add translate="title" module="magejam">
+                        <title>Add product to shopping cart</title>
+                        <method>add</method>
+                        <acl>cart/product/add</acl>
+                    </add>
+                    <remove translate="title" module="magejam">
+                        <title>Remove product to shopping cart</title>
+                        <method>remove</method>
+                        <acl>cart/product/remove</acl>
+                    </remove>
+                </methods>
+                <faults module="magejam">
+                    <store_not_exists>
+                        <code>1001</code>
+                        <message>Can not make operation because store is not exists</message>
+                    </store_not_exists>
+                    <quote_not_exists>
+                        <code>1002</code>
+                        <message>Can not make operation because quote is not exists</message>
+                    </quote_not_exists>
+                    <invalid_product_data>
+                        <code>1021</code>
+                        <message>Product's data is not valid.</message>
+                    </invalid_product_data>
+                    <add_product_fault>
+                        <code>1022</code>
+                        <message>Product(s) could not be added. </message>
+                    </add_product_fault>
+                    <add_product_quote_save_fault>
+                        <code>1023</code>
+                        <message>Quote could not be saved during adding product(s) operation.</message>
+                    </add_product_quote_save_fault>
+                    <remove_product_fault>
+                        <code>1026</code>
+                        <message>Product(s) could not be removed. </message>
+                    </remove_product_fault>
+                    <remove_product_quote_save_fault>
+                        <code>1027</code>
+                        <message>Quote could not be saved during removing product(s) operation.</message>
+                    </remove_product_quote_save_fault>
+                </faults>
+            </magejam_cart_product>
             <magejam_search translate="title" module="magejam">
                 <model>magejam/catalogsearch_api</model>
                 <title>Catalog Search API</title>
@@ -281,6 +328,7 @@
                 <magejam_payment_config>paymentConfig</magejam_payment_config>
                 <magejam_category>category</magejam_category>
                 <magejam_cart>cart</magejam_cart>
+                <magejam_cart_product>jmangoCartProduct</magejam_cart_product>
                 <magejam_checkout>checkout</magejam_checkout>
                 <magejam_version>magejam</magejam_version>
                 <magejam_cart_customer>shoppingCartGuestCustomer</magejam_cart_customer>
@@ -320,6 +368,15 @@
                         <title>Set customer's addresses in shopping cart</title>
                     </addresses>
                 </magejam_cart_customer>
+                <magejam_cart_product translate="title" module="magejam">
+                    <title>Cart Products</title>
+                    <add translate="title" module="magejam">
+                        <title>Add product(s) to shopping cart</title>
+                    </add>
+                    <remove translate="title" module="magejam">
+                        <title>Remove product(s) to shopping cart</title>
+                    </remove>
+                </magejam_cart_product>
             </resources>
         </acl>
     </api>

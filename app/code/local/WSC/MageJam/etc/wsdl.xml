@@ -9,6 +9,7 @@
             <complexType name="shoppingCartProductEntity">
                 <all>
                     <element name="super_attribute" type="typens:associativeArray" minOccurs="0"/>
+                    <element name="super_group" type="typens:associativeArray" minOccurs="0"/>
                 </all>
             </complexType>
      <!--       <complexType name="shoppingCartPaymentMethodResponseEntity">
@@ -179,6 +180,8 @@
                     <element name="updated_at" type="xsd:string" minOccurs="0"/>
                     <element name="type_id" type="xsd:string" minOccurs="0"/>
                     <element name="name" type="xsd:string" minOccurs="0"/>
+                    <element name="stock" type="xsd:int" minOccurs="0"/>
+                    <element name="is_in_stock" type="xsd:string" minOccurs="0" />
                     <element name="description" type="xsd:string" minOccurs="0"/>
                     <element name="short_description" type="xsd:string" minOccurs="0"/>
                     <element name="weight" type="xsd:string" minOccurs="0"/>
@@ -192,6 +195,7 @@
                     <element name="gift_message_available" type="xsd:string" minOccurs="0"/>
                     <element name="price" type="xsd:string" minOccurs="0"/>
                     <!--<element name="minimal_price" type="xsd:string" minOccurs="0"/>-->
+                    <element name="final_price" type="xsd:string" minOccurs="0"/>
                     <element name="special_price" type="xsd:string" minOccurs="0"/>
                     <element name="special_from_date" type="xsd:string" minOccurs="0"/>
                     <element name="special_to_date" type="xsd:string" minOccurs="0"/>
@@ -221,6 +225,8 @@
                     <element name="is_saleable" type="xsd:int" minOccurs="1"/>
                     <element name="position" type="xsd:int" minOccurs="1"/>
                     <element name="qty" type="xsd:string" minOccurs="1"/>
+                    <element name="stock" type="xsd:int" minOccurs="0"/>
+                    <element name="is_in_stock" type="xsd:string" minOccurs="0" />
                 </all>
             </complexType>
             <complexType name="bundleOptionArray">
@@ -260,6 +266,8 @@
                     <element name="name" type="xsd:string" minOccurs="1"/>
                     <element name="is_saleable" type="xsd:int" minOccurs="1"/>
                     <element name="qty" type="xsd:string" minOccurs="1"/>
+                    <element name="stock" type="xsd:int" minOccurs="0"/>
+                    <element name="is_in_stock" type="xsd:string" minOccurs="0" />
                     <element name="can_change_qty" type="xsd:int" minOccurs="1"/>
                 </all>
             </complexType>
@@ -318,6 +326,8 @@
                 <all>
                     <element name="id" type="xsd:int" minOccurs="1"/>
                     <element name="sku" type="xsd:string" minOccurs="1"/>
+                    <element name="stock" type="xsd:int" minOccurs="0"/>
+                    <element name="is_in_stock" type="xsd:string" minOccurs="0" />
                 </all>
             </complexType>
 
@@ -375,6 +385,12 @@
                     <element name="value" type="xsd:string" minOccurs="1"/>
                 </all>
             </complexType>
+            <complexType name="layerFilterResult">
+                <all>
+                    <element name="products" type="typens:categoryAssignedProductsArray" minOccurs="1"/>
+                    <element name="layer_filters" type="typens:layerFilterArray" minOccurs="0"/>
+                </all>
+            </complexType>
             <complexType name="searchProductsResult">
                 <all>
                     <element name="products" type="typens:categoryAssignedProductsArray" minOccurs="1"/>
@@ -422,6 +438,26 @@
                 <complexContent>
                     <restriction base="soapenc:Array">
                         <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:shoppingCartGuestCustomerAddressEntity[]"/>
+                    </restriction>
+                </complexContent>
+            </complexType>
+            <complexType name="magejamCartProductEntity">
+                <all>
+                    <element name="product_id" type="xsd:string" minOccurs="0"/>
+                    <element name="sku" type="xsd:string" minOccurs="0"/>
+                    <element name="qty" type="xsd:double" minOccurs="0"/>
+                    <element name="options" type="typens:associativeArray" minOccurs="0"/>
+                    <element name="bundle_option" type="typens:associativeMultiArray" minOccurs="0"/>
+                    <element name="bundle_option_qty" type="typens:associativeArray" minOccurs="0"/>
+                    <element name="links" type="typens:ArrayOfString" minOccurs="0"/>
+                    <element name="super_attribute" type="typens:associativeArray" minOccurs="0"/>
+                    <element name="super_group" type="typens:associativeArray" minOccurs="0"/>
+                </all>
+            </complexType>
+            <complexType name="magejamCartProductEntityArray">
+                <complexContent>
+                    <restriction base="soapenc:Array">
+                        <attribute ref="soapenc:arrayType" wsdl:arrayType="typens:magejamCartProductEntity[]"/>
                     </restriction>
                 </complexContent>
             </complexType>
@@ -473,17 +509,25 @@
         <part name="sessionId" type="xsd:string"/>
         <part name="categoryId" type="xsd:int"/>
         <part name="appliedFilters" type="typens:associativeArray"/>
+        <part name="complex_filters" type="typens:complexFilterArray"/>
+        <part name="pageNumber" type="xsd:int"/>
+        <part name="pageSize" type="xsd:int"/>
+        <part name="sortBy" type="xsd:string"/>
+        <part name="sortDirection" type="xsd:string"/>
         <part name="store" type="xsd:string"/>
     </message>
     <message name="layerFiltersResponse">
-        <part name="result" type="typens:layerFilterArray"/>
+        <part name="result" type="typens:layerFilterResult"/>
     </message>
     <message name="searchProductsRequest">
         <part name="sessionId" type="xsd:string"/>
         <part name="query" type="xsd:string"/>
         <part name="filters" type="typens:associativeArray"/>
+        <part name="complex_filters" type="typens:complexFilterArray"/>
         <part name="pageNumber" type="xsd:int"/>
         <part name="pageSize" type="xsd:int"/>
+        <part name="sortBy" type="xsd:string"/>
+        <part name="sortDirection" type="xsd:string"/>
         <part name="store" type="xsd:string"/>
         <part name="useLayerNavigation" type="xsd:boolean"/>
     </message>
@@ -536,6 +580,18 @@
     </message>
     <message name="shoppingCartGuestCustomerAddressesResponse">
         <part name="result" type="xsd:boolean"/>
+    </message>
+    <message name="magejamCartProductAddRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="quoteId" type="xsd:int"/>
+        <part name="products" type="typens:magejamCartProductEntityArray"/>
+        <part name="storeId" type="xsd:string"/>
+    </message>
+    <message name="magejamCartProductRemoveRequest">
+        <part name="sessionId" type="xsd:string"/>
+        <part name="quoteId" type="xsd:int"/>
+        <part name="products" type="typens:magejamCartProductEntityArray"/>
+        <part name="storeId" type="xsd:string"/>
     </message>
     <portType name="{{var wsdl.handler}}PortType">
         <operation name="cmsPageList">
@@ -602,6 +658,16 @@
             <documentation>Set guest customer's addresses in shopping cart</documentation>
             <input message="typens:shoppingCartGuestCustomerAddressesRequest"/>
             <output message="typens:shoppingCartGuestCustomerAddressesResponse"/>
+        </operation>
+        <operation name="jmangoCartProductAdd">
+            <documentation>Add product(s) to shopping cart</documentation>
+            <input message="typens:magejamCartProductAddRequest"/>
+            <output message="typens:shoppingCartProductAddResponse"/>
+        </operation>
+        <operation name="jmangoCartProductRemove">
+            <documentation>Remove product(s) to shopping cart</documentation>
+            <input message="typens:magejamCartProductRemoveRequest"/>
+            <output message="typens:shoppingCartProductRemoveResponse"/>
         </operation>
     </portType>
 
@@ -740,6 +806,28 @@
             </output>
         </operation>
 		<operation name="shoppingCartGuestCustomerAddresses">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="jmangoCartProductAdd">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+        <operation name="jmangoCartProductRemove">
             <soap:operation soapAction="urn:{{var wsdl.handler}}Action"/>
             <input>
                 <soap:body namespace="urn:{{var wsdl.name}}" use="encoded"

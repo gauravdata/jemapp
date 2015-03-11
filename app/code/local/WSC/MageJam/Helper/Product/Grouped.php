@@ -33,13 +33,16 @@ class WSC_MageJam_Helper_Product_Grouped extends Mage_Core_Helper_Abstract
         $result['sku'] = $item->getSku();
         $result['name'] = $item->getName();
 
-        /* @var $taxHelper Mage_Tax_Helper_Data */
-        $taxHelper = Mage::helper('tax');
-        $result['price'] = (string) $taxHelper->getPrice($item, $item->getFinalPrice(), true);
+        /* @var $taxHelper MageJam_Product_Helper */
+        $selectionPriceWithTax = Mage::helper('magejam/product')->calculatePriceIncludeTax($item, $item->getFinalPrice());
+
+        $result['price'] = (string) $selectionPriceWithTax;
 
         $result['is_saleable'] = (int) $item->isSaleable();
         $result['position'] = (int) $item->getPosition();
         $result['qty'] = $item->getQty();
+        $result['stock'] = $item->getStockItem()->getQty();
+        $result['is_in_stock'] = $item->getStockItem()->getIsInStock();
 
         return $result;
     }
