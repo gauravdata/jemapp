@@ -7,7 +7,7 @@ class WSC_MageJam_Helper_Product extends Mage_Core_Helper_Abstract
      *
      * @var array
      */
-    protected $_ignoredAttributeCodes = array('entity_id', 'attribute_set_id', 'entity_type_id');
+    protected $_ignoredAttributeCodes = array('entity_id', 'attribute_set_id', 'entity_type_id', 'tier_price');
 
     /**
      * Default ignored attribute types
@@ -72,6 +72,8 @@ class WSC_MageJam_Helper_Product extends Mage_Core_Helper_Abstract
     {
         $this->disableFlat();
         $this->setCustomerGroupIntoSession($customerId);
+
+        $collection->setFlag('require_stock_items', true);
         $collection->applyFrontendPriceLimitations();
         $collection->addAttributeToSelect($this->_selectedAttributes);
         $collection->addTierPriceData()->addOptionsToResult();
@@ -111,6 +113,7 @@ class WSC_MageJam_Helper_Product extends Mage_Core_Helper_Abstract
         /* @var $session Mage_Customer_Model_Session */
         $session = Mage::getSingleton('customer/session');
         $session->setCustomerGroupId($customer->getGroupId());
+        $session->setCustomer($customer);
     }
 
     /**
@@ -126,6 +129,15 @@ class WSC_MageJam_Helper_Product extends Mage_Core_Helper_Abstract
             array('product' => $product)
         );
 
+
+        /** @var $dataHelper WSC_MageJam_Helper_Data */
+        $dataHelper = Mage::helper('magejam/data');
+
+        //Strip invalid xml characters
+        $dataHelper->stripInvalidXmlInProduct($product);
+
+
+
         $result = array(
             'product_id' => $product->getId(),
             'sku'        => $product->getSku(),
@@ -133,8 +145,12 @@ class WSC_MageJam_Helper_Product extends Mage_Core_Helper_Abstract
             'type'       => $product->getTypeId(),
             'categories' => $product->getCategoryIds(),
             'websites'   => $product->getWebsiteIds(),
-            'position'   => $product->getCatIndexPosition()
+            'position'   => $product->getCatIndexPosition(),
+            'final_price'   => $this->calculatePriceIncludeTax($product, $product->getFinalPrice()),
+            'stock'        => $this->_getStockLevel($product),
+            'is_in_stock'=> $product->getStockItem()->getIsInStock()
         );
+
 
         $this->_addMediaInfo($product, $result);
         $this->_addCustomOptions($product, $result);
@@ -142,17 +158,34 @@ class WSC_MageJam_Helper_Product extends Mage_Core_Helper_Abstract
         $this->_addGroupedItems($product, $result);
         $this->_addBundleInfo($product, $result);
         $this->_addDownloadableInfo($product, $result);
+        $this->_addTierPriceInfo($product, $result);
+
+        // MPLUGIN-153
+        $basePriceWithTax = $this->calculatePriceIncludeTax($product, $product->getPrice());
+        $product->setPrice($basePriceWithTax);
 
         foreach ($product->getTypeInstance(true)->getEditableAttributes($product) as $attribute) {
             if ($this->_isAllowedAttribute($attribute)) {
                 $result[$attribute->getAttributeCode()] = $product->getData(
-                    $attribute->getAttributeCode());
+                   $attribute->getAttributeCode());
             }
         }
+
+
 
         return $result;
     }
 
+    /**
+     * @param Mage_Catalog_Model_Product $product
+     * @param $result
+     */
+    protected function _addTierPriceInfo(Mage_Catalog_Model_Product $product, &$result)
+    {
+        /* @var $helper WSC_MageJam_Helper_Product_Media */
+        $helper = Mage::helper('magejam/product_tierPrice');
+        $result['tier_price'] = $helper->getTierPriceInfo($product);
+    }
 
     /**
      * @param Mage_Catalog_Model_Product $product
@@ -254,5 +287,59 @@ class WSC_MageJam_Helper_Product extends Mage_Core_Helper_Abstract
     public function disableFlat($storeId = null)
     {
         Mage::app()->getStore($storeId)->setConfig(Mage_Catalog_Helper_Product_Flat::XML_PATH_USE_PRODUCT_FLAT, 0);
+    }
+
+    /**
+     * This function will return product final price with/without tax
+     * that based on Tax settings in Sale -> Tax & System -> Sale -> Tax
+     *
+     * @param Mage_Catalog_Model_Product $_product
+     * @param $_product->getFinalPrice()
+     */
+
+    public function calculatePriceIncludeTax(Mage_Catalog_Model_Product $_product, $productFinalPrice) {
+
+        $taxHelper = Mage::helper('tax');
+        $customerTaxClass = Mage::getSingleton('tax/calculation')->getRateRequest()->getCustomerClassId();
+
+        /**
+         * Get product price display type
+         *  1 - Excluding tax
+         *  2 - Including tax
+         *  3 - Both
+         */
+
+        /* @var Mage_Tax_Model_Config */
+        $productPriceDisplayType = $taxHelper->getPriceDisplayType(Mage::app()->getStore()->getId());
+
+
+        if ($productPriceDisplayType == 1) {
+            // Exclude tax
+            $productFinalPrice = $taxHelper->getPrice($_product, $productFinalPrice, false, null, null, $customerTaxClass);
+        }
+        else {
+            // Including tax or both
+            $productFinalPrice = $taxHelper->getPrice($_product, $productFinalPrice, true, null, null, $customerTaxClass);
+        }
+
+
+        return $productFinalPrice;
+    }
+
+    /**
+     * Return the stock level if user manage stock otherwise return -1
+     * @param Mage_Catalog_Model_Product $_product
+     * @return int stock level
+     */
+    protected function _getStockLevel(Mage_Catalog_Model_Product $_product) {
+
+        $manageStock = $_product->getStockItem()->getManageStock();
+
+        $stockQuantity = -1;
+        if ($manageStock == 1) {
+            $stockQuantity = $_product->getStockItem()->getQty();
+        }
+
+        return $stockQuantity;
     }
 }

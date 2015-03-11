@@ -21,6 +21,7 @@
                     <fields>
                         <version translate="label">
                             <label>Version</label>
+                            <comment>Check installation guide for configuration details http://www.jmango360.com/magejam/MageJam+Plugin+Installation+Guide.pdf</comment>
                             <frontend_type>text</frontend_type>
                             <frontend_model>magejam/system_config_form_version</frontend_model>
                             <sort_order>0</sort_order>
@@ -73,6 +74,45 @@
                         </custom_password>
                     </fields>
                 </settings>
+                <testing translate="label">
+                    <label>Testing of MageJam plugin</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <store translate="label">
+                            <label>Select test store</label>
+                            <comment>Please select the store that will be used for mobile app when integrate with JMango360</comment>	
+                            <frontend_type>select</frontend_type>
+                            <source_model>magejam/system_config_source_dropdown_store</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </store>
+                        <customer translate="label">
+                            <label>Select test customer</label>
+                            <comment>Please select a customer to test shopping cart checkout integration that JMango360 mobile app will use.</comment>	
+                            <frontend_type>select</frontend_type>
+                            <source_model>magejam/system_config_source_dropdown_customer</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customer>
+                        <check translate="label">
+                            <label>Run shopping cart test</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>magejam/system_config_form_button</frontend_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </check>
+                    </fields>
+                </testing>
             </groups>
         </magejam>
     </sections>

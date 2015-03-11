@@ -2,6 +2,12 @@
 
 class WSC_MageJam_Model_Catalogsearch_Api extends Mage_Catalog_Model_Category_Api
 {
+    protected $_filtersMap = array(
+        'product_id' => 'entity_id',
+        'set'        => 'attribute_set_id',
+        'type'       => 'type_id'
+    );
+
     /**
      * Used for api call catalogSearch
      *
@@ -13,7 +19,7 @@ class WSC_MageJam_Model_Catalogsearch_Api extends Mage_Catalog_Model_Category_Ap
      * @param bool $useLayerNavigation
      * @return mixed
      */
-    public function products($query, $filters = array(), $pageNumber = 0, $pageSize = null, $store = null, $useLayerNavigation = true)
+    public function products($query, $filters = array(), $complex_filters = array(), $pageNumber = 0, $pageSize = null, $sortBy = 'relevance', $sortDirection = 'asc', $store = null, $useLayerNavigation = true)
     {
         /* @var $layerHelper WSC_MageJam_Helper_Layer */
         $layerHelper = Mage::helper('magejam/layer');
@@ -40,11 +46,14 @@ class WSC_MageJam_Model_Catalogsearch_Api extends Mage_Catalog_Model_Category_Ap
         }
 
         $collection = $layer->getProductCollection();
+        $collection = $this->_filterCollection($collection, $complex_filters);
         if(is_null($pageSize)) {
             $pageSize = Mage::helper('magejam/product')->getProductLimit();
         }
+        $collection->setStore($storeId);
         $collection->setPage($pageNumber, $pageSize);
         $collection->addAttributeToSelect('sku');
+        $collection->addAttributeToSort($sortBy, $sortDirection);
 
         /* @var $productHelper WSC_MageJam_Helper_Product */
         $productHelper = Mage::helper('magejam/product');
@@ -76,6 +85,41 @@ class WSC_MageJam_Model_Catalogsearch_Api extends Mage_Catalog_Model_Category_Ap
         if ($maxQueryLength !== '' && $thisQueryLength > $maxQueryLength) {
             $message = Mage::helper('catalogsearch')->__('Maximum Search query length is %s', $this->getMaxQueryLength());
             $this->_fault('max_query_length', $message);
+        }
+    }
+
+    /**
+     * Used for filtering collection (layer navigation for example)
+     *
+     * @param $collection
+     * @param $filters
+     * @return mixed
+     */
+    protected function _filterCollection(Mage_Catalog_Model_Resource_Product_Collection $collection, $filters)
+    {
+        if (empty($filters)) {
+            return $collection;
+        }
+        /* @var $apiHelper WSC_MageJam_Helper_Api */
+        $apiHelper = Mage::helper('magejam/api');
+        $filters = $apiHelper->parseComplexFilters($filters, $this->_filtersMap);
+        foreach ($filters as $field => $value) {
+            $this->checkAttributeExistence($field, $collection);
+            $collection->addFieldToFilter($field, $value);
+        }
+        return $collection;
+    }
+
+    /**
+     * Check if attribute exists and throws exception if it doesn't
+     *
+     * @param $code
+     * @param $collection
+     */
+    protected function checkAttributeExistence($code, $collection) {
+        if(!$collection->getEntity()->getAttribute($code)) {
+            $message = "Incorrect filter with code '{$code}' has been provided";
+            $this->_fault('filters_invalid', $message);
         }
     }
 }

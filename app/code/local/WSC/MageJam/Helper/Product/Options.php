@@ -14,7 +14,7 @@ class WSC_MageJam_Helper_Product_Options extends Mage_Core_Helper_Abstract
         $result = array();
         /** @var $option Mage_Catalog_Model_Product_Option */
         foreach ($product->getProductOptionsCollection() as $option) {
-            $result[] = $this->_getOptionInfo($option);
+            $result[] = $this->_getOptionInfo($product, $option);
         }
         return $result;
     }
@@ -25,8 +25,10 @@ class WSC_MageJam_Helper_Product_Options extends Mage_Core_Helper_Abstract
      * @param Mage_Catalog_Model_Product_Option $option
      * @return array
      */
-    protected function _getOptionInfo(Mage_Catalog_Model_Product_Option $option)
+    protected function _getOptionInfo(Mage_Catalog_Model_Product $product,Mage_Catalog_Model_Product_Option $option)
     {
+        $optionPriceWithTax = $this->_preparePrice($product, $option->getPrice(), $option->getPriceType());
+
         $result = array(
             'option_id' => $option->getId(),
             'title' => $option->getTitle(),
@@ -36,7 +38,7 @@ class WSC_MageJam_Helper_Product_Options extends Mage_Core_Helper_Abstract
             // additional_fields should be two-dimensional array for all option types
             'additional_fields' => array(
                 array(
-                    'price' => $option->getPrice(),
+                    'price' => $optionPriceWithTax,
                     'price_type' => $option->getPriceType(),
                     'sku' => $option->getSku()
                 )
@@ -55,10 +57,13 @@ class WSC_MageJam_Helper_Product_Options extends Mage_Core_Helper_Abstract
             case Mage_Catalog_Model_Product_Option::OPTION_GROUP_SELECT:
                 $result['additional_fields'] = array();
                 foreach ($option->getValuesCollection() as $value) {
+
+                    $valuePriceWithTax = $this ->_preparePrice($product, $value->getPrice(), $value->getPriceType());
+
                     $result['additional_fields'][] = array(
                         'value_id' => $value->getId(),
                         'title' => $value->getTitle(),
-                        'price' => $value->getPrice(),
+                        'price' => $valuePriceWithTax,
                         'price_type' => $value->getPriceType(),
                         'sku' => $value->getSku(),
                         'sort_order' => $value->getSortOrder()
@@ -70,5 +75,25 @@ class WSC_MageJam_Helper_Product_Options extends Mage_Core_Helper_Abstract
         }
 
         return $result;
+    }
+
+    /**
+     * Calculation real price
+     *
+     * @param Mage_Catalog_Model_Product $product
+     * @param float $optionPrice
+     * @param string $priceType
+     * @return mixed
+     */
+    protected function _preparePrice(Mage_Catalog_Model_Product $product, $optionPrice, $priceType)
+    {
+        if (!empty($priceType) && strcasecmp($priceType, 'percent') == 0) {
+            $optionPrice = $product->getFinalPrice() * $optionPrice / 100;
+        }
+
+        /* @var $taxHelper MageJam_Product_Helper */
+        $configurableItemPriceWithTax = Mage::helper('magejam/product')->calculatePriceIncludeTax($product, $optionPrice);
+
+        return (string) $configurableItemPriceWithTax;
     }
 }
