@@ -105,20 +105,34 @@ class WSC_MageJam_Helper_Product_Media extends Mage_Core_Helper_Abstract
      */
     protected function _imageToArray(&$image, $product)
     {
+
+        $attributes = array();
+
+        // Get image attributes
+        foreach ($product->getMediaAttributes() as $attribute) {
+            if ($product->getData($attribute->getAttributeCode()) == $image['file']) {
+                $attributes[] = $attribute->getAttributeCode();
+            }
+        }
+
+
+        $storeUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'magejam/image/index';
+
+        // specify storeId
+        $storeUrl = $storeUrl.'/store/'.Mage::app()->getStore()->getId();
+
+        // specify productId
+        $storeUrl = $storeUrl.'/id/'.$product->getId();
+
         $result = array(
             'file'      => $image['file'],
             'label'     => $image['label'] === null ? $image['label_default'] : $image['label'],
             'position'  => $image['position'] === null ? $image['position_default'] : $image['position'],
             'exclude'   => $image['disabled'] === null ? $image['disabled_default'] : $image['disabled'],
-            'url'       => Mage::getSingleton('catalog/product_media_config')->getMediaUrl($image['file']),
-            'types'     => array()
+            'url'       => $storeUrl.'/?file='.$image['file'],
+            'types'     => $attributes
         );
 
-        foreach ($product->getMediaAttributes() as $attribute) {
-            if ($product->getData($attribute->getAttributeCode()) == $image['file']) {
-                $result['types'][] = $attribute->getAttributeCode();
-            }
-        }
 
         return $result;
     }

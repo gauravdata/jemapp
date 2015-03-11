@@ -174,4 +174,59 @@ class WSC_MageJam_Helper_Data extends Mage_Payment_Helper_Data
     	$version = Mage::getVersion();
 	    return (0 === strpos($version, '1.8') || 0 === strpos($version, '1.9'));
     }
+
+    /**
+     * @param Mage_Catalog_Model_Product $product
+     *
+     * Remove invalid xml in product title, description & short description
+     */
+    public function stripInvalidXmlInProduct(Mage_Catalog_Model_Product $product) {
+
+        $title = $this->stripInvalidXml($product->getName());
+        $description = $this->stripInvalidXml($product->getDescription());
+        $short_description = $this->stripInvalidXml($product->getShortDescription());
+
+        $product->setName($title);
+        $product->setDescription($description);
+        $product->setShortDescription($short_description);
+    }
+
+    /**
+     * Removes invalid XML
+     *
+     * @access public
+     * @param string $value
+     * @return string
+     */
+    public function stripInvalidXml($value)
+    {
+
+        $ret = "";
+
+        if (empty($value))
+        {
+            return $ret;
+        }
+
+        $length = strlen($value);
+        for ($i=0; $i < $length; $i++)
+        {
+            $current = ord($value{$i});
+            if (($current == 0x9) ||
+                ($current == 0xA) ||
+                ($current == 0xD) ||
+                (($current >= 0x20) && ($current <= 0xD7FF)) ||
+                (($current >= 0xE000) && ($current <= 0xFFFD)) ||
+                (($current >= 0x10000) && ($current <= 0x10FFFF)))
+            {
+                $ret .= chr($current);
+            }
+            else
+            {
+                $ret .= " ";
+            }
+        }
+
+        return $ret;
+    }
 }
