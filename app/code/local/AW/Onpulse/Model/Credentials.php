@@ -54,23 +54,23 @@ class AW_Onpulse_Model_Credentials extends Mage_Core_Model_Abstract
         }
 
 
-        if ((!Mage::getStoreConfig('awonpulse/general/credurlkey', $defaultStore))
-            && (!Mage::getStoreConfig('awonpulse/general/credhash', $defaultStore))
+        if ((!Mage::getStoreConfig('awonpulse/access/credurlkey', $defaultStore))
+            && (!Mage::getStoreConfig('awonpulse/access/credhash', $defaultStore))
         ) {
             Mage::app()->setUpdateMode(false);
             Mage::app()->init('','store');
         }
 
         //Read configuration
-        if ((Mage::getStoreConfig('awonpulse/general/credurlkey', $defaultStore))
-            && (Mage::getStoreConfig('awonpulse/general/credhash', $defaultStore))
+        if ((Mage::getStoreConfig('awonpulse/access/credurlkey', $defaultStore))
+            && (Mage::getStoreConfig('awonpulse/access/credhash', $defaultStore))
         ) {
             $this->hash = Mage::getStoreConfig(
-                'awonpulse/general/credhash', $defaultStore
+                'awonpulse/access/credhash', $defaultStore
             );
             $this->ddl = Mage::getStoreConfig('awonpulse/general/ddl', $defaultStore);
             $this->key = Mage::getStoreConfig(
-                'awonpulse/general/credurlkey', $defaultStore
+                'awonpulse/access/credurlkey', $defaultStore
             );
             $this->qrhash = md5($this->key . $this->hash);
         }
