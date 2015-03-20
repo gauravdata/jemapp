@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <twm_commercial_index_index>
+        <label>Commercial video page</label>
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="page/html_header" name="commercial" template="twm_commercial/video.phtml" />
+        </reference>
+    </twm_commercial_index_index>
+
+</layout>

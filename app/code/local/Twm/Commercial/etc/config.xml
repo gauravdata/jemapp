@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_Commercial>
+            <version>0.1.0</version>
+        </Twm_Commercial>
+    </modules>
+    <global>
+        <blocks>
+            <twm_commercial>
+                <class>Twm_Commercial_Block</class>
+            </twm_commercial>
+        </blocks>
+        <helpers>
+            <twm_commercial>
+                <class>Twm_Commercial_Helper</class>
+            </twm_commercial>
+        </helpers>
+    </global>
+    <frontend>
+        <routers>
+            <twm_commercial>
+                <use>standard</use>
+                <args>
+                    <frontName>track-and-trace</frontName>
+                    <module>Twm_Commercial</module>
+                </args>
+            </twm_commercial>
+        </routers>
+        <layout>
+            <updates>
+                <twm_commercial module="Twm_Commercial">
+                    <file>twm_commercial.xml</file>
+                </twm_commercial>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <rewrite>
+            <Twm_Commercial>
+                <from><![CDATA[#^/track-and-trace/(.+)#]]></from>
+                <to><![CDATA[/track-and-trace/index/index/code/$1]]></to>
+                <complete>1</complete>
+            </Twm_Commercial>
+        </rewrite>
+    </global>
+</config>
