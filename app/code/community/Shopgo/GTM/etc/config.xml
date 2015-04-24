@@ -1,8 +1,17 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * @category    ShopGo
+ * @package     Shopgo_GTM
+ * @author      Ali Halabyah <ali@shopgo.me>
+ * @copyright   Copyright (c) 2015 ShopGo
+ * @license     http://opensource.org/licenses/osl-3.0.php Open Software License 3.0 (OSL-3.0)
+ */
+-->
 <config>
 	<modules>
 		<Shopgo_GTM>
-			<version>1.0.2</version>
+			<version>1.0.3</version>
 		</Shopgo_GTM>
 	</modules>
 	<global>
@@ -82,8 +91,7 @@
 		<google>
 			<gtm>
 				<active>0</active>
-				<datalayertransactions>0</datalayertransactions>
-				<datalayervisitors>0</datalayervisitors>
+				<datalayer>1</datalayer>
 			</gtm>
 		</google>
 	</default>
