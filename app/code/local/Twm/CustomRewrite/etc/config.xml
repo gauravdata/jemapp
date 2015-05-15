@@ -24,11 +24,6 @@
             <twm_customrewrite>
                 <class>Twm_CustomRewrite_Helper</class>
             </twm_customrewrite>
-            <customercredit>
-                <rewrite>
-                    <data>Twm_CustomRewrite_Helper_CustomerCredit_Data</data>
-                </rewrite>
-            </customercredit>
         </helpers>
     </global>
 </config>

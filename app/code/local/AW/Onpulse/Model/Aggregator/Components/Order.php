@@ -2,9 +2,9 @@
 
 class AW_Onpulse_Model_Aggregator_Components_Order extends AW_Onpulse_Model_Aggregator_Component
 {
-    const COUNT_CUSTOMERS = 5;
+    const COUNT_ORDERS = 30;
 
-    public function getCollectionForOldMegento()
+    public function getCollectionForOldMagento()
     {
         $collection = Mage::getResourceModel('sales/order_collection')
             ->addAttributeToSelect('*')
@@ -31,22 +31,55 @@ class AW_Onpulse_Model_Aggregator_Components_Order extends AW_Onpulse_Model_Aggr
         return $collection;
     }
 
-    public function pushData($event = null){
-        if(version_compare(Mage::getVersion(),'1.4.1.0','<=')) {
-            $orderCollection=$this->getCollectionForOldMegento();
+    public function pushData($event = null)
+    {
+        $orderCollection = $this->_getOrderCollection();
+        $aggregator = $event->getEvent()->getAggregator();
+        $aggregator->setData('orders', $orderCollection->load());
+    }
+
+    public function pushSearchedData($aggregator, $query)
+    {
+        /** @var Mage_Sales_Model_Mysql4_Order_Collection $orderCollection */
+        $orderCollection = $this->_getOrderCollection();
+
+        if (strpos($query, '/') !== FALSE) {
+            $date = new Zend_Date($query, 'dd/MM/YYYY');
+            $orderCollection->addAttributeToSearchFilter(
+                'created_at', array('like' => $date->toString('YYYY-MM-dd') . '%')
+            );
+        } else if (strpos($query, '#') !== FALSE) {
+            $orderCollection->addAttributeToSearchFilter(
+                'increment_id', array('like' => str_replace('#', '', $query) . '%')
+            );
+        } else if (is_numeric($query) !== FALSE) {
+            $orderCollection->addAttributeToSearchFilter('increment_id', array('like' => '%' . $query . '%'));
+        } else if (strpos($query, '@') !== FALSE) {
+            $orderCollection->addAttributeToSearchFilter('customer_email', array('like' => '%' . $query . '%'));
+        } else {
             $orderCollection
-                ->addOrder('entity_id','DESC')
-                ->setPageSize(self::COUNT_CUSTOMERS)
+                ->addFieldToSearchFilter('customer_firstname', array('like' => '%' . $query . '%'))
+                ->addFieldToSearchFilter('customer_lastname', array('like' => '%' . $query . '%'));
             ;
+        }
+        $aggregator->setData('orders', $orderCollection->load());
+    }
+
+    protected function _getOrderCollection()
+    {
+        if (version_compare(Mage::getVersion(), '1.4.1.0', '<=')) {
+            $orderCollection = $this->getCollectionForOldMagento();
+            $orderCollection
+                ->addOrder('entity_id', 'DESC')
+                ->setPageSize(self::COUNT_ORDERS);
         } else {
             $orderCollection = Mage::getModel('sales/order')->getCollection()
                 ->addAddressFields()
                 ->addAttributeToSelect('*')
-                ->addOrder('entity_id','DESC')
-                ->setPageSize(self::COUNT_CUSTOMERS);
+                ->addOrder('entity_id', 'DESC')
+                ->setPageSize(self::COUNT_ORDERS);
         }
-        $aggregator = $event->getEvent()->getAggregator();
-        $aggregator->setData('orders', $orderCollection->load());
+        return $orderCollection;
     }
 
     protected function _addAddressFields($collection)
