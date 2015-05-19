@@ -4,6 +4,22 @@ $fieldForm = $this->getFieldForm();
 $refundResolutionId = Mage::helper('rma')->getResolutionByCode('refund')->getId();
 ?>
 
+<script type="text/javascript">
+    function isNumeric(obj) {
+        return !jQuery.isArray( obj ) && (obj - parseFloat( obj ) + 1) >= 0;
+    }
+
+    function checkQtyOrdered(currentQty) {
+        var ordered = $(currentQty.name.substring(0, 8) + '[qtyOrdered]').innerHTML;
+        if(isNumeric(currentQty.value) && isNumeric(ordered)) {
+            if(currentQty.value > ordered) {
+                currentQty.value = 0;
+                alert("<?php echo $this->__('You can not return more, than ordered. Please, try again.') ?>");
+            }
+        }
+    }
+</script>>
+
 <form id="edit_form" action="<?php echo $this->getUrl('*/*/save') ?>" method="post" enctype="multipart/form-data">
     <input name="form_key" type="hidden" value="<?php echo $this->getFormKey() ?>"/>
     <input name='rma_id' value='<?php echo $rma->getId() ?>' type='hidden'>
@@ -67,7 +83,7 @@ $refundResolutionId = Mage::helper('rma')->getResolutionByCode('refund')->getId(
                                     <?php if ($item->getProductType() == 'bundle'): ?>
                                     <tr class="even">
                                         <td><?php echo Mage::helper('rma')->getOrderItemLabel($item) ?> <?php echo $this->__('(Bundled Product)') ?></td>
-                                        <td><?php echo $item->getProduct()->getSku() ?></td>
+                                        <td><?php echo $item->getProductSku() ?></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -83,9 +99,9 @@ $refundResolutionId = Mage::helper('rma')->getResolutionByCode('refund')->getId(
                                         <td>
                                             <?php if ($item->getIsBundleItem()): ?> &nbsp;&nbsp;&nbsp; <?php endif;?>
                                             <?php echo Mage::helper('rma')->getOrderItemLabel($item)?></td>
-                                        <td><?php echo $item->getProduct()->getSku()?></td>
+                                        <td><?php echo $item->getProductSku() ?></td>
                                         <td><?php echo $item->getQtyStock()?></td>
-                                        <td><?php echo $item->getQtyOrdered()?></td>
+                                        <td id="items[<?php echo $i ?>][qtyOrdered]"><?php echo $item->getQtyOrdered()?></td>
                                         <td>
                                             <input name='items[<?php echo $i ?>][item_id]'
                                                    value='<?php echo $item->getId()?>' type='hidden'>
@@ -94,7 +110,8 @@ $refundResolutionId = Mage::helper('rma')->getResolutionByCode('refund')->getId(
 
                                             <input name='items[<?php echo $i ?>][qty_requested]'
                                                    class="input-text required-entry"
-                                                   value='<?php echo $item->getQtyRequested() ? $item->getQtyRequested() : 0?>'>
+                                                   value='<?php echo $item->getQtyRequested() ? $item->getQtyRequested() : 0?>'
+                                                   onKeyUp="checkQtyOrdered(this)">
                                         </td>
                                         <td>
                                             <select name="items[<?php echo $i ?>][reason_id]">
@@ -223,6 +240,11 @@ $refundResolutionId = Mage::helper('rma')->getResolutionByCode('refund')->getId(
                                     <td class="value">
                                         <textarea id="reply" name="reply" rows="2" cols="30" class=" textarea"
                                                   style="width:92%"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="value">
+                                        <input id="attachment" name="attachment[]" value="" class="multi" type="file"/>
                                     </td>
                                 </tr>
                                 </tbody>
