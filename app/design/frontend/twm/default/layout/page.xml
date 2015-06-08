@@ -71,7 +71,6 @@ Default layout, loads most of the pages
 				<action method="addItem"><type>skin_js</type><name>js/masonry.js</name><params/></action>
 				<action method="addItem"><type>skin_js</type><name>js/main.js</name><params/></action>
 
-				<block type="core/template" name="googleanalytics" as="googleanalytics" template="page/html/googleanalytics.phtml" />
             </block>
 
             <block type="core/text_list" name="after_body_start" as="after_body_start" translate="label">
@@ -121,7 +120,6 @@ Default layout, loads most of the pages
 
             <block type="core/text_list" name="before_body_end" as="before_body_end" translate="label">
                 <label>Page Bottom</label>
-				<block type="core/template" name="googleanalytics" as="googleanalytics" template="page/html/googleanalytics.phtml" />
 				<block type="core/template" name="adcrowd" as="adcrowd" template="page/adcrowd.phtml" />
             </block>
         </block>
