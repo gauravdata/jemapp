@@ -1,19 +1,4 @@
 <?php
-/**
- * Mirasvit
- *
- * This source file is subject to the Mirasvit Software License, which is available at http://mirasvit.com/license/.
- * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
- * If you wish to customize this module for your needs.
- * Please refer to http://www.magentocommerce.com for more information.
- *
- * @category  Mirasvit
- * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
- */
-
 
 class Mirasvit_Rma_Block_Adminhtml_Rma_Create_Order_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
@@ -39,27 +24,32 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Create_Order_Grid extends Mage_Adminhtml_
         } else {
             $collection->addFieldToFilter('status', array('in' => $allowedStatuses));
         }
+
+        $excluded = Mage::helper('rma')->getExcludedOrderIds();
+        if(count($excluded)) {
+            $collection->addFieldToFilter("main_table.increment_id", array('nin' => $excluded));
+        }
+
         $this->setCollection($collection);
-        // echo $collection->getSelect();die;
         return parent::_prepareCollection();
     }
 
     protected function _prepareColumns()
     {
         $this->addColumn('real_order_id', array(
-            'header'=> Mage::helper('sales')->__('Order #'),
+            'header' => Mage::helper('sales')->__('Order #'),
             'width' => '80px',
-            'type'  => 'text',
+            'type' => 'text',
             'index' => 'increment_id',
-            'filter_index' => 'main_table.increment_id'
+            'filter_index' => 'main_table.increment_id',
         ));
 
         if (!Mage::app()->isSingleStoreMode()) {
             $this->addColumn('store_id', array(
-                'header'    => Mage::helper('sales')->__('Purchased From (Store)'),
-                'index'     => 'store_id',
-                'type'      => 'store',
-                'store_view'=> true,
+                'header' => Mage::helper('sales')->__('Purchased From (Store)'),
+                'index' => 'store_id',
+                'type' => 'store',
+                'store_view' => true,
                 'display_deleted' => true,
             ));
         }
@@ -84,14 +74,14 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Create_Order_Grid extends Mage_Adminhtml_
         $this->addColumn('base_grand_total', array(
             'header' => Mage::helper('sales')->__('G.T. (Base)'),
             'index' => 'base_grand_total',
-            'type'  => 'currency',
+            'type' => 'currency',
             'currency' => 'base_currency_code',
         ));
 
         $this->addColumn('grand_total', array(
             'header' => Mage::helper('sales')->__('G.T. (Purchased)'),
             'index' => 'grand_total',
-            'type'  => 'currency',
+            'type' => 'currency',
             'currency' => 'order_currency_code',
         ));
 
@@ -100,7 +90,7 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Create_Order_Grid extends Mage_Adminhtml_
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/add', array('order_id'=>$row->getId(), 'ticket_id'=> Mage::app()->getRequest()->getParam('ticket_id')));
+        return $this->getUrl('*/*/add', array('order_id' => $row->getId(), 'ticket_id' => Mage::app()->getRequest()->getParam('ticket_id')));
     }
-
 }
+

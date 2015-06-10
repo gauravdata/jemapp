@@ -1,19 +1,4 @@
 <?php
-/**
- * Mirasvit
- *
- * This source file is subject to the Mirasvit Software License, which is available at http://mirasvit.com/license/.
- * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
- * If you wish to customize this module for your needs.
- * Please refer to http://www.magentocommerce.com for more information.
- *
- * @category  Mirasvit
- * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
- */
-
 
 class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
 {
@@ -22,18 +7,31 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getSingleton('rma/config');
     }
 
-    public function toAdminUserOptionArray($emptyOption = false) {
+    /**
+     * @param Mage_Sales_Model_Order $order
+     *
+     * @return Mage_Core_Model_Store
+     */
+    public function getStoreByOrder($order)
+    {
+        return ($order) ? Mage::getModel('core/store')->load($order->getStoreId()) : Mage::app()->getStore();
+    }
+
+    public function toAdminUserOptionArray($emptyOption = false)
+    {
         $arr = Mage::getModel('admin/user')->getCollection()->toArray();
         $result = array();
         foreach ($arr['items'] as $value) {
-            $result[] = array('value'=>$value['user_id'], 'label' => $value['firstname'].' '.$value['lastname']);
+            $result[] = array('value' => $value['user_id'], 'label' => $value['firstname'].' '.$value['lastname']);
         }
         if ($emptyOption) {
             array_unshift($result, array('value' => 0, 'label' => Mage::helper('rma')->__('-- Please Select --')));
         }
+
         return $result;
     }
-    public function getAdminUserOptionArray($emptyOption = false) {
+    public function getAdminUserOptionArray($emptyOption = false)
+    {
         $arr = Mage::getModel('admin/user')->getCollection()->toArray();
         $result = array();
         foreach ($arr['items'] as $value) {
@@ -42,10 +40,51 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
         if ($emptyOption) {
             $result[0] = Mage::helper('rma')->__('-- Please Select --');
         }
+
+        return $result;
+    }
+    public function getCoreStoreOptionArray()
+    {
+        $arr = Mage::getModel('core/store')->getCollection()->toArray();
+        foreach ($arr['items'] as $value) {
+            $result[$value['store_id']] = $value['name'];
+        }
+
         return $result;
     }
 
     /************************/
+
+    /**
+    * Returns ID's of orders, which already was fully returned and thus have to be excluded when creating new RMA
+    * @return array
+    */
+    public function getExcludedOrderIds()
+    {
+        // 1. Get all RMA and fold them on order_id
+        $rmas = Mage::getModel("rma/rma")->getCollection();
+        $rmas->getSelect()
+            ->group('order_id');
+        $ordersExcluded = array();
+        // 2. Check, whether there are goods for return
+        foreach($rmas as $rma) {
+            $rmaItems = Mage::getModel('rma/item')->getCollection();
+            $rmaItems->getSelect()
+                ->where('rma_id = ?', $rma->getId())
+                ->group('item_id');
+
+            $fullBack = 0;
+            foreach($rmaItems as $item) {
+                if($item->getQtyRequested() >= $item->getQtyOrdered()) {
+                    $fullBack++;
+                }
+            }
+            if($fullBack == count($rmaItems)) {
+                $ordersExcluded[] = Mage::getModel("sales/order")->load($rma->getOrderId())->getIncrementId();
+            }
+        }
+        return $ordersExcluded;
+    }
 
     public function getOrderLabel($order, $url = false)
     {
@@ -56,10 +95,11 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
         if ($url) {
             $res = "<a href='{$url}' target='_blank'>$res</a>";
         }
-        $res .= Mage::helper('rma')->__(" at %s (%s)",
+        $res .= Mage::helper('rma')->__(' at %s (%s)',
             Mage::helper('core')->formatDate($order->getCreatedAt(), 'medium'),
             strip_tags($order->formatPrice($order->getGrandTotal()))
         );
+
         return $res;
     }
 
@@ -96,14 +136,14 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
                 $result = array_merge($result, $options['attributes_info']);
             }
         }
+
         return $result;
     }
 
-
     public function generateIncrementId($rma)
     {
-        $id = (string)$rma->getId();
-        $storeId = (string)$rma->getStoreId();
+        $id = (string) $rma->getId();
+        $storeId = (string) $rma->getStoreId();
 
         $config = $this->getConfig();
         $format = $config->getNumberFormat();
@@ -116,11 +156,12 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
         $result = str_replace('[order]', $rma->getOrder()->getIncrementId(), $result);
 
         $collection = Mage::getModel('rma/rma')->getCollection()
-            ->addFieldToFilter('main_table.increment_id', array("like"=>$result.'%'));
+            ->addFieldToFilter('main_table.increment_id', array('like' => $result.'%'));
 
         if ($collection->count()) {
-            $result.= '-'.($collection->count()+1);
+            $result .= '-'.($collection->count() + 1);
         }
+
         return $result;
     }
 
@@ -140,6 +181,7 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
         if (!$rma || !$rma->getId()) {
             $item = Mage::getModel('rma/item')->initFromOrderItem($item);
         }
+
         return $item;
     }
 
@@ -154,7 +196,6 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
                 ->addFieldToFilter('rma_id', $rma->getId());
         } else {
             $collection = $order->getItemsCollection();
-
         }
         foreach ($collection as $item) {
             if ($item->getParentItem()) {
@@ -172,12 +213,14 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
                 $items[] = $item;
             }
         }
+
         return $items;
     }
 
     public function convertToHtml($text)
     {
-        $html =  nl2br($text);
+        $html = nl2br($text);
+
         return $html;
     }
 
@@ -190,6 +233,7 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
     {
         $collection = Mage::getModel('rma/status')->getCollection()
             ->addFieldToFilter('is_active', true);
+
         return $collection;
     }
 
@@ -213,15 +257,15 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * We calculate days from the next day of order has received the status 'complete'
+     * We calculate days from the next day of order has received the status 'complete'.
      */
     public function getLastReturnGmtDate()
     {
         $offset = gmdate('H') * 60 * 60 +  gmdate('i') * 60 + gmdate('s');
-        $time = gmdate('U') - ($this->getReturnPeriod()+1) * 24 * 60 * 60 - $offset;
+        $time = gmdate('U') - ($this->getReturnPeriod() + 1) * 24 * 60 * 60 - $offset;
+
         return Mage::getSingleton('core/date')->gmtDate(null, $time);
     }
-
 
     public function getAllowedOrderCollection($customer = false, $isLimitDate = true)
     {
@@ -230,15 +274,15 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
         $collection = Mage::getModel('sales/order')->getCollection();
         $collection->getSelect()->where("main_table.status IN ('".implode("','", $allowedStatuses)."')");
         if ($isLimitDate) {
-            $collection->getSelect()->where("
-                ((select MAX(created_at) from `".Mage::getConfig()->getTablePrefix().'sales_flat_order_status_history'."`
+            $collection->getSelect()->where('
+                ((select MAX(created_at) from `'.Mage::getConfig()->getTablePrefix().'sales_flat_order_status_history'."`
                 where status IN ('".implode("','", $allowedStatuses)."')
                       and parent_id = main_table.entity_id
                 ) >= '$limitDate')
                 ");
         }
         if ($customer) {
-            $collection->addFieldToFilter('customer_id', (int)$customer->getId());
+            $collection->addFieldToFilter('customer_id', (int) $customer->getId());
         }
         $collection->addAttributeToSelect('*')
                 ->setOrder('updated_at', 'desc')
@@ -254,7 +298,8 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
             $order = $order->getId();
         }
         $collection = $this->getAllowedOrderCollection();
-        $collection->addFieldToFilter('entity_id', (int)$order);
+        $collection->addFieldToFilter('entity_id', (int) $order);
+
         return $collection->count() > 0;
     }
 
@@ -275,4 +320,17 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
             return $collection->getFirstItem();
         }
     }
+
+    public function getCssFile()
+    {
+        if (file_exists(Mage::getBaseDir('skin').'/frontend/base/default/css/mirasvit/rma/custom.css')) {
+            return 'css/mirasvit/rma/custom.css';
+        }
+        if (Mage::getVersion() >= '1.9.0.0') {
+            return 'css/mirasvit/rma/rwd.css';
+        }
+
+        return 'css/mirasvit/rma/fixed.css';
+    }
 }
+

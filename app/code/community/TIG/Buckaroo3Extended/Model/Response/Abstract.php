@@ -259,17 +259,21 @@ class TIG_Buckaroo3Extended_Model_Response_Abstract extends TIG_Buckaroo3Extende
     {
         $this->_debugEmail .= "The transaction generated an error. \n";
 
+        if ($this->_order) {
         $this->_order->addStatusHistoryComment(
             Mage::helper('buckaroo3extended')->__(
                 'A technical error has occurred.'
             )
         );
+        }
 
         Mage::getSingleton('core/session')->addError(
             Mage::helper('buckaroo3extended')->__('A technical error has occurred. Please try again. If this problem persists, please contact the shop owner.')
         );
 
+        if ($this->_order) {
         $this->_order->cancel()->save();
+        }
         $this->_debugEmail .= "The order has been cancelled. \n";
         $this->restoreQuote();
         $this->_debugEmail .= "The quote has been restored. \n";
