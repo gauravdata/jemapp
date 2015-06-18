@@ -113,7 +113,7 @@
 ############################################
 ## enable rewrites
 
-    Options +FollowSymLinks
+    Options +SymLinksIfOwnerMatch
     RewriteEngine on
 
 ############################################
@@ -276,7 +276,7 @@ RewriteRule ^retour\.pdf retour-nt.pdf [L]
 SetEnvIf Host no\-tomatoes\.de MAGE_RUN_CODE=default_de
 
 SetEnvIf Host jemappelle\.nl MAGE_RUN_CODE=jma_nl
-SetEnvIf Host jemappelle\.be MAGE_RUN_CODE=jma_be
+SetEnvIf Host jemappelle\.be MAGE_RUN_CODE=jma_nl
 SetEnvIf Host jemappelle\.de MAGE_RUN_CODE=jma_de
 
 #SetEnv MAGE_RUN_CODE jma_de

@@ -29,7 +29,7 @@
  * @author     MageWorx Dev Team
  */
 
-class MageWorx_Customercredit_Model_Rules extends Mage_Rule_Model_Rule
+class MageWorx_CustomerCredit_Model_Rules extends Mage_Rule_Model_Rule
 {
     const FREE_SHIPPING_ITEM = 1;
     const FREE_SHIPPING_ADDRESS = 2;
@@ -60,6 +60,11 @@ class MageWorx_Customercredit_Model_Rules extends Mage_Rule_Model_Rule
         return Mage::getModel('salesrule/rule_condition_product_combine');
     }
 
+    /**
+     * To String
+     * @param string $format
+     * @return string
+     */
     public function toString($format='')
     {
         $str = Mage::helper('salesrule')->__("Name: %s", $this->getName()) ."\n"
@@ -73,6 +78,11 @@ class MageWorx_Customercredit_Model_Rules extends Mage_Rule_Model_Rule
         return $str;
     }
 
+    /**
+     * 
+     * @param array $rule
+     * @return MageWorx_CustomerCredit_Model_Rules
+     */
     public function loadPost(array $rule)
     {
         $arr = $this->_convertFlatToRecursive($rule);
@@ -112,14 +122,12 @@ class MageWorx_Customercredit_Model_Rules extends Mage_Rule_Model_Rule
         return Mage::getResourceModel('customercredit/rules_collection');
     }
     
-    
     // for magento 1.7 fix
     protected function _beforeSave() {
         // check if discount amount > 0
         if ((int)$this->getDiscountAmount() < 0) {
             Mage::throwException(Mage::helper('rule')->__('Invalid discount amount.'));
         }
-
 
         if ($this->getConditions()) {
             $this->setConditionsSerialized(serialize($this->getConditions()->asArray()));
@@ -137,7 +145,6 @@ class MageWorx_Customercredit_Model_Rules extends Mage_Rule_Model_Rule
         if (is_array($this->getCustomerGroupIds())) {
             $this->setCustomerGroupIds(join(',', $this->getCustomerGroupIds()));
         }
-        //parent::_beforeSave();
     }
 
 }

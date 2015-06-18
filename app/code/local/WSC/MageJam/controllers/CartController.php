@@ -90,7 +90,11 @@ class WSC_MageJam_CartController extends Mage_Checkout_CartController
 		
 		Mage::getSingleton('customer/session')->setCustomer($quote->getCustomer());
 		parent::_getCart()->setQuote($quote);
-		return parent::indexAction();
+		
+        $this->_redirectUrl(Mage::getUrl('checkout/cart'));
+        
+	//	$this->_redirectUrl(Mage::helper('checkout/url')->getCheckoutUrl());
+	//	return parent::indexAction();
     }
     
     /**

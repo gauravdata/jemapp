@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<layout>
+    <checkout_onepage_index>
+        <reference name="head">
+            <reference name="head">
+                <block type="core/text" name="google.cdn.jquery">
+                    <action method="setText"><text><![CDATA[<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>]]></text></action>
+                </block>
+            </reference>
+            <action method="addItem"><type>skin_js</type><name>js/servicepointdhl.js</name><params/></action>
+        </reference>
+    </checkout_onepage_index>
+    <onestepcheckout_index_index>
+        <reference name="head">
+            <reference name="head">
+                <block type="core/text" name="google.cdn.jquery">
+                    <action method="setText"><text><![CDATA[<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>]]></text></action>
+                </block>
+            </reference>
+            <action method="addItem"><type>skin_js</type><name>js/servicepointdhl-onestepcheckout.js</name><params/></action>
+        </reference>
+    </onestepcheckout_index_index>
+    <servicepointdhl_index_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template></template>
+            </action>
+        </reference>
+        <reference name="content">
+        </reference>
+    </servicepointdhl_index_index>
+</layout>

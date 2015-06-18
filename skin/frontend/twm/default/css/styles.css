@@ -30,6 +30,8 @@ html, body {
     display: inline-block;
 }
 
+.shippingmethod input[type="radio"] { vertical-align: top; }
+
 /*======================================================
 	BOOTSTRAP OVERWRITES/COPIES
 ======================================================*/

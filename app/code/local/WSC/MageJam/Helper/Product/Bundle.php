@@ -64,7 +64,7 @@ class WSC_MageJam_Helper_Product_Bundle extends Mage_Core_Helper_Abstract
         $options = $optionCollection->appendSelections(
             $selectionCollection,
             false,
-            $this->getSkipSaleableCheck()
+            true//$this->getSkipSaleableCheck()
         );
 
         $result = array();
@@ -132,10 +132,12 @@ class WSC_MageJam_Helper_Product_Bundle extends Mage_Core_Helper_Abstract
         $result['sku'] = $selection->getSku();
         $result['position'] = (int)$selection->getPosition();
         $result['is_default'] = (int)$selection->getIsDefault();
-        $result['price'] = $this->_getSelectionPrice($selection);
+
         $result['name'] = $selection->getName();
         $result['is_saleable'] = (int)$selection->isSaleable();
         $result['qty'] = $selection->getSelectionQty();
+        $result['stock'] = $selection->getStockItem()->getQty();
+        $result['is_in_stock'] = $selection->getStockItem()->getIsInStock();
         $result['can_change_qty'] = (int)$selection->getData('selection_can_change_qty');
 
     	$priceType = '';
@@ -145,6 +147,8 @@ class WSC_MageJam_Helper_Product_Bundle extends Mage_Core_Helper_Abstract
     		$priceType = 'percent';
     	}
     	$result['price_type'] = $priceType;
+
+        $result['price'] = $this->_getSelectionPrice($selection);
         
         return $result;
     }
@@ -157,6 +161,10 @@ class WSC_MageJam_Helper_Product_Bundle extends Mage_Core_Helper_Abstract
      */
     protected function _getSelectionPrice($selection)
     {
-        return (string) $this->_product->getPriceModel()->getSelectionPreFinalPrice($this->_product, $selection, 1);
+        $selectionPrice = $this->_product->getPriceModel()->getSelectionPreFinalPrice($this->_product, $selection, 1);
+
+        $selectionPriceWithTax = Mage::helper('magejam/product')->calculatePriceIncludeTax($this->_product, $selectionPrice);
+
+        return (string) $selectionPriceWithTax;
     }
 }

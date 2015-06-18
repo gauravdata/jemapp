@@ -69,6 +69,16 @@ class WSC_MageJam_PaymentController extends Mage_Core_Controller_Front_Action
             return;
         }
 
+        if (!$quote->validateMinimumAmount()) {
+            $minimumAmount = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())
+                ->toCurrency(Mage::getStoreConfig('sales/minimum_order/amount'));
+
+            $warning = Mage::getStoreConfig('sales/minimum_order/description')
+                ? Mage::getStoreConfig('sales/minimum_order/description')
+                : Mage::helper('checkout')->__('Minimum order amount is %s', $minimumAmount);
+
+            $this->_fault($warning);
+        }
         $requiredAgreements = Mage::helper('checkout')->getRequiredAgreementIds();
         if ($requiredAgreements) {
             /* @var $session Mage_Checkout_Model_Session */

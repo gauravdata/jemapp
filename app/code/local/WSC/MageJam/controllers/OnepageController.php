@@ -62,6 +62,17 @@ class WSC_MageJam_OnepageController extends Mage_Checkout_OnepageController
 	        }
         		
         }
+        
+        if (!$quote->validateMinimumAmount()) {
+            $minimumAmount = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())
+                ->toCurrency(Mage::getStoreConfig('sales/minimum_order/amount'));
+
+            $warning = Mage::getStoreConfig('sales/minimum_order/description')
+                ? Mage::getStoreConfig('sales/minimum_order/description')
+                : Mage::helper('checkout')->__('Minimum order amount is %s', $minimumAmount);
+
+            $this->_fault($warning);
+        }
         $session->replaceQuote($quote);
 
 		Mage::getSingleton('customer/session')->setCustomer($quote->getCustomer());
@@ -76,7 +87,7 @@ class WSC_MageJam_OnepageController extends Mage_Checkout_OnepageController
          */
 
 		//STEP(1)
-        if ($quote->getCustomer()){
+        if ($quote->getCustomerId()){
 			$checkout->saveCheckoutMethod('login');        	
 		}else{
 			$checkout->saveCheckoutMethod('guest');	

@@ -35,8 +35,11 @@ public function pushOrderAction()
 	public function twmPushOrdersAction() {
 		echo '<pre>';
 		$orders = Mage::getModel('sales/order')->getCollection()
-			->addfieldtofilter('created_at',array(array('gteq' => '2013-12-13 00:00:00')));
+			->addfieldtofilter('created_at',array(array('gteq' => '2015-03-29 00:00:00')))
+			->addfieldtofilter('created_at',array(array('lt' => '2015-03-30 00:00:00')));
 		$i = 0;
+		echo "Export " . $orders->count() . "orders <br/>" . PHP_EOL;
+
 		foreach ($orders as $order) {
 			$state = $order->getState();
 			if ($state == Mage_Sales_Model_Order::STATE_PROCESSING)
