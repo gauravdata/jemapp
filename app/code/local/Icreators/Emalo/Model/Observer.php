@@ -135,6 +135,11 @@ class Icreators_Emalo_Model_Observer
 
 	public function onSalesOrderSaveAfter(Varien_Event_Observer $observer)
 	{
+		$isDemo = Mage::getStoreConfigFlag('design/head/demonotice');
+		if ($isDemo) {
+			return;
+		}
+
 		$event = $observer->getEvent();
 		$order = $event->getOrder();
 

@@ -5,7 +5,7 @@
  * @category    ShopGo
  * @package     Shopgo_GTM
  * @author      Ali Halabyah <ali@shopgo.me>
- * @copyright   Copyright (c) 2014 ShopGo
+ * @copyright   Copyright (c) 2015 ShopGo
  * @license     http://opensource.org/licenses/osl-3.0.php Open Software License 3.0 (OSL-3.0)
  */
 class Shopgo_GTM_Block_Gtm extends Mage_Core_Block_Template
@@ -33,15 +33,18 @@ class Shopgo_GTM_Block_Gtm extends Mage_Core_Block_Template
 	{
 		// Initialise our data source.
 		$data = array();
+		$dataScript = '';
 
+		// Get transaction and visitor data.
 		$data = $data + $this->_getTransactionData();
 		$data = $data + $this->_getVisitorData();
-		
-		// Generate the data layer JavaScript.
-		$dataScript = '';
-		if (!empty($data)) {
-			$dataScript .= "<script>dataLayer = [".json_encode($data)."];</script>\n\n";
+
+		// Get transaction and visitor data, if desired.
+		if (Mage::helper('gtm')->isDataLayerEnabled() && !empty($data)) {
+			// Generate the data layer JavaScript.
+			$dataScript .= "<script>dataLayer = [" . json_encode($data) . "];</script>\n\n";
 		}
+
 		return $dataScript;
 	}
 
@@ -82,11 +85,11 @@ class Shopgo_GTM_Block_Gtm extends Mage_Core_Block_Template
 				);
 			} else {
 				// For subsequent orders, append to order ID, totals and shipping method.
-				$data['transactionId'] .= '|'.$order->getIncrementId();
+				$data['transactionId'] .= '|' . $order->getIncrementId();
 				$data['transactionTotal'] += $order->getBaseGrandTotal();
 				$data['transactionShipping'] += $order->getBaseShippingAmount();
 				$data['transactionTax'] += $order->getBaseTaxAmount();
-				$data['transactionShippingMethod'] .= '|'.$order->getShippingCarrier()->getCarrierCode();
+				$data['transactionShippingMethod'] .= '|' . $order->getShippingCarrier() ? $order->getShippingCarrier()->getCarrierCode() : 'No Shipping Method';
 			}
 
 			// Build products array.
@@ -172,7 +175,6 @@ class Shopgo_GTM_Block_Gtm extends Mage_Core_Block_Template
 	 */
 	protected function _toHtml()
 	{
-		// if (!Mage::helper('gtm')->isGTMAvailable()) return '';
 		return parent::_toHtml();
 	}
 }

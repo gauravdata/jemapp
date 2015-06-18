@@ -5,7 +5,7 @@
  * @category    ShopGo
  * @package     Shopgo_GTM
  * @author      Ali Halabyah <ali@shopgo.me>
- * @copyright   Copyright (c) 2014 ShopGo
+ * @copyright   Copyright (c) 2015 ShopGo
  * @license     http://opensource.org/licenses/osl-3.0.php Open Software License 3.0 (OSL-3.0)
  */
 class Shopgo_GTM_Model_Observer
