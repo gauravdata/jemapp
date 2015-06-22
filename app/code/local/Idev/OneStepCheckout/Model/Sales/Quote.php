@@ -1,11 +1,11 @@
 <?php
-class  Idev_OneStepCheckout_Model_Sales_Quote extends Mage_Sales_Model_Quote
+class  Idev_OneStepCheckout_Model_Sales_Quote extends Idev_OneStepCheckout_Model_Sales_Quote_Amasty_Pure
 {
 
     /**
      * Collect totals patched for magento issue #26145
      *
-     * @return Mage_Sales_Model_Quote
+     * @return Idev_OneStepCheckout_Model_Sales_Quote_Amasty_Pure
      */
     public function collectTotals()
     {
