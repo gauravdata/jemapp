@@ -98,8 +98,8 @@
                 <totals>
                     <vaimo_klarna_fee>
                         <class>klarna/quote_total</class>
-                        <after>subtotal,discount,shipping</after>
-                        <before>tax,grand_total</before>
+                        <after>subtotal,discount,shipping,tax</after>
+                        <before>grand_total</before>
                         <renderer>klarna/checkout_fee</renderer>
                     </vaimo_klarna_fee>
                     <vaimo_klarna_fee_tax>

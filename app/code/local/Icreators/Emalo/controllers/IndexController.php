@@ -35,8 +35,10 @@ public function pushOrderAction()
 	public function twmPushOrdersAction() {
 		echo '<pre>';
 		$orders = Mage::getModel('sales/order')->getCollection()
-			->addfieldtofilter('created_at',array(array('gteq' => '2015-03-29 00:00:00')))
-			->addfieldtofilter('created_at',array(array('lt' => '2015-03-30 00:00:00')));
+//			->addfieldtofilter('created_at',array(array('gteq' => '2015-06-07 00:00:00')))
+//			->addfieldtofilter('created_at',array(array('lt' => '2015-06-09 00:00:00')));
+			->addfieldtofilter('increment_id',array(array('gteq' => '500057105')))
+			->addfieldtofilter('increment_id',array(array('lteq' => '500057317')));
 		$i = 0;
 		echo "Export " . $orders->count() . "orders <br/>" . PHP_EOL;
 

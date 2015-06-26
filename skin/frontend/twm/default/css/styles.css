@@ -1542,3 +1542,7 @@ footer #newsletter-validate-detail .input-group-addon {
         cursor: default;
     }
 }
+
+.klarna_dob input[type="text"] {
+	display: inline-block;
+}
