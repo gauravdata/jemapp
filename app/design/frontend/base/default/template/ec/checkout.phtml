@@ -1,0 +1,191 @@
+<script type="text/javascript">
+
+	var checkoutProducts = [];
+	
+	<?php foreach (Mage::getSingleton('checkout/session')->getQuote()->getAllVisibleItems() as $item) : ?>
+		
+		<?php
+
+			$collection = $item->getProduct()->getCategoryIds();
+			
+			if (!$collection)
+			{
+				$collection[] = Mage::app()->getStore()->getRootCategoryId();
+			}
+			
+			$category = Mage::getModel('catalog/category')->load
+			(
+				end($collection)
+			);
+			
+			/**
+			 * Get product name
+			 */
+			$args = new stdClass();
+				
+			$args->id 	= $item->getProduct()->getSku();
+			$args->name = $item->getName();
+			
+			$variant = array();
+			
+			if ($item->getProduct()->isConfigurable())
+			{
+	
+				$parent = Mage::getModel('catalog/product')->load
+				(
+					$item->getProductId()
+				);
+				
+				$args->id	= $parent->getSku();
+				$args->name = $parent->getName();
+				
+							
+				if ($item instanceof Mage_Sales_Model_Quote_Item) 
+				{
+					$request = new Varien_Object(unserialize($item->getOptionByCode('info_buyRequest')->getValue()));
+				} 
+				else if ($item instanceof Mage_Sales_Model_Order_Item) 
+				{
+					$request = new Varien_Object($item->getProductOptions());
+				}
+	
+				$options = $request->getData();
+	
+				if (isset($options['super_attribute']) && is_array($options['super_attribute']))
+				{
+					foreach ($options['super_attribute'] as $id => $option)
+					{
+						$attribute = Mage::getModel('catalog/resource_eav_attribute')->load($id);
+						
+						if ($attribute->usesSource()) 
+						{
+							$variant[] = join(':', array
+							(
+								$attribute->getFrontendLabel(), 
+								$attribute->getSource()->getOptionText($option)
+							));
+						}
+					}
+				}
+			}
+		?>
+		
+		checkoutProducts.push(
+		{
+			'name': 		'<?php echo $args->name ?>',
+			'category': 	'<?php echo $category->getName() ?>',
+			'id': 			'<?php echo $args->id ?>',
+			'price': 		'<?php echo $item->getProduct()->getFinalPrice() ?>',
+			'quantity': 	'<?php echo $item->getQty() ?>',
+			'brand':		'<?php echo $item->getProduct()->getAttributeText('manufacturer') ?>',
+			'variant':		'<?php echo join(VARIANT_SEPARATOR, $variant) ?>'
+		})
+		
+	<?php endforeach; ?>
+
+
+	AEC.getSteps = function(selector)
+	{	
+		var find = function()
+		{
+			return document.querySelectorAll('.opc');
+		}
+			
+		var element = find();
+
+		if (element && 1 == element.length)
+		{
+			return element[0].children;
+		}
+
+		return null;
+	}
+
+	AEC.getStep = function(section, steps)
+	{
+		for (i = 0, l = steps.length; i < l; i++)
+		{
+			if (-1 != steps[i].id.indexOf(section))
+			{
+				return {
+					index: i, 
+					step: steps[i]
+				}
+			}
+		}
+
+		return {
+			index: -1,
+			step: null
+		}
+	}
+
+	/**
+	 * Check if customer is logged in
+	 */
+	var logged = <?php echo @Mage::getSingleton('customer/session')->isLoggedIn() ? 1 : 0 ?>;
+	
+	Checkout.prototype.gotoSection = Checkout.prototype.gotoSection.wrap(function(parentMethod, section, reloadProgressBlock) 
+	{
+		parentMethod(section, reloadProgressBlock);
+
+		var steps = AEC.getSteps(), step = AEC.getStep(section, steps), index = step.index;
+
+		if (-1 !== index)
+		{
+			/**
+			 * Check if customer is logged and shift steps by 1 to align step indexes to missing "Login/Welcome" step
+			 */
+			if (logged)
+			{
+				index += 1;
+			}
+
+			/**
+			 * Push data 
+			 */
+			dataLayer.push(
+			{
+				'event':'checkout',
+				'ecommerce': 
+				{
+					'checkout': 
+					{
+						'actionField': 
+						{
+							'step': ++index
+						},
+						'products': checkoutProducts
+					}
+				}
+			});
+
+			/**
+			 * Track time 
+			 */
+			AEC.Time.trackContinue(dataLayer, AEC.Const.TIMING_CATEGORY_CHECKOUT_STEP, index);	
+		}		
+	});
+
+	/**
+	 * Fire first step
+	 */
+	EC.push(function(dataLayer)
+	{
+		dataLayer.push(
+		{
+			'event':'checkout',
+			'ecommerce': 
+			{
+				'checkout': 
+				{
+					'actionField': 
+					{
+						'step': (logged ? 2 : 1)
+					},
+					'products': checkoutProducts
+				}
+			}
+		});
+	});
+</script>

@@ -1,0 +1,61 @@
+<?php 
+	$positions = Mage::getResourceModel('catalog/category')->getProductsPosition
+	(
+		$this->getCategory()
+	);
+?>
+<script type="text/javascript">
+
+	/* Set ecomm_pagetype */
+	window.google_tag_params.ecomm_pagetype = 'category';
+	window.google_tag_params.ecomm_category = '<?php echo Mage::helper('core')->jsQuoteEscape($this->getCategory()->getName()) ?>';
+
+	/* Change ecomm_pagetype if search results  */
+	<?php if (in_array(Mage::app()->getFrontController()->getAction()->getFullActionName(), array('catalogsearch_result_index','catalogsearch_advanced_result'))) : ?>
+
+		window.google_tag_params.ecomm_pagetype = 'searchresults';
+	
+		/* Unset category if search results */
+		try 
+		{
+			delete window.google_tag_params.ecomm_category;
+		}
+		catch (error)
+		{
+			/* TODO: Console log*/
+		}
+	
+	<?php endif; ?>
+	
+	EC.push(function(dataLayer)
+	{
+		var impressions = [];
+		
+		<?php foreach ($this->getCollection() as $product) : ?>
+		
+		impressions.push(
+		{
+			'list': 		'<?php echo Mage::helper('core')->jsQuoteEscape($this->getCategory()->getName()) ?>',
+			'id': 		    '<?php echo Mage::helper('core')->jsQuoteEscape($product->getSku()) ?>',
+			'name': 		'<?php echo Mage::helper('core')->jsQuoteEscape($product->getName()) ?>',
+			'price': 		'<?php echo $product->getFinalPrice() ?>',
+			'category': 	'<?php echo Mage::helper('core')->jsQuoteEscape($this->getCategory()->getName()) ?>',
+			'brand':		'<?php echo $product->getAttributeText('manufacturer') ?>',
+			'position':     '<?php echo (int) @$positions[$product->getId()] ?>',
+			'variant':		''
+		});
+			
+		<?php endforeach; ?>
+		
+		var data = 
+		{
+			'ecommerce': 
+			{
+				'currencyCode': '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode() ?>',
+				'impressions': 	impressions
+			}
+		}
+		
+		dataLayer.push(data);
+	})
+</script>
