@@ -1,0 +1,79 @@
+
+
+<!-- Tracking custom products impressions -->
+<script type="text/javascript">
+
+		EC.push(function(dataLayer)
+		{
+			var impressions = [];
+
+			/**
+			 * Iterate collection of products. It could be collection or array of products
+			 */
+			<?php foreach ($this->getCollection() as $product) : ?>
+			
+			impressions.push(
+			{
+				'list': 		'<?php echo Mage::helper('core')->jsQuoteEscape($this->getCategory()->getName()) ?>',
+				'id': 		    '<?php echo Mage::helper('core')->jsQuoteEscape($product->getSku()) ?>',
+				'name': 		'<?php echo Mage::helper('core')->jsQuoteEscape($product->getName()) ?>',
+				'price': 		'<?php echo $product->getFinalPrice() ?>',
+				'category': 	'<?php echo Mage::helper('core')->jsQuoteEscape($this->getCategory()->getName()) ?>',
+				'position':     '<?php echo (int) @$positions[$product->getId()] ?>'
+			});
+				
+			<?php endforeach; ?>
+			
+			var data = 
+			{
+				'ecommerce': 
+				{
+					'currencyCode': '<?php echo Mage::app()->getStore()->getCurrentCurrencyCode() ?>',
+					'impressions': 	impressions
+				}
+			}
+			
+			dataLayer.push(data);
+		})
+</script>
+
+<!--  Tracking custom product clicks -->
+
+<a href="" data-id="" data-name="" data-price="" data-quantity="" data-category="" onclick="AEC.click(this)">
+	<!--  Product image here and/or additional data -->
+</a>
+
+<!--  Tracking promotions impressions  -->
+
+<script type="text/javascript">
+
+	EC.push(function(dataLayer)
+	{
+	    dataLayer.push(
+	    {
+	        'ecommerce': 
+	        {
+	            'promoView': 
+	            {
+	                'promotions': 
+	                [
+	                    {
+	                        'id':       '', 
+	                        'name':     '',
+	                        'creative': '',
+	                        'position': ''
+	                    },
+	                    {
+	                        'id':       '', 
+	                        'name':     '',
+	                        'creative': '',
+	                        'position': ''
+	                    },
+	                    //And so on
+	                ]
+	            }
+	        }
+	    });            
+	});
+	
+</script>

@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+        <anowave translate="label">
+            <label>Anowave Extensions</label>
+            <sort_order>150</sort_order>
+        </anowave>
+    </tabs> 
+    <sections>
+        <ec translate="label" module="ec">
+            <label>Google Tag Manager</label>
+            <tab>anowave</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>980</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <config>
+                    <label>Installation code</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                    	<license translate="label comment">
+							<label>License key</label>
+							<comment>
+								<model>Anowave_Package_Model_License</model>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>0</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</license>
+						<code translate="label comment">
+							<label>Google Tag Manager Code</label>
+							<comment>
+								<![CDATA[Insert Google Tag Manager snippet. It will be inserted before the body closing tag e.g &lt;/body&gt;]]>
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<frontend_model>ec/snippet</frontend_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</code>
+						<refund translate="label comment">
+							<label>Refund Tracking ID</label>
+							<comment>
+								<![CDATA[Google Analytics Tracking ID (UA ID) for measuring refunds]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</refund>
+                    </fields>
+                </config>
+                <adwords>
+                    <label>AdWords Conversion Tracking</label>
+                    <sort_order>12</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>0</expanded>
+                    <fields>
+						<conversion_id translate="label comment">
+							<label>Conversion ID</label>
+							<comment>
+								<![CDATA[AdWords Conversion ID]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</conversion_id>
+						<conversion_label translate="label comment">
+							<label>Conversion Label</label>
+							<comment>
+								<![CDATA[AdWords Conversion Label]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</conversion_label>
+						<conversion_format translate="label comment">
+							<label>Conversion Format</label>
+							<comment>
+						        <model>ec/system_config_comment</model>
+						    </comment>
+						    <source_model>ec/system_config_format</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</conversion_format>
+						<conversion_currency translate="label comment">
+							<label>Conversion Currency</label>
+							<comment>
+						       	<![CDATA[AdWords Conversion Currency]]>
+						    </comment>
+						    <source_model>ec/system_config_currency</source_model>
+							<frontend_type>select</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</conversion_currency>
+						<conversion_color translate="label comment">
+							<label>Conversion Color</label>
+							<comment>
+								<![CDATA[Hex value e.g 666666. Do not include # prefix]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</conversion_color>
+                    </fields>
+                </adwords>
+                <revenue>
+                 	<label>Transaction revenue</label>
+                    <sort_order>13</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>0</expanded>
+                	<fields>
+                		<tax translate="label">
+                            <label>Tax</label>
+                            <comment><![CDATA[Choose whether Tax (e.g VAT) should be calculated in revenue]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>ec/system_config_tax</source_model>
+                            <sort_order>1</sort_order>
+                        </tax>
+                        <shipping translate="label">
+                            <label>Shipping</label>
+                            <comment><![CDATA[Choose whether shipping amount should be calculated in revenue]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>ec/system_config_shipping</source_model>
+                            <sort_order>2</sort_order>
+                        </shipping>
+                	</fields>
+                </revenue>
+                <definitions>
+                 	<label>Custom Definitions</label>
+                    <sort_order>14</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>0</expanded>
+                	<fields>
+                		<dimensions translate="label">
+                            <label>Enable custom dimensions</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                        </dimensions>
+                		<dimension1 translate="label">
+                            <label><![CDATA[Dimension 1<br /><p class="note">Scope: Product</p>]]></label>
+                            <comment><![CDATA[Choose dimension value]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>ec/system_config_dimension</source_model>
+                            <sort_order>1</sort_order>
+                        </dimension1>
+                        <dimension2 translate="label">
+                            <label><![CDATA[Dimension 2<br /><p class="note">Scope: Product</p>]]></label>
+                            <comment><![CDATA[Choose dimension value]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>ec/system_config_dimension</source_model>
+                            <sort_order>2</sort_order>
+                        </dimension2>
+                        <dimension3 translate="label">
+                            <label><![CDATA[Dimension 3<br /><p class="note">Scope: Product</p>]]></label>
+                            <comment><![CDATA[Choose dimension value]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>ec/system_config_dimension</source_model>
+                            <sort_order>3</sort_order>
+                        </dimension3>
+                        <dimension4 translate="label">
+                            <label><![CDATA[Dimension 4<br /><p class="note">Scope: Product</p>]]></label>
+                            <comment><![CDATA[Choose dimension value]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>ec/system_config_dimension</source_model>
+                            <sort_order>4</sort_order>
+                        </dimension4>
+                        <dimension5 translate="label">
+                            <label><![CDATA[Dimension 5<br /><p class="note">Scope: Product</p>]]></label>
+                            <comment><![CDATA[Choose dimension value]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>ec/system_config_dimension</source_model>
+                            <sort_order>5</sort_order>
+                        </dimension5>
+                	</fields>
+                </definitions>
+                <facebook>
+                	<label>Facebook Product Audiences</label>
+                    <sort_order>15</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>0</expanded>
+                    <fields>
+                    	<enable translate="label">
+                            <label>Enable pixel tracking</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                        </enable>
+                        <addPixelId translate="label comment">
+							<label>Ad Account Pixel Id</label>
+							<comment>
+								<![CDATA[]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</addPixelId>
+                    </fields>
+                </facebook>
+                <api>
+                	<label>Google Tag Manager API</label>
+                    <sort_order>16</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>0</expanded>
+                    <fields>
+                        <google_auth>
+							<label></label>
+							<frontend_type>text</frontend_type>
+							<frontend_model>ec/system_google_auth</frontend_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</google_auth>
+						<google_gtm_account_id>
+							<label>Account ID</label>
+							<comment>
+								<![CDATA[Google Tag Manager Account ID ex.: 19671043.]]>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</google_gtm_account_id>
+						<google_gtm_container>
+							<label>Container ID</label>
+							<comment>
+								<model>ec/container</model>
+							</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</google_gtm_container>
+                    </fields>
+                </api>
+            </groups>
+        </ec>
+    </sections>
+</config>
