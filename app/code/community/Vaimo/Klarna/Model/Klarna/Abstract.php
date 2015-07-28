@@ -612,7 +612,7 @@ abstract class Vaimo_Klarna_Model_Klarna_Abstract extends Vaimo_Klarna_Model_Tra
     protected function _addDiscount($taxRate)
     {
         if ($this->getOrder()->getDiscountAmount() >= 0) {
-            return;
+            //return;
         }
         // Instead of calculating discount from order etc, we now simply use the amounts we are adding to goods list
         
