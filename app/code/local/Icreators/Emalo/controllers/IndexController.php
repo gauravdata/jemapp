@@ -52,7 +52,7 @@ public function pushOrderAction()
             $observer = new Icreators_Emalo_Model_Observer();
             $xml = $observer->generateXml($order);
 
-            echo $xml;
+            $this->getResponse()->setHeader('Content-typ', 'text/xml')->setBody($xml);
         }
         catch(Exception $e)
         {
