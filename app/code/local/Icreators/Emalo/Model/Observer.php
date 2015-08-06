@@ -53,6 +53,7 @@ class Icreators_Emalo_Model_Observer
 				<NATURALPERSON/>
 				<NAME1>".htmlspecialchars(substr($shippingAddress->getName(),0,50))."</NAME1>
 				<STREET>".htmlspecialchars($shippingAddress->getStreetFull())."</STREET>
+				<HOUSENUMBER>".htmlspecialchars($shippingAddress->getStreet2())."</HOUSENUMBER>
 				<POSTALCODE>".$shippingAddress->getPostcode()."</POSTALCODE>
 				<CITY>".htmlspecialchars($shippingAddress->getCity())."</CITY>
 				<COUNTRY>".$shippingAddress->getCountryId()."</COUNTRY>

@@ -32,6 +32,34 @@ public function pushOrderAction()
         }
     }
 
+    public function showOrderAction()
+    {
+        $incrementId = $this->getRequest()->getParam('order_id');
+
+        if (empty($incrementId)) {
+            Mage::throwException('Empty order in function ' . __FUNCTION__);
+        }
+
+        try
+        {
+            $order = new Mage_Sales_Model_Order();
+            $order->loadByIncrementId($incrementId);
+
+            if (!$order->getId()) {
+                Mage::throwException('Invalid order number');
+            }
+
+            $observer = new Icreators_Emalo_Model_Observer();
+            $xml = $observer->generateXml($order);
+
+            $this->getResponse()->setHeader('Content-typ', 'text/xml')->setBody($xml);
+        }
+        catch(Exception $e)
+        {
+            Mage::log('Exception manual push for event order ' . $e->getMessage(), null, 'emalo.log');
+        }
+    }
+
 	public function twmPushOrdersAction() {
 		echo '<pre>';
 		$orders = Mage::getModel('sales/order')->getCollection()
