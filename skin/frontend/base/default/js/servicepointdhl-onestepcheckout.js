@@ -137,7 +137,7 @@ function updateLongLatForField(field) {
         var postcode = jQuery('#billing\\:postcode').val();
         var houseNumber = jQuery('#billing\\:postcode_housenumber').val();
         if (postcode !=  '' &&  houseNumber  !=  '') {
-        geocodeAddress(field.value,{},function(location,item) {
+        geocodeAddress(postcode + ' ' + houseNumber,{},function(location,item) {
             if (location) {
                 form.longlat = location;
                 jQuery(form).find('[name=latitude]').val(location.lat());
