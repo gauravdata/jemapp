@@ -80,7 +80,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
             $postcode = $searchPostcode;
             $city = $searchCity;
 		} else {
-            $postcode = $quote->getShippingAddress()->getPostcode();
+            $postcode = $quote->getShippingAddress()->getPostcode() . ' ' . $quote->getShippingAddress()->getStreet1();
             $city = $quote->getShippingAddress()->getCity();
 		}
 

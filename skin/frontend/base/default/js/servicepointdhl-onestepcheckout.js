@@ -134,7 +134,7 @@ function searchServicepointDHL(button, formid, mapid, prefix, url, moretext, cal
 function updateLongLatForField(field) {
     var form = field.form;
     if (field.value != '') {
-        var postcode = jQuery('#billing\\:postcode').val();
+        var postcode = jQuery('#billing\\:postcode_input').val();
         var houseNumber = jQuery('#billing\\:postcode_housenumber').val();
         if (postcode !=  '' &&  houseNumber  !=  '') {
         geocodeAddress(postcode + ' ' + houseNumber,{},function(location,item) {
