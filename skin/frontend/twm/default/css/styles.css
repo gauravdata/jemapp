@@ -1273,6 +1273,12 @@ ul#payment_form_customercredit {
     margin-top: 5px;
 }
 
+.klarna-widget.klarna-part-payment {
+	display: none;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
 #payment_form_klarna_invoice li {
     margin-top: 15px;
 }
