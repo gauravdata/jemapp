@@ -41,7 +41,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
             return $result;
         }
 
-        $query = !empty($postcode) ? $postcode . ' 1' : $city;
+        $query = !empty($postcode) ? $postcode . ' ' . Mage::getModel('core/session')->getLookupHouseNumer() : $city;
 
         $uri = 'https://dhlforyounl-dhlforyounl-service-point-locator.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s=' . urlencode($query);
         Mage::log($uri);
