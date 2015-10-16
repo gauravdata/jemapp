@@ -148,3 +148,12 @@ header .top-links a span {
 aside #block-cart > img {
 	display: none;
 }
+
+/*= Billink date =*/
+#billink-birthdate-fields .customer-dob {
+	overflow: hidden;
+}
+#billink-birthdate-fields .customer-dob > div {
+	float: left;
+	margin-right: 10px;
+}
