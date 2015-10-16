@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Shopworks_Billink>
-            <version>1.0.10</version>
+            <version>1.0.11</version>
         </Shopworks_Billink>
     </modules>
     <global>
@@ -28,11 +28,6 @@
             <billink>
                 <class>Shopworks_Billink_Block</class>
             </billink>
-            <adminhtml>
-                <rewrite>
-                    <sales_order_totals_tax>Shopworks_Billink_Block_Fee_Order_Tax</sales_order_totals_tax>
-                </rewrite>
-            </adminhtml>
             <checkout>
                 <rewrite>
                     <agreements>Shopworks_Billink_Block_Rewrite_CheckoutAgreements</agreements>

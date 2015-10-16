@@ -15,8 +15,10 @@ $newFeeRangePath = 'payment/billink/fee_ranges';
 
 Mage::log('Starting upgrade to 1.0.2', null, $logName);
 
+$coreConfigTableName = $this->getTable('core_config_data');
+
 //Find all fields with the old config value
-$findFeeAmountConfigRowsQuery = 'SELECT * FROM core_config_data WHERE path = "'.$oldFeeAmountPath.'"';
+$findFeeAmountConfigRowsQuery = 'SELECT * FROM '.$coreConfigTableName.' WHERE path = "'.$oldFeeAmountPath.'"';
 $configRowsToSave = array();
 
 foreach ($connection->fetchAll($findFeeAmountConfigRowsQuery) as $row)
@@ -39,7 +41,7 @@ foreach ($connection->fetchAll($findFeeAmountConfigRowsQuery) as $row)
 foreach($configRowsToSave as $row)
 {
     $value = $connection->quote($row['value']);
-    $sql = 'UPDATE core_config_data SET path="'.$newFeeRangePath.'", value='.$value.' WHERE config_id = ' . $row['config_id'] . ';';
+    $sql = 'UPDATE '.$coreConfigTableName.' SET path="'.$newFeeRangePath.'", value='.$value.' WHERE config_id = ' . $row['config_id'] . ';';
     $connection->query($sql);
 }
 
