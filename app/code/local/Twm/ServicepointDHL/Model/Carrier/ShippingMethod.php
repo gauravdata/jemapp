@@ -13,6 +13,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
         }
 
         $uri = 'https://dhlforyounl-dhlforyounl-service-point-locator.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&spid=' . urlencode($code) . '&v=2';
+        Mage::log($uri);
         $client = new Zend_Http_Client($uri);
         $client->setHeaders(array(
             'X-Mashape-Key' => '2mkhycZJq1msh6dAfgbllXxrSr5Wp1rotFHjsnEknupB8oHZcD',
@@ -40,9 +41,10 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
             return $result;
         }
 
-        $query = !empty($postcode) ? $postcode : $city;
+        $query = !empty($postcode) ? $postcode . ' ' . Mage::getModel('core/session')->getLookupHouseNumer() : $city;
 
         $uri = 'https://dhlforyounl-dhlforyounl-service-point-locator.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s=' . urlencode($query);
+        Mage::log($uri);
         $client = new Zend_Http_Client($uri);
         $client->setHeaders(array(
             'X-Mashape-Key' => '2mkhycZJq1msh6dAfgbllXxrSr5Wp1rotFHjsnEknupB8oHZcD',
@@ -80,7 +82,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
             $postcode = $searchPostcode;
             $city = $searchCity;
 		} else {
-            $postcode = $quote->getShippingAddress()->getPostcode();
+            $postcode = $quote->getShippingAddress()->getPostcode(); // . ' ' . $quote->getShippingAddress()->getStreet1();
             $city = $quote->getShippingAddress()->getCity();
 		}
 

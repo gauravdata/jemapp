@@ -42,8 +42,13 @@
                 <connection>
 		    <host><![CDATA[127.0.0.1]]></host>
 		    <dbname><![CDATA[notomatoes_shop]]></dbname>
+<<<<<<< HEAD
 		    <username><![CDATA[notomatoes]]></username>
 		    <password><![CDATA[trAs3ubr]]></password>
+=======
+		    <username><![CDATA[root]]></username>
+		    <password><![CDATA[J0nes]]></password>
+>>>>>>> develop
                     <active>1</active>
                 </connection>
             </default_setup>

@@ -31,6 +31,11 @@
             <servicepointdhl>
                 <class>Twm_ServicepointDHL_Helper</class>
             </servicepointdhl>
+            <postcodenl_api>
+                <rewrite>
+                    <data>Twm_ServicepointDHL_Helper_Api_Data</data>
+                </rewrite>
+            </postcodenl_api>
         </helpers>
         <events>
             <checkout_controller_onepage_save_shipping_method>

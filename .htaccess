@@ -279,4 +279,6 @@ SetEnvIf Host jemappelle\.nl MAGE_RUN_CODE=jma_nl
 SetEnvIf Host jemappelle\.be MAGE_RUN_CODE=jma_nl
 SetEnvIf Host jemappelle\.de MAGE_RUN_CODE=jma_de
 
-#SetEnv MAGE_RUN_CODE jma_de
+<IfDefine DEV>
+SetEnv MAGE_RUN_CODE jma_nl
+</IfDefine>

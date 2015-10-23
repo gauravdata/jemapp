@@ -152,7 +152,10 @@ function searchServicepointDHL(button, formid, mapid, prefix, url, moretext, cal
 function updateLongLatForField(field) {
     var form = field.form;
     if (field.value != '') {
-        geocodeAddress(field.value,{},function(location,item) {
+        var postcode = jQuery('#billing\\:postcode').val();
+        var houseNumber = jQuery('#billing\\:postcode_housenumber').val();
+        if (postcode !=  '' &&  houseNumber  !=  '') {
+        geocodeAddress(postcode + ' ' + houseNumber ,{},function(location,item) {
             if (location) {
                 form.longlat = location;
                 jQuery(form).find('[name=latitude]').val(location.lat());
@@ -163,12 +166,16 @@ function updateLongLatForField(field) {
                 },100)
             }
         });
+        }
     }
 }
 
 jQuery(function() {
 
     jQuery('#billing\\:postcode').change(function() {
+        updateLongLatForField(this);
+    });
+    jQuery('#billing\\:postcode_housenumber').change(function() {
         updateLongLatForField(this);
     });
     updateLongLatForField(jQuery('#billing\\:postcode')[0]);
