@@ -30,7 +30,7 @@ class Twm_ServicepointDHL_Model_Observer extends Mage_Sales_Model_Quote_Address
                     ->setPostcode($dhlAddress['zip'])
                     ->setCity($dhlAddress['city'])
                     ->setCountryId($dhlAddress['country'])
-                    ->setTelephone('-')
+                    ->setTelephone('')
                     ->setCollectShippingRates(true);
                 $quote->collectTotals()->save();
             }
