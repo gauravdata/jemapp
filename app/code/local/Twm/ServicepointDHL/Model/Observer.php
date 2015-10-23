@@ -20,18 +20,21 @@ class Twm_ServicepointDHL_Model_Observer extends Mage_Sales_Model_Quote_Address
             $dhlAddress = $model->getDHLAddress($code);
             if ($dhlAddress) {
                 $quote = $evt->getQuote();
+	        $dhlAddress = $dhlAddress['data']['items'][0];
 
-//                $quote->getShippingAddress()
-//                    ->setPrefix($code)
-//                    ->setFirstname($quote->getBillingAddress()->getFirstname())
-//                    ->setLastname($quote->getBillingAddress()->getLastname())
-//                    ->setCompany($dhlAddress['name'])
-//                    ->setStreet($dhlAddress['add'])
-//                    ->setPostcode($dhlAddress['zip'])
-//                    ->setCity($dhlAddress['city'])
-//                    ->setCountryId($dhlAddress['country'])
-//                    ->setCollectShippingRates(true);
-//                $quote->collectTotals()->save();
+                $quote->getShippingAddress()
+                    ->setPrefix($code)
+                    ->setFirstname('Servicepoint')
+                    ->setLastname($dhlAddress['name'])
+                    //->setCompany($dhlAddress['name'])
+                    ->setStreet($dhlAddress['add'])
+                    ->setPostcode($dhlAddress['zip'])
+                    ->setCity($dhlAddress['city'])
+                    ->setCountryId($dhlAddress['country'])
+                    ->setTelephone('0900 222 21 20')
+                    ->setCollectShippingRates(true);
+
+                $quote->collectTotals()->save();
             }
         }
     }

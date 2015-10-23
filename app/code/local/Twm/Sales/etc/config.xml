@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_Sales>
+            <version>0.1.0</version>
+        </Twm_Sales>
+    </modules>
+    <global>
+        <models>
+            <!--<twm_sales>-->
+            <!--<class>Twm_Sales_Model</class>-->
+            <!--</twm_sales>-->
+            <sales>
+                <rewrite>
+                    <order>Twm_Sales_Model_Order</order>
+                </rewrite>
+            </sales>
+        </models>
+    </global>
+</config>
