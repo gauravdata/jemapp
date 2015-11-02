@@ -50,6 +50,10 @@
             <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/window.js</name></action>
             <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/onestepcheckout.js</name></action>
             <!--<action method="addCss"><stylesheet>onestepcheckout/onestepcheckout.css</stylesheet></action>-->
+	    <block type="core/text" name="google.cdn.jquery">
+                <action method="setText"><text><![CDATA[<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>]]></text></action>
+            </block>
+            <action method="addItem"><type>skin_js</type><name>js/servicepointdhl-onestepcheckout.js</name><params/></action>
         </reference>
         <reference name="content">
             <block type="onestepcheckout/checkout" name="onestepcheckout.checkout" template="onestepcheckout/checkout.phtml">
