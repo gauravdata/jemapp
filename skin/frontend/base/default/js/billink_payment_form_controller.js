@@ -113,7 +113,11 @@ billink.paymentFormController = new function()
      */
     self.updateFieldVisibilies = function()
     {
-        var isCompany = $('billink_checkout_type_company').checked;
+	if ($('billink_checkout_type_company')) {
+	        var isCompany = $('billink_checkout_type_company').checked;
+	} else {
+		isCompany = false;
+	}
         if (isCompany)
         {
             $('billink-chamberofcommerce-field').setStyle({display: 'block'});
@@ -122,9 +126,15 @@ billink.paymentFormController = new function()
         }
         else
         {
-            $('billink-chamberofcommerce-field').setStyle({display: 'none'});
-            $('billink-birthdate-fields').setStyle({display: 'block'});
-            $('billink-sex-radio').setStyle({display: 'block'});
+	    if ($('billink-chamberofcommerce-field')) {
+	            $('billink-chamberofcommerce-field').setStyle({display: 'none'});
+	    }
+	    if ($('billink-birthdate-fields')) {
+	            $('billink-birthdate-fields').setStyle({display: 'block'});
+	    }
+	    if ($('billink-sex-radio')) {
+	            $('billink-sex-radio').setStyle({display: 'block'});
+	    }
         }
     };
 

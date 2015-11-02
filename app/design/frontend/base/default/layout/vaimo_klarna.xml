@@ -30,9 +30,9 @@
         <reference name="head">
             <action method="addCss"><stylesheet>css/vaimo/klarna/global.css</stylesheet></action>
         </reference>
-        <reference name="right">
+        <!--<reference name="right">
             <block type="klarna/page_html_logo" name="klarna_promotion_logo" template="vaimo/klarna/page/html/logo.phtml"/>
-        </reference>
+        </reference>-->
     </default>
     <!--
     <cms_index_index>

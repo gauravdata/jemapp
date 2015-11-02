@@ -175,7 +175,7 @@ RegionUpdater.prototype = {
         this.disableAction = (typeof disableAction=='undefined') ? 'hide' : disableAction;
         this.zipOptions = (typeof zipOptions=='undefined') ? false : zipOptions;
 
-        if (this.regionSelectEl.options.length<=1) {
+        if (this.regionSelectEl && this.regionSelectEl.options.length<=1) {
             this.update();
         }
 
