@@ -5,6 +5,9 @@ jQuery(function() {
         productform.submit(function(e) {
             e.preventDefault();
 
+            if (typeof AEC !== 'undefined')
+                AEC.ajax(this, dataLayer);
+
             $('product_addtocart_form').stopObserving('submit');
 
             var qtyInc = jQuery('input[name=qty_increments]').val();
