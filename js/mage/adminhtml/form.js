@@ -198,7 +198,7 @@ RegionUpdater.prototype = {
         this.disableAction = (typeof disableAction=='undefined') ? 'hide' : disableAction;
         this.clearRegionValueOnDisable = (typeof clearRegionValueOnDisable == 'undefined') ? false : clearRegionValueOnDisable;
 
-        if (this.regionSelectEl.options.length<=1) {
+        if (this.regionSelectEl && this.regionSelectEl.options.length<=1) {
             this.update();
         }
         else {
