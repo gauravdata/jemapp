@@ -37,34 +37,33 @@ class Twm_CustomRewrite_Model_Ec_Observer extends Anowave_Ec_Model_Observer
 
         foreach ($dom->getElementsByTagName('button') as $button)
         {
-            if (!$button->hasAttribute('no-gtm'))
-            {
-                /**
-                 * Reference existing click event(s)
-                 */
-                $click = $button->getAttribute('onclick');
+            /**
+             * Reference existing click event(s)
+             */
+            $click = $button->getAttribute('onclick');
 
+            if (!$button->hasAttribute('no-gtm'))
                 $button->setAttribute('onclick', 'AEC.ajax(this,dataLayer)');
-                $button->setAttribute('data-id', $block->getProduct()->getSku());
-                $button->setAttribute('data-name', Mage::helper('core')->jsQuoteEscape($block->getProduct()->getName()));
-                $button->setAttribute('data-price', $block->getProduct()->getFinalPrice());
-                $button->setAttribute('data-category', Mage::helper('core')->jsQuoteEscape($category->getName()));
-                $button->setAttribute('data-brand', $block->getProduct()->getAttributeText('manufacturer'));
-                $button->setAttribute('data-variant', Mage::helper('core')->jsQuoteEscape($block->getProduct()->getResource()->getAttribute('color')->getFrontend()->getValue($block->getProduct())));
+
+            $button->setAttribute('data-id', $block->getProduct()->getSku());
+            $button->setAttribute('data-name', Mage::helper('core')->jsQuoteEscape($block->getProduct()->getName()));
+            $button->setAttribute('data-price', $block->getProduct()->getFinalPrice());
+            $button->setAttribute('data-category', Mage::helper('core')->jsQuoteEscape($category->getName()));
+            $button->setAttribute('data-brand', $block->getProduct()->getAttributeText('manufacturer'));
+            $button->setAttribute('data-variant', Mage::helper('core')->jsQuoteEscape($block->getProduct()->getResource()->getAttribute('color')->getFrontend()->getValue($block->getProduct())));
+
+            if (!$button->hasAttribute('no-gtm'))
                 $button->setAttribute('data-click', $click);
 
-                if ('grouped' == $block->getProduct()->getTypeId())
-                {
-                    $button->setAttribute('data-grouped', 1);
-                }
-
-                if ('configurable' == $block->getProduct()->getTypeId())
-                {
-                    $button->setAttribute('data-configurable', 1);
-                }
+            if ('grouped' == $block->getProduct()->getTypeId())
+            {
+                $button->setAttribute('data-grouped', 1);
             }
-            else
-                $button->removeAttribute('no-gtm');
+
+            if ('configurable' == $block->getProduct()->getTypeId())
+            {
+                $button->setAttribute('data-configurable', 1);
+            }
         }
 
         return $this->getDOMContent($dom, $doc);
