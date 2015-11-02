@@ -5,9 +5,6 @@ jQuery(function() {
         productform.submit(function(e) {
             e.preventDefault();
 
-            if (typeof AEC !== 'undefined')
-                AEC.ajax(this, dataLayer);
-
             $('product_addtocart_form').stopObserving('submit');
 
             var qtyInc = jQuery('input[name=qty_increments]').val();
@@ -69,7 +66,10 @@ jQuery(function() {
                 return false;
             }
             else {
-                this.submit();
+                if (typeof AEC !== 'undefined')
+                    AEC.ajax(this, dataLayer);
+                else
+                    this.submit();
             }
             return true;
         });
