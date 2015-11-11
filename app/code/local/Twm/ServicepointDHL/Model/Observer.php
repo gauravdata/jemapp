@@ -24,7 +24,7 @@ class Twm_ServicepointDHL_Model_Observer extends Mage_Sales_Model_Quote_Address
 
                 $quote->getShippingAddress()
                     ->setPrefix($code)
-                    ->setFirstname('Servicepoint')
+                    ->setFirstname('DHL servicepoint')
                     ->setLastname($dhlAddress['name'])
                     //->setCompany($dhlAddress['name'])
                     ->setStreet($dhlAddress['add'])
