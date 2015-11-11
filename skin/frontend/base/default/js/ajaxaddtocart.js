@@ -66,7 +66,10 @@ jQuery(function() {
                 return false;
             }
             else {
-                this.submit();
+                if (typeof AEC !== 'undefined')
+                    AEC.ajax(this, dataLayer);
+                else
+                    this.submit();
             }
             return true;
         });

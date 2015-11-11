@@ -149,6 +149,12 @@ aside #block-cart > img {
 	display: none;
 }
 
+/*
+p.old-price {
+    display: none;
+}
+*/
+
 /*= Billink date =*/
 #billink-birthdate-fields .customer-dob {
 	overflow: hidden;

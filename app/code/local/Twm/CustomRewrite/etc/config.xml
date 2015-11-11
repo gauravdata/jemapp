@@ -14,6 +14,11 @@
             <twm_customrewrite_resource>
                 <class>Twm_CustomRewrite_Model_Resource</class>
             </twm_customrewrite_resource>
+            <ec>
+                <rewrite>
+                    <observer>Twm_CustomRewrite_Model_Ec_Observer</observer>
+                </rewrite>
+            </ec>
         </models>
         <blocks>
             <twm_customrewrite>
@@ -26,4 +31,15 @@
             </twm_customrewrite>
         </helpers>
     </global>
+    <frontend>
+        <routers>
+            <customer>
+                <args>
+                    <modules>
+                        <twm_customrewrite before="Mage_Customer">Twm_CustomRewrite</twm_customrewrite>
+                    </modules>
+                </args>
+            </customer>
+        </routers>
+    </frontend>
 </config>

@@ -29,7 +29,7 @@
                 <div id="servicepointdhl_maps"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" title="Zoeken" name="searchdhl" id="searchdhl" onclick="searchServicepointDHL(this, 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?=Mage::getUrl('servicepointdhl/index/index')?>')">Zoeken</button>
+                <button type="button" class="btn btn-primary" title="Zoeken" name="searchdhl" id="searchdhl" onclick="searchServicepointDHL(this, 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?php echo Mage::getUrl('servicepointdhl/index/index', array('_secure'=>true))?>')">Zoeken</button>
             </div>
         </div>
     </div>
@@ -44,6 +44,13 @@
     jQuery('.shippingmethod label a[data-toggle="popover"]').popover();
 
     jQuery('#servicepointdhl_postcode,#servicepointdhl_city').change(function(){
-        searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?=Mage::getUrl('servicepointdhl/index/index')?>');
+        searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?php echo Mage::getUrl('servicepointdhl/index/index', array('_secure'=>true))?>');
+    });
+    searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?php echo Mage::getUrl('servicepointdhl/index/index', array('_secure'=>true))?>');
+
+    jQuery('#billing\\:postcode,#billing\\:postcode_housenumber').change(function(){
+        var url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>';
+        var update_payments = 'true';
+        get_separate_save_methods_function(url, update_payments);
     });
 </script>
