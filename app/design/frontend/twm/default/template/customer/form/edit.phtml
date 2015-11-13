@@ -54,14 +54,10 @@
     <fieldset id="change-password" style="display:none;">
         <legend><?php echo $this->__('Change Password') ?></legend>
         <div class="form-list">
-            <div class="form-group">
-                <label for="current_password" class="required"><em>*</em><?php echo $this->__('Current Password') ?></label>
-				<!-- This is a dummy hidden field to trick firefox from auto filling the password -->
-				<input type="text" class="input-text hidden" name="dummy" id="dummy" />
-				<input type="password" title="<?php echo $this->__('Current Password') ?>" class="form-control" name="current_password" id="current_password" />
-            </div>
 			<div class="form-group">
 				<label for="password" class="required"><em>*</em><?php echo $this->__('New Password') ?></label>
+                <!-- This is a dummy hidden field to trick firefox from auto filling the password -->
+                <input type="text" class="input-text hidden" name="dummy" id="dummy" />
 				<input type="password" title="<?php echo $this->__('New Password') ?>" class="form-control validate-password" name="password" id="password" />
 			</div>
 			<div class="form-group">
@@ -80,13 +76,11 @@
     function setPasswordForm(arg){
         if(arg){
             $('change-password').show();
-            $('current_password').addClassName('required-entry');
             $('password').addClassName('required-entry');
             $('confirmation').addClassName('required-entry');
 
         }else{
             $('change-password').hide();
-            $('current_password').removeClassName('required-entry');
             $('password').removeClassName('required-entry');
             $('confirmation').removeClassName('required-entry');
         }
