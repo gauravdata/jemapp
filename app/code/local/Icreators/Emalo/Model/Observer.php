@@ -149,10 +149,10 @@ class Icreators_Emalo_Model_Observer
 		$status = $order->getStatus();
 		$state = $order->getState();
 
-		// Mage::log("Order #{$incrementId} saved (state: {$state})", Zend_Log::DEBUG, 'debug.log');
+		Mage::log("Order #{$incrementId} saved (state: {$state})", Zend_Log::DEBUG, 'debug.log');
 		if ($state == Mage_Sales_Model_Order::STATE_PROCESSING)
 		{
-			// Mage::log("Order #{$incrementId} saved (status: {$status})", Zend_Log::DEBUG, 'debug.log');
+			Mage::log("Order #{$incrementId} saved (status: {$status})", Zend_Log::DEBUG, 'debug.log');
 			if ($order->hasInvoices())
 			{
 				$invoicesPaid = true;
@@ -161,13 +161,13 @@ class Icreators_Emalo_Model_Observer
 					if ((int)$invoice->getState() !== Mage_Sales_Model_Order_Invoice::STATE_PAID)
 					{
 						// $invoiceId = $invoice->getId();
-						// Mage::log("Invoice #{$invoiceId} not paid", Zend_Log::DEBUG, 'debug.log');
+						Mage::log("Invoice #{$invoiceId} not paid", Zend_Log::DEBUG, 'debug.log');
 						$invoicesPaid = false;
 					}
 				}
 				if ($invoicesPaid)
 				{
-					// Mage::log("Order #{$incrementId} saved and invoices paid (status: {$status})", Zend_Log::DEBUG, 'debug.log');
+					Mage::log("Order #{$incrementId} saved and invoices paid (status: {$status})", Zend_Log::DEBUG, 'debug.log');
 					$xml = $this->generateXml($order);
 
 					try
@@ -192,6 +192,7 @@ class Icreators_Emalo_Model_Observer
 					}
 					catch(Exception $e)
 					{
+						Mage::log("Order #{$incrementId} pushed with result: " . $result, Zend_Log::DEBUG, 'emalo.log');
 						echo $e->getMessage();
 					}
 				}

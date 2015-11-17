@@ -5,7 +5,9 @@
  * Date: 10-11-15
  * Time: 11:27
  */
-class Twm_CustomRewrite_AccountController extends Mage_Core_Controller_Front_Action
+require_once 'Mage/Customer/controllers/AccountController.php';
+
+class Twm_CustomRewrite_AccountController extends Mage_Customer_AccountController
 {
     /**
      * Rewrite so users can change password without providing their current password
