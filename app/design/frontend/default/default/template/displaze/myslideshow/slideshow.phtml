@@ -1,0 +1,62 @@
+<?php
+/*
+ * Slideshow.php
+ * 
+ * Copyright (c) 2012 Aftab Naveed <aftabnaveed@gmail.com>. 
+ * 
+ * This file is part of Displaze Web Services Inc..
+ * 
+ * Displaze Web Services Inc. is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Displaze Web Services Inc. is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Displaze Web Services Inc..  If not, see <http ://www.gnu.org/licenses/>.
+ */
+
+$_slideshow = $this->getSlideshow();
+?>
+<div id="myslideshow" class="protoshow">
+    <ul class="show">
+        <?php foreach ($_slideshow as $_slide): ?>
+            <li class="slide" data-slide-interval="">
+                <?php if($_slide->getUrl() <> ''): ?>
+                <a href="<?php echo $_slide->getUrl() ?>" alt="<?php $_slide->getTitle(); ?>" />
+                <?php else: ?>
+                <a href="#" alt="<?php echo $_slide->getTitle(); ?>" />
+                <?php endif; ?>
+                <img src="<?php echo Mage::helper('myslideshow')->getSlideshowUrl() . $_slide->getImage() ?>" alt="<?php echo $_slide->getTitle() ?>" />
+                </a>
+            </li>
+            <?php endforeach; ?>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    
+    
+    Event.observe(window, "load", function() {
+	
+        $('myslideshow') && $('myslideshow').protoShow({
+            interval        :       2000,
+            captions        :       true,
+            transitionType  :       'fade',
+            autoPlay        :       true,
+            stopText        :       'Pause',
+            playText        :       'Play',
+            nextText        :       'Next',
+            previousText    :       'Previous',
+            keyboardControls:       false
+            /*controls        :       true*/
+        });
+
+	
+	
+    });
+</script>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+config.xml
+
+Copyright (c) 2012 Aftab Naveed <aftabnaveed@gmail.com>. 
+
+This file is part of Displaze Web Services Inc..
+
+Displaze Web Services Inc. is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Displaze Web Services Inc. is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Displaze Web Services Inc..  If not, see <http ://www.gnu.org/licenses/>.
+-->
+
+
+<config>
+    <modules>
+        <Displaze_MySlideshow>
+            <version>1.7.1</version>
+        </Displaze_MySlideshow>
+    </modules>
+    
+    
+    <global>
+        
+        <helpers>
+            <myslideshow>
+                <class>Displaze_MySlideshow_Helper</class>
+            </myslideshow>
+        </helpers>
+        
+        <!-- Global Blocks definition -->
+        <blocks>
+            <myslideshow>
+                <class>Displaze_MySlideshow_Block</class>
+            </myslideshow>
+        </blocks>
+        
+        <!--Global Models Definition -->
+        <models>
+            <myslideshow>
+                <class>Displaze_MySlideshow_Model</class>
+                <resourceModel>myslideshow_resource</resourceModel>
+            </myslideshow>
+            <myslideshow_resource>
+                <class>Displaze_MySlideshow_Model_Resource</class>
+                <entities>
+                    <slideshow>
+                        <table>displaze_my_slideshow</table>
+                    </slideshow>
+                </entities>
+            </myslideshow_resource>
+        </models>
+        
+        <resources>
+            <myslideshow_setup>
+                <setup>
+                    <module>Displaze_MySlideshow</module>
+                </setup>
+            </myslideshow_setup>
+        </resources>
+        
+    </global>
+    
+    <!--Admin Configuration -->
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Displaze_MySlideshow before="Mage_Adminhtml">Displaze_MySlideshow_Adminhtml</Displaze_MySlideshow>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+        <layout>
+            <updates>
+                <myslideshow>
+                    <file>displaze/myslideshow.xml</file>
+                </myslideshow>
+            </updates>
+        </layout>
+    </adminhtml>
+    
+    <frontend>
+        <layout>
+            <updates>
+                <myslideshow>
+                    <file>displaze/myslideshow.xml</file>
+                </myslideshow>
+            </updates>
+        </layout>
+    </frontend>
+</config>
