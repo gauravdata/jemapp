@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+myslideshow.xml
+
+Copyright (c) 2012 Aftab Naveed <aftabnaveed@gmail.com>. 
+
+This file is part of Displaze Web Services Inc..
+
+Displaze Web Services Inc. is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Displaze Web Services Inc. is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Displaze Web Services Inc..  If not, see <http ://www.gnu.org/licenses/>.
+-->
+
+
+<layout version="1.0">
+    
+    <adminhtml_slideshow_index>
+        <reference name="content">
+            <block type="myslideshow/adminhtml_slideshow" name="slideshow.grid" />
+        </reference>
+    </adminhtml_slideshow_index>
+    
+    <!--Edit Area -->
+     <adminhtml_slideshow_edit>
+        
+        <reference name="content">
+            <block type="myslideshow/adminhtml_slideshow_edit" name="displaze.slideshow.edit"></block>
+        </reference>
+        
+        <reference name="left">
+            <block type="myslideshow/adminhtml_slideshow_edit_tabs" name="myslideshow_slideshow_edit_tabs">
+                <block type="myslideshow/adminhtml_slideshow_edit_tab_main" name="myslideshow_slideshow_edit_tab_main" />
+                <action method="addTab"><name>main_section</name><block>myslideshow_slideshow_edit_tab_main</block></action>
+            </block>
+        </reference>
+        
+    </adminhtml_slideshow_edit>
+    
+</layout>
+    

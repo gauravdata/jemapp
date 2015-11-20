@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+mybrand.xml
+
+Copyright (c) 2012 Aftab Naveed <aftabnaveed@gmail.com>. 
+
+This file is part of Displaze Web Services Inc..
+
+Displaze Web Services Inc. is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Displaze Web Services Inc. is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Displaze Web Services Inc..  If not, see <http ://www.gnu.org/licenses/>.
+-->
+
+
+<layout version="1.0">
+    
+    <adminhtml_manufacturer_index>
+        <reference name="content">
+            <block type="mybrand/adminhtml_manufacturer" name="manufacturer.grid" />
+        </reference>
+    </adminhtml_manufacturer_index>
+    
+    <!--Edit Area -->
+     <adminhtml_manufacturer_edit>
+        
+        <reference name="content">
+            <block type="mybrand/adminhtml_manufacturer_edit" name="displaze.manufacturer.edit"></block>
+        </reference>
+        
+        <reference name="left">
+            <block type="mybrand/adminhtml_manufacturer_edit_tabs" name="mybrand_manufacturer_edit_tabs">
+                <block type="mybrand/adminhtml_manufacturer_edit_tab_general" name="mybrand_manufacturer_edit_tab_general" />
+                <block type="mybrand/adminhtml_manufacturer_edit_tab_meta" name="mybrand_manufacturer_edit_tab_meta" />
+                
+                <block type="mybrand/adminhtml_manufacturer_edit_tab_product" name="mybrand_manufacturer_edit_tab_product" />
+                    
+
+
+                <action method="addTab"><name>general_section</name><block>mybrand_manufacturer_edit_tab_general</block></action>
+                <action method="addTab"><name>meta_section</name><block>mybrand_manufacturer_edit_tab_meta</block></action>
+                <action method="addTab"><name>product_section</name><block>mybrand_manufacturer_edit_tab_product</block></action>
+            </block>
+        </reference>
+        
+    </adminhtml_manufacturer_edit>
+    
+</layout>
