@@ -1515,19 +1515,25 @@ footer #newsletter-validate-detail .input-group-addon {
 /*======================================================
 	RESPONSIVE
 ======================================================*/
+
+/*= Small screen =*/
 @media(max-width: 1200px) {
 	.cms-index-index .carousel-wide .carousel-inner .item {
 		height: 625px;
 	}
 }
-@media(max-width: 992px) {
-    .modal.wide .modal-dialog {
-        width: 90%;
-    }
+
+/*= Tablet landscape =*/
+@media(max-width: 1024px) {
+	.modal.wide .modal-dialog {
+		width: 90%;
+	}
 	.cms-index-index .carousel-wide .carousel-inner .item {
 		height: 515px;
 	}
 }
+
+/*= Tablet portrait =*/
 @media(max-width: 769px) {
     /*= Header =*/
     header .row > .pull-left,
