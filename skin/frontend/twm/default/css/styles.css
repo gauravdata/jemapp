@@ -229,7 +229,7 @@ textarea {
 	margin: 0;
 	height: 1000px;
 	background-position: 50%;
-	background-size: cover;
+	background-size: 100% auto;
 	background-repeat: no-repeat;
 }
 .cms-index-index .carousel-wide .carousel-inner .item a {
