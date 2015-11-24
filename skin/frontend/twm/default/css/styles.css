@@ -1602,6 +1602,31 @@ footer #newsletter-validate-detail .input-group-addon {
 	}
 }
 
+/*= iphone 6 landscape =*/
+@media(max-width: 667px) {
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 348px;
+	}
+}
+/*= iphone 5 landscape =*/
+@media(max-width: 568px) {
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 296px;
+	}
+}
+/*= iphone 6 portrait =*/
+@media(max-width: 320px) {
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 167px;
+	}
+}
+/*= iphone 5 portrait =*/
+@media(max-width: 375px) {
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 196px;
+	}
+}
+
 .klarna_dob input[type="text"] {
 	display: inline-block;
 }
