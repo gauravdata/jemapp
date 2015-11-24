@@ -28,13 +28,6 @@ $_slideshow = $this->getSlideshow();
 </div>
 
 <div id="carousel-example-generic" class="carousel carousel-wide slide" data-ride="carousel">
-	<!-- Indicators -->
-	<?php $i = 0; ?>
-	<ol class="carousel-indicators">
-		<?php foreach ($_slideshow as $_slide): ?>
-		<li data-target="#carousel-example-generic" data-slide-to="<?php echo $i; ?>"<?php if($i == 0) { echo ' class="active"'; } ?>></li>
-		<?php $i++; endforeach; ?>
-	</ol>
 
 	<!-- Wrapper for slides -->
 	<?php $i = 0; ?>
@@ -46,6 +39,15 @@ $_slideshow = $this->getSlideshow();
 		<?php $i++; endforeach; ?>
 	</div>
 
+	<?php if ($i > 1): ?>
+	<!-- Indicators -->
+	<?php $i = 0; ?>
+	<ol class="carousel-indicators">
+		<?php foreach ($_slideshow as $_slide): ?>
+		<li data-target="#carousel-example-generic" data-slide-to="<?php echo $i; ?>"<?php if($i == 0) { echo ' class="active"'; } ?>></li>
+		<?php $i++; endforeach; ?>
+	</ol>
+
 	<!-- Controls -->
 	<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
 		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -55,6 +57,8 @@ $_slideshow = $this->getSlideshow();
 		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 		<span class="sr-only">Next</span>
 	</a>
+	<?php endif; ?>
+
 </div>
 
 <div class="container" id="home-container">
