@@ -1620,16 +1620,16 @@ footer #newsletter-validate-detail .input-group-addon {
 		height: 296px;
 	}
 }
-/*= iphone 6 portrait =*/
-@media(max-width: 320px) {
-	.cms-index-index .carousel-wide .carousel-inner .item {
-		height: 167px;
-	}
-}
 /*= iphone 5 portrait =*/
 @media(max-width: 375px) {
 	.cms-index-index .carousel-wide .carousel-inner .item {
 		height: 196px;
+	}
+}
+/*= iphone 6 portrait =*/
+@media(max-width: 320px) {
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 167px;
 	}
 }
 
