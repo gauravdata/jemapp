@@ -27,7 +27,7 @@ class Twm_CustomRewrite_AccountController extends Mage_Customer_AccountControlle
             $customer = $this->_getSession()->getCustomer();
 
             /** @var $customerForm Mage_Customer_Model_Form */
-            $customerForm = $this->_getModel('customer/form');
+            $customerForm = Mage::getModel('customer/form');
             $customerForm->setFormCode('customer_account_edit')
                 ->setEntity($customer);
 
