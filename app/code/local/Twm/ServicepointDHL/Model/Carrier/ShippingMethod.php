@@ -31,38 +31,16 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
         return false;
     }
 
-    public function getDHLAddresses($postcode = '', $city = '') {
-
-        $key = strtolower($this->_code . $postcode . $city);
+    public function getDHLAddresses($query) {
+        $key = strtolower($this->_code . $query);
         $cached = Mage::app()->getCache();
-//        if (($result = $cached->load($key)) !== false) {
-//            $result = Zend_Json::decode($result);
-//            $result = array_slice($result['data']['items'], 0, 3);
-//            return $result;
-//        }
-
-        $query = !empty($postcode) ? $postcode . ' ' . Mage::getModel('core/session')->getLookupHouseNumer() . ' ' : '';
-        $query .= !empty($city) ? $city : '';
-
-        $uri = 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($query).'&sensor=false&key=AIzaSyAZZuJhjYqV--2Sswdvvi5zAYriV8kI1Xg';
-        Mage::log($uri);
-        $client = new Zend_Http_Client($uri);
-        $response = $client->request();
-        if (!$response->isSuccessful()) {
-            return array();
+        if (($result = $cached->load($key)) !== false) {
+            $result = Zend_Json::decode($result);
+            $result = array_slice($result['data']['items'], 0, 3);
+            return $result;
         }
 
-        $result = Zend_Json::decode($response->getBody());
-
-        if ($result['status'] == 'OK' && count($result['results']) > 0) {
-            $lat = $result['results'][0]['geometry']['location']['lat'];
-            $lng = $result['results'][0]['geometry']['location']['lng'];
-
-            $uri = 'https://dhlforyounl-dhlforyou-service-point-locator-benelux-v1.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s=geo&lat='.$lat.'&lng='.$lng;
-        } else {
-            $uri = 'https://dhlforyounl-dhlforyou-service-point-locator-benelux-v1.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s='.urlencode($query);
-        }
-
+        $uri = 'https://dhlforyounl-dhlforyou-service-point-locator-benelux-v1.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s='.urlencode($query);
         Mage::log($uri);
         $client = new Zend_Http_Client($uri);
         $client->setHeaders(array(
@@ -92,17 +70,14 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
 
         $request = Mage::app()->getRequest();
 
-		$searchPostcode = $request->getParam('servicepointdhl_postcode');
         $searchCity = $request->getParam('servicepointdhl_city');
 		
         $quote = Mage::getSingleton('checkout/session')->getQuote();
 
-		if ($searchPostcode || $searchCity) {
-            $postcode = $searchPostcode;
-            $city = $searchCity;
+		if ($searchCity) {
+            $query = '*' . $searchCity;
 		} else {
-            $postcode = $quote->getShippingAddress()->getPostcode(); // . ' ' . $quote->getShippingAddress()->getStreet1();
-            $city = $quote->getShippingAddress()->getCity();
+            $query = $quote->getShippingAddress()->getPostcode() . ' ' . $quote->getShippingAddress()->getStreet2();
 		}
 
         $result = Mage::getModel('servicepointdhl/rate_result');
@@ -110,7 +85,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
         $price = Mage::getStoreConfig("carriers/{$this->_code}/price");
         $carrierTitle = Mage::getStoreConfig("carriers/{$this->_code}/title");
 
-        foreach ($this->getDHLAddresses($postcode, $city) as $carrier) {
+        foreach ($this->getDHLAddresses($query) as $carrier) {
             $method = Mage::getModel('shipping/rate_result_method');
 
             $_address = '<br/>';
