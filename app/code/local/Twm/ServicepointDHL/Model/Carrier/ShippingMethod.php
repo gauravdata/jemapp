@@ -35,15 +35,34 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
 
         $key = strtolower($this->_code . $postcode . $city);
         $cached = Mage::app()->getCache();
-        if (($result = $cached->load($key)) !== false) {
-            $result = Zend_Json::decode($result);
-            $result = array_slice($result['data']['items'], 0, 3);
-            return $result;
+//        if (($result = $cached->load($key)) !== false) {
+//            $result = Zend_Json::decode($result);
+//            $result = array_slice($result['data']['items'], 0, 3);
+//            return $result;
+//        }
+
+        $query = !empty($postcode) ? $postcode . ' ' . Mage::getModel('core/session')->getLookupHouseNumer() . ' ' : '';
+        $query .= !empty($city) ? $city : '';
+
+        $uri = 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($query).'&sensor=false&key=AIzaSyAZZuJhjYqV--2Sswdvvi5zAYriV8kI1Xg';
+        Mage::log($uri);
+        $client = new Zend_Http_Client($uri);
+        $response = $client->request();
+        if (!$response->isSuccessful()) {
+            return array();
         }
 
-        $query = !empty($postcode) ? $postcode . ' ' . Mage::getModel('core/session')->getLookupHouseNumer() : $city;
+        $result = Zend_Json::decode($response->getBody());
 
-        $uri = 'https://dhlforyounl-dhlforyounl-service-point-locator.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s=' . urlencode($query);
+        if ($result['status'] == 'OK' && count($result['results']) > 0) {
+            $lat = $result['results'][0]['geometry']['location']['lat'];
+            $lng = $result['results'][0]['geometry']['location']['lng'];
+
+            $uri = 'https://dhlforyounl-dhlforyou-service-point-locator-benelux-v1.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s=geo&lat='.$lat.'&lng='.$lng;
+        } else {
+            $uri = 'https://dhlforyounl-dhlforyou-service-point-locator-benelux-v1.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s='.urlencode($query);
+        }
+
         Mage::log($uri);
         $client = new Zend_Http_Client($uri);
         $client->setHeaders(array(
@@ -55,9 +74,9 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
         if ($response->isSuccessful()) {
             $result = Zend_Json::decode($response->getBody());
 
-	    if (isset($result['status_msg'])) {
-		//Mage::getSingleton('core/session')->addNotice($result['status_msg']);	
-	    }
+            if (isset($result['status_msg'])) {
+            //Mage::getSingleton('core/session')->addNotice($result['status_msg']);
+            }
             $cached->save($response->getBody(), $key, array("dhl"), 30 * 24 * 3600);
             $result = array_slice($result['data']['items'], 0, 3);
             return $result;
