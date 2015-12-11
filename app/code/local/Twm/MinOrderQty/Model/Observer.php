@@ -12,6 +12,7 @@ class Twm_MinOrderQty_Model_Observer {
 		return Mage::getSingleton('checkout/cart');
 	}
 
+
 	public function checkMinOrderQty($observer) {
 		$event = $observer->getEvent();
 		$controller = $event->getControllerAction();
