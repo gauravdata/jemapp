@@ -13,7 +13,7 @@ class Twm_CustomRewrite_AjaxController extends Idev_OneStepCheckout_AjaxControll
     public function check_emailAction()
     {
         $validator = new Zend_Validate_EmailAddress();
-        $validator->setOptions(array('domain' => false));
+        //$validator->setOptions(array('domain' => false));
 
         $email = $this->getRequest()->getPost('email', false);
 
