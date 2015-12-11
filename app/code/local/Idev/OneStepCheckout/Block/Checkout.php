@@ -421,9 +421,28 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
         $billingAddressId = $this->getRequest()->getPost('billing_address_id');
         $customerAddressId = (!empty($billingAddressId)) ? $billingAddressId : false ;
 
+        $shippingAddressId = $this->getRequest()->getPost('shipping_address_id', false);
+
+
         if($this->_isLoggedIn()){
             $this->getQuote()->getBillingAddress()->setSaveInAddressBook(empty($billing_data['save_in_address_book']) ? 0 : 1);
             $this->getQuote()->getShippingAddress()->setSaveInAddressBook(empty($shipping_data['save_in_address_book']) ? 0 : 1);
+        }
+
+        if($this->differentShippingAvailable()) {
+            if(!isset($billing_data['use_for_shipping']) || $billing_data['use_for_shipping'] != '1')   {
+                //$shipping_result = $this->getOnepage()->saveShipping($shipping_data, $shippingAddressId);
+                $shipping_result = Mage::helper('onestepcheckout/checkout')->saveShipping($shipping_data, $shippingAddressId);
+
+                if(isset($shipping_result['error']))    {
+                    $this->formErrors['shipping_error'] = true;
+                    $this->formErrors['shipping_errors'] = $checkoutHelper->_getAddressError($shipping_result, $shipping_data, 'shipping');
+                }
+            }
+            else    {
+                //$shipping_result = $this->getOnepage()->saveShipping($billing_data, $shippingAddressId);
+                $shipping_result = Mage::helper('onestepcheckout/checkout')->saveShipping($billing_data, $customerAddressId);
+            }
         }
 
         $result = $this->getOnepage()->saveBilling($billing_data, $customerAddressId);
@@ -600,32 +619,13 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
             }
         }
 
-        $shippingAddressId = $this->getRequest()->getPost('shipping_address_id', false);
-
-        if($this->differentShippingAvailable()) {
-            if(!isset($billing_data['use_for_shipping']) || $billing_data['use_for_shipping'] != '1')   {
-                //$shipping_result = $this->getOnepage()->saveShipping($shipping_data, $shippingAddressId);
-                $shipping_result = Mage::helper('onestepcheckout/checkout')->saveShipping($shipping_data, $shippingAddressId);
-
-                if(isset($shipping_result['error']))    {
-                    $this->formErrors['shipping_error'] = true;
-                    $this->formErrors['shipping_errors'] = $checkoutHelper->_getAddressError($shipping_result, $shipping_data, 'shipping');
-                }
-            }
-            else    {
-                //$shipping_result = $this->getOnepage()->saveShipping($billing_data, $shippingAddressId);
-                $shipping_result = Mage::helper('onestepcheckout/checkout')->saveShipping($billing_data, $customerAddressId);
-            }
-        }
-
-
         // Save shipping method
         $shipping_method = $this->getRequest()->getPost('shipping_method', '');
 
         if(!$this->isVirtual()){
             //additional checks if the rate is indeed available for chosen shippin address
             $availableRates = $this->getAvailableRates($this->getOnepage()->getQuote()->getShippingAddress()->getGroupedAllShippingRates());
-            if(empty($shipping_method) || !in_array($shipping_method,$availableRates['codes'])){
+            if(empty($shipping_method) || (!empty($availableRates['codes']) && !in_array($shipping_method,$availableRates['codes']))){
                 $this->formErrors['shipping_method'] = true;
             } else if (!$this->getOnepage()->getQuote()->getShippingAddress()->getShippingDescription()) {
                 if(!empty($availableRates['rates'][$shipping_method])){

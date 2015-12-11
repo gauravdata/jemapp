@@ -9,10 +9,7 @@ class Twm_ServicepointDHL_IndexController extends Mage_Core_Controller_Front_Act
 
         $request = $this->getRequest();
 
-        $carriers = $model->getDHLAddresses(
-            $request->getParam('servicepointdhl_postcode'),
-            $request->getParam('servicepointdhl_city')
-        );
+        $carriers = $model->getDHLAddresses('*' . $request->getParam('servicepointdhl_city'));
 
         $result = array();
         foreach ($carriers as $carrier) {
