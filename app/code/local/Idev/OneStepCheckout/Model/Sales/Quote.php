@@ -1,5 +1,5 @@
 <?php
-class  Idev_OneStepCheckout_Model_Sales_Quote extends Mage_Sales_Model_Quote
+class  Idev_OneStepCheckout_Model_Sales_Quote extends Amasty_Coupons_Model_Sales_Quote
 {
 
     /**
