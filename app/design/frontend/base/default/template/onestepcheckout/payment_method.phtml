@@ -54,7 +54,7 @@ if($helper->settings['hide_nonfree_payment_methods'])   {
   <?php echo $this->getChildHtml('reward.scripts'); ?>
   <?php echo $this->getChildHtml('customerbalance_scripts'); ?>
   var payment = new Payment('checkout-payment-method-load', '<?php echo $this->getUrl('checkout/onepage/savePayment') ?>');
-  payment.currentMethod = "<?php echo $this->getQuote()->getPayment()->getMethod() ?>";
+  payment.currentMethod = "<?php echo Mage::helper('core')->escapeHtml($this->getQuote()->getPayment()->getMethod()) ?>";
 //]]>
 </script>
     <?php if(Mage::helper('onestepcheckout')->isEnterprise()):?>

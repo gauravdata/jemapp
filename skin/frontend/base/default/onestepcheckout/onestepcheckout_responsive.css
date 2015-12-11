@@ -468,7 +468,7 @@ div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
     z-index: 1000001;
 }
 
-#onestepcheckout-toc-popup .onestepcheckout-popup-wrapper {
+#onestepcheckout-toc-popup .onestepcheckout-popup-contents {
     height: 515px !important;
 }
 
@@ -492,57 +492,42 @@ div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
     text-align: left !important;
 }
 
-.onestepcheckout-popup-footer {
-    background: url(images/onestepcheckout-popup-footer.png) no-repeat;
-    height: 13px;
-}
-
-.onestepcheckout-popup-wrapper {
-    *background-image: url(images/onestepcheckout-popup-header.png)
-        !important;
-    background: url(images/onestepcheckout-popup-header.png) no-repeat;
-}
-
-.onestepcheckout-popup-wrapper h1 {
+.onestepcheckout-popup-contents h1 {
     font-size: 18px !important;
-    padding-bottom: 10px !important;
-    padding-top: 15px !important;
+    padding-top: 5px !important;
 }
 
 .onestepcheckout-popup-contents {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 0;
-    padding-bottom: 1px;
+    background: #dbdbdb;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #dbdbdb 0%, #f4f4f4 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dbdbdb), color-stop(100%,#f4f4f4));
+    background: -webkit-linear-gradient(top, #dbdbdb 0%,#f4f4f4 100%);
+    background: -o-linear-gradient(top, #dbdbdb 0%,#f4f4f4 100%);
+    background: -ms-linear-gradient(top, #dbdbdb 0%,#f4f4f4 100%);
+    background: linear-gradient(to bottom, #dbdbdb 0%,#f4f4f4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbdbdb', endColorstr='#f4f4f4',GradientType=0 );
+    border-radius: 10px;
+    border: 3px solid #fff;
+    margin: 0px 20px 0px 20px;
+    padding: 10px 10px 10px 10px;
 }
 
-.onestepcheckout-popup-wrapper label {
+.onestepcheckout-popup-contents label {
     font-weight: normal;
 }
 
-.onestepcheckout-popup-wrapper .input-text {
+.onestepcheckout-popup-contents .input-text {
     width: 190px !important;
 }
 
-#onestepcheckout-forgot-table td {
-    vertical-align: middle !important;
-}
 
 /* Popup CSS (login link) */
 #onestepcheckout-login-popup {
-    width: 482px;
+    max-width: 482px;
     position: absolute;
     z-index: 1000001;
     /*position: fixed;*/
-}
-
-#onestepcheckout-login-popup table {
-    width: 99%;
-}
-
-#onestepcheckout-login-popup table td {
-    padding-top: 3px;
-    padding-bottom: 3px;
 }
 
 #onestepcheckout-login-popup button {
@@ -552,6 +537,14 @@ div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
 #onestepcheckout-login-popup div.onestepcheckout-popup-contents {
 
 }
+#onestepcheckout-login-popup p
+    {
+    padding: 5px 0px 0px 0px;
+}
+#onestepcheckout-login-popup .input-button
+    {
+    padding-top: 5px;
+}
 
 #onestepcheckout-login-popup p.close,#onestepcheckout-toc-popup p.close
     {
@@ -559,8 +552,8 @@ div.onestepcheckout-skin-magento p.onestepcheckout-numbers-4 {
     text-transform: uppercase;
     font-weight: bold;
     position: absolute;
-    right: 10px;
-    bottom: 8px;
+    right: 28px;
+    bottom: 4px;
 }
 
 #onestepcheckout-login-popup p.close a,#onestepcheckout-login-popup p.close a:link,#onestepcheckout-login-popup p.close a:visited,#onestepcheckout-toc-popup p.close a,#onestepcheckout-toc-popup p.close a:link,#onestepcheckout-toc-popup p.close a:visited
