@@ -1,5 +1,5 @@
 <?php
-class  Idev_OneStepCheckout_Model_Sales_Quote extends Amasty_Coupons_Model_Sales_Quote
+class  Idev_OneStepCheckout_Model_Sales_Quote extends Idev_OneStepCheckout_Model_Sales_Quote_Amasty_Pure
 {
 
     /**
