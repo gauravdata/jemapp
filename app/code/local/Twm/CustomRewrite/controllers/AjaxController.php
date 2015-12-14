@@ -20,10 +20,11 @@ class Twm_CustomRewrite_AjaxController extends Idev_OneStepCheckout_AjaxControll
         $data = array('result'=>'invalid');
 
         if($email && $email != '')  {
-            if(!$validator->isValid($email))    {
-
-            }
-            else    {
+// sometimes not working
+//            if(!$validator->isValid($email))    {
+//
+//            }
+//            else    {
 
                 // Valid email, check for existance
                 if($this->_isEmailRegistered($email))   {
@@ -32,7 +33,7 @@ class Twm_CustomRewrite_AjaxController extends Idev_OneStepCheckout_AjaxControll
                 else    {
                     $data['result'] = 'clean';
                 }
-            }
+//            }
         }
 
         $this->getResponse()->setBody(Zend_Json::encode($data));
