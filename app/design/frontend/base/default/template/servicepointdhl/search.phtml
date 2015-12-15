@@ -34,14 +34,14 @@
     });
     jQuery('.shippingmethod label a[data-toggle="popover"]').popover();
 
-    jQuery('#servicepointdhl_postcode,#servicepointdhl_city').change(function(){
+    jQuery('#servicepointdhl_city').change(function(){
         searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?php echo Mage::getUrl('servicepointdhl/index/index', array('_secure'=>true))?>');
     });
-    searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?php echo Mage::getUrl('servicepointdhl/index/index', array('_secure'=>true))?>');
+    //searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?php echo Mage::getUrl('servicepointdhl/index/index', array('_secure'=>true))?>');
 
-    jQuery('#billing\\:postcode,#billing\\:postcode_housenumber').change(function(){
+    jQuery('#billing\\:postcode_housenumber').change(function(){
         var url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>';
         var update_payments = 'true';
-        get_separate_save_methods_function(url, update_payments);
+        //get_separate_save_methods_function(url, update_payments);
     });
 </script>

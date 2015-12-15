@@ -81,7 +81,13 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
 		if ($searchCity) {
             $query = '*' . $searchCity;
 		} else {
-            $query = $quote->getShippingAddress()->getPostcode() . ' ' . $quote->getShippingAddress()->getStreet2();
+            $postcode = Mage::getSingleton('checkout/session')->getTmpPostcode();
+            $houseNumber = Mage::getSingleton('checkout/session')->getTmpHouseNumber();
+            if (!empty($postcode) && !empty($houseNumber)) {
+                $query = str_replace(' ', '', $postcode) . ' ' . $houseNumber;
+            } else {
+                $query = str_replace(' ', '', $quote->getShippingAddress()->getPostcode()) . ' ' . $quote->getShippingAddress()->getStreet2();
+            }
 		}
 
         $result = Mage::getModel('servicepointdhl/rate_result');

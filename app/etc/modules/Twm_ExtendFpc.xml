@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_ExtendFpc>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Lesti_Fpc/>
+
+            </depends>
+        </Twm_ExtendFpc>
+    </modules>
+</config>
