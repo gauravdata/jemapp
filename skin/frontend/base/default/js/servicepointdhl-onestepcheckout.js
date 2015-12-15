@@ -96,6 +96,8 @@ function createInfoWindow(marker,item,title,moretext,callback) {
 
                 var params = '?servicepointdhl_postcode=' + item.Postcode;
                 params += '&servicepointdhl_city='  + item.City;
+                params += '&servicepointdhl_id='  + item.Id;
+                params += '&servicepointdhl_street='  + item.Street;
 
                 get_save_billing_function(url_save_billing + params, url_set_methods + params)(item.Id);
             }

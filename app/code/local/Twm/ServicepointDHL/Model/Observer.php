@@ -18,9 +18,9 @@ class Twm_ServicepointDHL_Model_Observer extends Mage_Sales_Model_Quote_Address
             //get shipping address via SOAP
             $model = Mage::getModel('servicepointdhl/carrier_shippingMethod');
             $dhlAddress = $model->getDHLAddress($code);
-            if ($dhlAddress) {
+            if (!empty($dhlAddress) && isset($dhlAddress['add'])) {
+
                 $quote = $evt->getQuote();
-	        $dhlAddress = $dhlAddress['data']['items'][0];
 
                 $quote->getShippingAddress()
                     ->setPrefix($code)
