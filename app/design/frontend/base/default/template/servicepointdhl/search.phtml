@@ -42,6 +42,6 @@
     jQuery('#billing\\:postcode_housenumber').change(function(){
         var url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>';
         var update_payments = 'true';
-        //get_separate_save_methods_function(url, update_payments);
+        get_separate_save_methods_function(url, update_payments);
     });
 </script>
