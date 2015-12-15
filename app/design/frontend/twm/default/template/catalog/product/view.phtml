@@ -77,8 +77,6 @@
 				<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
 				<input type="hidden" name="related_product" id="related-products-field" value="" />
 			</div>
-			<p><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?></p>
-
 			<?php //echo $this->getReviewsSummaryHtml($_product, false, true)?>
 			<?php echo $this->getChildHtml('product_type_data') ?>
 			<?php if (!$this->hasOptions()):?>
@@ -393,7 +391,8 @@
                 <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
             <?php endif;?>
         </form>
-    </div>
+		<p><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?></p>
+	</div>
 </div>
 
 <ul class="nav nav-tabs">
