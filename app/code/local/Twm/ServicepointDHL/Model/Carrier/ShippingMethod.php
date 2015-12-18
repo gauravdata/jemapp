@@ -71,9 +71,36 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
         $origCity = $requestDhl->getOrigCity();
         $origPostcode = $requestDhl->getOrigPostcode();
 
+
+				$freeBoxes = 0;
+        if ($requestDhl->getAllItems()) {
+            foreach ($requestDhl->getAllItems() as $item) {
+
+                if ($item->getProduct()->isVirtual() || $item->getParentItem()) {
+                    continue;
+                }
+
+                if ($item->getHasChildren() && $item->isShipSeparately()) {
+                    foreach ($item->getChildren() as $child) {
+                        if ($child->getFreeShipping() && !$child->getProduct()->isVirtual()) {
+                            $freeBoxes += $item->getQty() * $child->getQty();
+                        }
+                    }
+                } elseif ($item->getFreeShipping()) {
+                    $freeBoxes += $item->getQty();
+                }
+            }
+        }
+        $this->setFreeBoxes($freeBoxes);
+
         $result = Mage::getModel('servicepointdhl/rate_result');
 
         $price = Mage::getStoreConfig("carriers/{$this->_code}/price");
+
+				if ($requestDhl->getFreeShipping() === true || $requestDhl->getPackageQty() == $this->getFreeBoxes()) {
+						$price = '0.00';
+				}
+
         $carrierTitle = Mage::getStoreConfig("carriers/{$this->_code}/title");
 
         $request = Mage::app()->getRequest();
