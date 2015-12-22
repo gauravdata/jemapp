@@ -43,7 +43,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
 		return array();
 	}
 	Mage::log("DHL query {$query}");
-	
+
         $uri = 'https://dhlforyounl-dhlforyou-service-point-locator-benelux-v1.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s='.urlencode($query);
         Mage::log($uri);
         $client = new Zend_Http_Client($uri,  array( 'timeout' => 10));
@@ -148,6 +148,10 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
             $query = str_replace(' ', '', $postcode) . ' ' . $houseNumber;
         } else {
             $query = str_replace(' ', '', $quote->getShippingAddress()->getPostcode()) . ' ' . $quote->getShippingAddress()->getStreet2();
+        }
+        $query = trim($query);
+        if (empty($query)) {
+            $query = '*apeldoorn';
         }
 
         foreach ($this->getDHLAddresses($query) as $carrier) {

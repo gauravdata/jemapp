@@ -1654,3 +1654,7 @@ footer #newsletter-validate-detail .input-group-addon {
 .klarna_dob input[type="text"] {
 	display: inline-block;
 }
+
+#onestepcheckout-form .buckaroo-method label {
+    overflow: hidden;
+}
