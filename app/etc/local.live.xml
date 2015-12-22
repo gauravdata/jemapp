@@ -43,7 +43,7 @@
 		    <host><![CDATA[127.0.0.1]]></host>
 		    <dbname><![CDATA[notomatoes_shop]]></dbname>
 		    <username><![CDATA[notomatoes]]></username>
-		    <password><![CDATA[trAs3ubr]]></password>
+		    <password><![CDATA[tsG6HV0ZXm]]></password>
                     <active>1</active>
                 </connection>
             </default_setup>
@@ -95,7 +95,7 @@
         <routers>
             <adminhtml>
                 <args>
-                    <frontName><![CDATA[admin]]></frontName>
+                    <frontName><![CDATA[admin_jma]]></frontName>
                 </args>
             </adminhtml>
         </routers>

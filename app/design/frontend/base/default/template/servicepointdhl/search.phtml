@@ -14,17 +14,8 @@
             </div>
             <div class="modal-body">
                 <p>Vul &eacute;&eacute;n van de volgende velden in.</p>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="servicepointdhl_postcode">Postcode</label>
-                        <input type="text" name="servicepointdhl_postcode" id="servicepointdhl_postcode" class="form-control">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="servicepointdhl_city">Plaats</label>
-                        <input type="text" name="servicepointdhl_city" id="servicepointdhl_city" class="form-control">
-                    </div>
-                </div>
+                <label for="servicepointdhl_city">Plaats</label>
+                <input type="text" name="servicepointdhl_city" id="servicepointdhl_city" class="form-control">
                 <br />
                 <div id="servicepointdhl_maps"></div>
             </div>
@@ -43,12 +34,12 @@
     });
     jQuery('.shippingmethod label a[data-toggle="popover"]').popover();
 
-    jQuery('#servicepointdhl_postcode,#servicepointdhl_city').change(function(){
+    jQuery('#servicepointdhl_city').change(function(){
         searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?php echo Mage::getUrl('servicepointdhl/index/index', array('_secure'=>true))?>');
     });
-    searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?php echo Mage::getUrl('servicepointdhl/index/index', array('_secure'=>true))?>');
+    //searchServicepointDHL(jQuery('#searchdhl'), 'onestepcheckout-form', 'servicepointdhl_maps', 'servicepointdhl_', '<?php echo Mage::getUrl('servicepointdhl/index/index', array('_secure'=>true))?>');
 
-    jQuery('#billing\\:postcode,#billing\\:postcode_housenumber').change(function(){
+    jQuery('#billing\\:postcode_housenumber').change(function(){
         var url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>';
         var update_payments = 'true';
         get_separate_save_methods_function(url, update_payments);

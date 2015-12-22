@@ -33,8 +33,8 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
                 if ($price <= 0) {
                     continue;
                 }
-                $orgPrice = $item->getProduct()->getPrice();
-                $orgSpecialPrice = $item->getProduct()->getSpecialPrice();
+                //$orgPrice = $item->getProduct()->getPrice();
+                //$orgSpecialPrice = $item->getProduct()->getSpecialPrice();
 
                 $r[$item->getId()]['discount'] = 0; //($orgPrice - $price) * $item->getQty() * 2;//($orgPrice - $price);
                 $r[$item->getId()]['base_discount'] = 0; //($orgPrice - $price) * $item->getQty() * 2;//($orgPrice - $price);

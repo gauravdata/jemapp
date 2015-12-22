@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_ExtendFpc>
+            <version>0.1.0</version>
+        </Twm_ExtendFpc>
+    </modules>
+    <global>
+        <models>
+            <twm_extendfpc>
+                <class>Twm_ExtendFpc_Model</class>
+                <resourceModel>twm_extendfpc_resource</resourceModel>
+            </twm_extendfpc>
+            <twm_extendfpc_resource>
+                <class>Twm_ExtendFpc_Model_Resource</class>
+            </twm_extendfpc_resource>
+        </models>
+        <blocks>
+            <twm_extendfpc>
+                <class>Twm_ExtendFpc_Block</class>
+            </twm_extendfpc>
+        </blocks>
+        <helpers>
+            <twm_extendfpc>
+                <class>Twm_ExtendFpc_Helper</class>
+            </twm_extendfpc>
+            <fpc>
+                <rewrite>
+                    <data>Twm_ExtendFpc_Helper_Fpc_Data</data>
+                </rewrite>
+            </fpc>
+        </helpers>
+    </global>
+</config>

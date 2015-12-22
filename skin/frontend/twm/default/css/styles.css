@@ -214,8 +214,66 @@ textarea {
 	display: none;
 }
 
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+	width: 40px;
+	height: 40px;
+	background-position: 50%;
+	background-repeat: no-repeat;
+}
+.carousel-control .glyphicon-chevron-left {
+	background-image: url('../images/carousel-left.png');
+}
+.carousel-control .glyphicon-chevron-right {
+	background-image: url('../images/carousel-right.png');
+}
+.carousel-control .glyphicon-chevron-left:before,
+.carousel-control .glyphicon-chevron-right:before {
+	display: none;
+}
+
 #checkoutSteps .step {
     margin-bottom: 30px;
+}
+
+/*= Carousel wide =*/
+.cms-index-index #main-container {
+	padding-bottom: 0 !important;
+}
+.cms-index-index .carousel-wide {
+	margin: -20px 0 20px;
+}
+.cms-index-index .carousel-wide .carousel-inner .item {
+	margin: 0;
+	height: 1000px;
+	background-position: 50%;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+}
+.cms-index-index .carousel-wide .carousel-inner .item a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.cms-index-index .carousel-wide .carousel-control.left,
+.cms-index-index .carousel-wide .carousel-control.right {
+	margin: 0;
+	width: 100px;
+}
+.cms-index-index .carousel-wide .carousel-control.left .glyphicon,
+.cms-index-index .carousel-wide .carousel-control.right .glyphicon {
+	margin-left: -20px;
+	margin-top: -20px;
+	color: #fff;
+	font-size: 40px;
+}
+.cms-index-index .carousel-wide .carousel-indicators li {
+	width: 15px;
+	height: 15px;
+}
+.cms-index-index .carousel-wide .carousel-indicators .active {
+	width: 17px;
+	height: 17px;
 }
 
 /*= Tables =*/
@@ -546,6 +604,8 @@ nav,
 .category-nav-wrapper {
 	background: #fff;
 	margin-bottom: 20px;
+	position: relative;
+	z-index: 99;
 
 	box-shadow: 0 2px 1px rgba(0,0,0,0.15);
 	-webkit-box-shadow: 0 2px 1px rgba(0,0,0,0.15);
@@ -1473,11 +1533,25 @@ footer #newsletter-validate-detail .input-group-addon {
 /*======================================================
 	RESPONSIVE
 ======================================================*/
-@media(max-width: 992px) {
-    .modal.wide .modal-dialog {
-        width: 90%;
-    }
+
+/*= Small screen =*/
+@media(max-width: 1200px) {
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 625px;
+	}
 }
+
+/*= Tablet landscape =*/
+@media(max-width: 1024px) {
+	.modal.wide .modal-dialog {
+		width: 90%;
+	}
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 515px;
+	}
+}
+
+/*= Tablet portrait =*/
 @media(max-width: 769px) {
     /*= Header =*/
     header .row > .pull-left,
@@ -1547,6 +1621,34 @@ footer #newsletter-validate-detail .input-group-addon {
     #product-view .onsale-product-container, .onsale-product-container .onsale-product-container-inside {
         cursor: default;
     }
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 400px;
+	}
+}
+
+/*= iphone 6 landscape =*/
+@media(max-width: 667px) {
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 348px;
+	}
+}
+/*= iphone 5 landscape =*/
+@media(max-width: 568px) {
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 296px;
+	}
+}
+/*= iphone 5 portrait =*/
+@media(max-width: 375px) {
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 196px;
+	}
+}
+/*= iphone 6 portrait =*/
+@media(max-width: 320px) {
+	.cms-index-index .carousel-wide .carousel-inner .item {
+		height: 167px;
+	}
 }
 
 .klarna_dob input[type="text"] {

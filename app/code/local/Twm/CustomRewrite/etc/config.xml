@@ -40,6 +40,20 @@
                     </modules>
                 </args>
             </customer>
+            <onestepcheckout>
+                <args>
+                    <modules>
+                        <twm_customrewrite before="Idev_OneStepCheckout">Twm_CustomRewrite</twm_customrewrite>
+                    </modules>
+                </args>
+            </onestepcheckout>
+            <postcodenl_api>
+                <args>
+                    <modules>
+                        <twm_customrewrite before="PostcodeNl_Api">Twm_CustomRewrite</twm_customrewrite>
+                    </modules>
+                </args>
+            </postcodenl_api>
         </routers>
     </frontend>
 </config>

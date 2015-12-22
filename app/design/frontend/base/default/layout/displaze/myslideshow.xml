@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+myslideshow.xml
+
+Copyright (c) 2012 Aftab Naveed <aftabnaveed@gmail.com>. 
+
+This file is part of Displaze Web Services Inc..
+
+Displaze Web Services Inc. is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Displaze Web Services Inc. is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Displaze Web Services Inc..  If not, see <http ://www.gnu.org/licenses/>.
+-->
+
+<layout version="0.1.0">
+<!--
+Default layout, loads most of the links/pages
+-->
+    
+    <default>
+	
+        <reference name="head">	
+            <action method="addJs"><name>scriptaculous/scriptaculous.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>displaze/js/protoshow.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>displaze/css/protoshow.css</name></action>
+        </reference>
+		
+    </default>
+    
+</layout>

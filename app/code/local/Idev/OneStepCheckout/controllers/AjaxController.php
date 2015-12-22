@@ -445,8 +445,6 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
         } catch (Exception $e) {
         }
 
-        $result = $this->_getOnepage()->saveBilling($billing_data, $customerAddressId);
-
         if(Mage::helper('customer')->isLoggedIn()){
             $this->_getOnepage()->getQuote()->getBillingAddress()->setSaveInAddressBook(empty($billing_data['save_in_address_book']) ? 0 : 1);
             $this->_getOnepage()->getQuote()->getShippingAddress()->setSaveInAddressBook(empty($shipping_data['save_in_address_book']) ? 0 : 1);
@@ -459,6 +457,8 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
                 $shipping_result = $helper->saveShipping($billing_data, $customerAddressId);
             }
         }
+
+        $result = $this->_getOnepage()->saveBilling($billing_data, $customerAddressId);
 
         $shipping_method = $this->getRequest()->getPost('shipping_method', false);
 
@@ -609,22 +609,22 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
              $paymentMethod = $selectedMethod;
         }
 
-		try {
-			$payment = $this->getRequest()->getPost('payment', array());
-			//$payment = array();
-			//////////// MageWorx Fix ///////////////
-			if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit' || $paymentMethod=='customercredit' ) {
-				Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
-			} else {
-				Mage::getModel('checkout/session')->setUseInternalCredit(false);
-			}
-			//////////// MageWorx Fix ///////////////
-			if(!empty($paymentMethod)){
-				$payment['method'] = $paymentMethod;
-			}
-			//$payment_result = $this->_getOnepage()->savePayment($payment);
-			$helper->savePayment($payment);
-		}
+        try {
+            $payment = $this->getRequest()->getPost('payment', array());
+            //$payment = array();
+            //////////// MageWorx Fix ///////////////
+            if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit' || $paymentMethod=='customercredit' ) {
+                Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
+            } else {
+                Mage::getModel('checkout/session')->setUseInternalCredit(false);
+            }
+            //////////// MageWorx Fix ///////////////
+            if(!empty($paymentMethod)){
+                $payment['method'] = $paymentMethod;
+            }
+            //$payment_result = $this->_getOnepage()->savePayment($payment);
+            $helper->savePayment($payment);
+        }
         catch(Exception $e) {
             //die('Error: ' . $e->getMessage());
             // Silently fail for now
@@ -687,26 +687,25 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
 
         $payment_method = $this->getRequest()->getPost('payment_method');
 
-		if($payment_method != '')   {
-			try {
-				$payment = $this->getRequest()->getPost('payment', array());
-				$payment['method'] = $payment_method;
-
-				//////////// MageWorx Fix ///////////////
-				if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit') {
-					Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
-				} else {
-					Mage::getModel('checkout/session')->setUseInternalCredit(false);
-				}
-				//////////// MageWorx Fix ///////////////
-				//$payment_result = $this->_getOnepage()->savePayment($payment);
-				$helper->savePayment($payment);
-			}
-			catch(Exception $e) {
-				//die('Error: ' . $e->getMessage());
-				// Silently fail for now
-			}
-		}
+        if($payment_method != '')   {
+            try {
+                $payment = $this->getRequest()->getPost('payment', array());
+                $payment['method'] = $payment_method;
+                //////////// MageWorx Fix ///////////////
+                if (!empty($payment['use_internal_credit']) || $payment['method']=='customercredit') {
+                    Mage::getSingleton('checkout/session')->setUseInternalCredit(true);
+                } else {
+                    Mage::getModel('checkout/session')->setUseInternalCredit(false);
+                }
+                //////////// MageWorx Fix ///////////////
+                //$payment_result = $this->_getOnepage()->savePayment($payment);
+                $helper->savePayment($payment);
+            }
+            catch(Exception $e) {
+                //die('Error: ' . $e->getMessage());
+                // Silently fail for now
+            }
+        }
 
         //$this->_getOnepage()->getQuote()->collectTotals()->save();
 
@@ -757,12 +756,14 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
 
             $lastOrderId = $this->_getOnepage()->getCheckout()->getLastOrderId();
             $order = Mage::getModel('sales/order')->load($lastOrderId);
+
             $billing = $order->getBillingAddress();
             $shipping = $order->getShippingAddress();
 
             $customer->setData('firstname', $billing->getFirstname());
             $customer->setData('lastname', $billing->getLastname());
             $customer->setData('email', $order->getCustomerEmail());
+            $customer->setData('taxvat', $order->getCustomerTaxvat());
 
             foreach (Mage::getConfig()->getFieldset('customer_account') as $code => $node) {
                 if ($node->is('create') && ($value = $this->getRequest()->getParam($code)) !== null) {

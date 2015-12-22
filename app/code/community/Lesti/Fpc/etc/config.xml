@@ -15,7 +15,7 @@
 <config>
     <modules>
         <Lesti_Fpc>
-            <version>1.3.6</version>
+            <version>1.4.4</version>
         </Lesti_Fpc>
     </modules>
     <global>
@@ -211,10 +211,14 @@ catalog_category_view]]></cache_actions>
                 <dynamic_blocks><![CDATA[messages,
 global_messages,
 global_notices,
+global_cookie_notice,
 right.reports.product.viewed]]></dynamic_blocks>
                 <refresh_actions><![CDATA[checkout_cart_add,
 checkout_cart_delete,
 checkout_cart_updatePost,
+checkout_cart_ajaxDelete,
+checkout_cart_ajaxUpdate,
+checkout_cart_updateItemOptions,
 catalog_product_compare_add,
 catalog_product_compare_clear,
 catalog_product_compare_remove,
@@ -224,6 +228,7 @@ wishlist_index_update,
 wishlist_index_allcart,
 wishlist_index_configure,
 checkout_onepage_success,
+customer_account_login,
 poll_vote_add]]></refresh_actions>
                 <lazy_blocks><![CDATA[top.links,
 cart_sidebar,
@@ -234,12 +239,14 @@ minicart_head,
 right.poll]]></lazy_blocks>
                 <uri_params><![CDATA[id,
 category,
+cat,
 page_id,
 p,
 limit,
 dir,
 order,
 mode]]></uri_params>
+                <uri_params_layered_navigation>1</uri_params_layered_navigation>
                 <miss_uri_params><![CDATA[no_cache=/^1$/,
 limit=/^([0-9]+)|(all)$/,
 dir=/^[0-9a-z_]+$/,

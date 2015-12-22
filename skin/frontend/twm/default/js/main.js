@@ -1,6 +1,6 @@
 function setFooter() {
 	var footerHeight = jQuery('footer').outerHeight();
-	jQuery('#main-container').css({
+	jQuery('#main-container, #home-container').css({
 		paddingBottom: footerHeight + 30
 	});
 }
