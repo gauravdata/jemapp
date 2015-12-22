@@ -145,6 +145,10 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
         } else {
             $query = str_replace(' ', '', $quote->getShippingAddress()->getPostcode()) . ' ' . $quote->getShippingAddress()->getStreet2();
         }
+        $query = trim($query);
+        if (empty($query)) {
+            $query = '*apeldoorn';
+        }
 
         foreach ($this->getDHLAddresses($query) as $carrier) {
             $method = Mage::getModel('shipping/rate_result_method');
