@@ -213,7 +213,7 @@ class Mage_Core_Controller_Varien_Front extends Varien_Object
         // empty route supplied - return base url
         if (empty($routeName)) {
             $router = $this->getRouter('standard');
-        } elseif ($this->getRouter('admin')->getFrontNameByRoute($routeName)) {
+        } elseif ($this->getRouter('admin') && $this->getRouter('admin')->getFrontNameByRoute($routeName)) {
             // try standard router url assembly
             $router = $this->getRouter('admin');
         } elseif ($this->getRouter('standard')->getFrontNameByRoute($routeName)) {
