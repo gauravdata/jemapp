@@ -7,7 +7,7 @@ class Icreators_Emalo_IndexController extends Mage_Core_Controller_Front_Action
             $this->renderLayout();
     }
 
-public function pushOrderAction()
+	public function pushOrderAction()
     {
         $incrementId = $this->getRequest()->getParam('order_id');
 
