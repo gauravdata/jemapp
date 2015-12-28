@@ -19,3 +19,8 @@ sitemap.xml
 retour-nt.pdf
 retour-jma.pdf
 retour-jma-de.pdf
+
+#ignore this config. We use a different live and dev version. Use symlink to point to the correct version
+app/etc/modules/ArtsOnIT_Autologin.xml
+
+
