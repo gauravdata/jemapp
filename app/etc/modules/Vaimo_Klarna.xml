@@ -2,7 +2,7 @@
 <config>
   <modules>
     <Vaimo_Klarna>
-      <active>true</active>
+      <active>false</active>
       <codePool>community</codePool>
     </Vaimo_Klarna>
   </modules>
