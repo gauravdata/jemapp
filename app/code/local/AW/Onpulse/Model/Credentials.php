@@ -26,10 +26,13 @@ class AW_Onpulse_Model_Credentials extends Mage_Core_Model_Abstract
         }
         $keyRewrite = Mage::getModel('core/url_rewrite')->loadByIdPath($idPath);
         $oldRequestPath  = $keyRewrite->getRequestPath();
+        
         $defaultStore =  Mage::app()->getStore()->getId();
-        if(Mage::app()->getDefaultStoreView() !== null) {
-            $defaultStore = Mage::app()->getDefaultStoreView()->getId();
-        }
+        
+//         if(Mage::app()->getDefaultStoreView() !== null) {
+//             $defaultStore = Mage::app()->getDefaultStoreView()->getId();
+//         }
+        
         if(AW_Onpulse_Helper_Data::getPlatform() == AW_Onpulse_Helper_Data::EE_PLATFORM
             && version_compare(Mage::getVersion(), '1.13.0.0', '>=')
         ) {
