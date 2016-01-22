@@ -78,24 +78,24 @@
 ## http://developer.yahoo.com/performance/rules.html#gzip
 
     # Insert filter on all content
-    SetOutputFilter DEFLATE
+    ###SetOutputFilter DEFLATE
     # Insert filter on selected content types only
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    #AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
 
     # Netscape 4.x has some problems...
-    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    #BrowserMatch ^Mozilla/4 gzip-only-text/html
 
     # Netscape 4.06-4.08 have some more problems
-    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    #BrowserMatch ^Mozilla/4\.0[678] no-gzip
 
     # MSIE masquerades as Netscape, but it is fine
-    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    #BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
 
     # Don't compress images
-    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+    #SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
 
     # Make sure proxies don't deliver the wrong content
-    Header append Vary User-Agent env=!dont-vary
+    #Header append Vary User-Agent env=!dont-vary
 
 </IfModule>
 
@@ -113,20 +113,14 @@
 ############################################
 ## enable rewrites
 
-    Options +SymLinksIfOwnerMatch
+    Options +FollowSymLinks
     RewriteEngine on
 
 ############################################
 ## you can put here your magento root folder
 ## path relative to web root
 
-    RewriteBase /
-
-
-RewriteCond %{HTTP_HOST} ^(www\.)?jemappelle\.nl
-RewriteRule ^retour\.pdf retour-jma.pdf [L]
-
-RewriteRule ^retour\.pdf retour-nt.pdf [L]
+    #RewriteBase /magento/
 
 ############################################
 ## uncomment next line to enable light API calls processing
@@ -212,73 +206,29 @@ RewriteRule ^retour\.pdf retour-nt.pdf [L]
 ## If running in cluster environment, uncomment this
 ## http://developer.yahoo.com/performance/rules.html#etags
 
-    FileETag none
+    #FileETag none
 
-# ------------------------------------------------------------------------------
-# | Expires headers (for better cache control)                                 |
-# ------------------------------------------------------------------------------
+###########################################
+## Deny access to cron.php
+    <Files cron.php>
 
-# The following expires headers are set pretty far in the future. If you don't
-# control versioning with filename-based cache busting, consider lowering the
-# cache time for resources like CSS and JS to something like 1 week.
+############################################
+## uncomment next lines to enable cron access with base HTTP authorization
+## http://httpd.apache.org/docs/2.2/howto/auth.html
+##
+## Warning: .htpasswd file should be placed somewhere not accessible from the web.
+## This is so that folks cannot download the password file.
+## For example, if your documents are served out of /usr/local/apache/htdocs
+## you might want to put the password file(s) in /usr/local/apache/.
 
-<IfModule mod_expires.c>
+        #AuthName "Cron auth"
+        #AuthUserFile ../.htpasswd
+        #AuthType basic
+        #Require valid-user
 
-    ExpiresActive on
-    ExpiresDefault                                      "access plus 1 month"
+############################################
 
-  # CSS
-    ExpiresByType text/css                              "access plus 1 year"
+        Order allow,deny
+        Deny from all
 
-  # Data interchange
-    ExpiresByType application/json                      "access plus 0 seconds"
-    ExpiresByType application/xml                       "access plus 0 seconds"
-    ExpiresByType text/xml                              "access plus 0 seconds"
-
-  # Favicon (cannot be renamed!) and cursor images
-    ExpiresByType image/x-icon                          "access plus 1 week"
-
-  # HTML components (HTCs)
-    ExpiresByType text/x-component                      "access plus 1 month"
-
-  # HTML
-    ExpiresByType text/html                             "access plus 0 seconds"
-
-  # JavaScript
-    ExpiresByType application/javascript                "access plus 1 year"
-
-  # Manifest files
-    ExpiresByType application/x-web-app-manifest+json   "access plus 0 seconds"
-    ExpiresByType text/cache-manifest                   "access plus 0 seconds"
-
-  # Media
-    ExpiresByType audio/ogg                             "access plus 1 month"
-    ExpiresByType image/gif                             "access plus 1 month"
-    ExpiresByType image/jpeg                            "access plus 1 month"
-    ExpiresByType image/png                             "access plus 1 month"
-    ExpiresByType video/mp4                             "access plus 1 month"
-    ExpiresByType video/ogg                             "access plus 1 month"
-    ExpiresByType video/webm                            "access plus 1 month"
-
-  # Web feeds
-    ExpiresByType application/atom+xml                  "access plus 1 hour"
-    ExpiresByType application/rss+xml                   "access plus 1 hour"
-
-  # Web fonts
-    ExpiresByType application/font-woff                 "access plus 1 month"
-    ExpiresByType application/vnd.ms-fontobject         "access plus 1 month"
-    ExpiresByType application/x-font-ttf                "access plus 1 month"
-    ExpiresByType font/opentype                         "access plus 1 month"
-    ExpiresByType image/svg+xml                         "access plus 1 month"
-
-</IfModule>
-
-SetEnvIf Host no\-tomatoes\.de MAGE_RUN_CODE=default_de
-
-SetEnvIf Host jemappelle\.nl MAGE_RUN_CODE=jma_nl
-SetEnvIf Host jemappelle\.be MAGE_RUN_CODE=jma_nl
-SetEnvIf Host jemappelle\.de MAGE_RUN_CODE=jma_de
-
-<IfDefine DEV>
-SetEnv MAGE_RUN_CODE jma_nl
-</IfDefine>
+    </Files>
