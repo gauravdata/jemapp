@@ -53,6 +53,7 @@ class Twm_CustomRewrite_AccountController extends Mage_Customer_AccountControlle
                          * will be validated later to match each other and be of right length
                          */
                         $customer->setPassword($newPass);
+                        $customer->setPasswordConfirmation($confPass);
                         $customer->setConfirmation($confPass);
                     }
                     else
