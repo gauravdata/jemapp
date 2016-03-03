@@ -92,10 +92,10 @@ $checkoutHelper = Mage::helper('onestepcheckout/checkout');
         $grandTotal = null;
         if ($total->getCode() != 'grand_total')
         {
-            if (!isset($totalsArray[$total->getCode()]))
+            if (!isset($totalsArray[$total->getCode()]) && array_search($total->getCode(), $totalsSortOrder) === false)
                 $totalsSortOrder[] = $total->getCode();
 
-            $totalsArray[$total->getCode()] = $total;
+            $totalsArray[strtolower(trim($total->getCode()))] = $total;
         }
         else
             $grandTotal = $total;
@@ -104,12 +104,11 @@ $checkoutHelper = Mage::helper('onestepcheckout/checkout');
     $totalsArray['grand_total'] = $grandTotal;
     $totalsSortOrder[] = 'grand_total';
 
-    foreach ($totalsSortOrder as $index => $key):
-
-        $data = $totalsArray[$key];
-
-        if (!is_null($data))
-        {
+    foreach ($totalsSortOrder as $index => $code):
+        echo '<!-- '.$index.' :: '.$code.' -->';
+        $data = $totalsArray[$code];
+        unset($totalsArray[$code]);
+        if (!is_null($data)):
             ?>
             <tr<?php if ($code == 'grand_total'): ?> class="grand-total"<?php endif; ?>>
                 <td class="title">
@@ -147,7 +146,7 @@ $checkoutHelper = Mage::helper('onestepcheckout/checkout');
                 </td>
             </tr>
             <?php
-        }
+        endif;
     endforeach; ?>
 </table>
 <script type="text/javascript">
