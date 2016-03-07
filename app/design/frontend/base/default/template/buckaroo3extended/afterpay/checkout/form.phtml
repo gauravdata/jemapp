@@ -16,7 +16,7 @@
         <li>
             <label><?php echo $this->__('Billing name');?>:</label>
             <div class="input-box">
-                <span class="disabled stylefix" id="<?php echo $_code;?>_BPE_Customername" title="<?php echo $this->__('Name');?>"><?php echo $this->getName(); ?></span>
+                <span class="stylefix disabled" id="<?php echo $_code;?>_BPE_Customername" style="height: 35px !important;" title="<?php echo $this->__('Name');?>"><?php echo $this->getName(); ?></span>
             </div>
         </li>
         <li <?php if ($this->getAddress()->getTelephone() && $this->getAddress()->getTelephone() != '-'): ?>style="display:none;"<?php endif; ?>>
@@ -146,4 +146,5 @@
         }
     });
 </script>
+
 

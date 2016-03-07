@@ -14,7 +14,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
 
         $uri = 'https://dhlforyounl-dhlforyounl-service-point-locator.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&spid=' . urlencode($code) . '&v=2';
         Mage::log($uri);
-        $client = new Zend_Http_Client($uri, array( 'timeout' => 10));
+        $client = new Zend_Http_Client($uri, array( 'timeout' => 60));
         $client->setHeaders(array(
             'X-Mashape-Key' => '2mkhycZJq1msh6dAfgbllXxrSr5Wp1rotFHjsnEknupB8oHZcD',
             'Accept' => 'application/json'
@@ -46,7 +46,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
 
         $uri = 'https://dhlforyounl-dhlforyou-service-point-locator-benelux-v1.p.mashape.com/datamoduleAPI.jsp?action=public.splist&country_from=NL&country_results=NL&ot=n&v=2&s='.urlencode($query);
         Mage::log($uri);
-        $client = new Zend_Http_Client($uri,  array( 'timeout' => 10));
+        $client = new Zend_Http_Client($uri,  array( 'timeout' => 60));
         $client->setHeaders(array(
             'X-Mashape-Key' => '2mkhycZJq1msh6dAfgbllXxrSr5Wp1rotFHjsnEknupB8oHZcD',
             'Accept' => 'application/json'

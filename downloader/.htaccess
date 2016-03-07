@@ -1,3 +1,6 @@
+order allow,deny
+deny from all
+
 <IfModule mod_deflate.c>
 
     RemoveOutputFilter DEFLATE

@@ -122,7 +122,6 @@
 
     RewriteBase /
 
-
 RewriteCond %{HTTP_HOST} ^(www\.)?jemappelle\.nl
 RewriteRule ^retour\.pdf retour-jma.pdf [L]
 
