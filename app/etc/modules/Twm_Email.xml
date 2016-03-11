@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_Email>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Twm_Email>
+    </modules>
+</config>
