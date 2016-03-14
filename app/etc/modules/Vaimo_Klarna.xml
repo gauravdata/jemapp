@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-  <modules>
-    <Vaimo_Klarna>
-      <active>false</active>
-      <codePool>community</codePool>
-    </Vaimo_Klarna>
-  </modules>
-</config>

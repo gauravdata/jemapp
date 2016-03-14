@@ -53,7 +53,7 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
         $session = Mage::getModel('checkout/cart')->getCheckoutSession();
         if ($session->hasQuote()) {
             $this->collectingTotals = true;
-            //->collectTotals()
+            //$session->getQuote()->collectTotals();
             $items = $session->getQuote()->getAllItems();
             $this->collectingTotals = false;
             foreach ($items as $item) {

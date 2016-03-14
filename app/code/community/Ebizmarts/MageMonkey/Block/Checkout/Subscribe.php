@@ -8,7 +8,6 @@
  * @author     Ebizmarts Team <info@ebizmarts.com>
  * @license    http://opensource.org/licenses/osl-3.0.php
  */
-
 class Ebizmarts_MageMonkey_Block_Checkout_Subscribe extends Ebizmarts_MageMonkey_Block_Lists
 {
     protected function _construct()
@@ -17,6 +16,7 @@ class Ebizmarts_MageMonkey_Block_Checkout_Subscribe extends Ebizmarts_MageMonkey
 
         $key = array(
             'EbizMageMonkeyCheckoutSubscribe',
+            (int)Mage::app()->getStore()->getStoreId(),
             (int)Mage::app()->getStore()->isCurrentlySecure(),
             Mage::getSingleton('customer/session')->isLoggedIn(),
             $this->getQuote()->getCustomer()->getId()
@@ -24,8 +24,8 @@ class Ebizmarts_MageMonkey_Block_Checkout_Subscribe extends Ebizmarts_MageMonkey
 
         $this->addData(array(
             'cache_lifetime' => 60 * 60 * 4, // four hours valid
-            'cache_tags'     => array('EbizMageMonkey_Checkout_Subscribe'),
-            'cache_key'      => implode('_', $key),
+            'cache_tags' => array('EbizMageMonkey_Checkout_Subscribe'),
+            'cache_key' => implode('_', $key),
         ));
     }
 
