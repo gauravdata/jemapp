@@ -52,7 +52,7 @@ class Icreators_Emalo_IndexController extends Mage_Core_Controller_Front_Action
             $observer = new Icreators_Emalo_Model_Observer();
             $xml = $observer->generateXml($order);
 
-            $this->getResponse()->setHeader('Content-typ', 'text/xml')->setBody($xml);
+            $this->getResponse()->setHeader('Content-type', 'text/xml')->setBody($xml);
         }
         catch(Exception $e)
         {
