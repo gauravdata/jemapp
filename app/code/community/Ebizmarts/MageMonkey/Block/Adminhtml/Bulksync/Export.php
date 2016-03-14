@@ -8,7 +8,6 @@
  * @author     Ebizmarts Team <info@ebizmarts.com>
  * @license    http://opensource.org/licenses/osl-3.0.php
  */
-
 class Ebizmarts_MageMonkey_Block_Adminhtml_Bulksync_Export extends Mage_Adminhtml_Block_Widget_Form_Container
 {
 
@@ -16,16 +15,15 @@ class Ebizmarts_MageMonkey_Block_Adminhtml_Bulksync_Export extends Mage_Adminhtm
     {
         $this->_controller = 'adminhtml_bulksync';
         $this->_blockGroup = 'monkey';
-        $this->_mode       = 'export';
-
+        $this->_mode = 'export';
         parent::__construct();
-
         $this->_updateButton('save', 'label', Mage::helper('monkey')->__('All set!'));
+        $this->setTemplate('magemonkey/bulksync/export/form.phtml');
     }
 
     public function getHeaderText()
     {
-    	return Mage::helper('monkey')->__('New Export');
+        return Mage::helper('monkey')->__('New Export');
     }
 
 }
