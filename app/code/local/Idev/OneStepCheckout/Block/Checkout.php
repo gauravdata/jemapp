@@ -526,7 +526,7 @@ class Idev_OneStepCheckout_Block_Checkout extends Mage_Checkout_Block_Onepage_Ab
         // Validate stuff that saveBilling doesn't handle
         if(!$this->_isLoggedIn())   {
             $validator = new Zend_Validate_EmailAddress();
-            if(!$billing_data['email'] || $billing_data['email'] == '' || !$validator->isValid($billing_data['email'])) {
+            if(!$billing_data['email'] || $billing_data['email'] == ''){ // || !$validator->isValid($billing_data['email'])) {
 
                 if(is_array($this->formErrors['billing_errors']))   {
                     $this->formErrors['billing_errors'][] = 'email';

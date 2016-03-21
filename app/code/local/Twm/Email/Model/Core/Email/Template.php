@@ -5,7 +5,8 @@
  * Date: 11-3-16
  * Time: 14:39
  */ 
-class Twm_Email_Model_Core_Email_Template extends Mage_Core_Model_Email_Template
+//class Twm_Email_Model_Core_Email_Template extends Mage_Core_Model_Email_Template
+class Twm_Email_Model_Core_Email_Template extends Ebizmarts_Mandrill_Model_Email_Template
 {
     public function sendTransactional($templateId, $sender, $email, $name, $vars=array(), $storeId=null)
     {
