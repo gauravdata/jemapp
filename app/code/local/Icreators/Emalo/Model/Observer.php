@@ -34,7 +34,7 @@ class Icreators_Emalo_Model_Observer
 		// is de verzendomschrijving verkeert??
 		if (stristr($shippingDescription, 'thuisbezorg') !== false && stristr($shippingMethod, 'servicepointdhl') !== false) {
 			//Afhalen DHL Servicepoint - Dierenspeciaalzaak Animo<br/>Voorstraat 33<br/>3281AT Numansdorp<br/>
-			$shippingDescription = "Afhalen DHL Servicepoint - {$shippingAddress->getLastname()}<br/>{$shippingAddress->getStreet()}<br/>{$shippingAddress->getPostcode()} {$shippingAddress->getCity()}<br/>";
+			$shippingDescription = "Afhalen DHL Servicepoint - {$shippingAddress->getLastname()}<br/>{$shippingAddress->getStreetFull()}<br/>{$shippingAddress->getPostcode()} {$shippingAddress->getCity()}<br/>";
 		}
 
 		$xml="<SALESORDERS>

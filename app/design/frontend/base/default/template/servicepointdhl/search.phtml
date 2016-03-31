@@ -27,7 +27,7 @@
 </div>
 <script type="text/javascript">
     //jQuery('input[name="shipping_method"]:first').attr('checked', 'checked');
-    jQuery('.shippingmethod label strong').each(function(){
+    jQuery('#tab-1 .shippingmethod label strong').each(function(){
        if (jQuery(this).text().indexOf('0.00') > 0 || jQuery(this).text().indexOf('0,00') > 0) {
            jQuery(this).hide();
        }
