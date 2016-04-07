@@ -1,0 +1,79 @@
+/*======================================================
+	DEFAULT
+======================================================*/
+html, body {
+	height: 100%;
+	background: $xs-grey;
+	margin: 0;
+}
+
+/*======================================================
+	HEADER
+======================================================*/
+#header {
+	background-color: $xl-grey;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+	max-height: $header-height;
+	color: $white;
+
+	.logo {
+		margin: 14px 0;
+		position: absolute;
+		left: 50%;
+		margin-left: -74px;
+	}
+
+	.quick-access {
+		float: right;
+
+		#search_mini_form,
+		.form-language,
+		ul.links {
+			float: left;
+		}
+	}
+}
+
+/*======================================================
+	SIDE NAV
+======================================================*/
+#side-nav {
+	position: fixed;
+	background-color: #fff;
+	left: 0;
+	width: $side-nav-width;
+	top: $header-height;
+	bottom: 0;
+	z-index: 999;
+
+	ul {
+		@extend .unstyled;
+
+		> li {
+			> a {
+				display: block;
+				border-bottom: 1px solid $s-grey;
+				padding: $s-spacing $m-spacing;
+				font-size: $l-font;
+				text-transform: uppercase;
+				font-weight: bold;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+/*======================================================
+	MAIN
+======================================================*/
+#main {
+	position: relative;
+	left: $side-nav-width;
+	width: calc(100% - #{$side-nav-width});
+	padding-top: $header-height;
+	margin: 0;
+}

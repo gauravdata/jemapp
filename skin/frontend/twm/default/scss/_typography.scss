@@ -1,0 +1,19 @@
+/*======================================================
+	DEFAULT
+======================================================*/
+html,
+body {
+	font-family: $main-font;
+	color: $l-grey;
+	font-size: $m-font;
+	line-height: $m-font * 1.5;
+}
+
+/*======================================================
+	LINKS
+======================================================*/
+a {
+	@extend .main-transition;
+	color: $l-grey;
+	text-decoration: underline;
+}
