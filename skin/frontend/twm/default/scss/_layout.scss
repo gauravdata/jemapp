@@ -19,6 +19,9 @@ html, body {
 	z-index: 999;
 	max-height: $header-height;
 	color: $white;
+	line-height: $header-height;
+	font-size: $l-font;
+	font-weight: bold;
 
 	a {
 		color: $white;
@@ -26,15 +29,25 @@ html, body {
 		&:hover {
 			color: $s-grey;
 		}
+
+		&.link-mdi {
+			float: left;
+			padding: 0 $m-spacing;
+
+			.mdi {
+				width: auto;
+				margin-right: $xxs-spacing;
+			}
+		}
 	}
 
 	.mdi {
 		display: block;
 		height: $header-height;
-		line-height: $header-height;
 		width: $header-height;
 		text-align: center;
 		font-size: $xl-font;
+		line-height: $header-height;
 	}
 
 	.nav-btn {
@@ -42,6 +55,7 @@ html, body {
 	}
 
 	.logo {
+		line-height: 0;
 		margin: 14px 0;
 		position: absolute;
 		left: 50%;
@@ -56,8 +70,6 @@ html, body {
 		.mdi,
 		ul.links {
 			float: left;
-			font-size: $l-font;
-			font-weight: bold;
 		}
 
 		/*= Search =*/
@@ -119,17 +131,11 @@ html, body {
 					display: block;
 					line-height: $header-height;
 					padding: 0 $m-spacing;
-					font-size: 0;
 
-					span {
-						font-size: $l-font;
-
-						&:before {
-							font-family: 'Material Design Icons';
-							content: "\F110";
-							font-size: 21px;
-							margin-right: $xxs-spacing;
-						}
+					&:before {
+						font-family: 'Material Design Icons';
+						content: "\F110";
+						margin-right: $xxs-spacing;
 					}
 				}
 			}
