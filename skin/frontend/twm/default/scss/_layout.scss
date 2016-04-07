@@ -20,6 +20,27 @@ html, body {
 	max-height: $header-height;
 	color: $white;
 
+	a {
+		color: $white;
+
+		&:hover {
+			color: $s-grey;
+		}
+	}
+
+	.mdi {
+		display: block;
+		height: $header-height;
+		line-height: $header-height;
+		width: $header-height;
+		text-align: center;
+		font-size: $xl-font;
+	}
+
+	.nav-btn {
+		float: left;
+	}
+
 	.logo {
 		margin: 14px 0;
 		position: absolute;
@@ -32,8 +53,86 @@ html, body {
 
 		#search_mini_form,
 		.form-language,
+		.mdi,
 		ul.links {
 			float: left;
+			font-size: $l-font;
+			font-weight: bold;
+		}
+
+		/*= Search =*/
+		#search_mini_form {
+			.form-search {
+				width: 0;
+				overflow: hidden;
+			}
+		}
+
+		/*= Language switch =*/
+		.form-language {
+			line-height: $header-height;
+			position: relative;
+			padding: 0 $m-spacing;
+
+			img {
+				display: inline-block;
+				margin-right: $xxs-spacing;
+			}
+
+			ul {
+				@extend .unstyled;
+				position: absolute;
+				left: 0;
+				background-color: $white;
+				padding: 0 $m-spacing;
+				opacity: 0;
+				visibility: hidden;
+				transition: visibility 0s linear 0.25s, opacity 0.25s linear 0.25s;
+
+				li {
+					line-height: $l-font * 2;
+
+					a {
+						color: $xl-grey;
+						display: block;
+						white-space: nowrap;
+					}
+				}
+			}
+
+			&:hover {
+				ul {
+					visibility: visible;
+					opacity: 1;
+				}
+			}
+		}
+
+		/*= Links =*/
+		ul.links {
+			@extend .unstyled;
+
+			li {
+				float: left;
+
+				a {
+					display: block;
+					line-height: $header-height;
+					padding: 0 $m-spacing;
+					font-size: 0;
+
+					span {
+						font-size: $l-font;
+
+						&:before {
+							font-family: 'Material Design Icons';
+							content: "\F110";
+							font-size: 21px;
+							margin-right: $xxs-spacing;
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -60,8 +159,7 @@ html, body {
 				padding: $s-spacing $m-spacing;
 				font-size: $l-font;
 				text-transform: uppercase;
-				font-weight: bold;
-				text-decoration: none;
+				font-weight: 500;
 			}
 		}
 	}
@@ -75,5 +173,20 @@ html, body {
 	left: $side-nav-width;
 	width: calc(100% - #{$side-nav-width});
 	padding-top: $header-height;
-	margin: 0;
+}
+
+/*======================================================
+	FOOTER
+======================================================*/
+#footer {
+	position: relative;
+	left: $side-nav-width;
+	width: calc(100% - #{$side-nav-width});
+	text-align: center;
+
+	.footer-content {
+		width: 1000px;
+		display: inline-block;
+		text-align: justify;
+	}
 }

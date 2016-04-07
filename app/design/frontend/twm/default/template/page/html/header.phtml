@@ -29,6 +29,8 @@
 ?>
 <header id="header">
 
+	<a href="" class="nav-btn"><i class="mdi mdi-close"></i></a>
+
 	<?php if ($this->getIsHomePage()):?>
 	<h1 class="logo">
 		<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>">
@@ -41,9 +43,11 @@
 	</a>
 	<?php endif?>
 	<div class="quick-access">
-		<i class="mdi mdi-account"></i>
 		<?php echo $this->getChildHtml('topSearch') ?>
 		<?php echo $this->getChildHtml('store_language') ?>
+		<a href="<?php echo $this->getUrl() ?>	customer/account/">
+			<i class="mdi mdi-account"></i>
+		</a>
 		<?php echo $this->getChildHtml('topLinks') ?>
 	</div>
 	<?php echo $this->getChildHtml('topContainer'); ?>

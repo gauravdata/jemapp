@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+	<default>
+		<reference name="top.links">
+			<remove name="wishlist_link" />
+			<action method="removeLinkByUrl"><url helper="customer/getAccountUrl" /></action>
+			<action method="removeLinkByUrl"><url helper="customer/getLogoutUrl" /></action>
+			<action method="removeLinkByUrl"><url helper="customer/getLoginUrl" /></action>
+			<remove name="checkout_cart_link"/>
+			<block type="checkout/links" name="checkout_cart_link_custom">
+				<action method="addCartLink"></action>
+				<!--<action method="addCheckoutLink"></action>-->
+			</block>
+		</reference>
+	</default>
+
+	<customer_logged_in>
+		<reference name="top.links">
+			<action method="removeLinkByUrl"><url helper="customer/getLogoutUrl"/></action>
+		</reference>
+	</customer_logged_in>
+	<customer_logged_out>
+		<reference name="top.links">
+			<action method="removeLinkByUrl"><url helper="customer/getLoginUrl"/></action>
+		</reference>
+	</customer_logged_out>
+
+</layout>
