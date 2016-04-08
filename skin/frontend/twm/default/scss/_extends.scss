@@ -6,3 +6,13 @@
 .main-transition {
 	@include transition(all 0.3s ease-out);
 }
+.clearfix {
+	&:before,
+	&:after {
+		display: table;
+		content: "";
+	}
+	&:after {
+		clear: both;
+	}
+}

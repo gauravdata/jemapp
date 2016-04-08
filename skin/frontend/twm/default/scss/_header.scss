@@ -1,0 +1,184 @@
+#header {
+	background-color: $xl-grey;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+	max-height: $header-height;
+	color: $white;
+	line-height: $header-height;
+	font-size: $l-font;
+	font-weight: $bold;
+
+	a {
+		color: $white;
+
+		&:hover {
+			color: $s-grey;
+		}
+
+		&.link-mdi {
+			float: left;
+			padding: 0 $m-spacing;
+
+			.mdi {
+				width: auto;
+				margin-right: $xxs-spacing;
+			}
+		}
+	}
+
+	.mdi {
+		display: block;
+		height: $header-height;
+		width: $header-height;
+		text-align: center;
+		font-size: $xl-font;
+		line-height: $header-height;
+	}
+
+	.nav-btn {
+		float: left;
+	}
+
+	.logo {
+		line-height: 0;
+		margin: 14px 0;
+		position: absolute;
+		left: 50%;
+		margin-left: -74px;
+	}
+
+	.quick-access {
+		float: right;
+
+		#search_mini_form,
+		.form-language,
+		.mdi,
+		ul.links {
+			float: left;
+		}
+
+		/*= Search =*/
+		#search_mini_form {
+			@extend .main-transition;
+			border-left: 1px solid transparentize($white, 0.75);
+			border-right: 1px solid transparentize($white, 0.75);
+
+			button {
+				border: none;
+				height: $header-height;
+				width: $header-height;
+				text-align: center;
+				background-color: transparent;
+				color: $white;
+				padding: 0;
+				margin: 0;
+				float: left;
+			}
+			input.input-text {
+				width: 110px;
+				float: left;
+				height: $header-height;
+				border: none;
+				background-color: transparent;
+				padding: 0;
+				color: $white;
+				font-size: $l-font;
+				font-weight: $bold;
+
+				&::-webkit-input-placeholder {
+					color: $white;
+					opacity: 1;
+				}
+				&::-moz-placeholder {
+					color: $white;
+					opacity: 1;
+				}
+				&:-ms-input-placeholder {
+					color: $white;
+					opacity: 1;
+				}
+				&:-moz-placeholder {
+					color: $white;
+					opacity: 1;
+				}
+			}
+
+			&.focus {
+				background-color: $white;
+
+				button,
+				input.input-text {
+					color: $xl-grey;
+				}
+			}
+		}
+
+		/*= Language switch =*/
+		.form-language {
+			line-height: $header-height;
+			position: relative;
+			padding: 0 $m-spacing;
+
+			> span {
+				cursor: default;
+			}
+
+			img {
+				display: inline-block;
+				margin-right: $xxs-spacing;
+			}
+
+			ul {
+				@extend .unstyled;
+				position: absolute;
+				left: 0;
+				background-color: $white;
+				padding: 0 $m-spacing;
+				opacity: 0;
+				visibility: hidden;
+				transition: visibility 0s linear 0.25s, opacity 0.25s linear 0.25s;
+
+				li {
+					line-height: $l-font * 2;
+
+					a {
+						color: $xl-grey;
+						display: block;
+						white-space: nowrap;
+					}
+				}
+			}
+
+			&:hover {
+				ul {
+					visibility: visible;
+					opacity: 1;
+				}
+			}
+		}
+
+		/*= Links =*/
+		ul.links {
+			@extend .unstyled;
+
+			li {
+				float: left;
+
+				a {
+					display: block;
+					line-height: $header-height;
+					padding: 0 $m-spacing;
+
+					&:before {
+						font-family: 'Material Design Icons';
+						content: "\F110";
+						margin-right: $xxs-spacing;
+					}
+				}
+			}
+		}
+	}
+}

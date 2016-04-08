@@ -33,7 +33,9 @@
 ?>
 <?php if(count($this->getStores())>1): ?>
 <div class="form-language">
-	<img src="<?php echo Mage::getDesign()->getSkinUrl() . 'images/flag-' . Mage::app()->getStore()->getLocaleCode() . '.png'; ?>" alt="<?php echo Mage::app()->getStore()->getLocaleCode(); ?>" /> <?php echo Mage::app()->getStore()->getName() ?>
+	<span>
+		<img src="<?php echo Mage::getDesign()->getSkinUrl() . 'images/flag-' . Mage::app()->getStore()->getLocaleCode() . '.png'; ?>" alt="<?php echo Mage::app()->getStore()->getLocaleCode(); ?>" /> <?php echo Mage::app()->getStore()->getName() ?>
+	</span>
 	<ul>
     <?php foreach ($this->getStores() as $_lang): ?>
         <?php if($_lang->getId() != $this->getCurrentStoreId()) { ?>

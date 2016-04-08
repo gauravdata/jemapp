@@ -1,0 +1,13 @@
+input.input-text {
+	@extend .main-transition;
+	min-height: 38px;
+	padding: $xs-spacing;
+	border: 1px solid $s-grey;
+	width: 100%;
+
+	&:focus {
+		border-color: $primary;
+		color: $primary;
+		outline: none;
+	}
+}
