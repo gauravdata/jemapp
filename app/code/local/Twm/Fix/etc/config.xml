@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_Fix>
+            <version>0.1.0</version>
+        </Twm_Fix>
+    </modules>
+    <global>
+        <models>
+            <twm_fix>
+                <class>Twm_Fix_Model</class>
+                <resourceModel>twm_fix_resource</resourceModel>
+            </twm_fix>
+            <twm_fix_resource>
+                <class>Twm_Fix_Model_Resource</class>
+            </twm_fix_resource>
+            <core>
+                <rewrite>
+                    <config>Twm_Fix_Model_Core_Config</config>
+                </rewrite>
+            </core>
+        </models>
+        <blocks>
+            <twm_fix>
+                <class>Twm_Fix_Block</class>
+            </twm_fix>
+        </blocks>
+        <helpers>
+            <twm_fix>
+                <class>Twm_Fix_Helper</class>
+            </twm_fix>
+        </helpers>
+    </global>
+</config>
