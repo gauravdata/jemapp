@@ -54,6 +54,46 @@ html, body {
 }
 
 /*======================================================
+	VISUAL & TOP
+======================================================*/
+.page-top,
+.page-visual {
+	.content {
+		text-align: center;
+
+		h1 {
+			font-size: $xxxl-font;
+			line-height: normal;
+			margin: 0;
+		}
+	}
+}
+.page-visual {
+	height: 410px;
+	background-position: 50%;
+	background-size: cover;
+	position: relative;
+
+	.content {
+		@extend .position-center;
+		width: 100%;
+		color: $white;
+		z-index: 20;
+	}
+
+	&:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 10;
+		background-color: rgba(0,0,0,0.2);
+	}
+}
+
+/*======================================================
 	FOOTER
 ======================================================*/
 #footer {

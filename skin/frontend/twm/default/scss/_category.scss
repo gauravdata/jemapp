@@ -1,4 +1,86 @@
 /*======================================================
+	TOOLBAR
+======================================================*/
+.toolbar {
+	@extend .clearfix;
+	padding: $xs-spacing 0;
+	position: relative;
+
+	select {
+		border-width: 2px;
+		font-weight: bold;
+	}
+	
+	.pager {
+		position: absolute;
+		color: $white;
+		text-align: center;
+		width: 100%;
+		z-index: 30;
+		margin-top: -40px;
+		line-height: $m-font;
+
+		a {
+			color: $white;
+		}
+
+		.amount,
+		.limiter {
+			display: inline-block;
+			padding: 0 $s-spacing;
+			border-right: 1px solid $white;
+
+			a.active {
+				text-decoration: underline;
+			}
+
+			&:last-child {
+				border-right: none;
+			}
+		}
+	}
+
+	.sorter {
+		float: right;
+		margin-right: $xs-spacing;
+
+		label {
+			height: 42px;
+			line-height: 42px;
+			float: left;
+			border: 2px solid $s-grey;
+			background-color: $white;
+			border-right: none;
+			font-weight: $bold;
+			padding-left: $m-spacing;
+		}
+		select {
+			width: auto;
+			float: left;
+			border-left: none;
+			font-weight: $regular;
+
+			&:focus {
+				border-color: $s-grey;
+			}
+		}
+		a {
+			float: left;
+			font-weight: $bold;
+			color: $xl-grey;
+			line-height: 42px;
+			padding: 0 $xxs-spacing;
+			font-size: $xl-font;
+		}
+	}
+}
+.toolbar-bottom {
+	.pager {
+		display: none;
+	}
+}
+
+/*======================================================
 	LIST
 ======================================================*/
 .category-products {

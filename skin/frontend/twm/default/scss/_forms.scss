@@ -1,9 +1,11 @@
-input.input-text {
+input.input-text,
+select {
 	@extend .main-transition;
-	min-height: 38px;
+	min-height: 42px;
 	padding: $xs-spacing;
 	border: 1px solid $s-grey;
 	width: 100%;
+	font-size: $m-font;
 
 	&:focus {
 		border-color: $primary;

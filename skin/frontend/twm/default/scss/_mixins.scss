@@ -21,10 +21,10 @@
 	-ms-transform: rotate($rotate);
 	transform: rotate($rotate);
 }
-@mixin transform($transform) {
-	-moz-transform: translateX($transform) translateY($transform);
-	-webkit-transform: translateX($transform) translateY($transform);
-	-o-transform: translateX($transform) translateY($transform);
-	-ms-transform: translateX($transform) translateY($transform);
-	transform: translateX($transform) translateY($transform);
+@mixin transform($transformX, $transformY) {
+	-moz-transform: translateX($transformX) translateY($transformY);
+	-webkit-transform: translateX($transformX) translateY($transformY);
+	-o-transform: translateX($transformX) translateY($transformY);
+	-ms-transform: translateX($transformX) translateY($transformY);
+	transform: translateX($transformX) translateY($transformY);
 }
