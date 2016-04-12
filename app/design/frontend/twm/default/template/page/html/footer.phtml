@@ -26,8 +26,24 @@
 ?>
 <div id="footer">
 	<div class="footer-content">
-		<?php echo $this->getChildHtml() ?>
-		<p class="bugs"><?php echo $this->__('Help Us to Keep Magento Healthy') ?> - <a href="http://www.magentocommerce.com/bug-tracking" onclick="this.target='_blank'"><strong><?php echo $this->__('Report All Bugs') ?></strong></a> <?php echo $this->__('(ver. %s)', Mage::getVersion()) ?></p>
-		<address><?php echo $this->getCopyright() ?></address>
+		<div class="row">
+			<div class="col-4">
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_1')->toHtml(); ?>
+			</div>
+			<div class="col-4">
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_2')->toHtml(); ?>
+			</div>
+			<div class="col-4">
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_3')->toHtml(); ?>
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_4')->toHtml(); ?>
+			</div>
+		</div>
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_5')->toHtml(); ?>
+		<div class="footer-bar">
+			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_6')->toHtml(); ?>
+		</div>
+		<p class="text-center">
+			<?php echo $this->getCopyright() ?>
+		</p>
 	</div>
 </div>

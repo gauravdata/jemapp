@@ -62,11 +62,84 @@ html, body {
 	left: $side-nav-width;
 	width: calc(100% - #{$side-nav-width});
 	text-align: center;
+	padding-top: $xl-spacing;
+	color: $m-grey;
 
 	.footer-content {
 		width: 1000px;
 		display: inline-block;
 		text-align: justify;
+	}
+
+	h2 {
+		text-transform: uppercase;
+		font-size: $m-font;
+		color: $xl-grey;
+		margin-bottom: 0;
+		line-height: $xxl-font;
+	}
+
+	ul {
+		@extend .unstyled;
+		line-height: $xxl-font;
+	}
+
+	a {
+		color: $m-grey;
+
+		&:hover {
+			color: $xl-grey;
+		}
+	}
+
+	ul.social {
+		text-align: center;
+		margin: $xl-spacing 0;
+
+		li {
+			display: inline-block;
+
+			a {
+				@include radius(50%);
+				display: inline-block;
+				width: $xxl-font;
+				height: $xxl-font;
+				line-height: $xxl-font;
+				text-align: center;
+				background-color: $m-grey;
+				font-size: $xl-font;
+				color: $xs-grey;
+				margin: 0 $xxs-spacing;
+
+				i {
+					span {
+						display: none;
+					}
+				}
+
+				&:hover {
+					background-color: $xl-grey;
+				}
+			}
+
+		}
+	}
+
+	.footer-bar {
+		border-top: 1px solid $s-grey;
+		border-bottom: 1px solid $s-grey;
+		text-align: center;
+		margin: $xl-spacing 0;
+
+		p {
+			margin: $m-spacing 0;
+
+			img {
+				display: inline-block;
+				opacity: 0.5;
+				margin: 0 $s-spacing;
+			}
+		}
 	}
 }
 
