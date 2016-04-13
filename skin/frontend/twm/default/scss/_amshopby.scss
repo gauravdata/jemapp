@@ -1,11 +1,45 @@
 .amshopby-filters {
+	position: absolute;
 	padding: $xs-spacing;
+	z-index: 100;
 
-	select {
+	select,
+	.custom-dropdown strong {
 		width: auto !important;
 		border-width: 2px;
 		float: left;
 		margin-right: $xs-spacing;
 		font-weight: $bold;
+	}
+	.custom-dropdown {
+		.list {
+			a {
+				position: relative;
+				padding-left: $l-spacing;
+				color: $m-grey;
+
+				&:hover {
+					color: $xl-grey;
+				}
+
+				&:before {
+					position: absolute;
+					content: "";
+					width: $m-spacing;
+					height: $m-spacing;
+					background-color: $s-grey;
+					left: 0;
+				}
+
+				&.amshopby-attr-selected {
+					color: $xl-grey;
+					font-weight: $bold;
+
+					&:before {
+						background-color: $xl-grey;
+					}
+				}
+			}
+		}
 	}
 }

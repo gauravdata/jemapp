@@ -65,6 +65,7 @@ html, body {
 			font-size: $xxxl-font;
 			line-height: normal;
 			margin: 0;
+			color: $white;
 		}
 	}
 }
@@ -94,6 +95,14 @@ html, body {
 }
 
 /*======================================================
+	CONTENT
+======================================================*/
+.content-container {
+	max-width: 75%;
+	margin: 0 auto;
+}
+
+/*======================================================
 	FOOTER
 ======================================================*/
 #footer {
@@ -105,6 +114,34 @@ html, body {
 	padding-top: $xl-spacing;
 	color: $m-grey;
 
+	form {
+		margin-bottom: $xxl-spacing;
+
+		label {
+			display: block;
+			margin-bottom: $s-spacing;
+
+			strong {
+				color: $xl-grey;
+			}
+		}
+
+		input[type=email],
+		input[type=text] {
+			width: 400px;
+			float: left;
+			background-color: transparent;
+			border-width: 2px;
+			border-color: $xl-grey;
+			margin-right: $s-spacing;
+
+			&:focus {
+				color: $xl-grey;
+				font-weight: bold;
+			}
+		}
+	}
+
 	.footer-content {
 		width: 1000px;
 		display: inline-block;
@@ -114,7 +151,6 @@ html, body {
 	h2 {
 		text-transform: uppercase;
 		font-size: $m-font;
-		color: $xl-grey;
 		margin-bottom: 0;
 		line-height: $xxl-font;
 	}

@@ -1,0 +1,17 @@
+input[type=submit] {
+	@extend .main-transition;
+	height: $form-field-height;
+	line-height: $form-field-height;
+	padding: 0 $xl-spacing;
+	border: 2px solid $xl-grey;
+	background-color: $xl-grey;
+	font-weight: bold;
+	color: $white;
+	text-transform: uppercase;
+	cursor: pointer;
+
+	&:hover {
+		background-color: transparent;
+		color: $xl-grey;
+	}
+}

@@ -133,13 +133,11 @@
 
 			ul {
 				@extend .unstyled;
+				@extend .fade-in-transition;
 				position: absolute;
 				left: 0;
 				background-color: $white;
 				padding: 0 $m-spacing;
-				opacity: 0;
-				visibility: hidden;
-				transition: visibility 0s linear 0.25s, opacity 0.25s linear 0.25s;
 
 				li {
 					line-height: $l-font * 2;

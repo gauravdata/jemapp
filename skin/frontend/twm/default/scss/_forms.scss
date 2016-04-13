@@ -1,15 +1,72 @@
 input.input-text,
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=url],
+input[type=number],
+.custom-dropdown strong,
 select {
 	@extend .main-transition;
-	min-height: 42px;
-	padding: $xs-spacing;
+	display: block;
+	min-height: $form-field-height;
+	padding: $xs-spacing $s-spacing;
 	border: 1px solid $s-grey;
 	width: 100%;
 	font-size: $m-font;
+	background-color: $white;
 
 	&:focus {
 		border-color: $primary;
 		color: $primary;
 		outline: none;
+	}
+}
+.custom-dropdown {
+	position: relative;
+
+	strong {
+		padding-right: $l-spacing;
+		position: relative;
+		color: $xl-grey;
+
+		&:after {
+			position: absolute;
+			font-family: 'Material Design Icons';
+			content: "\F140";
+			right: $xs-spacing;
+		}
+	}
+
+	.list {
+		@extend .fade-in-transition;
+		position: absolute;
+		top: $form-field-height;
+		background-color: $white;
+		left: 0;
+		padding: $s-spacing;
+		z-index: 999;
+		font-weight: normal;
+
+		> a,
+		> div {
+			display: block;
+			white-space: nowrap;
+			padding: $xs-spacing 0;
+		}
+	}
+
+	&:focus,
+	&.focus {
+		strong {
+			border-color: $white;
+
+			&:after {
+				content: "\F143";
+			}
+		}
+		.list {
+			visibility: visible;
+			opacity: 1;
+		}
 	}
 }

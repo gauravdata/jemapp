@@ -14,4 +14,9 @@ jQuery(window).load(function(){
 		jQuery('#search_mini_form').removeClass('focus');
 	});
 
+	// custom dropdown
+	jQuery('.custom-dropdown strong').click(function(){
+		jQuery(this).parent().toggleClass('focus');
+	});
+
 });

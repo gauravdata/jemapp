@@ -31,7 +31,7 @@
 			border-right: 1px solid $white;
 
 			a.active {
-				text-decoration: underline;
+				display: none;
 			}
 
 			&:last-child {
@@ -45,14 +45,15 @@
 		margin-right: $xs-spacing;
 
 		label {
-			height: 42px;
-			line-height: 42px;
+			height: $form-field-height;
+			line-height: $form-field-height;
 			float: left;
 			border: 2px solid $s-grey;
 			background-color: $white;
 			border-right: none;
 			font-weight: $bold;
 			padding-left: $m-spacing;
+			color: $xl-grey;
 		}
 		select {
 			width: auto;
@@ -75,8 +76,26 @@
 	}
 }
 .toolbar-bottom {
-	.pager {
-		display: none;
+	margin-bottom: $l-spacing;
+
+	.toolbar {
+		.pager {
+			position: static;
+			float: left;
+			margin: 0;
+			color: $m-grey;
+			text-align: left;
+			width: auto;
+
+			.amount,
+			.limiter {
+				border-right-color: $m-grey;
+			}
+
+			a {
+				color: $m-grey;
+			}
+		}
 	}
 }
 

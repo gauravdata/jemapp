@@ -1,0 +1,10 @@
+.price-box {
+	color: $xl-grey;
+	font-weight: bold;
+
+	.old-price {
+		text-decoration: line-through;
+		font-weight: normal;
+		color: $m-grey;
+	}
+}

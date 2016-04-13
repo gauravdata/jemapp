@@ -42,10 +42,9 @@
             <?php endif; ?>
         </p>
         <div class="limiter">
-            <?php echo $this->__('Show') ?>:
             <?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
                 <a href="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> class="active"<?php endif ?>>
-                    <?php echo $_limit ?>
+                    <?php echo $this->__('Show') ?> <span class="lowercase"><?php echo $_limit ?></span> <?php echo $this->__('per page') ?>
                 </a>
             <?php endforeach; ?>
         </div>

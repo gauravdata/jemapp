@@ -4,7 +4,7 @@
 html,
 body {
 	font-family: $main-font;
-	color: $l-grey;
+	color: $m-grey;
 	font-size: $m-font;
 	line-height: $m-font * 1.5;
 }
@@ -16,6 +16,7 @@ h1,
 h2,
 h3 {
 	margin: 0 0 $m-spacing;
+	color: $xl-grey;
 }
 
 /*======================================================
@@ -32,6 +33,13 @@ ol {
 }
 .text-right {
 	text-align: right;
+}
+
+.lowercase {
+	text-transform: lowercase;
+}
+.uppercase {
+	text-transform: uppercase;
 }
 
 /*======================================================

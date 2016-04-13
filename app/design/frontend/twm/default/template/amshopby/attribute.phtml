@@ -1,16 +1,19 @@
+<div class="amshopby-filters clearfix">
 <?php
 switch ($this->getDisplayType()){
     case 0: // labels only
+        echo '<div class="custom-dropdown"><strong>'.$this->getName().'</strong><div class="list">';
         if ($this->getShowSearch()){
-            echo '<li rel="search"><input type="text" class="amshopby_attr_search input-text" onkeyup="amshopby_attr_search(this)" /></li>';
+            echo '<div rel="search"><input type="text" class="amshopby_attr_search input-text" onkeyup="amshopby_attr_search(this)" /></div>';
         }
         foreach ($this->getItemsAsArray() as $item){
-            echo '<li rel="'.$item['label'].'" '.(isset($item['style']) ? $item['style'] : '').'><a class="'.$item['css'].'" href="'.$item['url'].'">'. $item['label'] . '</a>' . $item['count'] . '</li>';
+            echo '<a rel="'.$item['label'].'" '.(isset($item['style']) ? $item['style'] : '').' class="'.$item['css'].'" href="'.$item['url'].'">'. $item['label'] . $item['count'] . '</a>';
         }
+        echo '</div></div>';
     break;
     
     case 1: // images only
-        echo '<li>';
+        echo '<div>';
         foreach ($this->getItemsAsArray() as $item){
             if (isset($item['image_hover']) && $item['image_hover'] != '') {
                 echo '<img src="' . $item['image_hover'] . '" style="display: none;" />';
@@ -22,15 +25,15 @@ switch ($this->getDisplayType()){
             echo '<a '.$item['style'].' class="'.$item['css'].'" href="'.$item['url'].'"><img src="'.$item['image'].'" ' . $onHover . ' title="'. $item['label'] .'" alt="'. $item['label'] .'"></a>';
             
         }
-        echo '</li>';
+        echo '</div>';
     break;
     
     case 2: // images and labels
         if ($this->getShowSearch()){
-            echo '<li rel="search"><input type="text" class="amshopby_attr_search" onkeyup="amshopby_attr_search(this)" /></li>';
+            echo '<div rel="search"><input type="text" class="amshopby_attr_search" onkeyup="amshopby_attr_search(this)" /></div>';
         }
         foreach ($this->getItemsAsArray() as $item){
-            echo '<li rel="'.$item['label'].'" '.$item['style'].'><a class="'.$item['css'].'" href="'.$item['url'].'">';
+            echo '<div rel="'.$item['label'].'" '.$item['style'].'><a class="'.$item['css'].'" href="'.$item['url'].'">';
             
             if (isset($item['image_hover']) && $item['image_hover'] != '') {
                 echo '<img src="' . $item['image_hover'] . '" style="display: none;" />';
@@ -43,7 +46,7 @@ switch ($this->getDisplayType()){
             if (!empty($item['image'])){
                 echo '<img src="'.$item['image'].'" ' . $onHover . ' title="'. $item['label'] .'" alt="'. $item['label'] .'">';
             }
-            echo $item['label'] . '</a>' . $item['count'] . '</li>';
+            echo $item['label'] . '</a>' . $item['count'] . '</div>';
         }
     break;
     
@@ -62,7 +65,7 @@ switch ($this->getDisplayType()){
         $size  = sizeof($items);
         $half  =  ceil($size/2);
         
-        echo '<li>';
+        echo '<div>';
         echo '<div class="amshopby-column">';
         for ($i=0; $i<$half; $i++){
             $item = $items[$i];
@@ -75,12 +78,13 @@ switch ($this->getDisplayType()){
             echo '<a class="'.$item['css'].'" href="'.$item['url'].'">'. $item['label'] . '</a>' . $item['count']. '<br/>';
         }
         echo '</div>';
-        echo '</li>';
+        echo '</div>';
     break;
 }
 
 if ($this->getDisplayType() < 3 && $this->getShowLessMore()){
-    echo '<li class="amshopby-clearer"><a id="amshopby-more-'.$this->getRequestValue().'" class="amshopby-more" href="#">' . $this->__('More ...') . '</a></li>';
-    echo '<li class="amshopby-clearer"><a id="amshopby-less-'.$this->getRequestValue().'" class="amshopby-less" href="#" style="display:none">' . $this->__('Less ...') . '</a></li>';
+    echo '<div class="amshopby-clearer"><a id="amshopby-more-'.$this->getRequestValue().'" class="amshopby-more" href="#">' . $this->__('More ...') . '</a></div>';
+    echo '<div class="amshopby-clearer"><a id="amshopby-less-'.$this->getRequestValue().'" class="amshopby-less" href="#" style="display:none">' . $this->__('Less ...') . '</a></div>';
 } 
 ?>
+</div>

@@ -26,6 +26,7 @@
 ?>
 <div id="footer">
 	<div class="footer-content">
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('newsletterform')->toHtml(); ?>
 		<div class="row">
 			<div class="col-4">
 				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_1')->toHtml(); ?>
@@ -35,12 +36,11 @@
 			</div>
 			<div class="col-4">
 				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_3')->toHtml(); ?>
-				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_4')->toHtml(); ?>
 			</div>
 		</div>
-		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_5')->toHtml(); ?>
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_4')->toHtml(); ?>
 		<div class="footer-bar">
-			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_6')->toHtml(); ?>
+			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_5')->toHtml(); ?>
 		</div>
 		<p class="text-center">
 			<?php echo $this->getCopyright() ?>

@@ -1,0 +1,17 @@
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+    $_imgHtml   = '';
+    $_imgUrl = $_category->getImageUrl()
+
+?>
+
+<?php if($_imgUrl) { ?>
+<div class="page-visual" style="background-image: url(<?php echo $_imgUrl; ?>);">
+<?php } else { ?>
+<div class="page-top">
+<?php } ?>
+    <div class="content">
+        <h1><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+    </div>
+</div>
