@@ -41,12 +41,12 @@
 			<?php echo $this->getChildHtml('header') ?>
 			<main id="main">
 				<div class="row">
-					<div class="col-left sidebar"><?php echo $this->getChildHtml('left') ?></div>
-					<div class="col-main">
+					<div class="col-left col-3 sidebar"><?php echo $this->getChildHtml('left') ?></div>
+					<div class="col-main col-6">
 						<?php echo $this->getChildHtml('global_messages') ?>
 						<?php echo $this->getChildHtml('content') ?>
 					</div>
-					<div class="col-right sidebar"><?php echo $this->getChildHtml('right') ?></div>
+					<div class="col-right col-3 sidebar"><?php echo $this->getChildHtml('right') ?></div>
 				</div>
 			</main>
 			<?php echo $this->getChildHtml('footer') ?>

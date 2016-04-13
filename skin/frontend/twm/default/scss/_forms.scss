@@ -28,6 +28,7 @@ select {
 		padding-right: $l-spacing;
 		position: relative;
 		color: $xl-grey;
+		cursor: pointer;
 
 		&:after {
 			position: absolute;

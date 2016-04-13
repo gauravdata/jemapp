@@ -16,7 +16,15 @@ jQuery(window).load(function(){
 
 	// custom dropdown
 	jQuery('.custom-dropdown strong').click(function(){
+		jQuery('.custom-dropdown.focus strong').not(this).parent().removeClass('focus');
 		jQuery(this).parent().toggleClass('focus');
+	});
+
+	// switch product image
+	jQuery('.product-img-box .more-views a').click(function(){
+		var imageUrl = jQuery(this).attr('href');
+		jQuery('.product-visual').css('background-image', 'url(' + imageUrl + ')');
+		return false;
 	});
 
 });

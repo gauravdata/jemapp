@@ -1,3 +1,49 @@
-.product-name {
+.product-view {
+	position: relative;
+}
 
+/*======================================================
+	VISUAL
+======================================================*/
+.product-visual-wrapper {
+	position: relative;
+	background-color: $s-grey;
+
+	.product-visual {
+		height: 675px;
+		background-position: 25% 50%;
+		background-size: auto 100%;
+		background-repeat: no-repeat;
+	}
+	.more-views {
+		position: absolute;
+		left: $m-spacing;
+		bottom: $m-spacing;
+
+		a {
+			display: block;
+			margin: $xs-spacing $xs-spacing 0 0;
+
+			img {
+				display: block;
+			}
+		}
+
+		&.double-row {
+			width: 160px + ($xs-spacing * 2);
+
+			a {
+				float: left;
+			}
+		}
+	}
+}
+
+/*======================================================
+	OPTIONS
+======================================================*/
+.product-options-wrapper {
+	position: absolute;
+	top: 0;
+	right: $xxl-spacing;
 }

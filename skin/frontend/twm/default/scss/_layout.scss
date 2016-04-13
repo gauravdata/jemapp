@@ -34,9 +34,9 @@ html, body {
 				display: block;
 				border-bottom: 1px solid $s-grey;
 				padding: $s-spacing $m-spacing;
-				font-size: $l-font;
+				font-size: $m-font;
 				text-transform: uppercase;
-				font-weight: 500;
+				font-weight: $bold;
 			}
 		}
 	}

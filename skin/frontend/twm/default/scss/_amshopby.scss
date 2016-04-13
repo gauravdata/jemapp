@@ -8,10 +8,12 @@
 		width: auto !important;
 		border-width: 2px;
 		float: left;
-		margin-right: $xs-spacing;
 		font-weight: $bold;
 	}
 	.custom-dropdown {
+		float: left;
+		margin-right: $xs-spacing;
+		
 		.list {
 			a {
 				position: relative;
