@@ -1,6 +1,11 @@
+.buttons-set {
+	@extend .clearfix;
+}
+
 .button,
 input[type=submit] {
 	@extend .main-transition;
+	display: inline-block;
 	height: $form-field-height;
 	line-height: $form-field-height;
 	padding: 0 $xl-spacing;
@@ -11,8 +16,68 @@ input[type=submit] {
 	text-transform: uppercase;
 	cursor: pointer;
 
-	&:hover {
+	&:hover,
+	&:focus {
 		background-color: transparent;
 		color: $primary;
+		outline: none;
+	}
+
+	&.button-link {
+		background-color: transparent;
+		font-weight: $regular;
+		color: $primary;
+		border: none;
+		padding: 0;
+		margin-right: $xl-spacing;
+		text-transform: none;
+
+		&:hover,
+		&:focus {
+			color: $xl-grey;
+		}
+	}
+
+	&.button-simple {
+		background-color: $l-grey;
+		border-color: $l-grey;
+
+		&:hover,
+		&:focus {
+			background-color: transparent;
+			color: $l-grey;
+		}
+	}
+
+	&.button-sm {
+		padding: 0 $s-spacing;
+	}
+
+	&.button-block {
+		display: block;
+		width: 100%;
+		margin: 0;
+		text-align: center;
+	}
+}
+
+p.back-link {
+	color: $primary;
+	display: inline-block;
+	margin-right: $xl-spacing;
+
+	&:before {
+		font-family: 'Material Design Icons';
+		content: "\F141";
+		margin-right: $xxs-spacing;
+
+		&:hover,
+		&:focus {
+			color: $xl-grey;
+		}
+	}
+
+	small {
+		display: none;
 	}
 }

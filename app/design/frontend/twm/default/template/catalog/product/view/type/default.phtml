@@ -24,26 +24,15 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div id="footer">
-	<div class="content-container">
-		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('newsletterform')->toHtml(); ?>
-		<div class="row">
-			<div class="col-4">
-				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_1')->toHtml(); ?>
-			</div>
-			<div class="col-4">
-				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_2')->toHtml(); ?>
-			</div>
-			<div class="col-4">
-				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_3')->toHtml(); ?>
-			</div>
-		</div>
-		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_4')->toHtml(); ?>
-		<div class="footer-bar">
-			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_5')->toHtml(); ?>
-		</div>
-		<p class="text-center">
-			<?php echo $this->getCopyright() ?>
-		</p>
-	</div>
-</div>
+<?php /* @var $this Mage_Catalog_Block_Product_View_Abstract */?>
+<?php $_product = $this->getProduct() ?>
+
+<?php echo $this->getChildHtml('product_type_data_extra') ?>
+<?php echo $this->getPriceHtml($_product) ?>
+<?php if ($this->displayProductStockStatus()): ?>
+    <?php if ($_product->isAvailable()): ?>
+        <p class="availability in-stock"><?php echo $this->__('In stock') ?></p>
+    <?php else: ?>
+        <p class="availability out-of-stock"><?php echo $this->__('Out of stock') ?></p>
+    <?php endif; ?>
+<?php endif; ?>

@@ -30,18 +30,18 @@ $_product    = $this->getProduct();
 $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 ?>
 <?php if ($_product->isSaleable() && count($_attributes)):?>
-    <dl>
+    <div class="clearfix">
     <?php foreach($_attributes as $_attribute): ?>
-        <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label></dt>
-        <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+        <div class="select-overlay">
+            <label class="required"><?php echo $_attribute->getLabel() ?> <em>*</em></label>
             <div class="input-box">
                 <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
                     <option><?php echo $this->__('Choose an Option...') ?></option>
-                  </select>
-              </div>
-        </dd>
+                </select>
+            </div>
+        </div>
     <?php endforeach; ?>
-    </dl>
+    </div>
     <script type="text/javascript">
         var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
     </script>

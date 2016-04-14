@@ -24,26 +24,23 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div id="footer">
-	<div class="content-container">
-		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('newsletterform')->toHtml(); ?>
-		<div class="row">
-			<div class="col-4">
-				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_1')->toHtml(); ?>
-			</div>
-			<div class="col-4">
-				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_2')->toHtml(); ?>
-			</div>
-			<div class="col-4">
-				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_3')->toHtml(); ?>
-			</div>
-		</div>
-		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_4')->toHtml(); ?>
-		<div class="footer-bar">
-			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_5')->toHtml(); ?>
-		</div>
-		<p class="text-center">
-			<?php echo $this->getCopyright() ?>
-		</p>
-	</div>
+<h2><?php echo $this->__('Address Book') ?></h2>
+<p>
+    <a href="<?php echo $this->getAddressBookUrl() ?>" class="link"><?php echo $this->__('Manage Addresses') ?></a>
+</p>
+<div class="row">
+    <div class="col-6">
+        <h3><?php echo $this->__('Default Billing Address') ?></h3>
+        <address>
+            <?php echo $this->getPrimaryBillingAddressHtml() ?><br />
+        </address>
+        <a href="<?php echo $this->getPrimaryBillingAddressEditUrl() ?>" class="link"><?php echo $this->__('Edit Address') ?></a>
+    </div>
+    <div class="col-6">
+        <h3><?php echo $this->__('Default Shipping Address') ?></h3>
+        <address>
+            <?php echo $this->getPrimaryShippingAddressHtml() ?><br />
+        </address>
+        <a href="<?php echo $this->getPrimaryShippingAddressEditUrl() ?>" class="link"><?php echo $this->__('Edit Address') ?></a>
+    </div>
 </div>

@@ -52,12 +52,12 @@
         <?php $_odd = ''; ?>
         <?php foreach ($_orders as $_order): ?>
         <tr>
-            <td><?php echo $_order->getRealOrderId() ?></td>
-            <td><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+            <td class="no-wrap"><?php echo $_order->getRealOrderId() ?></td>
+            <td class="no-wrap"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></td>
             <td><?php echo $_order->getShippingAddress() ? $this->escapeHtml($_order->getShippingAddress()->getName()) : '&nbsp;' ?></td>
-            <td><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
-            <td><em><?php echo $_order->getStatusLabel() ?></em></td>
-            <td class="a-center">
+            <td class="no-wrap"><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
+            <td class="no-wrap"><em><?php echo $_order->getStatusLabel() ?></em></td>
+            <td class="a-center no-wrap">
                 <span class="nobr"><a href="<?php echo $this->getViewUrl($_order) ?>"><?php echo $this->__('View Order') ?></a>
                     <?php /*<span class="separator">|</span><a href="<?php echo $this->getTrackUrl($_order) ?>"><?php echo $this->__('Track Order') ?></a>&nbsp;*/ ?>
                     <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>

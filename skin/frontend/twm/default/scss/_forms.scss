@@ -1,3 +1,63 @@
+/*======================================================
+	FIELDS
+======================================================*/
+fieldset,
+.fieldset {
+	border-bottom: 1px dotted $m-grey;
+	padding-bottom: $s-spacing;
+	margin-bottom: $l-spacing;
+}
+
+ul.form-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	> li {
+		@extend .clearfix;
+		margin-bottom: $xs-spacing;
+
+		.field {
+			@extend .clearfix;
+			margin-bottom: $xs-spacing;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+.field {
+	margin-bottom: $s-spacing;
+}
+
+/*======================================================
+	LABELS
+======================================================*/
+label {
+	font-weight: $regular;
+	color: $l-grey;
+	float: left;
+	width: 33%;
+	padding: $xs-spacing 0;
+
+	em {
+		color: $error;
+		float: right;
+		margin-right: $s-spacing;
+	}
+}
+
+/*======================================================
+	INPUTS
+======================================================*/
+.input-box {
+	float: right;
+	width: 67%;
+}
+
+/*= Default =*/
 input.input-text,
 input[type=text],
 input[type=email],
@@ -21,53 +81,75 @@ select {
 		outline: none;
 	}
 }
-.custom-dropdown {
-	position: relative;
 
-	strong {
-		padding-right: $l-spacing;
-		position: relative;
+/*= Date of birth =*/
+.customer-dob {
+	.dob-day,
+	.dob-month,
+	.dob-year {
+		@extend .clearfix;
+		display: inline-block;
+
+		input {
+			text-align: center;
+			width: 100px;
+			float: left;
+		}
+		label {
+			float: left;
+			width: auto;
+			margin: 0 $xs-spacing;
+		}
+	}
+}
+
+/*= Checkbox & radio =*/
+.control {
+	.input-box,
+	label {
+		display: inline-block;
+		width: auto;
+		float: none;
+	}
+}
+
+/*======================================================
+	SELECT OVERLAY
+======================================================*/
+.select-overlay {
+	position: relative;
+	
+	label {
+		position: absolute;
+		width: 100%;
+		height: $form-field-height;
+		line-height: $form-field-height;
+		padding: 0 $s-spacing;
+		border: 1px solid $s-grey;
+		background-color: $white;
+		font-weight: $bold;
 		color: $xl-grey;
-		cursor: pointer;
+		float: none;
 
 		&:after {
 			position: absolute;
-			font-family: 'Material Design Icons';
 			content: "\F140";
+			font-family: 'Material Design Icons';
 			right: $xs-spacing;
 		}
-	}
 
-	.list {
-		@extend .fade-in-transition;
-		position: absolute;
-		top: $form-field-height;
-		background-color: $white;
-		left: 0;
-		padding: $s-spacing;
-		z-index: 999;
-		font-weight: normal;
-
-		> a,
-		> div {
-			display: block;
-			white-space: nowrap;
-			padding: $xs-spacing 0;
+		em {
+			float: none;
 		}
 	}
-
-	&:focus,
-	&.focus {
-		strong {
-			border-color: $white;
-
-			&:after {
-				content: "\F143";
-			}
-		}
-		.list {
-			visibility: visible;
-			opacity: 1;
-		}
+	select {
+		position: relative;
+		z-index: 100;
+		opacity: 0;
 	}
+}
+
+p.required {
+	margin: $m-spacing 0;
+	color: $error;
 }

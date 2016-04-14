@@ -3,7 +3,7 @@
 ======================================================*/
 html, body {
 	height: 100%;
-	background: $xs-grey;
+	background: $xxs-grey;
 	margin: 0;
 }
 
@@ -62,7 +62,7 @@ html, body {
 		text-align: center;
 
 		h1 {
-			font-size: $xxxl-font;
+			font-size: $xxxxl-font;
 			line-height: normal;
 			margin: 0;
 			color: $white;
@@ -82,7 +82,7 @@ html, body {
 		z-index: 20;
 	}
 
-	&:after {
+	/*&:after {
 		content: "";
 		position: absolute;
 		top: 0;
@@ -91,15 +91,155 @@ html, body {
 		left: 0;
 		z-index: 10;
 		background-color: rgba(0,0,0,0.2);
-	}
+	}*/
 }
 
 /*======================================================
 	CONTENT
 ======================================================*/
 .content-container {
-	max-width: 75%;
+	width: 1000px;
 	margin: 0 auto;
+}
+
+.area {
+	padding: $xxl-spacing 0;
+}
+
+.bg-xs-grey {
+	background-color: $xs-grey;
+}
+
+/*======================================================
+	CUSTOM DROPDOWN
+======================================================*/
+.custom-dropdown {
+	position: relative;
+
+	strong {
+		padding-right: $l-spacing;
+		position: relative;
+		color: $xl-grey;
+		cursor: pointer;
+
+		&:after {
+			position: absolute;
+			font-family: 'Material Design Icons';
+			content: "\F140";
+			right: $xs-spacing;
+		}
+	}
+
+	.list {
+		@extend .fade-in-transition;
+		position: absolute;
+		top: $form-field-height;
+		background-color: $white;
+		left: 0;
+		padding: $s-spacing;
+		z-index: 999;
+		font-weight: normal;
+
+		> a,
+		> div {
+			display: block;
+			white-space: nowrap;
+			padding: $xs-spacing 0;
+		}
+	}
+
+	&:focus,
+	&.focus {
+		strong {
+			border-color: $white;
+
+			&:after {
+				content: "\F143";
+			}
+		}
+		.list {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+}
+
+/*======================================================
+	BOX
+======================================================*/
+.box {
+	margin-bottom: $m-spacing;
+}
+
+/*======================================================
+	BLOCK
+======================================================*/
+.block {
+	margin-bottom: $m-spacing;
+	border: 1px solid $s-grey;
+	padding: $m-spacing;
+
+	.block-title {
+		font-size: $s-font;
+		text-transform: uppercase;
+		margin-bottom: $m-spacing;
+	}
+
+	ul,
+	ol {
+		list-style: none;
+		padding: 0;
+
+		li {
+			a {
+				color: $m-grey;
+
+				&:hover,
+				&:focus {
+					color: $xl-grey;
+				}
+			}
+			strong {
+				font-weight: $regular;
+			}
+			&.current {
+				color: $xl-grey;
+			}
+		}
+	}
+}
+
+/*======================================================
+	SOCIAL
+======================================================*/
+ul.social {
+	li {
+		display: inline-block;
+
+		a {
+			@include radius(50%);
+			display: inline-block;
+			width: $xxxl-font;
+			height: $xxxl-font;
+			line-height: $xxxl-font;
+			text-align: center;
+			background-color: $m-grey;
+			font-size: $xl-font;
+			color: $xxs-grey;
+			margin-right: $xxs-spacing;
+
+			i {
+				span {
+					display: none;
+				}
+			}
+
+			&:hover {
+				background-color: $xl-grey;
+			}
+		}
+
+	}
 }
 
 /*======================================================
@@ -111,7 +251,7 @@ html, body {
 	left: $side-nav-width;
 	width: calc(100% - #{$side-nav-width});
 	text-align: center;
-	padding-top: $xl-spacing;
+	padding-top: $xxl-spacing;
 	color: $m-grey;
 
 	form {
@@ -120,6 +260,8 @@ html, body {
 		label {
 			display: block;
 			margin-bottom: $s-spacing;
+			float: none;
+			width: auto;
 
 			strong {
 				color: $xl-grey;
@@ -142,8 +284,7 @@ html, body {
 		}
 	}
 
-	.footer-content {
-		width: 1000px;
+	.content-container {
 		display: inline-block;
 		text-align: justify;
 	}
@@ -173,31 +314,10 @@ html, body {
 		margin: $xl-spacing 0;
 
 		li {
-			display: inline-block;
-
 			a {
-				@include radius(50%);
-				display: inline-block;
-				width: $xxl-font;
-				height: $xxl-font;
-				line-height: $xxl-font;
-				text-align: center;
-				background-color: $m-grey;
-				font-size: $xl-font;
-				color: $xs-grey;
 				margin: 0 $xxs-spacing;
-
-				i {
-					span {
-						display: none;
-					}
-				}
-
-				&:hover {
-					background-color: $xl-grey;
-				}
+				color: $white;
 			}
-
 		}
 	}
 

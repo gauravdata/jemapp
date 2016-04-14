@@ -1,6 +1,9 @@
+.hidden,
+.no-display {
+	display: none !important;
+}
 .unstyled {
 	list-style: none;
-	margin: 0;
 	padding: 0;
 }
 .main-transition {

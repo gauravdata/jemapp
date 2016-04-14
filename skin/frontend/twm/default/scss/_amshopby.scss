@@ -9,10 +9,17 @@
 		border-width: 2px;
 		float: left;
 		font-weight: $bold;
+		background-color: transparent;
 	}
 	.custom-dropdown {
 		float: left;
 		margin-right: $xs-spacing;
+
+		&.focus {
+			strong {
+				background-color: $white;
+			}
+		}
 		
 		.list {
 			a {

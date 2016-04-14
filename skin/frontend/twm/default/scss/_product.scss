@@ -7,7 +7,7 @@
 ======================================================*/
 .product-visual-wrapper {
 	position: relative;
-	background-color: $s-grey;
+	background-color: transparentize($s-grey, 0.5);
 
 	.product-visual {
 		height: 675px;
@@ -43,7 +43,59 @@
 	OPTIONS
 ======================================================*/
 .product-options-wrapper {
+	@include transform(0, -50%);
 	position: absolute;
-	top: 0;
+	top: 50%;
 	right: $xxl-spacing;
+
+	.product-shop {
+		.price-box {
+			p {
+				display: inline-block;
+				margin-right: $xs-spacing;
+			}
+		}
+	}
+	.product-options {
+		.select-overlay {
+			float: left;
+			width: 30%;
+
+			label {
+				border-width: 2px;
+				background-color: transparent;
+			}
+		}
+	}
+	.product-options-bottom {
+		margin-bottom: $m-spacing;
+
+		.price-box {
+			display: none;
+		}
+	}
+}
+
+.availability {
+	font-weight: $bold;
+	position: relative;
+	padding-left: $m-spacing;
+
+	&:before {
+		@include radius(50%);
+		content: "";
+		width: $xs-spacing;
+		height: $xs-spacing;
+		background-color: $xl-grey;
+		position: absolute;
+		left: 0;
+		top: 4px;
+	}
+
+	&.in-stock:before {
+		background-color: $success;
+	}
+	&.out-of-stock:before {
+		background-color: $error;
+	}
 }

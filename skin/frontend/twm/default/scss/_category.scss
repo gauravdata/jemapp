@@ -1,3 +1,11 @@
+.catalog-category-view {
+	main {
+		.content-container {
+			width: 75%;
+		}
+	}
+}
+
 /*======================================================
 	TOOLBAR
 ======================================================*/
@@ -9,6 +17,7 @@
 	select {
 		border-width: 2px;
 		font-weight: bold;
+		background-color: transparent;
 	}
 	
 	.pager {
@@ -44,25 +53,25 @@
 		float: right;
 		margin-right: $xs-spacing;
 
-		label {
+		p {
 			height: $form-field-height;
 			line-height: $form-field-height;
 			float: left;
 			border: 2px solid $s-grey;
-			background-color: $white;
 			border-right: none;
 			font-weight: $bold;
 			padding-left: $m-spacing;
 			color: $xl-grey;
+			margin-bottom: 0;
 		}
-		select {
-			width: auto;
+		.select-overlay {
 			float: left;
-			border-left: none;
-			font-weight: $regular;
 
-			&:focus {
-				border-color: $s-grey;
+			label {
+				border-width: 2px;
+				border-left: none;
+				font-weight: $regular;
+				background-color: transparent;
 			}
 		}
 		a {
