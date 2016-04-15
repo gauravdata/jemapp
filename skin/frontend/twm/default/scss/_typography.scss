@@ -57,6 +57,10 @@ strong {
 	color: $xl-grey;
 }
 
+.error {
+	color: $error;
+}
+
 /*= Check =*/
 .check {
 	list-style: none;
@@ -107,12 +111,12 @@ address {
 ======================================================*/
 a {
 	@extend .main-transition;
-	color: $l-grey;
+	color: $primary;
 	text-decoration: none;
 
 	&:hover,
 	&:focus {
-		color: $primary;
+		color: $l-grey;
 		outline: none;
 	}
 }
@@ -141,6 +145,8 @@ img {
 ======================================================*/
 table {
 	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
 
 	th,
 	td {
@@ -152,10 +158,57 @@ table {
 		&:last-child {
 			padding-right: 0;
 		}
+
+		img {
+			max-width: none;
+		}
 	}
 
 	th {
 		font-weight: $regular;
 		color: $xl-grey;
+	}
+}
+
+/*======================================================
+	MESSAGES
+======================================================*/
+ul.messages {
+	@extend .unstyled;
+
+	ul {
+		@extend .unstyled;
+
+		li {
+			border: 1px solid $m-grey;
+			background-color: $s-grey;
+			padding: $s-spacing $m-spacing;
+			color: $l-grey;
+		}
+	}
+
+	.error-msg {
+		li {
+			border-color: $error;
+			color: $error;
+			background-color: lighten($error, 57%);
+		}
+	}
+
+	.success-msg {
+		li {
+			border-color: $success;
+			color: $success;
+			background-color: lighten($success, 57%);
+		}
+	}
+
+	.warning-msg,
+	.notice-msg {
+		li {
+			border-color: $notice;
+			color: $notice;
+			background-color: lighten($notice, 57%);
+		}
 	}
 }

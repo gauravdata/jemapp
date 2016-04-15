@@ -1,0 +1,18 @@
+table#shopping-cart-table {
+	tr {
+		margin-bottom: $m-spacing;
+	}
+	tbody {
+		td {
+			background-color: $white;
+			border-bottom: $m-spacing solid $xs-grey;
+
+			&:first-child {
+				padding-left: $xs-spacing;
+			}
+			&:last-child {
+				padding-right: $xs-spacing;
+			}
+		}
+	}
+}

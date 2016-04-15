@@ -5,7 +5,8 @@ fieldset,
 .fieldset {
 	border-bottom: 1px dotted $m-grey;
 	padding-bottom: $s-spacing;
-	margin-bottom: $l-spacing;
+	margin: 0 0 $l-spacing;
+	border: none;
 }
 
 ul.form-list {
@@ -29,6 +30,7 @@ ul.form-list {
 }
 
 .field {
+	@extend .clearfix;
 	margin-bottom: $s-spacing;
 }
 
@@ -40,7 +42,7 @@ form {
 		font-weight: $regular;
 		color: $l-grey;
 		float: left;
-		width: 33%;
+		width: calc(33% - 10px);
 		padding: $xs-spacing 0;
 
 		em {
@@ -116,6 +118,17 @@ select {
 	input {
 		float: left;
 		margin: ($s-spacing - 1) $xs-spacing 0 0;
+	}
+}
+
+form {
+	.field-blocked {
+		label,
+		.input-box {
+			float: none;
+			width: 100%;
+			display: block;
+		}
 	}
 }
 
