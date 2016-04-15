@@ -35,17 +35,19 @@ ul.form-list {
 /*======================================================
 	LABELS
 ======================================================*/
-label {
-	font-weight: $regular;
-	color: $l-grey;
-	float: left;
-	width: 33%;
-	padding: $xs-spacing 0;
+form {
+	label {
+		font-weight: $regular;
+		color: $l-grey;
+		float: left;
+		width: 33%;
+		padding: $xs-spacing 0;
 
-	em {
-		color: $error;
-		float: right;
-		margin-right: $s-spacing;
+		em {
+			color: $error;
+			float: right;
+			margin-right: $s-spacing;
+		}
 	}
 }
 
@@ -111,6 +113,10 @@ select {
 		width: auto;
 		float: none;
 	}
+	input {
+		float: left;
+		margin: ($s-spacing - 1) $xs-spacing 0 0;
+	}
 }
 
 /*======================================================
@@ -130,6 +136,7 @@ select {
 		font-weight: $bold;
 		color: $xl-grey;
 		float: none;
+		left: 0;
 
 		&:after {
 			position: absolute;

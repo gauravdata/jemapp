@@ -144,7 +144,8 @@ table {
 
 	th,
 	td {
-		padding: $xxs-spacing $xs-spacing $xxs-spacing 0;
+		padding: $xs-spacing;
+		padding-left: 0;
 		text-align: left;
 		border-bottom: 1px solid $s-grey;
 

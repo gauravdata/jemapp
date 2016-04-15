@@ -111,6 +111,26 @@ html, body {
 }
 
 /*======================================================
+	PAGER
+======================================================*/
+.pager {
+	@extend .clearfix;
+	margin: $m-spacing 0;
+
+	.amount {
+		float: left;
+	}
+	.limiter {
+		float: right;
+
+		label {
+			background-color: transparent;
+			border-width: 2px;
+		}
+	}
+}
+
+/*======================================================
 	CUSTOM DROPDOWN
 ======================================================*/
 .custom-dropdown {
