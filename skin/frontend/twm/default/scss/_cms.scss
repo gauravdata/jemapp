@@ -1,0 +1,37 @@
+/*======================================================
+	USPS
+======================================================*/
+.main-usps {
+	background-color: $white;
+	color: $xl-grey;
+	padding: $xs-spacing $m-spacing;
+	text-align: center;
+
+	p,
+	ul,
+	ol {
+		margin: 0;
+	}
+
+	ul,
+	ol {
+		@extend .unstyled;
+
+		li {
+			display: inline-block;
+			margin: 0 $xl-spacing;
+
+			&:before {
+				font-family: 'Material Design Icons';
+				content: "\F12C";
+				font-size: $l-font;
+				margin-right: $xs-spacing;
+			}
+		}
+	}
+}
+.cms-page-view {
+	.main-usps {
+		display: none;
+	}
+}

@@ -40,11 +40,14 @@
 			<?php echo $this->getChildHtml('global_notices') ?>
 			<?php echo $this->getChildHtml('header') ?>
 			<main id="main">
+				<div class="main-usps">
+					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('main_usps')->toHtml(); ?>
+				</div>
+				<?php echo $this->getChildHtml('global_messages') ?>
 				<div class="area bg-xs-grey">
 					<div class="content-container">
 						<div class="row">
 							<div class="col-main col-9">
-								<?php echo $this->getChildHtml('global_messages') ?>
 								<?php echo $this->getChildHtml('content') ?>
 							</div>
 							<div class="col-right col-3 sidebar"><?php echo $this->getChildHtml('right') ?></div>

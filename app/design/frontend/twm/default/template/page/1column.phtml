@@ -40,6 +40,9 @@
 			<?php echo $this->getChildHtml('global_notices') ?>
 			<?php echo $this->getChildHtml('header') ?>
 			<main id="main">
+				<div class="main-usps">
+					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('main_usps')->toHtml(); ?>
+				</div>
 				<?php echo $this->getChildHtml('global_messages') ?>
 				<?php echo $this->getChildHtml('content') ?>
 			</main>

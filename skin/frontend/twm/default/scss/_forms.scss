@@ -37,6 +37,11 @@ ul.form-list {
 /*======================================================
 	LABELS
 ======================================================*/
+.control {
+	label {
+		padding: $xs-spacing 0;
+	}
+}
 form {
 	label {
 		font-weight: $regular;
@@ -122,7 +127,7 @@ select {
 }
 
 form {
-	.field-blocked {
+	.wide {
 		label,
 		.input-box {
 			float: none;

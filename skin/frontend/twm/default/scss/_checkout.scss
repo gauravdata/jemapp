@@ -9,7 +9,7 @@
 	}
 }
 #checkoutSteps {
-	li {
+	> li {
 		display: none;
 
 		&.active {
@@ -18,10 +18,11 @@
 	}
 }
 .progress-bar {
-	text-align: center;
+	display: inline-block;
+	margin-bottom: 0;
 
 	li {
-		display: inline-block;
+		float: left;
 		position: relative;
 		font-size: $l-font;
 		padding-left: $xl-spacing + 10;
@@ -41,14 +42,36 @@
 			left: 0;
 		}
 
+		strong {
+			color: $m-grey;
+			text-transform: uppercase;
+		}
+
 		&:after {
 			content: "";
 			height: 1px;
 			width: $m-spacing;
 			background-color: $m-grey;
 			position: absolute;
-			right: 5px;
+			right: 0;
 			top: 50%;
+		}
+
+		&:last-child {
+			&:after {
+				display: none;
+			}
+		}
+	}
+}
+
+#checkout-progress-wrapper {
+	.block {
+		border: none;
+		background-color: $white;
+
+		ul {
+			margin: 0;
 		}
 	}
 }
