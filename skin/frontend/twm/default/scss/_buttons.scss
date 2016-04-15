@@ -62,6 +62,18 @@ input[type=submit] {
 		}
 	}
 
+	&.button-outline {
+		background-color: transparent;
+		border-color: $s-grey;
+		color: $xl-grey;
+
+		&:hover,
+		&:hover {
+			border-color: $primary;
+			color: $primary;
+		}
+	}
+
 	&.button-sm {
 		padding: 0 $s-spacing;
 	}

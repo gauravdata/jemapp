@@ -1,0 +1,54 @@
+.checkout-onepage-index {
+	#header .nav-btn,
+	#side-nav {
+		display: none;
+	}
+	#main {
+		width: 100%;
+		left: 0;
+	}
+}
+#checkoutSteps {
+	li {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+}
+.progress-bar {
+	text-align: center;
+
+	li {
+		display: inline-block;
+		position: relative;
+		font-size: $l-font;
+		padding-left: $xl-spacing + 10;
+		text-align: left;
+		padding-right: $m-spacing + 10;
+
+		.mdi {
+			@include radius(50%);
+			width: $xl-spacing;
+			height: $xl-spacing;
+			line-height: $xl-spacing;
+			background-color: $m-grey;
+			color: $xxs-grey;
+			text-align: center;
+			font-size: $xl-font;
+			position: absolute;
+			left: 0;
+		}
+
+		&:after {
+			content: "";
+			height: 1px;
+			width: $m-spacing;
+			background-color: $m-grey;
+			position: absolute;
+			right: 5px;
+			top: 50%;
+		}
+	}
+}

@@ -44,11 +44,11 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <?php endif; ?>
         </h2>
         <?php if ($_options = $this->getOptionList()):?>
-        <dl class="item-options">
+        <ul class="item-options unstyled">
             <?php foreach ($_options as $_option) : ?>
             <?php $_formatedOptionValue = $this->getFormatedOptionValue($_option) ?>
-            <dt><?php echo $this->escapeHtml($_option['label']) ?></dt>
-            <dd<?php if (isset($_formatedOptionValue['full_view'])): ?> class="truncated"<?php endif; ?>><?php echo $_formatedOptionValue['value'] ?>
+            <li><strong><?php echo $this->escapeHtml($_option['label']) ?></strong></li>
+            <li<?php if (isset($_formatedOptionValue['full_view'])): ?> class="truncated"<?php endif; ?>><?php echo $_formatedOptionValue['value'] ?>
                 <?php if (isset($_formatedOptionValue['full_view'])): ?>
                 <div class="truncated_full_value">
                     <dl class="item-options">
@@ -57,9 +57,9 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
                     </dl>
                 </div>
                 <?php endif; ?>
-            </dd>
+            </li>
             <?php endforeach; ?>
-        </dl>
+        </ul>
         <?php endif;?>
         <?php if ($messages = $this->getMessages()): ?>
         <?php foreach ($messages as $message): ?>
@@ -187,17 +187,19 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <div class="select-overlay">
             <label><?php echo $this->getQty() ?></label>
             <select name="cart[<?php echo $_item->getId() ?>][qty]" data-cart-item-id="<?php echo $this->jsQuoteEscape($_item->getSku()) ?>" value="<?php echo $this->getQty() ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+                <?php
+                    $i = 1;
+                    $selected = '';
+                    while($i <= 60) {
+                        if($i == $this->getQty()) {
+                            $selected = ' selected="selected"';
+                        } else {
+                            $selected = '';
+                        }
+                        echo '<option value="' . $i . '"' . $selected . '>' . $i . '</option>';
+                        $i++;
+                    }
+                ?>
             </select>
         </div>
     </td>

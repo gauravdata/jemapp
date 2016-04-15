@@ -30,6 +30,7 @@ jQuery(window).load(function(){
 	// select overlay update label value
 	jQuery('.select-overlay select').change(function() {
 		jQuery(this).parents('.select-overlay').find('label').html(jQuery(this).val());
+		jQuery(this).parents('form').submit();
 	});
 
 });

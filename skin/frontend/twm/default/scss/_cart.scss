@@ -2,7 +2,7 @@ ul.checkout-types {
 	margin-bottom: 0;
 }
 
-table#shopping-cart-table {
+#shopping-cart-table {
 	thead {
 		display: none;
 	}
@@ -10,18 +10,37 @@ table#shopping-cart-table {
 		td {
 			background-color: $white;
 			border-bottom: $m-spacing solid $xs-grey;
+			vertical-align: middle;
 
 			&:first-child {
 				padding-left: $xs-spacing;
 			}
 			&:last-child {
 				padding-right: $xs-spacing;
+				vertical-align: top;
 			}
 		}
 		tr:last-child {
 			td {
 				border-bottom: none;
 			}
+		}
+	}
+}
+
+#shopping-cart-totals-table {
+	td:first-child {
+		font-weight: $bold;
+		color: $xl-grey;
+	}
+	td:last-child {
+		font-weight: $thin;
+		font-size: $xl-font;
+		color: $l-grey;
+
+		strong {
+			font-weight: $thin;
+			color: $l-grey;
 		}
 	}
 }
