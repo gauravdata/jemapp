@@ -20,6 +20,18 @@ table {
 	margin: 0 0 $m-spacing;
 }
 
+hr {
+	height: 0;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px dotted $m-grey;
+	margin: $m-spacing 0;
+
+	&.hr-xl {
+		margin: $xl-spacing 0;
+	}
+}
+
 /*======================================================
 	TITLES
 ======================================================*/
@@ -38,11 +50,15 @@ h3 {
 }
 
 .page-title {
+	border-bottom: 1px dotted $m-grey;
+	margin-bottom: $l-spacing;
+
 	h1 {
 		text-align: center;
-		border-bottom: 1px dotted $m-grey;
-		padding: 0 0 $xl-spacing;
-		margin-bottom: $l-spacing;
+	}
+
+	> * {
+		margin-bottom: $xl-spacing;
 	}
 }
 
@@ -150,17 +166,23 @@ table {
 
 	th,
 	td {
-		padding: $xs-spacing;
+		padding: $s-spacing $xs-spacing;
 		padding-left: 0;
 		text-align: left;
-		border-bottom: 1px solid $s-grey;
+		border-bottom: 1px dotted $m-grey;
 
 		&:last-child {
 			padding-right: 0;
 		}
 
 		img {
-			max-width: none;
+			max-width: none !important;
+		}
+
+		input,
+		select,
+		textarea {
+			width: auto !important;
 		}
 	}
 

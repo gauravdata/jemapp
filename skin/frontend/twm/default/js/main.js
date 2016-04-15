@@ -27,4 +27,9 @@ jQuery(window).load(function(){
 		return false;
 	});
 
+	// select overlay update label value
+	jQuery('.select-overlay select').change(function() {
+		jQuery(this).parents('.select-overlay').find('label').html(jQuery(this).val());
+	});
+
 });

@@ -43,6 +43,12 @@ input[type=submit] {
 		&:focus {
 			color: $xl-grey;
 		}
+
+		&.button-back {
+			&:before {
+				content: "\F141";
+			}
+		}
 	}
 
 	&.button-simple {

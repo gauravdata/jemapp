@@ -1,6 +1,10 @@
+ul.checkout-types {
+	margin-bottom: 0;
+}
+
 table#shopping-cart-table {
-	tr {
-		margin-bottom: $m-spacing;
+	thead {
+		display: none;
 	}
 	tbody {
 		td {
@@ -12,6 +16,11 @@ table#shopping-cart-table {
 			}
 			&:last-child {
 				padding-right: $xs-spacing;
+			}
+		}
+		tr:last-child {
+			td {
+				border-bottom: none;
 			}
 		}
 	}
