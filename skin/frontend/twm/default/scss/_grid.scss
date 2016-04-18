@@ -51,6 +51,14 @@
 	> .col-12 {
 		width: 100%;
 	}
+
+	&.wide {
+		margin: 0;
+
+		> *[class^="col-"] {
+			padding: 0;
+		}
+	}
 }
 .pull-left {
 	float: left;

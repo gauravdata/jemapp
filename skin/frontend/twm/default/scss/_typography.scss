@@ -45,6 +45,9 @@ h3 {
 h1 {
 	font-size: $xxxl-font;
 }
+h2 {
+	font-size: $xxl-font;
+}
 h3 {
 	color: $l-grey;
 }
@@ -58,7 +61,14 @@ h3 {
 	}
 
 	> * {
-		margin-bottom: $xl-spacing;
+		margin: $xl-spacing 0;
+	}
+}
+.area {
+	.page-title {
+		> * {
+			margin-top: 0;
+		}
 	}
 }
 
@@ -164,12 +174,15 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 
+	tr {
+		border-bottom: 1px dotted $m-grey;
+	}
+
 	th,
 	td {
 		padding: $s-spacing $xs-spacing;
 		padding-left: 0;
 		text-align: left;
-		border-bottom: 1px dotted $m-grey;
 		vertical-align: top;
 
 		&:last-child {

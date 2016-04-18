@@ -2,6 +2,29 @@
 	position: relative;
 }
 
+.show-more {
+	@extend .fade-out-transition;
+	position: fixed;
+	background-color: transparentize($white, 0.15);
+	bottom: $xs-spacing;
+	left: 50%;
+	z-index: 999;
+	padding: $xs-spacing;
+	color: $l-grey;
+
+	&.hide {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.mdi {
+		display: block;
+		font-size: $xxxxl-font;
+		text-align: center;
+		margin: -$s-spacing 0;
+	}
+}
+
 /*======================================================
 	VISUAL
 ======================================================*/
@@ -10,15 +33,24 @@
 	background-color: transparentize($s-grey, 0.5);
 
 	.product-visual {
+		width: 100%;
 		height: 675px;
-		background-position: 25% 50%;
-		background-size: auto 100%;
+		position: relative;
+		overflow: hidden;
 		background-repeat: no-repeat;
+		background-position: 30% 50%;
+		cursor: zoom-in;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
 	}
 	.more-views {
 		position: absolute;
 		left: $m-spacing;
 		bottom: $m-spacing;
+		z-index: 100;
 
 		a {
 			display: block;
@@ -39,6 +71,21 @@
 	}
 }
 
+.zoomContainer {
+	@extend .fade-in-transition;
+
+	&.visible {
+		opacity: 1;
+		visibility: visible;
+
+		.zoomWindow {
+			display: block !important;
+			opacity: 1 !important;
+			cursor: zoom-out !important;
+		}
+	}
+}
+
 /*======================================================
 	OPTIONS
 ======================================================*/
@@ -47,6 +94,7 @@
 	position: absolute;
 	top: 50%;
 	right: $xxl-spacing;
+	max-width: 360px;
 
 	.product-shop {
 		.price-box {

@@ -27,6 +27,12 @@
 
 <?php
 $_product    = $this->getProduct();
+Mage::helper('catalog/product')->setSkipSaleableCheck(true);
+$jsonConfig = $this->getJsonConfig();
+$this->unsAllowProducts();
+$config = Mage::helper('core')->jsonDecode($jsonConfig);
+Mage::helper('catalog/product')->setSkipSaleableCheck(false);
+
 $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 ?>
 <?php if ($_product->isSaleable() && count($_attributes)):?>
@@ -43,6 +49,28 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     <?php endforeach; ?>
     </div>
     <script type="text/javascript">
-        var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+        var saSelect = $('attribute<?php echo $_attribute->getAttributeId() ?>');
+        var spConfig = new Product.Config(<?php echo $jsonConfig ?>);
+        var _all_options = <?php echo $jsonConfig ?>;
+        var _options = <?php echo $this->getJsonConfig() ?>;
+        for (var i=0;i<_all_options.attributes[<?php echo $_attribute->getAttributeId() ?>].options.length;i++) {
+            var o = _all_options.attributes[<?php echo $_attribute->getAttributeId() ?>].options[i];
+            var _found = false;
+            for (var j=0;j<_options.attributes[<?php echo $_attribute->getAttributeId() ?>].options.length;j++) {
+                var k = _all_options.attributes[<?php echo $_attribute->getAttributeId() ?>].options[j];
+                if (o.id == k.id) {
+                    _found = true;
+                    break;
+                }
+            }
+            if (!_found) {
+                for (var l=0;l<saSelect.options.length;l++) {
+                    var p = saSelect.options[l];
+                    if (p.value == o.id) {
+                        p.disabled = true;
+                    }
+                }
+            }
+        }
     </script>
 <?php endif;?>

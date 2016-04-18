@@ -1,3 +1,14 @@
+.checkout-cart-index {
+	#header .nav-btn,
+	#header .quick-access,
+	#side-nav {
+		display: none;
+	}
+	#main {
+		width: 100%;
+		left: 0;
+	}
+}
 ul.checkout-types {
 	margin-bottom: 0;
 }
@@ -9,7 +20,7 @@ ul.checkout-types {
 	tbody {
 		td {
 			background-color: $white;
-			border-bottom: $m-spacing solid $xs-grey;
+			border-bottom: $xxs-spacing solid $xs-grey;
 			vertical-align: middle;
 
 			&:first-child {

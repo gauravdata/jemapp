@@ -5,7 +5,7 @@
 	left: 0;
 	width: 100%;
 	z-index: 999;
-	max-height: $header-height;
+	height: $header-height;
 	color: $white;
 	line-height: $header-height;
 	font-size: $l-font;
@@ -118,7 +118,6 @@
 
 		/*= Language switch =*/
 		.form-language {
-			line-height: $header-height;
 			position: relative;
 			padding: 0 $m-spacing;
 
@@ -167,12 +166,13 @@
 
 				a {
 					display: block;
+					height: $header-height;
 					line-height: $header-height;
 					padding: 0 $m-spacing;
 
 					&:before {
 						font-family: 'Material Design Icons';
-						content: "\F110";
+						content: "\F49A";
 						margin-right: $xxs-spacing;
 					}
 				}

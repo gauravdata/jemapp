@@ -8,10 +8,18 @@
 
 <?php if($_imgUrl) { ?>
 <div class="page-visual" style="background-image: url(<?php echo $_imgUrl; ?>);">
-<?php } else { ?>
-<div class="page-top">
-<?php } ?>
-    <div class="content">
-        <h1><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+    <div class="page-top">
+        <div class="content">
+            <h1><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+        </div>
     </div>
 </div>
+<?php } else { ?>
+<div class="content-container">
+    <div class="page-title">
+        <div class="content">
+            <h1><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+        </div>
+    </div>
+</div>
+<?php } ?>

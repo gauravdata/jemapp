@@ -149,9 +149,22 @@
     </div>
 
 <?php if ($_product->getShortDescription()):?>
-    <div class="short-description">
-        <h2><?php echo $this->__('Quick Overview') ?></h2>
-        <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+    <div class="short-description" id="more">
+        <div class="row wide">
+            <div class="col-6 content-box-img-left">
+                <img src="http://placehold.it/1200x1000" class="sync-height">
+            </div>
+            <div class="col-6">
+                <div class="content-box-wrapper sync-height">
+                    <div class="content-box">
+                        <h2><?php echo $this->__('Quick Overview') ?></h2>
+                        <div class="std">
+                            <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 <?php endif;?>
 
@@ -168,3 +181,8 @@
         <?php echo $this->getChildHtml('product_additional_data') ?>
     </div>
 </div>
+
+<a href="#more" class="show-more">
+    <i class="mdi mdi-chevron-down"></i>
+    <?php echo $this->__('Show more'); ?>
+</a>

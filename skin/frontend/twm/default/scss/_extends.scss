@@ -13,9 +13,17 @@
 	visibility: hidden;
 	opacity: 0;
 
-	-moz-transition: visibility 0s linear 0.25s, opacity 0.25s linear 0.25s;
-	-webkit-transition: visibility 0s linear 0.25s, opacity 0.25s linear 0.25s;
-	transition: visibility 0s linear 0.25s, opacity 0.25s linear 0.25s;
+	-moz-transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+	-webkit-transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+	transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+}
+.fade-out-transition {
+	visibility: visible;
+	opacity: 1;
+
+	-moz-transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+	-webkit-transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+	transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
 }
 .position-center {
 	position: absolute;

@@ -82,7 +82,9 @@
                     <div class="col-6 registered-users">
                         <div class="buttons-set">
                             <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="button button-link"><?php echo $this->__('Forgot Your Password?') ?></a>
-                            <button type="submit" class="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Login')) ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
+                            <button type="submit" class="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Login')) ?>" name="send" id="send2">
+                                <span><span><i class="mdi mdi-lock"></i> <?php echo $this->__('Login') ?></span></span>
+                            </button>
                         </div>
                     </div>
                 </div>

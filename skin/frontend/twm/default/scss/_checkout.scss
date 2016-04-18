@@ -1,5 +1,6 @@
 .checkout-onepage-index {
 	#header .nav-btn,
+	#header .quick-access,
 	#side-nav {
 		display: none;
 	}
@@ -74,4 +75,7 @@
 			margin: 0;
 		}
 	}
+}
+.pcnl-info-text {
+	margin-bottom: $m-spacing;
 }

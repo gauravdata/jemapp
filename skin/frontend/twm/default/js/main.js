@@ -1,5 +1,7 @@
 jQuery(window).load(function(){
 
+	jQuery('.sync-height').syncheight();
+
 	// show/hide sidenav
 	jQuery('#header .nav-btn').click(function(){
 		jQuery(this).find('.mdi').toggleClass('mdi-close mdi-plus');
@@ -20,17 +22,39 @@ jQuery(window).load(function(){
 		jQuery(this).parent().toggleClass('focus');
 	});
 
-	// switch product image
-	jQuery('.product-img-box .more-views a').click(function(){
-		var imageUrl = jQuery(this).attr('href');
-		jQuery('.product-visual').css('background-image', 'url(' + imageUrl + ')');
-		return false;
-	});
-
 	// select overlay update label value
 	jQuery('.select-overlay select').change(function() {
 		jQuery(this).parents('.select-overlay').find('label').html(jQuery(this).val());
 		jQuery(this).parents('form').submit();
 	});
 
+	jQuery('.back-to-top, .show-more').click(function(){
+		jQuery('html, body').animate({
+			scrollTop: jQuery(jQuery(this).attr('href')).offset().top
+		}, 500);
+		return false;
+	});
+
+});
+
+jQuery(window).scroll(function() {
+
+	// show back to top
+	if(jQuery(window).scrollTop() > 200) {
+		jQuery('.back-to-top').addClass('show');
+	} else {
+		jQuery('.back-to-top').removeClass('show');
+	}
+
+	// hide show more
+	if(jQuery(window).scrollTop() > (jQuery('#wrapper').height() - (jQuery('#footer').height() + jQuery(window).height()))) {
+		jQuery('.show-more').addClass('hide');
+	}
+
+
+});
+
+jQuery(window).resize(function(){
+	jQuery('.sync-height').syncheight();
+	setFooter();
 });

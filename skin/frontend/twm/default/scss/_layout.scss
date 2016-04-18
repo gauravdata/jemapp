@@ -26,18 +26,86 @@ html, body {
 	bottom: 0;
 	z-index: 999;
 
-	ul {
+	> ul {
 		@extend .unstyled;
+		margin-bottom: 0;
 
 		> li {
+			border-bottom: 1px solid $s-grey;
+
 			> a {
 				display: block;
-				border-bottom: 1px solid $s-grey;
 				padding: $s-spacing $m-spacing;
 				font-size: $m-font;
 				text-transform: uppercase;
 				font-weight: $bold;
 				color: $xl-grey;
+			}
+
+			> ul {
+				@extend .unstyled;
+				display: none;
+
+				> li {
+					> a {
+						display: block;
+						padding: $xxs-spacing $m-spacing;
+						color: $m-grey;
+
+						&:hover,
+						&:focus {
+							color: $xl-grey;
+						}
+					}
+
+					&.active {
+						a {
+							color: $xl-grey;
+							font-weight: $bold;
+
+							span {
+								position: relative;
+
+								&:after {
+									content: "";
+									position: absolute;
+									width: 100%;
+									height: 2px;
+									background-color: $xl-grey;
+									bottom: 0;
+									left: 0;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			&.parent {
+				> a {
+					position: relative;
+
+					&:after {
+						position: absolute;
+						content: "\F415";
+						font-family: 'Material Design Icons';
+						top: 50%;
+						font-size: $l-font;
+						right: $m-spacing;
+						margin-top: -11px;
+					}
+				}
+
+				&.active {
+					> a {
+						&:after {
+							content: "\F374";
+						}
+					}
+					> ul {
+						display: block;
+					}
+				}
 			}
 		}
 	}
@@ -109,6 +177,45 @@ html, body {
 
 .bg-xs-grey {
 	background-color: $xs-grey;
+}
+
+.content-box-wrapper {
+	position: relative;
+
+	.content-box {
+		@include transform(-50%, -50%);
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 80%;
+		max-width: 420px;
+	}
+}
+
+.content-box-img-left,
+.content-box-img-right {
+	position: relative;
+
+	img {
+		display: block;
+	}
+}
+.content-box-img-left:before,
+.content-box-img-right:before {
+	@include rotate(45deg);
+	content: "";
+	background-color: $xxs-grey;
+	width: $xxl-font;
+	height: $xxl-font;
+	position: absolute;
+	top: 50%;
+	margin: -($xxl-font / 2);
+}
+.content-box-img-left:before {
+	right: 0;
+}
+.content-box-img-right:before {
+	left: 0;
 }
 
 /*======================================================
@@ -355,6 +462,83 @@ ul.social {
 				display: inline-block;
 				opacity: 0.5;
 				margin: 0 $s-spacing;
+			}
+		}
+	}
+}
+
+.back-to-top {
+	@extend .fade-in-transition;
+	position: fixed;
+	background-color: $white;
+	right: 0;
+	bottom: 0;
+	padding: $xs-spacing ($xl-spacing + $m-spacing);
+	color: $m-grey;
+	font-weight: $bold;
+
+	&.show {
+		opacity: 1;
+		visibility: visible;
+	}
+	
+	.mdi {
+		position: absolute;
+		top: 50%;
+		margin-top: -($m-font / 2);
+		right: $xs-spacing;
+	}
+}
+
+/*======================================================
+	TOGGLE SIDE NAV
+======================================================*/
+.notice-cookie {
+	@include transform(-50%, 0);
+	@extend .clearfix;
+	position: fixed;
+	z-index: 999;
+	bottom: $m-spacing;
+	left: 50%;
+	background-color: transparentize($xl-grey, 0.3);
+	color: $white;
+
+	a {
+		color: $white;
+		text-decoration: underline;
+	}
+
+	.notice-text {
+		float: left;
+		padding: $s-spacing;
+		width: calc(100% - 50px);
+
+		p {
+			margin: 0;
+		}
+	}
+
+	.actions {
+		.button {
+			position: absolute;
+			width: 50px;
+			height: 100%;
+			padding: 0;
+			background-color: $l-grey;
+			border: none;
+
+			span {
+				display: none;
+			}
+
+			&:after {
+				content: "\F156";
+				font-family: 'Material Design Icons';
+				font-size: $xl-font;
+			}
+			&:hover,
+			&:focus {
+				color: $m-grey;
 			}
 		}
 	}

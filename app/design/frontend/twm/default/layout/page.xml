@@ -58,6 +58,7 @@ Default layout, loads most of the pages
 
 				<action method="addJs"><name>jquery/jquery.min.js</name></action>
                 <action method="addItem"><type>skin_js</type><name>js/jquery.elevateZoom.js</name><params/></action>
+                <action method="addItem"><type>skin_js</type><name>js/syncheight.js</name><params/></action>
 				<action method="addItem"><type>skin_js</type><name>js/main.js</name><params/></action>
             </block>
 
