@@ -1,3 +1,6 @@
+/*======================================================
+	DEFAULT
+======================================================*/
 .catalog-category-view {
 	main {
 		.content-container {
@@ -86,8 +89,6 @@
 	}
 }
 .toolbar-bottom {
-	margin-bottom: $l-spacing;
-
 	.toolbar {
 		.pager {
 			position: static;
@@ -125,6 +126,22 @@
 
 			a.product-image {
 				display: block;
+				position: relative;
+
+				.hover-image {
+					@include rotate(180deg);
+					position: absolute;
+					top: 0;
+					left: 0;
+					background-color: $black;
+					opacity: 0;
+				}
+
+				&:hover {
+					.hover-image {
+						opacity: 1;
+					}
+				}
 			}
 			h2.product-name {
 				float: left;

@@ -101,6 +101,7 @@ Category default layout
                 </block>
             </block>
             <block type="catalog/category_view" name="category.description" template="catalog/category/description.phtml"></block>
+            <block type="reports/product_viewed" name="product.recently.viewed" after="-" as="product_recently_viewed" template="reports/product_viewed.phtml"/>
         </reference>
     </catalog_category_default>
 
@@ -139,6 +140,7 @@ Category layered navigation layout
                 </block>
             </block>
             <block type="catalog/category_view" name="category.description" template="catalog/category/description.phtml"></block>
+            <block type="reports/product_viewed" name="product.recently.viewed" after="-" as="product_recently_viewed" template="reports/product_viewed.phtml"/>
         </reference>
     </catalog_category_layered>
 
@@ -200,9 +202,11 @@ Product view
                 <action method="setTierPriceTemplate"><template>catalog/product/view/tierprices.phtml</template></action>
 
                 <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml">
-                    <action method="setColumnCount"><columns>4</columns></action>
-                    <action method="setItemLimit"><type>upsell</type><limit>4</limit></action>
+                    <action method="setColumnCount"><columns>10</columns></action>
+                    <action method="setItemLimit"><type>upsell</type><limit>10</limit></action>
                 </block>
+
+                <block type="reports/product_viewed" name="product.recently.viewed" after="-" as="product_recently_viewed" template="reports/product_viewed.phtml"/>
 
                 <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data" />
                 <block type="catalog/product_view_description" name="product.description" as="description" template="catalog/product/view/description.phtml">
@@ -252,9 +256,6 @@ Product view
                 <action method="unsetCallChild"><child>container1</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
                 <action method="unsetCallChild"><child>container2</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
             </block>
-        </reference>
-        <reference name="right">
-            <block type="catalog/product_list_related" name="catalog.product.related" before="-" template="catalog/product/list/related.phtml"/>
         </reference>
     </catalog_product_view>
 

@@ -171,14 +171,6 @@ html, body {
 	margin: 0 auto;
 }
 
-.area {
-	padding: $xxl-spacing 0;
-}
-
-.bg-xs-grey {
-	background-color: $xs-grey;
-}
-
 .content-box-wrapper {
 	position: relative;
 
@@ -216,6 +208,21 @@ html, body {
 }
 .content-box-img-right:before {
 	left: 0;
+}
+
+/*======================================================
+	AREAS
+======================================================*/
+.area {
+	padding: $xxl-spacing 0;
+
+	&.area-m {
+		padding: $m-spacing 0;
+	}
+}
+
+.bg-xs-grey {
+	background-color: $xs-grey;
 }
 
 /*======================================================

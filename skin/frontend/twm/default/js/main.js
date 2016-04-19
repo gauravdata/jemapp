@@ -28,9 +28,18 @@ jQuery(window).load(function(){
 		jQuery(this).parents('form').submit();
 	});
 
-	jQuery('.back-to-top, .show-more').click(function(){
+	// scroll to id
+	jQuery('.scroll-to').click(function(){
 		jQuery('html, body').animate({
 			scrollTop: jQuery(jQuery(this).attr('href')).offset().top
+		}, 500);
+		return false;
+	});
+
+	// scroll 85% lower
+	jQuery('.show-more').click(function(){
+		jQuery('html, body').animate({
+			scrollTop: jQuery(window).scrollTop() + (jQuery(window).height() * 0.85)
 		}, 500);
 		return false;
 	});
@@ -39,22 +48,20 @@ jQuery(window).load(function(){
 
 jQuery(window).scroll(function() {
 
-	// show back to top
-	if(jQuery(window).scrollTop() > 200) {
+	// show back to top after 300 pixels scrolled
+	if(jQuery(window).scrollTop() > 300) {
 		jQuery('.back-to-top').addClass('show');
 	} else {
 		jQuery('.back-to-top').removeClass('show');
 	}
 
-	// hide show more
-	if(jQuery(window).scrollTop() > (jQuery('#wrapper').height() - (jQuery('#footer').height() + jQuery(window).height()))) {
+	// hide show more when footer is reached
+	if(jQuery(window).scrollTop() > (jQuery('#wrapper').height() - (jQuery('#footer').outerHeight()))) {
 		jQuery('.show-more').addClass('hide');
 	}
-
 
 });
 
 jQuery(window).resize(function(){
 	jQuery('.sync-height').syncheight();
-	setFooter();
 });
