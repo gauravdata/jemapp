@@ -129,12 +129,42 @@ html, body {
 .page-visual {
 	.content {
 		text-align: center;
+		color: $white;
+
+		p,
+		ul,
+		ol {
+			margin: $s-spacing 0;
+		}
 
 		h1 {
 			font-size: $xxxxl-font;
-			line-height: normal;
+			line-height: $xxxxl-font;
 			margin: 0;
 			color: $white;
+			text-transform: lowercase;
+		}
+
+		a {
+			color: $white;
+		}
+
+		.button {
+			border-color: $white;
+			background-color: $white;
+			color: $xl-grey;
+
+			&.button-outline {
+				border-color: $white;
+				background-color: transparent;
+				color: $white;
+
+				&:hover,
+				&:focus {
+					background-color: $white;
+					color: $xl-grey;
+				}
+			}
 		}
 	}
 }
@@ -218,6 +248,12 @@ html, body {
 
 	&.area-m {
 		padding: $m-spacing 0;
+	}
+	&.area-l {
+		padding: $l-spacing 0;
+	}
+	&.area-xl {
+		padding: $xl-spacing 0;
 	}
 }
 
@@ -559,6 +595,8 @@ ul.social {
 		left: -$side-nav-width;
 	}
 	#main,
+	.toolbar.fixed,
+	.amshopby-filters.fixed,
 	#footer {
 		width: 100%;
 		left: 0;

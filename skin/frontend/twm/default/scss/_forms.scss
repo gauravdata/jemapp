@@ -38,7 +38,11 @@ ul.form-list {
 	LABELS
 ======================================================*/
 .control {
-	label {
+	@extend .clearfix;
+
+	label,
+	.label {
+		float: left;
 		padding: $xs-spacing 0;
 	}
 }

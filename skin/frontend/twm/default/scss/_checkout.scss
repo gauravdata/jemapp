@@ -79,3 +79,24 @@
 .pcnl-info-text {
 	margin-bottom: $m-spacing;
 }
+
+main > .block.block-cart {
+	@include transition(all 0.5s ease-in);
+	position: fixed;
+	right: 0;
+	top: -1000px;
+	border: none;
+	background-color: $white;
+	z-index: 950;
+
+	-webkit-transition-delay: 0.5s;
+	transition-delay: 0.5s;
+
+	&.show {
+		@include transition(all 0.5s ease-out);
+		top: $header-height;
+
+		-webkit-transition-delay: 0s;
+		transition-delay: 0s;
+	}
+}

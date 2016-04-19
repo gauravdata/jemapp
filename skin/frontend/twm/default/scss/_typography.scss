@@ -212,6 +212,7 @@ table {
 ======================================================*/
 ul.messages {
 	@extend .unstyled;
+	margin: 0;
 
 	ul {
 		@extend .unstyled;

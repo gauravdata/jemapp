@@ -54,7 +54,7 @@
                         //]]>
                         </script>
                     <?php endif; ?>
-                    <a href="<?php echo $_item->getProduct()->getProductUrl() ?>"><?php echo $this->escapeHtml($_item->getName()) ?></a>
+                    <a href="<?php echo $_item->getProduct()->getProductUrl() ?>" class="label"><?php echo $this->escapeHtml($_item->getName()) ?></a>
                 </li>
             <?php endforeach; ?>
             </ol>

@@ -1,7 +1,8 @@
 .amshopby-filters {
+	@extend .main-transition;
 	position: absolute;
 	padding: $xs-spacing;
-	z-index: 100;
+	z-index: 801;
 
 	select,
 	.custom-dropdown strong {
@@ -50,5 +51,11 @@
 				}
 			}
 		}
+	}
+
+	&.fixed {
+		left: $side-nav-width;
+		position: fixed;
+		top: $header-height;
 	}
 }

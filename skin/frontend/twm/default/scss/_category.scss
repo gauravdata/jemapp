@@ -14,8 +14,10 @@
 ======================================================*/
 .toolbar {
 	@extend .clearfix;
+	@extend .main-transition;
 	padding: $xs-spacing 0;
 	position: relative;
+	background-color: $xxs-grey;
 
 	select {
 		border-width: 2px;
@@ -25,7 +27,6 @@
 	
 	.pager {
 		position: absolute;
-		color: $white;
 		text-align: center;
 		width: 100%;
 		z-index: 30;
@@ -33,7 +34,7 @@
 		line-height: $m-font;
 
 		a {
-			color: $white;
+			color: $m-grey;
 		}
 
 		.amount,
@@ -41,7 +42,7 @@
 			float: none;
 			display: inline-block;
 			padding: 0 $s-spacing;
-			border-right: 1px solid $white;
+			border-right: 1px solid $m-grey;
 
 			a.active {
 				display: none;
@@ -87,6 +88,14 @@
 			font-size: $xl-font;
 		}
 	}
+
+	&.fixed {
+		width: calc(100% - #{$side-nav-width});
+		left: $side-nav-width;
+		position: fixed;
+		top: $header-height;
+		z-index: 800;
+	}
 }
 .toolbar-bottom {
 	.toolbar {
@@ -105,6 +114,24 @@
 
 			a {
 				color: $m-grey;
+			}
+		}
+	}
+}
+
+/*= White pager if category image =*/
+.page-visual ~ .category-products {
+	.toolbar {
+		.pager {
+			color: $white;
+
+			a {
+				color: $white;
+			}
+
+			.amount,
+			.limiter {
+				border-right-color: $white;
 			}
 		}
 	}
