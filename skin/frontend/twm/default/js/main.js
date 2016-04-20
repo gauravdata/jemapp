@@ -3,21 +3,16 @@ jQuery(window).load(function(){
 
 	// show/hide sidenav
 	if(Cookies.get('side-nav') != 'open') {
-		jQuery('#header .nav-btn .mdi').removeClass('mdi-close').addClass('mdi-plus');
 		jQuery('body').addClass('hide-side-nav');
 	}
 	jQuery('#header .nav-btn').click(function(){
-		jQuery(this).find('.mdi').toggleClass('mdi-close mdi-plus');
 		jQuery('body').toggleClass('hide-side-nav');
 
-		if(jQuery(this).find('.mdi').hasClass('mdi-plus')) {
-			Cookies.set('side-nav', 'false');
+		if(jQuery('body').hasClass('hide-side-nav')) {
+			Cookies.set('side-nav', 'closed');
 		} else {
 			Cookies.set('side-nav', 'open');
 		}
-
-		console.log(Cookies.get('side-nav'));
-
 		return false;
 	});
 
@@ -35,7 +30,7 @@ jQuery(window).load(function(){
 	});
 
 	// select overlay update label value
-	jQuery('.select-overlay select').change(function() {
+	jQuery('.checkout-cart-index .select-overlay select').change(function() {
 		jQuery(this).parents('.select-overlay').find('label').html(jQuery(this).val());
 		jQuery(this).parents('form').submit();
 	});

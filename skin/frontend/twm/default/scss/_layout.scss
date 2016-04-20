@@ -601,4 +601,7 @@ ul.social {
 		width: 100%;
 		left: 0;
 	}
+	#header > .mdi-close:before {
+		content: "\F415";
+	}
 }

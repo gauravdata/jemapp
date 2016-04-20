@@ -45,6 +45,16 @@
             <?php else: ?>
                 <p class="amount"><?php echo $this->__('There are <a href="%s">%s items</a> in your cart.', $this->getUrl('checkout/cart'), $_cartQty) ?></p>
             <?php endif ?>
+
+	    <?php $_items = $this->getRecentItems(); ?>
+	    <div class="block-subtitle"><?php echo $this->__('Recently added item(s)') ?></div>
+            <ol id="cart-sidebar" class="mini-products-list clearer">
+	    <?php foreach($_items as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+            <?php endforeach; ?>
+            </ol>
+            <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
+
             <p class="subtotal">
                 <?php if ($this->canApplyMsrp()): ?>
                     <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
@@ -58,6 +68,7 @@
         </div>
     </div>
     <div class="actions">
+	<button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('View all items in your shopping cart')) ?>" class="button btn-inline" onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>')"><span><span><?php echo $this->__('View All') ?></span></span></button>
         <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Checkout')) ?>" class="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
     </div>
     <?php endif ?>
