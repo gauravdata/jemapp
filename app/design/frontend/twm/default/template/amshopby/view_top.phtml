@@ -9,7 +9,9 @@
         <?php endforeach; ?>
         <script type="text/javascript">decorateDataList('narrow-by-list')</script>
     <?php endif; ?>
-    <div class="actions"><a href="<?php echo Mage::helper('amshopby/url')->getFullUrl(array(), 1) ?>"><?php echo Mage::helper('catalog')->__('Clear All') ?></a></div>
+    <?php if ($this->getLayer()->getState()->getFilters()): ?>
+        <div class="actions"><a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
+    <?php endif; ?>
 <?php else: ?>
 <div style="display:none" class="<?php echo $this->getBlockId()?>"></div>
 <?php endif; ?>
