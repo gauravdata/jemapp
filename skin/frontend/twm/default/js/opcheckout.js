@@ -39,12 +39,43 @@ Checkout.prototype = {
         this.steps = ['login', 'billing', 'shipping', 'shipping_method', 'payment', 'review'];
         //We use billing as beginning step since progress bar tracks from billing
         this.currentStep = 'billing';
+	this._updateActive();
 
         this.accordion.sections.each(function(section) {
             Event.observe($(section).down('.step-title'), 'click', this._onSectionClick.bindAsEventListener(this));
         }.bind(this));
 
         this.accordion.disallowAccessToNextSections = true;
+    },
+
+    _updateActive: function() {
+        /* TWM */
+        $$('.progress-bar > li').each(function(e){
+                $(e).removeClassName('active');
+        });
+        switch(this.currentStep) {
+                case 'billing':
+                        $$('.progress-bar i.mdi-account').each(function(e){
+                                $(e).up().addClassName('active');
+                        });
+                break;
+                case 'shipping':
+                        $$('.progress-bar i.mdi-package-variant').each(function(e){
+                                $(e).up().addClassName('active');
+                        });
+                break;
+                case 'shipping_method':
+                        $$('.progress-bar i.mdi-truck').each(function(e){
+                                $(e).up().addClassName('active');
+                        });
+                break;
+                case 'payment':
+                        $$('.progress-bar i.mdi-credit-card').each(function(e){
+                                $(e).up().addClassName('active');
+                        });
+                break;
+        }
+        /* TWM */
     },
 
     /**
@@ -127,6 +158,10 @@ Checkout.prototype = {
             this.reloadProgressBlock(this.currentStep);
         }
         this.currentStep = section;
+	
+	/* TWM */
+	this._updateActive();
+	
         var sectionElement = $('opc-' + section);
         sectionElement.addClassName('allow');
         this.accordion.openSection('opc-' + section);

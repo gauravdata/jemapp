@@ -1,0 +1,26 @@
+<?php $_slideshow = $this->getSlideshow(); ?>
+
+<div class="owl-carousel" id="homepage-slider">
+	<?php foreach ($_slideshow as $_slide): ?>
+		<div class="item">
+			<a href="<?php echo $_slide->getUrl() ?>" alt="<?php $_slide->getTitle(); ?>" />
+				<img src="<?php echo Mage::helper('myslideshow')->getSlideshowUrl() . $_slide->getImage() ?>" alt="<?php echo $_slide->getTitle() ?>" style="width: 100%;" />
+			</a>
+		</div>
+	<?php endforeach; ?>
+</div>
+
+<script type="text/javascript">
+	jQuery(function(){
+		jQuery('#homepage-slider').owlCarousel({
+			loop:true,
+			nav:true,
+			navText: [
+				'<i class="mdi mdi-chevron-left"></i>',
+				'<i class="mdi mdi-chevron-right"></i>'
+			],
+			dots:false,
+			items: 1
+		})
+	});
+</script>

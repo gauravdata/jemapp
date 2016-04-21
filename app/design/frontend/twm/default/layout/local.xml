@@ -12,6 +12,10 @@
 				<action method="addCartLink"></action>
 				<!--<action method="addCheckoutLink"></action>-->
 			</block>
+			<reference name="right">
+                        	<action method="unsetChild"><name>cart_sidebar</name></action>
+				<action method="unsetChild"><name>sale.reorder.sidebar</name></action>
+			</reference>
 		</reference>
 	</default>
 

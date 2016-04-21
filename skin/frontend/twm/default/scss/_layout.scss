@@ -257,8 +257,91 @@ html, body {
 	}
 }
 
+/*======================================================
+	BACKGROUNDS
+======================================================*/
 .bg-xs-grey {
 	background-color: $xs-grey;
+}
+
+.bg-visual {
+	background-color: $m-grey;
+	position: relative;
+	background-position: 50%;
+	background-size: cover;
+
+	&.wide {
+		display: block;
+		width: 100%;
+		height: 0;
+		padding-bottom: 47%;
+	}
+	&.halve {
+		float: left;
+		width: 50%;
+		height: 0;
+		padding-bottom: 50%;
+	}
+
+	.bg-visual-content {
+		position: absolute;
+		top: 50%;
+
+		&.white {
+			color: $white;
+
+			strong,
+			h2,
+			a {
+				color: $white;
+			}
+
+			.button {
+				border-color: $white;
+
+				&:hover,
+				&:focus {
+					color: $xl-grey;
+					background-color: $white;
+				}
+			}
+		}
+		&.black {
+			color: $xl-grey;
+
+			strong,
+			h2,
+			a {
+				color: $xl-grey;
+			}
+
+			.button {
+				border-color: $xl-grey;
+
+				&:hover,
+				&:focus {
+					color: $white;
+					background-color: $xl-grey;
+				}
+			}
+		}
+	}
+
+	.bg-visual-content.left {
+		left: 10%;
+		@include transform(0, -50%);
+		text-align: left;
+	}
+	.bg-visual-content.center {
+		left: 50%;
+		@include transform(-50%, -50%);
+		text-align: center;
+	}
+	.bg-visual-content.right {
+		right: 10%;
+		@include transform(0, -50%);
+		text-align: right;
+	}
 }
 
 /*======================================================

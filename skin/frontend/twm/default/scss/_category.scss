@@ -156,7 +156,6 @@
 				position: relative;
 
 				.hover-image {
-					@include rotate(180deg);
 					position: absolute;
 					top: 0;
 					left: 0;

@@ -22,7 +22,7 @@
 
 $_slideshow = $this->getSlideshow();
 ?>
-<div id="myslideshow" class="protoshow">
+<div id="myslideshow" class="protoshow" style="width:100%">
     <ul class="show">
         <?php foreach ($_slideshow as $_slide): ?>
             <li class="slide" data-slide-interval="">
@@ -31,7 +31,7 @@ $_slideshow = $this->getSlideshow();
                 <?php else: ?>
                 <a href="#" alt="<?php echo $_slide->getTitle(); ?>" />
                 <?php endif; ?>
-                <img src="<?php echo Mage::helper('myslideshow')->getSlideshowUrl() . $_slide->getImage() ?>" alt="<?php echo $_slide->getTitle() ?>" />
+                <img src="<?php echo Mage::helper('myslideshow')->getSlideshowUrl() . $_slide->getImage() ?>" alt="<?php echo $_slide->getTitle() ?>" style="width: 100%;" />
                 </a>
             </li>
             <?php endforeach; ?>
