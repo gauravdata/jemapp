@@ -66,6 +66,9 @@ jQuery(window).load(function(){
 		jQuery('#wrapper > .block.block-cart').removeClass('show');
 	});
 
+	// remove title attribute from top link cart
+	jQuery('.top-link-cart').attr('title', '');
+
 });
 
 jQuery(window).scroll(function() {
