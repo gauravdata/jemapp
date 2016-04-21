@@ -58,9 +58,9 @@ jQuery(window).load(function(){
 	}
 
 	// show cart on hover
-	jQuery('.top-link-cart, main > .block.block-cart').mouseenter(function() {
-		if(jQuery('main > .block.block-cart .block-content').length > 0) {
-			jQuery('main > .block.block-cart').addClass('show');
+	jQuery('.top-link-cart, #wrapper > .block.block-cart').mouseenter(function() {
+		if(jQuery('#wrapper > .block.block-cart .block-content').length > 0) {
+			jQuery('#wrapper > .block.block-cart').addClass('show');
 		}
 	}).mouseleave(function(){
 		jQuery('main > .block.block-cart').removeClass('show');
