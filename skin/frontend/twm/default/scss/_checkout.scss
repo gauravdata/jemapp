@@ -1,3 +1,6 @@
+/*======================================================
+	DEFAULT
+======================================================*/
 .checkout-onepage-index {
 	#header .nav-btn,
 	#header .quick-access,
@@ -18,6 +21,10 @@
 		}
 	}
 }
+
+/*======================================================
+	PROGRESS BAR
+======================================================*/
 .progress-bar {
 	display: inline-block;
 	margin-bottom: 0;
@@ -29,13 +36,14 @@
 		padding-left: $xl-spacing + 10;
 		text-align: left;
 		padding-right: $m-spacing + 10;
+		color: $primary;
 
 		.mdi {
 			@include radius(50%);
 			width: $xl-spacing;
 			height: $xl-spacing;
 			line-height: $xl-spacing;
-			background-color: $m-grey;
+			background-color: $primary;
 			color: $xxs-grey;
 			text-align: center;
 			font-size: $xl-font;
@@ -44,7 +52,7 @@
 		}
 
 		strong {
-			color: $m-grey;
+			color: $primary;
 			text-transform: uppercase;
 		}
 
@@ -52,7 +60,7 @@
 			content: "";
 			height: 1px;
 			width: $m-spacing;
-			background-color: $m-grey;
+			background-color: $primary;
 			position: absolute;
 			right: 0;
 			top: 50%;
@@ -63,16 +71,58 @@
 				display: none;
 			}
 		}
+
+		&.active {
+			&:after {
+				background-color: $m-grey;
+			}
+			~ li {
+				color: $m-grey;
+
+				.mdi {
+					background-color: $m-grey;
+				}
+				strong {
+					color: $m-grey;
+				}
+				&:after {
+					background-color: $m-grey;
+				}
+			}
+		}
 	}
 }
 
+/*======================================================
+	PROGRESS SIDEBAR
+======================================================*/
 #checkout-progress-wrapper {
 	.block {
 		border: none;
 		background-color: $white;
+		padding: 0;
+		color: $xl-grey;
+
+		h2 {
+			font-size: $xl-font;
+			margin: 0;
+			padding: $xs-spacing $m-spacing;
+		}
+		h3 {
+			margin-bottom: 0;
+		}
+		.complete h3 {
+			margin-bottom: $m-spacing;
+		}
 
 		ul {
 			margin: 0;
+			> li {
+				padding: $xs-spacing $m-spacing;
+			}
+			> li:nth-child(odd) {
+				background-color: $xxs-grey;
+			}
 		}
 	}
 }
@@ -80,83 +130,137 @@
 	margin-bottom: $m-spacing;
 }
 
-#wrapper .block.block-cart {
-	@include transition(all 0.5s ease-in);
-	position: fixed;
-	right: 0;
-	top: -1000px;
-	border: none;
-	background-color: $white;
-	z-index: 950;
-	width: 522px;
+/*======================================================
+	SHIPPING METHODS
+======================================================*/
+.sp-methods,
+.payment-methods {
+	margin: 0;
 
-	-webkit-transition-delay: 0.5s;
-	transition-delay: 0.5s;
-
-	&.show {
-		@include transition(all 0.5s ease-out);
-		top: $header-height;
-
-		-webkit-transition-delay: 0s;
-		transition-delay: 0s;
+	dl {
+		margin: 0;
 	}
 
-	#cart-sidebar {
-		li {
-			position: relative;
-			padding: 0 30px 0 100px;
-			margin-bottom: $xs-spacing;
-			min-height: 80px;
+	dt {
+		display: block;
+		float: none;
+		font-weight: bold;
+		color: $xl-grey;
+		margin: $xl-spacing 0 $m-spacing;
 
-			.product-image {
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
-			.btn-remove {
-				position: absolute;
-				top: 0;
-				right: 0;
-			}
-			.btn-edit {
-				position: absolute;
-				top: 0;
-				right: 15px;
-			}
-			.product-name {
-				font-weight: $bold;
-				text-transform: uppercase;
-				color: $xl-grey;
-				margin-bottom: 0;
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	dd {
+		float: none;
+		margin: 0;
 
-				a {
-					color: $xl-grey;
+		ul {
+			@extend .unstyled;
+
+			li {
+				position: relative;
+				margin-bottom: $m-spacing;
+				padding-left: $m-spacing;
+
+				label {
+					float: none;
+					width: auto;
 				}
-			}
-			dl {
-				@extend .clearfix;
-				margin: 0;
 
-				dt,
-				dd {
-					display: inline-block;
+				input {
+					position: absolute;
+					left: 0;
+					top: 4px;
 					margin: 0;
 				}
-				dt {
-					&:after {
-						content: ":";
+			}
+		}
+
+		fieldset {
+			padding: 0;
+			margin: 0;
+		}
+	}
+}
+.payment-methods {
+	dt {
+		position: relative;
+		margin-top: 0;
+		padding-left: $m-spacing;
+
+		label {
+			float: none;
+			width: auto;
+		}
+
+		input {
+			position: absolute;
+			left: 0;
+			top: 4px;
+			margin: 0;
+		}
+	}
+
+	dd {
+		ul {
+			margin: 0 0 $l-spacing;
+
+			li {
+				padding-left: 0;
+				margin-bottom: 0;
+
+				input {
+					position: static;
+				}
+			}
+
+			&#payment_form_buckaroo3extended_ideal {
+				li {
+					margin: $xxs-spacing;
+
+					.bank_logo {
+						width: 40px;
+						float: left;
+					}
+					input {
+						display: none;
+					}
+				}
+			}
+
+			&#payment_form_buckaroo3extended_afterpay {
+				li {
+					@extend .clearfix;
+					margin-bottom: $xs-spacing;
+
+					label {
+						float: left;
+						width: calc(33% - 10px);
+					}
+					.input-box {
+						span {
+							line-height: $form-field-height;
+						}
+					}
+
+					&.tac-accept {
+						.input-box {
+							float: none;
+							width: auto;
+							display: inline-block;
+						}
+						label {
+							float: none;
+							display: inline-block;
+							width: auto;
+							padding: 0;
+						}
 					}
 				}
 			}
 		}
 	}
 
-	.subtotal {
-		text-align: right;
-		padding-top: $xs-spacing;
-		border-top: 1px solid $xl-grey;
-	}
-	.actions {
-		text-align: right;
-	}
 }

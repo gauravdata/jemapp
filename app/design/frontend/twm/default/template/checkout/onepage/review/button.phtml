@@ -24,17 +24,10 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<?php if ($this->getCheckout()->getStepData('payment', 'complete')): ?>
-    <div class="complete">
-        <h3><?php echo $this->__('Payment Method') ?></h3>
-    </div>
-    <div class="complete">
-        <?php echo $this->getPaymentHtml() ?>
-    </div>
-    <a href="#payment" onclick="checkout.changeSection('opc-payment'); return false;" class="link"><?php echo $this->__('Change') ?></a></span>
-<?php else: ?>
-    <h3>
-        <?php echo $this->__('Payment Method') ?>
-    </h3>
-<?php endif; ?>
-
+<button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Place Order')) ?>" class="button btn-checkout" onclick="review.save();">
+	<span>
+		<span>
+			<i class="mdi mdi-lock"></i> <?php echo $this->__('Place Order') ?>
+		</span>
+	</span>
+</button>

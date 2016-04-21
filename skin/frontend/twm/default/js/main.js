@@ -63,7 +63,7 @@ jQuery(window).load(function(){
 			jQuery('#wrapper > .block.block-cart').addClass('show');
 		}
 	}).mouseleave(function(){
-		jQuery('main > .block.block-cart').removeClass('show');
+		jQuery('#wrapper > .block.block-cart').removeClass('show');
 	});
 
 });

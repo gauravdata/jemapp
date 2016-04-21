@@ -31,27 +31,27 @@
     <div class="block-content">
         <ul class="unstyled">
             <?php if ($this->getCheckout()->getStepData('billing', 'is_show')): ?>
-            <div id="billing-progress-opcheckout">
+            <li id="billing-progress-opcheckout">
                 <?php echo $this->getChildHtml('billing.progress') ?>
-            </div>
+            </li>
             <?php endif; ?>
 
             <?php if ($this->getCheckout()->getStepData('shipping', 'is_show')): ?>
-            <div id="shipping-progress-opcheckout">
+            <li id="shipping-progress-opcheckout">
                 <?php echo $this->getChildHtml('shipping.progress') ?>
-            </div>
+            </li>
             <?php endif; ?>
 
             <?php if ($this->getCheckout()->getStepData('shipping_method', 'is_show')): ?>
-            <div id="shipping_method-progress-opcheckout">
+            <li id="shipping_method-progress-opcheckout">
                 <?php echo $this->getChildHtml('shippingmethod.progress') ?>
-            </div>
+            </li>
             <?php endif; ?>
 
             <?php if ($this->getCheckout()->getStepData('payment', 'is_show')): ?>
-            <div id="payment-progress-opcheckout">
+            <li id="payment-progress-opcheckout">
                 <?php echo $this->getChildHtml('payment.progress') ?>
-            </div>
+            </li>
             <?php endif; ?>
         </ul>
     </div>
