@@ -6,6 +6,7 @@
 }
 
 .show-more {
+	@include transform(-50%,0)
 	@extend .fade-out-transition;
 	position: fixed;
 	background-color: transparentize($white, 0.15);

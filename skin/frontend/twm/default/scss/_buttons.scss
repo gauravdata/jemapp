@@ -1,5 +1,6 @@
 .buttons-set {
 	@extend .clearfix;
+	margin-bottom: $m-spacing;
 }
 
 .button,
@@ -16,6 +17,7 @@ input[type=submit] {
 	text-transform: uppercase;
 	cursor: pointer;
 	font-size: $m-font;
+	margin-right: $m-spacing;
 
 	&:hover,
 	&:focus {
@@ -30,7 +32,6 @@ input[type=submit] {
 		color: $primary;
 		border: none;
 		padding: 0;
-		margin-right: $xl-spacing;
 		text-transform: none;
 
 		&:before {
@@ -83,6 +84,10 @@ input[type=submit] {
 		width: 100%;
 		margin: 0;
 		text-align: center;
+	}
+
+	&:last-child {
+		margin-right: 0;
 	}
 }
 

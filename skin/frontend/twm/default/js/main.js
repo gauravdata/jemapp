@@ -2,25 +2,37 @@ jQuery(window).load(function(){
 	jQuery('.sync-height').syncheight();
 
 	// show/hide sidenav
-	if(Cookies.get('side-nav') != 'open') {
-		jQuery('body').addClass('hide-side-nav');
-	}
 	jQuery('#header .nav-btn').click(function(){
-		jQuery('body').toggleClass('hide-side-nav');
+		jQuery('body').toggleClass('hidden-side-nav open-side-nav');
 
-		if(jQuery('body').hasClass('hide-side-nav')) {
+		if(jQuery('body').hasClass('hidden-side-nav')) {
 			Cookies.set('side-nav', 'closed');
 		} else {
 			Cookies.set('side-nav', 'open');
 		}
 		return false;
 	});
+	if(jQuery(window).width() < 1250) {
+		Cookies.set('side-nav', 'closed');
+		jQuery('body').addClass('hidden-side-nav').removeClass('open-side-nav');
+	}
 
 	// focus mini search form
 	jQuery('#search_mini_form input.input-text').focus(function(){
 		jQuery('#search_mini_form').addClass('focus');
 	}).blur(function(){
 		jQuery('#search_mini_form').removeClass('focus');
+	});
+
+	// click label mini search form
+	jQuery('#search_mini_form label').click(function(){
+		if(jQuery('#search_mini_form').find('input.input-text').val() !=  '') {
+			jQuery('#search_mini_form').submit();
+		} else {
+			if(jQuery(window).width() < 1250) {
+				jQuery('#search_mini_form .input-box').toggleClass('show');
+			}
+		}
 	});
 
 	// custom dropdown
@@ -69,6 +81,16 @@ jQuery(window).load(function(){
 	// remove title attribute from top link cart
 	jQuery('.top-link-cart').attr('title', '');
 
+	// checkbox fix
+	jQuery('input[type=checkbox]').click(function() {
+		jQuery(this).parent('.input-box').toggleClass('checkbox-checked');
+	});
+	
+	// show footer nav
+	jQuery('.footer-nav h2').click(function(){
+		jQuery(this).parent().toggleClass('show');
+	});
+
 });
 
 jQuery(window).scroll(function() {
@@ -99,4 +121,10 @@ jQuery(window).scroll(function() {
 
 jQuery(window).resize(function(){
 	jQuery('.sync-height').syncheight();
+
+	// hide side nav
+	if(jQuery(window).width() < 1250) {
+		Cookies.set('side-nav', 'closed');
+		jQuery('body').addClass('hidden-side-nav').removeClass('open-side-nav');
+	}
 });

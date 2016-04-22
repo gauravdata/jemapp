@@ -66,50 +66,52 @@
 			border-left: 1px solid transparentize($white, 0.75);
 			border-right: 1px solid transparentize($white, 0.75);
 
-			button {
-				border: none;
+			label {
 				height: $header-height;
 				width: $header-height;
 				text-align: center;
-				background-color: transparent;
 				color: $white;
 				padding: 0;
 				margin: 0;
 				float: left;
+				cursor: pointer;
 			}
-			input.input-text {
+			.input-box {
 				width: 110px;
 				float: left;
-				height: $header-height;
-				border: none;
-				background-color: transparent;
-				padding: 0;
-				color: $white;
-				font-size: $l-font;
-				font-weight: $bold;
 
-				&::-webkit-input-placeholder {
+				input.input-text {
+					height: $header-height;
+					border: none;
+					background-color: transparent;
+					padding: 0;
 					color: $white;
-					opacity: 1;
-				}
-				&::-moz-placeholder {
-					color: $white;
-					opacity: 1;
-				}
-				&:-ms-input-placeholder {
-					color: $white;
-					opacity: 1;
-				}
-				&:-moz-placeholder {
-					color: $white;
-					opacity: 1;
+					font-size: $l-font;
+					font-weight: $bold;
+
+					&::-webkit-input-placeholder {
+						color: $white;
+						opacity: 1;
+					}
+					&::-moz-placeholder {
+						color: $white;
+						opacity: 1;
+					}
+					&:-ms-input-placeholder {
+						color: $white;
+						opacity: 1;
+					}
+					&:-moz-placeholder {
+						color: $white;
+						opacity: 1;
+					}
 				}
 			}
 
 			&.focus {
 				background-color: $white;
 
-				button,
+				label,
 				input.input-text {
 					color: $xl-grey;
 				}

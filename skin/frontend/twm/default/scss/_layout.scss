@@ -197,7 +197,7 @@ html, body {
 	CONTENT
 ======================================================*/
 .content-container {
-	width: 1000px;
+	width: 950px;
 	margin: 0 auto;
 }
 
@@ -482,7 +482,9 @@ ul.social {
 			color: $xxs-grey;
 			margin-right: $xxs-spacing;
 
-			i {
+			i.mdi {
+				margin-top: 7px;
+
 				span {
 					display: none;
 				}
@@ -673,7 +675,7 @@ ul.social {
 /*======================================================
 	TOGGLE SIDE NAV
 ======================================================*/
-.hide-side-nav {
+.hidden-side-nav {
 	#side-nav {
 		left: -$side-nav-width;
 	}
@@ -684,7 +686,7 @@ ul.social {
 		width: 100%;
 		left: 0;
 	}
-	#header > .mdi-close:before {
+	#header .nav-btn .mdi-close:before {
 		content: "\F415";
 	}
 }

@@ -32,7 +32,9 @@
 <?php
 $sidenavState = false;
 if(isset($_COOKIE['side-nav']) && $_COOKIE['side-nav'] == 'closed') {
-	$sidenavState = ' hide-side-nav';
+	$sidenavState = ' hidden-side-nav';
+} else {
+	$sidenavState = ' open-side-nav';
 }
 ?>
 <!DOCTYPE>

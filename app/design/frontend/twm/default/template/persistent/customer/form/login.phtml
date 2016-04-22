@@ -43,13 +43,16 @@
                 <?php echo $this->getBlockHtml('formkey'); ?>
                 <div class="row">
                     <div class="col-6 new-users">
-                        <div class="content">
+                        <div class="content sync-height">
                             <h2><?php echo $this->__('New Customers') ?></h2>
                             <p><?php echo $this->__('By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.') ?></p>
                         </div>
+                        <div class="buttons-set">
+                            <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Create an Account')) ?>" class="button" onclick="window.location='<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
+                        </div>
                     </div>
                     <div class="col-6 registered-users">
-                        <div class="content">
+                        <div class="content sync-height clearfix">
                             <h2><?php echo $this->__('Registered Customers') ?></h2>
                             <p><?php echo $this->__('If you have an account with us, please log in.') ?></p>
                             <ul class="form-list">
@@ -69,22 +72,15 @@
                                 <?php echo $this->getChildHtml('persistent.remember.me'); ?>
                             </ul>
                             <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
-                            <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+                            <p class="required">
+                                <?php echo $this->__('* Required Fields') ?>
+                            </p>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 new-users">
                         <div class="buttons-set">
-                            <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Create an Account')) ?>" class="button" onclick="window.location='<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
-                        </div>
-                    </div>
-                    <div class="col-6 registered-users">
-                        <div class="buttons-set">
-                            <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="button button-link"><?php echo $this->__('Forgot Your Password?') ?></a>
                             <button type="submit" class="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Login')) ?>" name="send" id="send2">
                                 <span><span><i class="mdi mdi-lock"></i> <?php echo $this->__('Login') ?></span></span>
                             </button>
+                            <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="button button-link"><?php echo $this->__('Forgot Your Password?') ?></a>
                         </div>
                     </div>
                 </div>

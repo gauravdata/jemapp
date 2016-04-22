@@ -37,15 +37,6 @@ fieldset,
 /*======================================================
 	LABELS
 ======================================================*/
-.control {
-	@extend .clearfix;
-
-	label,
-	.label {
-		float: left;
-		padding: $xs-spacing 0;
-	}
-}
 form {
 	label {
 		font-weight: $regular;
@@ -81,7 +72,7 @@ input[type=number],
 select {
 	@extend .main-transition;
 	display: block;
-	min-height: $form-field-height;
+	height: $form-field-height;
 	padding: $xs-spacing $s-spacing;
 	border: 1px solid $s-grey;
 	width: 100%;
@@ -116,28 +107,87 @@ select {
 	}
 }
 
-/*= Checkbox & radio =*/
-.control {
-	.input-box,
-	label {
-		display: inline-block;
-		width: auto;
+/*======================================================
+	WIDE
+======================================================*/
+.wide {
+	label,
+	.input-box {
 		float: none;
-	}
-	input {
-		float: left;
-		margin: ($s-spacing - 1) $xs-spacing 0 0;
+		width: auto;
+		display: block;
 	}
 }
 
-form {
-	.wide {
-		label,
-		.input-box {
-			float: none;
-			width: 100%;
+/*======================================================
+	RADIO & CHECKBOX
+======================================================*/
+form .control {
+	position: relative;
+
+	.input-box {
+		width: auto;
+	}
+
+	label {
+		float: none;
+		display: block;
+		width: 100%;
+		padding-left: 38px;
+		position: relative;
+
+		&:before {
+			@extend .main-transition;
+			content: "";
 			display: block;
+			position: absolute;
+			left: 0;
+			top: 7px;
+			width: 21px;
+			height: 22px;
+			line-height: 22px;
+			border: 1px solid $xl-grey;
+			background-color: $white;
+			cursor: pointer;
+			text-align: center;
+			padding-left: 1px;
 		}
+
+		em {
+			float: none;
+			margin: 0;
+		}
+	}
+
+	input[type=radio],
+	input[type=checkbox] {
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+	}
+
+	// checkbox
+	.input-box.checkbox-checked + label:before,
+	input[type=checkbox]:checked + label:before {
+		font-family: 'Material Design Icons';
+		content: "\F12C";
+		color: $primary;
+		font-size: $l-font;
+		border-color: $primary;
+	}
+
+	// radio
+	input[type=radio] + label:before {
+		@include radius(50%);
+	}
+	.input-box.checked-checked + label:before,
+	input[type=radio]:checked + label:before {
+		border-color: $primary;
+		font-family: 'Material Design Icons';
+		content: "\F12F";
+		color: $primary;
+		font-size: $l-font;
+		border-color: $primary;
 	}
 }
 

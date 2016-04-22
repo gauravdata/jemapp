@@ -84,3 +84,11 @@
 		}
 	}
 }
+.main-usps + .amshopby-filters {
+	@include transition(none);
+	margin-top: 136px;
+
+	&.fixed {
+		margin-top: 0;
+	}
+}

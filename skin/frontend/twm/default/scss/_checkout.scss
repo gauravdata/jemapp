@@ -158,24 +158,6 @@
 
 		ul {
 			@extend .unstyled;
-
-			li {
-				position: relative;
-				margin-bottom: $m-spacing;
-				padding-left: $m-spacing;
-
-				label {
-					float: none;
-					width: auto;
-				}
-
-				input {
-					position: absolute;
-					left: 0;
-					top: 4px;
-					margin: 0;
-				}
-			}
 		}
 
 		fieldset {
@@ -188,7 +170,6 @@
 	dt {
 		position: relative;
 		margin-top: 0;
-		padding-left: $m-spacing;
 
 		label {
 			float: none;
@@ -216,48 +197,10 @@
 				}
 			}
 
-			&#payment_form_buckaroo3extended_ideal {
-				li {
-					margin: $xxs-spacing;
-
-					.bank_logo {
-						width: 40px;
-						float: left;
-					}
-					input {
-						display: none;
-					}
-				}
-			}
-
 			&#payment_form_buckaroo3extended_afterpay {
 				li {
 					@extend .clearfix;
 					margin-bottom: $xs-spacing;
-
-					label {
-						float: left;
-						width: calc(33% - 10px);
-					}
-					.input-box {
-						span {
-							line-height: $form-field-height;
-						}
-					}
-
-					&.tac-accept {
-						.input-box {
-							float: none;
-							width: auto;
-							display: inline-block;
-						}
-						label {
-							float: none;
-							display: inline-block;
-							width: auto;
-							padding: 0;
-						}
-					}
 				}
 			}
 		}

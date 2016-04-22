@@ -38,7 +38,7 @@ if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->
             $_code = $_method->getCode();
             if ($_code=='customercredit' && ($isPartial == -2 || $isPartial == -3)) continue; // hide customer credit
     ?>
-        <dt>
+        <dt class="control">
         <?php if (sizeof($this->getMethods()) > 1): ?>
             <?php if ($_code=='customercredit' && $isPartial==1): ?>
                 <input id="p_method_<?php echo $_code ?>" value="1" type="checkbox" name="payment[use_internal_credit]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="checkbox" onclick="creditPayment.switchPMethod('<?php echo $_code ?>');" <?php if ($isCheckedCustomercredit) { ?>checked="checked"<?php } ?> />

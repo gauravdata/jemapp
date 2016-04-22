@@ -1,3 +1,6 @@
+/*======================================================
+	DEFAULT
+======================================================*/
 @import 'materialdesignicons';
 @import 'fonts';
 @import 'variables';
@@ -9,6 +12,10 @@
 @import 'buttons';
 @import 'header';
 @import 'layout';
+
+/*======================================================
+	SHOP
+======================================================*/
 @import 'price';
 @import 'product';
 @import 'category';
@@ -19,3 +26,8 @@
 @import 'cms';
 @import 'owl';
 @import 'ajaxaddtocart';
+
+/*======================================================
+	MISC
+======================================================*/
+@import 'responsive';

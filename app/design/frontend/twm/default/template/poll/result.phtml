@@ -23,28 +23,25 @@
  * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
-/**
- * Product description template
- *
- * @see Mage_Catalog_Block_Product_View_Description
- */
 ?>
-<?php $_description = $this->getProduct()->getDescription(); ?>
-<?php if ($_description): ?>
-    <div class="row wide">
-        <div class="col-6 content-box-img-right pull-right">
-            <img src="http://placehold.it/1200x1000" class="sync-height">
-        </div>
-        <div class="col-6">
-            <div class="content-box-wrapper sync-height">
-                <div class="content-box">
-                    <h2><?php echo $this->__('Details') ?></h2>
-                    <div class="std">
-                        <?php echo $this->helper('catalog/output')->productAttribute($this->getProduct(), $_description, 'description') ?>
-                    </div>
-                </div>
-            </div>
-        </div>
+<?php if(isset($poll)) : ?>
+<div class="block block-poll">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Community Poll') ?></span></strong>
     </div>
+    <div class="block-content">
+        <p class="block-subtitle"><?php echo $this->escapeHtml($poll->getPollTitle()); ?></p>
+        <?php if( $poll_answers ): ?>
+        <ol id="poll-answers">
+            <?php foreach( $poll_answers as $answer ): ?>
+                <li>
+                    <span class="votes"><?php echo $answer->getVotesCount() ?> (<?php echo $answer->getPercent() ?>%)</span>
+                    <span class="answer"><?php echo $this->escapeHtml($answer->getAnswerTitle()) ?>:</span>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+        <script type="text/javascript">decorateList('poll-answers');</script>
+        <?php endif; ?>
+    </div>
+</div>
 <?php endif; ?>

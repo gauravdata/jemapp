@@ -103,17 +103,17 @@
 			position: static;
 			float: left;
 			margin: 0;
-			color: $m-grey;
+			color: $m-grey !important;
 			text-align: left;
 			width: auto;
 
 			.amount,
 			.limiter {
-				border-right-color: $m-grey;
+				border-right-color: $m-grey !important;
 			}
 
 			a {
-				color: $m-grey;
+				color: $m-grey !important;
 			}
 		}
 	}

@@ -189,9 +189,9 @@ var AjaxCart = Class.create({
                     }
                     _this.hideLoader();
                     if (messages) {
-			if(jQuery('main > .block.block-cart .block-content').length > 0) {
-                 	        jQuery('main > .block.block-cart').addClass('show');
-				setTimeout("jQuery('main > .block.block-cart').removeClass('show');", 3000);		
+			if(jQuery('#wrapper > .block.block-cart .block-content').length > 0) {
+        	                jQuery('#wrapper > .block.block-cart').addClass('show');
+				setTimeout("jQuery('#wrapper > .block.block-cart').removeClass('show');", 3000);
 	                }
                         var message = messages[0];
                         if (message) {

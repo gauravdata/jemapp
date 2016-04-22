@@ -47,13 +47,13 @@
 
 <?php if (Mage::registry('current_product')) { ?>
 <!--start Facebook Open Graph Protocol-->
-<meta property="og:site_name" content="Your Site Name" />
+<meta property="og:site_name" content="<?php echo Mage::app()->getStore()->getFrontendName(); ?>" />
 <meta property="og:title" content="<?php echo $this->getTitle() ?>" />
 <meta property="og:type" content="product" />
 <meta property="og:url" content="<?php echo Mage::helper('core/url')->getCurrentUrl()  ?>"/>
 <meta property="og:image" content="<?php echo Mage::helper('catalog/image')->init(Mage::registry('current_product'), 'small_image')->resize(100,100);?>"/>
 <link rel="image_src" type="image/jpeg" href="<?php echo Mage::helper('catalog/image')->init(Mage::registry('current_product'), 'small_image')->resize(100,100);?>" />
-<meta property="og:description" content="<?php echo $this->getDescription() ?>"/>
+<meta property="og:description" content="<?php echo Mage::registry('current_product')->getShortDescription() ?>"/>
 <meta property="fb:admins" content="your_profile_id_here" />
 <!--end Facebook Open Graph Protocol-->
 <?php } ?>
