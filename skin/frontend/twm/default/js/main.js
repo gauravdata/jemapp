@@ -114,10 +114,8 @@ jQuery(window).scroll(function() {
 	var toolbar = jQuery('.category-products > .toolbar');
 	if((jQuery(window).scrollTop() + jQuery('#header').height()) > toolbar.data('top')) {
 		toolbar.addClass('fixed');
-		jQuery('.amshopby-filters').addClass('fixed');
 	} else {
 		toolbar.removeClass('fixed');
-		jQuery('.amshopby-filters').removeClass('fixed');
 	}
 
 });

@@ -39,8 +39,10 @@
            <block type="amshopby/catalog_layer_view" name="amshopby.navleft" before="-" template="catalog/layer/view.phtml"/> 
         </reference>
         <reference name="content">
-            <block type="amshopby/catalog_layer_view_top" name="amshopby.navtop" before="category.products" template="amshopby/view_top.phtml"/>
             <block type="amshopby/top" name="amshopby.top" before="category.products" template="amshopby/top.phtml"/>
+        </reference>
+        <reference name="product_list_toolbar">
+            <block type="amshopby/catalog_layer_view_top" name="amshopby.navtop" before="category.products" template="amshopby/view_top.phtml"/>
         </reference>
     </catalog_category_layered> 
 
@@ -51,9 +53,9 @@
         
         <reference name="left">
            <block type="amshopby/search_layer" name="amshopby.navleft" before="-" template="catalog/layer/view.phtml"/> 
-        </reference>  
-        <reference name="content">
-                <block type="amshopby/search_layer_top" name="amshopby.navtop" before="search.result" template="amshopby/view_top.phtml"/>
+        </reference>
+        <reference name="product_list_toolbar">
+            <block type="amshopby/catalog_layer_view_top" name="amshopby.navtop" before="category.products" template="amshopby/view_top.phtml"/>
         </reference>
     </catalogsearch_result_index>   
 

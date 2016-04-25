@@ -1,8 +1,7 @@
 .amshopby-filters {
 	@extend .main-transition;
-	position: absolute;
-	padding: $xs-spacing;
-	z-index: 801;
+	float: left;
+	margin-left: $xs-spacing;
 
 	select,
 	.custom-dropdown strong {

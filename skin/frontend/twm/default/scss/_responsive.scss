@@ -94,11 +94,6 @@
 	.bg-visual {
 		margin-top: 1px;
 	}
-
-	/*= Category =*/
-	.amshopby-filters.fixed {
-		left: 0;
-	}
 }
 @media(max-width: 1024px) {
 	.category-products {
@@ -324,6 +319,11 @@
 				width: 50%;
 			}
 		}
+		.sorter {
+			a {
+				display: none;
+			}
+		}
 	}
 	.catalog-category-view {
 		main {
@@ -483,5 +483,10 @@
 	/*= Misc =*/
 	.back-to-top {
 		display: none;
+	}
+
+	/*= Cookie =*/
+	.notice-cookie {
+		width: 90%;
 	}
 }
