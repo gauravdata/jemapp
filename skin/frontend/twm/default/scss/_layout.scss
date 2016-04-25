@@ -23,12 +23,14 @@ html, body {
 	left: 0;
 	width: $side-nav-width;
 	top: $header-height;
-	bottom: 0;
+	min-height: 100%;
+	max-height: 100%;
 	z-index: 999;
+	overflow-y: scroll;
 
 	> ul {
 		@extend .unstyled;
-		margin-bottom: 0;
+		margin-bottom: $xxl-spacing * 1.5;
 
 		> li {
 			border-bottom: 1px solid $s-grey;
@@ -274,7 +276,7 @@ html, body {
 		display: block;
 		width: 100%;
 		height: 0;
-		padding-bottom: 47%;
+		padding-bottom: 50%;
 	}
 	&.halve {
 		float: left;
@@ -324,6 +326,10 @@ html, body {
 					background-color: $xl-grey;
 				}
 			}
+		}
+
+		*:last-child {
+			margin-bottom: 0;
 		}
 	}
 

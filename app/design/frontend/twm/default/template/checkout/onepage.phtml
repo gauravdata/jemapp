@@ -54,8 +54,10 @@
                         <?php if($i <= 4) { ?>
                         <li>
                             <?php echo $mdi; ?>
-                            <?php echo $this->__('Step') . ' ' . $i; ?><br />
-                            <strong><?php echo $_stepInfo['label'] ?></strong>
+                            <span>
+                                <?php echo $this->__('Step') . ' ' . $i; ?><br />
+                                <strong><?php echo $_stepInfo['label'] ?></strong>
+                            </span>
                         </li>
                         <?php } ?>
                     <?php endforeach ?>

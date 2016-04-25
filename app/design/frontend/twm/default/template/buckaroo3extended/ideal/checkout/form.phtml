@@ -15,12 +15,14 @@
                 <?php if ($i == count($_issuerList)): ?>
                     <?php $validation = "class='validate-one-required-by-name'"; ?>
                 <?php endif; ?>
-                <label>
+                <input id="<?php echo $issuer; ?>" type="radio" name="<?php echo $_code;?>_BPE_Issuer" value="<?php echo $issuer; ?>" <?php echo $validation; ?> <?php echo $issuer == $_value ? "checked" : ''; ?>/>
+                <label for="<?php echo $issuer; ?>">
                     <span class="bank_logo">
                         <img src="<?php echo $this->getSkinUrl("images/tig_buckaroo3extended/" . $issuerDetails['logo']);?>"/>
+                        </span>
+                    <span class="bank_name">
+                        <?php echo $this->__($issuerDetails['name']);?>
                     </span>
-                    <input type="radio" name="<?php echo $_code;?>_BPE_Issuer" value="<?php echo $issuer; ?>" <?php echo $validation; ?> <?php echo $issuer == $_value ? "checked" : ''; ?>/>
-                    <span class="bank_name"> <?php echo $this->__($issuerDetails['name']);?></span>
                 </label>
             </li>
         <?php endforeach; ?>

@@ -57,9 +57,17 @@
     <div class="sorter">
 
         <div class="sort-by">
-            <p><?php echo $this->__('Sort By') ?></p>
             <div class="select-overlay">
-                <label><?php echo $this->__('Select') ?></label>
+                <label>
+                    <?php echo $this->__('Sort By') ?>
+                    <span>
+                    <?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
+                        <?php if($this->isOrderCurrent($_key)): ?>
+                            <?php echo $this->__($_order) ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    </span>
+                </label>
                 <select onchange="setLocation(this.value)">
                 <?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
                     <option value="<?php echo $this->getOrderUrl($_key, 'asc') ?>"<?php if($this->isOrderCurrent($_key)): ?> selected="selected"<?php endif; ?>>

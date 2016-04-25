@@ -174,8 +174,8 @@ form .control {
 	}
 
 	// checkbox
-	.input-box.checkbox-checked + label:before,
-	input[type=checkbox]:checked + label:before {
+	.input-box.checkbox-checked ~ label:before,
+	input[type=checkbox]:checked ~ label:before {
 		font-family: 'Material Design Icons';
 		content: "\F12C";
 		color: $primary;
@@ -184,7 +184,7 @@ form .control {
 	}
 
 	// radio
-	input[type=radio] + label:before {
+	input[type=radio] ~ :before {
 		@include radius(50%);
 	}
 	.input-box.checked-checked + label:before,

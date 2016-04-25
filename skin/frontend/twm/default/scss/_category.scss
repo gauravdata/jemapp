@@ -71,12 +71,16 @@
 		}
 		.select-overlay {
 			float: left;
+			width: 200px;
 
 			label {
-				border-width: 2px;
-				border-left: none;
-				font-weight: $regular;
+				border: 2px solid $xl-grey;
+				font-weight: $bold;
 				background-color: transparent;
+
+				span {
+					font-weight: $regular;
+				}
 			}
 		}
 		a {
@@ -84,7 +88,7 @@
 			font-weight: $bold;
 			color: $xl-grey;
 			line-height: 42px;
-			padding: 0 $xxs-spacing;
+			padding: $xs-spacing $xxs-spacing;
 			font-size: $xl-font;
 		}
 	}

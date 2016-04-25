@@ -24,9 +24,11 @@ ul.checkout-types {
 		display: none;
 	}
 	tbody {
+		tr {
+			border-bottom: $xxs-spacing solid $xs-grey;
+		}
 		td {
 			background-color: $white;
-			border-bottom: $xxs-spacing solid $xs-grey;
 			vertical-align: middle;
 
 			&:first-child {
@@ -37,11 +39,12 @@ ul.checkout-types {
 				vertical-align: top;
 				text-align: right;
 			}
+			ul.item-options {
+				margin-bottom: 0;
+			}
 		}
 		tr:last-child {
-			td {
-				border-bottom: none;
-			}
+			border-bottom: none;
 		}
 	}
 }
@@ -70,7 +73,7 @@ ul.checkout-types {
 /*======================================================
 	CART SIDEBAR IN HEADER
 ======================================================*/
-#wrapper .block.block-cart {
+#wrapper > .block.block-cart {
 	@include transition(all 0.5s ease-in);
 	position: fixed;
 	right: 0;
@@ -89,6 +92,10 @@ ul.checkout-types {
 
 		-webkit-transition-delay: 0s;
 		transition-delay: 0s;
+	}
+
+	.amount {
+		display: none;
 	}
 
 	#cart-sidebar {

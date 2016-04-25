@@ -4,7 +4,7 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	z-index: 999;
+	z-index: 1000;
 	height: $header-height;
 	color: $white;
 	line-height: $header-height;
@@ -23,6 +23,8 @@
 			padding: 0 $m-spacing;
 
 			.mdi {
+				display: inline-block;
+				float: none;
 				width: auto;
 				margin-right: $xxs-spacing;
 			}

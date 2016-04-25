@@ -91,6 +91,9 @@ jQuery(window).load(function(){
 		jQuery(this).parent().toggleClass('show');
 	});
 
+	// wrap tables
+	jQuery('table').wrap('<div class="responsive-table"></div>');
+
 });
 
 jQuery(window).scroll(function() {

@@ -38,7 +38,13 @@
     <div class="block-content">
         <div class="summary">
 
-	    <?php $_items = $this->getRecentItems(); ?>
+            <?php if ($_cartQty==1): ?>
+                <p class="amount"><?php echo $this->__('There is <a href="%s">1 item</a> in your cart.', $this->getUrl('checkout/cart')) ?></p>
+            <?php else: ?>
+                <p class="amount"><?php echo $this->__('There are <a href="%s">%s items</a> in your cart.', $this->getUrl('checkout/cart'), $_cartQty) ?></p>
+            <?php endif ?>
+
+	        <?php $_items = $this->getRecentItems(); ?>
             <ol id="cart-sidebar" class="mini-products-list clearfix">
 	            <?php foreach($_items as $_item): ?>
                     <?php echo $this->getItemHtml($_item) ?>

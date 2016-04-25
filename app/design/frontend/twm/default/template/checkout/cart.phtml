@@ -36,7 +36,7 @@
         <div class="page-title title-buttons">
             <h1><?php echo $this->__('Shopping Cart') ?></h1>
 
-            <div class="clearfix">
+            <div class="cart-proceed clearfix">
                 <?php if($this->getContinueShoppingUrl()): ?>
                     <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Continue Shopping')) ?>" class="button button-link button-back btn-continue pull-left" onclick="setLocation('<?php echo Mage::helper('core')->quoteEscape($this->getContinueShoppingUrl()) ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
                 <?php endif; ?>
@@ -151,7 +151,7 @@
                 </div>
             </div>
             <hr class="hr-xl" />
-            <div class="clearfix">
+            <div class="cart-proceed clearfix">
                 <?php if($this->getContinueShoppingUrl()): ?>
                     <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Continue Shopping')) ?>" class="button button-link button-back btn-continue pull-left" onclick="setLocation('<?php echo Mage::helper('core')->quoteEscape($this->getContinueShoppingUrl()) ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
                 <?php endif; ?>
