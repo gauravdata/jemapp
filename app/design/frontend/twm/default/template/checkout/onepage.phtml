@@ -87,6 +87,8 @@
                 </ol>
                 <script type="text/javascript">
                     //<![CDATA[
+                    Validation.defaultOptions.immediate = true;
+                    
                     var accordion = new Accordion('checkoutSteps', '.step-title', true);
                     <?php if($this->getActiveStep()): ?>
                     accordion.openSection('opc-<?php echo $this->getActiveStep() ?>');
