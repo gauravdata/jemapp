@@ -1,12 +1,29 @@
 /*======================================================
 	DEFAULT
 ======================================================*/
+.product-header {
+	display: none;
+
+	.product-header-title {
+		font-size: $xxxl-font;
+		color: $xl-grey;
+		margin: $l-spacing 0 $m-spacing;
+		font-weight: $bold;
+	}
+	.price-box {
+		p {
+			display: inline-block;
+			margin-right: $xs-spacing;
+		}
+	}
+}
+
 .product-view {
 	position: relative;
 }
 
 .show-more {
-	@include transform(-50%,0)
+	@include transform(-50%,0);
 	@extend .fade-out-transition;
 	position: fixed;
 	background-color: transparentize($white, 0.15);
@@ -43,6 +60,7 @@
 		overflow: hidden;
 		background-repeat: no-repeat;
 		background-position: 30% 50%;
+		background-size: auto 100%;
 		cursor: zoom-in;
 
 		img {
@@ -58,6 +76,7 @@
 
 		a {
 			display: block;
+			width: 80px;
 			margin: $xs-spacing $xs-spacing 0 0;
 
 			img {
@@ -140,7 +159,6 @@
 .availability {
 	font-weight: $bold;
 	position: relative;
-	padding-left: $m-spacing;
 
 	&:before {
 		@include radius(50%);
@@ -148,9 +166,8 @@
 		width: $xs-spacing;
 		height: $xs-spacing;
 		background-color: $xl-grey;
-		position: absolute;
-		left: 0;
-		top: 4px;
+		display: inline-block;
+		margin-right: $xs-spacing;
 	}
 
 	&.in-stock:before {

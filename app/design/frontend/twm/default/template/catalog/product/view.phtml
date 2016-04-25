@@ -46,6 +46,12 @@
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>
 
+        <div class="product-header text-center">
+            <p class="product-header-title"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></p>
+            <?php echo $this->getChildHtml('product_type_data') ?>
+            <?php echo $this->getTierPriceHtml() ?>
+        </div>
+
         <div class="product-img-box">
             <?php echo $this->getChildHtml('media') ?>
         </div>
@@ -90,7 +96,9 @@
                 <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
             <?php endif;?>
 
-            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_usps')->toHtml(); ?>
+            <div class="product-usps">
+                <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_usps')->toHtml(); ?>
+            </div>
 
         </div>
     </form>
@@ -151,11 +159,11 @@
 <?php if ($_product->getShortDescription()):?>
     <div class="short-description" id="more">
         <div class="row wide">
-            <div class="col-6 content-box-img-left">
-                <img src="http://placehold.it/1200x1000" class="sync-height">
+            <div class="col-6">
+                <div class="content-box-img-left" style="background-image: url('http://placehold.it/1200x1000');"><span></span></div>
             </div>
             <div class="col-6">
-                <div class="content-box-wrapper sync-height">
+                <div class="content-box-wrapper">
                     <div class="content-box">
                         <h2><?php echo $this->__('Quick Overview') ?></h2>
                         <div class="std">

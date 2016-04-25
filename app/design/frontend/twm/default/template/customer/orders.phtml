@@ -51,7 +51,11 @@
             <!--<td class="a-center">{$page.orders[io].customer}</td>-->
             <td class="no-wrap"><?php echo $order->getGrandTotal() ?>&nbsp;</td>
             <td class="no-wrap"><?php echo $order->getStatus() ?>&nbsp;</td>
-            <td class="no-wrap"><a href="<?php echo $this->getUrl('customer/order/view', array('order'=>$order->getOrderId())) ?>"><?php echo $this->__('View Order') ?></a>&nbsp;</td>
+            <td class="no-wrap">
+                <a href="<?php echo $this->getUrl('customer/order/view', array('order'=>$order->getOrderId())) ?>">
+                    <i class="mdi mdi-eye" title="<?php echo $this->__('View Order') ?>"></i>
+                </a>
+            </td>
         </tr>
     <?php endforeach ?>
     </tbody>

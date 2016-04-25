@@ -203,6 +203,7 @@ html, body {
 
 .content-box-wrapper {
 	position: relative;
+	height: 675px;
 
 	.content-box {
 		@include transform(-50%, -50%);
@@ -217,26 +218,25 @@ html, body {
 .content-box-img-left,
 .content-box-img-right {
 	position: relative;
+	height: 675px;
+	background-position: 50%;
+	background-size: cover;
 
-	img {
-		display: block;
+	&:before {
+		@include rotate(45deg);
+		content: "";
+		background-color: $xxs-grey;
+		width: $xxl-font;
+		height: $xxl-font;
+		position: absolute;
+		top: 50%;
+		margin: -($xxl-font / 2);
 	}
-}
-.content-box-img-left:before,
-.content-box-img-right:before {
-	@include rotate(45deg);
-	content: "";
-	background-color: $xxs-grey;
-	width: $xxl-font;
-	height: $xxl-font;
-	position: absolute;
-	top: 50%;
-	margin: -($xxl-font / 2);
 }
 .content-box-img-left:before {
 	right: 0;
 }
-.content-box-img-right:before {
+.content-box-img-right:before span {
 	left: 0;
 }
 
@@ -360,6 +360,42 @@ html, body {
 		label {
 			background-color: transparent;
 			border-width: 2px;
+		}
+	}
+	.pages {
+		text-align: center;
+
+		strong {
+			display: none;
+		}
+		ol {
+			@extend .unstyled;
+			display: inline-block;
+			max-width: 250px;
+
+			li {
+				display: inline-block;
+				margin: 0 $xxs-spacing;
+				text-align: center;
+
+				a,
+				span {
+					display: block;
+					color: $m-grey;
+					border: 1px solid $s-grey;
+					width: 21px;
+					heigh: 21px;
+					line-height: 21px;
+				}
+
+				&.current {
+					a,
+					span {
+						border-color: $primary;
+						color: $primary;
+					}
+				}
+			}
 		}
 	}
 }

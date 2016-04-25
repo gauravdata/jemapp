@@ -33,11 +33,11 @@
 <?php $_description = $this->getProduct()->getDescription(); ?>
 <?php if ($_description): ?>
     <div class="row wide">
-        <div class="col-6 content-box-img-right pull-right">
-            <img src="http://placehold.it/1200x1000" class="sync-height">
+        <div class="col-6 pull-right">
+            <div class="content-box-img-right" style="background-image: url('http://placehold.it/1200x1000');"><span></span></div>
         </div>
         <div class="col-6">
-            <div class="content-box-wrapper sync-height">
+            <div class="content-box-wrapper">
                 <div class="content-box">
                     <h2><?php echo $this->__('Details') ?></h2>
                     <div class="std">

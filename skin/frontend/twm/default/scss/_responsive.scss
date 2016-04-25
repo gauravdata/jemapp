@@ -21,6 +21,11 @@
 
 	/*= Header =*/
 	#header {
+		.link-mdi {
+			span {
+				display: none;
+			}
+		}
 		.quick-access {
 			#search_mini_form {
 				border: none;
@@ -62,12 +67,17 @@
 		}
 	}
 
+	/*= Visuals =*/
+	.bg-visual {
+		margin-top: 1px;
+	}
+
 	/*= Category =*/
 	.amshopby-filters.fixed {
 		left: 0;
 	}
 }
-@media(max-width: 1000px) {
+@media(max-width: 1024px) {
 	.category-products {
 		ul.products-grid {
 			li.item {
@@ -80,6 +90,17 @@
 		padding: 0 $m-spacing;
 	}
 
+	#header {
+		.quick-access {
+			.form-language {
+				padding: 0 $xs-spacing;
+			}
+		}
+		a.link-mdi {
+			padding: 0 $xs-spacing;
+		}
+	}
+
 	.main-usps {
 		ul {
 			li {
@@ -88,31 +109,89 @@
 		}
 	}
 
+	.product-header {
+		display: block;
+	}
 	.product-options-wrapper {
 		@include transform(0,0);
-		position: static;
+		position: relative;
 		padding: $m-spacing;
+		width: 100%;
+		top: auto;
+		right: auto;
+		padding-left: 50%;
+		max-width: none;
+
+		.product-shop {
+			display: none;
+		}
+		.product-usps {
+			position: absolute;
+			left: 0;
+			top: 0;
+			margin: $m-spacing;
+			width: 50%;
+		}
 	}
 
-	.content-box-img-left:before,
-	.content-box-img-right:before {
-		display: none;
-	}
 	.content-box-wrapper {
 		.content-box {
-			@include transform(0,0);
-			position: static;
-			padding: $m-spacing;
-			width: auto;
-			max-width: none;
+			width: 100%;
+			padding: 0 $l-spacing;
 		}
 	}
 
 	.owl-title {
 		margin: $m-spacing;
 	}
+
+	.progress-bar {
+		li {
+			padding-right: $s-spacing;
+
+			&:after {
+				width: $s-spacing;
+			}
+
+			strong {
+				font-size: $m-font;
+			}
+		}
+	}
+
+	.pager {
+		.pages {
+			text-align: right;
+		}
+		.limiter {
+			display: none;
+		}
+	}
 }
-@media(max-width: 750px) {
+@media(max-width: 810px) {
+	/*= Usps =*/
+	.main-usps {
+		ul {
+			li:nth-child(2) {
+				display: none;
+			}
+		}
+	}
+
+	/*= Product =*/
+	.product-visual-wrapper {
+		.product-visual {
+			height: 500px;
+			background-position: 50%;
+		}
+		.more-views {
+			a {
+				width: 55px;
+			}
+		}
+	}
+}
+@media(max-width: 767px) {
 
 	/*= Grid =*/
 	.row {
@@ -140,15 +219,6 @@
 						padding-left: 0;
 					}
 				}
-			}
-		}
-	}
-
-	/*= Usps =*/
-	.main-usps {
-		ul {
-			li:nth-child(2) {
-				display: none;
 			}
 		}
 	}
@@ -189,6 +259,10 @@
 		span {
 			display: none;
 		}
+	}
+	.content-box-img-left:before,
+	.content-box-img-right:before {
+		display: none;
 	}
 
 	/*= Account =*/

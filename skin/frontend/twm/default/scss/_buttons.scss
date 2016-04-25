@@ -6,6 +6,7 @@
 .button,
 input[type=submit] {
 	@extend .main-transition;
+	@include radius(0);
 	display: inline-block;
 	height: $form-field-height;
 	line-height: $form-field-height;
