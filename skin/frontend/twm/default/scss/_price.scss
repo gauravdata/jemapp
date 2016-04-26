@@ -4,7 +4,14 @@
 
 	.old-price {
 		text-decoration: line-through;
-		font-weight: normal;
 		color: $m-grey;
+	}
+
+	p {
+		margin: 0 !important;
+
+		.price-label {
+			display: none;
+		}
 	}
 }

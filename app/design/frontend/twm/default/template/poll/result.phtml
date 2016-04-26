@@ -35,8 +35,9 @@
         <ol id="poll-answers">
             <?php foreach( $poll_answers as $answer ): ?>
                 <li>
-                    <span class="votes"><?php echo $answer->getVotesCount() ?> (<?php echo $answer->getPercent() ?>%)</span>
                     <span class="answer"><?php echo $this->escapeHtml($answer->getAnswerTitle()) ?>:</span>
+                    <span class="votes"><?php echo round($answer->getPercent()) ?>%</span>
+                    <span class="bar" style="width: <?php echo $answer->getPercent() ?>%;"></span>
                 </li>
             <?php endforeach; ?>
         </ol>

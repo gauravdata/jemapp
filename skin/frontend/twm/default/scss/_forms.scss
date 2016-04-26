@@ -52,7 +52,8 @@ form {
 		width: calc(33% - 10px);
 		padding: $xs-spacing 0;
 
-		em {
+		em,
+		span.required {
 			color: $error;
 			float: right;
 			margin-right: $s-spacing;
@@ -76,6 +77,7 @@ input[type=password],
 input[type=url],
 input[type=number],
 .custom-dropdown strong,
+textarea,
 select {
 	@extend .main-transition;
 	display: block;
@@ -85,12 +87,35 @@ select {
 	width: 100%;
 	font-size: $m-font;
 	background-color: $white;
+	background-position: right 10px center;
 
 	&:focus {
 		border-color: $primary;
 		color: $primary;
 		outline: none;
 	}
+
+	&.validation-failed {
+		border-color: $error !important;
+		color: $error !important;
+		font-weight: $bold;
+	}
+	&.validation-passed {
+		border-color: $primary !important;
+		color: $primary !important;
+		font-weight: $bold;
+	}
+	&:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0px 1000px white inset;
+	}
+}
+textarea {
+	height: 250px;
+}
+input.validation-passed {
+	background-image: url('../../images/check.png');
+	background-repeat: no-repeat;
+	background-position: right 10px center;
 }
 
 /*= Date of birth =*/
@@ -215,16 +240,13 @@ form .control {
 		color: $xl-grey;
 		float: none;
 		left: 0;
+		text-overflow: ellipsis;
 
 		&:after {
 			position: absolute;
 			content: "\F140";
 			font-family: 'Material Design Icons';
 			right: $xs-spacing;
-		}
-
-		em {
-			float: none;
 		}
 	}
 	.input-box {
@@ -241,4 +263,7 @@ form .control {
 p.required {
 	margin: $m-spacing 0;
 	color: $error;
+}
+.validation-advice {
+	display: none;
 }

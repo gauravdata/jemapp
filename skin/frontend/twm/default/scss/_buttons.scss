@@ -8,17 +8,16 @@ input[type=submit] {
 	@extend .main-transition;
 	@include radius(0);
 	display: inline-block;
-	height: $form-field-height;
-	line-height: $form-field-height;
-	padding: 0 $xl-spacing;
+	line-height: $m-font * 2;
+	padding: ($m-font / 2) $xl-spacing (($m-font / 2) - 4);
 	border: 2px solid $primary;
 	background-color: $primary;
 	font-weight: bold;
 	color: $white;
-	text-transform: uppercase;
 	cursor: pointer;
 	font-size: $m-font;
 	margin-right: $m-spacing;
+	font-family: $main-font;
 
 	&:hover,
 	&:focus {
@@ -33,7 +32,6 @@ input[type=submit] {
 		color: $primary;
 		border: none;
 		padding: 0;
-		text-transform: none;
 
 		&:before {
 			font-family: 'Material Design Icons';
@@ -78,6 +76,9 @@ input[type=submit] {
 
 	&.button-sm {
 		padding: 0 $s-spacing;
+		font-size: $s-font;
+		min-height: 0;
+		line-height: $xxl-font;
 	}
 
 	&.button-block {
@@ -85,6 +86,8 @@ input[type=submit] {
 		width: 100%;
 		margin: 0;
 		text-align: center;
+		padding-left: $s-spacing;
+		padding-right: $s-spacing;
 	}
 
 	&:last-child {

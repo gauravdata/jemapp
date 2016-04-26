@@ -23,32 +23,12 @@
 	position: relative;
 }
 
-.show-more {
-	@include transform(-50%,0);
-	@extend .fade-out-transition;
-	position: fixed;
-	background-color: transparentize($white, 0.15);
-	bottom: $xs-spacing;
-	left: 50%;
-	z-index: 999;
-	padding: $xs-spacing;
-	color: $l-grey;
-
-	&.hide {
-		opacity: 0;
-		visibility: hidden;
-	}
-
-	.mdi {
-		display: block;
-		font-size: $xxxxl-font;
-		text-align: center;
-		margin: -$s-spacing 0;
-	}
+.product-pricing {
+	display: none;
 }
 
 /*======================================================
-	VISUAL
+	MEDIA
 ======================================================*/
 .product-visual-wrapper {
 	position: relative;
@@ -110,6 +90,30 @@
 	}
 }
 
+.show-more {
+	@include transform(-50%,0);
+	@extend .fade-out-transition;
+	position: fixed;
+	background-color: transparentize($white, 0.15);
+	bottom: $xs-spacing;
+	left: 50%;
+	z-index: 999;
+	padding: $xs-spacing;
+	color: $l-grey;
+
+	&.hide {
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.mdi {
+		display: block;
+		font-size: $xxxxl-font;
+		text-align: center;
+		margin: -$s-spacing 0;
+	}
+}
+
 /*======================================================
 	OPTIONS
 ======================================================*/
@@ -135,22 +139,19 @@
 				margin-right: $xs-spacing;
 			}
 		}
-	}
-	.product-options {
-		.select-overlay {
-			float: left;
-			width: 30%;
 
-			label {
-				border-width: 2px;
-				font-weight: $bold;
-				background-color: transparent;
-			}
+	}
+	.select-overlay {
+		label {
+			border-width: 2px;
+			font-weight: $bold;
+			background-color: transparent;
 		}
 	}
-	.product-options-bottom {
+	.add-to-cart {
 		margin-bottom: $m-spacing;
-
+	}
+	.product-options-bottom {
 		.price-box {
 			display: none;
 		}
@@ -176,5 +177,11 @@
 	}
 	&.out-of-stock:before {
 		background-color: $error;
+	}
+}
+
+.product-usps {
+	ul.check {
+		margin-bottom: 0;
 	}
 }

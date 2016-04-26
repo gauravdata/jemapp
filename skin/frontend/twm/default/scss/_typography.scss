@@ -110,11 +110,14 @@ strong {
 }
 
 /*= Alignment =*/
+.text-left {
+	text-align: left !important;
+}
 .text-center {
-	text-align: center;
+	text-align: center !important;
 }
 .text-right {
-	text-align: right;
+	text-align: right !important;
 }
 
 /*= Case =*/
@@ -151,12 +154,15 @@ button {
 	@extend .main-transition;
 	cursor: pointer;
 }
-a.link {
+.link {
 	&:before {
 		font-family: 'Material Design Icons';
 		content: "\F142";
 		margin-right: $xxs-spacing;
 	}
+}
+.link-mdi {
+	font-size: $xl-font;
 }
 
 /*======================================================
@@ -216,6 +222,7 @@ ul.messages {
 
 	ul {
 		@extend .unstyled;
+		margin: 0;
 
 		li {
 			border: 1px solid $m-grey;

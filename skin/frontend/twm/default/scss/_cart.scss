@@ -82,6 +82,7 @@ ul.checkout-types {
 	background-color: $white;
 	z-index: 950;
 	width: 522px;
+	padding: 0;
 
 	-webkit-transition-delay: 0.5s;
 	transition-delay: 0.5s;
@@ -92,6 +93,10 @@ ul.checkout-types {
 
 		-webkit-transition-delay: 0s;
 		transition-delay: 0s;
+	}
+
+	.block-content-spacing {
+		padding: $s-spacing;
 	}
 
 	.amount {
@@ -118,7 +123,7 @@ ul.checkout-types {
 			.btn-edit {
 				position: absolute;
 				top: 0;
-				right: 15px;
+				right: 25px;
 			}
 			.product-name {
 				font-weight: $bold;
@@ -151,7 +156,7 @@ ul.checkout-types {
 	.subtotal {
 		text-align: right;
 		padding-top: $xs-spacing;
-		border-top: 1px solid $xl-grey;
+		border-top: 1px solid $m-grey;
 	}
 	.actions {
 		text-align: right;

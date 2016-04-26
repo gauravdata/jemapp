@@ -24,8 +24,8 @@ $success: #32a400;
 	FONT SIZES
 ======================================================*/
 $xxxxl-font: 60px;
-$xxxl-font: 36px;
-$xxl-font: 30px;
+$xxxl-font: 32px;
+$xxl-font: 28px;
 $xl-font: 21px;
 $l-font: 17px;
 $m-font: 14px;
@@ -55,4 +55,4 @@ $xxs-spacing: 5px;
 ======================================================*/
 $header-height: 54px;
 $side-nav-width: 250px;
-$form-field-height: 42px;
+$form-field-height: $m-font * 3;

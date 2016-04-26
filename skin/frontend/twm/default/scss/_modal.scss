@@ -1,0 +1,74 @@
+.modal-wrapper {
+	@extend .fade-in-transition;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100%;
+	z-index: 2000;
+
+	.modal-overlay {
+		position: absolute;
+		width: 100%;
+		min-height: 100%;
+		background-color: rgba(0,0,0,0.5);
+	}
+	.modal-container {
+		position: absolute;
+		overflow-y: auto;
+		width: 100%;
+		height: 100%;
+		padding: 100px 0;
+
+		.modal-box {
+			background-color: $white;
+			max-width: 768px;
+			margin: 0 auto;
+			position: relative;
+			z-index: 20;
+
+			.modal-close {
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: $xl-spacing;
+				height: $xl-spacing;
+				line-height: $xl-spacing;
+				text-align: center;
+				background-color: $xl-grey;
+				color: $white;
+
+				.mdi {
+					line-height: $xl-spacing;
+					font-size: $xl-font;
+				}
+			}
+			.modal-title {
+				text-align: center;
+				border-bottom: 1px solid $s-grey;
+				margin: 0;
+				padding: $s-spacing;
+			}
+			.modal-content {
+				margin: $m-spacing;
+			}
+		}
+
+		.modal-click-area {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 10;
+		}
+	}
+
+	&.show-modal {
+		visibility: visible;
+		opacity: 1;
+	}
+}
+body.modal-open {
+	overflow: hidden;
+}

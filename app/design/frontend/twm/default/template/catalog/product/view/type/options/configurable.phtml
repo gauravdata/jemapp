@@ -36,15 +36,20 @@ Mage::helper('catalog/product')->setSkipSaleableCheck(false);
 $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 ?>
 <?php if ($_product->isSaleable() && count($_attributes)):?>
-    <div class="clearfix">
+    <div class="row thin">
     <?php foreach($_attributes as $_attribute): ?>
-        <div class="select-overlay">
-            <label class="required"><?php echo $_attribute->getLabel() ?> <em>*</em></label>
-            <div class="input-box">
-                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
-                    <option><?php echo $this->__('Choose an Option...') ?></option>
-                </select>
+        <div class="col-6 field">
+            <div class="select-overlay">
+                <label class="required text-center"><?php echo $_attribute->getLabel() ?> <em>*</em></label>
+                <div class="input-box">
+                    <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                        <option><?php echo $this->__('Choose an Option...') ?></option>
+                    </select>
+                </div>
             </div>
+        </div>
+        <div class="col-6 field">
+            <a href="#modal-sizechart" class="button button-outline button-block show-modal"><?php echo $this->__('Sizechart') ?></a>
         </div>
     <?php endforeach; ?>
     </div>

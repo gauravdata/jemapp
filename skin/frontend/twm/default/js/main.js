@@ -1,3 +1,12 @@
+Validation.defaultOptions.immediate = true;
+
+// show cart on hover
+jQuery(document).on( "mouseenter", ".top-link-cart, #wrapper > .block.block-cart", function() {
+	jQuery('#wrapper > .block.block-cart').addClass('show');
+}).on( "mouseleave", ".top-link-cart, #wrapper > .block.block-cart", function() {
+	jQuery('#wrapper > .block.block-cart').removeClass('show');
+});
+
 jQuery(window).load(function(){
 	jQuery('.sync-height').syncheight();
 
@@ -42,17 +51,22 @@ jQuery(window).load(function(){
 	});
 
 	// select overlay update label value
-	jQuery('.checkout-cart-index .select-overlay select').change(function() {
-		jQuery(this).parents('.select-overlay').find('label').html(jQuery(this).val());
-		jQuery(this).parents('form').submit();
+	jQuery('.select-overlay select').each(function() {
+		var label = jQuery(this).parents('.select-overlay').find('label');
+		if(jQuery(this).val() != '' && label.find('span').length < 1) {
+			label.html(jQuery(this).find('option:selected').html());
+		}
+	});
+	jQuery('.select-overlay select').change(function() {
+		jQuery(this).parents('.select-overlay').find('label').html(jQuery(this).find('option:selected').html());
+		if(jQuery(this).hasClass('qty')) {
+			jQuery(this).parents('form').submit();
+		}
 	});
 
 	// scroll to id
 	jQuery('.scroll-to').click(function(){
-		jQuery('html, body').animate({
-			scrollTop: jQuery(jQuery(this).attr('href')).offset().top
-		}, 500);
-		return false;
+		scrollToId(jQuery(jQuery(this).attr('href')));
 	});
 
 	// scroll 85% lower
@@ -69,15 +83,6 @@ jQuery(window).load(function(){
 		toolbar.data('top', jQuery('.category-products > .toolbar').offset().top);
 	}
 
-	// show cart on hover
-	jQuery('.top-link-cart, #wrapper > .block.block-cart').mouseenter(function() {
-		if(jQuery('#wrapper > .block.block-cart .block-content').length > 0) {
-			jQuery('#wrapper > .block.block-cart').addClass('show');
-		}
-	}).mouseleave(function(){
-		jQuery('#wrapper > .block.block-cart').removeClass('show');
-	});
-
 	// remove title attribute from top link cart
 	jQuery('.top-link-cart').attr('title', '');
 
@@ -93,6 +98,20 @@ jQuery(window).load(function(){
 
 	// wrap tables
 	jQuery('table').wrap('<div class="responsive-table"></div>');
+
+	// show modal
+	jQuery('.show-modal').click(function() {
+		jQuery(jQuery(this).attr('href')).addClass('show-modal');
+		jQuery('body').addClass('modal-open')
+		return false;
+	});
+
+	// close modal
+	jQuery('.modal-close, .modal-click-area').click(function() {
+		jQuery('.modal-wrapper').removeClass('show-modal');
+		jQuery('body').removeClass('modal-open')
+		return false;
+	});
 
 });
 
@@ -129,3 +148,10 @@ jQuery(window).resize(function(){
 		jQuery('body').addClass('hidden-side-nav').removeClass('open-side-nav');
 	}
 });
+
+function scrollToId(scrollId) {
+	jQuery('html, body').animate({
+		scrollTop: scrollId.offset().top
+	}, 500);
+	return false;
+}

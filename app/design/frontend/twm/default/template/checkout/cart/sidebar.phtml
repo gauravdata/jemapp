@@ -35,46 +35,48 @@
 <div class="block block-cart">
     <?php $_cartQty = $this->getSummaryCount() ?>
     <?php if ($_cartQty>0): ?>
-    <div class="block-content">
-        <div class="summary">
-
-            <?php if ($_cartQty==1): ?>
-                <p class="amount"><?php echo $this->__('There is <a href="%s">1 item</a> in your cart.', $this->getUrl('checkout/cart')) ?></p>
-            <?php else: ?>
-                <p class="amount"><?php echo $this->__('There are <a href="%s">%s items</a> in your cart.', $this->getUrl('checkout/cart'), $_cartQty) ?></p>
-            <?php endif ?>
-
-	        <?php $_items = $this->getRecentItems(); ?>
-            <ol id="cart-sidebar" class="mini-products-list clearfix">
-	            <?php foreach($_items as $_item): ?>
-                    <?php echo $this->getItemHtml($_item) ?>
-                <?php endforeach; ?>
-            </ol>
-            <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
-
-            <p class="subtotal">
-                <?php if ($this->canApplyMsrp()): ?>
-                    <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+    <div class="block-content-spacing">
+        <div class="block-content">
+            <div class="summary">
+    
+                <?php if ($_cartQty==1): ?>
+                    <p class="amount"><?php echo $this->__('There is <a href="%s">1 item</a> in your cart.', $this->getUrl('checkout/cart')) ?></p>
                 <?php else: ?>
-                    <strong>
-                        <span class="label"><?php echo $this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
-                    </strong>
-                    <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
-                        <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                    <p class="amount"><?php echo $this->__('There are <a href="%s">%s items</a> in your cart.', $this->getUrl('checkout/cart'), $_cartQty) ?></p>
+                <?php endif ?>
+    
+                <?php $_items = $this->getRecentItems(); ?>
+                <ol id="cart-sidebar" class="mini-products-list clearfix">
+                    <?php foreach($_items as $_item): ?>
+                        <?php echo $this->getItemHtml($_item) ?>
+                    <?php endforeach; ?>
+                </ol>
+                <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
+    
+                <p class="subtotal">
+                    <?php if ($this->canApplyMsrp()): ?>
+                        <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+                    <?php else: ?>
+                        <strong>
+                            <span class="label"><?php echo $this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+                        </strong>
+                        <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+                            <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                        <?php endif; ?>
                     <?php endif; ?>
-                <?php endif; ?>
-            </p>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="actions">
-	    <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('View all items in your shopping cart')) ?>" class="button button-link" onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>')"><span><span><?php echo $this->__('View All') ?></span></span></button>
-        <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Checkout')) ?>" class="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')">
-            <span>
+        <div class="actions">
+            <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('View all items in your shopping cart')) ?>" class="button button-link" onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>')"><span><span><?php echo $this->__('View All') ?></span></span></button>
+            <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Checkout')) ?>" class="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')">
                 <span>
-                    <i class="mdi mdi-lock"></i> <?php echo $this->__('Checkout') ?>
+                    <span>
+                        <i class="mdi mdi-lock"></i> <?php echo $this->__('Checkout') ?>
+                    </span>
                 </span>
-            </span>
-        </button>
+            </button>
+        </div>
     </div>
     <?php endif ?>
 </div>

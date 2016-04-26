@@ -48,7 +48,6 @@
 
         <div class="product-header text-center">
             <p class="product-header-title"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></p>
-            <?php echo $this->getChildHtml('product_type_data') ?>
             <?php echo $this->getTierPriceHtml() ?>
         </div>
 
@@ -71,9 +70,6 @@
                     <div class="add-to-box">
                         <?php if($_product->isSaleable()): ?>
                             <?php echo $this->getChildHtml('addtocart') ?>
-                            <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
-                                <span class="or"><?php echo $this->__('OR') ?></span>
-                            <?php endif; ?>
                         <?php endif; ?>
                         <?php echo $this->getChildHtml('addto') ?>
                     </div>
@@ -154,7 +150,7 @@
         }.bind(productAddToCartForm);
     //]]>
     </script>
-    </div>
+</div>
 
 <?php if ($_product->getShortDescription()):?>
     <div class="short-description" id="more">
@@ -196,3 +192,21 @@
     <i class="mdi mdi-chevron-down"></i>
     <span><?php echo $this->__('Show more'); ?></span>
 </a>
+
+<?php if ($_product->getSizechart()): ?>
+    <div class="modal-wrapper" id="modal-sizechart">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-box">
+                <a href="#" class="modal-close">
+                    <i class="mdi mdi-close"></i>
+                </a>
+                <h2 class="modal-title"><?php echo $this->__('Sizechart') ?></h2>
+                <div class="modal-content">
+                    <?php echo $_helper->productAttribute($_product, nl2br($_product->getSizechart()), 'sizechart') ?>
+                </div>
+            </div>
+            <div class="modal-click-area"></div>
+        </div>
+    </div>
+<?php endif; ?>

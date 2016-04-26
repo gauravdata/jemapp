@@ -11,6 +11,8 @@
 @import 'forms';
 @import 'buttons';
 @import 'header';
+@import 'owl';
+@import 'modal';
 @import 'layout';
 
 /*======================================================
@@ -20,12 +22,16 @@
 @import 'product';
 @import 'category';
 @import 'amshopby';
+@import 'cms';
+@import 'ajaxaddtocart';
+
+/*======================================================
+	CUSTOMER
+======================================================*/
 @import 'account';
 @import 'cart';
 @import 'checkout';
-@import 'cms';
-@import 'owl';
-@import 'ajaxaddtocart';
+@import 'poll';
 
 /*======================================================
 	MISC

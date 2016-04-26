@@ -59,6 +59,14 @@
 			padding: 0;
 		}
 	}
+
+	&.thin {
+		margin: 0 (-$xxs-spacing);
+
+		> *[class^="col-"] {
+			padding: 0 $xxs-spacing;
+		}
+	}
 }
 .pull-left {
 	float: left !important;

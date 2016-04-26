@@ -59,6 +59,7 @@ if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->
                 <?php if ($_code=='customercredit' && (Mage::helper('customercredit')->isEnabledCodes() || $this->needShowRechageLink())):?>
                     (<a href="<?php echo $this->getUrl('customercredit/') ?>" target="_blank"><?php echo Mage::helper('customercredit')->__('Recharge') ?></a>)
                 <?php endif; ?>
+                <img src="<?php echo $this->getSkinUrl('images/logo-' . $_code . '.png'); ?>" />
             </label>
             <?php if (($_code=='customercredit') && Mage::getStoreConfig('mageworx_customers/customercredit_credit/enable_custom_value')): ?>
                 <?php echo $this->getChildHtml('payment.custom.value'); ?>

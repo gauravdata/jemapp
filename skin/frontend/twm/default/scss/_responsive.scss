@@ -139,10 +139,7 @@
 		right: auto;
 		padding-left: 50%;
 		max-width: none;
-
-		.product-shop {
-			display: none;
-		}
+		
 		.product-usps {
 			position: absolute;
 			left: 0;
@@ -278,6 +275,17 @@
 	.input-box {
 		float: none;
 		width: auto;
+	}
+
+	.buttons-set,
+	.add-to-cart {
+		margin-bottom: 0 !important;
+
+		.button {
+			display: block;
+			width: 100%;
+			margin-bottom: $m-spacing;
+		}
 	}
 
 	/*= Main =*/
