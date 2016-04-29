@@ -3,7 +3,7 @@
 ======================================================*/
 html, body {
 	height: 100%;
-	background: $xxs-grey;
+	background: $xxxs-grey;
 	margin: 0;
 }
 
@@ -116,7 +116,7 @@ html, body {
 /*======================================================
 	MAIN
 ======================================================*/
-#main {
+#content {
 	@extend .main-transition;
 	position: relative;
 	left: $side-nav-width;
@@ -227,7 +227,7 @@ html, body {
 	&:before {
 		@include rotate(45deg);
 		content: "";
-		background-color: $xxs-grey;
+		background-color: $xxxs-grey;
 		width: $xxl-font;
 		height: $xxl-font;
 		position: absolute;
@@ -521,7 +521,7 @@ ul.social {
 			text-align: center;
 			background-color: $m-grey;
 			font-size: $xl-font;
-			color: $xxs-grey;
+			color: $xxxs-grey;
 			margin-right: $xxs-spacing;
 
 			i.mdi {
@@ -552,32 +552,54 @@ ul.social {
 	padding-top: $xxl-spacing;
 	color: $m-grey;
 
-	form {
+	.block-subscribe {
+		padding: 0;
+		border: none;
 		margin-bottom: $xxl-spacing;
 
-		label {
-			display: block;
-			margin-bottom: $s-spacing;
-			float: none;
-			width: auto;
-
-			strong {
-				color: $xl-grey;
-			}
+		.block-title {
+			font-size: $m-font;
+			margin-bottom: 0;
+		}
+		.block-content {
+			@extend .clearfix;
 		}
 
-		input[type=email],
-		input[type=text] {
-			width: 400px;
-			float: left;
-			background-color: transparent;
-			border-width: 2px;
-			border-color: $xl-grey;
-			margin-right: $s-spacing;
+		form {
+			margin: 0;
 
-			&:focus {
-				color: $xl-grey;
-				font-weight: bold;
+			label {
+				display: block;
+				margin-bottom: $s-spacing;
+				float: none;
+				width: auto;
+
+				strong {
+					color: $xl-grey;
+				}
+			}
+
+			.input-box {
+				width: 400px;
+				float: left;
+				margin-right: $s-spacing;
+
+				input[type=email],
+				input[type=text] {
+					background-color: transparent;
+					border-width: 2px;
+					border-color: $xl-grey;
+					margin-right: $s-spacing;
+
+					&:focus {
+						color: $xl-grey;
+						font-weight: bold;
+					}
+				}
+			}
+
+			.actions {
+				float: left;
 			}
 		}
 	}
@@ -721,7 +743,7 @@ ul.social {
 	#side-nav {
 		left: -$side-nav-width;
 	}
-	#main,
+	#content,
 	.toolbar.fixed,
 	#footer {
 		width: 100%;

@@ -2,7 +2,7 @@
 	DEFAULT
 ======================================================*/
 .catalog-category-view {
-	main {
+	#content {
 		.content-container {
 			width: 80%;
 		}
@@ -17,7 +17,7 @@
 	@extend .main-transition;
 	padding: $xs-spacing 0;
 	position: relative;
-	background-color: $xxs-grey;
+	background-color: $xxxs-grey;
 
 	select {
 		border-width: 2px;
@@ -103,6 +103,10 @@
 }
 .toolbar-bottom {
 	.toolbar {
+		.amshopby-filters,
+		.sorter {
+			display: none;
+		}
 		.pager {
 			position: static;
 			float: left;

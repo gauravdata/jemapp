@@ -40,12 +40,10 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     <?php foreach($_attributes as $_attribute): ?>
         <div class="col-6 field">
             <div class="select-overlay">
+                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                    <option><?php echo $this->__('Choose an Option...') ?></option>
+                </select>
                 <label class="required text-center"><?php echo $_attribute->getLabel() ?> <em>*</em></label>
-                <div class="input-box">
-                    <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
-                        <option><?php echo $this->__('Choose an Option...') ?></option>
-                    </select>
-                </div>
             </div>
         </div>
         <div class="col-6 field">

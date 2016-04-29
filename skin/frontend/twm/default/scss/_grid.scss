@@ -10,7 +10,7 @@
 		clear: both;
 	}
 
-	> *[class^="col-"] {
+	> *[class*="col-"] {
 		float: left;
 		padding: 0 $m-spacing;
 	}
@@ -55,7 +55,7 @@
 	&.wide {
 		margin: 0;
 
-		> *[class^="col-"] {
+		> *[class*="col-"] {
 			padding: 0;
 		}
 	}
@@ -63,7 +63,7 @@
 	&.thin {
 		margin: 0 (-$xxs-spacing);
 
-		> *[class^="col-"] {
+		> *[class*="col-"] {
 			padding: 0 $xxs-spacing;
 		}
 	}

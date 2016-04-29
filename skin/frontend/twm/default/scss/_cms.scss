@@ -42,4 +42,30 @@ main > .std {
 	.main-usps {
 		display: none;
 	}
+	.content-wrapper {
+		padding: $xxl-spacing;
+		background-color: $xxs-grey;
+		border: 1px solid $s-grey;
+
+		.page-title {
+			border: none;
+			margin: 0;
+
+			h1 {
+				text-align: left;
+				margin-top: 0;
+			}
+		}
+		.std {
+			*:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+	&.one-column {
+		.content-wrapper {
+			width: 950px;
+			margin: 100px auto 0;
+		}
+	}
 }

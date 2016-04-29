@@ -7,7 +7,7 @@
 	#side-nav {
 		display: none;
 	}
-	#main {
+	#content {
 		width: 100%;
 		left: 0;
 	}
@@ -44,7 +44,7 @@
 			height: $xl-spacing;
 			line-height: $xl-spacing;
 			background-color: $primary;
-			color: $xxs-grey;
+			color: $xxxs-grey;
 			text-align: center;
 			font-size: $xl-font;
 			position: absolute;
@@ -121,7 +121,7 @@
 				padding: $xs-spacing $m-spacing;
 			}
 			> li:nth-child(odd) {
-				background-color: $xxs-grey;
+				background-color: $xxxs-grey;
 			}
 		}
 	}

@@ -42,12 +42,12 @@ if(isset($_COOKIE['side-nav']) && $_COOKIE['side-nav'] == 'closed') {
 	<head>
 		<?php echo $this->getChildHtml('head') ?>
 	</head>
-	<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().$sidenavState.'"':'' ?>>
+	<body class="three-column<?php echo $this->getBodyClass()?' ' . $this->getBodyClass() . $sidenavState : ''; ?>">
 		<?php echo $this->getChildHtml('after_body_start') ?>
 		<div class="wrapper">
 			<?php echo $this->getChildHtml('global_notices') ?>
 			<?php echo $this->getChildHtml('header') ?>
-			<main id="main">
+			<div id="content">
 				<div class="main-usps">
 					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('main_usps')->toHtml(); ?>
 				</div>
@@ -55,15 +55,21 @@ if(isset($_COOKIE['side-nav']) && $_COOKIE['side-nav'] == 'closed') {
 				<div class="area bg-xs-grey">
 					<div class="content-container">
 						<div class="row">
-							<div class="col-left col-3 sidebar"><?php echo $this->getChildHtml('left') ?></div>
-							<div class="col-main col-6">
-								<?php echo $this->getChildHtml('content') ?>
-							</div>
-							<div class="col-right col-3 sidebar"><?php echo $this->getChildHtml('right') ?></div>
+							<aside id="aside-left" class="col-3 aside">
+								<?php echo $this->getChildHtml('left') ?>
+							</aside>
+							<main id="main" class="col-9">
+								<div class="content-wrapper">
+									<?php echo $this->getChildHtml('content') ?>
+								</div>
+							</main>
+							<aside id="aside-right" class="aside col-3">
+								<?php echo $this->getChildHtml('right') ?>
+							</aside>
 						</div>
 					</div>
 				</div>
-			</main>
+			</div>
 			<?php echo $this->getChildHtml('footer') ?>
 			<?php echo $this->getChildHtml('global_cookie_notice') ?>
 			<?php echo $this->getChildHtml('before_body_end') ?>

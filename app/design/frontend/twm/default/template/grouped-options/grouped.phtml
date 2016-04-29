@@ -61,7 +61,6 @@
                 <div class="row thin">
                     <div class="col-6">
                         <div class="select-overlay">
-                            <label><em>*</em><?php echo $this->__('Qty') ?></label>
                             <select name="super_group[<?php echo $_item->getId() ?>]" title="<?php echo $this->__('Qty') ?>">
                                 <option value=""><?php echo $this->__('Choose an Option...') ?></option>
                                 <?php
@@ -78,6 +77,7 @@
                                 }
                                 ?>
                             </select>
+                            <label><em>*</em><?php echo $this->__('Qty') ?></label>
                         </div>
                     </div>
                     <?php if ($_item->isSuper() || $_item->getHasOptions()) : ?>

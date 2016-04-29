@@ -99,23 +99,39 @@ select {
 		border-color: $error !important;
 		color: $error !important;
 		font-weight: $bold;
+
+		~ label {
+			border-color: $error !important;
+			color: $error !important;
+			font-weight: $bold;
+		}
 	}
 	&.validation-passed {
 		border-color: $primary !important;
 		color: $primary !important;
 		font-weight: $bold;
+
+		~ label {
+			border-color: $primary !important;
+			color: $primary !important;
+			font-weight: $bold;
+		}
 	}
 	&:-webkit-autofill {
 		-webkit-box-shadow: 0 0 0px 1000px white inset;
 	}
 }
 textarea {
-	height: 250px;
+	height: 200px;
 }
-input.validation-passed {
+input.validation-passed,
+select.validation-passed ~ label {
 	background-image: url('../../images/check.png');
 	background-repeat: no-repeat;
 	background-position: right 10px center;
+}
+select.validation-passed ~ label {
+	background-position: right 30px center;
 }
 
 /*= Date of birth =*/
@@ -176,13 +192,15 @@ form .control {
 			left: 0;
 			top: 7px;
 			width: 21px;
-			height: 22px;
+			height: 21px;
 			line-height: 22px;
 			border: 1px solid $xl-grey;
 			background-color: $white;
 			cursor: pointer;
 			text-align: center;
-			padding-left: 1px;
+			font-size: $l-font;
+			color: $white;
+			font-family: 'Material Design Icons';
 		}
 
 		em {
@@ -199,26 +217,23 @@ form .control {
 	}
 
 	// checkbox
-	.input-box.checkbox-checked ~ label:before,
-	input[type=checkbox]:checked ~ label:before {
-		font-family: 'Material Design Icons';
+	input[type=checkbox] ~ :before {
 		content: "\F12C";
-		color: $primary;
-		font-size: $l-font;
 		border-color: $primary;
 	}
 
 	// radio
 	input[type=radio] ~ :before {
+		content: "\F12F";
 		@include radius(50%);
 	}
+
+	// checked
+	.input-box.checkbox-checked ~ label:before,
+	input[type=checkbox]:checked ~ label:before,
 	.input-box.checked-checked + label:before,
 	input[type=radio]:checked + label:before {
-		border-color: $primary;
-		font-family: 'Material Design Icons';
-		content: "\F12F";
 		color: $primary;
-		font-size: $l-font;
 		border-color: $primary;
 	}
 }
@@ -240,6 +255,7 @@ form .control {
 		color: $xl-grey;
 		float: none;
 		left: 0;
+		top: 0;
 		text-overflow: ellipsis;
 
 		&:after {

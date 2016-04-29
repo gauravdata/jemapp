@@ -20,6 +20,11 @@ table {
 	margin: 0 0 $m-spacing;
 }
 
+ul,
+ol {
+	padding-left: 15px;
+}
+
 hr {
 	height: 0;
 	background-color: transparent;
@@ -199,12 +204,6 @@ table {
 		img {
 			max-width: none !important;
 		}
-
-		input,
-		select,
-		textarea {
-			width: auto !important;
-		}
 	}
 
 	th {
@@ -219,13 +218,14 @@ table {
 ul.messages {
 	@extend .unstyled;
 	margin: 0;
+	padding: 0;
 
 	ul {
 		@extend .unstyled;
 		margin: 0;
 
 		li {
-			border: 1px solid $m-grey;
+			//border: 1px solid $m-grey;
 			background-color: $s-grey;
 			padding: $s-spacing $m-spacing;
 			color: $l-grey;

@@ -24,4 +24,28 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<?php echo $pageData->getPageContent(); ?>
+<div id="footer">
+	<div class="content-container">
+		<div class="row footer-nav">
+			<div class="col-4">
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_checkout_item_1')->toHtml(); ?>
+			</div>
+			<div class="col-4">
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_checkout_item_2')->toHtml(); ?>
+			</div>
+			<div class="col-4">
+				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_2')->toHtml(); ?>
+			</div>
+		</div>
+		<div class="footer-bar">
+			<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_5')->toHtml(); ?>
+		</div>
+		<p class="text-center">
+			<?php echo $this->getCopyright() ?>
+		</p>
+	</div>
+</div>
+<a href="#top" class="back-to-top scroll-to">
+	<?php echo $this->__('Back to top'); ?>
+	<i class="mdi mdi-chevron-up"></i>
+</a>

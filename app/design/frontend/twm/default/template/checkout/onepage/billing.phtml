@@ -30,10 +30,8 @@
     <?php if ($this->customerHasAddresses()): ?>
         <li class="wide">
             <div class="select-overlay">
+                <?php echo $this->getAddressesHtmlSelect('billing') ?>
                 <label for="billing-address-select"><?php echo $this->__('Select a billing address from your address book or enter a new address.') ?></label>
-                <div class="input-box">
-                    <?php echo $this->getAddressesHtmlSelect('billing') ?>
-                </div>
             </div>
         </li>
     <?php endif; ?>

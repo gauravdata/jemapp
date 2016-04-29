@@ -29,10 +29,8 @@
     <?php if ($this->customerHasAddresses()): ?>
        <li class="wide">
            <div class="select-overlay">
+               <?php echo $this->getAddressesHtmlSelect('shipping') ?>
                <label for="shipping-address-select"><?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?></label>
-               <div class="input-box">
-                   <?php echo $this->getAddressesHtmlSelect('shipping') ?>
-               </div>
            </div>
        </li>
     <?php endif ?>

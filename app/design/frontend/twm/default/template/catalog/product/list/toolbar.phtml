@@ -61,6 +61,13 @@
 
         <div class="sort-by">
             <div class="select-overlay">
+                <select onchange="setLocation(this.value)">
+                <?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
+                    <option value="<?php echo $this->getOrderUrl($_key, 'asc') ?>"<?php if($this->isOrderCurrent($_key)): ?> selected="selected"<?php endif; ?>>
+                        <?php echo $this->__($_order) ?>
+                    </option>
+                <?php endforeach; ?>
+                </select>
                 <label>
                     <?php echo $this->__('Sort By') ?>
                     <span>
@@ -71,13 +78,6 @@
                     <?php endforeach; ?>
                     </span>
                 </label>
-                <select onchange="setLocation(this.value)">
-                <?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
-                    <option value="<?php echo $this->getOrderUrl($_key, 'asc') ?>"<?php if($this->isOrderCurrent($_key)): ?> selected="selected"<?php endif; ?>>
-                        <?php echo $this->__($_order) ?>
-                    </option>
-                <?php endforeach; ?>
-                </select>
             </div>
             <?php if($this->getCurrentDirection() == 'desc'): ?>
                 <a href="<?php echo $this->getOrderUrl(null, 'asc') ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Set Ascending Direction')) ?>">

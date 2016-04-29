@@ -26,7 +26,7 @@
 ?>
 <div id="footer">
 	<div class="content-container">
-		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('newsletterform')->toHtml(); ?>
+		<?php echo $this->getChildHtml('footer.newsletter');?>
 		<div class="row footer-nav">
 			<div class="col-4">
 				<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_item_1')->toHtml(); ?>

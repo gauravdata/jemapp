@@ -185,7 +185,6 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
     <?php endif; ?>
     <td class="a-center">
         <div class="select-overlay">
-            <label><?php echo $this->getQty() ?></label>
             <select name="cart[<?php echo $_item->getId() ?>][qty]" data-cart-item-id="<?php echo $this->jsQuoteEscape($_item->getSku()) ?>" value="<?php echo $this->getQty() ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty">
                 <?php
                     $i = 1;
@@ -201,6 +200,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
                     }
                 ?>
             </select>
+            <label><?php echo $this->getQty() ?></label>
         </div>
     </td>
 
