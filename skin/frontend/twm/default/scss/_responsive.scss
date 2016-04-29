@@ -173,6 +173,21 @@
 	.product-header {
 		display: block;
 	}
+	.product-visual-wrapper {
+		.more-views {
+			background-color: $white;
+			position: static;
+			padding: $s-spacing 0 0 $s-spacing;
+
+			a {
+				margin: 0 $s-spacing $s-spacing 0;
+			}
+
+			&.double-row {
+				width: auto;
+			}
+		}
+	}
 	.product-options-wrapper {
 		@include transform(0,0);
 		position: relative;
@@ -182,6 +197,7 @@
 		right: auto;
 		padding-left: 50%;
 		max-width: none;
+		background-color: $white;
 		
 		.product-usps {
 			position: absolute;

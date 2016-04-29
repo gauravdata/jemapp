@@ -42,7 +42,7 @@
     ?>
 
     <?php if (count($this->getGalleryImages()) > 0): ?>
-    <div class="more-views<?php if(count($this->getGalleryImages()) > 4) { echo ' double-row'; } ?>">
+    <div class="more-views<?php if(count($this->getGalleryImages()) > 4) { echo ' double-row'; } ?> clearfix">
         <?php foreach ($this->getGalleryImages() as $_image): ?>
             <a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->keepFrame(false)->resize(null,675); ?>" data-zoom-image="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->keepFrame(false)->resize(2000,null); ?>">
                 <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(80); ?>" />
