@@ -32,28 +32,49 @@
 ======================================================*/
 .product-visual-wrapper {
 	position: relative;
-	background-color: transparentize($s-grey, 0.5);
+
+	#product-image-slider {
+		.owl-controls {
+			display: none;
+		}
+	}
 
 	.product-visual {
 		width: 100%;
 		height: 675px;
 		position: relative;
 		overflow: hidden;
-		background-repeat: no-repeat;
-		background-position: 30% 50%;
-		background-size: auto 100%;
+		background-color: $xs-grey;
 		cursor: zoom-in;
 
-		img {
-			width: 100%;
+		.view-image {
+			@include transform(-50%, 0);
 			height: 100%;
+			width: auto;
+			position: absolute;
+			left: 40%;
+			top: 0;
+			max-width: none;
 		}
 	}
+
+	.zoom-image {
+		@extend .fade-in-transition;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 100;
+		cursor: zoom-out;
+		background-color: $xs-grey;
+	}
+
 	.more-views {
 		position: absolute;
 		left: $m-spacing;
 		bottom: $m-spacing;
-		z-index: 100;
+		z-index: 200;
 
 		a {
 			display: block;
@@ -71,6 +92,13 @@
 			a {
 				float: left;
 			}
+		}
+	}
+
+	&.show {
+		.zoom-image {
+			opacity: 1;
+			visibility: visible;
 		}
 	}
 }
@@ -123,6 +151,9 @@
 	top: 50%;
 	right: $xxl-spacing;
 	max-width: 360px;
+	z-index: 999;
+	visibility: visible;
+	opacity: 1;
 
 	h1,
 	p {
@@ -155,6 +186,10 @@
 		.price-box {
 			display: none;
 		}
+	}
+
+	&.hide {
+		@extend .fade-in-transition;
 	}
 }
 

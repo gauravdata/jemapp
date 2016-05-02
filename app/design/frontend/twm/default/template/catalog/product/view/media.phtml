@@ -34,44 +34,73 @@
     $_product = $this->getProduct();
     $_helper = $this->helper('catalog/output');
 ?>
-
 <div class="product-visual-wrapper">
-    <?php
-    $_img = '<div class="product-visual" style="background-image: url('.$this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(null,675).')"><img src="' . $this->getSkinUrl('images/empty.png') . '" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(2000,null).'" /></div>';
-    echo $_helper->productAttribute($_product, $_img, 'image');
-    ?>
-
-    <?php if (count($this->getGalleryImages()) > 0): ?>
-    <div class="more-views<?php if(count($this->getGalleryImages()) > 4) { echo ' double-row'; } ?> clearfix">
-        <?php foreach ($this->getGalleryImages() as $_image): ?>
-            <a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->keepFrame(false)->resize(null,675); ?>" data-zoom-image="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->keepFrame(false)->resize(2000,null); ?>">
-                <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(80); ?>" />
-            </a>
-        <?php endforeach; ?>
-    </div>
+    <?php if (count($this->getGalleryImages()) > 1): ?>
+        <div class="owl-carousel" id="product-image-slider">
+            <?php $i = 0; foreach ($this->getGalleryImages() as $_image): $i++; ?>
+                <div class="item">
+                    <div class="product-visual">
+                        <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->keepFrame(false)->resize(null,675); ?>" class="view-image" data-zoom-image="<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->keepFrame(false)->resize(2000,null); ?>" />
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="zoom-image"></div>
+        <div class="more-views<?php if(count($this->getGalleryImages()) > 4) { echo ' double-row'; } ?> clearfix">
+            <?php foreach ($this->getGalleryImages() as $_image): ?>
+                <a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->keepFrame(false)->resize(null,675); ?>">
+                    <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(80); ?>" />
+                </a>
+            <?php endforeach; ?>
+        </div>
+        <script type="text/javascript">
+            jQuery(function(){
+                var productImageOwl = jQuery('#product-image-slider');
+                productImageOwl.owlCarousel({
+                    loop:true,
+                    nav:true,
+                    navText: [
+                        '<i class="mdi mdi-chevron-left"></i>',
+                        '<i class="mdi mdi-chevron-right"></i>'
+                    ],
+                    items: 1,
+                    responsive:{
+                        0:{
+                            mouseDrag: true,
+                            touchDrag: true
+                        },
+                        1024:{
+                            mouseDrag: false,
+                            touchDrag: false
+                        }
+                    }
+                });
+                jQuery('.product-img-box .more-views a').click(function(){
+                    productImageOwl.trigger('to.owl.carousel', [jQuery(this).index()]);
+                    return false;
+                });
+            });
+        </script>
+    <?php else: ?>
+        <div class="product-visual">
+            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(null,675); ?>" class="view-image" data-zoom-image="<?php echo $this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(2000,null); ?>" />
+        </div>
     <?php endif; ?>
 </div>
-
 <script type="text/javascript">
-    function setZoom(){
-        jQuery('#zoom-image').elevateZoom({
-            zoomType: "inner",
-            zoomWindowFadeIn: 500,
-            zoomWindowFadeOut: 750
-        });
-    }
-    jQuery(window).load(function(){
-        setZoom();
-
-        jQuery('#zoom-image').on('click', function(){
-            jQuery('.zoomContainer').toggleClass('visible');
-        });
+    jQuery('.product-visual').click(function() {
+        jQuery('.product-visual-wrapper').addClass('show');
+        jQuery('.zoom-image').css('background-image', 'url(' + jQuery(this).find('img').data('zoom-image') + ')');
+        jQuery('.product-options-wrapper').addClass('hide');
     });
-
-    // switch product image
-    jQuery('.product-img-box .more-views a').click(function(){
-        jQuery('.product-visual').css('background-image', 'url("' + jQuery(this).attr('href') + '")');
-        jQuery('.zoomContainer > div > div').css('background-image', 'url("' + jQuery(this).data('zoom-image') + '")');
-        return false;
+    jQuery('.zoom-image').mousemove(function(e) {
+        var $this = jQuery(this);
+        var parentOffset = $this.offset();
+        var relX = 100 / ($this.width() / (e.pageX - parentOffset.left));
+        var relY = 100 / ($this.height() / (e.pageY - parentOffset.top));
+        $this.css('background-position', relX + '%' + relY + '%');
+    }).click(function() {
+        jQuery('.product-visual-wrapper').removeClass('show');
+        jQuery('.product-options-wrapper').removeClass('hide');
     });
 </script>

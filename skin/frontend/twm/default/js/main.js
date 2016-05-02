@@ -142,10 +142,13 @@ jQuery(window).scroll(function() {
 jQuery(window).resize(function(){
 	jQuery('.sync-height').syncheight();
 
-	// hide side nav
+	// hide or show side nav based in window size
 	if(jQuery(window).width() < 1250) {
 		Cookies.set('side-nav', 'closed');
 		jQuery('body').addClass('hidden-side-nav').removeClass('open-side-nav');
+	} else {
+		Cookies.set('side-nav', 'open');
+		jQuery('body').removeClass('hidden-side-nav').addClass('open-side-nav');
 	}
 });
 
