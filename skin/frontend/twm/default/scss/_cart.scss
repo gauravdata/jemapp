@@ -32,12 +32,21 @@ ul.checkout-types {
 			vertical-align: middle;
 
 			&:first-child {
+				width: 1px;
+				white-space: nowrap;
 				padding-left: $xs-spacing;
 			}
 			&:last-child {
-				padding-right: $xs-spacing;
+				padding: 0;
 				vertical-align: top;
 				text-align: right;
+				position: relative;
+
+				a {
+					position: absolute;
+					top: $xs-spacing;
+					right: $xs-spacing;
+				}
 			}
 			ul.item-options {
 				margin-bottom: 0;
@@ -80,7 +89,7 @@ ul.checkout-types {
 	top: -1000px;
 	border: none;
 	background-color: $white;
-	z-index: 950;
+	z-index: 1050;
 	width: 522px;
 	padding: 0;
 

@@ -156,7 +156,11 @@
     <div class="short-description" id="more">
         <div class="row wide">
             <div class="col-6">
-                <div class="content-box-img-left" style="background-image: url('http://placehold.it/1200x1000');"><span></span></div>
+                <?php if ($this->getProduct()->getPropertyImage()): ?>
+                    <div class="content-box-img-right" style="background-image: url('<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'property_image')->keepFrame(false)->resize(1200,null); ?>');"><span></span></div>
+                <?php else: ?>
+                    <div class="content-box-img-right" style="background-image: url('http://placehold.it/1200x1000');"><span></span></div>
+                <?php endif; ?>
             </div>
             <div class="col-6">
                 <div class="content-box-wrapper">

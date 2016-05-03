@@ -236,3 +236,12 @@
 	}
 
 }
+#checkout-review-table {
+	dt {
+		font-weight: bold;
+		color: $xl-grey;
+	}
+	dd {
+		margin-left: 0;
+	}
+}
