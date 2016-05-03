@@ -53,6 +53,7 @@ Checkout.prototype = {
         $$('.progress-bar > li').each(function(e){
                 $(e).removeClassName('active');
         });
+        scrollToId('#top');
         switch(this.currentStep) {
                 case 'billing':
                         $$('.progress-bar i.mdi-account').each(function(e){

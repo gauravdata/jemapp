@@ -30,7 +30,7 @@
             <h1><?php echo $this->__('Your order has been received.') ?></h1>
         </div>
         <?php echo $this->getMessagesBlock()->toHtml() ?>
-        <h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+        <p><strong><?php echo $this->__('Thank you for your purchase!') ?></strong></p>
 
         <?php if ($this->getOrderId()):?>
         <?php if ($this->getCanViewOrder()) :?>

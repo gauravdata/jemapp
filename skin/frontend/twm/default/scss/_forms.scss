@@ -257,6 +257,7 @@ form .control {
 		left: 0;
 		top: 0;
 		text-overflow: ellipsis;
+		overflow: hidden;
 
 		&:after {
 			position: absolute;

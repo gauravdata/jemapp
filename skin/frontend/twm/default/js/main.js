@@ -66,7 +66,7 @@ jQuery(window).load(function(){
 
 	// scroll to id
 	jQuery('.scroll-to').click(function(){
-		scrollToId(jQuery(jQuery(this).attr('href')));
+		scrollToId(jQuery(this).attr('href'));
 	});
 
 	// scroll 85% lower
@@ -154,7 +154,7 @@ jQuery(window).resize(function(){
 
 function scrollToId(scrollId) {
 	jQuery('html, body').animate({
-		scrollTop: scrollId.offset().top
+		scrollTop: jQuery(scrollId).offset().top
 	}, 500);
 	return false;
 }
