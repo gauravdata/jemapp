@@ -215,6 +215,17 @@ table {
 /*======================================================
 	MESSAGES
 ======================================================*/
+.global-site-notice {
+	position: fixed;
+	bottom: 0;
+	padding: $m-spacing;
+	color: $white;
+	background-color: $notice;
+
+	> *:last-child {
+		margin-bottom: 0;
+	}
+}
 ul.messages {
 	@extend .unstyled;
 	margin: 0;
