@@ -221,6 +221,8 @@ table {
 	padding: $m-spacing;
 	color: $white;
 	background-color: $notice;
+	width: 100%;
+	z-index: 10000;
 
 	> *:last-child {
 		margin-bottom: 0;
