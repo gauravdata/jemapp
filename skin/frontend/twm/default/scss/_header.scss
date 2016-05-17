@@ -1,4 +1,5 @@
 #header {
+	@extend .main-transition;
 	background-color: $xl-grey;
 	position: fixed;
 	top: 0;

@@ -88,6 +88,13 @@
 
             </div>
 
+            <p>
+                <strong>
+                    <span class="attr-label"><?php echo $_product->getResource()->getAttribute('color')->getFrontendLabel(); ?></span>
+                    <?php echo $_product->getAttributeText('color'); ?>
+                </strong>
+            </p>
+
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
             <?php endif;?>
@@ -157,9 +164,9 @@
         <div class="row wide">
             <div class="col-6">
                 <?php if ($this->getProduct()->getPropertyImage()): ?>
-                    <div class="content-box-img-right" style="background-image: url('<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'property_image')->keepFrame(false)->resize(1200,null); ?>');"><span></span></div>
+                    <div class="content-box-img-left" style="background-image: url('<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'property_image')->keepFrame(false)->resize(1000,null); ?>');"><span></span></div>
                 <?php else: ?>
-                    <div class="content-box-img-right" style="background-image: url('http://placehold.it/1200x1000');"><span></span></div>
+                    <div class="content-box-img-left" style="background-image: url('http://placehold.it/1000x800');"><span></span></div>
                 <?php endif; ?>
             </div>
             <div class="col-6">

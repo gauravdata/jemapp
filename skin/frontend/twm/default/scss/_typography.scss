@@ -215,6 +215,21 @@ table {
 /*======================================================
 	MESSAGES
 ======================================================*/
+.global-site-notice {
+	position: fixed;
+	bottom: 0;
+	padding: $s-spacing $m-spacing;
+	color: $white;
+	background-color: $notice;
+	width: 100%;
+	z-index: 10000;
+
+	.notice-inner {
+		> *:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
 ul.messages {
 	@extend .unstyled;
 	margin: 0;
@@ -225,7 +240,7 @@ ul.messages {
 		margin: 0;
 
 		li {
-			//border: 1px solid $m-grey;
+			border-color: transparent;
 			background-color: $s-grey;
 			padding: $s-spacing $m-spacing;
 			color: $l-grey;
@@ -234,7 +249,6 @@ ul.messages {
 
 	.error-msg {
 		li {
-			border-color: $error;
 			color: $error;
 			background-color: lighten($error, 57%);
 		}
@@ -242,7 +256,6 @@ ul.messages {
 
 	.success-msg {
 		li {
-			border-color: $success;
 			color: $success;
 			background-color: lighten($success, 57%);
 		}
@@ -251,7 +264,6 @@ ul.messages {
 	.warning-msg,
 	.notice-msg {
 		li {
-			border-color: $notice;
 			color: $notice;
 			background-color: lighten($notice, 57%);
 		}

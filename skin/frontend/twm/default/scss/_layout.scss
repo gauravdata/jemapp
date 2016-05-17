@@ -21,12 +21,17 @@ html, body {
 	position: fixed;
 	background-color: #fff;
 	left: 0;
-	width: $side-nav-width;
 	top: $header-height;
 	min-height: 100%;
 	max-height: 100%;
 	z-index: 999;
 	overflow-y: auto;
+
+	min-width: $side-nav-width;
+	width: 15%;
+	width: -webkit-calc(#{$side-nav-width});
+	width: -moz-calc(#{$side-nav-width});
+	width: calc(#{$side-nav-width});
 
 	> ul {
 		@extend .unstyled;
@@ -119,9 +124,17 @@ html, body {
 #content {
 	@extend .main-transition;
 	position: relative;
-	left: $side-nav-width;
-	width: calc(100% - #{$side-nav-width});
 	padding-top: $header-height;
+
+	left: 15%;
+	left: -webkit-calc(#{$side-nav-width});
+	left: -moz-calc(#{$side-nav-width});
+	left: calc(#{$side-nav-width});
+
+	width: 85%;
+	width: -webkit-calc(100% - #{$side-nav-width});
+	width: -moz-calc(100% - #{$side-nav-width});
+	width: calc(100% - #{$side-nav-width});
 }
 
 /*======================================================
@@ -140,8 +153,8 @@ html, body {
 		}
 
 		h1 {
-			font-size: $xxxxl-font;
-			line-height: $xxxxl-font;
+			font-size: $xxxxxl-font;
+			line-height: $xxxxxl-font;
 			margin: 0;
 			color: $white;
 			text-transform: lowercase;
@@ -546,11 +559,19 @@ ul.social {
 #footer {
 	@extend .main-transition;
 	position: relative;
-	left: $side-nav-width;
-	width: calc(100% - #{$side-nav-width});
 	text-align: center;
 	padding-top: $xxl-spacing;
 	color: $m-grey;
+
+	left: 15%;
+	left: -webkit-calc(#{$side-nav-width});
+	left: -moz-calc(#{$side-nav-width});
+	left: calc(#{$side-nav-width});
+
+	width: 85%;
+	width: -webkit-calc(100% - #{$side-nav-width});
+	width: -moz-calc(100% - #{$side-nav-width});
+	width: calc(100% - #{$side-nav-width});
 
 	.block-subscribe {
 		padding: 0;
@@ -694,6 +715,9 @@ ul.social {
 	left: 50%;
 	background-color: transparentize($xl-grey, 0.3);
 	color: $white;
+	min-width: 50%;
+	max-width: 80%;
+	padding-right: 50px;
 
 	a {
 		color: $white;
@@ -703,7 +727,6 @@ ul.social {
 	.notice-text {
 		float: left;
 		padding: $s-spacing;
-		width: calc(100% - 50px);
 
 		p {
 			margin: 0;

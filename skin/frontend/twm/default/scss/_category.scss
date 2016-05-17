@@ -94,11 +94,19 @@
 	}
 
 	&.fixed {
-		width: calc(100% - #{$side-nav-width});
-		left: $side-nav-width;
 		position: fixed;
 		top: $header-height;
 		z-index: 800;
+
+		left: 15%;
+		left: -webkit-calc(#{$side-nav-width});
+		left: -moz-calc(#{$side-nav-width});
+		left: calc(#{$side-nav-width});
+
+		width: 85%;
+		width: -webkit-calc(100% - #{$side-nav-width});
+		width: -moz-calc(100% - #{$side-nav-width});
+		width: calc(100% - #{$side-nav-width});
 	}
 }
 .toolbar-bottom {
@@ -179,18 +187,26 @@
 			}
 			h2.product-name {
 				float: left;
-				width: calc(100% - 100px);
 				margin: 0;
 				padding: $xxs-spacing $xs-spacing;
 				font-size: $m-font;
 				font-weight: $bold;
 				height: 82px;
+
+				width: 65%;
+				width: -webkit-calc(100% - 100px);
+				width: -moz-calc(100% - 100px);
+				width: calc(100% - 100px);
 			}
 			.price-box {
-				width: 100px;
 				float: right;
 				padding: $xxs-spacing $xs-spacing;
 				text-align: right;
+
+				width: 35%;
+				width: -webkit-calc(100px);
+				width: -moz-calc(100px);
+				width: calc(100px);
 			}
 		}
 	}
