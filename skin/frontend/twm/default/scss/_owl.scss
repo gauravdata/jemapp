@@ -12,18 +12,26 @@
 		}
 		h2.product-name {
 			float: left;
-			width: calc(100% - 100px);
 			margin: 0;
 			padding: $xxs-spacing $xs-spacing;
 			font-size: $m-font;
 			font-weight: $bold;
 			height: 82px;
+
+			width: 65%;
+			width: -webkit-calc(100% - 100px);
+			width: -moz-calc(100% - 100px);
+			width: calc(100% - 100px);
 		}
 		.price-box {
-			width: 100px;
 			float: right;
 			padding: $xxs-spacing $xs-spacing;
 			text-align: right;
+
+			width: 35%;
+			width: -webkit-calc(100px);
+			width: -moz-calc(100px);
+			width: calc(100px);
 
 			p {
 				margin: 0;
@@ -46,15 +54,9 @@
 				background-color: $xl-grey;
 				margin-top: -20px;
 				color: $white;
-				font-size: $xxl-font;
-				width: $xl-spacing;
-				height: $xl-spacing;
+				font-size: $xxxxl-font;
 				text-align: center;
 				line-height: $xl-spacing;
-
-				.mdi {
-					margin-top: 5px;
-				}
 			}
 			.owl-prev {
 				left: 0;

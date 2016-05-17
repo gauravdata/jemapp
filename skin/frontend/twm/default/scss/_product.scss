@@ -36,6 +36,14 @@
 	#product-image-slider {
 		.owl-controls {
 			display: none;
+
+			.owl-nav {
+				.owl-prev,
+				.owl-next {
+					background-color: transparent;
+					color: $m-grey;
+				}
+			}
 		}
 	}
 
@@ -120,7 +128,9 @@
 
 .show-more {
 	@include transform(-50%,0);
-	@extend .fade-out-transition;
+	@extend .main-transition;
+	height: 70px;
+	overflow: hidden;
 	position: fixed;
 	background-color: transparentize($white, 0.15);
 	bottom: $xs-spacing;
@@ -132,11 +142,12 @@
 	&.hide {
 		opacity: 0;
 		visibility: hidden;
+		height: 0;
 	}
 
 	.mdi {
 		display: block;
-		font-size: $xxxxl-font;
+		font-size: $xxxxxl-font;
 		text-align: center;
 		margin: -$s-spacing 0;
 	}
@@ -219,4 +230,9 @@
 	ul.check {
 		margin-bottom: 0;
 	}
+}
+
+.attr-label {
+	color: $m-grey;
+	padding-right: $xxs-spacing;
 }

@@ -115,7 +115,14 @@ jQuery(window).load(function(){
 
 });
 
+var lastScrollTop = 0;
+
 jQuery(window).scroll(function() {
+
+	// hide show more label after 100 pixels scolled
+	if(jQuery(window).scrollTop() > 100) {
+		jQuery('.show-more').addClass('hidden-label');
+	}
 
 	// show back to top after 300 pixels scrolled
 	if(jQuery(window).scrollTop() > 300) {
@@ -123,6 +130,17 @@ jQuery(window).scroll(function() {
 	} else {
 		jQuery('.back-to-top').removeClass('show');
 	}
+
+	// hide menu after 400 pixels scrolled and scroll down
+	var st = jQuery(this).scrollTop();
+	if (st > lastScrollTop){
+		if(jQuery(window).scrollTop() > 400) {
+			jQuery('#header').addClass('hide');
+		}
+	} else {
+		jQuery('#header').removeClass('hide');
+	}
+	lastScrollTop = st;
 
 	// hide show more when footer is reached
 	if(jQuery(window).scrollTop() > (jQuery('#wrapper').height() - (jQuery('#footer').outerHeight()))) {
