@@ -38,9 +38,9 @@
     <div class="row wide">
         <div class="col-6">
             <?php if ($this->getProduct()->getInfoImage()): ?>
-                <div class="content-box-img-right" style="background-image: url('<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'info_image')->keepFrame(false)->resize(1000,null); ?>');"><span></span></div>
+                <div class="content-box-img-left" style="background-image: url('<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'info_image')->keepFrame(false)->resize(1000,null); ?>');"><span></span></div>
             <?php else: ?>
-                <div class="content-box-img-right" style="background-image: url('http://placehold.it/1000x800');"><span></span></div>
+                <div class="content-box-img-left" style="background-image: url('http://placehold.it/1000x800');"><span></span></div>
             <?php endif; ?>
         </div>
         <div class="col-6">
