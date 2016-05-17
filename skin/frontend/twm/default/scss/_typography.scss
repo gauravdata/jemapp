@@ -224,8 +224,10 @@ table {
 	width: 100%;
 	z-index: 10000;
 
-	> *:last-child {
-		margin-bottom: 0;
+	.notice-inner {
+		> *:last-child {
+			margin-bottom: 0;
+		}
 	}
 }
 ul.messages {
