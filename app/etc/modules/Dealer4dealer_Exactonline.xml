@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Dealer4dealer_Exactonline>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Dealer4dealer_Exactonline>
+	</modules>
+</config>

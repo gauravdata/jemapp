@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eExact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="eExact-XML.xsd">
+	<Invoices>
+		<Invoice ordernumber="" invoicenumber="">
+			<Journal code=""></Journal>
+			<PaymentCondition code=""></PaymentCondition>
+			<OrderDate></OrderDate>
+			<Description></Description>
+			<YourRef></YourRef>
+			<OrderedBy code=""></OrderedBy>
+			<InvoiceTo code=""></InvoiceTo>
+			<InvoiceLine>
+				<Item code=""></Item>
+				<Quantity></Quantity>
+				<NetPrice>					
+					<Currency code="EUR" />
+					<Value></Value>
+					<VAT code=""></VAT>
+				</NetPrice>
+			</InvoiceLine>			
+		</Invoice>
+	</Invoices>
+</eExact>
