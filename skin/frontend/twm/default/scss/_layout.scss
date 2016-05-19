@@ -705,64 +705,6 @@ ul.social {
 /*======================================================
 	TOGGLE SIDE NAV
 ======================================================*/
-.notice-cookie {
-	@include transform(-50%, 0);
-	@extend .clearfix;
-	position: fixed;
-	z-index: 999;
-	bottom: $m-spacing;
-	left: 50%;
-	background-color: transparentize($xl-grey, 0.3);
-	color: $white;
-	min-width: 50%;
-	max-width: 80%;
-	padding-right: 50px;
-
-	a {
-		color: $white;
-		text-decoration: underline;
-	}
-
-	.notice-text {
-		float: left;
-		padding: $s-spacing;
-
-		p {
-			margin: 0;
-		}
-	}
-
-	.actions {
-		.button {
-			position: absolute;
-			width: 50px;
-			height: 100%;
-			padding: 0;
-			background-color: $l-grey;
-			border: none;
-			right: 0;
-			top: 0;
-
-			span {
-				display: none;
-			}
-
-			&:after {
-				content: "\F156";
-				font-family: 'Material Design Icons';
-				font-size: $xl-font;
-			}
-			&:hover,
-			&:focus {
-				color: $m-grey;
-			}
-		}
-	}
-}
-
-/*======================================================
-	TOGGLE SIDE NAV
-======================================================*/
 .hidden-side-nav {
 	#side-nav {
 		left: -$side-nav-width;

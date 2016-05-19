@@ -213,23 +213,81 @@ table {
 }
 
 /*======================================================
-	MESSAGES
+	NOTICES
 ======================================================*/
+
 .global-site-notice {
+	@include transform(-50%, 0);
+	@extend .clearfix;
 	position: fixed;
-	bottom: $xs-spacing;
-	left: $xs-spacing;
+	z-index: 10000;
 	padding: $s-spacing $m-spacing;
 	color: $white;
-	background-color: $notice;
-	z-index: 10000;
+	left: 50%;
+	background-color: transparentize($xl-grey, 0.3);
+	min-width: 50%;
+	max-width: 80%;
+
+	a {
+		color: $white;
+		text-decoration: underline;
+	}
 
 	.notice-inner {
 		> *:last-child {
 			margin-bottom: 0;
 		}
 	}
+
+	.demo-notice {
+		top: $m-spacing;
+		background-color: transparentize($notice, 0.3);
+	}
+
+	.notice-cookie {
+		padding-right: 50px;
+
+		.notice-text {
+			float: left;
+			padding: $s-spacing;
+
+			p {
+				margin: 0;
+			}
+		}
+
+		.actions {
+			.button {
+				position: absolute;
+				width: 50px;
+				height: 100%;
+				padding: 0;
+				background-color: $l-grey;
+				border: none;
+				right: 0;
+				top: 0;
+
+				span {
+					display: none;
+				}
+
+				&:after {
+					content: "\F156";
+					font-family: 'Material Design Icons';
+					font-size: $xl-font;
+				}
+				&:hover,
+				&:focus {
+					color: $m-grey;
+				}
+			}
+		}
+	}
 }
+
+/*======================================================
+	MESSAGES
+======================================================*/
 ul.messages {
 	@extend .unstyled;
 	margin: 0;
