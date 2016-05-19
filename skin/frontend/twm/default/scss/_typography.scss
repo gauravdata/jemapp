@@ -239,12 +239,13 @@ table {
 		}
 	}
 
-	.demo-notice {
+	&.demo-notice {
 		top: $m-spacing;
 		background-color: transparentize($notice, 0.3);
 	}
 
-	.notice-cookie {
+	&.notice-cookie {
+		bottom: $m-spacing;
 		padding-right: 50px;
 
 		.notice-text {
