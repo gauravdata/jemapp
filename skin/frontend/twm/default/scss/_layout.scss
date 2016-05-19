@@ -96,10 +96,9 @@ html, body {
 						position: absolute;
 						content: "\F415";
 						font-family: 'Material Design Icons';
-						top: 50%;
+						top: 14px;
 						font-size: $l-font;
 						right: $m-spacing;
-						margin-top: -11px;
 					}
 				}
 
@@ -741,6 +740,8 @@ ul.social {
 			padding: 0;
 			background-color: $l-grey;
 			border: none;
+			right: 0;
+			top: 0;
 
 			span {
 				display: none;

@@ -217,11 +217,11 @@ table {
 ======================================================*/
 .global-site-notice {
 	position: fixed;
-	bottom: 0;
+	bottom: $xs-spacing;
+	left: $xs-spacing;
 	padding: $s-spacing $m-spacing;
 	color: $white;
 	background-color: $notice;
-	width: 100%;
 	z-index: 10000;
 
 	.notice-inner {

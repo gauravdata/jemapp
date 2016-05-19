@@ -136,9 +136,11 @@ jQuery(window).scroll(function() {
 	if (st > lastScrollTop){
 		if(jQuery(window).scrollTop() > 400) {
 			jQuery('#header').addClass('hide');
+			jQuery('.toolbar').addClass('top');
 		}
 	} else {
 		jQuery('#header').removeClass('hide');
+		jQuery('.toolbar').removeClass('top');
 	}
 	lastScrollTop = st;
 

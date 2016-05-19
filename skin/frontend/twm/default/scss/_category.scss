@@ -107,6 +107,10 @@
 		width: -webkit-calc(100% - #{$side-nav-width});
 		width: -moz-calc(100% - #{$side-nav-width});
 		width: calc(100% - #{$side-nav-width});
+
+		&.top {
+			top: 0;
+		}
 	}
 }
 .toolbar-bottom {
