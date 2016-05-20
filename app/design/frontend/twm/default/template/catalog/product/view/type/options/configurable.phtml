@@ -43,7 +43,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
                 <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
                     <option><?php echo $this->__('Choose an Option...') ?></option>
                 </select>
-                <label class="required text-center"><?php echo $_attribute->getLabel() ?> <em>*</em></label>
+                <label class="required text-center"><?php echo $_attribute->getLabel() ?></label>
             </div>
         </div>
         <?php if ($_product->hasSizechart()): ?>

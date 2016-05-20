@@ -3,7 +3,7 @@
 ======================================================*/
 html, body {
 	height: 100%;
-	background: $xxxs-grey;
+	background: $white;
 	margin: 0;
 }
 
@@ -19,7 +19,7 @@ html, body {
 #side-nav {
 	@extend .main-transition;
 	position: fixed;
-	background-color: #fff;
+	background-color: $white;
 	left: 0;
 	top: $header-height;
 	min-height: 100%;
@@ -508,7 +508,7 @@ html, body {
 				}
 			}
 			strong {
-				font-weight: $regular;
+				font-weight: $medium;
 			}
 			&.current {
 				color: $xl-grey;
