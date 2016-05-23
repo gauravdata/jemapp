@@ -81,11 +81,11 @@
             </div>
             <?php if($this->getCurrentDirection() == 'desc'): ?>
                 <a href="<?php echo $this->getOrderUrl(null, 'asc') ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Set Ascending Direction')) ?>">
-                    <i class="mdi mdi-chevron-down"></i>
+                    <i class="icon-arrow-down-circle icons"></i>
                 </a>
             <?php else: ?>
                 <a href="<?php echo $this->getOrderUrl(null, 'desc') ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Set Descending Direction')) ?>">
-                    <i class="mdi mdi-chevron-up"></i>
+                    <i class="icon-arrow-up-circle icons"></i>
                 </a>
             <?php endif; ?>
         </div>

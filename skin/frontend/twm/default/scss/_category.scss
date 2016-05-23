@@ -190,27 +190,22 @@
 				}
 			}
 			h2.product-name {
-				float: left;
-				margin: 0;
-				padding: $xxs-spacing $xs-spacing;
-				font-size: $m-font;
+				margin: $xxs-spacing $xxs-spacing 0;
+				font-size: $l-font;
 				font-weight: $bold;
-				height: 82px;
-
-				width: 65%;
-				width: -webkit-calc(100% - 100px);
-				width: -moz-calc(100% - 100px);
-				width: calc(100% - 100px);
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
 			}
 			.price-box {
-				float: right;
-				padding: $xxs-spacing $xs-spacing;
-				text-align: right;
+				font-size: $s-font;
+				padding: $xxs-spacing $xxs-spacing $s-spacing;
 
-				width: 35%;
-				width: -webkit-calc(100px);
-				width: -moz-calc(100px);
-				width: calc(100px);
+				.third-price {
+					.price {
+						font-size: $l-font;
+					}
+				}
 			}
 		}
 	}

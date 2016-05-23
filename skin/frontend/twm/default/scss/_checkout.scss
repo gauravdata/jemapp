@@ -36,15 +36,15 @@
 		padding-left: $xl-spacing + 10;
 		text-align: left;
 		padding-right: $m-spacing + 10;
-		color: $primary;
+		color: $xl-grey;
 
-		.mdi {
+		.icons {
 			@include radius(50%);
 			width: $xl-spacing;
 			height: $xl-spacing;
 			line-height: $xl-spacing;
-			background-color: $primary;
-			color: $xxxs-grey;
+			background-color: $xl-grey;
+			color: $white;
 			text-align: center;
 			font-size: $xl-font;
 			position: absolute;
@@ -52,7 +52,7 @@
 		}
 
 		strong {
-			color: $primary;
+			color: $xl-grey;
 			text-transform: uppercase;
 		}
 
@@ -60,7 +60,7 @@
 			content: "";
 			height: 1px;
 			width: $m-spacing;
-			background-color: $primary;
+			background-color: $xl-grey;
 			position: absolute;
 			right: 0;
 			top: 50%;
@@ -79,7 +79,7 @@
 			~ li {
 				color: $m-grey;
 
-				.mdi {
+				.icons {
 					background-color: $m-grey;
 				}
 				strong {

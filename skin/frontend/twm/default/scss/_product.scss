@@ -9,7 +9,7 @@
 		line-height: $xxxl-font;
 		color: $xl-grey;
 		margin: $l-spacing 0 $m-spacing;
-		font-weight: $bold;
+		font-weight: $thin;
 	}
 	.price-box {
 		p {
@@ -25,6 +25,66 @@
 
 .product-pricing {
 	display: none;
+}
+
+.product-name {
+	a {
+		color: $xl-grey;
+	}
+}
+
+.product-usps {
+	ul {
+		@extend .unstyled;
+
+		li {
+			position: relative;
+			padding-left: $xl-spacing;
+			font-size: $xs-font;
+			line-height: 1.5em;
+			margin-bottom: 5px;
+
+			strong,
+			b {
+				font-size: $m-font;
+			}
+
+			&:before {
+				position: absolute;
+				font-family: 'simple-line-icons';
+				color: $xl-grey;
+				top: 9px;
+				left: 0;
+				font-size: $xxl-font;
+			}
+
+			&:nth-child(1) {
+				&:before {
+					content: "\e080";
+				}
+			}
+			&:nth-child(2) {
+				&:before {
+					content: "\e098";
+				}
+			}
+			&:nth-child(3) {
+				&:before {
+					content: "\e094";
+				}
+			}
+			&:nth-child(4) {
+				&:before {
+					content: "\e07d";
+				}
+			}
+			&:nth-child(5) {
+				&:before {
+					content: "\e07b";
+				}
+			}
+		}
+	}
 }
 
 /*======================================================
@@ -136,7 +196,7 @@
 	bottom: $xs-spacing;
 	left: 50%;
 	z-index: 999;
-	padding: $xs-spacing;
+	padding: $xxs-spacing $xs-spacing;
 	color: $l-grey;
 
 	&.hide {
@@ -145,11 +205,10 @@
 		height: 0;
 	}
 
-	.mdi {
+	.icons {
 		display: block;
-		font-size: $xxxxxl-font;
+		font-size: $xxxxl-font;
 		text-align: center;
-		margin: -$s-spacing 0;
 	}
 }
 
@@ -170,24 +229,31 @@
 	p {
 		margin-bottom: $xs-spacing;
 	}
+	h2 {
+		font-weight: 300;
+	}
 	p.required {
 		margin-top: $xs-spacing;
 	}
 
 	.product-shop {
 		.price-box {
-			p {
+			margin-bottom: $m-spacing;
+		}
+		.third-price {
+			.icon-question {
 				display: inline-block;
-				margin-right: $xs-spacing;
 			}
 		}
-
 	}
 	.select-overlay {
 		label {
 			border-width: 2px;
-			font-weight: $bold;
 			background-color: transparent;
+
+			&:after {
+				display: none;
+			}
 		}
 	}
 	.add-to-cart {
@@ -223,12 +289,6 @@
 	}
 	&.out-of-stock:before {
 		background-color: $error;
-	}
-}
-
-.product-usps {
-	ul.check {
-		margin-bottom: 0;
 	}
 }
 

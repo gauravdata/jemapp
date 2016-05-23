@@ -49,7 +49,7 @@
 
 	/*= Header =*/
 	#header {
-		.link-mdi {
+		.link-icon {
 			span {
 				display: none;
 			}
@@ -113,7 +113,7 @@
 				padding: 0 $xs-spacing;
 			}
 		}
-		a.link-mdi {
+		a.link-icon {
 			padding: 0 $xs-spacing;
 		}
 	}
@@ -307,18 +307,6 @@
 		a.logo {
 			width: 110px;
 			margin: 17px 0 17px -55px;
-		}
-		a.link-account {
-			position: fixed;
-			background-color: $xl-grey;
-			width: $side-nav-width;
-			text-align: center;
-			left: -$side-nav-width;
-			bottom: 0;
-
-			span {
-				display: inline-block;
-			}
 		}
 		.quick-access {
 			.form-language {
@@ -523,7 +511,7 @@
 			width: 25%;
 			position: relative;
 
-			.mdi {
+			.icons {
 				position: relative;
 				z-index: 99;
 			}
@@ -574,7 +562,7 @@
 				cursor: pointer;
 
 				&:after {
-					font-family: 'Material Design Icons';
+					font-family: 'simple-line-icons';
 					content: "\F415";
 					float: right;
 					color: $m-grey;
@@ -614,31 +602,6 @@
 /*======================================================
 	MOBILE PORTRET
 ======================================================*/
-@media(max-width: 500px) {
-	.category-products {
-		ul.products-grid {
-			li.item {
-				h2.product-name {
-					float: none;
-					width: auto;
-					height: auto;
-					text-overflow: ellipsis;
-					overflow: hidden;
-					white-space: nowrap;
-				}
-				.price-box {
-					width: auto;
-					float: none;
-
-					p {
-						display: inline-block;
-					}
-				}
-			}
-		}
-	}
-}
-
 /*= Iphone 5 =*/
 @media(max-width: 370px) {
 	.amshopby-filters {

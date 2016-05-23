@@ -73,8 +73,8 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
     </td>
     <td class="a-center">
         <?php if ($isVisibleProduct): ?>
-        <a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Edit item parameters')) ?>" class="link-mdi">
-            <i class="mdi mdi-pencil" title="<?php echo $this->__('Edit') ?>"></i>
+        <a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Edit item parameters')) ?>" class="link-icon">
+            <i class="icon-pencil icons" title="<?php echo $this->__('Edit') ?>"></i>
         </a>
         <?php endif ?>
     </td>
@@ -299,8 +299,8 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
     </td>
     <?php endif; ?>
     <td class="a-center">
-        <a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Remove item')) ?>" class="btn-remove btn-remove2 link-mdi">
-            <i class="mdi mdi-close" title="<?php echo $this->__('Remove item')?>"></i>
+        <a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Remove item')) ?>" class="btn-remove btn-remove2 link-icon">
+            <i class="icon-close icons" title="<?php echo $this->__('Remove item')?>"></i>
         </a>
     </td>
 </tr>

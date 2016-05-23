@@ -40,12 +40,16 @@ html, body {
 		> li {
 			border-bottom: 1px solid $s-grey;
 
+			&:first-child {
+				border-top: 1px solid $s-grey;
+			}
+
 			> a {
 				display: block;
 				padding: $s-spacing $m-spacing;
 				font-size: $m-font;
 				text-transform: uppercase;
-				font-weight: $bold;
+				font-weight: $thin;
 				color: $xl-grey;
 			}
 
@@ -94,10 +98,10 @@ html, body {
 
 					&:after {
 						position: absolute;
-						content: "\F415";
-						font-family: 'Material Design Icons';
+						content: "\e095";
+						font-family: 'simple-line-icons';
 						top: 14px;
-						font-size: $l-font;
+						font-size: $xl-font;
 						right: $m-spacing;
 					}
 				}
@@ -105,7 +109,7 @@ html, body {
 				&.active {
 					> a {
 						&:after {
-							content: "\F374";
+							content: "\e615";
 						}
 					}
 					> ul {
@@ -239,7 +243,7 @@ html, body {
 	&:before {
 		@include rotate(45deg);
 		content: "";
-		background-color: $xxxs-grey;
+		background-color: $white;
 		width: $xxl-font;
 		height: $xxl-font;
 		position: absolute;
@@ -432,8 +436,8 @@ html, body {
 
 		&:after {
 			position: absolute;
-			font-family: 'Material Design Icons';
-			content: "\F140";
+			font-family: 'simple-line-icons';
+			content: "\e604";
 			right: $xs-spacing;
 		}
 	}
@@ -462,7 +466,7 @@ html, body {
 			border-color: $white;
 
 			&:after {
-				content: "\F143";
+				content: "\e607";
 			}
 		}
 		.list {
@@ -532,12 +536,13 @@ ul.social {
 			line-height: $xxxl-font;
 			text-align: center;
 			background-color: $m-grey;
-			font-size: $xl-font;
+			font-size: $l-font;
 			color: $xxxs-grey;
 			margin-right: $xxs-spacing;
 
-			i.mdi {
-				margin-top: 5px;
+			i.icons {
+				display: inline-block;
+				margin-top: 7px;
 
 				span {
 					display: none;
@@ -688,13 +693,14 @@ ul.social {
 	padding: $xs-spacing ($xl-spacing + $m-spacing);
 	color: $m-grey;
 	font-weight: $bold;
+	z-index: 9999;
 
 	&.show {
 		opacity: 1;
 		visibility: visible;
 	}
 	
-	.mdi {
+	.icons {
 		position: absolute;
 		top: 50%;
 		margin-top: -($m-font / 2);
@@ -715,7 +721,7 @@ ul.social {
 		width: 100%;
 		left: 0;
 	}
-	#header .nav-btn .mdi-close:before {
-		content: "\F35C";
+	#header .nav-btn .icon-close:before {
+		content: "\e067";
 	}
 }

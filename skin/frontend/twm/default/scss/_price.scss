@@ -1,7 +1,4 @@
 .price-box {
-	color: $xl-grey;
-	font-weight: bold;
-
 	.old-price {
 		text-decoration: line-through;
 		color: $m-grey;
@@ -9,8 +6,19 @@
 
 	p {
 		margin: 0 !important;
+	}
 
-		.price-label {
+	.third-price {
+		color: $xl-grey;
+		font-weight: bold;
+
+		.price {
+			color: $success;
+		}
+
+		.icon-question {
+			margin-left: $xxs-spacing;
+			font-size: $l-font;
 			display: none;
 		}
 	}

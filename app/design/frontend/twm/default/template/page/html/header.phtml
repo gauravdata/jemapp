@@ -30,7 +30,7 @@
 <a id="top"></a>
 <header id="header">
 
-	<a href="" class="nav-btn"><i class="mdi mdi-close"></i></a>
+	<a href="" class="nav-btn"><i class="icon-close icons"></i></a>
 
 	<?php if ($this->getIsHomePage()):?>
 	<h1 class="logo">
@@ -44,10 +44,10 @@
 	</a>
 	<?php endif?>
 	<div class="quick-access">
-		<?php echo $this->getChildHtml('topSearch') ?>
-		<?php echo $this->getChildHtml('store_language') ?>
-		<a class="link-mdi link-account" href="<?php echo $this->getUrl() ?>	customer/account/">
-			<i class="mdi mdi-account"></i>
+		<?php //echo $this->getChildHtml('topSearch') ?>
+		<?php //echo $this->getChildHtml('store_language') ?>
+		<a class="link-icon link-account" href="<?php echo $this->getUrl() ?>	customer/account/">
+			<i class="icon-user icons"></i>
 			<span><?php echo Mage::getSingleton('customer/session')->getCustomer()->getName(); ?></span>
 		</a>
 		<?php echo $this->getChildHtml('topLinks') ?>

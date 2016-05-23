@@ -36,24 +36,25 @@
                         <?php
                         switch ($i) {
                             case 1:
-                                $mdi = '<i class="mdi mdi-account"></i>';
+                                $icon = '<i class="icon-user icons"></i>';
                                 break;
                             case 2:
-                                $mdi = '<i class="mdi mdi-package-variant"></i>';
+                                $icon = '<i class="icon-location-pin icons"></i>';
+                                $icon = '<i class="icon-location-pin icons"></i>';
                                 break;
                             case 3:
-                                $mdi = '<i class="mdi mdi-truck"></i>';
+                                $icon = '<i class="icon-paper-plane icons"></i>';
                                 break;
                             case 4:
-                                $mdi = '<i class="mdi mdi-credit-card"></i>';
+                                $icon = '<i class="icon-credit-card icons"></i>';
                                 break;
                             default:
-                                $mdi = '';
+                                $icon = '';
                         }
                         ?>
                         <?php if($i <= 4) { ?>
                         <li>
-                            <?php echo $mdi; ?>
+                            <?php echo $icon; ?>
                             <span>
                                 <?php echo $this->__('Step') . ' ' . $i; ?><br />
                                 <strong><?php echo $_stepInfo['label'] ?></strong>

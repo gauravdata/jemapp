@@ -209,9 +209,6 @@ Product view
                 <block type="reports/product_viewed" name="product.recently.viewed" after="-" as="product_recently_viewed" template="reports/product_viewed.phtml"/>
 
                 <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data" />
-                <block type="catalog/product_view_description" name="product.description" as="description" template="catalog/product/view/description.phtml">
-                    <action method="addToParentGroup"><group>detailed_info</group></action>
-                </block>
                 <block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml">
                     <action method="addToParentGroup"><group>detailed_info</group></action>
                 </block>

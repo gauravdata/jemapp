@@ -19,12 +19,11 @@
 			color: $m-grey !important;
 		}
 
-		&.link-mdi {
+		&.link-icon {
 			float: left;
-			padding: 0 $m-spacing;
 			font-size: $l-font;
 
-			.mdi {
+			.icons {
 				display: inline-block;
 				float: none;
 				width: auto;
@@ -33,7 +32,7 @@
 		}
 	}
 
-	.mdi {
+	.icons {
 		display: block;
 		height: $header-height;
 		width: $header-height;
@@ -60,7 +59,7 @@
 
 		#search_mini_form,
 		.form-language,
-		.mdi,
+		.icons,
 		ul.links {
 			float: left;
 		}
@@ -179,9 +178,11 @@
 					padding: 0 $m-spacing;
 
 					&:before {
-						font-family: 'Material Design Icons';
-						content: "\F49A";
+						font-family: 'simple-line-icons';
+						content: "\e035";
 						margin-right: $xxs-spacing;
+						font-size: $xl-font;
+						font-weight: normal;
 					}
 
 					span {

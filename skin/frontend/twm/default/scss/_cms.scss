@@ -30,10 +30,25 @@ main .std {
 			margin: 0 $xl-spacing;
 
 			&:before {
-				font-family: 'Material Design Icons';
-				content: "\F12C";
+				font-family: 'simple-line-icons';
 				font-size: $l-font;
 				margin-right: $xs-spacing;
+			}
+
+			&:nth-child(1) {
+				&:before {
+					content: "\e080";
+				}
+			}
+			&:nth-child(2) {
+				&:before {
+					content: "\e098";
+				}
+			}
+			&:nth-child(3) {
+				&:before {
+					content: "\e07d";
+				}
 			}
 		}
 	}

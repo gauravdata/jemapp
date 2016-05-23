@@ -9,10 +9,9 @@ input[type=submit] {
 	@include radius(0);
 	display: inline-block;
 	line-height: $m-font * 2;
-	padding: ($m-font / 2) $xl-spacing (($m-font / 2) - 4);
-	border: 2px solid $primary;
-	background-color: $primary;
-	font-weight: bold;
+	padding: $xxs-spacing $xl-spacing;
+	border: 2px solid $l-grey;
+	background-color: $l-grey;
 	color: $white;
 	cursor: pointer;
 	font-size: $m-font;
@@ -22,8 +21,21 @@ input[type=submit] {
 	&:hover,
 	&:focus {
 		background-color: transparent;
-		color: $primary;
+		color: $l-grey;
 		outline: none;
+	}
+
+	&.btn-cart,
+	&.btn-checkout {
+		background-color: $primary;
+		border-color: $primary;
+		font-size: $xl-font;
+
+		&:hover,
+		&:focus {
+			background-color: transparent;
+			color: $primary;
+		}
 	}
 
 	&.button-link {
@@ -34,8 +46,8 @@ input[type=submit] {
 		padding: 0;
 
 		&:before {
-			font-family: 'Material Design Icons';
-			content: "\F142";
+			font-family: 'simple-line-icons';
+			content: "\e606";
 			margin-right: $xxs-spacing;
 		}
 
@@ -46,7 +58,7 @@ input[type=submit] {
 
 		&.button-back {
 			&:before {
-				content: "\F141";
+				content: "\e605";
 			}
 		}
 	}
@@ -65,7 +77,7 @@ input[type=submit] {
 	&.button-outline {
 		background-color: transparent;
 		border-color: $s-grey;
-		color: $xl-grey;
+		color: $l-grey;
 
 		&:hover,
 		&:hover {
@@ -101,8 +113,8 @@ p.back-link {
 	margin-right: $xl-spacing;
 
 	&:before {
-		font-family: 'Material Design Icons';
-		content: "\F141";
+		font-family: 'simple-line-icons';
+		content: "\e605";
 		margin-right: $xxs-spacing;
 
 		&:hover,

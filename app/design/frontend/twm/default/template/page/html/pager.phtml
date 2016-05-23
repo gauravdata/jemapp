@@ -70,7 +70,7 @@
         <?php if (!$this->isFirstPage()): ?>
             <li>
                 <a class="previous<?php if(!$this->getAnchorTextForPrevious()): ?> i-previous<?php endif;?>" href="<?php echo $this->getPreviousPageUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Previous')) ?>">
-                    <i class="mdi mdi-chevron-left" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Previous')) ?>"></i>
+                    <i class="icon-arrow-left icons" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Previous')) ?>"></i>
                 </a>
             </li>
         <?php endif;?>
@@ -103,7 +103,7 @@
         <?php if (!$this->isLastPage()): ?>
             <li>
                 <a class="next<?php if(!$this->getAnchorTextForNext()): ?> i-next<?php endif; ?>" href="<?php echo $this->getNextPageUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Next')) ?>">
-                    <i class="mdi mdi-chevron-right" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Next')) ?>"></i>
+                    <i class="icon-arrow-right icons" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Next')) ?>"></i>
                 </a>
             </li>
         <?php endif;?>
