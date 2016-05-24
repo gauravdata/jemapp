@@ -188,6 +188,11 @@
 			background-repeat: no-repeat;
 			background-position: 50% !important;
 			z-index: 99999;
+
+			&:after {
+				top: auto;
+				bottom: $m-spacing;
+			}
 		}
 	}
 	.product-options-wrapper {

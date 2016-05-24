@@ -94,7 +94,7 @@
         jQuery('.product-options-wrapper').addClass('hide');
         if(jQuery(window).width() < 1024) {
             viewport = document.querySelector("meta[name=viewport]");
-            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=1');
         }
     });
     jQuery('.zoom-image').mousemove(function(e) {

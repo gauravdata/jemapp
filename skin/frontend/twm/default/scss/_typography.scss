@@ -50,11 +50,11 @@ h3 {
 h1 {
 	font-size: $xxxl-font;
 	line-height: $xxxl-font;
-	font-weight: 300;
+	font-weight: $thin;
 }
 h2 {
 	font-size: $xxl-font;
-	font-weight: 500;
+	font-weight: $medium;
 }
 h3 {
 	color: $l-grey;
@@ -90,7 +90,7 @@ h3 {
 strong,
 b {
 	color: $xl-grey;
-	font-weight: 700;
+	font-weight: $bold;
 }
 
 .error {
@@ -277,7 +277,7 @@ table {
 				}
 
 				&:after {
-					content: "\F156";
+					content: "\e082";
 					font-family: 'simple-line-icons';
 					font-size: $xl-font;
 				}

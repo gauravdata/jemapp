@@ -148,6 +148,20 @@
 		z-index: 100;
 		cursor: zoom-out;
 		background-color: $xs-grey;
+
+		&:after {
+			content: "\e082";
+			color: $white;
+			font-family: 'simple-line-icons';
+			width: $xxxxl-font;
+			height: $xxxxl-font;
+			line-height: $xxxxl-font;
+			font-size: $xxxxl-font;
+			position: absolute;
+			top: $m-spacing;
+			right: $m-spacing;
+			cursor: pointer;
+		}
 	}
 
 	.more-views {
@@ -242,7 +256,7 @@
 		margin-bottom: $xs-spacing;
 	}
 	h2 {
-		font-weight: 300;
+		font-weight: $thin;
 	}
 	p.required {
 		margin-top: $xs-spacing;
