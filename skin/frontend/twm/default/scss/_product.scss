@@ -267,6 +267,12 @@
 				display: none;
 			}
 		}
+		select.validation-failed,
+		select.validation-passed {
+			~ label {
+				background-position: right 10px center;
+			}
+		}
 	}
 	.add-to-cart {
 		margin-bottom: $m-spacing;
