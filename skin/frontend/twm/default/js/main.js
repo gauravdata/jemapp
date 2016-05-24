@@ -98,7 +98,7 @@ jQuery(window).load(function(){
 	
 	// show footer nav
 	jQuery('.footer-nav h2').click(function(){
-		jQuery(this).parent().toggleClass('show');
+		jQuery(this).next().slideToggle().parent().toggleClass('show')
 	});
 
 	// wrap tables

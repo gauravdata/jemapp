@@ -572,8 +572,12 @@
 		}
 
 		.footer-nav {
+			> div {
+				margin-bottom: $m-spacing;
+			}
 			h2 {
 				cursor: pointer;
+				margin-bottom: $m-spacing;
 
 				&:after {
 					font-family: 'simple-line-icons';
@@ -584,8 +588,8 @@
 			}
 			p,
 			ul {
-				height: 0;
-				overflow: hidden;
+				display: none;
+				margin-bottom: 0;
 			}
 
 			.show {
