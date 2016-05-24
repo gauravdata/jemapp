@@ -99,10 +99,6 @@
 		z-index: 800;
 		left: calc(#{$side-nav-width});
 		width: calc(100% - #{$side-nav-width});
-
-		&.top {
-			top: 0;
-		}
 	}
 }
 .toolbar-bottom {

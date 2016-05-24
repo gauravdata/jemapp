@@ -162,12 +162,10 @@ jQuery(window).scroll(function() {
 	var st = jQuery(this).scrollTop();
 	if (st > lastScrollTop){
 		if(jQuery(window).scrollTop() > 400) {
-			jQuery('#header').addClass('hide');
-			jQuery('.toolbar').addClass('top');
+			jQuery('#wrapper').addClass('hidden-header');
 		}
 	} else {
-		jQuery('#header').removeClass('hide');
-		jQuery('.toolbar').removeClass('top');
+		jQuery('#wrapper').removeClass('hidden-header');
 	}
 	lastScrollTop = st;
 

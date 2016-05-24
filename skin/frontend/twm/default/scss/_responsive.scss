@@ -305,10 +305,6 @@
 	/*= Header =*/
 	#header {
 
-		&.hide {
-			top: -$header-height;
-		}
-
 		a.logo {
 			width: 110px;
 			margin: 17px 0 17px -55px;
@@ -323,6 +319,22 @@
 						padding-left: 0;
 					}
 				}
+			}
+		}
+	}
+
+	#wrapper.hidden-header {
+		#header {
+			top: -$header-height;
+		}
+		> .block.block-cart {
+			&.show {
+				top: 0;
+			}
+		}
+		.toolbar {
+			&.fixed {
+				top: 0;
 			}
 		}
 	}
