@@ -124,6 +124,22 @@ jQuery(window).load(function(){
 		return false;
 	});
 
+	// show nav children
+	jQuery('#side-nav > ul > li.parent').each(function(){
+		var $this = jQuery(this);
+		if($this.hasClass('active')) {
+			$this.addClass('open')
+		} else {
+			$this.addClass('closed')
+		}
+	});
+	jQuery('#side-nav > ul > li.parent > a').click(function(){
+		var $this = jQuery(this);
+		$this.next().slideToggle();
+		$this.parent().toggleClass('closed open');
+		return false;
+	});
+
 });
 
 var lastScrollTop = 0;

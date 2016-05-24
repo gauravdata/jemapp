@@ -83,7 +83,7 @@ html, body {
 									width: 100%;
 									height: 2px;
 									background-color: $xl-grey;
-									bottom: 0;
+									bottom: -4px;
 									left: 0;
 								}
 							}
@@ -98,20 +98,27 @@ html, body {
 
 					&:after {
 						position: absolute;
-						content: "\e095";
 						font-family: 'simple-line-icons';
 						top: 14px;
 						font-size: $xl-font;
 						right: $m-spacing;
 					}
 				}
-
-				&.active {
+				&.closed {
+					> a {
+						&:after {
+							content: "\e095";
+						}
+					}
+				}
+				&.open {
 					> a {
 						&:after {
 							content: "\e615";
 						}
 					}
+				}
+				&.active {
 					> ul {
 						display: block;
 					}
