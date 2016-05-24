@@ -334,12 +334,14 @@ ul.messages {
 }
 
 /*======================================================
-	ICON TOOLTIP
+	TOOLTIP
 ======================================================*/
-.icons {
+.tooltip-wrapper {
+	display: inline-block;
 	position: relative;
-
-	.icon-tooltop {
+	font-weight: $thin;
+	
+	.tooltip {
 		@extend .fade-in-transition;
 		background-color: $white;
 		padding: $xs-spacing;
@@ -364,10 +366,18 @@ ul.messages {
 			left: 50%;
 			margin-left: -5px;
 		}
+
+		p {
+			margin-bottom: $xs-spacing !important;
+		}
+
+		> *:last-child {
+			margin-bottom: 0 !important;
+		}
 	}
 
 	&:hover {
-		.icon-tooltop {
+		.tooltip {
 			opacity: 1;
 			visibility: visible;
 		}
