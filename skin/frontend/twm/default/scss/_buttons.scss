@@ -108,14 +108,17 @@ input[type=submit] {
 }
 
 p.back-link {
-	color: $primary;
 	display: inline-block;
 	margin-right: $xl-spacing;
 
-	&:before {
-		font-family: 'simple-line-icons';
-		content: "\e605";
-		margin-right: $xxs-spacing;
+	a {
+		color: $primary;
+
+		&:before {
+			font-family: 'simple-line-icons';
+			content: "\e605";
+			margin-right: $xxs-spacing;
+		}
 
 		&:hover,
 		&:focus {

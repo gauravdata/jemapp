@@ -47,7 +47,9 @@
         </div>
 
         <div class="product-header text-center">
-            <p class="product-header-title"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></p>
+            <a href="#" class="product-back-btn"><i class="icon-arrow-left icons"></i></a>
+            <span class="product-header-title"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></span><br />
+            <span class="product-header-color"><?php echo $_product->getAttributeText('color'); ?></span>
             <?php echo $this->getTierPriceHtml() ?>
         </div>
 

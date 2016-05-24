@@ -11,34 +11,17 @@
 			display: block;
 		}
 		h2.product-name {
-			float: left;
 			margin: 0;
-			padding: $xxs-spacing $xs-spacing;
+			margin: $xxs-spacing $xxs-spacing 0;
 			font-size: $m-font;
 			font-weight: $bold;
-			height: 82px;
-
-			width: 65%;
-			width: -webkit-calc(100% - 100px);
-			width: -moz-calc(100% - 100px);
-			width: calc(100% - 100px);
 		}
 		.price-box {
-			float: right;
-			padding: $xxs-spacing $xs-spacing;
-			text-align: right;
-
-			width: 35%;
-			width: -webkit-calc(100px);
-			width: -moz-calc(100px);
-			width: calc(100px);
+			margin: $xxs-spacing $xxs-spacing $s-spacing;
+			font-size: $s-font;
 
 			p {
 				margin: 0;
-
-				.price-label {
-					display: none;
-				}
 			}
 		}
 	}

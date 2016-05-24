@@ -3,12 +3,24 @@
 ======================================================*/
 .product-header {
 	display: none;
+	margin: $l-spacing 0 $m-spacing;
+	position: relative;
 
+	.product-back-btn {
+		position: absolute;
+		top: 8px;
+		left: $m-spacing;
+		color: $xl-grey;
+	}
 	.product-header-title {
+		display: inline-block;
 		font-size: $xxxl-font;
 		line-height: $xxxl-font;
 		color: $xl-grey;
-		margin: $l-spacing 0 $m-spacing;
+		font-weight: $thin;
+	}
+	.product-header-color {
+		font-size: $xxl-font;
 		font-weight: $thin;
 	}
 	.price-box {

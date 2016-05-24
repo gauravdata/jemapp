@@ -118,6 +118,12 @@ jQuery(window).load(function(){
 		return false;
 	});
 
+	// go back 1
+	jQuery('.product-back-btn').click(function() {
+		window.history.back(-1);
+		return false;
+	});
+
 });
 
 var lastScrollTop = 0;
