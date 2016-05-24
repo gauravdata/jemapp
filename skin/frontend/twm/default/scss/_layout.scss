@@ -28,9 +28,6 @@ html, body {
 	overflow-y: auto;
 
 	min-width: $side-nav-width;
-	width: 15%;
-	width: -webkit-calc(#{$side-nav-width});
-	width: -moz-calc(#{$side-nav-width});
 	width: calc(#{$side-nav-width});
 
 	> ul {
@@ -135,15 +132,7 @@ html, body {
 	@extend .main-transition;
 	position: relative;
 	padding-top: $header-height;
-
-	left: 15%;
-	left: -webkit-calc(#{$side-nav-width});
-	left: -moz-calc(#{$side-nav-width});
 	left: calc(#{$side-nav-width});
-
-	width: 85%;
-	width: -webkit-calc(100% - #{$side-nav-width});
-	width: -moz-calc(100% - #{$side-nav-width});
 	width: calc(100% - #{$side-nav-width});
 }
 
@@ -573,15 +562,7 @@ ul.social {
 	text-align: center;
 	padding-top: $xxl-spacing;
 	color: $m-grey;
-
-	left: 15%;
-	left: -webkit-calc(#{$side-nav-width});
-	left: -moz-calc(#{$side-nav-width});
 	left: calc(#{$side-nav-width});
-
-	width: 85%;
-	width: -webkit-calc(100% - #{$side-nav-width});
-	width: -moz-calc(100% - #{$side-nav-width});
 	width: calc(100% - #{$side-nav-width});
 
 	.block-subscribe {
