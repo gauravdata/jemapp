@@ -32,21 +32,22 @@
 		.owl-nav {
 			.owl-prev,
 			.owl-next {
+				@include radius(50%);
 				position: absolute;
 				top: 50%;
-				background-color: $xl-grey;
+				background-color: transparentize($xxs-grey, 0.45);
 				margin-top: -20px;
-				color: $white;
-				font-size: $xxl-font;
+				color: $xl-grey;
+				font-size: $xxxl-font;
 				padding: $xxs-spacing;
 				text-align: center;
 				line-height: $xl-spacing;
 			}
 			.owl-prev {
-				left: 0;
+				left: $xs-spacing;
 			}
 			.owl-next {
-				right: 0;
+				right: $xs-spacing;
 			}
 		}
 
