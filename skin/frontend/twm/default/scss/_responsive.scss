@@ -331,11 +331,8 @@
 	.main-usps {
 		ul {
 			li {
-				font-size: 0px;
-
-				strong {
-					font-size: $m-font;
-				}
+				margin: 0;
+				font-size: $s-font;
 			}
 			li:nth-child(2) {
 				display: none;
