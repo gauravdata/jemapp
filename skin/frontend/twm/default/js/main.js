@@ -10,6 +10,11 @@ jQuery(document).on( "mouseenter", ".top-link-cart, #wrapper > .block.block-cart
 jQuery(window).load(function(){
 	jQuery('.sync-height').syncheight();
 
+	// remove demo notice after 2.5 seconds
+	setTimeout(function(){
+		jQuery('.demo-notice').fadeOut();
+	}, 2500);
+
 	// show/hide sidenav
 	jQuery('#header .nav-btn').click(function(){
 		jQuery('body').toggleClass('hidden-side-nav open-side-nav');
