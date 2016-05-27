@@ -215,8 +215,6 @@
 .show-more {
 	@include transform(-50%,0);
 	@extend .main-transition;
-	height: 70px;
-	overflow: hidden;
 	position: fixed;
 	background-color: transparentize($white, 0.15);
 	bottom: $xs-spacing;
@@ -276,16 +274,6 @@
 		label {
 			border-width: 2px;
 			background-color: transparent;
-
-			&:after {
-				display: none;
-			}
-		}
-		select.validation-failed,
-		select.validation-passed {
-			~ label {
-				background-position: right 10px center;
-			}
 		}
 	}
 	.add-to-cart {

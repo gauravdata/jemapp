@@ -55,6 +55,7 @@
 	}
 
 	.sorter {
+		display: none;
 		float: right;
 		margin-right: $xs-spacing;
 
@@ -103,8 +104,7 @@
 }
 .toolbar-bottom {
 	.toolbar {
-		.amshopby-filters,
-		.sorter {
+		.amshopby-filters {
 			display: none;
 		}
 		.pager {

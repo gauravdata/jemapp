@@ -15,10 +15,17 @@
 			margin: $xxs-spacing $xxs-spacing 0;
 			font-size: $m-font;
 			font-weight: $bold;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 		}
 		.price-box {
 			margin: $xxs-spacing $xxs-spacing $s-spacing;
 			font-size: $s-font;
+
+			.regular-price {
+				display: none;
+			}
 
 			p {
 				margin: 0;

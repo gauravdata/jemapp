@@ -146,11 +146,6 @@ var lastScrollTop = 0;
 
 jQuery(window).scroll(function() {
 
-	// hide show more label after 100 pixels scolled
-	if(jQuery(window).scrollTop() > 100) {
-		jQuery('.show-more').addClass('hidden-label');
-	}
-
 	// show back to top after 300 pixels scrolled
 	if(jQuery(window).scrollTop() > 300) {
 		jQuery('.back-to-top').addClass('show');
