@@ -56,23 +56,23 @@ Checkout.prototype = {
         scrollToId('#top');
         switch(this.currentStep) {
                 case 'billing':
-                        $$('.progress-bar i.mdi-account').each(function(e){
-                                $(e).up().addClassName('active');
+                        $$('.progress-bar li:nth-child(1)').each(function(e){
+                                $(e).addClassName('active');
                         });
                 break;
                 case 'shipping':
-                        $$('.progress-bar i.mdi-package-variant').each(function(e){
-                                $(e).up().addClassName('active');
+                        $$('.progress-bar li:nth-child(2)').each(function(e){
+                                $(e).addClassName('active');
                         });
                 break;
                 case 'shipping_method':
-                        $$('.progress-bar i.mdi-truck').each(function(e){
-                                $(e).up().addClassName('active');
+                        $$('.progress-bar li:nth-child(3)').each(function(e){
+                                $(e).addClassName('active');
                         });
                 break;
                 case 'payment':
-                        $$('.progress-bar i.mdi-credit-card').each(function(e){
-                                $(e).up().addClassName('active');
+                        $$('.progress-bar li:nth-child(4)').each(function(e){
+                                $(e).addClassName('active');
                         });
                 break;
         }

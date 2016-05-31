@@ -517,17 +517,15 @@
 
 	/*= Checkout =*/
 	.progress-bar {
-		width: 100%;
-
 		li {
 			text-align: center;
 			padding-left: 0;
-			width: 25%;
 			position: relative;
 
 			.icons {
 				position: relative;
 				z-index: 99;
+				display: inline-block;
 			}
 			span {
 				display: block;
