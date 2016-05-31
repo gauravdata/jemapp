@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eExact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="eExact-XML.xsd">
+    <SalesOrders>
+		<SalesOrder salesordernumber="">
+			<OrderDate></OrderDate>
+			<DeliveryDate></DeliveryDate>
+			<Description></Description>
+			<YourRef></YourRef>
+			<OrderedBy code=""></OrderedBy>
+			<DeliverTo code=""></DeliverTo>
+			<InvoiceTo code=""></InvoiceTo>
+			<PaymentCondition code=""></PaymentCondition>
+			<SalesOrderLine>
+				<Item code=""></Item>
+				<Quantity></Quantity>
+				<DeliveryDate></DeliveryDate>
+				<NetPrice>
+					<Currency code="EUR" />
+					<Value></Value>
+				</NetPrice>
+			</SalesOrderLine>
+		</SalesOrder>
+	</SalesOrders>
+</eExact>

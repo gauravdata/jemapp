@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eExact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="eExact-XML.xsd">
+	<Accounts>
+		<Account code="" status="C">
+			<Name></Name>
+			<IsSupplier>0</IsSupplier>
+			<IsBlocked>0</IsBlocked>
+			<IsSales>1</IsSales>
+			<IsPurchase>0</IsPurchase>
+			<Address type="">
+				<Addressee>
+					<FullName></FullName>
+				</Addressee>
+				<AddressLine1></AddressLine1>
+				<AddressLine2></AddressLine2>
+				<PostalCode></PostalCode>
+				<City></City>
+				<Country code=""></Country>
+			</Address>
+			<VATNumber></VATNumber>
+		</Account>
+	</Accounts>
+</eExact>
