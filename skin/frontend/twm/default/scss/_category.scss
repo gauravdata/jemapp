@@ -26,12 +26,14 @@
 	}
 	
 	.pager {
-		position: absolute;
-		text-align: center;
-		width: 100%;
+		float: right;
 		z-index: 30;
-		margin-top: -40px;
 		line-height: $m-font;
+		margin: 12px 0;
+
+		p {
+			margin: 0;
+		}
 
 		a {
 			color: $m-grey;
@@ -41,8 +43,7 @@
 		.limiter {
 			float: none;
 			display: inline-block;
-			padding: 0 $s-spacing;
-			border-right: 1px solid $m-grey;
+			padding: 0 $xs-spacing;
 
 			a.active {
 				display: none;
@@ -51,6 +52,9 @@
 			&:last-child {
 				border-right: none;
 			}
+		}
+		.limiter {
+			display: none;
 		}
 	}
 
@@ -103,44 +107,12 @@
 	}
 }
 .toolbar-bottom {
+	display: none;
+	margin-bottom: $xl-spacing;
+
 	.toolbar {
 		.amshopby-filters {
 			display: none;
-		}
-		.pager {
-			position: static;
-			float: left;
-			margin: 0;
-			color: $m-grey !important;
-			text-align: left;
-			width: auto;
-
-			.amount,
-			.limiter {
-				border-right-color: $m-grey !important;
-			}
-
-			a {
-				color: $m-grey !important;
-			}
-		}
-	}
-}
-
-/*= White pager if category image =*/
-.page-visual ~ .category-products {
-	.toolbar {
-		.pager {
-			color: $white;
-
-			a {
-				color: $white;
-			}
-
-			.amount,
-			.limiter {
-				border-right-color: $white;
-			}
 		}
 	}
 }

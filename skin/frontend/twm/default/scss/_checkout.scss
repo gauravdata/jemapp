@@ -105,6 +105,25 @@
 }
 
 /*======================================================
+	OPC
+======================================================*/
+ol.opc {
+	.buttons-set {
+		.button {
+			background-color: $primary;
+			border-color: $primary;
+			font-size: $xl-font;
+
+			&:hover,
+			&:focus {
+				background-color: transparent;
+				color: $primary;
+			}
+		}
+	}
+}
+
+/*======================================================
 	PROGRESS SIDEBAR
 ======================================================*/
 #checkout-progress-wrapper {
@@ -180,7 +199,8 @@
 .payment-methods {
 	dt {
 		position: relative;
-		margin-top: 0;
+		margin-top: $xl-font;
+		margin-bottom: 0;
 
 		label {
 			float: none;

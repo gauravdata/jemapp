@@ -235,23 +235,6 @@ html, body {
 	height: 675px;
 	background-position: 50%;
 	background-size: cover;
-
-	&:before {
-		@include rotate(45deg);
-		content: "";
-		background-color: $white;
-		width: $xxl-font;
-		height: $xxl-font;
-		position: absolute;
-		top: 50%;
-		margin: -($xxl-font / 2);
-	}
-}
-.content-box-img-left:before {
-	right: 0;
-}
-.content-box-img-right:before span {
-	left: 0;
 }
 
 /*======================================================

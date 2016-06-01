@@ -5,6 +5,11 @@ jQuery(document).on( "mouseenter", ".top-link-cart, #wrapper > .block.block-cart
 	jQuery('#wrapper > .block.block-cart').addClass('show');
 }).on( "mouseleave", ".top-link-cart, #wrapper > .block.block-cart", function() {
 	jQuery('#wrapper > .block.block-cart').removeClass('show');
+}).on("change", ".select-overlay select", function() {
+	jQuery(this).parents('.select-overlay').find('label').html(jQuery(this).find('option:selected').html());
+	if(jQuery(this).hasClass('qty')) {
+		jQuery(this).parents('form').submit();
+	}
 });
 
 jQuery(window).load(function(){
@@ -60,12 +65,6 @@ jQuery(window).load(function(){
 		var label = jQuery(this).parents('.select-overlay').find('label');
 		if(jQuery(this).val() != '' && label.find('span').length < 1) {
 			label.html(jQuery(this).find('option:selected').html());
-		}
-	});
-	jQuery('.select-overlay select').change(function() {
-		jQuery(this).parents('.select-overlay').find('label').html(jQuery(this).find('option:selected').html());
-		if(jQuery(this).hasClass('qty')) {
-			jQuery(this).parents('form').submit();
 		}
 	});
 
