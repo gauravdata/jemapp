@@ -173,11 +173,49 @@
 	}
 
 	/*= Product =*/
+	.product-visual-wrapper {
+		.product-visual {
+			height: 500px;
+
+			.view-image {
+				left: 35%;
+			}
+		}
+		.more-views {
+			a {
+				width: 55px;
+			}
+		}
+	}
+
+	/*= Checkout =*/
+	.progress-bar {
+		li {
+			padding-right: $s-spacing;
+
+			&:after {
+				width: $s-spacing;
+			}
+
+			strong {
+				font-size: $m-font;
+			}
+		}
+	}
+}
+
+/*======================================================
+	MOBILE LANDSCAPE +
+======================================================*/
+@media(max-width: 810px) {
+	/*= Product =*/
 	.product-header {
 		display: block;
 	}
 	.product-visual-wrapper {
 		.product-visual {
+			background-position: 50%;
+
 			.view-image {
 				left: 50%;
 			}
@@ -211,46 +249,13 @@
 				display: none;
 			}
 		}
-		
+
 		.product-usps {
 			position: absolute;
 			left: 0;
 			top: 0;
 			margin: $m-spacing;
 			width: 50%;
-		}
-	}
-
-	/*= Checkout =*/
-	.progress-bar {
-		li {
-			padding-right: $s-spacing;
-
-			&:after {
-				width: $s-spacing;
-			}
-
-			strong {
-				font-size: $m-font;
-			}
-		}
-	}
-}
-
-/*======================================================
-	MOBILE LANDSCAPE +
-======================================================*/
-@media(max-width: 810px) {
-	/*= Product =*/
-	.product-visual-wrapper {
-		.product-visual {
-			height: 500px;
-			background-position: 50%;
-		}
-		.more-views {
-			a {
-				width: 55px;
-			}
 		}
 	}
 

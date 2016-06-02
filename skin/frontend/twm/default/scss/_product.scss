@@ -250,6 +250,9 @@
 	opacity: 1;
 
 	h1,
+	h2,
+	.price-box,
+	.field,
 	p {
 		margin-bottom: $xs-spacing;
 	}
@@ -261,9 +264,6 @@
 	}
 
 	.product-shop {
-		.price-box {
-			margin-bottom: $m-spacing;
-		}
 		.third-price {
 			.icon-question {
 				display: inline-block;

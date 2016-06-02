@@ -108,16 +108,18 @@
 	OPC
 ======================================================*/
 ol.opc {
-	.buttons-set {
-		.button {
-			background-color: $primary;
-			border-color: $primary;
-			font-size: $xl-font;
+	li:not(#opc-login) {
+		.buttons-set {
+			.button {
+				background-color: $primary;
+				border-color: $primary;
+				font-size: $xl-font;
 
-			&:hover,
-			&:focus {
-				background-color: transparent;
-				color: $primary;
+				&:hover,
+				&:focus {
+					background-color: transparent;
+					color: $primary;
+				}
 			}
 		}
 	}

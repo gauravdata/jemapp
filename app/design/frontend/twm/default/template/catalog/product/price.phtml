@@ -71,12 +71,9 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
 					<span class="price">
 						<?php echo $_coreHelper->currency($_product->getPriceByThree(), true, false) ?>
 					</span>
-					<div class="tooltip-wrapper">
+					<a href="#modal-third-price" class="show-modal">
 						<i class="icon-question icons"></i>
-						<div class="tooltip">
-							<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('third_price')->toHtml(); ?>
-						</div>
-					</div>
+					</a>
 				</div>
 			<?php endif;  ?>
 		<?php endif; /* if ($_finalPrice == $_price): */ ?>

@@ -214,3 +214,21 @@
         </div>
     </div>
 <?php endif; ?>
+
+<?php if ($_product->getPriceByThree()): ?>
+    <div class="modal-wrapper" id="modal-third-price">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-box">
+                <a href="#" class="modal-close">
+                    <i class="icon-close icons"></i>
+                </a>
+                <h2 class="modal-title"><?php echo $this->__('If three or more articles'); ?></h2>
+                <div class="modal-content">
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('third_price')->toHtml(); ?>
+                </div>
+            </div>
+            <div class="modal-click-area"></div>
+        </div>
+    </div>
+<?php endif;  ?>

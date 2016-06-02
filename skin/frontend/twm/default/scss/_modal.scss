@@ -50,6 +50,7 @@
 				padding: $s-spacing;
 			}
 			.modal-content {
+				@extend .clearfix;
 				margin: $m-spacing;
 			}
 		}

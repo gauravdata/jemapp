@@ -69,7 +69,7 @@
         </div>
         <div class="actions">
             <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('View all items in your shopping cart')) ?>" class="button button-link" onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>')"><span><span><?php echo $this->__('View All') ?></span></span></button>
-            <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Checkout')) ?>" class="button btn-checkout" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')">
+            <button type="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Checkout')) ?>" class="button btn-checkout" onclick="setLocation('<?php echo $this->getUrl('checkout/cart') ?>')">
                 <span>
                     <span>
                         <i class="icon-lock icons"></i> <?php echo $this->__('Checkout') ?>
