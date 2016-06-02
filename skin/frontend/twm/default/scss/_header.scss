@@ -1,30 +1,29 @@
 #header {
 	@extend .main-transition;
-	background-color: $xl-grey;
+	background-color: $white;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	z-index: 1000;
 	height: $header-height;
-	color: $white;
+	color: $xl-grey;
 	line-height: $header-height;
 	font-size: $l-font;
 	font-weight: $bold;
 
 	a {
-		color: $white;
+		color: $xl-grey !important;
 
 		&:hover {
-			color: $s-grey;
+			color: $m-grey !important;
 		}
 
-		&.link-mdi {
+		&.link-icon {
 			float: left;
-			padding: 0 $m-spacing;
 			font-size: $l-font;
 
-			.mdi {
+			.icons {
 				display: inline-block;
 				float: none;
 				width: auto;
@@ -33,7 +32,7 @@
 		}
 	}
 
-	.mdi {
+	.icons {
 		display: block;
 		height: $header-height;
 		width: $header-height;
@@ -51,7 +50,8 @@
 		margin: 14px 0;
 		position: absolute;
 		left: 50%;
-		margin-left: -74px;
+		margin-left: -75px;
+		width: 150px;
 	}
 
 	.quick-access {
@@ -59,7 +59,7 @@
 
 		#search_mini_form,
 		.form-language,
-		.mdi,
+		.icons,
 		ul.links {
 			float: left;
 		}
@@ -74,7 +74,7 @@
 				height: $header-height;
 				width: $header-height;
 				text-align: center;
-				color: $white;
+				color: $xl-grey;
 				padding: 0;
 				margin: 0;
 				float: left;
@@ -126,6 +126,7 @@
 		.form-language {
 			position: relative;
 			padding: 0 $m-spacing;
+			color: $xl-grey;
 
 			> span {
 				cursor: default;
@@ -177,9 +178,11 @@
 					padding: 0 $m-spacing;
 
 					&:before {
-						font-family: 'Material Design Icons';
-						content: "\F49A";
+						font-family: 'simple-line-icons';
+						content: "\e035";
 						margin-right: $xxs-spacing;
+						font-size: $xl-font;
+						font-weight: normal;
 					}
 
 					span {

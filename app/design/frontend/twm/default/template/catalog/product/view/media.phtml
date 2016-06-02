@@ -60,8 +60,8 @@
                     loop:true,
                     nav:true,
                     navText: [
-                        '<i class="mdi mdi-chevron-left"></i>',
-                        '<i class="mdi mdi-chevron-right"></i>'
+                        '<i class="icon-arrow-left icons"></i>',
+                        '<i class="icon-arrow-right icons"></i>'
                     ],
                     items: 1,
                     responsive:{
@@ -92,6 +92,10 @@
         jQuery('.product-visual-wrapper').addClass('show');
         jQuery('.zoom-image').css('background-image', 'url(' + jQuery(this).find('img').data('zoom-image') + ')');
         jQuery('.product-options-wrapper').addClass('hide');
+        if(jQuery(window).width() < 1024) {
+            viewport = document.querySelector("meta[name=viewport]");
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=1');
+        }
     });
     jQuery('.zoom-image').mousemove(function(e) {
         var $this = jQuery(this);
@@ -102,5 +106,9 @@
     }).click(function() {
         jQuery('.product-visual-wrapper').removeClass('show');
         jQuery('.product-options-wrapper').removeClass('hide');
+        if(jQuery(window).width() < 1024) {
+            viewport = document.querySelector("meta[name=viewport]");
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1');
+        }
     });
 </script>

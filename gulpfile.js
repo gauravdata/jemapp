@@ -10,7 +10,7 @@ var concat = require('gulp-concat');
 var paths = {
     scss: {
         src: ['skin/frontend/twm/default/scss/**/*.scss'],
-		includes: ['node_modules/mdi/scss/'],
+		includes: ['node_modules/simple-line-icons/scss/'],
         dest: 'skin/frontend/twm/default/dist/css/'
     }
 };

@@ -50,9 +50,11 @@ h3 {
 h1 {
 	font-size: $xxxl-font;
 	line-height: $xxxl-font;
+	font-weight: $thin;
 }
 h2 {
 	font-size: $xxl-font;
+	font-weight: $medium;
 }
 h3 {
 	color: $l-grey;
@@ -85,8 +87,10 @@ h3 {
 .no-wrap {
 	white-space: nowrap;
 }
-strong {
+strong,
+b {
 	color: $xl-grey;
+	font-weight: $bold;
 }
 
 .error {
@@ -104,8 +108,8 @@ strong {
 		
 		&:before {
 			position: absolute;
-			font-family: 'Material Design Icons';
-			content: "\F12C";
+			font-family: 'simple-line-icons';
+			content: "\e080";
 			color: $xl-grey;
 			top: 0;
 			left: 0;
@@ -161,12 +165,12 @@ button {
 }
 .link {
 	&:before {
-		font-family: 'Material Design Icons';
-		content: "\F142";
+		font-family: 'simple-line-icons';
+		content: "\e606";
 		margin-right: $xxs-spacing;
 	}
 }
-.link-mdi {
+.link-icon {
 	font-size: $xl-font;
 }
 
@@ -207,29 +211,88 @@ table {
 	}
 
 	th {
-		font-weight: $regular;
+		font-weight: $medium;
 		color: $xl-grey;
 	}
 }
 
 /*======================================================
-	MESSAGES
+	NOTICES
 ======================================================*/
+
 .global-site-notice {
+	@include transform(-50%, 0);
+	@extend .clearfix;
 	position: fixed;
-	bottom: 0;
+	z-index: 10000;
 	padding: $s-spacing $m-spacing;
 	color: $white;
-	background-color: $notice;
-	width: 100%;
-	z-index: 10000;
+	left: 50%;
+	background-color: transparentize($xl-grey, 0.3);
+	min-width: 50%;
+	max-width: 80%;
+
+	a {
+		color: $white;
+		text-decoration: underline;
+	}
 
 	.notice-inner {
 		> *:last-child {
 			margin-bottom: 0;
 		}
 	}
+
+	&.demo-notice {
+		top: $m-spacing;
+		background-color: transparentize($notice, 0.3);
+	}
+
+	&.notice-cookie {
+		bottom: $m-spacing;
+		padding-right: 50px;
+
+		.notice-text {
+			float: left;
+			padding: $s-spacing;
+
+			p {
+				margin: 0;
+			}
+		}
+
+		.actions {
+			.button {
+				position: absolute;
+				width: 50px;
+				height: 100%;
+				padding: 0;
+				background-color: $l-grey;
+				border: none;
+				right: 0;
+				top: 0;
+
+				span {
+					display: none;
+				}
+
+				&:after {
+					content: "\e082";
+					font-family: 'simple-line-icons';
+					font-size: $xl-font;
+				}
+				&:hover,
+				&:focus {
+					color: $m-grey;
+				}
+			}
+		}
+	}
 }
+
+/*======================================================
+	MESSAGES
+======================================================*/
 ul.messages {
 	@extend .unstyled;
 	margin: 0;
@@ -266,6 +329,57 @@ ul.messages {
 		li {
 			color: $notice;
 			background-color: lighten($notice, 57%);
+		}
+	}
+}
+
+/*======================================================
+	TOOLTIP
+======================================================*/
+.tooltip-wrapper {
+	display: inline-block;
+	position: relative;
+	font-weight: $thin;
+	
+	.tooltip {
+		@extend .fade-in-transition;
+		background-color: $white;
+		padding: $xs-spacing;
+		font-size: $s-font;
+		text-align: center;
+		width: 200px;
+		bottom: 100%;
+		left: 50%;
+		margin-left: -100px;
+		font-family: 'Raleway', sans-serif;
+		position: absolute;
+		margin-bottom: 10px;
+
+		&:after {
+			@include rotate(45deg);
+			content: "";
+			background-color: $white;
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			bottom: -5px;
+			left: 50%;
+			margin-left: -5px;
+		}
+
+		p {
+			margin-bottom: $xs-spacing !important;
+		}
+
+		> *:last-child {
+			margin-bottom: 0 !important;
+		}
+	}
+
+	&:hover {
+		.tooltip {
+			opacity: 1;
+			visibility: visible;
 		}
 	}
 }

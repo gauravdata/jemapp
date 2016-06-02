@@ -48,8 +48,8 @@
 
 			<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
 				<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(720,965); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
-				<?php if ($_product->getSecondThumbnail()): ?>
-					<img class="hover-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'second_thumbnail')->resize(720,965); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'second_thumbnail'), null, true) ?>" />
+				<?php if ($_product->getHoverImage()): ?>
+					<img class="hover-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'hover_image')->resize(720,965); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'hover_image'), null, true) ?>" />
 				<?php endif; ?>
 			</a>
 

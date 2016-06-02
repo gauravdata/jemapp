@@ -1,17 +1,6 @@
 /*======================================================
 	DEFAULT
 ======================================================*/
-.checkout-cart-index {
-	#header .nav-btn,
-	#header .quick-access,
-	#side-nav {
-		display: none;
-	}
-	#content {
-		width: 100%;
-		left: 0;
-	}
-}
 ul.checkout-types {
 	margin-bottom: 0;
 }
@@ -102,6 +91,10 @@ ul.checkout-types {
 
 		-webkit-transition-delay: 0s;
 		transition-delay: 0s;
+
+		&.stick-to-top {
+			top: 0;
+		}
 	}
 
 	.block-content-spacing {

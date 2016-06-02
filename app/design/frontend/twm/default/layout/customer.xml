@@ -214,7 +214,7 @@ Customer account pages, rendered for all tabs in dashboard
         <remove name="sale.reorder.sidebar"/>
         <!-- Mage_Customer -->
         <reference name="root">
-            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
         </reference>
 
         <reference name="content">
@@ -224,7 +224,7 @@ Customer account pages, rendered for all tabs in dashboard
             </block>
         </reference>
 
-        <reference name="right">
+        <reference name="left">
             <block type="core/template" name="customer_account_logout" before="-" template="customer/account/logout.phtml"></block>
             <block type="customer/account_navigation" name="customer_account_navigation" after="customer_account_logout" template="customer/account/navigation.phtml">
                 <action method="addLink" translate="label" module="customer"><name>account</name><path>customer/account/</path><label>Account Dashboard</label></action>
@@ -251,7 +251,7 @@ Customer account home dashboard layout
         <update handle="customer_account"/>
         <!-- Mage_Customer -->
         <reference name="root">
-            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
         </reference>
         <reference name="my.account.wrapper">
             <block type="customer/account_dashboard" name="customer_account_dashboard" template="customer/account/dashboard.phtml">

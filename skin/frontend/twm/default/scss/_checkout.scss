@@ -36,14 +36,18 @@
 		padding-left: $xl-spacing + 10;
 		text-align: left;
 		padding-right: $m-spacing + 10;
-		color: $primary;
+		color: $m-grey;
 
-		.mdi {
+		&:last-child {
+			padding-right: 0;
+		}
+
+		.icons {
 			@include radius(50%);
 			width: $xl-spacing;
 			height: $xl-spacing;
 			line-height: $xl-spacing;
-			background-color: $primary;
+			background-color: $m-grey;
 			color: $xxxs-grey;
 			text-align: center;
 			font-size: $xl-font;
@@ -52,7 +56,7 @@
 		}
 
 		strong {
-			color: $primary;
+			color: $m-grey;
 			text-transform: uppercase;
 		}
 
@@ -60,7 +64,7 @@
 			content: "";
 			height: 1px;
 			width: $m-spacing;
-			background-color: $primary;
+			background-color: $m-grey;
 			position: absolute;
 			right: 0;
 			top: 50%;
@@ -73,20 +77,48 @@
 		}
 
 		&.active {
-			&:after {
-				background-color: $m-grey;
+			color: $primary;
+
+			strong {
+				color: $primary;
+			}
+			.icons {
+				background-color: $primary;
 			}
 			~ li {
 				color: $m-grey;
 
-				.mdi {
-					background-color: $m-grey;
+				.icons {
+					background-color: transparent;
+					border: 1px solid $m-grey;
+					color: $m-grey;
 				}
 				strong {
 					color: $m-grey;
 				}
 				&:after {
 					background-color: $m-grey;
+				}
+			}
+		}
+	}
+}
+
+/*======================================================
+	OPC
+======================================================*/
+ol.opc {
+	li:not(#opc-login) {
+		.buttons-set {
+			.button {
+				background-color: $primary;
+				border-color: $primary;
+				font-size: $xl-font;
+
+				&:hover,
+				&:focus {
+					background-color: transparent;
+					color: $primary;
 				}
 			}
 		}
@@ -169,7 +201,8 @@
 .payment-methods {
 	dt {
 		position: relative;
-		margin-top: 0;
+		margin-top: $xl-font;
+		margin-bottom: 0;
 
 		label {
 			float: none;

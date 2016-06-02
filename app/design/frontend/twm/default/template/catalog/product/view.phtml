@@ -47,7 +47,9 @@
         </div>
 
         <div class="product-header text-center">
-            <p class="product-header-title"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></p>
+            <a href="#" class="product-back-btn"><i class="icon-arrow-left icons"></i></a>
+            <span class="product-header-title"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></span><br />
+            <span class="product-header-color"><?php echo $_product->getAttributeText('color'); ?></span>
             <?php echo $this->getTierPriceHtml() ?>
         </div>
 
@@ -59,6 +61,7 @@
             <div class="product-shop">
                 <div class="product-name">
                     <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    <h2><?php echo $_product->getAttributeText('color'); ?></h2>
                 </div>
 
                 <?php echo $this->getChildHtml('alert_urls') ?>
@@ -87,13 +90,6 @@
                 <?php endif;?>
 
             </div>
-
-            <p>
-                <strong>
-                    <span class="attr-label"><?php echo $_product->getResource()->getAttribute('color')->getFrontendLabel(); ?></span>
-                    <?php echo $_product->getAttributeText('color'); ?>
-                </strong>
-            </p>
 
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
@@ -183,25 +179,22 @@
     </div>
 <?php endif;?>
 
-    <div class="product-collateral">
-<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
+<div class="product-collateral">
+    <?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html):?>
         <div class="box-collateral <?php echo "box-{$alias}"?>">
             <?php if ($title = $this->getChildData($alias, 'title')):?>
             <h2><?php echo $this->escapeHtml($title); ?></h2>
             <?php endif;?>
             <?php echo $html; ?>
         </div>
-<?php endforeach;?>
-        <?php echo $this->getChildHtml('upsell_products') ?>
-        <?php echo $this->getChildHtml('product_additional_data') ?>
-    </div>
-
+    <?php endforeach;?>
+    <?php echo $this->getChildHtml('upsell_products') ?>
+    <?php echo $this->getChildHtml('product_additional_data') ?>
     <?php echo $this->getChildHtml('product_recently_viewed') ?>
 </div>
 
 <a href="#" class="show-more">
-    <i class="mdi mdi-chevron-down"></i>
-    <span><?php echo $this->__('Show more'); ?></span>
+    <i class="icon-arrow-down icons"></i>
 </a>
 
 <?php if ($_product->hasSizechart()): ?>
@@ -210,7 +203,7 @@
         <div class="modal-container">
             <div class="modal-box">
                 <a href="#" class="modal-close">
-                    <i class="mdi mdi-close"></i>
+                    <i class="icon-close icons"></i>
                 </a>
                 <h2 class="modal-title"><?php echo $this->__('Sizechart') ?></h2>
                 <div class="modal-content">
@@ -221,3 +214,21 @@
         </div>
     </div>
 <?php endif; ?>
+
+<?php if ($_product->getPriceByThree()): ?>
+    <div class="modal-wrapper" id="modal-third-price">
+        <div class="modal-overlay"></div>
+        <div class="modal-container">
+            <div class="modal-box">
+                <a href="#" class="modal-close">
+                    <i class="icon-close icons"></i>
+                </a>
+                <h2 class="modal-title"><?php echo $this->__('If three or more articles'); ?></h2>
+                <div class="modal-content">
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('third_price')->toHtml(); ?>
+                </div>
+            </div>
+            <div class="modal-click-area"></div>
+        </div>
+    </div>
+<?php endif;  ?>

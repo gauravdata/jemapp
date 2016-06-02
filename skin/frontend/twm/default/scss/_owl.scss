@@ -11,34 +11,24 @@
 			display: block;
 		}
 		h2.product-name {
-			float: left;
 			margin: 0;
-			padding: $xxs-spacing $xs-spacing;
+			margin: $xxs-spacing $xxs-spacing 0;
 			font-size: $m-font;
 			font-weight: $bold;
-			height: 82px;
-
-			width: 65%;
-			width: -webkit-calc(100% - 100px);
-			width: -moz-calc(100% - 100px);
-			width: calc(100% - 100px);
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 		}
 		.price-box {
-			float: right;
-			padding: $xxs-spacing $xs-spacing;
-			text-align: right;
+			margin: $xxs-spacing $xxs-spacing $s-spacing;
+			font-size: $s-font;
 
-			width: 35%;
-			width: -webkit-calc(100px);
-			width: -moz-calc(100px);
-			width: calc(100px);
+			.regular-price {
+				display: none;
+			}
 
 			p {
 				margin: 0;
-
-				.price-label {
-					display: none;
-				}
 			}
 		}
 	}
@@ -49,20 +39,22 @@
 		.owl-nav {
 			.owl-prev,
 			.owl-next {
+				@include radius(50%);
 				position: absolute;
 				top: 50%;
-				background-color: $xl-grey;
+				background-color: transparentize($xxs-grey, 0.45);
 				margin-top: -20px;
-				color: $white;
-				font-size: $xxxxl-font;
+				color: $xl-grey;
+				font-size: $xxxl-font;
+				padding: $xxs-spacing;
 				text-align: center;
 				line-height: $xl-spacing;
 			}
 			.owl-prev {
-				left: 0;
+				left: $xs-spacing;
 			}
 			.owl-next {
-				right: 0;
+				right: $xs-spacing;
 			}
 		}
 

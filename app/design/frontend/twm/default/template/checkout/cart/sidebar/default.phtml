@@ -37,11 +37,11 @@
     <?php endif; ?>
     <div class="product-details">
         <a href="<?php echo $this->getDeleteUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Remove This Item')) ?>" onclick="return confirm('<?php echo Mage::helper('core')->quoteEscape($this->__('Are you sure you would like to remove this item from the shopping cart?'), true) ?>');" class="btn-remove">
-            <i class="mdi mdi-close link-mdi"></i>
+            <i class="icon-close icons link-icon"></i>
         </a>
         <?php if ($isVisibleProduct): ?>
         <a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Edit item')) ?>" class="btn-edit">
-            <i class="mdi mdi-pencil link-mdi"></i>
+            <i class="icon-pencil icons link-icon"></i>
         </a>
         <?php endif ?>
         <p class="product-name"><?php if ($this->hasProductUrl()): ?><a href="<?php echo $this->getProductUrl() ?>"><?php endif; ?><?php echo $this->escapeHtml($this->getProductName()) ?><?php if ($this->hasProductUrl()): ?></a><?php endif; ?></p>

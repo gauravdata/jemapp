@@ -3,7 +3,7 @@
 ======================================================*/
 html, body {
 	height: 100%;
-	background: $xxxs-grey;
+	background: $white;
 	margin: 0;
 }
 
@@ -19,7 +19,7 @@ html, body {
 #side-nav {
 	@extend .main-transition;
 	position: fixed;
-	background-color: #fff;
+	background-color: $white;
 	left: 0;
 	top: $header-height;
 	min-height: 100%;
@@ -28,9 +28,6 @@ html, body {
 	overflow-y: auto;
 
 	min-width: $side-nav-width;
-	width: 15%;
-	width: -webkit-calc(#{$side-nav-width});
-	width: -moz-calc(#{$side-nav-width});
 	width: calc(#{$side-nav-width});
 
 	> ul {
@@ -40,12 +37,16 @@ html, body {
 		> li {
 			border-bottom: 1px solid $s-grey;
 
+			&:first-child {
+				border-top: 1px solid $s-grey;
+			}
+
 			> a {
 				display: block;
 				padding: $s-spacing $m-spacing;
 				font-size: $m-font;
 				text-transform: uppercase;
-				font-weight: $bold;
+				font-weight: $thin;
 				color: $xl-grey;
 			}
 
@@ -79,7 +80,7 @@ html, body {
 									width: 100%;
 									height: 2px;
 									background-color: $xl-grey;
-									bottom: 0;
+									bottom: -4px;
 									left: 0;
 								}
 							}
@@ -94,21 +95,27 @@ html, body {
 
 					&:after {
 						position: absolute;
-						content: "\F415";
-						font-family: 'Material Design Icons';
-						top: 50%;
-						font-size: $l-font;
+						font-family: 'simple-line-icons';
+						top: 14px;
+						font-size: $xl-font;
 						right: $m-spacing;
-						margin-top: -11px;
 					}
 				}
-
-				&.active {
+				&.closed {
 					> a {
 						&:after {
-							content: "\F374";
+							content: "\e095";
 						}
 					}
+				}
+				&.open {
+					> a {
+						&:after {
+							content: "\e615";
+						}
+					}
+				}
+				&.active {
 					> ul {
 						display: block;
 					}
@@ -125,15 +132,7 @@ html, body {
 	@extend .main-transition;
 	position: relative;
 	padding-top: $header-height;
-
-	left: 15%;
-	left: -webkit-calc(#{$side-nav-width});
-	left: -moz-calc(#{$side-nav-width});
 	left: calc(#{$side-nav-width});
-
-	width: 85%;
-	width: -webkit-calc(100% - #{$side-nav-width});
-	width: -moz-calc(100% - #{$side-nav-width});
 	width: calc(100% - #{$side-nav-width});
 }
 
@@ -236,23 +235,6 @@ html, body {
 	height: 675px;
 	background-position: 50%;
 	background-size: cover;
-
-	&:before {
-		@include rotate(45deg);
-		content: "";
-		background-color: $xxxs-grey;
-		width: $xxl-font;
-		height: $xxl-font;
-		position: absolute;
-		top: 50%;
-		margin: -($xxl-font / 2);
-	}
-}
-.content-box-img-left:before {
-	right: 0;
-}
-.content-box-img-right:before span {
-	left: 0;
 }
 
 /*======================================================
@@ -433,8 +415,8 @@ html, body {
 
 		&:after {
 			position: absolute;
-			font-family: 'Material Design Icons';
-			content: "\F140";
+			font-family: 'simple-line-icons';
+			content: "\e604";
 			right: $xs-spacing;
 		}
 	}
@@ -463,7 +445,7 @@ html, body {
 			border-color: $white;
 
 			&:after {
-				content: "\F143";
+				content: "\e607";
 			}
 		}
 		.list {
@@ -509,7 +491,7 @@ html, body {
 				}
 			}
 			strong {
-				font-weight: $regular;
+				font-weight: $medium;
 			}
 			&.current {
 				color: $xl-grey;
@@ -533,11 +515,12 @@ ul.social {
 			line-height: $xxxl-font;
 			text-align: center;
 			background-color: $m-grey;
-			font-size: $xl-font;
+			font-size: $l-font;
 			color: $xxxs-grey;
 			margin-right: $xxs-spacing;
 
-			i.mdi {
+			i.icons {
+				display: inline-block;
 				margin-top: 7px;
 
 				span {
@@ -562,15 +545,7 @@ ul.social {
 	text-align: center;
 	padding-top: $xxl-spacing;
 	color: $m-grey;
-
-	left: 15%;
-	left: -webkit-calc(#{$side-nav-width});
-	left: -moz-calc(#{$side-nav-width});
 	left: calc(#{$side-nav-width});
-
-	width: 85%;
-	width: -webkit-calc(100% - #{$side-nav-width});
-	width: -moz-calc(100% - #{$side-nav-width});
 	width: calc(100% - #{$side-nav-width});
 
 	.block-subscribe {
@@ -689,73 +664,18 @@ ul.social {
 	padding: $xs-spacing ($xl-spacing + $m-spacing);
 	color: $m-grey;
 	font-weight: $bold;
+	z-index: 9999;
 
 	&.show {
 		opacity: 1;
 		visibility: visible;
 	}
 	
-	.mdi {
+	.icons {
 		position: absolute;
 		top: 50%;
 		margin-top: -($m-font / 2);
 		right: $xs-spacing;
-	}
-}
-
-/*======================================================
-	TOGGLE SIDE NAV
-======================================================*/
-.notice-cookie {
-	@include transform(-50%, 0);
-	@extend .clearfix;
-	position: fixed;
-	z-index: 999;
-	bottom: $m-spacing;
-	left: 50%;
-	background-color: transparentize($xl-grey, 0.3);
-	color: $white;
-	min-width: 50%;
-	max-width: 80%;
-	padding-right: 50px;
-
-	a {
-		color: $white;
-		text-decoration: underline;
-	}
-
-	.notice-text {
-		float: left;
-		padding: $s-spacing;
-
-		p {
-			margin: 0;
-		}
-	}
-
-	.actions {
-		.button {
-			position: absolute;
-			width: 50px;
-			height: 100%;
-			padding: 0;
-			background-color: $l-grey;
-			border: none;
-
-			span {
-				display: none;
-			}
-
-			&:after {
-				content: "\F156";
-				font-family: 'Material Design Icons';
-				font-size: $xl-font;
-			}
-			&:hover,
-			&:focus {
-				color: $m-grey;
-			}
-		}
 	}
 }
 
@@ -772,7 +692,7 @@ ul.social {
 		width: 100%;
 		left: 0;
 	}
-	#header .nav-btn .mdi-close:before {
-		content: "\F35C";
+	#header .nav-btn .icon-close:before {
+		content: "\e067";
 	}
 }

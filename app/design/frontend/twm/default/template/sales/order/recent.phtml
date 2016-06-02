@@ -64,8 +64,8 @@
                     <td class="no-wrap"><em><?php echo $_order->getStatusLabel() ?></em></td>
                     <td class="a-center no-wrap">
                         <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
-                            <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder link-mdi">
-                                <i class="mdi mdi-shopping" title="<?php echo $this->__('Reorder') ?>"></i>
+                            <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder link-icon">
+                                <i class="icon-handbag icons" title="<?php echo $this->__('Reorder') ?>"></i>
                             </a>
                         <?php endif ?>
                     </td>

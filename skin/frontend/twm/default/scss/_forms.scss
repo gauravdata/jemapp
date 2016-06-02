@@ -46,7 +46,7 @@ fieldset,
 ======================================================*/
 form {
 	label {
-		font-weight: $regular;
+		font-weight: $medium;
 		color: $l-grey;
 		float: left;
 		width: calc(33% - 10px);
@@ -86,12 +86,13 @@ select {
 	border: 1px solid $s-grey;
 	width: 100%;
 	font-size: $m-font;
+	color: $xl-grey;
 	background-color: $white;
 	background-position: right 10px center;
 
 	&:focus {
-		border-color: $primary;
-		color: $primary;
+		border-color: $xl-grey;
+		color: $xl-grey;
 		outline: none;
 	}
 
@@ -107,13 +108,13 @@ select {
 		}
 	}
 	&.validation-passed {
-		border-color: $primary !important;
-		color: $primary !important;
+		border-color: $success !important;
+		color: $success !important;
 		font-weight: $bold;
 
 		~ label {
-			border-color: $primary !important;
-			color: $primary !important;
+			border-color: $success !important;
+			color: $success !important;
 			font-weight: $bold;
 		}
 	}
@@ -124,6 +125,19 @@ select {
 textarea {
 	height: 200px;
 }
+
+/*= Failed =*/
+input.validation-failed,
+select.validation-failed ~ label {
+	background-image: url('../../images/cross.png');
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+}
+select.validation-failed ~ label {
+	background-position: right 30px center;
+}
+
+/*= Passed =*/
 input.validation-passed,
 select.validation-passed ~ label {
 	background-image: url('../../images/check.png');
@@ -198,9 +212,9 @@ form .control {
 			background-color: $white;
 			cursor: pointer;
 			text-align: center;
-			font-size: $l-font;
+			font-size: $s-font;
 			color: $white;
-			font-family: 'Material Design Icons';
+			font-family: 'simple-line-icons';
 		}
 
 		em {
@@ -217,14 +231,15 @@ form .control {
 	}
 
 	// checkbox
+	.input-box.checkbox-checked ~ label:before,
 	input[type=checkbox] ~ :before {
-		content: "\F12C";
+		content: "\e604";
 		border-color: $primary;
 	}
 
 	// radio
 	input[type=radio] ~ :before {
-		content: "\F12F";
+		content: "\e604";
 		@include radius(50%);
 	}
 
@@ -235,6 +250,17 @@ form .control {
 	input[type=radio]:checked + label:before {
 		color: $primary;
 		border-color: $primary;
+	}
+}
+
+/*======================================================
+	SELECT
+======================================================*/
+select {
+	option {
+		&:disabled {
+			color: $s-grey;
+		}
 	}
 }
 
@@ -252,7 +278,7 @@ form .control {
 		padding: 0 $s-spacing;
 		border: 1px solid $s-grey;
 		background-color: $white;
-		color: $xl-grey;
+		color: $l-grey;
 		float: none;
 		left: 0;
 		top: 0;
@@ -261,8 +287,8 @@ form .control {
 
 		&:after {
 			position: absolute;
-			content: "\F140";
-			font-family: 'Material Design Icons';
+			content: "\e604";
+			font-family: 'simple-line-icons';
 			right: $xs-spacing;
 		}
 	}
@@ -274,6 +300,7 @@ form .control {
 		position: relative;
 		z-index: 100;
 		opacity: 0;
+		cursor: pointer;
 	}
 }
 

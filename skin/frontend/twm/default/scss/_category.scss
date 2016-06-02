@@ -26,12 +26,14 @@
 	}
 	
 	.pager {
-		position: absolute;
-		text-align: center;
-		width: 100%;
+		float: right;
 		z-index: 30;
-		margin-top: -40px;
 		line-height: $m-font;
+		margin: 12px 0;
+
+		p {
+			margin: 0;
+		}
 
 		a {
 			color: $m-grey;
@@ -41,8 +43,7 @@
 		.limiter {
 			float: none;
 			display: inline-block;
-			padding: 0 $s-spacing;
-			border-right: 1px solid $m-grey;
+			padding: 0 $xs-spacing;
 
 			a.active {
 				display: none;
@@ -52,9 +53,13 @@
 				border-right: none;
 			}
 		}
+		.limiter {
+			display: none;
+		}
 	}
 
 	.sorter {
+		display: none;
 		float: right;
 		margin-right: $xs-spacing;
 
@@ -79,7 +84,7 @@
 				background-color: transparent;
 
 				span {
-					font-weight: $regular;
+					font-weight: $medium;
 				}
 			}
 		}
@@ -97,58 +102,17 @@
 		position: fixed;
 		top: $header-height;
 		z-index: 800;
-
-		left: 15%;
-		left: -webkit-calc(#{$side-nav-width});
-		left: -moz-calc(#{$side-nav-width});
 		left: calc(#{$side-nav-width});
-
-		width: 85%;
-		width: -webkit-calc(100% - #{$side-nav-width});
-		width: -moz-calc(100% - #{$side-nav-width});
 		width: calc(100% - #{$side-nav-width});
 	}
 }
 .toolbar-bottom {
+	display: none;
+	margin-bottom: $xl-spacing;
+
 	.toolbar {
-		.amshopby-filters,
-		.sorter {
+		.amshopby-filters {
 			display: none;
-		}
-		.pager {
-			position: static;
-			float: left;
-			margin: 0;
-			color: $m-grey !important;
-			text-align: left;
-			width: auto;
-
-			.amount,
-			.limiter {
-				border-right-color: $m-grey !important;
-			}
-
-			a {
-				color: $m-grey !important;
-			}
-		}
-	}
-}
-
-/*= White pager if category image =*/
-.page-visual ~ .category-products {
-	.toolbar {
-		.pager {
-			color: $white;
-
-			a {
-				color: $white;
-			}
-
-			.amount,
-			.limiter {
-				border-right-color: $white;
-			}
 		}
 	}
 }
@@ -186,27 +150,22 @@
 				}
 			}
 			h2.product-name {
-				float: left;
-				margin: 0;
-				padding: $xxs-spacing $xs-spacing;
-				font-size: $m-font;
+				margin: $xxs-spacing $xxs-spacing 0;
+				font-size: $l-font;
 				font-weight: $bold;
-				height: 82px;
-
-				width: 65%;
-				width: -webkit-calc(100% - 100px);
-				width: -moz-calc(100% - 100px);
-				width: calc(100% - 100px);
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
 			}
 			.price-box {
-				float: right;
-				padding: $xxs-spacing $xs-spacing;
-				text-align: right;
+				font-size: $s-font;
+				margin: $xxs-spacing $xxs-spacing $s-spacing;
 
-				width: 35%;
-				width: -webkit-calc(100px);
-				width: -moz-calc(100px);
-				width: calc(100px);
+				.third-price {
+					.price {
+						font-size: $l-font;
+					}
+				}
 			}
 		}
 	}

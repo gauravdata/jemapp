@@ -5,10 +5,20 @@ jQuery(document).on( "mouseenter", ".top-link-cart, #wrapper > .block.block-cart
 	jQuery('#wrapper > .block.block-cart').addClass('show');
 }).on( "mouseleave", ".top-link-cart, #wrapper > .block.block-cart", function() {
 	jQuery('#wrapper > .block.block-cart').removeClass('show');
+}).on("change", ".select-overlay select", function() {
+	jQuery(this).parents('.select-overlay').find('label').html(jQuery(this).find('option:selected').html());
+	if(jQuery(this).hasClass('qty')) {
+		jQuery(this).parents('form').submit();
+	}
 });
 
 jQuery(window).load(function(){
 	jQuery('.sync-height').syncheight();
+
+	// remove demo notice after 2.5 seconds
+	setTimeout(function(){
+		jQuery('.demo-notice').fadeOut();
+	}, 2500);
 
 	// show/hide sidenav
 	jQuery('#header .nav-btn').click(function(){
@@ -57,12 +67,6 @@ jQuery(window).load(function(){
 			label.html(jQuery(this).find('option:selected').html());
 		}
 	});
-	jQuery('.select-overlay select').change(function() {
-		jQuery(this).parents('.select-overlay').find('label').html(jQuery(this).find('option:selected').html());
-		if(jQuery(this).hasClass('qty')) {
-			jQuery(this).parents('form').submit();
-		}
-	});
 
 	// scroll to id
 	jQuery('.scroll-to').click(function(){
@@ -93,7 +97,7 @@ jQuery(window).load(function(){
 	
 	// show footer nav
 	jQuery('.footer-nav h2').click(function(){
-		jQuery(this).parent().toggleClass('show');
+		jQuery(this).next().slideToggle().parent().toggleClass('show')
 	});
 
 	// wrap tables
@@ -113,16 +117,33 @@ jQuery(window).load(function(){
 		return false;
 	});
 
+	// go back 1
+	jQuery('.product-back-btn').click(function() {
+		window.history.back(-1);
+		return false;
+	});
+
+	// show nav children
+	jQuery('#side-nav > ul > li.parent').each(function(){
+		var $this = jQuery(this);
+		if($this.hasClass('active')) {
+			$this.addClass('open')
+		} else {
+			$this.addClass('closed')
+		}
+	});
+	jQuery('#side-nav > ul > li.parent > a').click(function(){
+		var $this = jQuery(this);
+		$this.next().slideToggle();
+		$this.parent().toggleClass('closed open');
+		return false;
+	});
+
 });
 
 var lastScrollTop = 0;
 
 jQuery(window).scroll(function() {
-
-	// hide show more label after 100 pixels scolled
-	if(jQuery(window).scrollTop() > 100) {
-		jQuery('.show-more').addClass('hidden-label');
-	}
 
 	// show back to top after 300 pixels scrolled
 	if(jQuery(window).scrollTop() > 300) {
@@ -135,10 +156,10 @@ jQuery(window).scroll(function() {
 	var st = jQuery(this).scrollTop();
 	if (st > lastScrollTop){
 		if(jQuery(window).scrollTop() > 400) {
-			jQuery('#header').addClass('hide');
+			jQuery('#wrapper').addClass('hidden-header');
 		}
 	} else {
-		jQuery('#header').removeClass('hide');
+		jQuery('#wrapper').removeClass('hidden-header');
 	}
 	lastScrollTop = st;
 

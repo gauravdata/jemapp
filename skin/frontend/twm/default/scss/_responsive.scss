@@ -49,7 +49,7 @@
 
 	/*= Header =*/
 	#header {
-		.link-mdi {
+		.link-icon {
 			span {
 				display: none;
 			}
@@ -113,7 +113,7 @@
 				padding: 0 $xs-spacing;
 			}
 		}
-		a.link-mdi {
+		a.link-icon {
 			padding: 0 $xs-spacing;
 		}
 	}
@@ -173,46 +173,18 @@
 	}
 
 	/*= Product =*/
-	.product-header {
-		display: block;
-	}
 	.product-visual-wrapper {
 		.product-visual {
-			.view-image {
-				left: 50%;
-			}
-		}
-		.zoom-image {
-			position: fixed;
-			background-size: auto 100%;
-			background-repeat: no-repeat;
-			background-position: 50% !important;
-			z-index: 99999;
-		}
-	}
-	.product-options-wrapper {
-		@include transform(0,0);
-		position: relative;
-		padding: $m-spacing;
-		width: 100%;
-		top: auto;
-		right: auto;
-		padding-left: 50%;
-		max-width: none;
-		background-color: $white;
+			height: 500px;
 
-		.product-shop {
-			.product-name {
-				display: none;
+			.view-image {
+				left: 35%;
 			}
 		}
-		
-		.product-usps {
-			position: absolute;
-			left: 0;
-			top: 0;
-			margin: $m-spacing;
-			width: 50%;
+		.more-views {
+			a {
+				width: 55px;
+			}
 		}
 	}
 
@@ -237,15 +209,53 @@
 ======================================================*/
 @media(max-width: 810px) {
 	/*= Product =*/
+	.product-header {
+		display: block;
+	}
 	.product-visual-wrapper {
 		.product-visual {
-			height: 500px;
 			background-position: 50%;
-		}
-		.more-views {
-			a {
-				width: 55px;
+
+			.view-image {
+				left: 50%;
 			}
+		}
+		.zoom-image {
+			position: fixed;
+			background-size: auto 100%;
+			background-repeat: no-repeat;
+			background-position: 50% !important;
+			z-index: 99999;
+
+			&:after {
+				top: auto;
+				bottom: $m-spacing;
+			}
+		}
+	}
+	.product-options-wrapper {
+		@include transform(0,0);
+		position: relative;
+		padding: $m-spacing;
+		width: 100%;
+		top: auto;
+		right: auto;
+		padding-left: 50%;
+		max-width: none;
+		background-color: $white;
+
+		.product-shop {
+			.product-name {
+				display: none;
+			}
+		}
+
+		.product-usps {
+			position: absolute;
+			left: 0;
+			top: 0;
+			margin: $m-spacing;
+			width: 50%;
 		}
 	}
 
@@ -300,25 +310,9 @@
 	/*= Header =*/
 	#header {
 
-		&.hide {
-			top: -$header-height;
-		}
-
 		a.logo {
 			width: 110px;
 			margin: 17px 0 17px -55px;
-		}
-		a.link-account {
-			position: fixed;
-			background-color: $xl-grey;
-			width: $side-nav-width;
-			text-align: center;
-			left: -$side-nav-width;
-			bottom: 0;
-
-			span {
-				display: inline-block;
-			}
 		}
 		.quick-access {
 			.form-language {
@@ -334,15 +328,28 @@
 		}
 	}
 
+	#wrapper.hidden-header {
+		#header {
+			top: -$header-height;
+		}
+		> .block.block-cart {
+			&.show {
+				top: 0;
+			}
+		}
+		.toolbar {
+			&.fixed {
+				top: 0;
+			}
+		}
+	}
+
 	/*= Usps =*/
 	.main-usps {
 		ul {
 			li {
-				font-size: 0px;
-
-				strong {
-					font-size: $m-font;
-				}
+				margin: 0;
+				font-size: $s-font;
 			}
 			li:nth-child(2) {
 				display: none;
@@ -503,7 +510,6 @@
 		}
 	}
 	#wrapper > .block.block-cart {
-		display: none;
 		width: 100%;
 
 		.amount {
@@ -516,17 +522,15 @@
 
 	/*= Checkout =*/
 	.progress-bar {
-		width: 100%;
-
 		li {
 			text-align: center;
 			padding-left: 0;
-			width: 25%;
 			position: relative;
 
-			.mdi {
+			.icons {
 				position: relative;
 				z-index: 99;
+				display: inline-block;
 			}
 			span {
 				display: block;
@@ -571,26 +575,30 @@
 		}
 
 		.footer-nav {
+			> div {
+				margin-bottom: $m-spacing;
+			}
 			h2 {
 				cursor: pointer;
+				margin-bottom: $m-spacing;
 
 				&:after {
-					font-family: 'Material Design Icons';
-					content: "\F415";
+					font-family: 'simple-line-icons';
+					content: "\e095";
 					float: right;
 					color: $m-grey;
 				}
 			}
 			p,
 			ul {
-				height: 0;
-				overflow: hidden;
+				display: none;
+				margin-bottom: 0;
 			}
 
 			.show {
 				h2 {
 					&:after {
-						content: "\F374";
+						content: "\e615";
 					}
 				}
 				p,
@@ -615,31 +623,6 @@
 /*======================================================
 	MOBILE PORTRET
 ======================================================*/
-@media(max-width: 500px) {
-	.category-products {
-		ul.products-grid {
-			li.item {
-				h2.product-name {
-					float: none;
-					width: auto;
-					height: auto;
-					text-overflow: ellipsis;
-					overflow: hidden;
-					white-space: nowrap;
-				}
-				.price-box {
-					width: auto;
-					float: none;
-
-					p {
-						display: inline-block;
-					}
-				}
-			}
-		}
-	}
-}
-
 /*= Iphone 5 =*/
 @media(max-width: 370px) {
 	.amshopby-filters {
