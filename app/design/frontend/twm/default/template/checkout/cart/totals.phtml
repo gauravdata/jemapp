@@ -42,7 +42,20 @@
             <?php echo $this->renderTotals('footer'); ?>
         </tfoot>
         <tbody>
-            <?php echo $this->renderTotals(); ?>
+        <?php $_cart = $this->getLayout()->getBlock('checkout.cart'); ?>
+        <?php if ($_cart->hasTotal3is1()) : ?>
+            <tr>
+                <td class="a-right"><?php echo $this->__('3=1 Normal price') ?></td>
+                <td class="a-right"><?php echo $this->helper('checkout')->formatPrice($_cart->getTotal3is1()) ?></td>
+            </tr>
+        <?php endif; ?>
+        <?php if ($_cart->hasDiscount3is1()) : ?>
+            <tr>
+                <td class="a-right"><?php echo $this->__('3=1 Discount') ?></td>
+                <td class="a-right"><?php echo $this->helper('checkout')->formatPrice($_cart->getDiscount3is1()) ?>-</td>
+            </tr>
+        <?php endif; ?>
+        <?php echo $this->renderTotals(); ?>
         </tbody>
     </table>
 <?php endif; ?>

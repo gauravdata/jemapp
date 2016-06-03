@@ -29,20 +29,12 @@
  * Template for Mage_Page_Block_Html
  */
 ?>
-<?php
-$sidenavState = false;
-if(isset($_COOKIE['side-nav']) && $_COOKIE['side-nav'] == 'closed') {
-	$sidenavState = ' hidden-side-nav';
-} else {
-	$sidenavState = ' open-side-nav';
-}
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
 	<head>
 		<?php echo $this->getChildHtml('head') ?>
 	</head>
-	<body class="three-column<?php echo $this->getBodyClass()?' ' . $this->getBodyClass() . $sidenavState : ''; ?>">
+	<body class="three-column<?php echo $this->getBodyClass()?' ' . $this->getBodyClass() : ''; ?>">
 		<?php echo $this->getChildHtml('after_body_start') ?>
 		<div class="wrapper">
 			<?php echo $this->getChildHtml('global_notices') ?>

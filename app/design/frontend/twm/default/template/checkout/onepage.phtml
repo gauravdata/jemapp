@@ -37,26 +37,28 @@
                         switch ($i) {
                             case 1:
                                 $icon = '<i class="icon-user icons"></i>';
+                                $step = 1;
                                 break;
                             case 2:
-                                $icon = '<i class="icon-location-pin icons"></i>';
                                 $icon = '<i class="icon-location-pin icons"></i>';
                                 break;
                             case 3:
                                 $icon = '<i class="icon-paper-plane icons"></i>';
+                                $step = 2;
                                 break;
                             case 4:
                                 $icon = '<i class="icon-credit-card icons"></i>';
+                                $step = 3;
                                 break;
                             default:
                                 $icon = '';
                         }
                         ?>
                         <?php if($i <= 4) { ?>
-                        <li>
+                        <li<?php if($i == 2) { echo ' style="display: none;"'; } ?>>
                             <?php echo $icon; ?>
                             <span>
-                                <?php echo $this->__('Step') . ' ' . $i; ?><br />
+                                <?php echo $this->__('Step') . ' ' . $step; ?><br />
                                 <strong><?php echo $_stepInfo['label'] ?></strong>
                             </span>
                         </li>

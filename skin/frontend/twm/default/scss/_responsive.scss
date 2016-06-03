@@ -1,6 +1,16 @@
 /*======================================================
 	SMALLER SCREENS
 ======================================================*/
+@media(max-width: 1500px) {
+	/*= Usps =*/
+	.main-usps {
+		ul {
+			li:nth-child(3) {
+				display: none;
+			}
+		}
+	}
+}
 @media(max-width: 1250px) {
 
 	/*= Default =*/
@@ -82,15 +92,6 @@
 						color: $white;
 					}
 				}
-			}
-		}
-	}
-
-	/*= Usps =*/
-	.main-usps {
-		ul {
-			li:nth-child(3) {
-				display: none;
 			}
 		}
 	}
