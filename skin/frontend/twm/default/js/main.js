@@ -139,6 +139,17 @@ jQuery(window).load(function(){
 		return false;
 	});
 
+	// remove shipping address from progress if same as billing
+	jQuery('#co-billing-form input[type=radio]').change(function() {
+		if(jQuery(this).val() == 0) {
+			jQuery('.opc-block-progress').removeClass('same-address');
+			jQuery('#different-shipping-address').show();
+		} else {
+			jQuery('.opc-block-progress').addClass('same-address');
+			jQuery('#different-shipping-address').hide();
+		}
+	});
+
 });
 
 var lastScrollTop = 0;

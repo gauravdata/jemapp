@@ -21,6 +21,9 @@
 		}
 	}
 }
+#different-shipping-address {
+	display: none;
+}
 
 /*======================================================
 	PROGRESS BAR
@@ -154,6 +157,22 @@ ol.opc {
 			}
 			> li:nth-child(odd) {
 				background-color: $xxxs-grey;
+			}
+		}
+
+		&.same-address {
+			ul {
+				> li {
+					&#shipping-progress-opcheckout {
+						display: none;
+					}
+				}
+				> li:nth-child(3) {
+					background-color: transparent;
+				}
+				> li:nth-child(4) {
+					background-color: $xxxs-grey;
+				}
 			}
 		}
 	}

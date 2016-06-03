@@ -34,9 +34,9 @@
 <script type="text/javascript">
     var sideNavSate = false;
     if(Cookies.get('side-nav') !== undefined && Cookies.get('side-nav') == 'closed') {
-        document.body.className = ' hidden-side-nav';
+        document.body.className += ' hidden-side-nav';
     } else {
-        document.body.className = ' open-side-nav';
+        document.body.className += ' open-side-nav';
     }
 </script>
 <?php $_menu = $this->getHtml('level-top') ?>
