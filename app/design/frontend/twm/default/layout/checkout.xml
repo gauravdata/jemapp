@@ -337,6 +337,7 @@ One page checkout main layout
                     <block type="checkout/onepage_progress" name="shipping.progress" template="checkout/onepage/progress/shipping.phtml"></block>
                     <block type="checkout/onepage_progress" name="shippingmethod.progress" template="checkout/onepage/progress/shipping_method.phtml"></block>
                     <block type="checkout/onepage_progress" name="payment.progress" template="checkout/onepage/progress/payment.phtml"></block>
+                    <block type="checkout/cart_totals" name="totals.progress" template="checkout/onepage/review/totals_sidebar.phtml"/>
                 </block>
             </block>
 
@@ -359,6 +360,7 @@ One page checkout main layout
             <block type="checkout/onepage_progress" name="shipping.progress" template="checkout/onepage/progress/shipping.phtml"></block>
             <block type="checkout/onepage_progress" name="shippingmethod.progress" template="checkout/onepage/progress/shipping_method.phtml"></block>
             <block type="checkout/onepage_progress" name="payment.progress" template="checkout/onepage/progress/payment.phtml"></block>
+            <block type="checkout/cart_totals" name="totals.progress" template="checkout/onepage/review/totals_sidebar.phtml"/>
         </block>
     </checkout_onepage_progress>
 

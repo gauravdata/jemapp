@@ -191,8 +191,11 @@
 
 	/*= Checkout =*/
 	.progress-bar {
+		display: block;
+
 		li {
-			padding-right: $s-spacing;
+			padding-right: 0;
+			width: 33%;
 
 			&:after {
 				width: $s-spacing;

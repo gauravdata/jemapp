@@ -210,7 +210,7 @@
 }
 
 .tss-ls-location-item.selected {
-    color: #0093d0;
+    color: #fe5f55;
 }
 
 .tss-ls-location-item .tss-ls-name{
@@ -256,8 +256,20 @@
     .tss-selector {
         width: 100%;
         margin-left: 0;
-	left: 0px;
-	top: 0px;
+    	left: 0px;
+	    top: 0px;
+        height: 100%;
+        overflow-y: scroll;
+        margin-top: 0 !important;
+        overflow-y: auto;
+    }
+    .tss-ls-location-wrapper {
+        float: none;
+    }
+    #tss-ls-locations {
+        width: auto;
+        height: auto !important;
+        overflow: auto;
     }
     .tss-ls-map-container{
         display: none;
