@@ -46,10 +46,7 @@
 	<div class="quick-access">
 		<?php //echo $this->getChildHtml('topSearch') ?>
 		<?php //echo $this->getChildHtml('store_language') ?>
-		<a class="link-icon link-account" href="<?php echo $this->getUrl() ?>	customer/account/">
-			<i class="icon-user icons"></i>
-			<span><?php echo Mage::getSingleton('customer/session')->getCustomer()->getName(); ?></span>
-		</a>
+		<?php echo $this->getChildHtml('topAccount') ?>
 		<?php echo $this->getChildHtml('topLinks') ?>
 	</div>
 	<?php echo $this->getChildHtml('topContainer'); ?>

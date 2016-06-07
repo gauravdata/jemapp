@@ -29,9 +29,10 @@
     width: 40px;
     height: 40px;
     border: none;
-    text-indent: -999px;
-    background: url('images/close-btn.png') no-repeat center center #4c4c4c;
+    background-color: #1a1a1a;
     overflow: hidden;
+    color: #fff;
+    font-size: 20px;
 }
 
 .tss-selector {
@@ -50,21 +51,11 @@
 }
 
 #tss-pickup-container .tss-background-overlay {
-    background-color: #636363;
+    background-color: rgba(0,0,0,.5);
     height: 100%;
     left: 0;
-    opacity: 0.6;
     position: fixed;
     top: 0;
-    width: 100%;
-}
-
-.tss-selector-container .tss-ls-header {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    float: left;
-    padding: 20px;
     width: 100%;
 }
 
@@ -73,7 +64,7 @@
     -moz-box-sizing: border-box;
     display: inline;
     box-sizing: border-box;
-    background: #EFEFEF;
+    background: #eeeeee;
     border: none;
     color: black;
     height: 36px;
@@ -92,15 +83,14 @@
 .tss-selector-container .tss-ls-header .tss-ls-options{
     float: right;
     max-width: 274px;
+    margin: 25px 20px;
 }
 .tss-selector-container .tss-ls-header .tss-ls-options .tss-ls-checkbox-wrapper{
     float: left;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 .tss-selector-container .tss-ls-header .tss-ls-options .tss-ls-checkbox-wrapper label{
     display: inline;
-    font-size: 11px;
-    vertical-align: text-top;
 }
 .tss-selector-container .tss-ls-header .tss-ls-options .tss-ls-checkbox-wrapper input,
 .tss-selector-container .tss-ls-header .tss-ls-options .tss-ls-checkbox-wrapper label {
@@ -109,17 +99,8 @@
 
 .tss-selector-container .tss-ls-header .tss-ls-search-wrapper{
     float: left;
+    margin: 20px;
 }
-
-.tss-ls-footer-controls button#tss-ls-select,
-.tss-selector-container .tss-ls-header .tss-ls-search-wrapper button{
-    background: #fe5f55;
-    border: none;
-    color: white;
-    font-size: 20px;
-    text-transform: uppercase;
-}
-
 
 .tss-ls-footer-controls button#tss-ls-select.disabled,
 .tss-selector-container .tss-ls-header .tss-ls-search-wrapper button.disabled{
@@ -127,20 +108,14 @@
     color: #CCC;
 }
 
-.tss-ls-footer-controls button#tss-ls-select{
-    background: url('images/arrow.png') no-repeat 87% center #4c4c4c;
-    padding-right: 30px;
-}
-
-
 .tss-selector-container .tss-ls-header .tss-ls-header-title {
-    color: #202020;
     display: block;
-    font-family: 'Dosis', sans-serif;
+    text-align: center;
+    color: #1a1a1a;
+    padding: 15px;
     font-size: 24px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    font-weight: 500;
+    border-bottom: 1px solid #dcdcdc;
 }
 
 .tss-selector-container .tss-ls-header .tss-ls-header-controls {
@@ -186,14 +161,12 @@
 }
 
 .tss-ls-location-wrapper h3{
-    background: #EBF0F3;
-    color: #4c4c4c;
+    background: #eeeeee;
     display: block;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 10px;
     padding: 15px;
-    text-transform: uppercase;
 }
 
 .tss-ls-footer-controls {
@@ -204,9 +177,14 @@
     text-align: right;
 }
 
+.tss-ls-footer-controls #tss-ls-select {
+    background-color: #fe5f55;
+    border-color: #fe5f55;
+    font-size: 20px;
+}
 
 .tss-ls-location-item {
-    border-bottom: 1px solid #E2E2E2;
+    border-bottom: 1px solid #eeeeee;
     display: table;
     padding: 10px 0;
     width: 100%;
@@ -232,7 +210,7 @@
 }
 
 .tss-ls-location-item.selected {
-    color: #0093d0;
+    color: #fe5f55;
 }
 
 .tss-ls-location-item .tss-ls-name{
@@ -252,15 +230,12 @@
 
 .tss-ls-location-item .tss-ls-name .tss-ls-company-name{
     display: block;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 14px;
-    padding-bottom: 3px;
+    font-weight: 500;
+    color: #1a1a1a;
 }
 .tss-ls-location-item .tss-ls-name .tss-ls-address{
     float: left;
-    font-size: 11px;
-    line-height: 10px;
+    font-size: 12px;
 }
 
 .tss-loader {
@@ -281,8 +256,20 @@
     .tss-selector {
         width: 100%;
         margin-left: 0;
-	left: 0px;
-	top: 0px;
+    	left: 0px;
+	    top: 0px;
+        height: 100%;
+        overflow-y: scroll;
+        margin-top: 0 !important;
+        overflow-y: auto;
+    }
+    .tss-ls-location-wrapper {
+        float: none;
+    }
+    #tss-ls-locations {
+        width: auto;
+        height: auto !important;
+        overflow: auto;
     }
     .tss-ls-map-container{
         display: none;

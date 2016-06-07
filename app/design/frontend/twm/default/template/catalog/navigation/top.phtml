@@ -39,10 +39,21 @@
  * string If specified wraps children list in div with this class
  */
 ?>
+<script type="text/javascript">
+    var sideNavSate = false;
+    if(Cookies.get('side-nav') !== undefined && Cookies.get('side-nav') == 'closed') {
+        document.body.className = ' hidden-side-nav';
+    } else {
+        document.body.className = ' open-side-nav';
+    }
+</script>
 <?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top') ?>
 <?php if($_menu): ?>
 <nav id="side-nav">
     <ul>
+        <li>
+            <span><?php echo $this->__('3 items for the lowest price') ;?></span>
+        </li>
         <?php echo $_menu ?>
     </ul>
 </nav>

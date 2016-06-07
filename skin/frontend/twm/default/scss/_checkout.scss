@@ -21,6 +21,9 @@
 		}
 	}
 }
+#different-shipping-address {
+	display: none;
+}
 
 /*======================================================
 	PROGRESS BAR
@@ -89,7 +92,7 @@
 				color: $m-grey;
 
 				.icons {
-					background-color: transparent;
+					background-color: $xs-grey;
 					border: 1px solid $m-grey;
 					color: $m-grey;
 				}
@@ -154,6 +157,22 @@ ol.opc {
 			}
 			> li:nth-child(odd) {
 				background-color: $xxxs-grey;
+			}
+		}
+
+		&.same-address {
+			ul {
+				> li {
+					&#shipping-progress-opcheckout {
+						display: none;
+					}
+				}
+				> li:nth-child(3) {
+					background-color: transparent;
+				}
+				> li:nth-child(4) {
+					background-color: $xxxs-grey;
+				}
 			}
 		}
 	}
@@ -228,18 +247,6 @@ ol.opc {
 		ul {
 			margin: 0;
 
-			li.control {
-				padding: $xs-spacing $m-spacing;
-				border: 2px solid $s-grey;
-				border-bottom: none;
-				margin: 0;
-
-				&:last-child {
-					border-bottom: 2px solid $s-grey;
-					margin-bottom: $m-spacing;
-				}
-			}
-
 			&#payment_form_buckaroo3extended_afterpay {
 				li {
 					@extend .clearfix;
@@ -256,14 +263,6 @@ ol.opc {
 			.bank_name {
 				float: left;
 				margin-top: 8px;
-			}
-
-			label {
-				width: 100%;
-				float: none;
-				display: block;
-				margin-bottom: $m-spacing;
-				padding: 0;
 			}
 		}
 	}

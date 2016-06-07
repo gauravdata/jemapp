@@ -24,7 +24,7 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div class="block block-progress opc-block-progress">
+<div class="block block-progress opc-block-progress same-address">
     <h2>
         <?php echo $this->__('Overview') ?>
     </h2>
@@ -53,6 +53,9 @@
                 <?php echo $this->getChildHtml('payment.progress') ?>
             </li>
             <?php endif; ?>
+            <li id="totals-progress-opcheckout">
+                <?php //echo $this->getChildHtml('totals.progress') ?>
+            </li>
         </ul>
     </div>
 </div>

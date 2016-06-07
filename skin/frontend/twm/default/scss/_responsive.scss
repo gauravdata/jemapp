@@ -1,6 +1,16 @@
 /*======================================================
 	SMALLER SCREENS
 ======================================================*/
+@media(max-width: 1500px) {
+	/*= Usps =*/
+	.main-usps {
+		ul {
+			li:nth-child(3) {
+				display: none;
+			}
+		}
+	}
+}
 @media(max-width: 1250px) {
 
 	/*= Default =*/
@@ -82,15 +92,6 @@
 						color: $white;
 					}
 				}
-			}
-		}
-	}
-
-	/*= Usps =*/
-	.main-usps {
-		ul {
-			li:nth-child(3) {
-				display: none;
 			}
 		}
 	}
@@ -190,8 +191,11 @@
 
 	/*= Checkout =*/
 	.progress-bar {
+		display: block;
+
 		li {
-			padding-right: $s-spacing;
+			padding-right: 0;
+			width: 33%;
 
 			&:after {
 				width: $s-spacing;

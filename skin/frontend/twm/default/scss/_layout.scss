@@ -41,7 +41,8 @@ html, body {
 				border-top: 1px solid $s-grey;
 			}
 
-			> a {
+			> a,
+			> span {
 				display: block;
 				padding: $s-spacing $m-spacing;
 				font-size: $m-font;

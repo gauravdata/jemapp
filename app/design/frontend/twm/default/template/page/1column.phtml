@@ -29,20 +29,12 @@
  * Template for Mage_Page_Block_Html
  */
 ?>
-<?php
-$sidenavState = false;
-if(isset($_COOKIE['side-nav']) && $_COOKIE['side-nav'] == 'closed') {
-	$sidenavState = ' hidden-side-nav';
-} else {
-	$sidenavState = ' open-side-nav';
-}
-?>
 <!DOCTYPE>
 <html lang="<?php echo $this->getLang() ?>">
 	<head>
 		<?php echo $this->getChildHtml('head') ?>
 	</head>
-	<body class="one-column<?php echo $this->getBodyClass()?' ' . $this->getBodyClass() . $sidenavState : ''; ?>">
+	<body class="one-column<?php echo $this->getBodyClass()?' ' . $this->getBodyClass() : ''; ?>">
 		<?php echo $this->getChildHtml('after_body_start') ?>
 		<div id="wrapper">
 			<?php echo $this->getChildHtml('global_notices') ?>

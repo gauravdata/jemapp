@@ -178,6 +178,9 @@
         </li>
     <?php endif; ?>
     </ul>
+    <div id="different-shipping-address">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('different_shipping_address')->toHtml(); ?>
+    </div>
     <?php if (!$this->canShip()): ?>
         <input type="hidden" name="billing[use_for_shipping]" value="1" />
     <?php endif; ?>
