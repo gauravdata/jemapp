@@ -223,6 +223,15 @@ form .control {
 		}
 	}
 
+	input:disabled {
+		~ label {
+			&:before {
+				opacity: 0.5;
+				cursor: not-allowed;
+			}
+		}
+	}
+
 	input[type=radio],
 	input[type=checkbox] {
 		opacity: 0;
