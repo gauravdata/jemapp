@@ -25,16 +25,6 @@
  */
 /** @var Mage_Checkout_Block_Onepage_Billing $this */
 
-function randomPassword() {
-    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    $pass = array(); //remember to declare $pass as an array
-    $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-    for ($i = 0; $i < 8; $i++) {
-        $n = rand(0, $alphaLength);
-        $pass[] = $alphabet[$n];
-    }
-    return implode($pass); //turn the array into a string
-}
 ?>
 <form id="co-billing-form" action="">
 <fieldset>
@@ -157,13 +147,13 @@ function randomPassword() {
                     <div class="field">
                         <label for="billing:customer_password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
                         <div class="input-box">
-                            <input type="password" name="billing[customer_password]" value="<?php echo $_pass = randomPassword(); ?>" id="billing:customer_password" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Password')) ?>" class="input-text required-entry validate-password" />
+                            <input type="password" name="billing[customer_password]" id="billing:customer_password" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Password')) ?>" class="input-text required-entry validate-password" />
                         </div>
                     </div>
                     <div class="field">
                         <label for="billing:confirm_password" class="required"><em>*</em><?php echo $this->__('Confirm Password') ?></label>
                         <div class="input-box">
-                            <input type="password" name="billing[confirm_password]" value="<?php echo $_pass; ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Confirm Password')) ?>" id="billing:confirm_password" class="input-text required-entry validate-cpassword" />
+                            <input type="password" name="billing[confirm_password]" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Confirm Password')) ?>" id="billing:confirm_password" class="input-text required-entry validate-cpassword" />
                         </div>
                     </div>
                 </li>
