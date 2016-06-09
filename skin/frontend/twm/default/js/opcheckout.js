@@ -80,7 +80,7 @@ Checkout.prototype = {
                         $('totals-progress-opcheckout').addClassName('active');
                 break;
         }
-        $$('#checkout-progress-wrapper > li').each(function(e){
+        $$('#checkout-progress-wrapper li').each(function(e){
             $(e).removeClassName('active');
         });
         var s = this.currentStep;
