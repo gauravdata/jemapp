@@ -9,17 +9,17 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magento.com so we can send you a copy immediately.
+ * to license@magentocommerce.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magento.com for more information.
+ * needs please refer to http://www.magentocommerce.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 var Checkout = Class.create();
@@ -39,12 +39,55 @@ Checkout.prototype = {
         this.steps = ['login', 'billing', 'shipping', 'shipping_method', 'payment', 'review'];
         //We use billing as beginning step since progress bar tracks from billing
         this.currentStep = 'billing';
+	this._updateActive();
 
         this.accordion.sections.each(function(section) {
             Event.observe($(section).down('.step-title'), 'click', this._onSectionClick.bindAsEventListener(this));
         }.bind(this));
 
         this.accordion.disallowAccessToNextSections = true;
+    },
+
+    _updateActive: function() {
+        /* TWM */
+        $$('.progress-bar > li').each(function(e){
+                $(e).removeClassName('active');
+        });
+        scrollToId('#top');
+        switch(this.currentStep) {
+                case 'billing':
+                        $$('.progress-bar li:nth-child(1)').each(function(e){
+                                $(e).addClassName('active');
+                        });
+                break;
+                case 'shipping':
+                        $$('.progress-bar li:nth-child(2)').each(function(e){
+                                $(e).addClassName('active');
+                        });
+                        $(this.currentStep + '-progress-opcheckout').addClassName('active');
+                break;
+                case 'shipping_method':
+                        $$('.progress-bar li:nth-child(3)').each(function(e){
+                                $(e).addClassName('active');
+                        });
+                    $(this.currentStep + '-progress-opcheckout').addClassName('active');
+                break;
+                case 'payment':
+                        $$('.progress-bar li:nth-child(4)').each(function(e){
+                                $(e).addClassName('active');
+                        });
+                        $(this.currentStep + '-progress-opcheckout').addClassName('active');
+                        $('totals-progress-opcheckout').addClassName('active');
+                break;
+        }
+        $$('#checkout-progress-wrapper > li').each(function(e){
+            $(e).removeClassName('active');
+        });
+        var s = this.currentStep;
+        $$('#checkout-progress-wrapper').each(function(e){
+            $(e).addClassName(s);
+        });
+        /* TWM */
     },
 
     /**
@@ -127,6 +170,10 @@ Checkout.prototype = {
             this.reloadProgressBlock(this.currentStep);
         }
         this.currentStep = section;
+	
+	/* TWM */
+	this._updateActive();
+	
         var sectionElement = $('opc-' + section);
         sectionElement.addClassName('allow');
         this.accordion.openSection('opc-' + section);
@@ -746,20 +793,6 @@ Payment.prototype = {
             //Event fix for payment methods without form like "Check / Money order"
             document.body.fire('payment-method:switched', {method_code : method});
         }
-        if (method == 'free' && quoteBaseGrandTotal > 0.0001
-            && !(($('use_reward_points') && $('use_reward_points').checked) || ($('use_customer_balance') && $('use_customer_balance').checked))
-        ) {
-            if ($('p_method_' + method)) {
-                $('p_method_' + method).checked = false;
-                if ($('dt_method_' + method)) {
-                    $('dt_method_' + method).hide();
-                }
-                if ($('dd_method_' + method)) {
-                    $('dd_method_' + method).hide();
-                }
-            }
-            method == '';
-        }
         if (method) {
             this.lastUsedMethod = method;
         }
@@ -885,11 +918,7 @@ Payment.prototype = {
                 }
                 return;
             }
-            if (typeof(response.message) == 'string') {
-                alert(response.message);
-            } else {
-                alert(response.error);
-            }
+            alert(response.error);
             return;
         }
 

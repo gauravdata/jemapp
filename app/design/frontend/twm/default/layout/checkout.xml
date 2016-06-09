@@ -375,6 +375,15 @@ One page checkout main layout
         </block>
     </checkout_onepage_progress_billing>
 
+    <checkout_onepage_progress_totals>
+        <!-- Mage_Checkout -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <block type="checkout/cart_totals" name="root" output="toHtml" template="checkout/onepage/review/totals_sidebar.phtml">
+            <action method="setInfoTemplate"><method></method><template></template></action>
+        </block>
+    </checkout_onepage_progress_totals>
 
     <checkout_onepage_progress_shipping>
         <!-- Mage_Checkout -->

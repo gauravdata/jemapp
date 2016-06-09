@@ -54,9 +54,18 @@
             </li>
             <?php endif; ?>
             <li id="totals-progress-opcheckout">
-                <?php //echo $this->getChildHtml('totals.progress') ?>
+                <?php echo $this->getChildHtml('totals.progress') ?>
             </li>
         </ul>
     </div>
 </div>
-
+<script type="application/javascript">
+    Checkout.prototype.reloadStep = Checkout.prototype.reloadStep.wrap(function(parentMethod){
+        parentMethod();
+        var updater = new Ajax.Updater('totals-progress-opcheckout', this.progressUrl, {
+            method:'get',
+            onFailure:this.ajaxFailure.bind(this),
+            parameters: {prevStep: 'totals'}
+        });
+    });
+</script>
