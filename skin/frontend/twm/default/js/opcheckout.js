@@ -85,6 +85,7 @@ Checkout.prototype = {
         });
         var s = this.currentStep;
         $$('#checkout-progress-wrapper').each(function(e){
+            e.className = '';
             $(e).addClassName(s);
         });
         /* TWM */
