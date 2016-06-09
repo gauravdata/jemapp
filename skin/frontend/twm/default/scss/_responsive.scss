@@ -361,6 +361,18 @@
 		}
 	}
 
+	/*= Page visual =*/
+	.page-visual {
+		height: 280px;
+
+		.content {
+			h1 {
+				font-size: $xxxxl-font;
+				line-height: $xxxxl-font;
+			}
+		}
+	}
+
 	/*= Main =*/
 	.area {
 		padding: $xl-spacing 0;
@@ -540,7 +552,7 @@
 				display: block;
 			}
 			strong {
-				display: none;
+				font-size: $xs-font - 1;
 			}
 
 			&:after {
@@ -552,7 +564,28 @@
 		}
 	}
 	#checkout-progress-wrapper {
-		display: none;
+		h2,
+		ul li {
+			display: none;
+		}
+
+		&.payment {
+			ul {
+				li:last-child {
+					display: block;
+				}
+			}
+		}
+	}
+	.payment-methods {
+		dt {
+			label {
+				img {
+					margin: 0px 10px;
+					max-height: 19px;
+				}
+			}
+		}
 	}
 
 

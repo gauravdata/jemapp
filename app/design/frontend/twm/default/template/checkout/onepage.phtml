@@ -69,6 +69,11 @@
             <?php } ?>
         </div>
         <div class="row">
+            <?php if($this->getActiveStep() != 'login') { ?>
+                <div class="col-3 pull-right">
+                    <?php echo $this->getChildHtml('checkout.progress.wrapper'); ?>
+                </div>
+            <?php } ?>
             <div class="col-<?php if($this->getActiveStep() != 'login') { ?>9<?php } else { ?>12<?php } ?>">
                 <script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
                 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
@@ -105,11 +110,6 @@
                     //]]>
                 </script>
             </div>
-            <?php if($this->getActiveStep() != 'login') { ?>
-            <div class="col-3">
-                <?php echo $this->getChildHtml('checkout.progress.wrapper'); ?>
-            </div>
-            <?php } ?>
         </div>
     </div>
 </div>
