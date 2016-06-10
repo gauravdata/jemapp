@@ -15,12 +15,12 @@
         </Uni_Autoregister>
     </modules>
     <global>
-        <rewrite>
-            <uni_autoregister_checkout_onepagecontroller>
-                <from><![CDATA[#^/checkout/onepage/#]]></from> <!-- Mage_Checkout_OnepageController  -->
-                <to>/autoregister/checkout_onepage/</to> <!-- Uni_Autoregister_Checkout_OnepageController  -->
-            </uni_autoregister_checkout_onepagecontroller>
-        </rewrite>
+        <!--<rewrite>        -->
+            <!--<uni_autoregister_checkout_onepagecontroller>-->
+                <!--<from><![CDATA[#^/checkout/onepage/#]]></from> &lt;!&ndash; Mage_Checkout_OnepageController  &ndash;&gt;-->
+                <!--<to>/autoregister/checkout_onepage/</to> &lt;!&ndash; Uni_Autoregister_Checkout_OnepageController  &ndash;&gt;-->
+            <!--</uni_autoregister_checkout_onepagecontroller>-->
+        <!--</rewrite>-->
         <helpers>
             <autoregister>
                 <class>Uni_Autoregister_Helper</class>

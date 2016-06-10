@@ -50,44 +50,46 @@ Checkout.prototype = {
 
     _updateActive: function() {
         /* TWM */
-        $$('.progress-bar > li').each(function(e){
+        try {
+            $$('.progress-bar > li').each(function (e) {
                 $(e).removeClassName('active');
-        });
-        scrollToId('#top');
-        switch(this.currentStep) {
+            });
+            scrollToId('#top');
+            switch (this.currentStep) {
                 case 'billing':
-                        $$('.progress-bar li:nth-child(1)').each(function(e){
-                                $(e).addClassName('active');
-                        });
-                break;
+                    $$('.progress-bar li:nth-child(1)').each(function (e) {
+                        $(e).addClassName('active');
+                    });
+                    break;
                 case 'shipping':
-                        $$('.progress-bar li:nth-child(2)').each(function(e){
-                                $(e).addClassName('active');
-                        });
-                        $(this.currentStep + '-progress-opcheckout').addClassName('active');
-                break;
-                case 'shipping_method':
-                        $$('.progress-bar li:nth-child(3)').each(function(e){
-                                $(e).addClassName('active');
-                        });
+                    $$('.progress-bar li:nth-child(2)').each(function (e) {
+                        $(e).addClassName('active');
+                    });
                     $(this.currentStep + '-progress-opcheckout').addClassName('active');
-                break;
+                    break;
+                case 'shipping_method':
+                    $$('.progress-bar li:nth-child(3)').each(function (e) {
+                        $(e).addClassName('active');
+                    });
+                    $(this.currentStep + '-progress-opcheckout').addClassName('active');
+                    break;
                 case 'payment':
-                        $$('.progress-bar li:nth-child(4)').each(function(e){
-                                $(e).addClassName('active');
-                        });
-                        $(this.currentStep + '-progress-opcheckout').addClassName('active');
-                        $('totals-progress-opcheckout').addClassName('active');
-                break;
-        }
-        $$('#checkout-progress-wrapper li').each(function(e){
-            $(e).removeClassName('active');
-        });
-        var s = this.currentStep;
-        $$('#checkout-progress-wrapper').each(function(e){
-            e.className = '';
-            $(e).addClassName(s);
-        });
+                    $$('.progress-bar li:nth-child(4)').each(function (e) {
+                        $(e).addClassName('active');
+                    });
+                    $(this.currentStep + '-progress-opcheckout').addClassName('active');
+                    $('totals-progress-opcheckout').addClassName('active');
+                    break;
+            }
+            $$('#checkout-progress-wrapper li').each(function (e) {
+                $(e).removeClassName('active');
+            });
+            var s = this.currentStep;
+            $$('#checkout-progress-wrapper').each(function (e) {
+                e.className = '';
+                $(e).addClassName(s);
+            });
+        } catch (e) {console.log(e);}
         /* TWM */
     },
 
@@ -794,6 +796,20 @@ Payment.prototype = {
             //Event fix for payment methods without form like "Check / Money order"
             document.body.fire('payment-method:switched', {method_code : method});
         }
+        if (method == 'free' && quoteBaseGrandTotal > 0.0001
+            && !(($('use_reward_points') && $('use_reward_points').checked) || ($('use_customer_balance') && $('use_customer_balance').checked))
+        ) {
+            if ($('p_method_' + method)) {
+                $('p_method_' + method).checked = false;
+                if ($('dt_method_' + method)) {
+                    $('dt_method_' + method).hide();
+                }
+                if ($('dd_method_' + method)) {
+                    $('dd_method_' + method).hide();
+                }
+            }
+            method == '';
+        }
         if (method) {
             this.lastUsedMethod = method;
         }
@@ -919,7 +935,11 @@ Payment.prototype = {
                 }
                 return;
             }
-            alert(response.error);
+            if (typeof(response.message) == 'string') {
+                alert(response.message);
+            } else {
+                alert(response.error);
+            }
             return;
         }
 
