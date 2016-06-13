@@ -11,7 +11,7 @@
 -->
 <layout>
     <!-- admin acl users edit page -->
-    <!-- <adminhtml_permissions_user_edit>
+    <adminhtml_permissions_user_edit>
         <reference name="left">
             <block type="adminhtml/permissions_user_edit_tabs" name="adminhtml.permissions.user.edit.tabs"/>
         </reference>
@@ -21,7 +21,7 @@
         <reference name="js">
             <block type="adminhtml/template" name="adminhtml.permissions.user.roles.grid.js" template="permissions/user_roles_grid_js.phtml"/>
         </reference>
-    </adminhtml_permissions_user_edit> -->
+    </adminhtml_permissions_user_edit>
 
     <!-- admin acl roles grid page -->
     <!-- <adminhtml_permissions_role_index>

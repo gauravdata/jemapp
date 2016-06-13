@@ -37,8 +37,8 @@
 <?php if($_additional = $this->getAdditionalData()): ?>
     <div class="row wide">
         <div class="col-6 pull-right">
-            <?php if ($this->getProduct()->getInfoImage()): ?>
-                <div class="content-box-img-right" style="background-image: url('<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'info_image')->keepFrame(false)->resize(1000,null); ?>');"><span></span></div>
+            <?php if ($_product->hasInfoImage() && $_product->getInfoImage() != 'no_selection'): ?>
+                <div class="content-box-img-right" style="background-image: url('<?php echo $this->helper('catalog/image')->init($_product, 'info_image')->keepFrame(false)->resize(1000,null); ?>');"><span></span></div>
             <?php else: ?>
                 <div class="content-box-img-right" style="background-image: url('http://placehold.it/1000x800');"><span></span></div>
             <?php endif; ?>
