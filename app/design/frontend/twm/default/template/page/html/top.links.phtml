@@ -29,6 +29,11 @@
  * @deprecated after 1.4.0.1
  */
 ?>
+<a class="link-icon link-account" href="<?php echo $this->getUrl() ?>customer/account/">
+    <i class="icon-user icons"></i>
+    <span><?php echo Mage::getSingleton('customer/session')->getCustomer()->getName(); ?></span>
+</a>
+
 <?php if($toplinks && is_array($toplinks)): ?>
 <ul class="links">
     <?php echo $this->getChildHtml() ?>
