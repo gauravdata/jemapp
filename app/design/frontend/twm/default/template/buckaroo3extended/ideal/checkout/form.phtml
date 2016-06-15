@@ -1,0 +1,21 @@
+<?php $_session = Mage::getSingleton('checkout/session'); ?>
+<?php $_code = $this->getMethodCode() ?>
+<?php $_value = $_session->getData($_code . '_BPE_Issuer'); ?>
+<?php $_issuerList = $this->getIssuerList();?>
+<?php $validation = ''; ?>
+<div id="payment-errors" class="validation-advice" style="display:none;"></div>
+
+<fieldset class="form-list buckaroo-method">
+    <div id="payment_form_<?php echo $_code ?>" style="display:none" class="buckaroo3extended_input form-list buckaroo-method">
+        <div class="select-overlay">
+            <select id="<?php echo $_code;?>_BPE_Issuer" name="<?php echo $_code;?>_BPE_Issuer">
+                <?php foreach($_issuerList as $issuer => $issuerDetails): ?>
+                    <option value="<?php echo $issuer; ?>">
+                        <?php echo $this->__($issuerDetails['name']);?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <label for="<?php echo $_code;?>_BPE_Issuer" class="required"><?php echo $this->__('Please, choose your bank'); ?>: <em>*</em></label>
+        </div>
+    </div>
+</fieldset>

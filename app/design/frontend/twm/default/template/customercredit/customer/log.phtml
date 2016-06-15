@@ -36,10 +36,12 @@
 ?>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <?php $_items = $this->getLogItems(); ?>
-<h1><?php echo $this->__('My Credit Activity') ?></h1>
+<div class="page-title">
+    <h1><?php echo $this->__('My Credit Activity') ?></h1>
+</div>
 <?php echo $this->getPagerHtml(); ?>
 
-<table cellspacing="0" class="table table-striped" id="my-credit-log-table">
+<table cellspacing="0" class="data-table" id="my-credit-log-table">
     <col width="50" />
     <col width="50" />
     <col width="150" />
@@ -58,8 +60,8 @@
         <?php if($_items->getSize()): ?>
         <?php foreach ($_items as $_item): ?>
             <tr>
-                <td><?php echo Mage::helper('core')->currency($_item->getValue())?></td>
-                <td><?php echo Mage::helper('core')->currency($_item->getValueChange())?></td>
+                <td><?php echo round($_item->getValue(),2)?></td>
+                <td><?php echo round($_item->getValueChange(),2)?></td>
                 <td><?php echo $_item->getActionDate()?></td>
                 <td><?php echo $this->getActionTypeLabel($_item->getActionType())?></td>
                 <td><?php echo $_item->getComment()?></td>

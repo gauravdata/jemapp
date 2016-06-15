@@ -1,0 +1,25 @@
+.box-account {
+	border-bottom: 1px dotted $m-grey;
+	padding-bottom: $m-spacing;
+	margin-bottom: $m-spacing;
+}
+
+.block-account {
+	.block-content {
+		margin: 0 (-$m-spacing) (-$m-spacing);
+
+		ul {
+			margin: 0;
+
+			li {
+				border-top: 1px solid $s-grey;
+
+				a,
+				strong {
+					display: block;
+					padding: $xxs-spacing $m-spacing;
+				}
+			}
+		}
+	}
+}

@@ -10,17 +10,17 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
@@ -32,6 +32,7 @@
  */
 ?>
 <?php if($this->getCollection()->getSize()): ?>
+
     <?php if($this->getUseContainer()): ?>
     <div class="pager">
     <?php endif ?>
@@ -42,34 +43,35 @@
             <?php echo $this->__('Items %s to %s of %s total', $this->getFirstNum(), $this->getLastNum(), $this->getTotalNum()) ?>
         <?php else: ?>
             <?php echo $this->__('%s Item(s)', $this->getTotalNum()) ?>
-        <?php endif; ?> -
+        <?php endif; ?>
     </p>
     <?php endif ?>
 
     <?php if($this->getShowPerPage()): ?>
-    <div class="limiter form-inline">
-        <label><?php echo $this->__('Show') ?></label>
-        <select class="form-control" onchange="setLocation(this.value)">
-        <?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
-            <option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
-                <?php echo $_limit ?>
-            </option>
-        <?php endforeach; ?>
-        </select> <?php echo $this->__('per page') ?>
+    <div class="limiter">
+        <div class="select-overlay">
+            <select onchange="setLocation(this.value)">
+                <option disabled><?php echo $this->__('Show') ?> <?php echo $this->__('per page') ?></option>
+            <?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
+                <option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+                    <?php echo $_limit ?>
+                </option>
+            <?php endforeach; ?>
+            </select>
+            <label><?php echo $this->__('Show') ?> <?php echo $this->__('per page') ?></label>
+        </div>
     </div>
     <?php endif ?>
 
     <?php if($this->getLastPageNum()>1): ?>
-	<ul class="pagination">
+    <div class="pages">
+        <strong><?php echo $this->__('Page:') ?></strong>
+        <ol>
         <?php if (!$this->isFirstPage()): ?>
             <li>
-			<a class="previous<?php if(!$this->getAnchorTextForPrevious()): ?> i-previous<?php endif;?>" href="<?php echo $this->getPreviousPageUrl() ?>" title="<?php echo $this->__('Previous') ?>">
-                    <?php if(!$this->getAnchorTextForPrevious()): ?>
-					&laquo;
-                    <?php else: ?>
-                        <?php echo $this->getAnchorTextForPrevious() ?>
-                    <?php endif;?>
-			</a>
+                <a class="previous<?php if(!$this->getAnchorTextForPrevious()): ?> i-previous<?php endif;?>" href="<?php echo $this->getPreviousPageUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Previous')) ?>">
+                    <i class="icon-arrow-left icons" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Previous')) ?>"></i>
+                </a>
             </li>
         <?php endif;?>
 
@@ -83,9 +85,9 @@
 
         <?php foreach ($this->getFramePages() as $_page): ?>
             <?php if ($this->isPageCurrent($_page)): ?>
-			<li class="active"><a><?php echo $_page ?></a></li>
+                <li class="current"><span><?php echo $_page ?></span></li>
             <?php else: ?>
-			<li><a href="<?php echo $this->getPageUrl($_page) ?>"><?php echo $_page ?></a></li>
+                <li><a href="<?php echo $this->getPageUrl($_page) ?>"><?php echo $_page ?></a></li>
             <?php endif;?>
         <?php endforeach;?>
 
@@ -100,16 +102,14 @@
 
         <?php if (!$this->isLastPage()): ?>
             <li>
-			<a class="next<?php if(!$this->getAnchorTextForNext()): ?> i-next<?php endif; ?>" href="<?php echo $this->getNextPageUrl() ?>" title="<?php echo $this->__('Next') ?>">
-                    <?php if(!$this->getAnchorTextForNext()): ?>
-					&raquo;
-                    <?php else: ?>
-                        <?php echo $this->getAnchorTextForNext() ?>
-                    <?php endif;?>
+                <a class="next<?php if(!$this->getAnchorTextForNext()): ?> i-next<?php endif; ?>" href="<?php echo $this->getNextPageUrl() ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Next')) ?>">
+                    <i class="icon-arrow-right icons" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Next')) ?>"></i>
                 </a>
             </li>
         <?php endif;?>
-	</ul>
+        </ol>
+
+    </div>
     <?php endif; ?>
 
     <?php if($this->getUseContainer()): ?>

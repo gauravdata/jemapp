@@ -6,8 +6,6 @@ $collection = $this->getRmaCollection();
         <h1><?php echo $this->__("My Returns") ?></h1>
     </div>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-    <button onclick="window.location.href='<?php echo Mage::getUrl('rma/rma/new')?>';" class="button pull-right"><span><span><?php echo $this->__('Request New Return')?></span></span></button>
-    <br><br>
     <?php if ($collection->count()):
 
 // echo $collection->getSelect();die;
@@ -42,4 +40,5 @@ $collection = $this->getRmaCollection();
     <?php else: ?>
         <p><?php echo $this->__("There are no Returns") ?></p>
     <?php endif ?>
+    <button onclick="window.location.href='<?php echo Mage::getUrl('rma/rma/new')?>';" class="button"><span><span><?php echo $this->__('Request New Return')?></span></span></button>
 </div>

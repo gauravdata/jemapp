@@ -10,29 +10,26 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
 <meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
 <title><?php echo $this->getTitle() ?></title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
 <meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
 <meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
-<?php if (Mage::app()->getRequest()->getRequestString() == "/") : ?>
-<link rel="canonical" href="<?php echo $this->getBaseUrl() ?>" />
-<?php endif; ?>
 <link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
 <link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
 <!--[if lt IE 7]>
@@ -43,66 +40,25 @@
 //]]>
 </script>
 <![endif]-->
-<?php if (Mage::registry('current_product')) { ?>
-<!--start Facebook Open Graph Protocol-->
-<meta property="og:site_name" content="Your Site Name" />
-<meta property="og:title" content="<?php echo $this->getTitle() ?>" />
-<meta property="og:type" content="product" />
-<meta property="og:url" content="<?php echo Mage::helper('core/url')->getCurrentUrl()  ?>"/>
-<meta property="og:image" content="<?php echo Mage::helper('catalog/image')->init(Mage::registry('current_product'), 'small_image')->resize(100,100);?>"/>
-<link rel="image_src" type="image/jpeg" href="<?php echo Mage::helper('catalog/image')->init(Mage::registry('current_product'), 'small_image')->resize(100,100);?>" />
-<meta property="og:description" content="<?php echo $this->getDescription() ?>"/>
-<meta property="fb:admins" content="your_profile_id_here" />
-<!--end Facebook Open Graph Protocol-->
-<?php } ?>
-<link href="//fonts.googleapis.com/css?family=Economica" rel='stylesheet' type='text/css'>
 <?php echo $this->getCssJsHtml() ?>
 <?php echo $this->getChildHtml() ?>
 <?php echo $this->helper('core/js')->getTranslatorScript() ?>
 <?php echo $this->getIncludes() ?>
 
+<?php if (Mage::registry('current_product')) { ?>
+<!--start Facebook Open Graph Protocol-->
+<meta property="og:site_name" content="<?php echo Mage::app()->getStore()->getFrontendName(); ?>" />
+<meta property="og:title" content="<?php echo $this->getTitle() ?>" />
+<meta property="og:type" content="product" />
+<meta property="og:url" content="<?php echo Mage::helper('core/url')->getCurrentUrl()  ?>"/>
+<meta property="og:image" content="<?php echo Mage::helper('catalog/image')->init(Mage::registry('current_product'), 'small_image')->resize(100,100);?>"/>
+<link rel="image_src" type="image/jpeg" href="<?php echo Mage::helper('catalog/image')->init(Mage::registry('current_product'), 'small_image')->resize(100,100);?>" />
+<meta property="og:description" content="<?php echo Mage::registry('current_product')->getShortDescription() ?>"/>
+<meta property="fb:admins" content="your_profile_id_here" />
+<!--end Facebook Open Graph Protocol-->
+<?php } ?>
 
-<?php if (Mage::app()->getFrontController()->getAction()->getFullActionName() == 'checkout_onepage_success'): ?>
-	<?php if(Mage::app()->getStore()->getCode() == 'default' || Mage::app()->getStore()->getCode() == 'default_en' || Mage::app()->getStore()->getCode() == 'default_de') : ?>
-		<!-- Facebook Conversion Code for Bestelling NT -->
-		<script>(function() {
-		var _fbq = window._fbq || (window._fbq = []);
-		if (!_fbq.loaded) {
-			var fbds = document.createElement('script');
-			fbds.async = true;
-			fbds.src = '//connect.facebook.net/en_US/fbds.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(fbds, s);
-			_fbq.loaded = true;
-		}
-		})();
-		window._fbq = window._fbq || [];
-		window._fbq.push(['track', '6017102528973', {'value':'0.00','currency':'EUR'}]);
-		</script>
-		<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6017102528973&amp;cd[value]=0.00&amp;cd[currency]=EUR&amp;noscript=1" /></noscript>
-	<?php endif; ?>
 
-	<?php if(Mage::app()->getStore()->getCode() == 'jma_be' || Mage::app()->getStore()->getCode() == 'jma_de' || Mage::app()->getStore()->getCode() == 'jma_nl') : ?>
-		<!-- Facebook Conversion Code for Bestelling JMA -->
-		<script>(function() {
-			var _fbq = window._fbq || (window._fbq = []);
-			if (!_fbq.loaded) {
-				var fbds = document.createElement('script');
-				fbds.async = true;
-				fbds.src = '//connect.facebook.net/en_US/fbds.js';
-				var s = document.getElementsByTagName('script')[0];
-				s.parentNode.insertBefore(fbds, s);
-				_fbq.loaded = true;
-			}
-		})();
-		window._fbq = window._fbq || [];
-		window._fbq.push(['track', '6007916391973', {'value':'0.00','currency':'EUR'}]);
-		</script>
-		<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6007916391973&amp;cd[value]=0.00&amp;cd[currency]=EUR&amp;noscript=1" /></noscript>
-	<?php endif; ?>
-<?php endif; ?>
-
-<?php if(Mage::app()->getStore()->getCode() == 'jma_nl') : ?>
 <script>
 	(function() {
 		var _fbq = window._fbq || (window._fbq = []);
@@ -122,17 +78,16 @@
 <noscript>
 	<img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=479143585558920&amp;ev=PixelInitialized" />
 </noscript>
-	<?php if (Mage::registry('current_product')) : ?>
-	<script type="text/javascript">
-		var _ac = {};
-		// _ac.value = '19.99';
-		_ac.product = '<?php echo  Mage::registry('current_product')->getId() ?>';
+<?php if (Mage::registry('current_product')) : ?>
+<script type="text/javascript">
+	var _ac = {};
+	// _ac.value = '19.99';
+	_ac.product = '<?php echo  Mage::registry('current_product')->getId() ?>';
 
-		(function(d, t) {
-		var a = d.createElement(t), s = d.getElementsByTagName(t)[0];
-		a.async = a.src = '//pixel.adcrowd.com/smartpixel/c6036a69be21cb660499b75718a3ef24.js';
-		s.parentNode.insertBefore(a, s);
-		}(document, 'script'));
-	</script>
-	<?php endif; ?>
+	(function(d, t) {
+	var a = d.createElement(t), s = d.getElementsByTagName(t)[0];
+	a.async = a.src = '//pixel.adcrowd.com/smartpixel/c6036a69be21cb660499b75718a3ef24.js';
+	s.parentNode.insertBefore(a, s);
+	}(document, 'script'));
+</script>
 <?php endif; ?>

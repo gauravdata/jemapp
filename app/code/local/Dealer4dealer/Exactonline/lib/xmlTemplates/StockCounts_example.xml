@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<eExact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="eExact-XML.xsd">
+	<StockCounts>
+		<StockCount StockCountNumber="1">
+			<StockCountLine LineNumber="1">
+				<Quantity>5</Quantity> 
+				<NewQuantity>5</NewQuantity> 
+				<TransactionDate>2011-04-28</TransactionDate> 
+				<Item code="lptp">
+					<Description>Laptop</Description> 
+					<Unit>-</Unit> 
+				</Item>
+				<GLAccount code="7000">
+					<Description>Kostprijs verkopen</Description> 
+				</GLAccount>
+				<Warehouse code="1">
+					<Description>Main warehouse</Description> 
+				</Warehouse>
+			</StockCountLine>
+		</StockCount>
+	</StockCounts>
+	<Messages /> 
+	</eExact>

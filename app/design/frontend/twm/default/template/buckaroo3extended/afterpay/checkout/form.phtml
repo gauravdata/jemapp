@@ -1,6 +1,7 @@
 <?php $_code = $this->getMethodCode() ?>
 
 <div id="payment-errors" class="validation-advice" style="display:none;"></div>
+
 <fieldset class="form-list buckaroo-method">
     <ul id="payment_form_<?php echo $_code ?>" style="display:none" class="buckaroo3extended_input">
         <li>
@@ -13,10 +14,10 @@
                 </select>
             </div>
         </li>
-        <li class="hidden">
+        <li>
             <label><?php echo $this->__('Billing name');?>:</label>
             <div class="input-box">
-                <span class="disabled stylefix" id="<?php echo $_code;?>_BPE_Customername" title="<?php echo $this->__('Name');?>"><?php echo $this->getName(); ?></span>
+                <span class="stylefix disabled" id="<?php echo $_code;?>_BPE_Customername" style="height: 35px !important;" title="<?php echo $this->__('Name');?>"><?php echo $this->getName(); ?></span>
             </div>
         </li>
         <li <?php if ($this->getAddress()->getTelephone() && $this->getAddress()->getTelephone() != '-'): ?>style="display:none;"<?php endif; ?>>
@@ -119,13 +120,13 @@
 
         <?php endif; ?>
 
-        <li class="tac-accept">
-            <div class="input-box pull-left">
+        <li class="tac-accept control wide">
+            <div class="input-box">
                 <input class="input-checkbox required-entry" type="checkbox" title="<?php echo $this->__('Terms and Conditions') ?>" name="<?php echo $_code;?>_bpe_accept" value="checked" id="<?php echo $_code;?>_BPE_terms_and_conditions" />
+                <label for="<?php echo $_code;?>_BPE_terms_and_conditions" class="required">
+                    <?php echo $this->__('Yes, I accept the %sterms and condition%s for the use of Afterpay.', '<a style="float:none;margin:0;" target="_blank" href="https://www.afterpay.nl/nl/klantenservice/betalingsvoorwaarden/">', '</a>') ?> <em>*</em>
+                </label>
             </div>
-            <label for="<?php echo $_code;?>_BPE_terms_and_conditions" class="required">
-                <?php echo $this->__('Yes, I accept the %sterms and condition%s for the use of Afterpay.', '<a style="float:none;margin:0;" target="_blank" href="https://www.afterpay.nl/nl/klantenservice/betalingsvoorwaarden/">', '</a>') ?> <em>*</em>
-            </label>
         </li>
 
         <li>
@@ -146,4 +147,5 @@
         }
     });
 </script>
+
 

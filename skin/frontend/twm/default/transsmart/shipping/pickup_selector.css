@@ -1,0 +1,313 @@
+/**
+ * @category    Transsmart
+ * @package     Transsmart_Shipping
+ * @copyright   Copyright (c) 2016 Techtwo Webdevelopment B.V. (http://www.techtwo.nl)
+ */
+
+#tss-pickup-container {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+#tss-pickup-container input, #tss-pickup-container button {
+    margin: 0;
+    line-height: normal;
+}
+
+#tss-pickup-container button {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+#tss-ls-close{
+    position: absolute;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #1a1a1a;
+    overflow: hidden;
+    color: #fff;
+    font-size: 20px;
+}
+
+.tss-selector {
+    background: #fff;
+    left: 50%;
+    text-align: left;
+    margin-top: 20px;
+    margin-left: -377px;
+    position: fixed;
+    width: 754px;
+    z-index: 1;
+}
+
+.tss-selector-inner {
+    padding: 0;
+}
+
+#tss-pickup-container .tss-background-overlay {
+    background-color: rgba(0,0,0,.5);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.tss-selector-container .tss-ls-header #tss-ls-search{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    display: inline;
+    box-sizing: border-box;
+    background: #eeeeee;
+    border: none;
+    color: black;
+    height: 36px;
+    padding: 0 10px;
+    width: 145px;
+}
+
+.tss-selector-container .tss-ls-header #tss-ls-search-btn {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 36px;
+    padding: 7px 20px;
+}
+
+.tss-selector-container .tss-ls-header .tss-ls-options{
+    float: right;
+    max-width: 274px;
+    margin: 25px 20px;
+}
+.tss-selector-container .tss-ls-header .tss-ls-options .tss-ls-checkbox-wrapper{
+    float: left;
+    margin-left: 20px;
+}
+.tss-selector-container .tss-ls-header .tss-ls-options .tss-ls-checkbox-wrapper label{
+    display: inline;
+}
+.tss-selector-container .tss-ls-header .tss-ls-options .tss-ls-checkbox-wrapper input,
+.tss-selector-container .tss-ls-header .tss-ls-options .tss-ls-checkbox-wrapper label {
+    cursor: pointer;
+}
+
+.tss-selector-container .tss-ls-header .tss-ls-search-wrapper{
+    float: left;
+    margin: 20px;
+}
+
+.tss-ls-footer-controls button#tss-ls-select.disabled,
+.tss-selector-container .tss-ls-header .tss-ls-search-wrapper button.disabled{
+    background-color: #999;
+    color: #CCC;
+}
+
+.tss-selector-container .tss-ls-header .tss-ls-header-title {
+    display: block;
+    text-align: center;
+    color: #1a1a1a;
+    padding: 15px;
+    font-size: 24px;
+    font-weight: 500;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.tss-selector-container .tss-ls-header .tss-ls-header-controls {
+    margin-top: 5px;
+}
+
+.tss-selector-container .tss-ls-content{
+    clear: both;
+}
+
+.tss-ls-map-container #tss-ls-map {
+    float: left;
+    height: 460px;
+    width: 454px;
+}
+
+.tss-ls-map-container #tss-ls-map h1{
+    font-size: 15px;
+    max-width: 150px;
+}
+
+.tss-ls-map-container #tss-ls-map table td {
+    font-size: 11px;
+}
+
+#tss-ls-locations {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 300px;
+    height: 392px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.tss-ls-location-wrapper{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+}
+
+.tss-ls-location-wrapper h3{
+    background: #eeeeee;
+    display: block;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+
+.tss-ls-footer-controls {
+    background: white;
+    clear: both;
+    margin-top: 10px;
+    padding: 10px 20px;
+    text-align: right;
+}
+
+.tss-ls-footer-controls #tss-ls-select {
+    background-color: #fe5f55;
+    border-color: #fe5f55;
+    font-size: 20px;
+}
+
+.tss-ls-location-item {
+    border-bottom: 1px solid #eeeeee;
+    display: table;
+    padding: 10px 0;
+    width: 100%;
+    cursor: pointer;
+}
+
+.tss-ls-location-item .tss-ls-check{
+    display: table-cell;
+    line-height: 16px;
+    vertical-align: middle;
+    width: 25px;
+}
+
+.tss-ls-location-item .tss-ls-check .tss-ls-img{
+    background: url('images/radio.png') no-repeat center top;
+    display: block;
+    height: 15px;
+    width: 100%;
+}
+
+.tss-ls-location-item.selected .tss-ls-check .tss-ls-img{
+    background: url('images/radio.png') no-repeat center bottom;
+}
+
+.tss-ls-location-item.selected {
+    color: #fe5f55;
+}
+
+.tss-ls-location-item .tss-ls-name{
+    display: table-cell;
+    min-width: 140px;
+    padding-right: 5px;
+}
+
+.tss-ls-location-item .tss-ls-distance{
+    display: table-cell;
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.tss-ls-location-item .tss-ls-name .tss-ls-company-name{
+    display: block;
+    font-weight: 500;
+    color: #1a1a1a;
+}
+.tss-ls-location-item .tss-ls-name .tss-ls-address{
+    float: left;
+    font-size: 12px;
+}
+
+.tss-loader {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.tss-loader img{
+    display: inline-block;
+    margin: 80px 0;
+}
+
+#tss-ls-selected-location-info {
+    margin-top: 10px;
+}
+
+@media (max-width: 770px) {
+    .tss-selector {
+        width: 100%;
+        margin-left: 0;
+    	left: 0px;
+	    top: 0px;
+        height: 100%;
+        overflow-y: scroll;
+        margin-top: 0 !important;
+        overflow-y: auto;
+    }
+    .tss-ls-location-wrapper {
+        float: none;
+    }
+    #tss-ls-locations {
+        width: auto;
+        height: auto !important;
+        overflow: auto;
+    }
+    .tss-ls-map-container{
+        display: none;
+    }
+    .tss-selector-container .tss-ls-header{
+        padding: 15px 45px 20px 20px;
+    }
+    .tss-selector-container .tss-ls-header .tss-ls-header-title{
+        font-size: 22px;
+    }
+    .tss-selector-container .tss-ls-header .tss-ls-options{
+        float: left;
+        margin-top: 10px;
+    }
+    .tss-selector-container .tss-ls-header .tss-ls-options .tss-ls-checkbox-wrapper{
+        margin-left: 0;
+        clear: both;
+    }
+}
+
+@media (min-width: 1200px) {
+    .tss-selector {
+        width: 950px;
+        margin-left: -475px;
+    }
+    .tss-selector-container .tss-ls-header .tss-ls-options{
+        max-width: none;
+    }
+    .tss-ls-map-container #tss-ls-map{
+        width: 540px;
+    }
+    #tss-ls-locations{
+        width: 410px;
+    }
+    .tss-ls-location-item{
+        padding: 18px 0;
+    }
+    .tss-ls-location-item .tss-ls-check{
+        width: 50px;
+    }
+}
