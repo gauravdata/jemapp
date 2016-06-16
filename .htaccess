@@ -1,9 +1,3 @@
-#order deny,allow
-#deny from all
-#allow from  127.0.0.1
-#allow from  145.131.208.232
-#allow from  95.97.31.66
-
 ############################################
 ## uncomment these lines for CGI mode
 ## make sure to specify the correct cgi php binary file name
