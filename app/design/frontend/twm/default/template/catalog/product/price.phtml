@@ -73,7 +73,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
             </p>
 			<?php if ($_product->getPriceByThree()): ?>
 			<p class="third-price">
-				<span class="price-label"><? echo $this->__('If three or more articles'); ?></span>
+				<span class="price-label"><?php echo $this->__('If three or more articles'); ?></span>
 				<span class="price">
 					<?php echo $_coreHelper->currency($_product->getPriceByThree(), true, false) ?>
 				</span>
