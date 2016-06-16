@@ -28,7 +28,6 @@
     <div class="content-container">
         <div class="page-title">
             <h1><?php echo $this->__('Checkout') ?></h1>
-            <?php if($this->getActiveStep() != 'login') { ?>
             <div class="text-center">
                 <ol class="progress-bar unstyled clearfix">
                     <?php $i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): ?>
@@ -66,15 +65,12 @@
                     <?php endforeach ?>
                 </ol>
             </div>
-            <?php } ?>
         </div>
         <div class="row">
-            <?php if($this->getActiveStep() != 'login') { ?>
-                <div class="col-3 pull-right">
-                    <?php echo $this->getChildHtml('checkout.progress.wrapper'); ?>
-                </div>
-            <?php } ?>
-            <div class="col-<?php if($this->getActiveStep() != 'login') { ?>9<?php } else { ?>12<?php } ?>">
+            <div class="col-3 pull-right checkout-sidebar">
+                <?php echo $this->getChildHtml('checkout.progress.wrapper'); ?>
+            </div>
+            <div class="col-9 checkout-content">
                 <script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
                 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
                 <ol class="opc unstyled" id="checkoutSteps">

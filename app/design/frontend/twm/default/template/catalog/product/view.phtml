@@ -61,7 +61,7 @@
             <div class="product-shop">
                 <div class="product-name">
                     <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
-                    <h2><?php echo $_product->getAttributeText('color'); ?></h2>
+                    <h2><?php echo $_product->getAttributeText('color_product'); ?></h2>
                 </div>
 
                 <?php echo $this->getChildHtml('alert_urls') ?>
@@ -155,8 +155,8 @@
     </script>
 </div>
 
-<?php if ($_product->getShortDescription()):?>
-    <div class="short-description" id="more">
+<?php if ($_product->getDescription()):?>
+    <div class="description" id="more">
         <div class="row wide">
             <div class="col-6">
 		<?php if ($_product->hasPropertyImage() && $_product->getPropertyImage() != 'no_selection'): ?>
@@ -170,7 +170,7 @@
                     <div class="content-box">
                         <h2><?php echo $this->__('Quick Overview') ?></h2>
                         <div class="std">
-                            <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
+                            <?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?>
                         </div>
                     </div>
                 </div>

@@ -51,13 +51,27 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
 		<?php $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()) ?>
 		<?php $_finalPriceInclTax = $_taxHelper->getPrice($_product, $_product->getFinalPrice(), true) ?>
 		<?php if ($_finalPrice >= $_price): ?>
-			<span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+			<p class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+				<span class="price-label"><?php echo $this->__('Regular Price') ?></span>
+				<span class="price">
                 <?php if ($_finalPrice == $_price): ?>
 					<?php echo $_coreHelper->currency($_price, true, true) ?>
 				<?php else: ?>
 					<?php echo $_coreHelper->currency($_finalPrice, true, true) ?>
 				<?php endif; ?>
-            </span>
+				</span>
+            </p>
+			<?php if ($_product->getPriceByThree()): ?>
+				<div class="third-price">
+					<span class="price-label"><?php echo $this->__('If three or more articles'); ?></span>
+					<span class="price">
+						<?php echo $_coreHelper->currency($_product->getPriceByThree(), true, false) ?>
+					</span>
+					<a href="#modal-third-price" class="show-modal">
+						<i class="icon-question icons"></i>
+					</a>
+				</div>
+			<?php endif;  ?>
 		<?php else: /* if ($_finalPrice == $_price): */ ?>
 			<p class="regular-price">
 				<span class="price-label"><?php echo $this->__('Regular Price') ?></span>
