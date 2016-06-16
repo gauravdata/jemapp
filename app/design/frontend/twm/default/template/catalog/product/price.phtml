@@ -61,17 +61,6 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
 				<?php endif; ?>
 				</span>
             </p>
-			<?php if ($_product->getPriceByThree()): ?>
-				<div class="third-price">
-					<span class="price-label"><?php echo $this->__('If three or more articles'); ?></span>
-					<span class="price">
-						<?php echo $_coreHelper->currency($_product->getPriceByThree(), true, false) ?>
-					</span>
-					<a href="#modal-third-price" class="show-modal">
-						<i class="icon-question icons"></i>
-					</a>
-				</div>
-			<?php endif;  ?>
 		<?php else: /* if ($_finalPrice == $_price): */ ?>
 			<p class="regular-price">
 				<span class="price-label"><?php echo $this->__('Regular Price') ?></span>
@@ -79,18 +68,18 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                     <?php echo $_coreHelper->currency($_regularPrice, true, false) ?>
                 </span>
 			</p>
-			<?php if ($_product->getPriceByThree()): ?>
-				<div class="third-price">
-					<span class="price-label"><?php echo $this->__('If three or more articles'); ?></span>
+		<?php endif; /* if ($_finalPrice == $_price): */ ?>
+		<?php if ($_product->getPriceByThree()): ?>
+			<div class="third-price">
+				<span class="price-label"><?php echo $this->__('If three or more articles'); ?></span>
 					<span class="price">
 						<?php echo $_coreHelper->currency($_product->getPriceByThree(), true, false) ?>
 					</span>
-					<a href="#modal-third-price" class="show-modal">
-						<i class="icon-question icons"></i>
-					</a>
-				</div>
-			<?php endif;  ?>
-		<?php endif; /* if ($_finalPrice == $_price): */ ?>
+				<a href="#modal-third-price" class="show-modal">
+					<i class="icon-question icons"></i>
+				</a>
+			</div>
+		<?php endif;  ?>
 	</div>
 <?php else: /* if (!$_product->isGrouped()): */ ?>
 	<?php
