@@ -1,0 +1,287 @@
+/*======================================================
+	DEFAULT
+======================================================*/
+//.checkout-onepage-index {
+//	#header .nav-btn,
+//	#header .quick-access,
+//	#side-nav {
+//		display: none;
+//	}
+//	#content {
+//		width: 100%;
+//		left: 0;
+//	}
+//}
+#checkoutSteps {
+	> li {
+		display: none;
+
+		&.active {
+			display: block;
+		}
+	}
+}
+#different-shipping-address {
+	display: none;
+}
+
+/*======================================================
+	PROGRESS BAR
+======================================================*/
+.progress-bar {
+	display: inline-block;
+	margin-bottom: 0;
+
+	li {
+		float: left;
+		position: relative;
+		font-size: $l-font;
+		padding-left: $xl-spacing + 10;
+		text-align: left;
+		padding-right: $m-spacing + 10;
+		color: $m-grey;
+
+		&:last-child {
+			padding-right: 0;
+		}
+
+		.icons {
+			@include radius(50%);
+			width: $xl-spacing;
+			height: $xl-spacing;
+			line-height: $xl-spacing;
+			background-color: $m-grey;
+			color: $xxxs-grey;
+			text-align: center;
+			font-size: $xl-font;
+			position: absolute;
+			left: 0;
+		}
+
+		strong {
+			color: $m-grey;
+			text-transform: uppercase;
+		}
+
+		&:after {
+			content: "";
+			height: 1px;
+			width: $m-spacing;
+			background-color: $m-grey;
+			position: absolute;
+			right: 0;
+			top: 50%;
+		}
+
+		&:last-child {
+			&:after {
+				display: none;
+			}
+		}
+
+		&.active {
+			color: $primary;
+
+			strong {
+				color: $primary;
+			}
+			.icons {
+				background-color: $primary;
+			}
+			~ li {
+				color: $m-grey;
+
+				.icons {
+					background-color: $xs-grey;
+					border: 1px solid $m-grey;
+					color: $m-grey;
+				}
+				strong {
+					color: $m-grey;
+				}
+				&:after {
+					background-color: $m-grey;
+				}
+			}
+		}
+	}
+}
+
+/*======================================================
+	OPC
+======================================================*/
+ol.opc {
+	li:not(#opc-login) {
+		.buttons-set {
+			.button {
+				background-color: $primary;
+				border-color: $primary;
+				font-size: $xl-font;
+
+				&:hover,
+				&:focus {
+					background-color: transparent;
+					color: $primary;
+				}
+			}
+		}
+	}
+}
+
+/*======================================================
+	PROGRESS SIDEBAR
+======================================================*/
+#checkout-progress-wrapper {
+	.block {
+		border: none;
+		background-color: $white;
+		padding: 0;
+		color: $xl-grey;
+
+		h2 {
+			font-size: $xl-font;
+			margin: 0;
+			padding: $xs-spacing $m-spacing;
+		}
+		h3 {
+			margin-bottom: 0;
+		}
+		.complete h3 {
+			margin-bottom: $m-spacing;
+		}
+
+		ul {
+			margin: 0;
+			> li {
+				padding: $xs-spacing $m-spacing;
+			}
+			> li:nth-child(odd) {
+				background-color: $xxxs-grey;
+			}
+
+			#totals-progress-opcheckout {
+				table {
+					td:first-child {
+						font-size: $s-font;
+					}
+				}
+			}
+		}
+
+		&.same-address {
+			ul {
+				> li {
+					&#shipping-progress-opcheckout {
+						display: none;
+					}
+				}
+				> li:nth-child(3) {
+					background-color: transparent;
+				}
+				> li:nth-child(4) {
+					background-color: $xxxs-grey;
+				}
+			}
+		}
+	}
+}
+.pcnl-info-text {
+	margin-bottom: $m-spacing;
+}
+
+/*======================================================
+	SHIPPING & PAYMENT METHODS
+======================================================*/
+.sp-methods,
+.payment-methods {
+	margin: 0;
+
+	dl {
+		margin: 0;
+	}
+
+	dt {
+		display: block;
+		float: none;
+		font-weight: bold;
+		color: $xl-grey;
+		margin: $xl-spacing 0 $m-spacing;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	dd {
+		float: none;
+		margin: 0;
+
+		ul {
+			@extend .unstyled;
+		}
+
+		fieldset {
+			padding: 0;
+			margin: 0;
+		}
+	}
+}
+.payment-methods {
+	dt {
+		position: relative;
+		margin-top: $xl-font;
+		margin-bottom: 0;
+
+		label {
+			float: none;
+			width: auto;
+
+			img {
+				position: absolute;
+				margin: -9px 10px;
+			}
+		}
+
+		input {
+			position: absolute;
+			left: 0;
+			top: 4px;
+			margin: 0;
+		}
+	}
+
+	dd {
+		position: relative;
+		
+		ul {
+			margin: 0;
+
+			&#payment_form_buckaroo3extended_afterpay {
+				li {
+					@extend .clearfix;
+					margin-bottom: $xs-spacing;
+				}
+			}
+
+			.bank_logo {
+				float: left;
+				width: 50px;
+				text-align: center;
+				margin: 8px 0 0 22px;
+			}
+			.bank_name {
+				float: left;
+				margin-top: 8px;
+			}
+		}
+	}
+
+}
+#checkout-review-table {
+	dt {
+		font-weight: bold;
+		color: $xl-grey;
+	}
+	dd {
+		margin-left: 0;
+	}
+}

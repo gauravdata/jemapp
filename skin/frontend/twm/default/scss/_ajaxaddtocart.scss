@@ -1,0 +1,14 @@
+#ajax-cart-modal {
+	.overlay {
+		background-color: transparent;
+	}
+	.block {
+		@extend .main-shadow;
+		background-color: $white;
+		border: none;
+
+		.close-btn {
+			background: none;
+		}
+	}
+}

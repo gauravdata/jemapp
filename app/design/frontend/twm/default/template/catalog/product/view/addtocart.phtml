@@ -10,33 +10,36 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
 <?php $_product = $this->getProduct(); ?>
 <?php $buttonTitle = $this->__('Add to Cart'); ?>
+
+<p>
+    <?php echo $_product->getFit(); ?>
+</p>
+
 <?php if($_product->isSaleable()): ?>
     <div class="add-to-cart">
-        <?php if(!$_product->isGrouped()): ?>
-		<div class="form-inline">
-			<div class="form-group">
-				<label for="qty"><?php echo $this->__('Qty:') ?></label>
-				<input type="text" name="qty" id="qty" maxlength="4" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="form-control qty" />
-			</div>
-		</div>
-        <?php endif; ?>
-        <button type="submit" title="<?php echo $buttonTitle ?>" class="btn btn-success btn-cart" no-gtm><?php echo $buttonTitle ?></button>
+        <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="button button-block btn-cart" onclick="productAddToCartForm.submit(this)">
+            <span>
+                <span>
+                    <i class="icon-handbag icons"></i> <?php echo $buttonTitle ?>
+                </span>
+            </span>
+        </button>
         <?php echo $this->getChildHtml('', true, true) ?>
     </div>
 <?php endif; ?>

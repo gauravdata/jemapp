@@ -82,7 +82,7 @@ class Anowave_Ec_Model_Api
 	 */
 	public function getClient()
 	{
-		if (!$this->client)
+		if (!isset($this->client))
 		{
 			
 			

@@ -1,15 +1,8 @@
-# ----------------------------------------------------------------------
-# | Forcing `https://`                                                 |
-# ----------------------------------------------------------------------
-
-# Redirect from the `http://` to the `https://` version of the URL.
-# https://wiki.apache.org/httpd/RewriteHTTPToHTTPS
-
-<IfModule mod_rewrite.c>
-   RewriteEngine On
-   RewriteCond %{HTTPS} !=on
-   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-</IfModule>
+order deny,allow
+deny from all
+allow from  127.0.0.1
+allow from  145.131.208.232
+allow from  95.97.31.66
 
 ############################################
 ## uncomment these lines for CGI mode
@@ -142,7 +135,8 @@ RewriteRule ^retour\.pdf retour-nt.pdf [L]
 
 ############################################
 ## uncomment next line to enable light API calls processing
-    RewriteRule ^api/([a-z][0-9a-z_]+)/?$ api.php?type=$1 [QSA,L]
+
+#    RewriteRule ^api/([a-z][0-9a-z_]+)/?$ api.php?type=$1 [QSA,L]
 
 ############################################
 ## rewrite API2 calls to api.php (by now it is REST only)

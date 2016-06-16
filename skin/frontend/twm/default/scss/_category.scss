@@ -1,0 +1,172 @@
+/*======================================================
+	DEFAULT
+======================================================*/
+.catalog-category-view {
+	#content {
+		.content-container {
+			width: 80%;
+		}
+	}
+}
+
+/*======================================================
+	TOOLBAR
+======================================================*/
+.toolbar {
+	@extend .clearfix;
+	@extend .main-transition;
+	padding: $xs-spacing 0;
+	position: relative;
+	background-color: $xxxs-grey;
+
+	select {
+		border-width: 2px;
+		font-weight: bold;
+		background-color: transparent;
+	}
+	
+	.pager {
+		float: right;
+		z-index: 30;
+		line-height: $m-font;
+		margin: 12px 0;
+
+		p {
+			margin: 0;
+		}
+
+		a {
+			color: $m-grey;
+		}
+
+		.amount,
+		.limiter {
+			float: none;
+			display: inline-block;
+			padding: 0 $xs-spacing;
+
+			a.active {
+				display: none;
+			}
+
+			&:last-child {
+				border-right: none;
+			}
+		}
+		.limiter {
+			display: none;
+		}
+	}
+
+	.sorter {
+		display: none;
+		float: right;
+		margin-right: $xs-spacing;
+
+		p {
+			height: $form-field-height;
+			line-height: $form-field-height;
+			float: left;
+			border: 2px solid $s-grey;
+			border-right: none;
+			font-weight: $bold;
+			padding-left: $m-spacing;
+			color: $xl-grey;
+			margin-bottom: 0;
+		}
+		.select-overlay {
+			float: left;
+			width: 200px;
+
+			label {
+				border: 2px solid $xl-grey;
+				font-weight: $bold;
+				background-color: transparent;
+
+				span {
+					font-weight: $medium;
+				}
+			}
+		}
+		a {
+			float: left;
+			font-weight: $bold;
+			color: $xl-grey;
+			line-height: 42px;
+			padding: $xs-spacing $xxs-spacing;
+			font-size: $xl-font;
+		}
+	}
+
+	&.fixed {
+		position: fixed;
+		top: $header-height;
+		z-index: 800;
+		left: calc(#{$side-nav-width});
+		width: calc(100% - #{$side-nav-width});
+	}
+}
+.toolbar-bottom {
+	display: none;
+	margin-bottom: $xl-spacing;
+
+	.toolbar {
+		.amshopby-filters {
+			display: none;
+		}
+	}
+}
+
+/*======================================================
+	LIST
+======================================================*/
+.category-products {
+	ul.products-grid {
+		@extend .unstyled;
+		@extend .clearfix;
+
+		li.item {
+			@extend .clearfix;
+			float: left;
+			width: 25%;
+			border-left: 2px solid transparent;
+
+			a.product-image {
+				display: block;
+				position: relative;
+
+				.hover-image {
+					position: absolute;
+					top: 0;
+					left: 0;
+					background-color: $black;
+					opacity: 0;
+				}
+
+				&:hover {
+					.hover-image {
+						opacity: 1;
+					}
+				}
+			}
+			h2.product-name {
+				margin: $xxs-spacing $xxs-spacing 0;
+				font-size: $l-font;
+				font-weight: $bold;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			.price-box {
+				font-size: $s-font;
+				margin: $xxs-spacing $xxs-spacing $s-spacing;
+
+				.third-price {
+					.price {
+						font-size: $l-font;
+					}
+				}
+			}
+		}
+	}
+}

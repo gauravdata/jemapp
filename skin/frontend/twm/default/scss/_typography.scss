@@ -1,0 +1,385 @@
+/*======================================================
+	DEFAULT
+======================================================*/
+html,
+body {
+	font-family: $main-font;
+	color: $m-grey;
+	font-size: $m-font;
+	line-height: $m-font * 1.5;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+address,
+table {
+	margin: 0 0 $m-spacing;
+}
+
+ul,
+ol {
+	padding-left: 15px;
+}
+
+hr {
+	height: 0;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px dotted $m-grey;
+	margin: $m-spacing 0;
+
+	&.hr-xl {
+		margin: $xl-spacing 0;
+	}
+}
+
+/*======================================================
+	TITLES
+======================================================*/
+h1,
+h2,
+h3 {
+	color: $xl-grey;
+	line-height: normal;
+}
+
+h1 {
+	font-size: $xxxl-font;
+	line-height: $xxxl-font;
+	font-weight: $thin;
+}
+h2 {
+	font-size: $xxl-font;
+	font-weight: $medium;
+}
+h3 {
+	color: $l-grey;
+}
+
+.page-title {
+	border-bottom: 1px dotted $m-grey;
+	margin-bottom: $l-spacing;
+
+	h1 {
+		text-align: center;
+	}
+
+	> * {
+		margin: $xl-spacing 0;
+	}
+}
+.area {
+	.page-title {
+		> * {
+			margin-top: 0;
+		}
+	}
+}
+
+/*======================================================
+	TEXT
+======================================================*/
+.nobr,
+.no-wrap {
+	white-space: nowrap;
+}
+strong,
+b {
+	color: $xl-grey;
+	font-weight: $bold;
+}
+
+.error {
+	color: $error;
+}
+
+/*= Check =*/
+.check {
+	list-style: none;
+	padding: 0;
+
+	li {
+		position: relative;
+		padding-left: $m-spacing;
+		
+		&:before {
+			position: absolute;
+			font-family: 'simple-line-icons';
+			content: "\e080";
+			color: $xl-grey;
+			top: 0;
+			left: 0;
+			font-size: $l-font;
+		}
+	}
+}
+
+/*= Alignment =*/
+.text-left {
+	text-align: left !important;
+}
+.text-center {
+	text-align: center !important;
+}
+.text-right {
+	text-align: right !important;
+}
+
+/*= Case =*/
+.capitalize {
+	text-transform: capitalize;
+}
+.lowercase {
+	text-transform: lowercase;
+}
+.uppercase {
+	text-transform: uppercase;
+}
+
+address {
+	margin-bottom: $m-spacing;
+	font-style: normal;
+}
+
+/*======================================================
+	LINKS
+======================================================*/
+a {
+	@extend .main-transition;
+	color: $primary;
+	text-decoration: none;
+
+	&:hover,
+	&:focus {
+		color: $l-grey;
+		outline: none;
+	}
+}
+button {
+	@extend .main-transition;
+	cursor: pointer;
+}
+.link {
+	&:before {
+		font-family: 'simple-line-icons';
+		content: "\e606";
+		margin-right: $xxs-spacing;
+	}
+}
+.link-icon {
+	font-size: $xl-font;
+}
+
+/*======================================================
+	IMAGES
+======================================================*/
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/*======================================================
+	TABLE
+======================================================*/
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+
+	tr {
+		border-bottom: 1px dotted $m-grey;
+	}
+
+	th,
+	td {
+		padding: $s-spacing $xs-spacing;
+		padding-left: 0;
+		text-align: left;
+		vertical-align: top;
+
+		&:last-child {
+			padding-right: 0;
+		}
+
+		img {
+			max-width: none !important;
+		}
+	}
+
+	th {
+		font-weight: $medium;
+		color: $xl-grey;
+	}
+}
+
+/*======================================================
+	NOTICES
+======================================================*/
+
+.global-site-notice {
+	@include transform(-50%, 0);
+	@extend .clearfix;
+	position: fixed;
+	z-index: 10000;
+	padding: $s-spacing $m-spacing;
+	color: $white;
+	left: 50%;
+	background-color: transparentize($xl-grey, 0.3);
+	min-width: 50%;
+	max-width: 80%;
+
+	a {
+		color: $white;
+		text-decoration: underline;
+	}
+
+	.notice-inner {
+		> *:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&.demo-notice {
+		top: $m-spacing;
+		background-color: transparentize($notice, 0.3);
+	}
+
+	&.notice-cookie {
+		bottom: $m-spacing;
+		padding-right: 50px;
+
+		.notice-text {
+			float: left;
+			padding: $s-spacing;
+
+			p {
+				margin: 0;
+			}
+		}
+
+		.actions {
+			.button {
+				position: absolute;
+				width: 50px;
+				height: 100%;
+				padding: 0;
+				background-color: $l-grey;
+				border: none;
+				right: 0;
+				top: 0;
+
+				span {
+					display: none;
+				}
+
+				&:after {
+					content: "\e082";
+					font-family: 'simple-line-icons';
+					font-size: $xl-font;
+				}
+				&:hover,
+				&:focus {
+					color: $m-grey;
+				}
+			}
+		}
+	}
+}
+
+/*======================================================
+	MESSAGES
+======================================================*/
+ul.messages {
+	@extend .unstyled;
+	margin: 0;
+	padding: 0;
+
+	ul {
+		@extend .unstyled;
+		margin: 0;
+
+		li {
+			border-color: transparent;
+			background-color: $s-grey;
+			padding: $s-spacing $m-spacing;
+			color: $l-grey;
+		}
+	}
+
+	.error-msg {
+		li {
+			color: $error;
+			background-color: lighten($error, 57%);
+		}
+	}
+
+	.success-msg {
+		li {
+			color: $success;
+			background-color: lighten($success, 57%);
+		}
+	}
+
+	.warning-msg,
+	.notice-msg {
+		li {
+			color: $notice;
+			background-color: lighten($notice, 57%);
+		}
+	}
+}
+
+/*======================================================
+	TOOLTIP
+======================================================*/
+.tooltip-wrapper {
+	display: inline-block;
+	position: relative;
+	font-weight: $thin;
+	
+	.tooltip {
+		@extend .fade-in-transition;
+		background-color: $white;
+		padding: $xs-spacing;
+		font-size: $s-font;
+		text-align: center;
+		width: 200px;
+		bottom: 100%;
+		left: 50%;
+		margin-left: -100px;
+		font-family: 'Raleway', sans-serif;
+		position: absolute;
+		margin-bottom: 10px;
+
+		&:after {
+			@include rotate(45deg);
+			content: "";
+			background-color: $white;
+			position: absolute;
+			width: 10px;
+			height: 10px;
+			bottom: -5px;
+			left: 50%;
+			margin-left: -5px;
+		}
+
+		p {
+			margin-bottom: $xs-spacing !important;
+		}
+
+		> *:last-child {
+			margin-bottom: 0 !important;
+		}
+	}
+
+	&:hover {
+		.tooltip {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}

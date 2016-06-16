@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Unicode Systems
+ * @category   Uni
+ * @package    Uni_Autoregister
+ * @copyright  Copyright (c) 2010-2011 Unicode Systems. (http://www.unicodesystems.in)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Uni_Autoregister>
+            <version>0.1.2</version>
+        </Uni_Autoregister>
+    </modules>
+    <global>
+        <!--<rewrite>        -->
+            <!--<uni_autoregister_checkout_onepagecontroller>-->
+                <!--<from><![CDATA[#^/checkout/onepage/#]]></from> &lt;!&ndash; Mage_Checkout_OnepageController  &ndash;&gt;-->
+                <!--<to>/autoregister/checkout_onepage/</to> &lt;!&ndash; Uni_Autoregister_Checkout_OnepageController  &ndash;&gt;-->
+            <!--</uni_autoregister_checkout_onepagecontroller>-->
+        <!--</rewrite>-->
+        <helpers>
+            <autoregister>
+                <class>Uni_Autoregister_Helper</class>
+            </autoregister>
+        </helpers>
+        <models>
+            <autoregister>
+                <class>Uni_Autoregister_Model</class>
+            </autoregister>
+        </models>
+    </global>
+
+    <frontend>
+        <translate>
+            <modules>
+                <Uni_Autoregister>
+                    <files>
+                        <default>Uni_Autoregister.csv</default>
+                    </files>
+                </Uni_Autoregister>
+            </modules>
+        </translate>        
+        <layout>
+            <updates>
+                <autoregister>
+                    <file>autoregister.xml</file>
+                </autoregister>
+            </updates>
+        </layout>
+        <routers>
+            <autoregister>
+                <use>standard</use>
+                <args>
+                    <module>Uni_Autoregister</module>
+                    <frontName>autoregister</frontName>
+                </args>
+            </autoregister>
+        </routers>     
+        <events>
+            <sales_order_place_after>
+                <observers>
+                    <uni_autoregister>
+                        <type>singleton</type>
+                        <class>Uni_Autoregister_Model_Observer</class>
+                        <method>isGuest</method>
+                    </uni_autoregister>
+                </observers>
+            </sales_order_place_after>
+        </events>
+   
+    </frontend>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <autoregister>
+                                            <title>Autoregister Section</title>
+                                        </autoregister>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <autoregister>
+            <autoregister>
+                <enabled>1</enabled>
+                <password_length>6</password_length>
+                <password_char>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</password_char>
+            </autoregister>
+        </autoregister>
+    </default>
+</config>

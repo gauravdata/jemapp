@@ -1,0 +1,25 @@
+<?php
+    $_helper    = $this->helper('catalog/output');
+    $_category  = $this->getCurrentCategory();
+    $_imgHtml   = '';
+    $_imgUrl = $_category->getImageUrl()
+
+?>
+
+<?php if($_imgUrl) { ?>
+<div class="page-visual" style="background-image: url(<?php echo $_imgUrl; ?>);">
+    <div class="page-top">
+        <div class="content">
+            <?php if($this->isContentMode() || $this->isMixedMode()): ?>
+                <?php echo $this->getCmsBlockHtml() ?>
+            <?php else: ?>
+                <h1><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<?php } else { ?>
+<div class="area area-xl">
+    <h1 class="text-center"><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+</div>
+<?php } ?>

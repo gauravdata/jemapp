@@ -1,0 +1,93 @@
+.amshopby-filters {
+	@extend .main-transition;
+	float: left;
+	margin-left: $xs-spacing;
+
+	select,
+	.custom-dropdown strong {
+		width: auto !important;
+		border-width: 2px;
+		float: left;
+		font-weight: $bold;
+		background-color: transparent;
+	}
+	.custom-dropdown {
+		float: left;
+		margin-right: $xs-spacing;
+
+		&.focus {
+			strong {
+				background-color: $white;
+			}
+		}
+		
+		.list {
+			a {
+				position: relative;
+				padding-left: $l-spacing;
+				color: $m-grey;
+
+				&:hover {
+					color: $xl-grey;
+				}
+
+				&:before {
+					position: absolute;
+					content: "";
+					width: $m-spacing;
+					height: $m-spacing;
+					background-color: $s-grey;
+					left: 0;
+				}
+
+				&.amshopby-attr-selected {
+					color: $xl-grey;
+					font-weight: $bold;
+
+					&:before {
+						background-color: $xl-grey;
+					}
+				}
+			}
+		}
+	}
+
+	&.fixed {
+		left: $side-nav-width;
+		position: fixed;
+		top: $header-height;
+	}
+	
+	.actions {
+		float: left;
+
+		a {
+			width: $form-field-height;
+			height: $form-field-height;
+			background-color: $xl-grey;
+			display: block;
+			position: relative;
+			font-size: 0;
+			color: #fff;
+		}
+
+		a:after {
+			content: "\e082";
+			font-family: 'simple-line-icons';
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			font-size: $xxl-font;
+			text-align: center;
+			line-height: $form-field-height + 2;
+		}
+	}
+}
+.main-usps + .amshopby-filters {
+	@include transition(none);
+	margin-top: 136px;
+
+	&.fixed {
+		margin-top: 0;
+	}
+}

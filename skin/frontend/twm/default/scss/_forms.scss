@@ -1,0 +1,322 @@
+/*======================================================
+	DEFAULT
+======================================================*/
+form {
+	margin: 0;
+}
+
+/*======================================================
+	FIELDS
+======================================================*/
+fieldset,
+.fieldset {
+	border-bottom: 1px dotted $m-grey;
+	padding: 0 0 $s-spacing;
+	margin: 0 0 $l-spacing;
+	border: none;
+}
+
+.form-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+	> li {
+		@extend .clearfix;
+		margin-bottom: $xs-spacing;
+
+		.field {
+			@extend .clearfix;
+			margin-bottom: $xs-spacing;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+.field {
+	@extend .clearfix;
+	margin-bottom: $s-spacing;
+}
+
+/*======================================================
+	LABELS
+======================================================*/
+form {
+	label {
+		font-weight: $medium;
+		color: $l-grey;
+		float: left;
+		width: calc(33% - 10px);
+		padding: $xs-spacing 0;
+
+		em,
+		span.required {
+			color: $error;
+			float: right;
+			margin-right: $s-spacing;
+		}
+	}
+}
+
+/*======================================================
+	INPUTS
+======================================================*/
+.input-box {
+	float: right;
+	width: 67%;
+}
+
+/*= Default =*/
+input.input-text,
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=url],
+input[type=number],
+.custom-dropdown strong,
+textarea,
+select {
+	@extend .main-transition;
+	display: block;
+	height: $form-field-height;
+	padding: $xs-spacing $s-spacing;
+	border: 1px solid $s-grey;
+	width: 100%;
+	font-size: $m-font;
+	color: $xl-grey;
+	background-color: $white;
+	background-position: right 10px center;
+
+	&:focus {
+		border-color: $xl-grey;
+		color: $xl-grey;
+		outline: none;
+	}
+
+	&.validation-failed {
+		border-color: $error !important;
+		color: $error !important;
+		font-weight: $bold;
+
+		~ label {
+			border-color: $error !important;
+			color: $error !important;
+			font-weight: $bold;
+		}
+	}
+	&.validation-passed {
+		border-color: $success !important;
+		color: $success !important;
+		font-weight: $bold;
+
+		~ label {
+			border-color: $success !important;
+			color: $success !important;
+			font-weight: $bold;
+		}
+	}
+	&:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0px 1000px white inset;
+	}
+}
+textarea {
+	height: 200px;
+}
+
+/*= Failed =*/
+input.validation-failed,
+select.validation-failed ~ label {
+	background-image: url('../../images/cross.png');
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+}
+select.validation-failed ~ label {
+	background-position: right 30px center;
+}
+
+/*= Passed =*/
+input.validation-passed,
+select.validation-passed ~ label {
+	background-image: url('../../images/check.png');
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+}
+select.validation-passed ~ label {
+	background-position: right 30px center;
+}
+
+/*= Date of birth =*/
+.customer-dob {
+	.dob-day,
+	.dob-month,
+	.dob-year {
+		@extend .clearfix;
+		display: inline-block;
+
+		input {
+			text-align: center;
+			width: 100px;
+			float: left;
+		}
+		label {
+			float: left;
+			width: auto;
+			margin: 0 $xs-spacing;
+		}
+	}
+}
+
+/*======================================================
+	WIDE
+======================================================*/
+.wide {
+	label,
+	.input-box {
+		float: none;
+		width: auto;
+		display: block;
+	}
+}
+
+/*======================================================
+	RADIO & CHECKBOX
+======================================================*/
+form .control {
+	position: relative;
+
+	.input-box {
+		width: auto;
+	}
+
+	label {
+		float: none;
+		display: block;
+		width: 100%;
+		padding-left: 38px;
+		position: relative;
+
+		&:before {
+			@extend .main-transition;
+			content: "";
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 7px;
+			width: 21px;
+			height: 21px;
+			line-height: 22px;
+			border: 1px solid $xl-grey;
+			background-color: $white;
+			cursor: pointer;
+			text-align: center;
+			font-size: $s-font;
+			color: $white;
+			font-family: 'simple-line-icons';
+		}
+
+		em {
+			float: none;
+			margin: 0;
+		}
+	}
+
+	input:disabled {
+		~ label {
+			&:before {
+				opacity: 0.5;
+				cursor: not-allowed;
+			}
+		}
+	}
+
+	input[type=radio],
+	input[type=checkbox] {
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+	}
+
+	// checkbox
+	.input-box.checkbox-checked ~ label:before,
+	input[type=checkbox] ~ :before {
+		content: "\e604";
+		border-color: $primary;
+	}
+
+	// radio
+	input[type=radio] ~ :before {
+		content: "\e604";
+		@include radius(50%);
+	}
+
+	// checked
+	.input-box.checkbox-checked ~ label:before,
+	input[type=checkbox]:checked ~ label:before,
+	.input-box.checked-checked + label:before,
+	input[type=radio]:checked + label:before {
+		color: $primary;
+		border-color: $primary;
+	}
+}
+
+/*======================================================
+	SELECT
+======================================================*/
+select {
+	option {
+		&:disabled {
+			color: $s-grey;
+		}
+	}
+}
+
+/*======================================================
+	SELECT OVERLAY
+======================================================*/
+.select-overlay {
+	position: relative;
+	
+	label {
+		position: absolute;
+		width: 100%;
+		height: $form-field-height;
+		line-height: $form-field-height;
+		padding: 0 $s-spacing;
+		border: 1px solid $s-grey;
+		background-color: $white;
+		color: $l-grey;
+		float: none;
+		left: 0;
+		top: 0;
+		text-overflow: ellipsis;
+		overflow: hidden;
+
+		&:after {
+			position: absolute;
+			content: "\e604";
+			font-family: 'simple-line-icons';
+			right: $xs-spacing;
+		}
+	}
+	.input-box {
+		width: 100%;
+		float: none;
+	}
+	select {
+		position: relative;
+		z-index: 100;
+		opacity: 0;
+		cursor: pointer;
+	}
+}
+
+p.required {
+	margin: $m-spacing 0;
+	color: $error;
+}
+.validation-advice {
+	display: none;
+}

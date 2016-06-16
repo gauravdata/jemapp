@@ -10,17 +10,17 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
@@ -32,13 +32,20 @@
  */
 ?>
 <?php if(count($this->getStores())>1): ?>
-<div class="form-language pull-right">
-    <select id="select-language" class="form-control" title="<?php echo $this->__('Your Language') ?>" onchange="window.location.href=this.value">
-		<option value=""><?php echo $this->__('Your Language:') ?></option>
+<div class="form-language">
+	<span>
+		<img src="<?php echo Mage::getDesign()->getSkinUrl() . 'images/flag-' . Mage::app()->getStore()->getLocaleCode() . '.png'; ?>" alt="<?php echo Mage::app()->getStore()->getLocaleCode(); ?>" /> <?php echo Mage::app()->getStore()->getName() ?>
+	</span>
+	<ul>
     <?php foreach ($this->getStores() as $_lang): ?>
-        <?php $_selected = ($_lang->getId() == $this->getCurrentStoreId()) ? ' selected="selected"' : '' ?>
-        <option value="<?php echo $_lang->getCurrentUrl() ?>"<?php echo $_selected ?>><?php echo $this->escapeHtml($_lang->getName()) ?></option>
+        <?php if($_lang->getId() != $this->getCurrentStoreId()) { ?>
+		<li>
+			<a href="<?php echo $_lang->getCurrentUrl(); ?>">
+				<img src="<?php echo Mage::getDesign()->getSkinUrl() . 'images/flag-' . $this->escapeHtml($_lang->getLocaleCode()) . '.png'; ?>" alt="<?php echo $this->escapeHtml($_lang->getName()); ?>" /> <?php echo $this->escapeHtml($_lang->getName()) ?>
+			</a>
+		</li>
+		<?php } ?>
     <?php endforeach; ?>
-    </select>
+	</ul>
 </div>
 <?php endif; ?>

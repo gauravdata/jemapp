@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 /**
  * Magento
@@ -113,3 +114,117 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
         </div>-->
     <?php endif; /* if ($this->getDisplayMinimalPrice() && $_minimalPrice): */ ?>
 <?php endif; /* if (!$_product->isGrouped()): */ ?>
+=======
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Template for displaying product price in different places (products grid, product view page etc)
+ *
+ * @see Mage_Catalog_Block_Product_Abstract
+ */
+?>
+<?php
+$_coreHelper = $this->helper('core');
+$_taxHelper  = $this->helper('tax');
+/* @var $_coreHelper Mage_Core_Helper_Data */
+/* @var $_taxHelper Mage_Tax_Helper_Data */
+
+$_product = $this->getProduct();
+$_storeId = $_product->getStoreId();
+$_id = $_product->getId();
+$_simplePricesTax = ($_taxHelper->displayPriceIncludingTax() || $_taxHelper->displayBothPrices());
+$_minimalPriceValue = $_product->getMinimalPrice();
+$_minimalPrice = $_taxHelper->getPrice($_product, $_minimalPriceValue, $_simplePricesTax);
+$_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStoreLabel();
+?>
+<?php if (!$_product->isGrouped()): ?>
+	<div class="price-box">
+		<?php $_price = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>
+		<?php $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice(), $_simplePricesTax) ?>
+		<?php $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()) ?>
+		<?php $_finalPriceInclTax = $_taxHelper->getPrice($_product, $_product->getFinalPrice(), true) ?>
+		<?php if ($_finalPrice >= $_price): ?>
+			<span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                <?php if ($_finalPrice == $_price): ?>
+					<?php echo $_coreHelper->currency($_price, true, true) ?>
+				<?php else: ?>
+					<?php echo $_coreHelper->currency($_finalPrice, true, true) ?>
+				<?php endif; ?>
+            </span>
+		<?php else: /* if ($_finalPrice == $_price): */ ?>
+			<p class="regular-price">
+				<span class="price-label"><?php echo $this->__('Regular Price') ?></span>
+                <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                    <?php echo $_coreHelper->currency($_regularPrice, true, false) ?>
+                </span>
+			</p>
+			<?php if ($_product->getPriceByThree()): ?>
+				<div class="third-price">
+					<span class="price-label"><?php echo $this->__('If three or more articles'); ?></span>
+					<span class="price">
+						<?php echo $_coreHelper->currency($_product->getPriceByThree(), true, false) ?>
+					</span>
+					<a href="#modal-third-price" class="show-modal">
+						<i class="icon-question icons"></i>
+					</a>
+				</div>
+			<?php endif;  ?>
+		<?php endif; /* if ($_finalPrice == $_price): */ ?>
+	</div>
+<?php else: /* if (!$_product->isGrouped()): */ ?>
+	<?php
+	$showMinPrice = $this->getDisplayMinimalPrice();
+	if ($showMinPrice && $_minimalPriceValue) {
+		$_exclTax = $_taxHelper->getPrice($_product, $_minimalPriceValue);
+		$_inclTax = $_taxHelper->getPrice($_product, $_minimalPriceValue, true);
+		$price    = $showMinPrice ? $_minimalPriceValue : 0;
+	} else {
+		$price    = $_product->getFinalPrice();
+		$_exclTax = $_taxHelper->getPrice($_product, $price);
+		$_inclTax = $_taxHelper->getPrice($_product, $price, true);
+	}
+	?>
+	<?php if ($price): ?>
+		<!--<div class="price-box">
+            <p<?php if ($showMinPrice): ?> class="minimal-price"<?php endif ?>>
+                <?php if ($showMinPrice): ?>
+                    <span class="price-label"><?php echo $this->__('Starting at:') ?></span>
+                <?php endif ?>
+                <?php
+		$_showPrice = $_inclTax;
+		if (!$_taxHelper->displayPriceIncludingTax()) {
+			$_showPrice = $_exclTax;
+		}
+		?>
+                <span class="price" id="product-minimal-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                    <?php echo $_coreHelper->currency($_showPrice, true, false) ?>
+                </span>
+            </p>
+        </div>-->
+	<?php endif; /* if ($this->getDisplayMinimalPrice() && $_minimalPrice): */ ?>
+<?php endif; /* if (!$_product->isGrouped()): */ ?>
+>>>>>>> 379c0670e4047f1554cdd012e3f3b6b19fd4baab

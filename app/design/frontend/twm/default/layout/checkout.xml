@@ -11,17 +11,17 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
@@ -38,17 +38,10 @@ Default layout, loads most of the pages
         <reference name="top.links">
             <block type="checkout/links" name="checkout_cart_link">
                 <action method="addCartLink"></action>
-                <!--<action method="addCheckoutLink"></action>-->
+                <action method="addCheckoutLink"></action>
             </block>
         </reference>
-        <reference name="right">
-            <block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/cart/sidebar.phtml" before="-">
-                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
-                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
-                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>
-                <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions"/>
-            </block>
-        </reference>
+
     </default>
 
     <checkout_cart_index translate="label">
@@ -58,6 +51,12 @@ Default layout, loads most of the pages
         <!-- Mage_Checkout -->
         <reference name="root">
             <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <block type="page/html_footer" name="footer" as="footer" template="page/html/footer_checkout.phtml">
+                <block type="page/html_wrapper" name="bottom.container" as="bottomContainer" translate="label">
+                    <label>Page Footer</label>
+                    <action method="setElementClass"><value>bottom-container</value></action>
+                </block>
+            </block>
         </reference>
         <reference name="content">
             <block type="checkout/cart" name="checkout.cart">
@@ -84,6 +83,7 @@ Default layout, loads most of the pages
                 </block>
 
                 <block type="checkout/cart_coupon" name="checkout.cart.coupon" as="coupon" template="checkout/cart/coupon.phtml"/>
+                <block type="checkout/cart_shipping" name="checkout.cart.shipping" as="shipping" template="checkout/cart/shipping.phtml"/>
                 <block type="checkout/cart_crosssell" name="checkout.cart.crosssell" as="crosssell" template="checkout/cart/crosssell.phtml"/>
 
                 <block type="checkout/cart_totals" name="checkout.cart.totals" as="totals" template="checkout/cart/totals.phtml"/>
@@ -300,18 +300,11 @@ One page checkout main layout
         <remove name="left"/>
 
         <reference name="root">
-            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
-        </reference>
-        <reference name="right">
-            <action method="unsetChildren"></action>
-            <block type="page/html_wrapper" name="checkout.progress.wrapper" translate="label">
-                <label>Checkout Progress Wrapper</label>
-                <action method="setElementId"><value>checkout-progress-wrapper</value></action>
-                <block type="checkout/onepage_progress" name="checkout.progress" before="-" template="checkout/onepage/progress.phtml">
-                    <block type="checkout/onepage_progress" name="billing.progress" template="checkout/onepage/progress/billing.phtml"></block>
-                    <block type="checkout/onepage_progress" name="shipping.progress" template="checkout/onepage/progress/shipping.phtml"></block>
-                    <block type="checkout/onepage_progress" name="shippingmethod.progress" template="checkout/onepage/progress/shipping_method.phtml"></block>
-                    <block type="checkout/onepage_progress" name="payment.progress" template="checkout/onepage/progress/payment.phtml"></block>
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <block type="page/html_footer" name="footer" as="footer" template="page/html/footer_checkout.phtml">
+                <block type="page/html_wrapper" name="bottom.container" as="bottomContainer" translate="label">
+                    <label>Page Footer</label>
+                    <action method="setElementClass"><value>bottom-container</value></action>
                 </block>
             </block>
         </reference>
@@ -335,13 +328,26 @@ One page checkout main layout
                     </block>
                 </block>
                 <block type="checkout/onepage_review" name="checkout.onepage.review" as="review" template="checkout/onepage/review.phtml"/>
+
+            <block type="page/html_wrapper" name="checkout.progress.wrapper" translate="label">
+                <label>Checkout Progress Wrapper</label>
+                <action method="setElementId"><value>checkout-progress-wrapper</value></action>
+                <block type="checkout/onepage_progress" name="checkout.progress" before="-" template="checkout/onepage/progress.phtml">
+                    <block type="checkout/onepage_progress" name="billing.progress" template="checkout/onepage/progress/billing.phtml"></block>
+                    <block type="checkout/onepage_progress" name="shipping.progress" template="checkout/onepage/progress/shipping.phtml"></block>
+                    <block type="checkout/onepage_progress" name="shippingmethod.progress" template="checkout/onepage/progress/shipping_method.phtml"></block>
+                    <block type="checkout/onepage_progress" name="payment.progress" template="checkout/onepage/progress/payment.phtml"></block>
+                    <block type="checkout/cart_totals" name="totals.progress" template="checkout/onepage/review/totals_sidebar.phtml"/>
+                </block>
+            </block>
+
             </block>
         </reference>
     </checkout_onepage_index>
 
-<!--
-One page checkout progress block
--->
+    <!--
+    One page checkout progress block
+    -->
 
     <checkout_onepage_progress>
         <!-- Mage_Checkout -->
@@ -354,6 +360,7 @@ One page checkout progress block
             <block type="checkout/onepage_progress" name="shipping.progress" template="checkout/onepage/progress/shipping.phtml"></block>
             <block type="checkout/onepage_progress" name="shippingmethod.progress" template="checkout/onepage/progress/shipping_method.phtml"></block>
             <block type="checkout/onepage_progress" name="payment.progress" template="checkout/onepage/progress/payment.phtml"></block>
+            <block type="checkout/cart_totals" name="totals.progress" template="checkout/onepage/review/totals_sidebar.phtml"/>
         </block>
     </checkout_onepage_progress>
 
@@ -368,6 +375,15 @@ One page checkout progress block
         </block>
     </checkout_onepage_progress_billing>
 
+    <checkout_onepage_progress_totals>
+        <!-- Mage_Checkout -->
+        <remove name="right"/>
+        <remove name="left"/>
+
+        <block type="checkout/cart_totals" name="root" output="toHtml" template="checkout/onepage/review/totals_sidebar.phtml">
+            <action method="setInfoTemplate"><method></method><template></template></action>
+        </block>
+    </checkout_onepage_progress_totals>
 
     <checkout_onepage_progress_shipping>
         <!-- Mage_Checkout -->
@@ -396,18 +412,18 @@ One page checkout progress block
     <remove name="left"/>
 
     <block type="checkout/onepage_progress" name="root" output="toHtml" template="checkout/onepage/progress/payment.phtml">
-            <block type="checkout/onepage_payment_info" name="payment_info">
-                <action method="setInfoTemplate"><method></method><template></template></action>
-            </block>
+        <block type="checkout/onepage_payment_info" name="payment_info">
             <action method="setInfoTemplate"><method></method><template></template></action>
         </block>
+        <action method="setInfoTemplate"><method></method><template></template></action>
+    </block>
     </checkout_onepage_progress_payment>
 
 <!-- end individual progress blocks -->
 
-<!--
-One page checkout payment methods block
--->
+    <!--
+    One page checkout payment methods block
+    -->
     <checkout_onepage_paymentmethod>
         <remove name="right"/>
         <remove name="left"/>
@@ -445,27 +461,27 @@ One page checkout order review block
 -->
 
     <checkout_onepage_review translate="label">
-            <label>One Page Checkout Overview</label>
-            <!-- Mage_Checkout -->
-            <remove name="right"/>
-            <remove name="left"/>
+        <label>One Page Checkout Overview</label>
+        <!-- Mage_Checkout -->
+        <remove name="right"/>
+        <remove name="left"/>
 
-            <block type="checkout/onepage_review_info" name="root" output="toHtml" template="checkout/onepage/review/info.phtml">
-                <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
-                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/review/item.phtml</template></action>
-                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
-                <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
-                <block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before" translate="label">
-                    <label>Items Before</label>
-                </block>
-	        <block type="core/text_list" name="checkout.onepage.review.info.items.after" as="items_after" translate="label">
-                    <label>Items After</label>
-                </block>
-                <block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="checkout/onepage/agreements.phtml"/>
-                <block type="core/template" name="checkout.onepage.review.button" as="button" template="checkout/onepage/review/button.phtml"/>
+        <block type="checkout/onepage_review_info" name="root" output="toHtml" template="checkout/onepage/review/info.phtml">
+            <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+            <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/review/item.phtml</template></action>
+            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
+            <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+            <block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before" translate="label">
+                <label>Items Before</label>
             </block>
+            <block type="core/text_list" name="checkout.onepage.review.info.items.after" as="items_after" translate="label">
+                <label>Items After</label>
+            </block>
+            <block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="checkout/onepage/agreements.phtml"/>
+            <block type="core/template" name="checkout.onepage.review.button" as="button" template="checkout/onepage/review/button.phtml"/>
+        </block>
     </checkout_onepage_review>
-                                                                                                                                                                                                                
+
     <checkout_onepage_success translate="label">
         <label>One Page Checkout Success</label>
         <reference name="root">

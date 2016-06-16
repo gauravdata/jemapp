@@ -1,0 +1,27 @@
+<?php if($this->getCollection()->getSize()): ?>
+    <div class="pager">
+        <p class="amount">
+            <?php if($this->getLastPageNum()>1): ?>
+                <?php echo $this->__('Items %s to %s of %s total', $this->getFirstNum(), $this->getLastNum(), $this->getTotalNum()) ?>
+            <?php else: ?>
+                <strong><?php echo $this->__('%s Item(s)', $this->getTotalNum()) ?></strong>
+            <?php endif; ?>
+        </p>
+
+        <div class="limiter">
+            <div class="select-overlay">
+                <select onchange="setLocation(this.value)">
+                    <option disabled><?php echo $this->__('Show') ?> <?php echo $this->__('per page') ?></option>
+                <?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
+                    <option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+                        <?php echo $_limit ?>
+                    </option>
+                <?php endforeach; ?>
+                </select>
+                <label><?php echo $this->__('Show') ?> <?php echo $this->__('per page') ?></label>
+            </div>
+        </div>
+
+        <?php echo $this->getPagerHtml() ?>
+    </div>
+<?php endif ?>

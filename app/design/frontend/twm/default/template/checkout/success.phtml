@@ -10,120 +10,59 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<h1><?php echo $this->__('Your order has been received.') ?></h1>
-<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+<div class="area bg-xs-grey">
+    <div class="content-container">
+        <div class="page-title">
+            <h1><?php echo $this->__('Your order has been received.') ?></h1>
+        </div>
+        <?php echo $this->getMessagesBlock()->toHtml() ?>
+        <p><strong><?php echo $this->__('Thank you for your purchase!') ?></strong></p>
 
-<?php if ($this->getOrderId()):?>
-<?php if ($this->getCanViewOrder()) :?>
-    <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
-<?php  else :?>
-    <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
-<?php endif;?>
-    <p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
-<?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
-    <p>
-        <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
-        <?php echo $this->getChildHtml() ?>
-    </p>
-<?php endif;?>
-<?php endif;?>
+        <?php if ($this->getOrderId()):?>
+        <?php if ($this->getCanViewOrder()) :?>
+            <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+        <?php  else :?>
+            <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+        <?php endif;?>
+            <p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+        <?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
+            <p>
+                <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
+                <?php echo $this->getChildHtml() ?>
+            </p>
+        <?php endif;?>
+        <?php endif;?>
 
-<?php if ($this->getAgreementRefId()): ?>
-    <p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
-<?php endif;?>
+        <?php if ($this->getAgreementRefId()): ?>
+            <p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+        <?php endif;?>
 
-<?php if ($profiles = $this->getRecurringProfiles()):?>
-<p><?php echo $this->__('Your recurring payment profiles:'); ?></p>
-<ul class="disc">
-<?php foreach($profiles as $profile):?>
-<?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
-    <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
-<?php endforeach;?>
-</ul>
-<?php endif;?>
-<button type="button" class="btn btn-success" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+        <?php if ($profiles = $this->getRecurringProfiles()):?>
+        <p><?php echo $this->__('Your recurring payment profiles:'); ?></p>
+        <ul class="disc">
+        <?php foreach($profiles as $profile):?>
+        <?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+            <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
+        <?php endforeach;?>
+        </ul>
+        <?php endif;?>
 
-<?php if ($this->getOrderId()):?>
-    <?php $_order = Mage::getModel('sales/order')->loadByIncrementId($this->getOrderId()); ?>
-    <script type="text/javascript">
-        var fb_param = {};
-        fb_param.pixel_id = '6007916391973';
-        fb_param.value = '<?=$_order->subtotal?>';
-        fb_param.currency = 'EUR';
-        (function(){
-            var fpw = document.createElement('script');
-            fpw.async = true;
-            fpw.src = '//connect.facebook.net/en_US/fp.js';
-            var ref = document.getElementsByTagName('script')[0];
-            ref.parentNode.insertBefore(fpw, ref);
-        })();
-    </script>
-    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/offsite_event.php?id=6007916391973&amp;value=<?=$_order->subtotal?>&amp;currency=EUR" /></noscript>
-    <!-- START of the zanox affiliate HTML code -->
-    <!-- (The HTML code may not be changed in the sense of faultless functionality!) -->
-    <?php $_orderId = Mage::getSingleton('checkout/session')->getLastOrderId();  ?>
-    <?php $_customerId = Mage::getSingleton('customer/session')->getCustomerId(); ?>
-    <?php $_customerId = (empty($_customerId))? 1:$_customerId; ?>
-    <script type="text/javascript" src="https://ad.zanox.com/pps/?15071C778574155&mode=[[1]]&CID=[[NL]]&CustomerID=[[<?php echo $_customerId; ?>]]&OrderID=[[<?php echo $_order->getIncrementId(); ?>]]&CurrencySymbol=[[EUR]]&TotalPrice=[[<?php echo $_order->getSubtotal();?>]]">
-    </script>
-    <noscript>
-        <img src="https://ad.zanox.com/pps/?15071C778574155&mode=[[2]]&CID=[[NL]]&CustomerID=[[<?php echo $_customerId; ?>]]&OrderID=[[<?php echo $_order->getIncrementId(); ?>]]&CurrencySymbol=[[EUR]]&TotalPrice=[[<?php echo $_order->getSubtotal();?>]]" width="1" height="1" />
-    </noscript>
-    <!-- END zanox-affiliate HTML-Code -->
-    
-    <?php if(Mage::app()->getStore()->getCode() == 'jma_nl'): ?>
-        <img src="//drs2.veinteractive.com/DataReceiverService.asmx/Pixel?journeycode=C8C91B0B-18FC-4673-9BD5-4A499985F786" width="1" height="1"/>
-    <?php endif; ?>
-<?php endif;?>
-
-<?php if(Mage::app()->getStore()->getCode() == 'jma_nl' || Mage::app()->getStore()->getCode() == 'jma_de') { ?>
-	<?php
-	$orderItems = $_order->getAllItems();
-	$purchasedSkus = array();
-	foreach($orderItems as $orderItem) {
-		$purchasedSkus[] = $orderItem->getSku();
-	}
-	?>
-	<!-- Google Code for Ecommerce -->
-	<script type="text/javascript">
-		var google_tag_params = {
-			ecomm_prodid: <?php echo json_encode($purchasedSkus); ?>,
-			ecomm_pagetype: 'purchase',
-			ecomm_totalvalue: '<?=$_order->subtotal?>'
-		};
-	</script>
-
-	<!-- Google Code for Verkoop jemappelle.nl Conversion Page -->
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 962945563;
-		var google_conversion_language = "en";
-		var google_conversion_format = "2";
-		var google_conversion_color = "ffffff";
-		var google_conversion_label = "4GcHCNyZtVkQm8SVywM";
-		var google_remarketing_only = false;
-		/* ]]> */
-	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-	<noscript>
-		<div style="display:inline;">
-			<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/962945563/?label=4GcHCNyZtVkQm8SVywM&amp;guid=ON&amp;script=0"/>
-		</div>
-	</noscript>
-<?php } ?>
+        <div class="buttons-set">
+            <button type="button" class="button" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Continue Shopping')) ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+        </div>
+    </div>
+</div>
