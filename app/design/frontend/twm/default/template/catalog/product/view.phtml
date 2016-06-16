@@ -61,7 +61,9 @@
             <div class="product-shop">
                 <div class="product-name">
                     <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
-                    <h2><?php echo $_product->getAttributeText('color_product'); ?></h2>
+                    <?php if($_product->getColorProduct()) { ?>
+                    <h2><?php echo $_product->getColorProduct(); ?></h2>
+                    <?php } ?>
                 </div>
 
                 <?php echo $this->getChildHtml('alert_urls') ?>
