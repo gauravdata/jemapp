@@ -44,7 +44,7 @@
     <?php $_columnCount = $this->getColumnCount(); ?>
 	<ul class="products-grid">
     <?php $i=0; foreach ($_productCollection as $_product): ?>
-		<li class="item">
+		<li class="item sync-height">
 
 			<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
 				<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(720,965); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
