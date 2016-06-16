@@ -37,8 +37,11 @@ Checkout.prototype = {
         this.payment = '';
         this.loadWaiting = false;
         this.steps = ['login', 'billing', 'shipping', 'shipping_method', 'payment', 'review'];
-        //We use billing as beginning step since progress bar tracks from billing
-        this.currentStep = 'billing';
+        if($('login-form') != undefined) {
+            this.currentStep = 'login';
+        } else {
+            this.currentStep = 'billing';
+        }
 	this._updateActive();
 
         this.accordion.sections.each(function(section) {
@@ -55,7 +58,24 @@ Checkout.prototype = {
                 $(e).removeClassName('active');
             });
             scrollToId('#top');
+            $$('.progress-bar, .checkout-sidebar').each(function (e) {
+                $(e).removeClassName('hidden');
+            });
+            $$('.checkout-content').each(function (e) {
+                $(e).removeClassName('col-12');
+            });
             switch (this.currentStep) {
+                case 'login':
+                    $$('.progress-bar li:nth-child(1)').each(function (e) {
+                        $(e).addClassName('active');
+                    });
+                    $$('.progress-bar, .checkout-sidebar').each(function (e) {
+                        $(e).addClassName('hidden');
+                    });
+                    $$('.checkout-content').each(function (e) {
+                        $(e).addClassName('col-12');
+                    });
+                    break;
                 case 'billing':
                     $$('.progress-bar li:nth-child(1)').each(function (e) {
                         $(e).addClassName('active');
