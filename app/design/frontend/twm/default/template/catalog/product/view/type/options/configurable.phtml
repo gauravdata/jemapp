@@ -33,7 +33,6 @@ $config = Mage::helper('core')->jsonDecode($jsonConfig);
 Mage::helper('catalog/product')->setSkipSaleableCheck(false);
 
 $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
-var_dump($this->getParentBlock()->getBlockAlias());
 ?>
 <?php if ($_product->isSaleable() && count($_attributes)):?>
     <div class="row thin">
