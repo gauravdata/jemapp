@@ -52,44 +52,9 @@
 	
 	<!-- example of redis cache -->
         <cache>
-            <backend>Cm_Cache_Backend_Redis</backend>
-            <backend_options>
-                <server>127.0.0.1</server> <!-- or absolute path to unix socket for better performance -->
-                <port>6379</port>
-                <database>0</database>
-                <password></password>
-                <force_standalone>0</force_standalone>  <!-- 0 for phpredis, 1 for standalone PHP -->
-                <connect_retries>1</connect_retries>    <!-- Reduces errors due to random connection failures -->
-                <automatic_cleaning_factor>0</automatic_cleaning_factor> <!-- Disabled by default -->
-                <compress_data>1</compress_data>  <!-- 0-9 for compression level, recommended: 0 or 1 -->
-                <compress_tags>1</compress_tags>  <!-- 0-9 for compression level, recommended: 0 or 1 -->
-                <compress_threshold>20480</compress_threshold>  <!-- Strings below this size will not be compressed -->
-                <compression_lib>gzip</compression_lib> <!-- Supports gzip, lzf and snappy -->
-                <persistent>1</persistent> <!-- persistence value, 0: not in use, > 0 used as persistence ID -->
-            </backend_options>
+            <backend>apc</backend>
+	     <prefix>jma_live_</prefix>
         </cache>
-
-	<!-- example of redis full page cache -->
-        <full_page_cache>
-            <backend>Cm_Cache_Backend_Redis</backend>
-            <backend_options>
-                <server>127.0.0.1</server> <!-- or absolute path to unix socket for better performance -->
-                <port>6379</port>
-                <database>1</database>
-                <password></password>
-                <force_standalone>0</force_standalone>  <!-- 0 for phpredis, 1 for standalone PHP -->
-                <connect_retries>1</connect_retries>    <!-- Reduces errors due to random connection failures -->
-                <automatic_cleaning_factor>0</automatic_cleaning_factor> <!-- Disabled by default -->
-                <!-- in FPC data is already gzipped, no need to do this twice -->
-                <compress_data>0</compress_data>  <!-- 0-9 for compression level, recommended: 0 or 1 -->
-                <compress_tags>1</compress_tags>  <!-- 0-9 for compression level, recommended: 0 or 1 -->
-                <compress_threshold>20480</compress_threshold>  <!-- Strings below this size will not be compressed -->
-                <compression_lib>gzip</compression_lib> <!-- Supports gzip, lzf and snappy -->
-                <lifetimelimit>43200</lifetimelimit> <!-- set lifetime for keys without TTL -->
-                <persistent>2</persistent>
-            </backend_options>
-        </full_page_cache>
-
     </global>
     <admin>
         <routers>
