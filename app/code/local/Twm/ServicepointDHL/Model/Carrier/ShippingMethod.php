@@ -36,7 +36,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
         $cached = Mage::app()->getCache();
         if (($result = $cached->load($key)) !== false) {
             $result = Zend_Json::decode($result);
-            $result = array_slice($result['data']['items'], 0, 3);
+            $result = array_slice($result['data']['items'], 0, 5);
             return $result;
         }
 	if (empty($query) || $query == '*') {
@@ -60,7 +60,7 @@ class Twm_ServicepointDHL_Model_Carrier_ShippingMethod extends Mage_Shipping_Mod
             //Mage::getSingleton('core/session')->addNotice($result['status_msg']);
             }
             $cached->save($response->getBody(), $key, array("dhl"), 30 * 24 * 3600);
-            $result = array_slice($result['data']['items'], 0, 3);
+            $result = array_slice($result['data']['items'], 0, 5);
             return $result;
         }
         return array();

@@ -24,7 +24,6 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-
 <?php
 $_product    = $this->getProduct();
 Mage::helper('catalog/product')->setSkipSaleableCheck(true);
@@ -62,7 +61,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
             var o = _all_options.attributes[<?php echo $_attribute->getAttributeId() ?>].options[i];
             var _found = false;
             for (var j=0;j<_options.attributes[<?php echo $_attribute->getAttributeId() ?>].options.length;j++) {
-                var k = _all_options.attributes[<?php echo $_attribute->getAttributeId() ?>].options[j];
+                var k = _options.attributes[<?php echo $_attribute->getAttributeId() ?>].options[j];
                 if (o.id == k.id) {
                     _found = true;
                     break;
