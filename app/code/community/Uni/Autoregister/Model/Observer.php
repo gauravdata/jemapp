@@ -58,6 +58,10 @@ class Uni_Autoregister_Model_Observer {
                         $_order->setCustomerId($_custid);
                         $_order->setCustomer($customer);
 
+                        $resource = Mage::getSingleton ( 'core/resource' );
+                        $write = $resource->getConnection ( 'core_write' );
+                        $write->query ( "UPDATE ".Mage::getSingleton('core/resource')->getTableName('sales_flat_order')." SET customer_id = '" . $_custid . "', customer_is_guest = '0', customer_group_id = '1' WHERE entity_id = '" . $_order->getId() . "'" );
+                        
                         /*
                         $_orderBilling = $_orderDetails->getBillingAddress();
 
