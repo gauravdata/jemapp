@@ -59,6 +59,8 @@ class Uni_Autoregister_Model_Observer {
                         Mage::log('Autoregister: set customer id "#'.$_custid.'" to order id "#'.$_order->getId().'"', Zend_Log::DEBUG, 'twm.log');
                         $_order->setCustomerId($_custid);
                         $_order->setCustomer($customer);
+                        $_order->setCustomerGroupId(1);
+                        $_order->setCustomerIsGuest(0);
 
                         $resource = Mage::getSingleton ( 'core/resource' );
                         $write = $resource->getConnection ( 'core_write' );
