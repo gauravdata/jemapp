@@ -38,11 +38,13 @@ class Uni_Autoregister_Model_Observer {
                     ->setPassword($_randPassword);
 
                 try {
-                    Mage::log('Autoregister: Try to save customer', Zend_Log::DEBUG, 'twm.log');
+                    Mage::log('Autoregister: Try to save customer ' . $_orderDetails->getCustomerEmail(), Zend_Log::DEBUG, 'twm.log');
                     $customer->save();
-                    Mage::log('Autoregister: saved new customer', Zend_Log::DEBUG, 'twm.log');
+                    Mage::log('Autoregister: saved new customer '. $_orderDetails->getCustomerEmail(), Zend_Log::DEBUG, 'twm.log');
 /////***Registration End***/////////
                 } catch (Exception $e) {
+                    Mage::log('Autoregister: '. json_encode($customer->debug()), Zend_Log::DEBUG, 'twm.log');
+                    Mage::logException($e);
                     // customer already exists??
                     $customer = Mage::getModel('customer/customer')
                         ->setWebsiteId($websiteId)
@@ -61,7 +63,7 @@ class Uni_Autoregister_Model_Observer {
                         $resource = Mage::getSingleton ( 'core/resource' );
                         $write = $resource->getConnection ( 'core_write' );
                         $write->query ( "UPDATE ".Mage::getSingleton('core/resource')->getTableName('sales_flat_order')." SET customer_id = '" . $_custid . "', customer_is_guest = '0', customer_group_id = '1' WHERE entity_id = '" . $_order->getId() . "'" );
-                        
+
                         /*
                         $_orderBilling = $_orderDetails->getBillingAddress();
 
