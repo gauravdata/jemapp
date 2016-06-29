@@ -38,7 +38,9 @@ class Uni_Autoregister_Model_Observer {
                     ->setPassword($_randPassword);
 
                 try {
+                    Mage::log('Autoregister: Try to save customer', Zend_Log::DEBUG, 'twm.log');
                     $customer->save();
+                    Mage::log('Autoregister: saved new customer', Zend_Log::DEBUG, 'twm.log');
 /////***Registration End***/////////
                 } catch (Exception $e) {
                     // customer already exists??
@@ -52,7 +54,7 @@ class Uni_Autoregister_Model_Observer {
 
                     if ($customer->getId()) {
                         $_custid = $customer->getId();
-
+                        Mage::log('Autoregister: set customer id "#'.$_custid.'" to order id "#'.$_order->getId().'"', Zend_Log::DEBUG, 'twm.log');
                         $_order->setCustomerId($_custid);
                         $_order->setCustomer($customer);
 
@@ -82,7 +84,6 @@ class Uni_Autoregister_Model_Observer {
 /////***Save Address End***/////////                
                 } catch (Exception $e) {
                     Mage::logException($e);
-                    var_dump($e); die();
                 }
                 Mage::getSingleton('checkout/session')->unsIsGuest();
             }
