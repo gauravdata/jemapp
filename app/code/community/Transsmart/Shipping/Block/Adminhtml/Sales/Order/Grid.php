@@ -5,7 +5,7 @@
  * @package     Transsmart_Shipping
  * @copyright   Copyright (c) 2016 Techtwo Webdevelopment B.V. (http://www.techtwo.nl)
  */
-class Transsmart_Shipping_Block_Adminhtml_Sales_Order_Grid extends Mage_Adminhtml_Block_Sales_Order_Grid
+class Transsmart_Shipping_Block_Adminhtml_Sales_Order_Grid extends Dealer4dealer_Syncinfo_Block_Sales_Order_Column
 {
     /**
      * Prepare grid massaction actions
