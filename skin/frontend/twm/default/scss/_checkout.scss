@@ -192,6 +192,15 @@ ol.opc {
 /*======================================================
 	SHIPPING & PAYMENT METHODS
 ======================================================*/
+#opc-shipping_method {
+	.no-display ~ label {
+		padding-left: 0 !important;
+
+		&:before {
+			display: none;
+		}
+	}
+}
 .sp-methods,
 .payment-methods {
 	margin: 0;
