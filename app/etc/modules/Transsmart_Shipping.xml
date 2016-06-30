@@ -9,7 +9,7 @@
 <config>
     <modules>
         <Transsmart_Shipping>
-            <active>false</active>
+            <active>true</active>
             <codePool>community</codePool>
         </Transsmart_Shipping>
     </modules>
