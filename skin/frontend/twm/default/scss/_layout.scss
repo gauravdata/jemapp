@@ -217,16 +217,18 @@ html, body {
 }
 
 .content-box-wrapper {
-	position: relative;
 	height: 675px;
+	display: table;
+	vertical-align: middle;
+	width: 80%;
+	max-width: 420px;
+	margin: 0 auto;
+	padding: $m-spacing 0;
 
 	.content-box {
-		@include transform(-50%, -50%);
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		width: 80%;
-		max-width: 420px;
+		display: table-cell;
+		vertical-align: middle;
+		position: relative;
 	}
 }
 

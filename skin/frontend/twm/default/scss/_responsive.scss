@@ -136,10 +136,10 @@
 		margin: 0;
 	}
 	.content-box-wrapper {
-		.content-box {
-			width: 100%;
-			padding: 0 $l-spacing;
-		}
+		width: 100%;
+		max-width: none;
+		padding: $s-spacing;
+		margin: 0;
 	}
 	.owl-title {
 		margin: $m-spacing;
