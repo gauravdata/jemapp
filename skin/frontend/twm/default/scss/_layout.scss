@@ -129,7 +129,7 @@ html, body {
 /*======================================================
 	MAIN
 ======================================================*/
-#content {
+#main-content {
 	@extend .main-transition;
 	position: relative;
 	padding-top: $header-height;
@@ -687,7 +687,7 @@ ul.social {
 	#side-nav {
 		left: -$side-nav-width;
 	}
-	#content,
+	#main-content,
 	.toolbar.fixed,
 	#footer {
 		width: 100%;

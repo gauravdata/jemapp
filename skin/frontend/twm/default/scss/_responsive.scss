@@ -39,7 +39,7 @@
 	#side-nav {
 		left: -250px;
 	}
-	#content,
+	#main-content,
 	#footer,
 	.toolbar.fixed {
 		left: 0;
@@ -425,7 +425,7 @@
 		}
 	}
 	.catalog-category-view {
-		#content {
+		#main-content {
 			.content-container {
 				width: 100%;
 			}
