@@ -11,7 +11,7 @@
 <config>
     <modules>
         <Icreators_Emalo>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </Icreators_Emalo>
     </modules>
