@@ -180,33 +180,69 @@ Transsmart.Shipping.Pickup = Class.create({
         searchField.addClassName('disabled');
         searchButton.disabled = true;
         searchButton.addClassName('disabled');
+        var self = this;
 
-        this.retrieveLocation(searchValue, function (bounds) {
-            searchField.disabled = false;
-            searchField.removeClassName('disabled');
-            searchButton.disabled = false;
-            searchButton.removeClassName('disabled');
+        this.googleGeocoder.geocode( { 'address': searchValue}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                //console.log(results[0].formatted_address);
+                searchValue = results[0].formatted_address;
+                self.retrieveLocation(searchValue, function (bounds) {
+                        searchField.disabled = false;
+                        searchField.removeClassName('disabled');
+                        searchButton.disabled = false;
+                        searchButton.removeClassName('disabled');
 
-            this.updateMapMarkers();
+                        this.updateMapMarkers();
 
-            google.maps.event.trigger(this.googleMaps, 'resize');
-            this.googleMaps.setCenter(bounds.getCenter());
-            this.googleMaps.fitBounds(bounds);
+                        google.maps.event.trigger(this.googleMaps, 'resize');
+                        this.googleMaps.setCenter(bounds.getCenter());
+                        this.googleMaps.fitBounds(bounds);
 
-        }.bind(this),
-        function (error) {
-            searchField.disabled = false;
-            searchField.removeClassName('disabled');
-            searchButton.disabled = false;
-            searchButton.removeClassName('disabled');
+                    }.bind(self),
+                    function (error) {
+                        searchField.disabled = false;
+                        searchField.removeClassName('disabled');
+                        searchButton.disabled = false;
+                        searchButton.removeClassName('disabled');
 
-            if (this.isClosing) {
-                return;
+                        if (this.isClosing) {
+                            return;
+                        }
+                        Transsmart.Logger.log('Transsmart_Shipping error: ' + error);
+                        alert(Translator.translate('Search did not succeed. Please try again.'));
+
+                    }.bind(self));
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
             }
-            Transsmart.Logger.log('Transsmart_Shipping error: ' + error);
-            alert(Translator.translate('Search did not succeed. Please try again.'));
+        });
 
-        }.bind(this));
+        // this.retrieveLocation(searchValue, function (bounds) {
+        //     searchField.disabled = false;
+        //     searchField.removeClassName('disabled');
+        //     searchButton.disabled = false;
+        //     searchButton.removeClassName('disabled');
+        //
+        //     this.updateMapMarkers();
+        //
+        //     google.maps.event.trigger(this.googleMaps, 'resize');
+        //     this.googleMaps.setCenter(bounds.getCenter());
+        //     this.googleMaps.fitBounds(bounds);
+        //
+        // }.bind(this),
+        // function (error) {
+        //     searchField.disabled = false;
+        //     searchField.removeClassName('disabled');
+        //     searchButton.disabled = false;
+        //     searchButton.removeClassName('disabled');
+        //
+        //     if (this.isClosing) {
+        //         return;
+        //     }
+        //     Transsmart.Logger.log('Transsmart_Shipping error: ' + error);
+        //     alert(Translator.translate('Search did not succeed. Please try again.'));
+        //
+        // }.bind(this));
     },
 
     /**

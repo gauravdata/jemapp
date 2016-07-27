@@ -142,6 +142,7 @@ class Transsmart_Shipping_Helper_Location extends Mage_Core_Helper_Abstract
                 $city = $shippingAddress->getCity();
                 $country = $shippingAddress->getCountryId();
                 $street = $shippingAddress->getStreet(1);
+                $housenr = $shippingAddress->getStreet(2);
 
                 if (!empty($street) && strlen($street) > 0) {
                     preg_match('#^([^\d]*[^\d\s]) *(\d.*)$#', $street, $match);
