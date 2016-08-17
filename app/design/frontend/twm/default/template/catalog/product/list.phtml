@@ -45,19 +45,21 @@
 	<ul class="products-grid">
     <?php $i=0; foreach ($_productCollection as $_product): ?>
 		<li class="item sync-height">
+			<div class="onsale-category-container-list">
+				<?php echo Mage::helper('onsale')->getCategoryLabelHtml($_product); ?>
+				<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
+					<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(720,965); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+					<?php if ($_product->hasHoverImage() && $_product->getHoverImage() != 'no_selection'): ?>
+						<img class="hover-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'hover_image')->resize(720,965); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'hover_image'), null, true) ?>" />
+					<?php endif; ?>
+				</a>
 
-			<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
-				<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(720,965); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
-				<?php if ($_product->hasHoverImage() && $_product->getHoverImage() != 'no_selection'): ?>
-					<img class="hover-image" src="<?php echo $this->helper('catalog/image')->init($_product, 'hover_image')->resize(720,965); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'hover_image'), null, true) ?>" />
+				<h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+				<?php if($_product->getRatingSummary()): ?>
+				<?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
 				<?php endif; ?>
-			</a>
-
-			<h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
-			<?php if($_product->getRatingSummary()): ?>
-			<?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
-			<?php endif; ?>
-			<?php echo $this->getPriceHtml($_product, true) ?>
+				<?php echo $this->getPriceHtml($_product, true) ?>
+			</div>
 		</li>
 	<?php endforeach ?>
 	</ul>
