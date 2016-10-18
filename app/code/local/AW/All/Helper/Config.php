@@ -18,8 +18,8 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_Previousnext
- * @version    1.3.0
+ * @package    AW_Followupemail
+ * @version    3.6.5
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
@@ -30,11 +30,5 @@ class AW_All_Helper_Config extends Mage_Core_Helper_Abstract
     const EXTENSIONS_FEED_URL = 'http://media.aheadworks.com/feeds/extensions.xml';
     /** Updates Feed path */
     const UPDATES_FEED_URL = 'http://media.aheadworks.com/feeds/updates.xml';
-    /** Estore URL */
-    const STORE_URL = 'http://ecommerce.aheadworks.com/estore/';
-
-    /** EStore response cache key*/
-    const STORE_RESPONSE_CACHE_KEY = 'aw_all_store_response_cache_key';
-
 
 }

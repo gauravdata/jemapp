@@ -12,20 +12,17 @@
  * =================================================================
  *                 MAGENTO EDITION USAGE NOTICE
  * =================================================================
- * This package designed for Magento community edition
- * aheadWorks does not guarantee correct work of this extension
- * on any other Magento edition except Magento community edition.
- * aheadWorks does not provide extension support in case of
- * incorrect edition usage.
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
  * =================================================================
  *
  * @category   AW
- * @package    AW_Helpdeskultimate
- * @version    2.10.4
+ * @package    AW_Followupemail
+ * @version    3.6.5
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
-
 
 class AW_Core_Object extends Varien_Object
 {
@@ -34,9 +31,8 @@ class AW_Core_Object extends Varien_Object
      *
      * @param object $message
      * @param object $severity [optional]
-     * @param string $details [optional]
      *
-     * @return void
+     * @return
      */
     public function log($message, $severity = null, $details = '')
     {
