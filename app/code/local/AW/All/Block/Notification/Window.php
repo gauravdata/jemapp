@@ -18,40 +18,15 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_Previousnext
- * @version    1.3.0
+ * @package    AW_Followupemail
+ * @version    3.6.5
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
 
+
 class AW_All_Block_Notification_Window extends Mage_Adminhtml_Block_Notification_Window
 {
-    protected function _construct()
-    {
-        parent::_construct();
-
-        if (!Mage::getStoreConfig('awall/install/run')) {
-            $c = Mage::getModel('core/config_data');
-            $c
-                    ->setScope('default')
-                    ->setPath('awall/install/run')
-                    ->setValue(time())
-                    ->save();
-            $this->setHeaderText($this->__("aheadWorks Notifications Setup"));
-            $this->setIsFirstRun(1);
-            $this->setIsHtml(1);
-
-        }
-    }
-
-    protected function _toHtml()
-    {
-        if ($this->getIsHtml()) {
-            $this->setTemplate('aw_all/notification/window.phtml');
-        }
-        return parent::_toHtml();
-    }
-
     public function presetFirstSetup()
     {
 
@@ -60,12 +35,39 @@ class AW_All_Block_Notification_Window extends Mage_Adminhtml_Block_Notification
     public function getNoticeMessageText()
     {
         if ($this->getIsFirstRun()) {
-            $child = $this->getLayout()->createBlock('core/template')->setTemplate('aw_all/notification/window/first-run.phtml')->toHtml();
+            $child = $this->getLayout()->createBlock('core/template')->setTemplate(
+                'aw_all/notification/window/first-run.phtml'
+            )->toHtml();
             return $child;
         } else {
             return $this->getData('notice_message_text');
         }
     }
 
+    protected function _construct()
+    {
+        parent::_construct();
 
+        if (!Mage::getStoreConfig('awall/install/run')) {
+            $c = Mage::getModel('core/config_data');
+            $c
+                ->setScope('default')
+                ->setPath('awall/install/run')
+                ->setValue(time())
+                ->save();
+            $this->setHeaderText($this->__("aheadWorks Notifications Setup"));
+            $this->setIsFirstRun(1);
+            $this->setIsHtml(1);
+        }
+    }
+
+    protected function _toHtml()
+    {
+        if ($this->getIsHtml()) {
+            $this->setTemplate('aw_all/notification/window.phtml');
+        } else {
+            $this->setTemplate('aw_all/notification/window/standard.phtml');
+        }
+        return parent::_toHtml();
+    }
 }

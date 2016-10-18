@@ -2,7 +2,7 @@
 <config>
     <modules>
         <AW_All>
-            <version>2.3.0</version><platform>ce</platform>
+            <version>2.3.8</version><platform>ce</platform>
         </AW_All>
     </modules>
 
@@ -51,13 +51,14 @@
     </global>
     <admin>
         <routers>
-            <awall_admin>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>AW_All</module>
-                    <frontName>awall_admin</frontName>
+                    <modules>
+                        <awall after="Mage_Adminhtml">AW_All_Adminhtml</awall>
+                        <frontName>awall</frontName>
+                    </modules>
                 </args>
-            </awall_admin>
+            </adminhtml>
         </routers>
     </admin>
     <adminhtml>
@@ -83,9 +84,6 @@
                                         <awall>
                                             <title>aheadWorks - All</title>
                                         </awall>
-                                        <awstore>
-                                            <title>aheadWorks - Extensions Store</title>
-                                        </awstore>
                                     </children>
                                 </config>
                             </children>
@@ -102,11 +100,6 @@
                         <class>awall/feed_extensions</class>
                         <method>check</method>
                     </awall_exts>
-                    <awall_check>
-                        <type>singleton</type>
-                        <class>awall/feed_extensions</class>
-                        <method>checkExtensions</method>
-                    </awall_check>
                     <awall_upds>
                         <type>singleton</type>
                         <class>awall/feed_updates</class>
@@ -114,7 +107,7 @@
                     </awall_upds>
                 </observers>
             </controller_action_predispatch>
-            <adminhtml_block_html_before>
+            <controller_action_layout_render_before_adminhtml_system_config_edit>
                 <observers>
                     <awall_tabs_sorting>
                         <type>singleton</type>
@@ -122,7 +115,7 @@
                         <method>prepareAWTabs</method>
                     </awall_tabs_sorting>
                 </observers>
-            </adminhtml_block_html_before>
+            </controller_action_layout_render_before_adminhtml_system_config_edit>
         </events>
     </adminhtml>
     <default>
@@ -136,4 +129,16 @@
             </feed>
         </awall>
     </default>
+    <crontab>
+        <jobs>
+            <aw_all_cron>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>awall/cron::run</model>
+                </run>
+            </aw_all_cron>
+        </jobs>
+    </crontab>
 </config>
