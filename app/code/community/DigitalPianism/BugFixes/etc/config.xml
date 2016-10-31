@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <DigitalPianism_BugFixes>
+            <version>0.0.3</version>
+        </DigitalPianism_BugFixes>
+    </modules>
+
+    <global>
+        <sales>
+            <quote>
+                <totals>
+                    <freeshipping>
+                        <after>subtotal</after>
+                        <before>tax_subtotal,shipping</before>
+                    </freeshipping>
+                </totals>
+            </quote>
+        </sales>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <DigitalPianism_BugFixes before="Mage_Adminhtml">DigitalPianism_BugFixes_Adminhtml</DigitalPianism_BugFixes>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>
