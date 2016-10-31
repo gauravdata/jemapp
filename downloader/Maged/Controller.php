@@ -10,18 +10,18 @@
  * http://opensource.org/licenses/osl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_Connect
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
@@ -34,6 +34,10 @@
 */
 final class Maged_Controller
 {
+
+    const DOWNLOADER_DIRECTORY = "downloader";
+    const BRUTE_FORCE_CONFIG_NAME = "brute-force.ini";
+    
     /**
      * Request key of action
      */
@@ -788,11 +792,30 @@ final class Maged_Controller
     }
 
     /**
+     * Add domain policy header according to admin area settings
+     */
+    protected function _addDomainPolicyHeader()
+    {
+        if ($this->isInstalled()) {
+            /** @var Mage_Core_Model_Domainpolicy $domainPolicy */
+            $domainPolicy = Mage::getModel('core/domainpolicy');
+            if ($domainPolicy) {
+                $policy = $domainPolicy->getBackendPolicy();
+                if ($policy) {
+                    header('X-Frame-Options: ' . $policy);
+                }
+            }
+        }
+    }
+
+    /**
      * Dispatch process
      */
     public function dispatch()
     {
         header('Content-type: text/html; charset=UTF-8');
+
+        $this->_addDomainPolicyHeader();
 
         $this->setAction();
 
@@ -801,7 +824,18 @@ final class Maged_Controller
                 $this->setAction('index');
             }
         } else {
-            $this->session()->authenticate();
+            try {
+                /** @var Maged_BruteForce_Validator $bruteForce */
+                $bruteForce = $this->createBruteForceValidator();
+                if ($bruteForce->isCanLogin()) {
+                    $this->session()->authenticate($bruteForce);
+                } else {
+                    throw new Exception ("Access is locked. Please try again in a few minutes.");
+                }
+            } catch (Exception $e) {
+                $this->session()->addMessage("error", $e->getMessage());
+                $this->setAction("login");
+            }
         }
 
         while (!$this->_isDispatched) {
@@ -1013,8 +1047,8 @@ final class Maged_Controller
     {
         return array(
             'major'     => '1',
-            'minor'     => '8',
-            'revision'  => '1',
+            'minor'     => '9',
+            'revision'  => '3',
             'patch'     => '0',
             'stability' => '',
             'number'    => '',
@@ -1131,5 +1165,72 @@ final class Maged_Controller
     public function getFormKey()
     {
         return $this->session()->getFormKey();
+    }
+
+    /**
+     * @return Maged_BruteForce_Validator
+     * @throws Exception
+     */
+    protected function createBruteForceValidator()
+    {
+        $isRemote = (strlen($this->config()->remote_config) > 0);
+        $localFileName = ($isRemote) ? "brute-force.tmp.ini" : self::BRUTE_FORCE_CONFIG_NAME;
+        $localFile = $this->getBruteForceLocalFile($localFileName);
+
+        if (!is_file($localFile)) {
+            $this->createBruteForceTemporaryFile($localFile, $this->getBruteForceLocalDirectory());
+        }
+        if (!is_writable($localFile)) {
+            throw new Exception("Unable to write to the configuration file.");
+        }
+        if ($isRemote) {
+            $resource = new Maged_Model_BruteForce_Resource_FTP($this->config()->remote_config, $localFile, self::DOWNLOADER_DIRECTORY . DIRECTORY_SEPARATOR . self::BRUTE_FORCE_CONFIG_NAME);
+        } else {
+            $resource = new Maged_Model_BruteForce_Resource_File($localFile, self::DOWNLOADER_DIRECTORY . DIRECTORY_SEPARATOR . self::BRUTE_FORCE_CONFIG_NAME);
+        }
+        return new Maged_BruteForce_Validator(new Maged_Model_BruteForce_ConfigIni($resource));
+    }
+
+    /**
+     * @param string $fileName
+     * @return false |string
+     */
+    protected function getBruteForceLocalFile($fileName)
+    {
+        $varFolder = $this->getBruteForceLocalDirectory();
+        return rtrim($varFolder . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $fileName), DIRECTORY_SEPARATOR);
+    }
+
+    /**
+     * @param string $localBruteForceConfigFile
+     * @param string $folder
+     * @throws Exception
+     */
+    protected function createBruteForceTemporaryFile($localBruteForceConfigFile, $folder)
+    {
+        $error = false;
+        if (!is_dir($folder)) {
+            if (false === mkdir($folder)) {
+                $error = true;
+            };
+        }
+        $fp = fopen($localBruteForceConfigFile, "w");
+        if ($fp !== false) {
+            fclose($fp);
+        } else {
+            $error = true;
+        }
+
+        if ($error) {
+            throw  new Exception("Unable to create a temporary file. Please add write permission to the var/ folder.");
+        }
+    }
+
+    /**
+     * @return string
+     */
+    protected function getBruteForceLocalDirectory()
+    {
+        return $this->getMageDir() . DIRECTORY_SEPARATOR . "var" . DIRECTORY_SEPARATOR;
     }
 }
