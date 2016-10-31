@@ -2,7 +2,7 @@
 <config>
     <modules>
         <WSC_MageJam>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </WSC_MageJam>
     </modules>

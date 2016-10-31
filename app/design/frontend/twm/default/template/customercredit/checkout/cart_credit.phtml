@@ -33,9 +33,9 @@
  * @package    MageWorx_CustomerCredit
  * @author     MageWorx Dev Team <dev@mageworx.com>
  */
-if (Mage::helper('customercredit')->isDisplayCreditBlockAtCart()): ?>
+if (false && Mage::helper('customercredit')->isDisplayCreditBlockAtCart()): ?>
     <div class="credit-payment box discount">
-        <h4><?php echo $this->__('Payment with Credit') ?></h4>
+        <h2><?php echo $this->__('Payment with Credit') ?></h2>
         <?php if($this->getUseInternalCredit()) { ?>
             <?php echo $this->__('You are using your credit to pay this order.')?><br/>
             <a href="<?php echo $this->getUrl('customercredit/index/removeCreditUse')?>"><?php echo $this->__("Don't use credit.")?></a>

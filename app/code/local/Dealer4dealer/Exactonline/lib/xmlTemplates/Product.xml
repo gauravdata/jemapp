@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eExact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="eExact-XML.xsd">
+	<Items>
+		<Item code="">
+			<Description><![CDATA[]]></Description>			
+			<IsSalesItem>1</IsSalesItem>
+			<IsStockItem></IsStockItem>
+			<DateStart>2011-01-01</DateStart>
+			<Assortment code="">
+				<Description></Description>
+				<IsDefault>0</IsDefault>
+			</Assortment>
+			<Sales>
+				<Price>
+					<Currency code="EUR" />
+					<Value></Value>
+					<VAT code=""></VAT>
+				</Price>
+			</Sales>
+			<Note><![CDATA[]]></Note>
+		</Item>
+	</Items>
+</eExact>

@@ -1,1043 +1,5 @@
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-<meta charset='utf-8'>
-<meta content='GitLab Community Edition' name='description'>
-<title>
-no-tomatoes/app/design/frontend/base/default/layout/catalog.xml at master - magento / no-tomatoes | 
-GitLab
-</title>
-<link href="/assets/favicon-baaa14bade1248aa6165e9d34e7d83c0.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-<link href="/assets/application-73571cda686e7d86010f9b8bfc7011e6.css" media="all" rel="stylesheet" />
-<link href="/assets/print-1df3ea9b8ff148a6745321899e0cb213.css" media="print" rel="stylesheet" />
-<script src="/assets/application-5ad542bf6995c2d40719a914c59a0f44.js"></script>
-<meta content="authenticity_token" name="csrf-param" />
-<meta content="56ZrqYkXRH/CKQ1gCfh95VNyn/3ZaF399cqRa6mnG7w=" name="csrf-token" />
-<script type="text/javascript">
-//<![CDATA[
-window.gon={};gon.default_issues_tracker="gitlab";gon.api_version="v3";gon.relative_url_root="";gon.default_avatar_url="http://labs.twm.eu/assets/no_avatar-adffbfe10d45b20495cd2a9b88974150.png";gon.current_user_id=9;gon.api_token="wsHAXYKEhozztNjMuBBy";
-//]]>
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-
-</head>
-
-<body class='ui_mars project' data-page='projects:blob:show' data-project-id='23'>
-<div class='broadcast-message' style='background-color:;color:'>
-<i class='icon-bullhorn'></i>
-Bij het aanmaken van een project is het gebruikelijk om bij de &quot;Visibility Level&quot; de optie &quot;Private&quot; te selecteren.
-</div>
-
-<header class='navbar navbar-static-top navbar-gitlab'>
-<div class='navbar-inner'>
-<div class='container'>
-<div class='app_logo'>
-<span class='separator'></span>
-<a class="home has_bottom_tooltip" href="/" title="Dashboard"><h1>GITLAB</h1>
-</a><span class='separator'></span>
-</div>
-<h1 class='title'><span><a href="/groups/magento">magento</a> / no-tomatoes</span></h1>
-<button class='navbar-toggle' data-target='.navbar-collapse' data-toggle='collapse' type='button'>
-<span class='sr-only'>Toggle navigation</span>
-<i class='icon-reorder'></i>
-</button>
-<div class='navbar-collapse collapse'>
-<ul class='nav navbar-nav'>
-<li class='hidden-sm hidden-xs'>
-<div class='search'>
-<form accept-charset="UTF-8" action="/search" class="navbar-form pull-left" method="get"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-<input class="search-input" id="search" name="search" placeholder="Search in this project" type="search" />
-<input id="group_id" name="group_id" type="hidden" />
-<input id="project_id" name="project_id" type="hidden" value="23" />
-<input id="search_code" name="search_code" type="hidden" value="true" />
-<input id="repository_ref" name="repository_ref" type="hidden" value="master" />
-
-<div class='search-autocomplete-opts hide' data-autocomplete-path='/search/autocomplete' data-autocomplete-project-id='23' data-autocomplete-project-ref='master'></div>
-</form>
-
-</div>
-<script>
-  $('.search-input').on('keyup', function(e) {
-    if (e.keyCode == 27) {
-      $('.search-input').blur()
-    }
-  })
-</script>
-
-</li>
-<li class='visible-sm visible-xs'>
-<a class="has_bottom_tooltip" data-original-title="Search area" href="/search" title="Search"><i class='icon-search'></i>
-</a></li>
-<li>
-<a class="has_bottom_tooltip" data-original-title="Help" href="/help" title="Help"><i class='icon-question-sign'></i>
-</a></li>
-<li>
-<a class="has_bottom_tooltip" data-original-title="Public area" href="/explore" title="Explore"><i class='icon-globe'></i>
-</a></li>
-<li>
-<a class="has_bottom_tooltip" data-original-title="My snippets" href="/s/StevenLantinga" title="My snippets"><i class='icon-paste'></i>
-</a></li>
-<li>
-<a class="has_bottom_tooltip" data-original-title="New project" href="/projects/new" title="New project"><i class='icon-plus'></i>
-</a></li>
-<li>
-<a class="has_bottom_tooltip" data-original-title="Profile settings&quot;" href="/profile" title="Profile settings"><i class='icon-user'></i>
-</a></li>
-<li>
-<a class="has_bottom_tooltip" data-method="delete" data-original-title="Logout" href="/users/sign_out" rel="nofollow" title="Logout"><i class='icon-signout'></i>
-</a></li>
-<li class='hidden-xs'>
-<a class="profile-pic" href="/u/StevenLantinga" id="profile-pic"><img alt="User activity" src="http://www.gravatar.com/avatar/b7e13e4db7e49809307c98ffbcba7ff7?s=26&amp;d=identicon" />
-</a></li>
-</ul>
-</div>
-</div>
-</div>
-</header>
-
-<script>
-  GitLab.GfmAutoComplete.dataSource = "/magento/no-tomatoes/autocomplete_sources?type=NilClass&type_id=master%2Fapp%2Fdesign%2Ffrontend%2Fbase%2Fdefault%2Flayout%2Fcatalog.xml"
-  GitLab.GfmAutoComplete.setup();
-</script>
-
-<div class='flash-container'>
-</div>
-
-
-<nav class='main-nav navbar-collapse collapse'>
-<div class='container'><ul class='project-navigation'>
-<li class="home"><a class="shortcuts-project" href="/magento/no-tomatoes" title="Project">Project
-</a></li><li class="active"><a class="shortcuts-tree" href="/magento/no-tomatoes/tree/master">Files</a>
-</li><li class=""><a class="shortcuts-commits" href="/magento/no-tomatoes/commits/master">Commits</a>
-</li><li class=""><a class="shortcuts-network" href="/magento/no-tomatoes/network/master">Network</a>
-</li><li class=""><a class="shortcuts-graphs" href="/magento/no-tomatoes/graphs/master">Graphs</a>
-</li><li class=""><a class="shortcuts-issues" href="/magento/no-tomatoes/issues">Issues
-<span class='count issue_counter'>0</span>
-</a></li><li class=""><a class="shortcuts-merge_requests" href="/magento/no-tomatoes/merge_requests">Merge Requests
-<span class='count merge_counter'>0</span>
-</a></li><li class=""><a class="shortcuts-wiki" href="/magento/no-tomatoes/wikis/home">Wiki</a>
-</li><li class=""><a class="stat-tab tab " href="/magento/no-tomatoes/edit">Settings
-</a></li></ul>
-</div>
-</nav>
-<div class='container'>
-<div class='content'><div class='tree-ref-holder'>
-<form accept-charset="UTF-8" action="/magento/no-tomatoes/refs/switch" class="project-refs-form" method="get"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-<select class="project-refs-select select2 select2-sm" id="ref" name="ref"><optgroup label="Branches"><option value="develop">develop</option>
-<option value="feature/minorderqty">feature/minorderqty</option>
-<option value="feature/revert-ga">feature/revert-ga</option>
-<option selected="selected" value="master">master</option></optgroup><optgroup label="Tags"></optgroup></select>
-<input id="destination" name="destination" type="hidden" value="blob" />
-<input id="path" name="path" type="hidden" value="app/design/frontend/base/default/layout/catalog.xml" />
-</form>
-
-
-</div>
-<div class='tree-holder' id='tree-holder'>
-<ul class='breadcrumb repo-breadcrumb'>
-<li>
-<i class='icon-angle-right'></i>
-<a href="/magento/no-tomatoes/tree/master">no-tomatoes
-</a></li>
-<li>
-<a href="#">..</a>
-</li>
-<li>
-<a href="/magento/no-tomatoes/tree/master/app/design/frontend/base/default/layout">layout</a>
-</li>
-<li>
-<a href="/magento/no-tomatoes/blob/master/app/design/frontend/base/default/layout/catalog.xml"><strong>
-catalog.xml
-</strong>
-</a></li>
-</ul>
-<ul class='blob-commit-info bs-callout bs-callout-info hidden-xs'>
-<li class='commit js-toggle-container'>
-<div class='commit-row-title'>
-<a class="commit_short_id" href="/magento/no-tomatoes/commit/93931ef045f655991e4ad4996bd9586c5c279912">93931ef04</a>
-&nbsp;
-<span class='str-truncated'>
-<a class="commit-row-message" href="/magento/no-tomatoes/commit/93931ef045f655991e4ad4996bd9586c5c279912">Move files to root</a>
-</span>
-<a class="pull-right" href="/magento/no-tomatoes/tree/93931ef045f655991e4ad4996bd9586c5c279912">Browse Code »</a>
-<div class='notes_count'>
-</div>
-</div>
-<div class='commit-row-info'>
-<a class="commit-author-link has_tooltip" data-original-title="rick@thewebmen.com" href="/u/rskuipers"><img alt="" class="avatar s16" src="http://www.gravatar.com/avatar/2282d1e9b993764ac450075294499a56?s=16&amp;d=identicon" width="16" /> <span class="commit-author-name">Rick Kuipers</span></a>
-<div class='committed_ago'>
-<time class='time_ago' data-placement='top' data-toggle='tooltip' datetime='2014-02-07T15:41:15Z' title='Feb 07, 2014 4:41pm'>2014-02-07 16:41:15 +0100</time>
-<script>$('.time_ago').timeago().tooltip()</script>
- &nbsp;
-</div>
-</div>
-</li>
-
-</ul>
-<div class='tree-content-holder' id='tree-content-holder'>
-<article class='file-holder'>
-<div class='file-title clearfix'>
-<i class='icon-file'></i>
-<span class='file_name'>
-catalog.xml
-<small>24.8 KB</small>
-</span>
-<span class='options hidden-xs'><div class='btn-group tree-btn-group'>
-<a class="btn btn-small" href="/magento/no-tomatoes/edit/master/app/design/frontend/base/default/layout/catalog.xml">edit</a>
-<a class="btn btn-small" href="/magento/no-tomatoes/raw/master/app/design/frontend/base/default/layout/catalog.xml" target="_blank">raw</a>
-<a class="btn btn-small" href="/magento/no-tomatoes/blame/master/app/design/frontend/base/default/layout/catalog.xml">blame</a>
-<a class="btn btn-small" href="/magento/no-tomatoes/commits/master/app/design/frontend/base/default/layout/catalog.xml">history</a>
-<a class="btn btn-small" href="/magento/no-tomatoes/blob/414ab85e603f819de193969c3975a63eb736863b/app/design/frontend/base/default/layout/catalog.xml">permalink</a>
-</div>
-<a class="remove-blob btn btn-small btn-remove" data-toggle="modal" href="#modal-remove-blob">remove
-</a></span>
-</div>
-<div class='file-content code'>
-<div class='highlighted-data white'>
-<div class='line-numbers'>
-<a href="#L1" id="L1" rel="#L1"><i class='icon-link'></i>
-1
-</a><a href="#L2" id="L2" rel="#L2"><i class='icon-link'></i>
-2
-</a><a href="#L3" id="L3" rel="#L3"><i class='icon-link'></i>
-3
-</a><a href="#L4" id="L4" rel="#L4"><i class='icon-link'></i>
-4
-</a><a href="#L5" id="L5" rel="#L5"><i class='icon-link'></i>
-5
-</a><a href="#L6" id="L6" rel="#L6"><i class='icon-link'></i>
-6
-</a><a href="#L7" id="L7" rel="#L7"><i class='icon-link'></i>
-7
-</a><a href="#L8" id="L8" rel="#L8"><i class='icon-link'></i>
-8
-</a><a href="#L9" id="L9" rel="#L9"><i class='icon-link'></i>
-9
-</a><a href="#L10" id="L10" rel="#L10"><i class='icon-link'></i>
-10
-</a><a href="#L11" id="L11" rel="#L11"><i class='icon-link'></i>
-11
-</a><a href="#L12" id="L12" rel="#L12"><i class='icon-link'></i>
-12
-</a><a href="#L13" id="L13" rel="#L13"><i class='icon-link'></i>
-13
-</a><a href="#L14" id="L14" rel="#L14"><i class='icon-link'></i>
-14
-</a><a href="#L15" id="L15" rel="#L15"><i class='icon-link'></i>
-15
-</a><a href="#L16" id="L16" rel="#L16"><i class='icon-link'></i>
-16
-</a><a href="#L17" id="L17" rel="#L17"><i class='icon-link'></i>
-17
-</a><a href="#L18" id="L18" rel="#L18"><i class='icon-link'></i>
-18
-</a><a href="#L19" id="L19" rel="#L19"><i class='icon-link'></i>
-19
-</a><a href="#L20" id="L20" rel="#L20"><i class='icon-link'></i>
-20
-</a><a href="#L21" id="L21" rel="#L21"><i class='icon-link'></i>
-21
-</a><a href="#L22" id="L22" rel="#L22"><i class='icon-link'></i>
-22
-</a><a href="#L23" id="L23" rel="#L23"><i class='icon-link'></i>
-23
-</a><a href="#L24" id="L24" rel="#L24"><i class='icon-link'></i>
-24
-</a><a href="#L25" id="L25" rel="#L25"><i class='icon-link'></i>
-25
-</a><a href="#L26" id="L26" rel="#L26"><i class='icon-link'></i>
-26
-</a><a href="#L27" id="L27" rel="#L27"><i class='icon-link'></i>
-27
-</a><a href="#L28" id="L28" rel="#L28"><i class='icon-link'></i>
-28
-</a><a href="#L29" id="L29" rel="#L29"><i class='icon-link'></i>
-29
-</a><a href="#L30" id="L30" rel="#L30"><i class='icon-link'></i>
-30
-</a><a href="#L31" id="L31" rel="#L31"><i class='icon-link'></i>
-31
-</a><a href="#L32" id="L32" rel="#L32"><i class='icon-link'></i>
-32
-</a><a href="#L33" id="L33" rel="#L33"><i class='icon-link'></i>
-33
-</a><a href="#L34" id="L34" rel="#L34"><i class='icon-link'></i>
-34
-</a><a href="#L35" id="L35" rel="#L35"><i class='icon-link'></i>
-35
-</a><a href="#L36" id="L36" rel="#L36"><i class='icon-link'></i>
-36
-</a><a href="#L37" id="L37" rel="#L37"><i class='icon-link'></i>
-37
-</a><a href="#L38" id="L38" rel="#L38"><i class='icon-link'></i>
-38
-</a><a href="#L39" id="L39" rel="#L39"><i class='icon-link'></i>
-39
-</a><a href="#L40" id="L40" rel="#L40"><i class='icon-link'></i>
-40
-</a><a href="#L41" id="L41" rel="#L41"><i class='icon-link'></i>
-41
-</a><a href="#L42" id="L42" rel="#L42"><i class='icon-link'></i>
-42
-</a><a href="#L43" id="L43" rel="#L43"><i class='icon-link'></i>
-43
-</a><a href="#L44" id="L44" rel="#L44"><i class='icon-link'></i>
-44
-</a><a href="#L45" id="L45" rel="#L45"><i class='icon-link'></i>
-45
-</a><a href="#L46" id="L46" rel="#L46"><i class='icon-link'></i>
-46
-</a><a href="#L47" id="L47" rel="#L47"><i class='icon-link'></i>
-47
-</a><a href="#L48" id="L48" rel="#L48"><i class='icon-link'></i>
-48
-</a><a href="#L49" id="L49" rel="#L49"><i class='icon-link'></i>
-49
-</a><a href="#L50" id="L50" rel="#L50"><i class='icon-link'></i>
-50
-</a><a href="#L51" id="L51" rel="#L51"><i class='icon-link'></i>
-51
-</a><a href="#L52" id="L52" rel="#L52"><i class='icon-link'></i>
-52
-</a><a href="#L53" id="L53" rel="#L53"><i class='icon-link'></i>
-53
-</a><a href="#L54" id="L54" rel="#L54"><i class='icon-link'></i>
-54
-</a><a href="#L55" id="L55" rel="#L55"><i class='icon-link'></i>
-55
-</a><a href="#L56" id="L56" rel="#L56"><i class='icon-link'></i>
-56
-</a><a href="#L57" id="L57" rel="#L57"><i class='icon-link'></i>
-57
-</a><a href="#L58" id="L58" rel="#L58"><i class='icon-link'></i>
-58
-</a><a href="#L59" id="L59" rel="#L59"><i class='icon-link'></i>
-59
-</a><a href="#L60" id="L60" rel="#L60"><i class='icon-link'></i>
-60
-</a><a href="#L61" id="L61" rel="#L61"><i class='icon-link'></i>
-61
-</a><a href="#L62" id="L62" rel="#L62"><i class='icon-link'></i>
-62
-</a><a href="#L63" id="L63" rel="#L63"><i class='icon-link'></i>
-63
-</a><a href="#L64" id="L64" rel="#L64"><i class='icon-link'></i>
-64
-</a><a href="#L65" id="L65" rel="#L65"><i class='icon-link'></i>
-65
-</a><a href="#L66" id="L66" rel="#L66"><i class='icon-link'></i>
-66
-</a><a href="#L67" id="L67" rel="#L67"><i class='icon-link'></i>
-67
-</a><a href="#L68" id="L68" rel="#L68"><i class='icon-link'></i>
-68
-</a><a href="#L69" id="L69" rel="#L69"><i class='icon-link'></i>
-69
-</a><a href="#L70" id="L70" rel="#L70"><i class='icon-link'></i>
-70
-</a><a href="#L71" id="L71" rel="#L71"><i class='icon-link'></i>
-71
-</a><a href="#L72" id="L72" rel="#L72"><i class='icon-link'></i>
-72
-</a><a href="#L73" id="L73" rel="#L73"><i class='icon-link'></i>
-73
-</a><a href="#L74" id="L74" rel="#L74"><i class='icon-link'></i>
-74
-</a><a href="#L75" id="L75" rel="#L75"><i class='icon-link'></i>
-75
-</a><a href="#L76" id="L76" rel="#L76"><i class='icon-link'></i>
-76
-</a><a href="#L77" id="L77" rel="#L77"><i class='icon-link'></i>
-77
-</a><a href="#L78" id="L78" rel="#L78"><i class='icon-link'></i>
-78
-</a><a href="#L79" id="L79" rel="#L79"><i class='icon-link'></i>
-79
-</a><a href="#L80" id="L80" rel="#L80"><i class='icon-link'></i>
-80
-</a><a href="#L81" id="L81" rel="#L81"><i class='icon-link'></i>
-81
-</a><a href="#L82" id="L82" rel="#L82"><i class='icon-link'></i>
-82
-</a><a href="#L83" id="L83" rel="#L83"><i class='icon-link'></i>
-83
-</a><a href="#L84" id="L84" rel="#L84"><i class='icon-link'></i>
-84
-</a><a href="#L85" id="L85" rel="#L85"><i class='icon-link'></i>
-85
-</a><a href="#L86" id="L86" rel="#L86"><i class='icon-link'></i>
-86
-</a><a href="#L87" id="L87" rel="#L87"><i class='icon-link'></i>
-87
-</a><a href="#L88" id="L88" rel="#L88"><i class='icon-link'></i>
-88
-</a><a href="#L89" id="L89" rel="#L89"><i class='icon-link'></i>
-89
-</a><a href="#L90" id="L90" rel="#L90"><i class='icon-link'></i>
-90
-</a><a href="#L91" id="L91" rel="#L91"><i class='icon-link'></i>
-91
-</a><a href="#L92" id="L92" rel="#L92"><i class='icon-link'></i>
-92
-</a><a href="#L93" id="L93" rel="#L93"><i class='icon-link'></i>
-93
-</a><a href="#L94" id="L94" rel="#L94"><i class='icon-link'></i>
-94
-</a><a href="#L95" id="L95" rel="#L95"><i class='icon-link'></i>
-95
-</a><a href="#L96" id="L96" rel="#L96"><i class='icon-link'></i>
-96
-</a><a href="#L97" id="L97" rel="#L97"><i class='icon-link'></i>
-97
-</a><a href="#L98" id="L98" rel="#L98"><i class='icon-link'></i>
-98
-</a><a href="#L99" id="L99" rel="#L99"><i class='icon-link'></i>
-99
-</a><a href="#L100" id="L100" rel="#L100"><i class='icon-link'></i>
-100
-</a><a href="#L101" id="L101" rel="#L101"><i class='icon-link'></i>
-101
-</a><a href="#L102" id="L102" rel="#L102"><i class='icon-link'></i>
-102
-</a><a href="#L103" id="L103" rel="#L103"><i class='icon-link'></i>
-103
-</a><a href="#L104" id="L104" rel="#L104"><i class='icon-link'></i>
-104
-</a><a href="#L105" id="L105" rel="#L105"><i class='icon-link'></i>
-105
-</a><a href="#L106" id="L106" rel="#L106"><i class='icon-link'></i>
-106
-</a><a href="#L107" id="L107" rel="#L107"><i class='icon-link'></i>
-107
-</a><a href="#L108" id="L108" rel="#L108"><i class='icon-link'></i>
-108
-</a><a href="#L109" id="L109" rel="#L109"><i class='icon-link'></i>
-109
-</a><a href="#L110" id="L110" rel="#L110"><i class='icon-link'></i>
-110
-</a><a href="#L111" id="L111" rel="#L111"><i class='icon-link'></i>
-111
-</a><a href="#L112" id="L112" rel="#L112"><i class='icon-link'></i>
-112
-</a><a href="#L113" id="L113" rel="#L113"><i class='icon-link'></i>
-113
-</a><a href="#L114" id="L114" rel="#L114"><i class='icon-link'></i>
-114
-</a><a href="#L115" id="L115" rel="#L115"><i class='icon-link'></i>
-115
-</a><a href="#L116" id="L116" rel="#L116"><i class='icon-link'></i>
-116
-</a><a href="#L117" id="L117" rel="#L117"><i class='icon-link'></i>
-117
-</a><a href="#L118" id="L118" rel="#L118"><i class='icon-link'></i>
-118
-</a><a href="#L119" id="L119" rel="#L119"><i class='icon-link'></i>
-119
-</a><a href="#L120" id="L120" rel="#L120"><i class='icon-link'></i>
-120
-</a><a href="#L121" id="L121" rel="#L121"><i class='icon-link'></i>
-121
-</a><a href="#L122" id="L122" rel="#L122"><i class='icon-link'></i>
-122
-</a><a href="#L123" id="L123" rel="#L123"><i class='icon-link'></i>
-123
-</a><a href="#L124" id="L124" rel="#L124"><i class='icon-link'></i>
-124
-</a><a href="#L125" id="L125" rel="#L125"><i class='icon-link'></i>
-125
-</a><a href="#L126" id="L126" rel="#L126"><i class='icon-link'></i>
-126
-</a><a href="#L127" id="L127" rel="#L127"><i class='icon-link'></i>
-127
-</a><a href="#L128" id="L128" rel="#L128"><i class='icon-link'></i>
-128
-</a><a href="#L129" id="L129" rel="#L129"><i class='icon-link'></i>
-129
-</a><a href="#L130" id="L130" rel="#L130"><i class='icon-link'></i>
-130
-</a><a href="#L131" id="L131" rel="#L131"><i class='icon-link'></i>
-131
-</a><a href="#L132" id="L132" rel="#L132"><i class='icon-link'></i>
-132
-</a><a href="#L133" id="L133" rel="#L133"><i class='icon-link'></i>
-133
-</a><a href="#L134" id="L134" rel="#L134"><i class='icon-link'></i>
-134
-</a><a href="#L135" id="L135" rel="#L135"><i class='icon-link'></i>
-135
-</a><a href="#L136" id="L136" rel="#L136"><i class='icon-link'></i>
-136
-</a><a href="#L137" id="L137" rel="#L137"><i class='icon-link'></i>
-137
-</a><a href="#L138" id="L138" rel="#L138"><i class='icon-link'></i>
-138
-</a><a href="#L139" id="L139" rel="#L139"><i class='icon-link'></i>
-139
-</a><a href="#L140" id="L140" rel="#L140"><i class='icon-link'></i>
-140
-</a><a href="#L141" id="L141" rel="#L141"><i class='icon-link'></i>
-141
-</a><a href="#L142" id="L142" rel="#L142"><i class='icon-link'></i>
-142
-</a><a href="#L143" id="L143" rel="#L143"><i class='icon-link'></i>
-143
-</a><a href="#L144" id="L144" rel="#L144"><i class='icon-link'></i>
-144
-</a><a href="#L145" id="L145" rel="#L145"><i class='icon-link'></i>
-145
-</a><a href="#L146" id="L146" rel="#L146"><i class='icon-link'></i>
-146
-</a><a href="#L147" id="L147" rel="#L147"><i class='icon-link'></i>
-147
-</a><a href="#L148" id="L148" rel="#L148"><i class='icon-link'></i>
-148
-</a><a href="#L149" id="L149" rel="#L149"><i class='icon-link'></i>
-149
-</a><a href="#L150" id="L150" rel="#L150"><i class='icon-link'></i>
-150
-</a><a href="#L151" id="L151" rel="#L151"><i class='icon-link'></i>
-151
-</a><a href="#L152" id="L152" rel="#L152"><i class='icon-link'></i>
-152
-</a><a href="#L153" id="L153" rel="#L153"><i class='icon-link'></i>
-153
-</a><a href="#L154" id="L154" rel="#L154"><i class='icon-link'></i>
-154
-</a><a href="#L155" id="L155" rel="#L155"><i class='icon-link'></i>
-155
-</a><a href="#L156" id="L156" rel="#L156"><i class='icon-link'></i>
-156
-</a><a href="#L157" id="L157" rel="#L157"><i class='icon-link'></i>
-157
-</a><a href="#L158" id="L158" rel="#L158"><i class='icon-link'></i>
-158
-</a><a href="#L159" id="L159" rel="#L159"><i class='icon-link'></i>
-159
-</a><a href="#L160" id="L160" rel="#L160"><i class='icon-link'></i>
-160
-</a><a href="#L161" id="L161" rel="#L161"><i class='icon-link'></i>
-161
-</a><a href="#L162" id="L162" rel="#L162"><i class='icon-link'></i>
-162
-</a><a href="#L163" id="L163" rel="#L163"><i class='icon-link'></i>
-163
-</a><a href="#L164" id="L164" rel="#L164"><i class='icon-link'></i>
-164
-</a><a href="#L165" id="L165" rel="#L165"><i class='icon-link'></i>
-165
-</a><a href="#L166" id="L166" rel="#L166"><i class='icon-link'></i>
-166
-</a><a href="#L167" id="L167" rel="#L167"><i class='icon-link'></i>
-167
-</a><a href="#L168" id="L168" rel="#L168"><i class='icon-link'></i>
-168
-</a><a href="#L169" id="L169" rel="#L169"><i class='icon-link'></i>
-169
-</a><a href="#L170" id="L170" rel="#L170"><i class='icon-link'></i>
-170
-</a><a href="#L171" id="L171" rel="#L171"><i class='icon-link'></i>
-171
-</a><a href="#L172" id="L172" rel="#L172"><i class='icon-link'></i>
-172
-</a><a href="#L173" id="L173" rel="#L173"><i class='icon-link'></i>
-173
-</a><a href="#L174" id="L174" rel="#L174"><i class='icon-link'></i>
-174
-</a><a href="#L175" id="L175" rel="#L175"><i class='icon-link'></i>
-175
-</a><a href="#L176" id="L176" rel="#L176"><i class='icon-link'></i>
-176
-</a><a href="#L177" id="L177" rel="#L177"><i class='icon-link'></i>
-177
-</a><a href="#L178" id="L178" rel="#L178"><i class='icon-link'></i>
-178
-</a><a href="#L179" id="L179" rel="#L179"><i class='icon-link'></i>
-179
-</a><a href="#L180" id="L180" rel="#L180"><i class='icon-link'></i>
-180
-</a><a href="#L181" id="L181" rel="#L181"><i class='icon-link'></i>
-181
-</a><a href="#L182" id="L182" rel="#L182"><i class='icon-link'></i>
-182
-</a><a href="#L183" id="L183" rel="#L183"><i class='icon-link'></i>
-183
-</a><a href="#L184" id="L184" rel="#L184"><i class='icon-link'></i>
-184
-</a><a href="#L185" id="L185" rel="#L185"><i class='icon-link'></i>
-185
-</a><a href="#L186" id="L186" rel="#L186"><i class='icon-link'></i>
-186
-</a><a href="#L187" id="L187" rel="#L187"><i class='icon-link'></i>
-187
-</a><a href="#L188" id="L188" rel="#L188"><i class='icon-link'></i>
-188
-</a><a href="#L189" id="L189" rel="#L189"><i class='icon-link'></i>
-189
-</a><a href="#L190" id="L190" rel="#L190"><i class='icon-link'></i>
-190
-</a><a href="#L191" id="L191" rel="#L191"><i class='icon-link'></i>
-191
-</a><a href="#L192" id="L192" rel="#L192"><i class='icon-link'></i>
-192
-</a><a href="#L193" id="L193" rel="#L193"><i class='icon-link'></i>
-193
-</a><a href="#L194" id="L194" rel="#L194"><i class='icon-link'></i>
-194
-</a><a href="#L195" id="L195" rel="#L195"><i class='icon-link'></i>
-195
-</a><a href="#L196" id="L196" rel="#L196"><i class='icon-link'></i>
-196
-</a><a href="#L197" id="L197" rel="#L197"><i class='icon-link'></i>
-197
-</a><a href="#L198" id="L198" rel="#L198"><i class='icon-link'></i>
-198
-</a><a href="#L199" id="L199" rel="#L199"><i class='icon-link'></i>
-199
-</a><a href="#L200" id="L200" rel="#L200"><i class='icon-link'></i>
-200
-</a><a href="#L201" id="L201" rel="#L201"><i class='icon-link'></i>
-201
-</a><a href="#L202" id="L202" rel="#L202"><i class='icon-link'></i>
-202
-</a><a href="#L203" id="L203" rel="#L203"><i class='icon-link'></i>
-203
-</a><a href="#L204" id="L204" rel="#L204"><i class='icon-link'></i>
-204
-</a><a href="#L205" id="L205" rel="#L205"><i class='icon-link'></i>
-205
-</a><a href="#L206" id="L206" rel="#L206"><i class='icon-link'></i>
-206
-</a><a href="#L207" id="L207" rel="#L207"><i class='icon-link'></i>
-207
-</a><a href="#L208" id="L208" rel="#L208"><i class='icon-link'></i>
-208
-</a><a href="#L209" id="L209" rel="#L209"><i class='icon-link'></i>
-209
-</a><a href="#L210" id="L210" rel="#L210"><i class='icon-link'></i>
-210
-</a><a href="#L211" id="L211" rel="#L211"><i class='icon-link'></i>
-211
-</a><a href="#L212" id="L212" rel="#L212"><i class='icon-link'></i>
-212
-</a><a href="#L213" id="L213" rel="#L213"><i class='icon-link'></i>
-213
-</a><a href="#L214" id="L214" rel="#L214"><i class='icon-link'></i>
-214
-</a><a href="#L215" id="L215" rel="#L215"><i class='icon-link'></i>
-215
-</a><a href="#L216" id="L216" rel="#L216"><i class='icon-link'></i>
-216
-</a><a href="#L217" id="L217" rel="#L217"><i class='icon-link'></i>
-217
-</a><a href="#L218" id="L218" rel="#L218"><i class='icon-link'></i>
-218
-</a><a href="#L219" id="L219" rel="#L219"><i class='icon-link'></i>
-219
-</a><a href="#L220" id="L220" rel="#L220"><i class='icon-link'></i>
-220
-</a><a href="#L221" id="L221" rel="#L221"><i class='icon-link'></i>
-221
-</a><a href="#L222" id="L222" rel="#L222"><i class='icon-link'></i>
-222
-</a><a href="#L223" id="L223" rel="#L223"><i class='icon-link'></i>
-223
-</a><a href="#L224" id="L224" rel="#L224"><i class='icon-link'></i>
-224
-</a><a href="#L225" id="L225" rel="#L225"><i class='icon-link'></i>
-225
-</a><a href="#L226" id="L226" rel="#L226"><i class='icon-link'></i>
-226
-</a><a href="#L227" id="L227" rel="#L227"><i class='icon-link'></i>
-227
-</a><a href="#L228" id="L228" rel="#L228"><i class='icon-link'></i>
-228
-</a><a href="#L229" id="L229" rel="#L229"><i class='icon-link'></i>
-229
-</a><a href="#L230" id="L230" rel="#L230"><i class='icon-link'></i>
-230
-</a><a href="#L231" id="L231" rel="#L231"><i class='icon-link'></i>
-231
-</a><a href="#L232" id="L232" rel="#L232"><i class='icon-link'></i>
-232
-</a><a href="#L233" id="L233" rel="#L233"><i class='icon-link'></i>
-233
-</a><a href="#L234" id="L234" rel="#L234"><i class='icon-link'></i>
-234
-</a><a href="#L235" id="L235" rel="#L235"><i class='icon-link'></i>
-235
-</a><a href="#L236" id="L236" rel="#L236"><i class='icon-link'></i>
-236
-</a><a href="#L237" id="L237" rel="#L237"><i class='icon-link'></i>
-237
-</a><a href="#L238" id="L238" rel="#L238"><i class='icon-link'></i>
-238
-</a><a href="#L239" id="L239" rel="#L239"><i class='icon-link'></i>
-239
-</a><a href="#L240" id="L240" rel="#L240"><i class='icon-link'></i>
-240
-</a><a href="#L241" id="L241" rel="#L241"><i class='icon-link'></i>
-241
-</a><a href="#L242" id="L242" rel="#L242"><i class='icon-link'></i>
-242
-</a><a href="#L243" id="L243" rel="#L243"><i class='icon-link'></i>
-243
-</a><a href="#L244" id="L244" rel="#L244"><i class='icon-link'></i>
-244
-</a><a href="#L245" id="L245" rel="#L245"><i class='icon-link'></i>
-245
-</a><a href="#L246" id="L246" rel="#L246"><i class='icon-link'></i>
-246
-</a><a href="#L247" id="L247" rel="#L247"><i class='icon-link'></i>
-247
-</a><a href="#L248" id="L248" rel="#L248"><i class='icon-link'></i>
-248
-</a><a href="#L249" id="L249" rel="#L249"><i class='icon-link'></i>
-249
-</a><a href="#L250" id="L250" rel="#L250"><i class='icon-link'></i>
-250
-</a><a href="#L251" id="L251" rel="#L251"><i class='icon-link'></i>
-251
-</a><a href="#L252" id="L252" rel="#L252"><i class='icon-link'></i>
-252
-</a><a href="#L253" id="L253" rel="#L253"><i class='icon-link'></i>
-253
-</a><a href="#L254" id="L254" rel="#L254"><i class='icon-link'></i>
-254
-</a><a href="#L255" id="L255" rel="#L255"><i class='icon-link'></i>
-255
-</a><a href="#L256" id="L256" rel="#L256"><i class='icon-link'></i>
-256
-</a><a href="#L257" id="L257" rel="#L257"><i class='icon-link'></i>
-257
-</a><a href="#L258" id="L258" rel="#L258"><i class='icon-link'></i>
-258
-</a><a href="#L259" id="L259" rel="#L259"><i class='icon-link'></i>
-259
-</a><a href="#L260" id="L260" rel="#L260"><i class='icon-link'></i>
-260
-</a><a href="#L261" id="L261" rel="#L261"><i class='icon-link'></i>
-261
-</a><a href="#L262" id="L262" rel="#L262"><i class='icon-link'></i>
-262
-</a><a href="#L263" id="L263" rel="#L263"><i class='icon-link'></i>
-263
-</a><a href="#L264" id="L264" rel="#L264"><i class='icon-link'></i>
-264
-</a><a href="#L265" id="L265" rel="#L265"><i class='icon-link'></i>
-265
-</a><a href="#L266" id="L266" rel="#L266"><i class='icon-link'></i>
-266
-</a><a href="#L267" id="L267" rel="#L267"><i class='icon-link'></i>
-267
-</a><a href="#L268" id="L268" rel="#L268"><i class='icon-link'></i>
-268
-</a><a href="#L269" id="L269" rel="#L269"><i class='icon-link'></i>
-269
-</a><a href="#L270" id="L270" rel="#L270"><i class='icon-link'></i>
-270
-</a><a href="#L271" id="L271" rel="#L271"><i class='icon-link'></i>
-271
-</a><a href="#L272" id="L272" rel="#L272"><i class='icon-link'></i>
-272
-</a><a href="#L273" id="L273" rel="#L273"><i class='icon-link'></i>
-273
-</a><a href="#L274" id="L274" rel="#L274"><i class='icon-link'></i>
-274
-</a><a href="#L275" id="L275" rel="#L275"><i class='icon-link'></i>
-275
-</a><a href="#L276" id="L276" rel="#L276"><i class='icon-link'></i>
-276
-</a><a href="#L277" id="L277" rel="#L277"><i class='icon-link'></i>
-277
-</a><a href="#L278" id="L278" rel="#L278"><i class='icon-link'></i>
-278
-</a><a href="#L279" id="L279" rel="#L279"><i class='icon-link'></i>
-279
-</a><a href="#L280" id="L280" rel="#L280"><i class='icon-link'></i>
-280
-</a><a href="#L281" id="L281" rel="#L281"><i class='icon-link'></i>
-281
-</a><a href="#L282" id="L282" rel="#L282"><i class='icon-link'></i>
-282
-</a><a href="#L283" id="L283" rel="#L283"><i class='icon-link'></i>
-283
-</a><a href="#L284" id="L284" rel="#L284"><i class='icon-link'></i>
-284
-</a><a href="#L285" id="L285" rel="#L285"><i class='icon-link'></i>
-285
-</a><a href="#L286" id="L286" rel="#L286"><i class='icon-link'></i>
-286
-</a><a href="#L287" id="L287" rel="#L287"><i class='icon-link'></i>
-287
-</a><a href="#L288" id="L288" rel="#L288"><i class='icon-link'></i>
-288
-</a><a href="#L289" id="L289" rel="#L289"><i class='icon-link'></i>
-289
-</a><a href="#L290" id="L290" rel="#L290"><i class='icon-link'></i>
-290
-</a><a href="#L291" id="L291" rel="#L291"><i class='icon-link'></i>
-291
-</a><a href="#L292" id="L292" rel="#L292"><i class='icon-link'></i>
-292
-</a><a href="#L293" id="L293" rel="#L293"><i class='icon-link'></i>
-293
-</a><a href="#L294" id="L294" rel="#L294"><i class='icon-link'></i>
-294
-</a><a href="#L295" id="L295" rel="#L295"><i class='icon-link'></i>
-295
-</a><a href="#L296" id="L296" rel="#L296"><i class='icon-link'></i>
-296
-</a><a href="#L297" id="L297" rel="#L297"><i class='icon-link'></i>
-297
-</a><a href="#L298" id="L298" rel="#L298"><i class='icon-link'></i>
-298
-</a><a href="#L299" id="L299" rel="#L299"><i class='icon-link'></i>
-299
-</a><a href="#L300" id="L300" rel="#L300"><i class='icon-link'></i>
-300
-</a><a href="#L301" id="L301" rel="#L301"><i class='icon-link'></i>
-301
-</a><a href="#L302" id="L302" rel="#L302"><i class='icon-link'></i>
-302
-</a><a href="#L303" id="L303" rel="#L303"><i class='icon-link'></i>
-303
-</a><a href="#L304" id="L304" rel="#L304"><i class='icon-link'></i>
-304
-</a><a href="#L305" id="L305" rel="#L305"><i class='icon-link'></i>
-305
-</a><a href="#L306" id="L306" rel="#L306"><i class='icon-link'></i>
-306
-</a><a href="#L307" id="L307" rel="#L307"><i class='icon-link'></i>
-307
-</a><a href="#L308" id="L308" rel="#L308"><i class='icon-link'></i>
-308
-</a><a href="#L309" id="L309" rel="#L309"><i class='icon-link'></i>
-309
-</a><a href="#L310" id="L310" rel="#L310"><i class='icon-link'></i>
-310
-</a><a href="#L311" id="L311" rel="#L311"><i class='icon-link'></i>
-311
-</a><a href="#L312" id="L312" rel="#L312"><i class='icon-link'></i>
-312
-</a><a href="#L313" id="L313" rel="#L313"><i class='icon-link'></i>
-313
-</a><a href="#L314" id="L314" rel="#L314"><i class='icon-link'></i>
-314
-</a><a href="#L315" id="L315" rel="#L315"><i class='icon-link'></i>
-315
-</a><a href="#L316" id="L316" rel="#L316"><i class='icon-link'></i>
-316
-</a><a href="#L317" id="L317" rel="#L317"><i class='icon-link'></i>
-317
-</a><a href="#L318" id="L318" rel="#L318"><i class='icon-link'></i>
-318
-</a><a href="#L319" id="L319" rel="#L319"><i class='icon-link'></i>
-319
-</a><a href="#L320" id="L320" rel="#L320"><i class='icon-link'></i>
-320
-</a><a href="#L321" id="L321" rel="#L321"><i class='icon-link'></i>
-321
-</a><a href="#L322" id="L322" rel="#L322"><i class='icon-link'></i>
-322
-</a><a href="#L323" id="L323" rel="#L323"><i class='icon-link'></i>
-323
-</a><a href="#L324" id="L324" rel="#L324"><i class='icon-link'></i>
-324
-</a><a href="#L325" id="L325" rel="#L325"><i class='icon-link'></i>
-325
-</a><a href="#L326" id="L326" rel="#L326"><i class='icon-link'></i>
-326
-</a><a href="#L327" id="L327" rel="#L327"><i class='icon-link'></i>
-327
-</a><a href="#L328" id="L328" rel="#L328"><i class='icon-link'></i>
-328
-</a><a href="#L329" id="L329" rel="#L329"><i class='icon-link'></i>
-329
-</a><a href="#L330" id="L330" rel="#L330"><i class='icon-link'></i>
-330
-</a><a href="#L331" id="L331" rel="#L331"><i class='icon-link'></i>
-331
-</a><a href="#L332" id="L332" rel="#L332"><i class='icon-link'></i>
-332
-</a><a href="#L333" id="L333" rel="#L333"><i class='icon-link'></i>
-333
-</a><a href="#L334" id="L334" rel="#L334"><i class='icon-link'></i>
-334
-</a><a href="#L335" id="L335" rel="#L335"><i class='icon-link'></i>
-335
-</a><a href="#L336" id="L336" rel="#L336"><i class='icon-link'></i>
-336
-</a><a href="#L337" id="L337" rel="#L337"><i class='icon-link'></i>
-337
-</a><a href="#L338" id="L338" rel="#L338"><i class='icon-link'></i>
-338
-</a><a href="#L339" id="L339" rel="#L339"><i class='icon-link'></i>
-339
-</a><a href="#L340" id="L340" rel="#L340"><i class='icon-link'></i>
-340
-</a><a href="#L341" id="L341" rel="#L341"><i class='icon-link'></i>
-341
-</a><a href="#L342" id="L342" rel="#L342"><i class='icon-link'></i>
-342
-</a><a href="#L343" id="L343" rel="#L343"><i class='icon-link'></i>
-343
-</a><a href="#L344" id="L344" rel="#L344"><i class='icon-link'></i>
-344
-</a><a href="#L345" id="L345" rel="#L345"><i class='icon-link'></i>
-345
-</a><a href="#L346" id="L346" rel="#L346"><i class='icon-link'></i>
-346
-</a><a href="#L347" id="L347" rel="#L347"><i class='icon-link'></i>
-347
-</a><a href="#L348" id="L348" rel="#L348"><i class='icon-link'></i>
-348
-</a><a href="#L349" id="L349" rel="#L349"><i class='icon-link'></i>
-349
-</a><a href="#L350" id="L350" rel="#L350"><i class='icon-link'></i>
-350
-</a><a href="#L351" id="L351" rel="#L351"><i class='icon-link'></i>
-351
-</a><a href="#L352" id="L352" rel="#L352"><i class='icon-link'></i>
-352
-</a><a href="#L353" id="L353" rel="#L353"><i class='icon-link'></i>
-353
-</a><a href="#L354" id="L354" rel="#L354"><i class='icon-link'></i>
-354
-</a><a href="#L355" id="L355" rel="#L355"><i class='icon-link'></i>
-355
-</a><a href="#L356" id="L356" rel="#L356"><i class='icon-link'></i>
-356
-</a><a href="#L357" id="L357" rel="#L357"><i class='icon-link'></i>
-357
-</a><a href="#L358" id="L358" rel="#L358"><i class='icon-link'></i>
-358
-</a><a href="#L359" id="L359" rel="#L359"><i class='icon-link'></i>
-359
-</a><a href="#L360" id="L360" rel="#L360"><i class='icon-link'></i>
-360
-</a><a href="#L361" id="L361" rel="#L361"><i class='icon-link'></i>
-361
-</a><a href="#L362" id="L362" rel="#L362"><i class='icon-link'></i>
-362
-</a><a href="#L363" id="L363" rel="#L363"><i class='icon-link'></i>
-363
-</a><a href="#L364" id="L364" rel="#L364"><i class='icon-link'></i>
-364
-</a><a href="#L365" id="L365" rel="#L365"><i class='icon-link'></i>
-365
-</a><a href="#L366" id="L366" rel="#L366"><i class='icon-link'></i>
-366
-</a><a href="#L367" id="L367" rel="#L367"><i class='icon-link'></i>
-367
-</a><a href="#L368" id="L368" rel="#L368"><i class='icon-link'></i>
-368
-</a><a href="#L369" id="L369" rel="#L369"><i class='icon-link'></i>
-369
-</a><a href="#L370" id="L370" rel="#L370"><i class='icon-link'></i>
-370
-</a><a href="#L371" id="L371" rel="#L371"><i class='icon-link'></i>
-371
-</a><a href="#L372" id="L372" rel="#L372"><i class='icon-link'></i>
-372
-</a><a href="#L373" id="L373" rel="#L373"><i class='icon-link'></i>
-373
-</a><a href="#L374" id="L374" rel="#L374"><i class='icon-link'></i>
-374
-</a><a href="#L375" id="L375" rel="#L375"><i class='icon-link'></i>
-375
-</a><a href="#L376" id="L376" rel="#L376"><i class='icon-link'></i>
-376
-</a><a href="#L377" id="L377" rel="#L377"><i class='icon-link'></i>
-377
-</a><a href="#L378" id="L378" rel="#L378"><i class='icon-link'></i>
-378
-</a><a href="#L379" id="L379" rel="#L379"><i class='icon-link'></i>
-379
-</a><a href="#L380" id="L380" rel="#L380"><i class='icon-link'></i>
-380
-</a><a href="#L381" id="L381" rel="#L381"><i class='icon-link'></i>
-381
-</a><a href="#L382" id="L382" rel="#L382"><i class='icon-link'></i>
-382
-</a><a href="#L383" id="L383" rel="#L383"><i class='icon-link'></i>
-383
-</a><a href="#L384" id="L384" rel="#L384"><i class='icon-link'></i>
-384
-</a><a href="#L385" id="L385" rel="#L385"><i class='icon-link'></i>
-385
-</a><a href="#L386" id="L386" rel="#L386"><i class='icon-link'></i>
-386
-</a><a href="#L387" id="L387" rel="#L387"><i class='icon-link'></i>
-387
-</a><a href="#L388" id="L388" rel="#L388"><i class='icon-link'></i>
-388
-</a><a href="#L389" id="L389" rel="#L389"><i class='icon-link'></i>
-389
-</a><a href="#L390" id="L390" rel="#L390"><i class='icon-link'></i>
-390
-</a><a href="#L391" id="L391" rel="#L391"><i class='icon-link'></i>
-391
-</a><a href="#L392" id="L392" rel="#L392"><i class='icon-link'></i>
-392
-</a><a href="#L393" id="L393" rel="#L393"><i class='icon-link'></i>
-393
-</a><a href="#L394" id="L394" rel="#L394"><i class='icon-link'></i>
-394
-</a><a href="#L395" id="L395" rel="#L395"><i class='icon-link'></i>
-395
-</a><a href="#L396" id="L396" rel="#L396"><i class='icon-link'></i>
-396
-</a><a href="#L397" id="L397" rel="#L397"><i class='icon-link'></i>
-397
-</a><a href="#L398" id="L398" rel="#L398"><i class='icon-link'></i>
-398
-</a><a href="#L399" id="L399" rel="#L399"><i class='icon-link'></i>
-399
-</a><a href="#L400" id="L400" rel="#L400"><i class='icon-link'></i>
-400
-</a><a href="#L401" id="L401" rel="#L401"><i class='icon-link'></i>
-401
-</a><a href="#L402" id="L402" rel="#L402"><i class='icon-link'></i>
-402
-</a><a href="#L403" id="L403" rel="#L403"><i class='icon-link'></i>
-403
-</a><a href="#L404" id="L404" rel="#L404"><i class='icon-link'></i>
-404
-</a><a href="#L405" id="L405" rel="#L405"><i class='icon-link'></i>
-405
-</a><a href="#L406" id="L406" rel="#L406"><i class='icon-link'></i>
-406
-</a><a href="#L407" id="L407" rel="#L407"><i class='icon-link'></i>
-407
-</a><a href="#L408" id="L408" rel="#L408"><i class='icon-link'></i>
-408
-</a><a href="#L409" id="L409" rel="#L409"><i class='icon-link'></i>
-409
-</a><a href="#L410" id="L410" rel="#L410"><i class='icon-link'></i>
-410
-</a><a href="#L411" id="L411" rel="#L411"><i class='icon-link'></i>
-411
-</a><a href="#L412" id="L412" rel="#L412"><i class='icon-link'></i>
-412
-</a><a href="#L413" id="L413" rel="#L413"><i class='icon-link'></i>
-413
-</a><a href="#L414" id="L414" rel="#L414"><i class='icon-link'></i>
-414
-</a><a href="#L415" id="L415" rel="#L415"><i class='icon-link'></i>
-415
-</a><a href="#L416" id="L416" rel="#L416"><i class='icon-link'></i>
-416
-</a><a href="#L417" id="L417" rel="#L417"><i class='icon-link'></i>
-417
-</a><a href="#L418" id="L418" rel="#L418"><i class='icon-link'></i>
-418
-</a></div>
-<div class='highlight'>
-<pre><code class='language-xml'>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;!--
+<?xml version="1.0"?>
+<!--
 /**
  * Magento
  *
@@ -1049,17 +11,17 @@ catalog.xml
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
@@ -1073,440 +35,387 @@ Supported layout update handles (special):
 - catalog_category_layered
 - catalog_product_view
 
---&gt;
-&lt;layout version=&quot;0.1.0&quot;&gt;
+-->
+<layout version="0.1.0">
 
-&lt;!--
+<!--
 Default layout, loads most of the pages
---&gt;
+-->
 
-    &lt;default&gt;
+    <default>
 
-        &lt;!-- Mage_Catalog --&gt;
-        &lt;reference name=&quot;left&quot;&gt;
-            &lt;block type=&quot;core/template&quot; name=&quot;left.permanent.callout&quot; template=&quot;callouts/left_col.phtml&quot;&gt;
-                &lt;action method=&quot;setImgSrc&quot;&gt;&lt;src&gt;images/media/col_left_callout.jpg&lt;/src&gt;&lt;/action&gt;
-                &lt;action method=&quot;setImgAlt&quot; translate=&quot;alt&quot; module=&quot;catalog&quot;&gt;&lt;alt&gt;Our customer service is available 24/7. Call us at (555) 555-0123.&lt;/alt&gt;&lt;/action&gt;
-                &lt;action method=&quot;setLinkUrl&quot;&gt;&lt;url&gt;checkout/cart&lt;/url&gt;&lt;/action&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;right&quot;&gt;
-            &lt;block type=&quot;catalog/product_compare_sidebar&quot; before=&quot;cart_sidebar&quot; name=&quot;catalog.compare.sidebar&quot; template=&quot;catalog/product/compare/sidebar.phtml&quot;/&gt;
-            &lt;block type=&quot;core/template&quot; name=&quot;right.permanent.callout&quot; template=&quot;callouts/right_col.phtml&quot;&gt;
-                &lt;action method=&quot;setImgSrc&quot;&gt;&lt;src&gt;images/media/col_right_callout.jpg&lt;/src&gt;&lt;/action&gt;
-                &lt;action method=&quot;setImgAlt&quot; translate=&quot;alt&quot; module=&quot;catalog&quot;&gt;&lt;alt&gt;Keep your eyes open for our special Back to School items and save A LOT!&lt;/alt&gt;&lt;/action&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;footer_links&quot;&gt;
-            &lt;action method=&quot;addLink&quot; translate=&quot;label title&quot; module=&quot;catalog&quot; ifconfig=&quot;catalog/seo/site_map&quot;&gt;&lt;label&gt;Site Map&lt;/label&gt;&lt;url helper=&quot;catalog/map/getCategoryUrl&quot; /&gt;&lt;title&gt;Site Map&lt;/title&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;block type=&quot;catalog/product_price_template&quot; name=&quot;catalog_product_price_template&quot; /&gt;
-    &lt;/default&gt;
+        <!-- Mage_Catalog -->
+        <reference name="left">
+            <block type="core/template" name="left.permanent.callout" template="callouts/left_col.phtml">
+                <action method="setImgSrc"><src>images/media/col_left_callout.jpg</src></action>
+                <action method="setImgAlt" translate="alt" module="catalog"><alt>Our customer service is available 24/7. Call us at (555) 555-0123.</alt></action>
+                <action method="setLinkUrl"><url>checkout/cart</url></action>
+            </block>
+        </reference>
+        <reference name="right">
+            <block type="catalog/product_compare_sidebar" before="cart_sidebar" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/>
+            <block type="core/template" name="right.permanent.callout" template="callouts/right_col.phtml">
+                <action method="setImgSrc"><src>images/media/col_right_callout.jpg</src></action>
+                <action method="setImgAlt" translate="alt" module="catalog"><alt>Keep your eyes open for our special Back to School items and save A LOT!</alt></action>
+            </block>
+        </reference>
+        <reference name="footer_links">
+            <action method="addLink" translate="label title" module="catalog" ifconfig="catalog/seo/site_map"><label>Site Map</label><url helper="catalog/map/getCategoryUrl" /><title>Site Map</title></action>
+        </reference>
+        <block type="catalog/product_price_template" name="catalog_product_price_template" />
+    </default>
 
 
-&lt;!--
+<!--
 Category default layout
---&gt;
+-->
 
-    &lt;catalog_category_default translate=&quot;label&quot;&gt;
-        &lt;label&gt;Catalog Category (Non-Anchor)&lt;/label&gt;
-        &lt;reference name=&quot;left&quot;&gt;
-            &lt;block type=&quot;catalog/navigation&quot; name=&quot;catalog.leftnav&quot; after=&quot;currency&quot; template=&quot;catalog/navigation/left.phtml&quot;/&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;content&quot;&gt;
-            &lt;block type=&quot;catalog/category_view&quot; name=&quot;category.products&quot; template=&quot;catalog/category/view.phtml&quot;&gt;
-                &lt;block type=&quot;catalog/product_list&quot; name=&quot;product_list&quot; template=&quot;catalog/product/list.phtml&quot;&gt;
-                    &lt;block type=&quot;catalog/product_list_toolbar&quot; name=&quot;product_list_toolbar&quot; template=&quot;catalog/product/list/toolbar.phtml&quot;&gt;
-                        &lt;block type=&quot;page/html_pager&quot; name=&quot;product_list_toolbar_pager&quot;/&gt;
-                        &lt;!-- The following code shows how to set your own pager increments --&gt;
-                        &lt;!--
-                            &lt;action method=&quot;setDefaultListPerPage&quot;&gt;&lt;limit&gt;4&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;setDefaultGridPerPage&quot;&gt;&lt;limit&gt;9&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;list&lt;/mode&gt;&lt;limit&gt;2&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;list&lt;/mode&gt;&lt;limit&gt;4&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;list&lt;/mode&gt;&lt;limit&gt;6&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;list&lt;/mode&gt;&lt;limit&gt;8&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot; translate=&quot;label&quot;&gt;&lt;mode&gt;list&lt;/mode&gt;&lt;limit&gt;all&lt;/limit&gt;&lt;label&gt;All&lt;/label&gt;&lt;/action&gt;
-                        --&gt;
-                    &lt;/block&gt;
-                    &lt;action method=&quot;addColumnCountLayoutDepend&quot;&gt;&lt;layout&gt;empty&lt;/layout&gt;&lt;count&gt;6&lt;/count&gt;&lt;/action&gt;
-                    &lt;action method=&quot;addColumnCountLayoutDepend&quot;&gt;&lt;layout&gt;one_column&lt;/layout&gt;&lt;count&gt;5&lt;/count&gt;&lt;/action&gt;
-                    &lt;action method=&quot;addColumnCountLayoutDepend&quot;&gt;&lt;layout&gt;two_columns_left&lt;/layout&gt;&lt;count&gt;4&lt;/count&gt;&lt;/action&gt;
-                    &lt;action method=&quot;addColumnCountLayoutDepend&quot;&gt;&lt;layout&gt;two_columns_right&lt;/layout&gt;&lt;count&gt;4&lt;/count&gt;&lt;/action&gt;
-                    &lt;action method=&quot;addColumnCountLayoutDepend&quot;&gt;&lt;layout&gt;three_columns&lt;/layout&gt;&lt;count&gt;3&lt;/count&gt;&lt;/action&gt;
-                    &lt;action method=&quot;setToolbarBlockName&quot;&gt;&lt;name&gt;product_list_toolbar&lt;/name&gt;&lt;/action&gt;
-                &lt;/block&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-    &lt;/catalog_category_default&gt;
+    <catalog_category_default translate="label">
+        <label>Catalog Category (Non-Anchor)</label>
+        <reference name="left">
+            <block type="catalog/navigation" name="catalog.leftnav" after="currency" template="catalog/navigation/left.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
+                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                        <!-- The following code shows how to set your own pager increments -->
+                        <!--
+                            <action method="setDefaultListPerPage"><limit>4</limit></action>
+                            <action method="setDefaultGridPerPage"><limit>9</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
+                            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+                        -->
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </block>
+            </block>
+        </reference>
+    </catalog_category_default>
 
-&lt;!--
+<!--
 Category layered navigation layout
---&gt;
+-->
 
-    &lt;catalog_category_layered translate=&quot;label&quot;&gt;
-        &lt;label&gt;Catalog Category (Anchor)&lt;/label&gt;
-        &lt;reference name=&quot;left&quot;&gt;
-            &lt;block type=&quot;catalog/layer_view&quot; name=&quot;catalog.leftnav&quot; after=&quot;currency&quot; template=&quot;catalog/layer/view.phtml&quot;/&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;content&quot;&gt;
-            &lt;block type=&quot;catalog/category_view&quot; name=&quot;category.products&quot; template=&quot;catalog/category/view.phtml&quot;&gt;
-                &lt;block type=&quot;catalog/product_list&quot; name=&quot;product_list&quot; template=&quot;catalog/product/list.phtml&quot;&gt;
-                    &lt;!-- &lt;action method=&quot;addReviewSummaryTemplate&quot;&gt;&lt;type&gt;default&lt;/type&gt;&lt;template&gt;review/helper/su.phtml&lt;/template&gt;&lt;/action&gt; --&gt;
-                    &lt;block type=&quot;catalog/product_list_toolbar&quot; name=&quot;product_list_toolbar&quot; template=&quot;catalog/product/list/toolbar.phtml&quot;&gt;
-                        &lt;block type=&quot;page/html_pager&quot; name=&quot;product_list_toolbar_pager&quot;/&gt;
-                        &lt;!-- The following code shows how to set your own pager increments --&gt;
-                        &lt;!--
-                            &lt;action method=&quot;setDefaultListPerPage&quot;&gt;&lt;limit&gt;4&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;setDefaultGridPerPage&quot;&gt;&lt;limit&gt;3&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;list&lt;/mode&gt;&lt;limit&gt;2&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;list&lt;/mode&gt;&lt;limit&gt;4&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;list&lt;/mode&gt;&lt;limit&gt;6&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;list&lt;/mode&gt;&lt;limit&gt;8&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot; translate=&quot;label&quot;&gt;&lt;mode&gt;list&lt;/mode&gt;&lt;limit&gt;all&lt;/limit&gt;&lt;label&gt;All&lt;/label&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;grid&lt;/mode&gt;&lt;limit&gt;3&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;grid&lt;/mode&gt;&lt;limit&gt;6&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot;&gt;&lt;mode&gt;grid&lt;/mode&gt;&lt;limit&gt;9&lt;/limit&gt;&lt;/action&gt;
-                            &lt;action method=&quot;addPagerLimit&quot; translate=&quot;label&quot;&gt;&lt;mode&gt;grid&lt;/mode&gt;&lt;limit&gt;all&lt;/limit&gt;&lt;label&gt;All&lt;/label&gt;&lt;/action&gt;
-                        --&gt;
-                    &lt;/block&gt;
-                    &lt;action method=&quot;addColumnCountLayoutDepend&quot;&gt;&lt;layout&gt;empty&lt;/layout&gt;&lt;count&gt;6&lt;/count&gt;&lt;/action&gt;
-                    &lt;action method=&quot;addColumnCountLayoutDepend&quot;&gt;&lt;layout&gt;one_column&lt;/layout&gt;&lt;count&gt;5&lt;/count&gt;&lt;/action&gt;
-                    &lt;action method=&quot;addColumnCountLayoutDepend&quot;&gt;&lt;layout&gt;two_columns_left&lt;/layout&gt;&lt;count&gt;4&lt;/count&gt;&lt;/action&gt;
-                    &lt;action method=&quot;addColumnCountLayoutDepend&quot;&gt;&lt;layout&gt;two_columns_right&lt;/layout&gt;&lt;count&gt;4&lt;/count&gt;&lt;/action&gt;
-                    &lt;action method=&quot;addColumnCountLayoutDepend&quot;&gt;&lt;layout&gt;three_columns&lt;/layout&gt;&lt;count&gt;3&lt;/count&gt;&lt;/action&gt;
-                    &lt;action method=&quot;setToolbarBlockName&quot;&gt;&lt;name&gt;product_list_toolbar&lt;/name&gt;&lt;/action&gt;
-                &lt;/block&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-    &lt;/catalog_category_layered&gt;
+    <catalog_category_layered translate="label">
+        <label>Catalog Category (Anchor)</label>
+        <reference name="left">
+            <block type="catalog/layer_view" name="catalog.leftnav" after="currency" template="catalog/layer/view.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
+                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+                    <!-- <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/su.phtml</template></action> -->
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                        <!-- The following code shows how to set your own pager increments -->
+                        <!--
+                            <action method="setDefaultListPerPage"><limit>4</limit></action>
+                            <action method="setDefaultGridPerPage"><limit>3</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
+                            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+                            <action method="addPagerLimit"><mode>grid</mode><limit>3</limit></action>
+                            <action method="addPagerLimit"><mode>grid</mode><limit>6</limit></action>
+                            <action method="addPagerLimit"><mode>grid</mode><limit>9</limit></action>
+                            <action method="addPagerLimit" translate="label"><mode>grid</mode><limit>all</limit><label>All</label></action>
+                        -->
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </block>
+            </block>
+        </reference>
+    </catalog_category_layered>
 
-&lt;!--
+<!--
 Compare products page
---&gt;
+-->
 
-    &lt;catalog_product_compare_index translate=&quot;label&quot;&gt;
-        &lt;label&gt;Catalog Product Compare List&lt;/label&gt;
-        &lt;!-- Mage_Catalog --&gt;
-        &lt;reference name=&quot;root&quot;&gt;
-            &lt;action method=&quot;setTemplate&quot;&gt;&lt;template&gt;page/popup.phtml&lt;/template&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;head&quot;&gt;
-            &lt;action method=&quot;addJs&quot;&gt;&lt;script&gt;scriptaculous/scriptaculous.js&lt;/script&gt;&lt;/action&gt;
-            &lt;action method=&quot;addJs&quot;&gt;&lt;script&gt;varien/product.js&lt;/script&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;content&quot;&gt;
-            &lt;block type=&quot;catalog/product_compare_list&quot; name=&quot;catalog.compare.list&quot; template=&quot;catalog/product/compare/list.phtml&quot;/&gt;
-        &lt;/reference&gt;
-    &lt;/catalog_product_compare_index&gt;
+    <catalog_product_compare_index translate="label">
+        <label>Catalog Product Compare List</label>
+        <!-- Mage_Catalog -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/popup.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>scriptaculous/scriptaculous.js</script></action>
+            <action method="addJs"><script>varien/product.js</script></action>
+            <action method="addJs"><script>varien/product_options.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="catalog/product_compare_list" name="catalog.compare.list" template="catalog/product/compare/list.phtml"/>
+        </reference>
+    </catalog_product_compare_index>
 
-    &lt;customer_account_index&gt;
-        &lt;reference name=&quot;right&quot;&gt;
-            &lt;action method=&quot;unsetChild&quot;&gt;&lt;name&gt;catalog.compare.sidebar&lt;/name&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-    &lt;/customer_account_index&gt;
+    <customer_account_index>
+        <reference name="right">
+            <action method="unsetChild"><name>catalog.compare.sidebar</name></action>
+        </reference>
+    </customer_account_index>
 
-&lt;!--
+<!--
 Product view
---&gt;
+-->
 
-    &lt;catalog_product_view translate=&quot;label&quot;&gt;
-        &lt;label&gt;Catalog Product View (Any)&lt;/label&gt;
-        &lt;!-- Mage_Catalog --&gt;
-        &lt;reference name=&quot;root&quot;&gt;
-            &lt;action method=&quot;setTemplate&quot;&gt;&lt;template&gt;page/2columns-right.phtml&lt;/template&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;head&quot;&gt;
-            &lt;action method=&quot;addJs&quot;&gt;&lt;script&gt;varien/product.js&lt;/script&gt;&lt;/action&gt;
-            &lt;action method=&quot;addJs&quot;&gt;&lt;script&gt;varien/configurable.js&lt;/script&gt;&lt;/action&gt;
+    <catalog_product_view translate="label">
+        <label>Catalog Product View (Any)</label>
+        <!-- Mage_Catalog -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>varien/product.js</script></action>
+            <action method="addJs"><script>varien/product_options.js</script></action>
+            <action method="addJs"><script>varien/configurable.js</script></action>
 
-            &lt;action method=&quot;addItem&quot;&gt;&lt;type&gt;js_css&lt;/type&gt;&lt;name&gt;calendar/calendar-win2k-1.css&lt;/name&gt;&lt;params/&gt;&lt;!--&lt;if/&gt;&lt;condition&gt;can_load_calendar_js&lt;/condition&gt;--&gt;&lt;/action&gt;
-            &lt;action method=&quot;addItem&quot;&gt;&lt;type&gt;js&lt;/type&gt;&lt;name&gt;calendar/calendar.js&lt;/name&gt;&lt;!--&lt;params/&gt;&lt;if/&gt;&lt;condition&gt;can_load_calendar_js&lt;/condition&gt;--&gt;&lt;/action&gt;
-            &lt;action method=&quot;addItem&quot;&gt;&lt;type&gt;js&lt;/type&gt;&lt;name&gt;calendar/calendar-setup.js&lt;/name&gt;&lt;!--&lt;params/&gt;&lt;if/&gt;&lt;condition&gt;can_load_calendar_js&lt;/condition&gt;--&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;content&quot;&gt;
-            &lt;block type=&quot;catalog/product_view&quot; name=&quot;product.info&quot; template=&quot;catalog/product/view.phtml&quot;&gt;
-                &lt;!--
-                &lt;action method=&quot;addReviewSummaryTemplate&quot;&gt;&lt;type&gt;default&lt;/type&gt;&lt;template&gt;review/helper/summary.phtml&lt;/template&gt;&lt;/action&gt;
-                &lt;action method=&quot;addReviewSummaryTemplate&quot;&gt;&lt;type&gt;short&lt;/type&gt;&lt;template&gt;review/helper/summary_short.phtml&lt;/template&gt;&lt;/action&gt;
-                &lt;action method=&quot;addReviewSummaryTemplate&quot;&gt;&lt;type&gt;...&lt;/type&gt;&lt;template&gt;...&lt;/template&gt;&lt;/action&gt;
-                --&gt;
-                &lt;block type=&quot;catalog/product_view_media&quot; name=&quot;product.info.media&quot; as=&quot;media&quot; template=&quot;catalog/product/view/media.phtml&quot;/&gt;
-                &lt;block type=&quot;core/text_list&quot; name=&quot;alert.urls&quot; as=&quot;alert_urls&quot; translate=&quot;label&quot;&gt;
-                    &lt;label&gt;Alert Urls&lt;/label&gt;
-                &lt;/block&gt;
+            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+        </reference>
+        <reference name="content">
+            <block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
+                <!--
+                <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary.phtml</template></action>
+                <action method="addReviewSummaryTemplate"><type>short</type><template>review/helper/summary_short.phtml</template></action>
+                <action method="addReviewSummaryTemplate"><type>...</type><template>...</template></action>
+                -->
+                <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>
+                <block type="core/text_list" name="alert.urls" as="alert_urls" translate="label">
+                    <label>Alert Urls</label>
+                </block>
 
-                &lt;action method=&quot;setTierPriceTemplate&quot;&gt;&lt;template&gt;catalog/product/view/tierprices.phtml&lt;/template&gt;&lt;/action&gt;
+                <action method="setTierPriceTemplate"><template>catalog/product/view/tierprices.phtml</template></action>
 
-                &lt;block type=&quot;catalog/product_list_upsell&quot; name=&quot;product.info.upsell&quot; as=&quot;upsell_products&quot; template=&quot;catalog/product/list/upsell.phtml&quot;&gt;
-                    &lt;action method=&quot;setColumnCount&quot;&gt;&lt;columns&gt;4&lt;/columns&gt;&lt;/action&gt;
-                    &lt;action method=&quot;setItemLimit&quot;&gt;&lt;type&gt;upsell&lt;/type&gt;&lt;limit&gt;4&lt;/limit&gt;&lt;/action&gt;
-                &lt;/block&gt;
+                <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml">
+                    <action method="setColumnCount"><columns>4</columns></action>
+                    <action method="setItemLimit"><type>upsell</type><limit>4</limit></action>
+                </block>
 
-                &lt;block type=&quot;catalog/product_view_additional&quot; name=&quot;product.info.additional&quot; as=&quot;product_additional_data&quot; /&gt;
-                &lt;block type=&quot;catalog/product_view_description&quot; name=&quot;product.description&quot; as=&quot;description&quot; template=&quot;catalog/product/view/description.phtml&quot;&gt;
-                    &lt;action method=&quot;addToParentGroup&quot;&gt;&lt;group&gt;detailed_info&lt;/group&gt;&lt;/action&gt;
-                &lt;/block&gt;
-                &lt;block type=&quot;catalog/product_view_attributes&quot; name=&quot;product.attributes&quot; as=&quot;additional&quot; template=&quot;catalog/product/view/attributes.phtml&quot;&gt;
-                    &lt;action method=&quot;addToParentGroup&quot;&gt;&lt;group&gt;detailed_info&lt;/group&gt;&lt;/action&gt;
-                &lt;/block&gt;
-                &lt;block type=&quot;catalog/product_view&quot; name=&quot;product.info.addto&quot; as=&quot;addto&quot; template=&quot;catalog/product/view/addto.phtml&quot;/&gt;
-                &lt;block type=&quot;catalog/product_view&quot; name=&quot;product.info.addtocart&quot; as=&quot;addtocart&quot; template=&quot;catalog/product/view/addtocart.phtml&quot;/&gt;
+                <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data" />
+                <block type="catalog/product_view_description" name="product.description" as="description" template="catalog/product/view/description.phtml">
+                    <action method="addToParentGroup"><group>detailed_info</group></action>
+                </block>
+                <block type="catalog/product_view_attributes" name="product.attributes" as="additional" template="catalog/product/view/attributes.phtml">
+                    <action method="addToParentGroup"><group>detailed_info</group></action>
+                </block>
+                <block type="catalog/product_view" name="product.info.addto" as="addto" template="catalog/product/view/addto.phtml"/>
+                <block type="catalog/product_view" name="product.info.addtocart" as="addtocart" template="catalog/product/view/addtocart.phtml"/>
 
-                &lt;block type=&quot;core/text_list&quot; name=&quot;product.info.extrahint&quot; as=&quot;extrahint&quot; translate=&quot;label&quot;&gt;
-                    &lt;label&gt;Product View Extra Hint&lt;/label&gt;
-                &lt;/block&gt;
+                <block type="core/text_list" name="product.info.extrahint" as="extrahint" translate="label">
+                    <label>Product View Extra Hint</label>
+                </block>
 
-                &lt;block type=&quot;catalog/product_view&quot; name=&quot;product.info.options.wrapper&quot; as=&quot;product_options_wrapper&quot; template=&quot;catalog/product/view/options/wrapper.phtml&quot; translate=&quot;label&quot;&gt;
-                    &lt;label&gt;Info Column Options Wrapper&lt;/label&gt;
-                    &lt;block type=&quot;core/template&quot; name=&quot;options_js&quot; template=&quot;catalog/product/view/options/js.phtml&quot;/&gt;
-                    &lt;block type=&quot;catalog/product_view_options&quot; name=&quot;product.info.options&quot; as=&quot;product_options&quot; template=&quot;catalog/product/view/options.phtml&quot;&gt;
-                        &lt;action method=&quot;addOptionRenderer&quot;&gt;&lt;type&gt;text&lt;/type&gt;&lt;block&gt;catalog/product_view_options_type_text&lt;/block&gt;&lt;template&gt;catalog/product/view/options/type/text.phtml&lt;/template&gt;&lt;/action&gt;
-                        &lt;action method=&quot;addOptionRenderer&quot;&gt;&lt;type&gt;file&lt;/type&gt;&lt;block&gt;catalog/product_view_options_type_file&lt;/block&gt;&lt;template&gt;catalog/product/view/options/type/file.phtml&lt;/template&gt;&lt;/action&gt;
-                        &lt;action method=&quot;addOptionRenderer&quot;&gt;&lt;type&gt;select&lt;/type&gt;&lt;block&gt;catalog/product_view_options_type_select&lt;/block&gt;&lt;template&gt;catalog/product/view/options/type/select.phtml&lt;/template&gt;&lt;/action&gt;
-                        &lt;action method=&quot;addOptionRenderer&quot;&gt;&lt;type&gt;date&lt;/type&gt;&lt;block&gt;catalog/product_view_options_type_date&lt;/block&gt;&lt;template&gt;catalog/product/view/options/type/date.phtml&lt;/template&gt;&lt;/action&gt;
-                &lt;/block&gt;
-                        &lt;block type=&quot;core/html_calendar&quot; name=&quot;html_calendar&quot; as=&quot;html_calendar&quot; template=&quot;page/js/calendar.phtml&quot;/&gt;
-                    &lt;/block&gt;
-                &lt;block type=&quot;catalog/product_view&quot; name=&quot;product.info.options.wrapper.bottom&quot; as=&quot;product_options_wrapper_bottom&quot; template=&quot;catalog/product/view/options/wrapper/bottom.phtml&quot; translate=&quot;label&quot;&gt;
-                    &lt;label&gt;Bottom Block Options Wrapper&lt;/label&gt;
-                    &lt;action method=&quot;insert&quot;&gt;&lt;block&gt;product.tierprices&lt;/block&gt;&lt;/action&gt;
-                    &lt;block type=&quot;catalog/product_view&quot; name=&quot;product.clone_prices&quot; as=&quot;prices&quot; template=&quot;catalog/product/view/price_clone.phtml&quot;/&gt;
-                    &lt;action method=&quot;append&quot;&gt;&lt;block&gt;product.info.addtocart&lt;/block&gt;&lt;/action&gt;
-                    &lt;action method=&quot;append&quot;&gt;&lt;block&gt;product.info.addto&lt;/block&gt;&lt;/action&gt;
-                &lt;/block&gt;
+                <block type="catalog/product_view" name="product.info.options.wrapper" as="product_options_wrapper" template="catalog/product/view/options/wrapper.phtml" translate="label">
+                    <label>Info Column Options Wrapper</label>
+                    <block type="core/template" name="options_js" template="catalog/product/view/options/js.phtml"/>
+                    <block type="catalog/product_view_options" name="product.info.options" as="product_options" template="catalog/product/view/options.phtml">
+                        <action method="addOptionRenderer"><type>text</type><block>catalog/product_view_options_type_text</block><template>catalog/product/view/options/type/text.phtml</template></action>
+                        <action method="addOptionRenderer"><type>file</type><block>catalog/product_view_options_type_file</block><template>catalog/product/view/options/type/file.phtml</template></action>
+                        <action method="addOptionRenderer"><type>select</type><block>catalog/product_view_options_type_select</block><template>catalog/product/view/options/type/select.phtml</template></action>
+                        <action method="addOptionRenderer"><type>date</type><block>catalog/product_view_options_type_date</block><template>catalog/product/view/options/type/date.phtml</template></action>
+                </block>
+                        <block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/>
+                    </block>
+                <block type="catalog/product_view" name="product.info.options.wrapper.bottom" as="product_options_wrapper_bottom" template="catalog/product/view/options/wrapper/bottom.phtml" translate="label">
+                    <label>Bottom Block Options Wrapper</label>
+                    <action method="insert"><block>product.tierprices</block></action>
+                    <block type="catalog/product_view" name="product.clone_prices" as="prices" template="catalog/product/view/price_clone.phtml"/>
+                    <action method="append"><block>product.info.addtocart</block></action>
+                    <action method="append"><block>product.info.addto</block></action>
+                </block>
 
-                &lt;block type=&quot;core/template_facade&quot; name=&quot;product.info.container1&quot; as=&quot;container1&quot;&gt;
-                    &lt;action method=&quot;setDataByKey&quot;&gt;&lt;key&gt;alias_in_layout&lt;/key&gt;&lt;value&gt;container1&lt;/value&gt;&lt;/action&gt;
-                    &lt;action method=&quot;setDataByKeyFromRegistry&quot;&gt;&lt;key&gt;options_container&lt;/key&gt;&lt;key_in_registry&gt;product&lt;/key_in_registry&gt;&lt;/action&gt;
-                    &lt;action method=&quot;append&quot;&gt;&lt;block&gt;product.info.options.wrapper&lt;/block&gt;&lt;/action&gt;
-                    &lt;action method=&quot;append&quot;&gt;&lt;block&gt;product.info.options.wrapper.bottom&lt;/block&gt;&lt;/action&gt;
-                &lt;/block&gt;
-                &lt;block type=&quot;core/template_facade&quot; name=&quot;product.info.container2&quot; as=&quot;container2&quot;&gt;
-                    &lt;action method=&quot;setDataByKey&quot;&gt;&lt;key&gt;alias_in_layout&lt;/key&gt;&lt;value&gt;container2&lt;/value&gt;&lt;/action&gt;
-                    &lt;action method=&quot;setDataByKeyFromRegistry&quot;&gt;&lt;key&gt;options_container&lt;/key&gt;&lt;key_in_registry&gt;product&lt;/key_in_registry&gt;&lt;/action&gt;
-                    &lt;action method=&quot;append&quot;&gt;&lt;block&gt;product.info.options.wrapper&lt;/block&gt;&lt;/action&gt;
-                    &lt;action method=&quot;append&quot;&gt;&lt;block&gt;product.info.options.wrapper.bottom&lt;/block&gt;&lt;/action&gt;
-                &lt;/block&gt;
-                &lt;action method=&quot;unsetCallChild&quot;&gt;&lt;child&gt;container1&lt;/child&gt;&lt;call&gt;ifEquals&lt;/call&gt;&lt;if&gt;0&lt;/if&gt;&lt;key&gt;alias_in_layout&lt;/key&gt;&lt;key&gt;options_container&lt;/key&gt;&lt;/action&gt;
-                &lt;action method=&quot;unsetCallChild&quot;&gt;&lt;child&gt;container2&lt;/child&gt;&lt;call&gt;ifEquals&lt;/call&gt;&lt;if&gt;0&lt;/if&gt;&lt;key&gt;alias_in_layout&lt;/key&gt;&lt;key&gt;options_container&lt;/key&gt;&lt;/action&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;right&quot;&gt;
-            &lt;block type=&quot;catalog/product_list_related&quot; name=&quot;catalog.product.related&quot; before=&quot;-&quot; template=&quot;catalog/product/list/related.phtml&quot;/&gt;
-        &lt;/reference&gt;
-    &lt;/catalog_product_view&gt;
+                <block type="core/template_facade" name="product.info.container1" as="container1">
+                    <action method="setDataByKey"><key>alias_in_layout</key><value>container1</value></action>
+                    <action method="setDataByKeyFromRegistry"><key>options_container</key><key_in_registry>product</key_in_registry></action>
+                    <action method="append"><block>product.info.options.wrapper</block></action>
+                    <action method="append"><block>product.info.options.wrapper.bottom</block></action>
+                </block>
+                <block type="core/template_facade" name="product.info.container2" as="container2">
+                    <action method="setDataByKey"><key>alias_in_layout</key><value>container2</value></action>
+                    <action method="setDataByKeyFromRegistry"><key>options_container</key><key_in_registry>product</key_in_registry></action>
+                    <action method="append"><block>product.info.options.wrapper</block></action>
+                    <action method="append"><block>product.info.options.wrapper.bottom</block></action>
+                </block>
+                <action method="unsetCallChild"><child>container1</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
+                <action method="unsetCallChild"><child>container2</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
+            </block>
+        </reference>
+        <reference name="right">
+            <block type="catalog/product_list_related" name="catalog.product.related" before="-" template="catalog/product/list/related.phtml"/>
+        </reference>
+    </catalog_product_view>
 
-&lt;!--
+<!--
 Additional block dependant on product type
---&gt;
-    &lt;PRODUCT_TYPE_simple translate=&quot;label&quot; module=&quot;catalog&quot;&gt;
-        &lt;label&gt;Catalog Product View (Simple)&lt;/label&gt;
-        &lt;reference name=&quot;product.info&quot;&gt;
-            &lt;block type=&quot;catalog/product_view_type_simple&quot; name=&quot;product.info.simple&quot; as=&quot;product_type_data&quot; template=&quot;catalog/product/view/type/default.phtml&quot;&gt;
-                &lt;block type=&quot;core/text_list&quot; name=&quot;product.info.simple.extra&quot; as=&quot;product_type_data_extra&quot; translate=&quot;label&quot;&gt;
-                    &lt;label&gt;Product Extra Info&lt;/label&gt;
-                &lt;/block&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-    &lt;/PRODUCT_TYPE_simple&gt;
-    &lt;PRODUCT_TYPE_configurable translate=&quot;label&quot; module=&quot;catalog&quot;&gt;
-        &lt;label&gt;Catalog Product View (Configurable)&lt;/label&gt;
-        &lt;reference name=&quot;product.info&quot;&gt;
-            &lt;block type=&quot;catalog/product_view_type_configurable&quot; name=&quot;product.info.configurable&quot; as=&quot;product_type_data&quot; template=&quot;catalog/product/view/type/default.phtml&quot;&gt;
-                &lt;block type=&quot;core/text_list&quot; name=&quot;product.info.configurable.extra&quot; as=&quot;product_type_data_extra&quot; translate=&quot;label&quot;&gt;
-                    &lt;label&gt;Product Extra Info&lt;/label&gt;
-                &lt;/block&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;product.info.options.wrapper&quot;&gt;
-            &lt;block type=&quot;catalog/product_view_type_configurable&quot; name=&quot;product.info.options.configurable&quot; as=&quot;options_configurable&quot; before=&quot;-&quot; template=&quot;catalog/product/view/type/options/configurable.phtml&quot;/&gt;
-        &lt;/reference&gt;
-    &lt;/PRODUCT_TYPE_configurable&gt;
-    &lt;PRODUCT_TYPE_grouped translate=&quot;label&quot; module=&quot;catalog&quot;&gt;
-        &lt;label&gt;Catalog Product View (Grouped)&lt;/label&gt;
-        &lt;reference name=&quot;product.info&quot;&gt;
-            &lt;block type=&quot;catalog/product_view_type_grouped&quot; name=&quot;product.info.grouped&quot; as=&quot;product_type_data&quot; template=&quot;catalog/product/view/type/grouped.phtml&quot;&gt;
-                &lt;block type=&quot;core/text_list&quot; name=&quot;product.info.grouped.extra&quot; as=&quot;product_type_data_extra&quot; translate=&quot;label&quot;&gt;
-                    &lt;label&gt;Product Extra Info&lt;/label&gt;
-                &lt;/block&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-    &lt;/PRODUCT_TYPE_grouped&gt;
-    &lt;PRODUCT_TYPE_virtual translate=&quot;label&quot; module=&quot;catalog&quot;&gt;
-        &lt;label&gt;Catalog Product View (Virtual)&lt;/label&gt;
-        &lt;reference name=&quot;product.info&quot;&gt;
-            &lt;block type=&quot;catalog/product_view_type_virtual&quot; name=&quot;product.info.virtual&quot; as=&quot;product_type_data&quot; template=&quot;catalog/product/view/type/default.phtml&quot;&gt;
-                &lt;block type=&quot;core/text_list&quot; name=&quot;product.info.virtual.extra&quot; as=&quot;product_type_data_extra&quot; translate=&quot;label&quot;&gt;
-                    &lt;label&gt;Product Extra Info&lt;/label&gt;
-                &lt;/block&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-    &lt;/PRODUCT_TYPE_virtual&gt;
+-->
+    <PRODUCT_TYPE_simple translate="label" module="catalog">
+        <label>Catalog Product View (Simple)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/default.phtml">
+                <block type="core/text_list" name="product.info.simple.extra" as="product_type_data_extra" translate="label">
+                    <label>Product Extra Info</label>
+                </block>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_simple>
+    <PRODUCT_TYPE_configurable translate="label" module="catalog">
+        <label>Catalog Product View (Configurable)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_configurable" name="product.info.configurable" as="product_type_data" template="catalog/product/view/type/default.phtml">
+                <block type="core/text_list" name="product.info.configurable.extra" as="product_type_data_extra" translate="label">
+                    <label>Product Extra Info</label>
+                </block>
+            </block>
+        </reference>
+        <reference name="product.info.options.wrapper">
+            <block type="catalog/product_view_type_configurable" name="product.info.options.configurable" as="options_configurable" before="-" template="catalog/product/view/type/options/configurable.phtml"/>
+        </reference>
+    </PRODUCT_TYPE_configurable>
+    <PRODUCT_TYPE_grouped translate="label" module="catalog">
+        <label>Catalog Product View (Grouped)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_grouped" name="product.info.grouped" as="product_type_data" template="catalog/product/view/type/grouped.phtml">
+                <block type="core/text_list" name="product.info.grouped.extra" as="product_type_data_extra" translate="label">
+                    <label>Product Extra Info</label>
+                </block>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_grouped>
+    <PRODUCT_TYPE_virtual translate="label" module="catalog">
+        <label>Catalog Product View (Virtual)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_virtual" name="product.info.virtual" as="product_type_data" template="catalog/product/view/type/default.phtml">
+                <block type="core/text_list" name="product.info.virtual.extra" as="product_type_data_extra" translate="label">
+                    <label>Product Extra Info</label>
+                </block>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_virtual>
 
 
 
-&lt;!--
+<!--
 Product send to friend
---&gt;
+-->
 
-    &lt;catalog_product_send translate=&quot;label&quot;&gt;
-        &lt;label&gt;Catalog Product Email to a Friend&lt;/label&gt;
-        &lt;!-- Mage_Catalog --&gt;
-        &lt;reference name=&quot;root&quot;&gt;
-            &lt;action method=&quot;setTemplate&quot;&gt;&lt;template&gt;page/2columns-right.phtml&lt;/template&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;head&quot;&gt;
-            &lt;action method=&quot;addJs&quot;&gt;&lt;script&gt;varien/product.js&lt;/script&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;content&quot;&gt;
-            &lt;block type=&quot;catalog/product_send&quot; name=&quot;product.send&quot; template=&quot;catalog/product/send.phtml&quot;&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-    &lt;/catalog_product_send&gt;
+    <catalog_product_send translate="label">
+        <label>Catalog Product Email to a Friend</label>
+        <!-- Mage_Catalog -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>varien/product.js</script></action>
+            <action method="addJs"><script>varien/product_options.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="catalog/product_send" name="product.send" template="catalog/product/send.phtml">
+            </block>
+        </reference>
+    </catalog_product_send>
 
-&lt;!--
+<!--
 Product additional images gallery popup
---&gt;
+-->
 
-    &lt;catalog_product_gallery translate=&quot;label&quot;&gt;
-        &lt;label&gt;Catalog Product Image Gallery Popup&lt;/label&gt;
-        &lt;!-- Mage_Catalog --&gt;
-        &lt;reference name=&quot;root&quot;&gt;
-            &lt;action method=&quot;setTemplate&quot;&gt;&lt;template&gt;page/popup.phtml&lt;/template&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;content&quot;&gt;
-            &lt;block type=&quot;catalog/product_gallery&quot; name=&quot;catalog_product_gallery&quot; template=&quot;catalog/product/gallery.phtml&quot;/&gt;
-        &lt;/reference&gt;
-    &lt;/catalog_product_gallery&gt;
+    <catalog_product_gallery translate="label">
+        <label>Catalog Product Image Gallery Popup</label>
+        <!-- Mage_Catalog -->
+        <reference name="root">
+            <action method="setTemplate"><template>page/popup.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="catalog/product_gallery" name="catalog_product_gallery" template="catalog/product/gallery.phtml"/>
+        </reference>
+    </catalog_product_gallery>
 
-&lt;!--
+<!--
 SEO Site Map
---&gt;
+-->
 
-    &lt;catalog_seo_sitemap translate=&quot;label&quot;&gt;
-        &lt;label&gt;Catalog Seo Sitemap (Common)&lt;/label&gt;
-        &lt;remove name=&quot;right&quot;/&gt;
-        &lt;remove name=&quot;left&quot;/&gt;
+    <catalog_seo_sitemap translate="label">
+        <label>Catalog Seo Sitemap (Common)</label>
+        <remove name="right"/>
+        <remove name="left"/>
 
-        &lt;reference name=&quot;root&quot;&gt;
-            &lt;action method=&quot;setTemplate&quot;&gt;&lt;template&gt;page/1column.phtml&lt;/template&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;content&quot;&gt;
-            &lt;block type=&quot;page/template_container&quot; name=&quot;seo.sitemap.container&quot; template=&quot;catalog/seo/sitemap/container.phtml&quot;&gt;
-                &lt;block type=&quot;page/template_links&quot; name=&quot;seo.sitemap.links&quot; as=&quot;links&quot; template=&quot;page/template/links.phtml&quot;/&gt;
-                &lt;block type=&quot;page/html_pager&quot; name=&quot;seo.sitemap.pager.top&quot; as=&quot;pager_top&quot; template=&quot;page/html/pager.phtml&quot;/&gt;
-                &lt;block type=&quot;page/html_pager&quot; name=&quot;seo.sitemap.pager.bottom&quot; as=&quot;pager_bottom&quot; template=&quot;page/html/pager.phtml&quot;/&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-    &lt;/catalog_seo_sitemap&gt;
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="page/template_container" name="seo.sitemap.container" template="catalog/seo/sitemap/container.phtml">
+                <block type="page/template_links" name="seo.sitemap.links" as="links" template="page/template/links.phtml"/>
+                <block type="page/html_pager" name="seo.sitemap.pager.top" as="pager_top" template="page/html/pager.phtml"/>
+                <block type="page/html_pager" name="seo.sitemap.pager.bottom" as="pager_bottom" template="page/html/pager.phtml"/>
+            </block>
+        </reference>
+    </catalog_seo_sitemap>
 
-    &lt;catalog_seo_sitemap_category translate=&quot;label&quot;&gt;
-        &lt;label&gt;Catalog Seo Sitemap (Category List)&lt;/label&gt;
-        &lt;reference name=&quot;head&quot;&gt;
-            &lt;action method=&quot;setTitle&quot; translate=&quot;title&quot; module=&quot;catalog&quot;&gt;&lt;title&gt;Site Map&lt;/title&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;update handle=&quot;catalog_seo_sitemap&quot; /&gt;
-        &lt;reference name=&quot;seo.sitemap.container&quot;&gt;
-            &lt;action method=&quot;setTitle&quot; translate=&quot;title&quot; module=&quot;catalog&quot;&gt;&lt;title&gt;Categories&lt;/title&gt;&lt;/action&gt;
-            &lt;block type=&quot;catalog/seo_sitemap_category&quot; name=&quot;seo.sitemap.sitemap&quot; as=&quot;sitemap&quot; after=&quot;pager_top&quot; template=&quot;catalog/seo/sitemap.phtml&quot;&gt;
-                &lt;action method=&quot;bindPager&quot;&gt;&lt;pager&gt;seo.sitemap.pager.top&lt;/pager&gt;&lt;/action&gt;
-                &lt;action method=&quot;bindPager&quot;&gt;&lt;pager&gt;seo.sitemap.pager.bottom&lt;/pager&gt;&lt;/action&gt;
-                &lt;action method=&quot;setItemsTitle&quot; translate=&quot;title&quot; module=&quot;catalog&quot;&gt;&lt;title&gt;categories&lt;/title&gt;&lt;/action&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;seo.sitemap.links&quot;&gt;
-            &lt;action method=&quot;addLink&quot; translate=&quot;label title&quot; module=&quot;catalog&quot;&gt;&lt;label&gt;Products Sitemap&lt;/label&gt;&lt;url helper=&quot;catalog/map/getProductUrl&quot;/&gt;&lt;title&gt;Products Sitemap&lt;/title&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-    &lt;/catalog_seo_sitemap_category&gt;
+    <catalog_seo_sitemap_category translate="label">
+        <label>Catalog Seo Sitemap (Category List)</label>
+        <reference name="head">
+            <action method="setTitle" translate="title" module="catalog"><title>Site Map</title></action>
+        </reference>
+        <update handle="catalog_seo_sitemap" />
+        <reference name="seo.sitemap.container">
+            <action method="setTitle" translate="title" module="catalog"><title>Categories</title></action>
+            <block type="catalog/seo_sitemap_category" name="seo.sitemap.sitemap" as="sitemap" after="pager_top" template="catalog/seo/sitemap.phtml">
+                <action method="bindPager"><pager>seo.sitemap.pager.top</pager></action>
+                <action method="bindPager"><pager>seo.sitemap.pager.bottom</pager></action>
+                <action method="setItemsTitle" translate="title" module="catalog"><title>categories</title></action>
+            </block>
+        </reference>
+        <reference name="seo.sitemap.links">
+            <action method="addLink" translate="label title" module="catalog"><label>Products Sitemap</label><url helper="catalog/map/getProductUrl"/><title>Products Sitemap</title></action>
+        </reference>
+    </catalog_seo_sitemap_category>
 
-    &lt;catalog_seo_sitemap_category_tree translate=&quot;label&quot;&gt;
-        &lt;label&gt;Catalog Seo Sitemap (Category Tree)&lt;/label&gt;
-        &lt;reference name=&quot;seo.sitemap.container&quot;&gt;
-            &lt;remove name=&quot;seo.sitemap.pager.top&quot; /&gt;
-            &lt;remove name=&quot;seo.sitemap.pager.bottom&quot; /&gt;
-            &lt;block type=&quot;catalog/seo_sitemap_tree_pager&quot; name=&quot;seo.sitemap.tree.pager.top&quot; as=&quot;pager_top&quot; template=&quot;page/html/pager.phtml&quot;/&gt;
-            &lt;block type=&quot;catalog/seo_sitemap_tree_pager&quot; name=&quot;seo.sitemap.tree.pager.bottom&quot; as=&quot;pager_bottom&quot; template=&quot;page/html/pager.phtml&quot;/&gt;
-            &lt;remove name=&quot;seo.sitemap.sitemap&quot; /&gt;
-            &lt;block type=&quot;catalog/seo_sitemap_tree_category&quot; name=&quot;seo.sitemap.sitemap_tree&quot; as=&quot;sitemap&quot; after=&quot;pager_top&quot; template=&quot;catalog/seo/tree.phtml&quot;&gt;
-                &lt;action method=&quot;bindPager&quot;&gt;&lt;pager&gt;seo.sitemap.tree.pager.top&lt;/pager&gt;&lt;/action&gt;
-                &lt;action method=&quot;bindPager&quot;&gt;&lt;pager&gt;seo.sitemap.tree.pager.bottom&lt;/pager&gt;&lt;/action&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-    &lt;/catalog_seo_sitemap_category_tree&gt;
+    <catalog_seo_sitemap_category_tree translate="label">
+        <label>Catalog Seo Sitemap (Category Tree)</label>
+        <reference name="seo.sitemap.container">
+            <remove name="seo.sitemap.pager.top" />
+            <remove name="seo.sitemap.pager.bottom" />
+            <block type="catalog/seo_sitemap_tree_pager" name="seo.sitemap.tree.pager.top" as="pager_top" template="page/html/pager.phtml"/>
+            <block type="catalog/seo_sitemap_tree_pager" name="seo.sitemap.tree.pager.bottom" as="pager_bottom" template="page/html/pager.phtml"/>
+            <remove name="seo.sitemap.sitemap" />
+            <block type="catalog/seo_sitemap_tree_category" name="seo.sitemap.sitemap_tree" as="sitemap" after="pager_top" template="catalog/seo/tree.phtml">
+                <action method="bindPager"><pager>seo.sitemap.tree.pager.top</pager></action>
+                <action method="bindPager"><pager>seo.sitemap.tree.pager.bottom</pager></action>
+            </block>
+        </reference>
+    </catalog_seo_sitemap_category_tree>
 
-    &lt;catalog_seo_sitemap_product translate=&quot;label&quot;&gt;
-        &lt;label&gt;Catalog Seo Sitemap (Product List)&lt;/label&gt;
-        &lt;reference name=&quot;head&quot;&gt;
-            &lt;action method=&quot;setTitle&quot; translate=&quot;title&quot; module=&quot;catalog&quot;&gt;&lt;title&gt;Site Map&lt;/title&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-        &lt;update handle=&quot;catalog_seo_sitemap&quot; /&gt;
-        &lt;reference name=&quot;seo.sitemap.container&quot;&gt;
-            &lt;action method=&quot;setTitle&quot; translate=&quot;title&quot; module=&quot;catalog&quot;&gt;&lt;title&gt;Products&lt;/title&gt;&lt;/action&gt;
-            &lt;block type=&quot;catalog/seo_sitemap_product&quot; name=&quot;seo.sitemap.sitemap&quot; as=&quot;sitemap&quot; after=&quot;pager_top&quot; template=&quot;catalog/seo/sitemap.phtml&quot;&gt;
-                &lt;action method=&quot;bindPager&quot;&gt;&lt;pager&gt;seo.sitemap.pager.top&lt;/pager&gt;&lt;/action&gt;
-                &lt;action method=&quot;bindPager&quot;&gt;&lt;pager&gt;seo.sitemap.pager.bottom&lt;/pager&gt;&lt;/action&gt;
-                &lt;action method=&quot;setItemsTitle&quot; translate=&quot;title&quot; module=&quot;catalog&quot;&gt;&lt;title&gt;products&lt;/title&gt;&lt;/action&gt;
-            &lt;/block&gt;
-        &lt;/reference&gt;
-        &lt;reference name=&quot;seo.sitemap.links&quot;&gt;
-            &lt;action method=&quot;addLink&quot; translate=&quot;label title&quot; module=&quot;catalog&quot;&gt;&lt;label&gt;Categories Sitemap&lt;/label&gt;&lt;url helper=&quot;catalog/map/getCategoryUrl&quot;/&gt;&lt;title&gt;Categories Sitemap&lt;/title&gt;&lt;/action&gt;
-        &lt;/reference&gt;
-    &lt;/catalog_seo_sitemap_product&gt;
-&lt;/layout&gt;
-</code></pre>
-</div>
-</div>
-
-</div>
-
-</article>
-</div>
-
-</div>
-<div class='modal hide' id='modal-remove-blob'>
-<div class='modal-dialog'>
-<div class='modal-content'>
-<div class='modal-header'>
-<a class='close' data-dismiss='modal' href='#'>×</a>
-<h3 class='page-title'>Remove catalog.xml</h3>
-<p class='light'>
-From branch
-<strong>master</strong>
-</p>
-</div>
-<div class='modal-body'>
-<form accept-charset="UTF-8" action="/magento/no-tomatoes/blob/master/app/design/frontend/base/default/layout/catalog.xml" class="form-horizontal" method="post"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="delete" /><input name="authenticity_token" type="hidden" value="56ZrqYkXRH/CKQ1gCfh95VNyn/3ZaF399cqRa6mnG7w=" /></div>
-<div class='form-group commit_message-group'>
-<label class="control-label" for="commit_message">Commit message
-</label><div class='col-sm-10'>
-<div class='commit-message-container'>
-<div class='max-width-marker'></div>
-<textarea class="form-control" id="commit_message" name="commit_message" placeholder="Removed this file because..." required="required" rows="3">
-</textarea>
-</div>
-
-</div>
-</div>
-<div class='form-group'>
-<div class='col-sm-2'></div>
-<div class='col-sm-10'>
-<input class="btn btn-remove btn-remove-file" name="commit" type="submit" value="Remove file" />
-<a class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</a>
-</div>
-</div>
-</form>
-
-</div>
-</div>
-</div>
-</div>
-<script>
-  disableButtonIfEmptyField('#commit_message', '.btn-remove-file')
-</script>
-
-</div>
-</div>
-
-</body>
-</html>
+    <catalog_seo_sitemap_product translate="label">
+        <label>Catalog Seo Sitemap (Product List)</label>
+        <reference name="head">
+            <action method="setTitle" translate="title" module="catalog"><title>Site Map</title></action>
+        </reference>
+        <update handle="catalog_seo_sitemap" />
+        <reference name="seo.sitemap.container">
+            <action method="setTitle" translate="title" module="catalog"><title>Products</title></action>
+            <block type="catalog/seo_sitemap_product" name="seo.sitemap.sitemap" as="sitemap" after="pager_top" template="catalog/seo/sitemap.phtml">
+                <action method="bindPager"><pager>seo.sitemap.pager.top</pager></action>
+                <action method="bindPager"><pager>seo.sitemap.pager.bottom</pager></action>
+                <action method="setItemsTitle" translate="title" module="catalog"><title>products</title></action>
+            </block>
+        </reference>
+        <reference name="seo.sitemap.links">
+            <action method="addLink" translate="label title" module="catalog"><label>Categories Sitemap</label><url helper="catalog/map/getCategoryUrl"/><title>Categories Sitemap</title></action>
+        </reference>
+    </catalog_seo_sitemap_product>
+</layout>

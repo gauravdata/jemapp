@@ -10,21 +10,20 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-
 <?php
 $_product    = $this->getProduct();
 Mage::helper('catalog/product')->setSkipSaleableCheck(true);
@@ -36,50 +35,46 @@ Mage::helper('catalog/product')->setSkipSaleableCheck(false);
 $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 ?>
 <?php if ($_product->isSaleable() && count($_attributes)):?>
-	<?php foreach($_attributes as $_attribute): ?>
-		<div class="form-group btn-group<?php if ($_attribute->decoratedIsLast){?> last<?php }?>">
-			<?php $values = $config['attributes'][$_attribute->getAttributeId()]['options']; ?>
-			<select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
-				<option><?php echo $this->__('Choose an Option...') ?></option>
-			</select>
-			<div class="super_attribute<?php echo $_attribute->getAttributeId() ?>-options">
-				<?php foreach ($values as $value): ?>
-					<button id="option<?=$value['id']?>" class="option-btn" value="<?=$value['id']?>"><?=$value['label']?></button>
-				<?php endforeach ?>
-			</div>
-		</div>
-	<?php endforeach; ?>
-	<script type="text/javascript">
-		var config = <?php echo $this->getJsonConfig() ?>;
-		config.chooseText = '<?php echo sprintf($this->__('Kies je maat...'), $_attribute->getLabel()) ?>';
-		var spConfig = new Product.Config(config);
-
-		var buttons = $$('.super_attribute<?php echo $_attribute->getAttributeId() ?>-options .option-btn');
-
-		buttons.each(function(btn){
-			$(btn).on('click', function(evt){
-				$('attribute<?php echo $_attribute->getAttributeId() ?>').setValue(this.value);
-				fireEvent($('attribute<?php echo $_attribute->getAttributeId() ?>')[0], 'change');
-				$$('.super_attribute<?php echo $_attribute->getAttributeId() ?>-options .option-btn').each(function(btn){
-					btn.removeClassName('pressed');
-				});
-				$(this).addClassName('pressed');
-				evt.stop();
-				return false;
-			});
-			for (id in config.attributes) {
-				var attr = config.attributes[id];
-				for (key in attr.options) {
-					var option = attr.options[key];
-					if (typeof option != 'object') continue;
-					if (option.id == btn.value) {
-						return;
-					}
-				}
-			}
-			$(btn).addClassName('disabled').disable();
-		});
-		$('attribute<?php echo $_attribute->getAttributeId() ?>').hide();
-
-	</script>
+    <div class="row thin">
+    <?php foreach($_attributes as $_attribute): ?>
+        <div class="col-6 col-fixed field">
+            <div class="select-overlay">
+                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                    <option><?php echo $this->__('Choose an Option...') ?></option>
+                </select>
+                <label class="required text-center"><?php echo $_attribute->getLabel() ?></label>
+            </div>
+        </div>
+        <?php if ($_product->hasSizechart()): ?>
+        <div class="col-6 col-fixed field">
+            <a href="#modal-sizechart" class="button button-outline button-block show-modal"><?php echo $this->__('Sizechart') ?></a>
+        </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    </div>
+    <script type="text/javascript">
+        var saSelect = $('attribute<?php echo $_attribute->getAttributeId() ?>');
+        var spConfig = new Product.Config(<?php echo $jsonConfig ?>);
+        var _all_options = <?php echo $jsonConfig ?>;
+        var _options = <?php echo $this->getJsonConfig() ?>;
+        for (var i=0;i<_all_options.attributes[<?php echo $_attribute->getAttributeId() ?>].options.length;i++) {
+            var o = _all_options.attributes[<?php echo $_attribute->getAttributeId() ?>].options[i];
+            var _found = false;
+            for (var j=0;j<_options.attributes[<?php echo $_attribute->getAttributeId() ?>].options.length;j++) {
+                var k = _options.attributes[<?php echo $_attribute->getAttributeId() ?>].options[j];
+                if (o.id == k.id) {
+                    _found = true;
+                    break;
+                }
+            }
+            if (!_found) {
+                for (var l=0;l<saSelect.options.length;l++) {
+                    var p = saSelect.options[l];
+                    if (p.value == o.id) {
+                        p.disabled = true;
+                    }
+                }
+            }
+        }
+    </script>
 <?php endif;?>

@@ -26,18 +26,12 @@
 
 <?php
 $_product    = $this->getProduct();
-
-Mage::helper('catalog/product')->setSkipSaleableCheck(true);
-$jsonConfig = $this->getJsonConfig();
-$this->unsAllowProducts();
-$config = Mage::helper('core')->jsonDecode($jsonConfig);
-Mage::helper('catalog/product')->setSkipSaleableCheck(false);
-
 $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 $_wrapperId = "product_addtocart_wrapper_".$_product->getId();
 $_formId = "product_addtocart_form_".$_product->getId();
 $_formJsVar = "productAddToCartForm".$_product->getId();
 ?>
+
 <div id="<?php echo $_wrapperId; ?>">
 <div class="no-display">
 	<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
@@ -46,62 +40,25 @@ $_formJsVar = "productAddToCartForm".$_product->getId();
 <?php if ($_product->isSaleable() && count($_attributes)):?>
 
     <?php foreach($_attributes as $_attribute): ?>
-    <?php $values = $config['attributes'][$_attribute->getAttributeId()]['options']; ?>
-    <div class="grouped-option">
-        <?php /*<label class="grouped-option-title"><span class="required">*&nbsp;</span><?php echo $_attribute->getLabel() ?></label>*/ ?>
-        <select name="super_attribute[<?php echo $_product->getId() ?>][<?php echo $_attribute->getAttributeId() ?>]" id="<?php echo $this->helper('groupedoptions')->getHtmlConfigAttributeId($_attribute);?>" class="go-qty-required-entry super-attribute-select">
-            <option><?php echo $this->__('Choose an Option...') ?></option>
-        </select>
-        <div class="super_attribute<?php echo $_product->getId() ?>-<?php echo $_attribute->getAttributeId() ?>-options">
-            <?php foreach ($values as $value): ?>
-                <button id="option<?=$value['id']?>" class="option-btn" value="<?=$value['id']?>"><?=$value['label']?></button>
-            <?php endforeach ?>
+    <div class="grouped-option field">
+        <div class="select-overlay">
+            <select name="super_attribute[<?php echo $_product->getId() ?>][<?php echo $_attribute->getAttributeId() ?>]" id="<?php echo $this->helper('groupedoptions')->getHtmlConfigAttributeId($_attribute);?>" class="go-qty-required-entry super-attribute-select">
+                <option><?php echo $this->__('Choose an Option...') ?></option>
+            </select>
+            <label class="grouped-option-title"><span class="required">*&nbsp;</span><?php echo $_attribute->getLabel() ?></label>
         </div>
     </div>
     <?php endforeach; ?>
 
     <script type="text/javascript">
-        var config = <?php echo $this->getJsonConfig() ?>;
-        var spConfig = new Product.GroupedConfig(config, <?php echo $_product->getId() ?>);
+        var spConfig = new Product.GroupedConfig(<?php echo $this->getJsonConfig() ?>, <?php echo $_product->getId() ?>);
         spConfig.setOptionsPrice(new Product.OptionsPrice(<?php echo Mage::helper('groupedoptions')->getProductViewJsonConfig($_product) ?>));
-
-        var buttons = $$('.super_attribute<?php echo $_product->getId() ?>-<?php echo $_attribute->getAttributeId() ?>-options .option-btn');
-
-        buttons.each(function(btn){
-            $(btn).on('click', function(evt){
-                $('<?php echo $this->helper('groupedoptions')->getHtmlConfigAttributeId($_attribute);?>').setValue(this.value);
-                //fireEvent($('<?php echo $this->helper('groupedoptions')->getHtmlConfigAttributeId($_attribute);?>')[0], 'change');
-                var val = $('super_group<?php echo $_product->getId() ?>').getValue();
-                if (val == 0) $('super_group<?php echo $_product->getId() ?>').setValue(1);
-
-                $$('.super_attribute<?php echo $_product->getId() ?>-<?php echo $_attribute->getAttributeId() ?>-options .option-btn').each(function(btn){
-                    btn.removeClassName('pressed');
-                })
-                $(this).addClassName('pressed');
-                evt.stop();
-                return false;
-            });
-            for (id in config.attributes) {
-                var attr = config.attributes[id];
-                for (key in attr.options) {
-                    var option = attr.options[key];
-                    if (typeof option != 'object') continue;
-                    if (option.id == btn.value) {
-                        return;
-                    }
-                }
-            }
-            $(btn).addClassName('disabled').disable();
-        });
-        $('<?php echo $this->helper('groupedoptions')->getHtmlConfigAttributeId($_attribute);?>').hide();
-
     </script>
 
     <script type="text/javascript">
     //<![CDATA[
             var <?php echo $_formJsVar ?> = new VarienForm('<?php echo $_formId ?>');
             <?php echo $_formJsVar ?>.submit = function(){
-
                     if (this.validator.validate()) {
                             this.form.submit();
                     }

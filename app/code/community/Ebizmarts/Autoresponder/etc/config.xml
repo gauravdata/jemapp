@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Ebizmarts_Autoresponder>
-            <version>0.1.6</version>
+            <version>1.2.1.1</version>
         </Ebizmarts_Autoresponder>
     </modules>
     <global>
@@ -97,24 +97,6 @@
         </template>
         <template>
             <email>
-                <ebizmarts_autoresponder_registration_template translate="label" module="ebizmarts_autoresponder">
-                    <label>Registration Email</label>
-                    <file>ebizmarts/autoresponder/registration.html</file>
-                    <type>html</type>
-                </ebizmarts_autoresponder_registration_template>
-            </email>
-        </template>
-        <template>
-            <email>
-                <ebizmarts_autoresponder_newsletter_template translate="label" module="ebizmarts_autoresponder">
-                    <label>Newsletter Registration Email</label>
-                    <file>ebizmarts/autoresponder/newsletter.html</file>
-                    <type>html</type>
-                </ebizmarts_autoresponder_newsletter_template>
-            </email>
-        </template>
-        <template>
-            <email>
                 <ebizmarts_autoresponder_noactivity_template translate="label" module="ebizmarts_autoresponder">
                     <label>No Customer Activity Email</label>
                     <file>ebizmarts/autoresponder/noactivity.html</file>
@@ -177,7 +159,24 @@
                     </mandrill_save_config>
                 </observers>
             </admin_system_config_changed_section_mandrill>
+            <sales_order_save_after>
+                <observers>
+                    <ebizmarts_autoresponder_order_save_after>
+                        <class>ebizmarts_autoresponder/eventObserver</class>
+                        <method>orderSaved</method>
+                    </ebizmarts_autoresponder_order_save_after>
+                </observers>
+            </sales_order_save_after>
         </events>
+        <translate>
+            <modules>
+                <Ebizmarts_Autoresponder>
+                    <files>
+                        <default>Ebizmarts_Autoresponder.csv</default>
+                    </files>
+                </Ebizmarts_Autoresponder>
+            </modules>
+        </translate>
     </adminhtml>
     <frontend>
         <layout>
@@ -214,21 +213,30 @@
                 </observers>
             </review_product_post_after>
         </events>
+        <translate>
+            <modules>
+                <Ebizmarts_Autoresponder>
+                    <files>
+                        <default>Ebizmarts_Autoresponder.csv</default>
+                    </files>
+                </Ebizmarts_Autoresponder>
+            </modules>
+        </translate>
     </frontend>
 
     <crontab>
         <jobs>
             <ebizmarts_autoresponder>
                 <schedule>
-                    <cron_expr>0 1 * * *</cron_expr>
+                    <cron_expr>0 * * * *</cron_expr>
                 </schedule>
                 <run>
-                    <model>ebizmarts_autoresponder/cron::process</model>
+                    <model>ebizmarts_autoresponder/cron::autoresponder</model>
                 </run>
             </ebizmarts_autoresponder>
             <ebizmarts_autoresponder_backtostock_cleanup>
                 <schedule>
-                    <cron_expr>0 0 1 * *</cron_expr>
+                    <cron_expr>0 1 * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>ebizmarts_autoresponder/cron::cleanupBackToStock</model>

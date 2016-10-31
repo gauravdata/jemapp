@@ -1,0 +1,195 @@
+#header {
+	@extend .main-transition;
+	background-color: $white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+	height: $header-height;
+	color: $xl-grey;
+	line-height: $header-height;
+	font-size: $l-font;
+	font-weight: $bold;
+
+	a {
+		color: $xl-grey !important;
+
+		&:hover {
+			color: $m-grey !important;
+		}
+
+		&.link-icon {
+			float: left;
+			font-size: $l-font;
+
+			.icons {
+				display: inline-block;
+				float: none;
+				width: auto;
+				margin-right: $xxs-spacing;
+			}
+		}
+	}
+
+	.icons {
+		display: block;
+		height: $header-height;
+		width: $header-height;
+		text-align: center;
+		font-size: $xl-font;
+		line-height: $header-height;
+	}
+
+	.nav-btn {
+		float: left;
+	}
+
+	.logo {
+		line-height: 0;
+		margin: 14px 0;
+		position: absolute;
+		left: 50%;
+		margin-left: -75px;
+		width: 150px;
+	}
+
+	.quick-access {
+		float: right;
+
+		#search_mini_form,
+		.form-language,
+		.icons,
+		ul.links {
+			float: left;
+		}
+
+		/*= Search =*/
+		#search_mini_form {
+			@extend .main-transition;
+			border-left: 1px solid transparentize($white, 0.75);
+			border-right: 1px solid transparentize($white, 0.75);
+
+			label {
+				height: $header-height;
+				width: $header-height;
+				text-align: center;
+				color: $xl-grey;
+				padding: 0;
+				margin: 0;
+				float: left;
+				cursor: pointer;
+			}
+			.input-box {
+				width: 110px;
+				float: left;
+
+				input.input-text {
+					height: $header-height;
+					border: none;
+					background-color: transparent;
+					padding: 0;
+					color: $white;
+					font-size: $l-font;
+					font-weight: $bold;
+
+					&::-webkit-input-placeholder {
+						color: $white;
+						opacity: 1;
+					}
+					&::-moz-placeholder {
+						color: $white;
+						opacity: 1;
+					}
+					&:-ms-input-placeholder {
+						color: $white;
+						opacity: 1;
+					}
+					&:-moz-placeholder {
+						color: $white;
+						opacity: 1;
+					}
+				}
+			}
+
+			&.focus {
+				background-color: $white;
+
+				label,
+				input.input-text {
+					color: $xl-grey;
+				}
+			}
+		}
+
+		/*= Language switch =*/
+		.form-language {
+			position: relative;
+			padding: 0 $m-spacing;
+			color: $xl-grey;
+
+			> span {
+				cursor: default;
+			}
+
+			img {
+				display: inline-block;
+				margin-right: $xxs-spacing;
+			}
+
+			ul {
+				@extend .unstyled;
+				@extend .fade-in-transition;
+				position: absolute;
+				left: 0;
+				background-color: $white;
+				padding: 0 $m-spacing;
+
+				li {
+					line-height: $l-font * 2;
+
+					a {
+						color: $xl-grey;
+						display: block;
+						white-space: nowrap;
+					}
+				}
+			}
+
+			&:hover {
+				ul {
+					visibility: visible;
+					opacity: 1;
+				}
+			}
+		}
+
+		/*= Links =*/
+		ul.links {
+			@extend .unstyled;
+
+			li {
+				float: left;
+
+				a {
+					display: block;
+					height: $header-height;
+					line-height: $header-height;
+					padding: 0 $m-spacing;
+
+					&:before {
+						font-family: 'simple-line-icons';
+						content: "\e035";
+						margin-right: $xxs-spacing;
+						font-size: $xl-font;
+						font-weight: normal;
+					}
+
+					span {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}

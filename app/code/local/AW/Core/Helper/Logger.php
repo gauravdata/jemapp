@@ -12,20 +12,17 @@
  * =================================================================
  *                 MAGENTO EDITION USAGE NOTICE
  * =================================================================
- * This package designed for Magento community edition
- * aheadWorks does not guarantee correct work of this extension
- * on any other Magento edition except Magento community edition.
- * aheadWorks does not provide extension support in case of
- * incorrect edition usage.
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
  * =================================================================
  *
  * @category   AW
- * @package    AW_Helpdeskultimate
- * @version    2.10.4
+ * @package    AW_Followupemail
+ * @version    3.6.5
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
-
 
 class AW_Core_Helper_Logger extends Mage_Core_Helper_Abstract
 {
@@ -65,13 +62,12 @@ class AW_Core_Helper_Logger extends Mage_Core_Helper_Abstract
      * @param object $Object
      * @param string $message
      * @param object $severity [optional]
-     * @param string $description [optional]
-     * @param int $line [optional]
      *
      * @return AW_Core_Helper_Logger
      */
     public function log($Object, $message, $severity = null, $description = null, $line = null)
     {
+
         if (!Mage::getStoreConfig(self::XML_PATH_ENABLE_LOG)) {
             return $this;
         }
@@ -121,7 +117,7 @@ class AW_Core_Helper_Logger extends Mage_Core_Helper_Abstract
     /**
      * Deletes all old log records
      *
-     * @return AW_Core_Helper_Logger
+     * @return
      */
     public function exorcise()
     {

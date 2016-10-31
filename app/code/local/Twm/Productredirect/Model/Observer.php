@@ -49,10 +49,10 @@ class Twm_Productredirect_Model_Observer
                     
                     array_pop($urlSegments);
                     $destinationUrl = implode('/', $urlSegments);
-                    $response = Mage::app()->getResponse();
-                    $response->setRedirect(Mage::getBaseUrl() . $destinationUrl, 301);
-                    $response->sendResponse();
-                    exit;
+                    //$response = Mage::app()->getResponse();
+                    //$response->setRedirect(Mage::getBaseUrl() . $destinationUrl, 301);
+                    //$response->sendResponse();
+                    //exit;
                 }
 
             }

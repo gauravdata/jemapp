@@ -2,7 +2,7 @@
 <config>
     <modules>
         <AW_Aheadmetrics>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>
         </AW_Aheadmetrics>
     </modules>

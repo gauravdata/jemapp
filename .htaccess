@@ -1,3 +1,18 @@
+# ----------------------------------------------------------------------
+# | Forcing `https://`                                                 |
+# ----------------------------------------------------------------------
+
+# Redirect from the `http://` to the `https://` version of the URL.
+# https://wiki.apache.org/httpd/RewriteHTTPToHTTPS
+
+<IfDefine !DEV>
+<IfModule mod_rewrite.c>
+   RewriteEngine On
+   RewriteCond %{HTTPS} !=on
+   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+</IfDefine>
+
 ############################################
 ## uncomment these lines for CGI mode
 ## make sure to specify the correct cgi php binary file name
@@ -32,7 +47,7 @@
 ## adjust memory limit
 
 #    php_value memory_limit 64M
-    php_value memory_limit 256M
+    php_value memory_limit 512M
     php_value max_execution_time 18000
 
 ############################################
@@ -121,7 +136,6 @@
 ## path relative to web root
 
     RewriteBase /
-
 
 RewriteCond %{HTTP_HOST} ^(www\.)?jemappelle\.nl
 RewriteRule ^retour\.pdf retour-jma.pdf [L]

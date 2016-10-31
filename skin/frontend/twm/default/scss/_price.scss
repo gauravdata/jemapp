@@ -1,0 +1,28 @@
+.price-box {
+	.old-price {
+		text-decoration: line-through;
+		color: $m-grey;
+	}
+
+	p {
+		margin: 0 !important;
+	}
+
+	.third-price {
+		color: $xl-grey;
+
+		.price {
+			color: $success;
+		}
+
+		.icon-question {
+			margin-left: $xxs-spacing;
+			font-size: $l-font;
+			display: none;
+		}
+
+		.show-modal {
+			color: $xl-grey;
+		}
+	}
+}

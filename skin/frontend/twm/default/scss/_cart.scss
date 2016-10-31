@@ -1,0 +1,166 @@
+/*======================================================
+	DEFAULT
+======================================================*/
+ul.checkout-types {
+	margin-bottom: 0;
+}
+
+/*======================================================
+	PRODUCTS
+======================================================*/
+#shopping-cart-table {
+	thead {
+		display: none;
+	}
+	tbody {
+		tr {
+			border-bottom: $xxs-spacing solid $xs-grey;
+		}
+		td {
+			background-color: $white;
+			vertical-align: middle;
+
+			&:first-child {
+				width: 1px;
+				white-space: nowrap;
+				padding-left: $xs-spacing;
+			}
+			&:last-child {
+				padding: 0;
+				vertical-align: top;
+				text-align: right;
+				position: relative;
+
+				a {
+					position: absolute;
+					top: $xs-spacing;
+					right: $xs-spacing;
+				}
+			}
+			ul.item-options {
+				margin-bottom: 0;
+			}
+		}
+		tr:last-child {
+			border-bottom: none;
+		}
+	}
+}
+
+/*======================================================
+	TOTALS
+======================================================*/
+#shopping-cart-totals-table {
+	td:first-child {
+		font-weight: $bold;
+		color: $xl-grey;
+	}
+	td:last-child {
+		font-weight: $thin;
+		font-size: $xl-font;
+		color: $l-grey;
+		text-align: right;
+
+		strong {
+			font-weight: $thin;
+			color: $l-grey;
+		}
+	}
+}
+
+/*======================================================
+	CART SIDEBAR IN HEADER
+======================================================*/
+#wrapper > .block.block-cart {
+	@include transition(all 0.5s ease-in);
+	position: fixed;
+	right: 0;
+	top: -1000px;
+	border: none;
+	background-color: $white;
+	z-index: 1050;
+	width: 522px;
+	padding: 0;
+
+	-webkit-transition-delay: 0.5s;
+	transition-delay: 0.5s;
+
+	&.show {
+		@include transition(all 0.5s ease-out);
+		top: $header-height;
+
+		-webkit-transition-delay: 0s;
+		transition-delay: 0s;
+
+		&.stick-to-top {
+			top: 0;
+		}
+	}
+
+	.block-content-spacing {
+		padding: $s-spacing;
+	}
+
+	.amount {
+		display: none;
+	}
+
+	#cart-sidebar {
+		li {
+			position: relative;
+			padding: 0 30px 0 100px;
+			margin-bottom: $xs-spacing;
+			min-height: 80px;
+
+			.product-image {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			.btn-remove {
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
+			.btn-edit {
+				position: absolute;
+				top: 0;
+				right: 25px;
+			}
+			.product-name {
+				font-weight: $bold;
+				text-transform: uppercase;
+				color: $xl-grey;
+				margin-bottom: 0;
+
+				a {
+					color: $xl-grey;
+				}
+			}
+			dl {
+				@extend .clearfix;
+				margin: 0;
+
+				dt,
+				dd {
+					display: inline-block;
+					margin: 0;
+				}
+				dt {
+					&:after {
+						content: ":";
+					}
+				}
+			}
+		}
+	}
+
+	.subtotal {
+		text-align: right;
+		padding-top: $xs-spacing;
+		border-top: 1px solid $m-grey;
+	}
+	.actions {
+		text-align: right;
+	}
+}

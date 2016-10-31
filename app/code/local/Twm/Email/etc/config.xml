@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_Email>
+            <version>0.1.0</version>
+        </Twm_Email>
+    </modules>
+    <global>
+        <models>
+            <twm_email>
+                <class>Twm_Email_Model</class>
+                <resourceModel>twm_email_resource</resourceModel>
+            </twm_email>
+            <twm_email_resource>
+                <class>Twm_Email_Model_Resource</class>
+            </twm_email_resource>
+            <core>
+                <rewrite>
+                    <email_template>Twm_Email_Model_Core_Email_Template</email_template>
+                </rewrite>
+            </core>
+        </models>
+    </global>
+</config>

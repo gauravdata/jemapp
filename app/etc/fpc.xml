@@ -27,7 +27,7 @@
                 <persistent>cache-fpc</persistent>
                 <database>1</database>
                 <password></password>
-                <force_standalone>1</force_standalone>
+                <force_standalone>0</force_standalone>
                 <connect_retries>1</connect_retries>
                 <lifetimelimit>86400</lifetimelimit>
                 <read_timeout>10</read_timeout>

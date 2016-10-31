@@ -36,8 +36,14 @@
 ?>
 <?php $_items = $this->getLogItems(); ?>
 
-<div class="box-account box-recent table-responsive">
-    <table cellspacing="0" class="table table-striped" id="my-credit-log-table">
+<div class="box-account box-recent">
+    <div class="box-head credit-payment">
+        <h2><?php echo $this->__('Recent Actions') ?></h2>
+        <p>
+            <a href="<?php echo $this->getViewAllUrl()?>" class="link"><?php echo Mage::helper('customercredit')->__('View All') ?></a>
+        </p>
+    </div>
+    <table cellspacing="0" class="data-table" id="my-credit-log-table">
         <col width="50" />
         <col width="50" />
         <col width="150" />
@@ -56,8 +62,8 @@
             <?php if($_items->getSize()): ?>
                 <?php foreach ($_items as $_item): ?>
                     <tr>
-                        <td><?php echo Mage::helper('core')->currency($_item->getValue())?></td>
-                        <td><?php echo Mage::helper('core')->currency($_item->getValueChange())?></td>
+                        <td><?php echo round($_item->getValue(),2)?></td>
+                        <td><?php echo round($_item->getValueChange(),2)?></td>
                         <td><?php echo $_item->getActionDate()?></td>
                         <td><?php echo $this->getActionTypeLabel($_item->getActionType())?></td>
                         <td><?php echo $_item->getComment()?></td>
@@ -70,6 +76,5 @@
             <?php endif ?>
         </tbody>
     </table>
-	<a href="<?php echo $this->getViewAllUrl()?>" class="btn btn-primary"><?php echo Mage::helper('customercredit')->__('View All') ?></a>
     <script type="text/javascript">decorateTable('my-credit-log-table')</script>
 </div>

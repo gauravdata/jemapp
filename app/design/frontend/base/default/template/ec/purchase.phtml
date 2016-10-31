@@ -109,13 +109,14 @@
 
 					<?php 	
 					
-						list($parents) = Mage::getModel('catalog/product_type_configurable')->getParentIdsByChild
+						$parents = Mage::getModel('catalog/product_type_configurable')->getParentIdsByChild
 						(
 							$product->getId()
 						);
 						
-						if ($parents)
+						if ($parents && isset($parents[0]))
 						{
+							$parents = $parents[0];
 							/**
 							 * Get parent product(s)
 							 */

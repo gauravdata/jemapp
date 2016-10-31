@@ -12,23 +12,21 @@
  * =================================================================
  *                 MAGENTO EDITION USAGE NOTICE
  * =================================================================
- * This package designed for Magento community edition
- * aheadWorks does not guarantee correct work of this extension
- * on any other Magento edition except Magento community edition.
- * aheadWorks does not provide extension support in case of
- * incorrect edition usage.
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
  * =================================================================
  *
  * @category   AW
- * @package    AW_Helpdeskultimate
- * @version    2.10.4
+ * @package    AW_Followupemail
+ * @version    3.6.5
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
 
-
 class AW_Core_Block_Adminhtml_Log extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
+
     public function __construct()
     {
         $this->_controller = 'adminhtml_log';
@@ -39,14 +37,13 @@ class AW_Core_Block_Adminhtml_Log extends Mage_Adminhtml_Block_Widget_Grid_Conta
 
         $this->setTemplate('widget/grid/container.phtml');
         $this->_removeButton('add');
-        $this->_addButton(
-            'clear',
-            array(
-                 'label'   => Mage::helper('awcore')->__('Clear Log'),
-                 'onclick' => 'if(confirm(\'' . Mage::helper('awcore')->__('Are you sure to clear all log entries?') . '\'))setLocation(\'' . $this->getClearUrl() . '\')',
-                 'class'   => 'delete',
-            )
-        );
+        $this->_addButton('clear', array(
+            'label'   => Mage::helper('awcore')->__('Clear Log'),
+            'onclick' =>
+            'if(confirm(\'' . Mage::helper('awcore')->__('Are you sure to clear all log entries?')
+            . '\'))setLocation(\'' . $this->getClearUrl() . '\')',
+            'class'   => 'delete',
+        ));
     }
 
     /**
@@ -56,6 +53,7 @@ class AW_Core_Block_Adminhtml_Log extends Mage_Adminhtml_Block_Widget_Grid_Conta
      */
     public function getClearUrl()
     {
-        return Mage::getSingleton('adminhtml/url')->getUrl('awcore_admin/viewlog/clear');
+        return Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/awcore_viewlog/clear');
     }
+
 }

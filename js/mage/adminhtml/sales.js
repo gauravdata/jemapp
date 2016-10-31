@@ -9,17 +9,17 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    Mage
  * @package     Mage_Adminhtml
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 var AdminOrder = new Class.create();
@@ -68,7 +68,7 @@ AdminOrder.prototype = {
                 window.setTimeout(function () {
                     el.remove();
                 }, 10);
-            }
+            };
 
             this.dataArea.onLoad = this.dataArea.onLoad.wrap(function(proceed) {
                 proceed();
@@ -197,10 +197,10 @@ AdminOrder.prototype = {
         var data;
 
         if(this.isBillingField(field.id)){
-            data = this.serializeData(this.billingAddressContainer)
+            data = this.serializeData(this.billingAddressContainer);
         }
         else{
-            data = this.serializeData(this.shippingAddressContainer)
+            data = this.serializeData(this.shippingAddressContainer);
         }
         data = data.toObject();
 
@@ -377,7 +377,7 @@ AdminOrder.prototype = {
         if(!this.paymentMethod || method){
             $('order-billing_method_form').select('input', 'select', 'textarea').each(function(elem){
                 if(elem.type != 'radio') elem.disabled = true;
-            })
+            });
         }
 
         if ($('payment_form_'+method)){
@@ -393,7 +393,7 @@ AdminOrder.prototype = {
                            field.bindChange = true;
                            field.paymentContainer = form; /** @deprecated after 1.4.0.0-rc1 */
                            field.method = method;
-                           field.observe('change', this.changePaymentData.bind(this))
+                           field.observe('change', this.changePaymentData.bind(this));
                         }
                     },this);
                 }
@@ -797,7 +797,7 @@ AdminOrder.prototype = {
         for(var i=0; i<elems.length; i++){
             if(!elems[i].bindOnchange){
                 elems[i].bindOnchange = true;
-                elems[i].observe('change', this.itemChange.bind(this))
+                elems[i].observe('change', this.itemChange.bind(this));
             }
         }
     },
@@ -880,10 +880,10 @@ AdminOrder.prototype = {
             var fields = $(container).select('input', 'select', 'textarea');
             for(var i=0; i<fields.length; i++){
                 if(fields[i].id == 'group_id'){
-                    fields[i].observe('change', this.accountGroupChange.bind(this))
+                    fields[i].observe('change', this.accountGroupChange.bind(this));
                 }
                 else{
-                    fields[i].observe('change', this.accountFieldChange.bind(this))
+                    fields[i].observe('change', this.accountFieldChange.bind(this));
                 }
             }
         }
@@ -901,7 +901,7 @@ AdminOrder.prototype = {
         if($(container)){
             var fields = $(container).select('input', 'textarea');
             for(var i=0; i<fields.length; i++)
-                fields[i].observe('change', this.commentFieldChange.bind(this))
+                fields[i].observe('change', this.commentFieldChange.bind(this));
         }
     },
 
@@ -913,7 +913,7 @@ AdminOrder.prototype = {
         if($(container)){
             var fields = $(container).select('input', 'textarea');
             for(var i=0; i<fields.length; i++)
-                fields[i].observe('change', this.giftmessageFieldChange.bind(this))
+                fields[i].observe('change', this.giftmessageFieldChange.bind(this));
         }
     },
 
@@ -1103,7 +1103,7 @@ AdminOrder.prototype = {
         if (typeof(show) == 'undefined') { show = true; }
 
         var orderObj = this;
-        var obj = this.overlayData.get(elId)
+        var obj = this.overlayData.get(elId);
         if (!obj) {
             obj = {
                 show: show,
@@ -1112,7 +1112,7 @@ AdminOrder.prototype = {
                 fx: function(event) {
                     this.order.processOverlay(this.el, this.show);
                 }
-            }
+            };
             obj.bfx = obj.fx.bindAsEventListener(obj);
             this.overlayData.set(elId, obj);
         }

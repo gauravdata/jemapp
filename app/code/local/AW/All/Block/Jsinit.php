@@ -18,8 +18,8 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_Previousnext
- * @version    1.3.0
+ * @package    AW_Followupemail
+ * @version    3.6.5
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
@@ -27,11 +27,10 @@
 class AW_All_Block_Jsinit extends Mage_Adminhtml_Block_Template
 {
     protected $_platform = -1;
-    protected $_extensions_cache = array();
+    protected $_extensionsCache = array();
     protected $_extensions;
 
     protected $_section = '';
-    protected $_store_data = null;
 
     /**
      * Include JS in head if section is moneybookers
@@ -44,12 +43,6 @@ class AW_All_Block_Jsinit extends Mage_Adminhtml_Block_Template
                     ->getBlock('head')
                     ->addJs('aw_all/aw_all.js');
             $this->setData('extensions', $this->_initExtensions());
-        } elseif ($this->_section == 'awstore') {
-            // AW extensions store
-            $this->getLayout()
-                    ->getBlock('head')
-                    ->addJs('aw_all/aw_all.js');
-            $this->setData('store_data', $this->_getStoreData());
         }
         parent::_prepareLayout();
     }
@@ -60,7 +53,7 @@ class AW_All_Block_Jsinit extends Mage_Adminhtml_Block_Template
      */
     protected function _toHtml()
     {
-        if ($this->_section == 'awall' || $this->_section == 'awstore') {
+        if ($this->_section == 'awall') {
             return parent::_toHtml();
         } else {
             return '';
@@ -87,13 +80,13 @@ class AW_All_Block_Jsinit extends Mage_Adminhtml_Block_Template
             try {
                 if ($platform = Mage::getConfig()->getNode("modules/$moduleName/platform")) {
                     $platform = strtolower($platform);
-                    $ignore_platform = false;
+                    $ignorePlatform = false;
                 } else {
                     throw new Exception();
                 }
             } catch (Exception $e) {
                 $platform = "ce";
-                $ignore_platform = true;
+                $ignorePlatform = true;
             }
             $platform = AW_All_Helper_Versions::convertPlatform($platform);
 
@@ -108,7 +101,8 @@ class AW_All_Block_Jsinit extends Mage_Adminhtml_Block_Template
             }
             $isPlatformValid = $platform >= $this->getPlatform();
             $feedInfo = $this->getExtensionInfo($moduleName);
-            $upgradeAvailable = ($this->_convertVersion($feedInfo->getLatestVersion()) - $this->_convertVersion($ver)) > 0;
+            $upgradeAvailable =
+                ($this->_convertVersion($feedInfo->getLatestVersion()) - $this->_convertVersion($ver)) > 0;
 
             if (null !== $feedInfo->getDisplayName()) {
                 $moduleName = $feedInfo->getDisplayName();
@@ -153,16 +147,17 @@ class AW_All_Block_Jsinit extends Mage_Adminhtml_Block_Template
      */
     public function getExtensionInfo($moduleName)
     {
-        if (!sizeof($this->_extensions_cache)) {
+        if (!sizeof($this->_extensionsCache)) {
             if ($displayNames = Mage::app()->loadCache('aw_all_extensions_feed')) {
-                $this->_extensions_cache = @unserialize($displayNames);
+                $this->_extensionsCache = @unserialize($displayNames);
             }
         }
-        if (array_key_exists($moduleName, $this->_extensions_cache)) {
+        if (array_key_exists($moduleName, $this->_extensionsCache)) {
             $data = array(
-                'url' => @$this->_extensions_cache[$moduleName]['url'],
-                'display_name' => @$this->_extensions_cache[$moduleName]['display_name'],
-                'latest_version' => @$this->_extensions_cache[$moduleName]['version']
+                'url' => @$this->_extensionsCache[$moduleName]['url'],
+                'display_name' => @$this->_extensionsCache[$moduleName]['display_name'],
+                'latest_version' => @$this->_extensionsCache[$moduleName]['version'],
+                'documentation_url' => @$this->_extensionsCache[$moduleName]['documentation_url'],
             );
             return new Varien_Object($data);
         }
@@ -171,15 +166,15 @@ class AW_All_Block_Jsinit extends Mage_Adminhtml_Block_Template
 
     /**
      * Return icon for installed extension
-     * @param $Extension
+     * @param $extension
      * @return Varien_Object
      */
-    public function getIcon($Extension)
+    public function getIcon($extension)
     {
-        if ($Extension->getUpgradeAvailable()) {
+        if ($extension->getUpgradeAvailable()) {
             $icon = 'aw_all/images/update.gif';
             $title = "Update available";
-        } elseif (!$Extension->getIsPlatformValid()) {
+        } elseif (!$extension->getIsPlatformValid()) {
             $icon = 'aw_all/images/bad.gif';
             $title = "Wrong Extension Platform";
         } else {
@@ -188,60 +183,6 @@ class AW_All_Block_Jsinit extends Mage_Adminhtml_Block_Template
         }
         return new Varien_Object(array('title' => $title, 'source' => $this->getSkinUrl($icon)));
     }
-
-    /**
-     * Fetch store data and return as Varien Object
-     * @return Varien_Object
-     */
-    protected function _getStoreData()
-    {
-        if (!is_null($this->_store_data))
-            return $this->_store_data;
-        $storeData = array();
-        $connection = $this->_getStoreConnection();
-        $storeResponse = $connection->read();
-
-        if ($storeResponse !== false) {
-            $storeResponse = preg_split('/^\r?$/m', $storeResponse, 2);
-            $storeResponse = trim($storeResponse[1]);
-            Mage::app()->saveCache($storeResponse, AW_All_Helper_Config::STORE_RESPONSE_CACHE_KEY);
-        }
-        else {
-            $storeResponse =  Mage::app()->loadCache(AW_All_Helper_Config::STORE_RESPONSE_CACHE_KEY);
-            if (!$storeResponse) {
-                Mage::getSingleton('adminhtml/session')->addError($this->__('Sorry, but Extensions Store is not available now. Please try again in a few minutes.'));
-            }
-        }
-
-        $connection->close();
-        $this->_store_data = new Varien_Object(array('text_response' => $storeResponse));
-        return $this->_store_data;
-    }
-
-    /**
-     * Returns URL to store
-     * @return Varien_Http_Adapter_Curl
-     */
-    protected function _getStoreConnection()
-    {
-        $params = array(
-
-        );
-        $url = array();
-        foreach ($params as $k => $v) {
-            $url[] = urlencode($k) . "=" . urlencode($v);
-        }
-        $url = rtrim(AW_All_Helper_Config::STORE_URL) . (sizeof($url) ? ("?" . implode("&", $url)) : "");
-
-        $curl = new Varien_Http_Adapter_Curl();
-        $curl->setConfig(array(
-                              'timeout' => 5
-                         ));
-        $curl->write(Zend_Http_Client::GET, $url, '1.0');
-
-        return $curl;
-    }
-
 
 }
  

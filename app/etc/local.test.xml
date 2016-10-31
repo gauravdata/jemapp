@@ -40,7 +40,7 @@
             </db>
             <default_setup>
                 <connection>
-		    <host><![CDATA[127.0.0.1]]></host>
+                    <host><![CDATA[127.0.0.1]]></host>
 		    <dbname><![CDATA[dbtest]]></dbname>
 		    <username><![CDATA[test]]></username>
 		    <password><![CDATA[J0GXB6Odn0]]></password>
@@ -48,54 +48,35 @@
                 </connection>
             </default_setup>
         </resources>
-        <session_save><![CDATA[files]]></session_save>
-	
-	<!-- example of redis cache -->
+        <session_save><![CDATA[db]]></session_save>
+
+        <!-- example of redis cache -->
         <cache>
-            <backend>Cm_Cache_Backend_Redis</backend>
-            <backend_options>
-                <server>127.0.0.1</server> <!-- or absolute path to unix socket for better performance -->
-                <port>6379</port>
-                <database>0</database>
-                <password></password>
-                <force_standalone>0</force_standalone>  <!-- 0 for phpredis, 1 for standalone PHP -->
-                <connect_retries>1</connect_retries>    <!-- Reduces errors due to random connection failures -->
-                <automatic_cleaning_factor>0</automatic_cleaning_factor> <!-- Disabled by default -->
-                <compress_data>1</compress_data>  <!-- 0-9 for compression level, recommended: 0 or 1 -->
-                <compress_tags>1</compress_tags>  <!-- 0-9 for compression level, recommended: 0 or 1 -->
-                <compress_threshold>20480</compress_threshold>  <!-- Strings below this size will not be compressed -->
-                <compression_lib>gzip</compression_lib> <!-- Supports gzip, lzf and snappy -->
-                <persistent>1</persistent> <!-- persistence value, 0: not in use, > 0 used as persistence ID -->
-            </backend_options>
+          <backend>Cm_Cache_Backend_Redis</backend>
+          <backend_options>
+            <server>127.0.0.1</server>                               <!-- or absolute path to unix socket -->
+            <port>6379</port>
+            <persistent></persistent>                                <!-- Specify unique string to enable persistent connections. E.g.: sess-db0; bugs with phpredis and php-fpm are known: https://github.com/nicolasff/phpredis/issues/70 -->
+            <database>1</database>                                   <!-- Redis database number; protection against accidental data loss is improved by not sharing databases -->
+            <password></password>                                    <!-- Specify if your Redis server requires authentication -->
+            <force_standalone>0</force_standalone>                   <!-- 0 for phpredis, 1 for standalone PHP -->
+            <connect_retries>1</connect_retries>                     <!-- Reduces errors due to random connection failures; a value of 1 will not retry after the first failure -->
+            <read_timeout>10</read_timeout>                          <!-- Set read timeout duration; phpredis does not currently support setting read timeouts -->
+            <automatic_cleaning_factor>0</automatic_cleaning_factor> <!-- Disabled by default -->
+            <compress_data>1</compress_data>                         <!-- 0-9 for compression level, recommended: 0 or 1 -->
+            <compress_tags>1</compress_tags>                         <!-- 0-9 for compression level, recommended: 0 or 1 -->
+            <compress_threshold>20480</compress_threshold>           <!-- Strings below this size will not be compressed -->
+            <compression_lib>gzip</compression_lib>                  <!-- Support gzip, lzf, lz4 (https://github.com/kjdev/php-ext-lz4) or snappy (https://github.com/goatherd/php-snappy) -->
+            <use_lua>0</use_lua>                                     <!-- Set to 1 if Lua scripts should be used for some operations -->
+          </backend_options>
         </cache>
-
-	<!-- example of redis full page cache -->
-        <full_page_cache>
-            <backend>Cm_Cache_Backend_Redis</backend>
-            <backend_options>
-                <server>127.0.0.1</server> <!-- or absolute path to unix socket for better performance -->
-                <port>6379</port>
-                <database>1</database>
-                <password></password>
-                <force_standalone>0</force_standalone>  <!-- 0 for phpredis, 1 for standalone PHP -->
-                <connect_retries>1</connect_retries>    <!-- Reduces errors due to random connection failures -->
-                <automatic_cleaning_factor>0</automatic_cleaning_factor> <!-- Disabled by default -->
-                <!-- in FPC data is already gzipped, no need to do this twice -->
-                <compress_data>0</compress_data>  <!-- 0-9 for compression level, recommended: 0 or 1 -->
-                <compress_tags>1</compress_tags>  <!-- 0-9 for compression level, recommended: 0 or 1 -->
-                <compress_threshold>20480</compress_threshold>  <!-- Strings below this size will not be compressed -->
-                <compression_lib>gzip</compression_lib> <!-- Supports gzip, lzf and snappy -->
-                <lifetimelimit>43200</lifetimelimit> <!-- set lifetime for keys without TTL -->
-                <persistent>2</persistent>
-            </backend_options>
-        </full_page_cache>
-
+	
     </global>
     <admin>
         <routers>
             <adminhtml>
                 <args>
-                    <frontName><![CDATA[admin]]></frontName>
+                    <frontName><![CDATA[admin_jma]]></frontName>
                 </args>
             </adminhtml>
         </routers>

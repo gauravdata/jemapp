@@ -45,71 +45,71 @@ $_minimalPrice = $_taxHelper->getPrice($_product, $_minimalPriceValue, $_simpleP
 $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStoreLabel();
 ?>
 <?php if (!$_product->isGrouped()): ?>
-    <div class="price-box">
-        <?php $_price = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>
-        <?php $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice(), $_simplePricesTax) ?>
-        <?php $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()) ?>
-        <?php $_finalPriceInclTax = $_taxHelper->getPrice($_product, $_product->getFinalPrice(), true) ?>
-        <?php if ($_finalPrice >= $_price): ?>
-            <span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+	<div class="price-box">
+		<?php $_price = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>
+		<?php $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice(), $_simplePricesTax) ?>
+		<?php $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()) ?>
+		<?php $_finalPriceInclTax = $_taxHelper->getPrice($_product, $_product->getFinalPrice(), true) ?>
+		<?php if ($_finalPrice >= $_price): ?>
+			<p class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+				<span class="price-label"><?php echo $this->__('Regular Price') ?></span>
+				<span class="price">
                 <?php if ($_finalPrice == $_price): ?>
-                    <?php echo $_coreHelper->currency($_price, true, true) ?>
-                <?php else: ?>
-                    <?php echo $_coreHelper->currency($_finalPrice, true, true) ?>
-                <?php endif; ?>
-            </span>
-        <?php else: /* if ($_finalPrice == $_price): */ ?>
-            <p class="old-price">
+					<?php echo $_coreHelper->currency($_price, true, true) ?>
+				<?php else: ?>
+					<?php echo $_coreHelper->currency($_finalPrice, true, true) ?>
+				<?php endif; ?>
+				</span>
+            </p>
+		<?php else: /* if ($_finalPrice == $_price): */ ?>
+			<p class="regular-price">
 				<span class="price-label"><?php echo $this->__('Regular Price') ?></span>
                 <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->currency($_regularPrice, true, false) ?>
                 </span>
-            </p>
-            <p class="special-price">
-				<span class="price-label"><?php echo $this->__('Special Price') ?></span>
-                <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                    <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>
-                </span>
-            </p>
-			<?php if ($_product->getPriceByThree()): ?>
-			<p class="third-price">
-				<span class="price-label"><? echo $this->__('If three or more articles'); ?></span>
-				<span class="price">
-					<?php echo $_coreHelper->currency($_product->getPriceByThree(), true, false) ?>
-				</span>
 			</p>
-			<?php endif;  ?>
-        <?php endif; /* if ($_finalPrice == $_price): */ ?>
-    </div>
+		<?php endif; /* if ($_finalPrice == $_price): */ ?>
+		<?php if ($_product->getPriceByThree()): ?>
+			<div class="third-price">
+				<span class="price-label"><?php echo $this->__('If three or more articles'); ?></span>
+					<span class="price">
+						<?php echo $_coreHelper->currency($_product->getPriceByThree(), true, false) ?>
+					</span>
+				<a href="#modal-third-price" class="show-modal">
+					<i class="icon-question icons"></i>
+				</a>
+			</div>
+		<?php endif;  ?>
+	</div>
 <?php else: /* if (!$_product->isGrouped()): */ ?>
-    <?php
-    $showMinPrice = $this->getDisplayMinimalPrice();
-    if ($showMinPrice && $_minimalPriceValue) {
-        $_exclTax = $_taxHelper->getPrice($_product, $_minimalPriceValue);
-        $_inclTax = $_taxHelper->getPrice($_product, $_minimalPriceValue, true);
-        $price    = $showMinPrice ? $_minimalPriceValue : 0;
-    } else {
-        $price    = $_product->getFinalPrice();
-        $_exclTax = $_taxHelper->getPrice($_product, $price);
-        $_inclTax = $_taxHelper->getPrice($_product, $price, true);
-    }
-    ?>
-    <?php if ($price): ?>
-        <!--<div class="price-box">
+	<?php
+	$showMinPrice = $this->getDisplayMinimalPrice();
+	if ($showMinPrice && $_minimalPriceValue) {
+		$_exclTax = $_taxHelper->getPrice($_product, $_minimalPriceValue);
+		$_inclTax = $_taxHelper->getPrice($_product, $_minimalPriceValue, true);
+		$price    = $showMinPrice ? $_minimalPriceValue : 0;
+	} else {
+		$price    = $_product->getFinalPrice();
+		$_exclTax = $_taxHelper->getPrice($_product, $price);
+		$_inclTax = $_taxHelper->getPrice($_product, $price, true);
+	}
+	?>
+	<?php if ($price): ?>
+		<!--<div class="price-box">
             <p<?php if ($showMinPrice): ?> class="minimal-price"<?php endif ?>>
                 <?php if ($showMinPrice): ?>
                     <span class="price-label"><?php echo $this->__('Starting at:') ?></span>
                 <?php endif ?>
                 <?php
-                $_showPrice = $_inclTax;
-                if (!$_taxHelper->displayPriceIncludingTax()) {
-                    $_showPrice = $_exclTax;
-                }
-                ?>
+		$_showPrice = $_inclTax;
+		if (!$_taxHelper->displayPriceIncludingTax()) {
+			$_showPrice = $_exclTax;
+		}
+		?>
                 <span class="price" id="product-minimal-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->currency($_showPrice, true, false) ?>
                 </span>
             </p>
         </div>-->
-    <?php endif; /* if ($this->getDisplayMinimalPrice() && $_minimalPrice): */ ?>
+	<?php endif; /* if ($this->getDisplayMinimalPrice() && $_minimalPrice): */ ?>
 <?php endif; /* if (!$_product->isGrouped()): */ ?>

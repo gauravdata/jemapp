@@ -1,0 +1,46 @@
+.hidden,
+.no-display {
+	display: none !important;
+}
+.unstyled {
+	list-style: none;
+	padding: 0;
+}
+.main-transition {
+	@include transition(all 0.3s ease-out);
+}
+.fade-in-transition {
+	visibility: hidden;
+	opacity: 0;
+
+	-moz-transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+	-webkit-transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+	transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+}
+.fade-out-transition {
+	visibility: visible;
+	opacity: 1;
+
+	-moz-transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+	-webkit-transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+	transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
+}
+.main-shadow {
+	@include shadow(0 0 2px 2px rgba(0,0,0,.05));
+}
+.position-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	@include transform(-50%, -50%);
+}
+.clearfix {
+	&:before,
+	&:after {
+		display: table;
+		content: "";
+	}
+	&:after {
+		clear: both;
+	}
+}

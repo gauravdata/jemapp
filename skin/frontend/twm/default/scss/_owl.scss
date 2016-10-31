@@ -1,0 +1,81 @@
+.owl-title {
+	margin: $m-spacing $xl-spacing;
+}
+.owl-carousel {
+
+	/*= Item =*/
+	.owl-item {
+		@extend .clearfix;
+
+		a.product-image {
+			display: block;
+		}
+		h2.product-name {
+			margin: 0;
+			margin: $xxs-spacing $xxs-spacing 0;
+			font-size: $m-font;
+			font-weight: $bold;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		.price-box {
+			margin: $xxs-spacing $xxs-spacing $s-spacing;
+			font-size: $s-font;
+
+			.regular-price {
+				display: none;
+			}
+
+			p {
+				margin: 0;
+			}
+		}
+	}
+
+	/*= Controls =*/
+	.owl-controls {
+
+		.owl-nav {
+			.owl-prev,
+			.owl-next {
+				@include radius(50%);
+				position: absolute;
+				top: 50%;
+				background-color: transparentize($xxs-grey, 0.45);
+				margin-top: -20px;
+				color: $xl-grey;
+				font-size: $xxxl-font;
+				padding: $xxs-spacing;
+				text-align: center;
+				line-height: $xl-spacing;
+			}
+			.owl-prev {
+				left: $xs-spacing;
+			}
+			.owl-next {
+				right: $xs-spacing;
+			}
+		}
+
+		.owl-dots {
+			text-align: center;
+
+			.owl-dot {
+				@include radius(50%);
+				@extend .main-transition;
+				display: inline-block;
+				width: $s-spacing;
+				height: $s-spacing;
+				background-color: $xl-grey;
+				margin: 0 $xxs-spacing;
+
+				&.active,
+				&:hover {
+					background-color: $m-grey;
+				}
+			}
+		}
+	}
+
+}

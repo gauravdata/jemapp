@@ -1,0 +1,86 @@
+/*======================================================
+	DEFAULT
+======================================================*/
+main .std {
+	@extend .clearfix;
+}
+
+/*======================================================
+	USPS
+======================================================*/
+.main-usps {
+	background-color: $xxxs-grey;
+	color: $m-grey;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+
+	p,
+	ul,
+	ol {
+		margin: 0;
+	}
+
+	ul,
+	ol {
+		@extend .unstyled;
+
+		li {
+			display: inline-block;
+			margin: 0 $xl-spacing;
+
+			&:before {
+				font-family: 'simple-line-icons';
+				font-size: $l-font;
+				margin-right: $xs-spacing;
+			}
+
+			&:nth-child(1) {
+				&:before {
+					content: "\e080";
+				}
+			}
+			&:nth-child(2) {
+				&:before {
+					content: "\e098";
+				}
+			}
+			&:nth-child(3) {
+				&:before {
+					content: "\e07d";
+				}
+			}
+		}
+	}
+}
+.cms-page-view {
+	.main-usps {
+		display: none;
+	}
+	.content-wrapper {
+		padding: $xxl-spacing;
+		background-color: $xxs-grey;
+		border: 1px solid $s-grey;
+
+		.page-title {
+			border: none;
+			margin: 0;
+
+			h1 {
+				text-align: left;
+				margin-top: 0;
+			}
+		}
+		.std {
+			*:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+	&.one-column {
+		.content-wrapper {
+			width: 950px;
+			margin: 100px auto 0;
+		}
+	}
+}

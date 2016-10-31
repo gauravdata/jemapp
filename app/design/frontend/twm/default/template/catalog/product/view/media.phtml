@@ -10,17 +10,17 @@
  * http://opensource.org/licenses/afl-3.0.php
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * to license@magento.com so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade Magento to newer
  * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
+ * needs please refer to http://www.magento.com for more information.
  *
  * @category    design
  * @package     base_default
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
@@ -34,88 +34,84 @@
     $_product = $this->getProduct();
     $_helper = $this->helper('catalog/output');
 ?>
-
-<div class="onsale-product-container">
-	<?php echo Mage::helper('onsale')->getProductLabelHtml($_product); ?>
-	<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
-	<p class="product-image">
-		<span class="glyphicon glyphicon-search"></span>
-        <?php
-            $_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" />';
-            echo $_helper->productAttribute($_product, $_img, 'image');
-        ?>
-	</p>
-	<?php else: ?>
-	<p class="product-image">
-		<span class="glyphicon glyphicon-search"></span>
-						<?php
-			$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" id="zoom-image" data-zoom-image="'.$this->helper('catalog/image')->init($_product, 'image')->resize(725).'" />';
-							echo $_helper->productAttribute($_product, $_img, 'image');
-						?>
-	</p>
-				<?php endif; ?>
-</div>
-<?php if (count($this->getGalleryImages()) > 0): ?>
-	<div class="more-views">
-    <p class="title"><?php echo $this->__('More views') ?></p>
-    <div class="row">
-    <?php foreach ($this->getGalleryImages() as $_image): ?>
-        <div class="col-xs-3 text-center">
-			<a title="<?php echo $this->escapeHtml($_image->getLabel()) ?>" class="thumbnail" href="#" data-image-small="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(725); ?>" data-image-large="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(725); ?>">
-				<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(100); ?>" alt="<?php echo $this->escapeHtml($_image->getLabel()) ?>" />
-				</a>
+<div class="product-visual-wrapper">
+    <?php if (count($this->getGalleryImages()) > 1): ?>
+        <div class="onsale-product-container">
+            <?php echo Mage::helper('onsale')->getProductLabelHtml($_product); ?>
+            <div class="owl-carousel" id="product-image-slider">
+                <?php $i = 0; foreach ($this->getGalleryImages() as $_image): $i++; ?>
+                    <div class="item">
+                        <div class="product-visual">
+                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->keepFrame(false)->resize(null,675); ?>" class="view-image" data-zoom-image="<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->keepFrame(false)->resize(2000,null); ?>" />
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="zoom-image"></div>
+            <div class="more-views<?php if(count($this->getGalleryImages()) > 4) { echo ' double-row'; } ?> clearfix">
+                <?php foreach ($this->getGalleryImages() as $_image): ?>
+                    <a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->keepFrame(false)->resize(null,675); ?>">
+                        <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(80); ?>" />
+                    </a>
+                <?php endforeach; ?>
+            </div>
         </div>
-		<?php endforeach; ?>
-	</div>
+        <script type="text/javascript">
+            jQuery(function(){
+                var productImageOwl = jQuery('#product-image-slider');
+                productImageOwl.owlCarousel({
+                    loop:true,
+                    nav:true,
+                    navText: [
+                        '<i class="icon-arrow-left icons"></i>',
+                        '<i class="icon-arrow-right icons"></i>'
+                    ],
+                    items: 1,
+                    responsive:{
+                        0:{
+                            mouseDrag: true,
+                            touchDrag: true
+                        },
+                        1024:{
+                            mouseDrag: false,
+                            touchDrag: false
+                        }
+                    }
+                });
+                jQuery('.product-img-box .more-views a').click(function(){
+                    productImageOwl.trigger('to.owl.carousel', [jQuery(this).index()]);
+                    return false;
+                });
+            });
+        </script>
+    <?php else: ?>
+        <div class="product-visual">
+            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(null,675); ?>" class="view-image" data-zoom-image="<?php echo $this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(2000,null); ?>" />
+        </div>
+    <?php endif; ?>
 </div>
-<?php endif; ?>
-	<script type="text/javascript">
-	function setZoom(){
-        if(jQuery(window).width() > 752){
-            jQuery('#zoom-image').elevateZoom({
-                zoomType: "inner",
-                cursor: "crosshair",
-                zoomWindowFadeIn: 500,
-                zoomWindowFadeOut: 750
-            });
-        }else{
-            jQuery('#zoom-image').click(function(){
-                return false;
-            });
+<script type="text/javascript">
+    jQuery('.product-visual').click(function() {
+        jQuery('.product-visual-wrapper').addClass('show');
+        jQuery('.zoom-image').css('background-image', 'url(' + jQuery(this).find('img').data('zoom-image') + ')');
+        jQuery('.product-options-wrapper').addClass('hide');
+        if(jQuery(window).width() < 1024) {
+            viewport = document.querySelector("meta[name=viewport]");
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=1');
         }
-	}
-	jQuery(window).resize(function(){
-		setZoom();
-			});
-	jQuery(window).load(function(){
-		setZoom();
-		jQuery('.more-views .row > div:first-child a').addClass('active');
-
-		jQuery('.more-views .row > div a').click(function(){
-			jQuery('.more-views .row > div a').removeClass('active');
-			jQuery(this).addClass('active');
-			jQuery('.product-image img#zoom-image').attr('src', jQuery(this).data('image-small')).data('zoom-image', jQuery(this).data('image-large'));
-			setZoom();
-			return false;
-		});
-
-		jQuery('p.product-image').click(function(){
-			jQuery('#product-image-modal h4').html(jQuery('h1.product-name').html());
-			jQuery('#product-image-modal .modal-body img').attr('src', jQuery('.product-image img').data('zoom-image'));
-			jQuery('#product-image-modal').modal();
-		});
-	});
-	</script>
-<div id="product-image-modal" class="modal wide fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Product title</h4>
-			</div>
-			<div class="modal-body">
-				<img src="" />
-			</div>
-		</div>
-	</div>
-</div>
+    });
+    jQuery('.zoom-image').mousemove(function(e) {
+        var $this = jQuery(this);
+        var parentOffset = $this.offset();
+        var relX = 100 / ($this.width() / (e.pageX - parentOffset.left));
+        var relY = 100 / ($this.height() / (e.pageY - parentOffset.top));
+        $this.css('background-position', relX + '%' + relY + '%');
+    }).click(function() {
+        jQuery('.product-visual-wrapper').removeClass('show');
+        jQuery('.product-options-wrapper').removeClass('hide');
+        if(jQuery(window).width() < 1024) {
+            viewport = document.querySelector("meta[name=viewport]");
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1');
+        }
+    });
+</script>
