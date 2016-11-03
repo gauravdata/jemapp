@@ -124,7 +124,7 @@ class Zend_Http_Client
         'maxredirects'    => 5,
         'strictredirects' => false,
         'useragent'       => 'Zend_Http_Client',
-        'timeout'         => 60,
+        'timeout'         => 10,
         'adapter'         => 'Zend_Http_Client_Adapter_Socket',
         'httpversion'     => self::HTTP_1,
         'keepalive'       => false,

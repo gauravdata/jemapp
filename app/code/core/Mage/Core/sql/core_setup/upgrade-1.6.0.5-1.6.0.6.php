@@ -32,7 +32,6 @@ $installer->startSetup();
 /**
  * Create table 'core/email_queue'
  */
-
 $table = $installer->getConnection()
     ->newTable($installer->getTable('core/email_queue'))
     ->addColumn('message_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
