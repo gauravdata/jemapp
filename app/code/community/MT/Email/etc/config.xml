@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MT_Email>
+            <version>1.4.0</version>
+        </MT_Email>
+    </modules>
+
+    <global>
+        <blocks>
+            <mtemail>
+                <class>MT_Email_Block</class>
+            </mtemail>
+            <adminhtml>
+                <rewrite>
+                    <system_email_template>MT_Email_Block_Adminhtml_System_Email_Template</system_email_template>
+                </rewrite>
+                <rewrite>
+                    <system_email_template_grid_renderer_action>MT_Email_Block_Adminhtml_System_Email_Template_Grid_Renderer_Action</system_email_template_grid_renderer_action>
+                </rewrite>
+
+                <rewrite>
+                    <system_email_template_grid>MT_Email_Block_Adminhtml_System_Email_Template_Grid</system_email_template_grid>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+
+        <helpers>
+            <mtemail>
+                <class>MT_Email_Helper</class>
+            </mtemail>
+        </helpers>
+
+        <models>
+            <mtemail>
+                <class>MT_Email_Model</class>
+                <resourceModel>mtemail_resource</resourceModel>
+            </mtemail>
+
+            <mtemail_resource>
+                <class>MT_Email_Model_Resource</class>
+                <entities>
+                    <var>
+                        <table>mt_email_var</table>
+                    </var>
+                    <var_default>
+                        <table>mt_email_var_default</table>
+                    </var_default>
+                </entities>
+            </mtemail_resource>
+            <core>
+                <rewrite>
+                    <email_template_filter>MT_Email_Model_Core_Email_Template_Filter</email_template_filter>
+                    <email_template>MT_Email_Model_Core_Email_Template</email_template>
+                </rewrite>
+            </core>
+        </models>
+
+        <events>
+            <admin_system_config_changed_section_mtemail>
+                <observers>
+                    <mtemail_license>
+                        <type>singleton</type>
+                        <class>mtemail/module_license</class>
+                        <method>check</method>
+                    </mtemail_license>
+                </observers>
+            </admin_system_config_changed_section_mtemail>
+
+            <admin_system_config_changed_section_mtlicense>
+                <observers>
+                    <mtemail>
+                        <type>singleton</type>
+                        <class>mtemail/module_license</class>
+                        <method>update</method>
+                    </mtemail>
+                </observers>
+            </admin_system_config_changed_section_mtlicense>
+
+            <aschroder_smtppro_template_before_send>
+                <observers>
+                    <mtemail_template_before_send>
+                        <type>singleton</type>
+                        <class>mtemail/observer</class>
+                        <method>beforeEmailSend</method>
+                    </mtemail_template_before_send>
+                </observers>
+            </aschroder_smtppro_template_before_send>
+
+            <mtemail_email_template_before_send>
+                <observers>
+                    <mtemail_template_before_send_default>
+                        <type>singleton</type>
+                        <class>mtemail/observer</class>
+                        <method>beforeEmailSend</method>
+                    </mtemail_template_before_send_default>
+                </observers>
+            </mtemail_email_template_before_send>
+        </events>
+
+        <resources>
+            <mtemail_setup>
+                <setup>
+                    <module>MT_Email</module>
+                </setup>
+            </mtemail_setup>
+        </resources>
+
+        <template>
+            <email>
+                <mtemail_default_custom module="mtemail">
+                    <label> * Custom  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/custom.html</file>
+                    <type>html</type>
+                </mtemail_default_custom>
+
+                <mtemail_default_account_new module="mtemail">
+                    <label>* New account  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/account_new.html</file>
+                    <type>html</type>
+                </mtemail_default_account_new>
+
+                <mtemail_default_account_new_confirmation module="mtemail">
+                    <label>* New account confirmation  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/account_new_confirmation.html</file>
+                    <type>html</type>
+                </mtemail_default_account_new_confirmation>
+
+                <mtemail_default_account_new_confirmed module="mtemail">
+                    <label>* New account confirmed  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/account_new_confirmed.html</file>
+                    <type>html</type>
+                </mtemail_default_account_new_confirmed>
+
+                <mtemail_default_account_password_reset_confirmation module="mtemail">
+                    <label>* Forgot password [ MTEmail/Default ]</label>
+                    <file>mt/email/default/account_password_reset_confirmation.html</file>
+                    <type>html</type>
+                </mtemail_default_account_password_reset_confirmation>
+
+
+                <mtemail_default_newsletter_subscription_confirm translate="label" module="mtemail">
+                    <label>* Newsletter subscription confirmation  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/newsletter_subscr_confirm.html</file>
+                    <type>html</type>
+                </mtemail_default_newsletter_subscription_confirm>
+
+                <mtemail_default_newsletter_subscr_success translate="label" module="mtemail">
+                    <label>* Newsletter subscription success  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/newsletter_subscr_success.html</file>
+                    <type>html</type>
+                </mtemail_default_newsletter_subscr_success>
+
+                <mtemail_default_newsletter_unsubscr_success translate="label" module="mtemail">
+                    <label>* Newsletter unsubscription success  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/newsletter_unsub_success.html</file>
+                    <type>html</type>
+                </mtemail_default_newsletter_unsubscr_success>
+
+                <mtemail_default_customer_password_remind translate="label" module="mtemail">
+                    <label>* Remind Password  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/password_new.html</file>
+                    <type>html</type>
+                </mtemail_default_customer_password_remind>
+
+                <mtemail_default_product_share translate="label" module="mtemail">
+                    <label>* Send product to a friend  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/product_share.html</file>
+                    <type>html</type>
+                </mtemail_default_product_share>
+
+                <mtemail_default_wishlist_share translate="label" module="mtemail">
+                    <label>* Share wishlist  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/wishlist_share.html</file>
+                    <type>html</type>
+                </mtemail_default_wishlist_share>
+
+                <!-- Sales emails -->
+
+                <mtemail_default_sales_creditmemo_new translate="label" module="mtemail">
+                    <label>* New credit memo  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/creditmemo_new.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_creditmemo_new>
+
+
+                <mtemail_default_sales_creditmemo_new_guest translate="label" module="mtemail">
+                    <label>* New credit memo for guest  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/creditmemo_new_guest.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_creditmemo_new_guest>
+
+                <mtemail_default_sales_creditmemo_update translate="label" module="mtemail">
+                    <label>* Credit memo update  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/creditmemo_update.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_creditmemo_update>
+
+                <mtemail_default_sales_creditmemo_update_guest translate="label" module="mtemail">
+                    <label>* Credit memo update for guest  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/creditmemo_update_guest.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_creditmemo_update_guest>
+
+                <mtemail_default_sales_invoice_new translate="label" module="mtemail">
+                    <label>* New invoice  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/invoice_new.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_invoice_new>
+
+                <mtemail_default_sales_invoice_new_guest translate="label" module="mtemail">
+                    <label>* New invoice for guest  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/invoice_new_guest.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_invoice_new_guest>
+
+                <mtemail_default_sales_invoice_update translate="label" module="mtemail">
+                    <label>* Invoice update  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/invoice_update.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_invoice_update>
+
+                <mtemail_default_sales_invoice_update_guest translate="label" module="mtemail">
+                    <label>* Invoice update for guest  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/invoice_update_guest.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_invoice_update_guest>
+
+                <mtemail_default_sales_order_new translate="label" module="mtemail">
+                    <label>* New order  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/order_new.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_order_new>
+
+                <mtemail_default_sales_order_new_guest translate="label" module="mtemail">
+                    <label>* New order for guest  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/order_new_guest.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_order_new_guest>
+
+                <mtemail_default_sales_order_update translate="label" module="mtemail">
+                    <label>* Order update  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/order_update.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_order_update>
+
+                <mtemail_default_sales_order_update_guest translate="label" module="mtemail">
+                    <label>* Order update for guest  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/order_update_guest.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_order_update_guest>
+
+                <mtemail_default_sales_shipment_new translate="label" module="mtemail">
+                    <label>* New shipment  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/shipment_new.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_shipment_new>
+
+                <mtemail_default_sales_shipment_new_guest translate="label" module="mtemail">
+                    <label>* New shipment for guest  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/shipment_new_guest.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_shipment_new_guest>
+
+                <mtemail_default_sales_shipment_update translate="label" module="mtemail">
+                    <label>* Shipment update  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/shipment_update.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_shipment_update>
+
+                <mtemail_default_sales_shipment_update_guest translate="label" module="mtemail">
+                    <label>* Shipment update for guest  [ MTEmail/Default ]</label>
+                    <file>mt/email/default/sales/shipment_update_guest.html</file>
+                    <type>html</type>
+                </mtemail_default_sales_shipment_update_guest>
+            </email>
+        </template>
+    </global>
+
+    <frontend>
+        <routers>
+            <mtemail>
+                <use>standard</use>
+                <args>
+                    <module>MT_Email</module>
+                    <frontName>mtemail</frontName>
+                </args>
+            </mtemail>
+        </routers>
+
+        <layout>
+            <updates>
+                <mtemail>
+                    <file>mt/email.xml</file>
+                </mtemail>
+            </updates>
+        </layout>
+    </frontend>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <mtemail before="Mage_Adminhtml">MT_Email_Adminhtml</mtemail>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <mtemail>
+                    <file>mt/email.xml</file>
+                </mtemail>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <default>
+        <mtemail>
+            <general>
+                <is_active>1</is_active>
+                <direction>ltr</direction>
+            </general>
+            <editor>
+                <font_family>a:3:{s:18:"_1439625818786_786";a:1:{s:4:"name";s:17:" Arial,sans-serif";}s:18:"_1439626540977_977";a:1:{s:4:"name";s:17:"Tahoma,sans-serif";}s:18:"_1439632316738_738";a:1:{s:4:"name";s:43:""Helvetica Neue",Helvetica,Arial,sans-serif";}}</font_family>
+            </editor>
+            <template>
+                <show_sku>1</show_sku>
+            </template>
+        </mtemail>
+    </default>
+</config>
+
