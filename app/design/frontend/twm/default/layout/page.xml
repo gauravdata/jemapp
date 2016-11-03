@@ -114,7 +114,7 @@ Default layout, loads most of the pages
                 <block type="newsletter/subscribe" name="footer.newsletter" as="footer.newsletter" template="newsletter/subscribe.phtml"/>
             </block>
 
-            <block type="page/html_footer" name="browser_notification" as="browser_notification" template="page/html/browser_notification.phtml" />
+            <block type="core/template" name="browser_notification" as="browser_notification" template="page/html/browser_notification.phtml" />
 
             <block type="core/text_list" name="before_body_end" as="before_body_end" translate="label">
                 <label>Page Bottom</label>
