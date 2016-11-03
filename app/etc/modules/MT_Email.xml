@@ -1,0 +1,12 @@
+<config>
+    <modules>
+        <MT_Email>
+            <active>true</active>
+            <codePool>community</codePool>
+            <!--depends>
+                <ES_Newsletterpopup />
+                <Aschroder_SMTPPro />
+            </depends-->
+        </MT_Email>
+    </modules>
+</config>

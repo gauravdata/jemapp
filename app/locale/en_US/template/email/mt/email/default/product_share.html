@@ -1,0 +1,135 @@
+<!--@subject Welcome, {{var name}} @-->
+
+<!--@vars
+{
+"store url=''":"Store Url",
+"var store.getFrontendName()":"Store frontend name",
+
+"config path='trans_email/ident_support/email'":"Support email",
+"config path='trans_email/ident_general/email'":"General email",
+"config path='general/store_information/phone'":"Phone",
+
+"htmlescape var=$name":"Recipient Name",
+"var email":"Recipient Email address",
+"var product_url":"Url for Product",
+"var product_name":"Product Name",
+"var product_image":"Url for product small image (75 px)",
+"var sender_name":"Sender name",
+"var sender_email":"Sender email",
+"var message":"Sender Message",
+
+"layout handle=\"mt_email_block_header\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_header\"  noborder=\"1\" margintop=30 ":"mt_email_block_header",
+"mt/email/theme/default/block/images/header.png":"mt_email_block_header_image",
+
+"layout handle=\"mt_email_block_text1\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_text1\" ":"mt_email_block_text1",
+"mt/email/theme/default/block/images/text1.png":"mt_email_block_text1_image",
+
+"layout handle=\"mt_email_block_text2\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_text2\" ":"mt_email_block_text2",
+"mt/email/theme/default/block/images/text2.png":"mt_email_block_text2_image",
+
+"layout handle=\"mt_email_block_grid2\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_grid2\" ":"mt_email_block_grid2",
+"mt/email/theme/default/block/images/grid2.png":"mt_email_block_grid2_image",
+
+"layout handle=\"mt_email_block_button1\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_button1\" ":"mt_email_block_button1",
+"mt/email/theme/default/block/images/button1.png":"mt_email_block_button1_image",
+
+"layout handle=\"mt_email_block_signature\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_signature\" ":"mt_email_block_signature",
+"mt/email/theme/default/block/images/signature.png":"mt_email_block_signature_image",
+
+"layout handle=\"mt_email_block_footer\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_footer\" noborder=1":"mt_email_block_footer",
+"mt/email/theme/default/block/images/footer.png":"mt_email_block_footer_image"
+
+}
+@-->
+<!--@styles
+body, html { padding: 0; margin: 0; }
+
+@media (min-width: 640px) {
+    .header-logo,
+    .header-logo td{
+        text-align: left !important;
+        float: left !important;
+    }
+
+    .header-title td,
+    .header-title {
+        text-align: right  !important;
+        float: right;
+    }
+}
+
+@media (max-width: 640px) {
+
+    *[data-hide-on-mobile="true"] {
+        display: none;
+    }
+
+    *[data-show-on-mobile="true"] {
+        display: block;
+    }
+    .header-logo,
+    .header-title {
+        width: 100% !important;
+    }
+
+    .header-logo td,
+    .header-title td{
+        text-align: center !important;
+    }
+
+    .header-logo {
+        margin-bottom: 10px;
+    }
+}
+
+
+@media (max-width: 540px) {
+    .column-half {
+        width: 100% !important;
+        max-width: 100% !important;
+        clear: both;
+    }
+
+    .column-half-left  {
+        padding-right: 0 !important;
+    }
+
+    .column-half-right  {
+        padding-left: 0 !important;
+    }
+
+    td.separator {
+        height: 0 !important;
+    }
+}
+
+.column-half-left  {
+    padding-right: 10px;
+}
+
+.column-half-right  {
+    padding-left: 10px;
+}
+
+@-->
+
+<!--@plain
+Shared product
+
+
+Welcome {{htmlescape var=$name}},
+Please look at {{var product_name}} ({{var product_url}}) .
+Here is the message from friend:
+{{var message}}
+
+Thank you!
+
+{{config path='design/footer/copyright'}}
+@-->
+
+{{layout handle="mt_email_block_header" theme="default" template_id=$this.id block_id=91 block_name="mt_email_block_header" noborder=1 margintop=30 }}
+{{layout handle="mt_email_block_text1" theme="default" template_id=$this.id block_id=92 block_name="mt_email_block_text1" }}
+{{layout handle="mt_email_block_footer" theme="default" template_id=$this.id block_id=95 block_name="mt_email_block_footer"  noborder=1 }}
+
+
+
