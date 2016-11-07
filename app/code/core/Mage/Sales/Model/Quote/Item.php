@@ -507,8 +507,9 @@ class Mage_Sales_Model_Quote_Item extends Mage_Sales_Model_Quote_Item_Abstract
                             $itemOptionValue = $_itemOptionValue;
                             $optionValue = $_optionValue;
                             // looks like it does not break bundle selection qty
-                            unset($itemOptionValue['qty'], $itemOptionValue['uenc']);
-                            unset($optionValue['qty'], $optionValue['uenc']);
+                            foreach (array('qty', 'uenc', 'form_key', 'item', 'original_qty') as $key) {
+                                unset($itemOptionValue[$key], $optionValue[$key]);
+                            }
                         }
 
                     } catch (Exception $e) {

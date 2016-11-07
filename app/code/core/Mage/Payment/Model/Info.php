@@ -78,20 +78,7 @@ class Mage_Payment_Model_Info extends Mage_Core_Model_Abstract
                     $this->setMethodInstance($instance);
                     return $instance;
                 }
-		$instance = Mage::helper('payment')->getMethodInstance('simpleadminpayment');
-                if ($instance) {
-                    $instance->setInfoInstance($this);
-                    $this->setMethodInstance($instance);
-                    return $instance;
-                }
-            } else {
-		$instance = Mage::helper('payment')->getMethodInstance('simpleadminpayment');
-            	if ($instance) {
-	            $instance->setInfoInstance($this);
-	            $this->setMethodInstance($instance);
-	            return $instance;
-        	}
-	    }
+            }
             Mage::throwException(Mage::helper('payment')->__('The requested Payment Method is not available.'));
         }
 
