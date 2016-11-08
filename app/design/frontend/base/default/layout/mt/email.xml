@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <mt_email_block_header>
+        <block type="mtemail/email_block" name="block" template="block.phtml" >
+            <block type="mtemail/email_block_template" name="header" template="block/header.phtml"/>
+        </block>
+    </mt_email_block_header>
+
+    <mt_email_block_text1>
+        <block type="mtemail/email_block" name="block" template="block.phtml" >
+            <block type="mtemail/email_block_template" name="text1" template="block/text1.phtml"/>
+        </block>
+    </mt_email_block_text1>
+
+    <mt_email_block_text2>
+        <block type="mtemail/email_block" name="block" template="block.phtml" >
+            <block type="mtemail/email_block_template" name="text2" template="block/text2.phtml"/>
+        </block>
+    </mt_email_block_text2>
+
+    <mt_email_block_grid2>
+        <block type="mtemail/email_block" name="block" template="block.phtml" >
+            <block type="mtemail/email_block_template" name="grid2" template="block/grid2.phtml"/>
+        </block>
+    </mt_email_block_grid2>
+
+    <mt_email_block_button1>
+        <block type="mtemail/email_block" name="block" template="block.phtml" >
+            <block type="mtemail/email_block_template" name="button1" template="block/button1.phtml"/>
+        </block>
+    </mt_email_block_button1>
+
+    <mt_email_block_signature>
+        <block type="mtemail/email_block" name="block" template="block.phtml" >
+            <block type="mtemail/email_block_template" name="signature" template="block/signature.phtml"/>
+        </block>
+    </mt_email_block_signature>
+
+    <mt_email_block_footer>
+        <block type="mtemail/email_block" name="block" template="block.phtml" >
+            <block type="mtemail/email_block_template" name="footer" template="block/footer.phtml"/>
+        </block>
+    </mt_email_block_footer>
+
+
+    <!-- sales template block -->
+
+    <mt_email_block_sales_order_items>
+        <block type="mtemail/email_block" name="block" template="block.phtml" >
+            <block type="mtemail/email_block_sales_order_items" name="sales_order_items" template="block/sales/order/items.phtml">
+                <action method="addItemRender"><type>default</type><block>mtemail/email_block_sales_order_items_default</block><template>block/sales/order/items/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>mtemail/email_block_sales_order_items_grouped</block><template>block/sales/order/items/default.phtml</template></action>
+            </block>
+        </block>
+    </mt_email_block_sales_order_items>
+
+    <mt_email_block_sales_order_totals>
+        <block type="mtemail/email_block" name="block" template="block.phtml" >
+            <block type="mtemail/email_block_sales_order_totals" name="totals" template="block/sales/order/totals.phtml">
+
+                <block type="sales/order_creditmemo_totals" name="creditmemo_totals" template="sales/order/totals.phtml">
+                    <action method="setLabelProperties"><value>colspan="3" align="right" style="padding:3px 9px"</value></action>
+                    <action method="setValueProperties"><value>align="right" style="padding:3px 9px"</value></action>
+                    <block type="tax/sales_order_tax" name="tax" template="totals/tax.phtml">
+                        <action method="setArea"><value>frontend</value></action>
+                    </block>
+                </block>
+
+                <block type="sales/order_totals" name="order_totals" template="sales/order/totals.phtml">
+                    <action method="setLabelProperties"><value>colspan="3" align="right" style="padding:3px 9px"</value></action>
+                    <action method="setValueProperties"><value>align="right" style="padding:3px 9px"</value></action>
+                    <block type="tax/sales_order_tax" name="tax" template="totals/tax.phtml">
+                        <action method="setArea"><value>frontend</value></action>
+                    </block>
+                </block>
+
+                <block type="sales/order_invoice_totals" name="invoice_totals" template="sales/order/totals.phtml">
+                    <action method="setLabelProperties"><value>colspan="3" align="right" style="padding:3px 9px"</value></action>
+                    <action method="setValueProperties"><value>align="right" style="padding:3px 9px"</value></action>
+                    <block type="tax/sales_order_tax" name="tax" template="totals/tax.phtml">
+                        <action method="setArea"><value>frontend</value></action>
+                    </block>
+                </block>
+
+            </block>
+        </block>
+    </mt_email_block_sales_order_totals>
+
+
+    <mt_email_block_sales_order_info>
+        <block type="mtemail/email_block" name="block" template="block.phtml">
+            <block type="mtemail/email_block_sales_order_info" name="info" template="block/sales/order/info.phtml"/>
+        </block>
+    </mt_email_block_sales_order_info>
+
+    <mt_email_block_sales_order_giftmessage>
+        <block type="mtemail/email_block" name="block" template="block.phtml">
+            <block type="mtemail/email_block_sales_order_giftmessage" name="info" template="block/sales/order/giftmessage.phtml"/>
+        </block>
+    </mt_email_block_sales_order_giftmessage>
+
+    <mt_email_block_sales_shipping_tracking>
+        <block type="mtemail/email_block" name="block" template="block.phtml">
+            <block type="mtemail/email_block_sales_shipping_tracking" name="info" template="block/sales/shipping/tracking.phtml"/>
+        </block>
+    </mt_email_block_sales_shipping_tracking>
+
+</layout>

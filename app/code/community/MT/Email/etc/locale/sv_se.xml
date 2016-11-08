@@ -1,0 +1,1111 @@
+<?xml version="1.0" encoding="utf8"?>
+
+<table name="mt_email_var">
+    <row>
+        <block_id>11</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Nytt konto</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new</template_code>
+    </row>
+    <row>
+        <block_id>12</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$customer.name}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new</template_code>
+    </row>
+    <row>
+        <block_id>12</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Välkommen till {{var store.getFrontendName()}}! För att logga in när du besöker vår sida klicka på
+            &lt;a class="" href="{{store url='customer/account/'}}"&gt;Login&lt;/a&gt; eller &lt;a class=""
+            href="{{store url='customer/account/'}}"&gt;Mitt konto&lt;/a&gt; i sidhuvudet och ange din mailadress och
+            lösenord.
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new</template_code>
+    </row>
+    <row>
+        <block_id>13</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url='customer/account/'}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new</template_code>
+    </row>
+    <row>
+        <block_id>13</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Gå till mitt konto</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new</template_code>
+    </row>
+    <row>
+        <block_id>21</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Kontobekräftelse</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>22</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$customer.name}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>22</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din e-postadress måste vara registrerad innan du kan logga in på vår butik.
+            För att bekräfta e-postadressem och direkt logga in, använd &lt;a href="{{store
+            url='customer/account/confirm/' _query_id=$customer.id _query_key=$customer.confirmation
+            _query_back_url=$back_url}}"&gt;link&lt;/a&gt; eller tryck på knappen nedan. Länken kan enbart användas vid
+            ett tillfälle.
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>23</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url='customer/account/confirm/' _query_id=$customer.id _query_key=$customer.confirmation
+            _query_back_url=$back_url}}
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>23</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Bekräfta mitt konto.</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>201</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Uppdaterad kreditnota</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_update</template_code>
+    </row>
+    <row>
+        <block_id>202</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getCustomerName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_update</template_code>
+    </row>
+    <row>
+        <block_id>202</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din order {{var order.getIncrementId()}} har blivit {{var order.getStatusLabel()}}. Du kan
+            kontrollera status på din order genom att logga in på ditt &lt;a href="{{store url='customer/account/'}}"
+            &gt;konto&lt;/a&gt;</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_update</template_code>
+    </row>
+    <row>
+        <block_id>33</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url='customer/account/'}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new_confirmed</template_code>
+    </row>
+    <row>
+        <block_id>33</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Till mitt konto</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_new_confirmed</template_code>
+    </row>
+    <row>
+        <block_id>43</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url='customer/account/resetpassword/' _query_id=$customer.id
+            _query_token=$customer.rp_token}}
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_password_reset_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>43</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Nollställ lösenord</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_password_reset_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>42</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$customer.name}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_password_reset_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>42</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Det finns en begäran om att ändra lösenordet för kontot.
+            Om Du har begärt att lösenordet skall ändras, klicka på valet nedan:
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_password_reset_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>41</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Nollställ lösenord</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_password_reset_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>46</block_id>
+        <block_name>mt_email_block_text2</block_name>
+        <var_key>text2_text</var_key>
+        <var_value>Om länken inte fungerar kan du kopiera och klistra in den i din webbläsare. Länk: &lt;a href="{{store
+            url='customer/account/resetpassword/' _query_id=$customer.id _query_token=$customer.rp_token}}"&gt;{{store
+            url='customer/account/resetpassword/' _query_id=$customer.id _query_token=$customer.rp_token}}&lt;/a&gt;
+
+            Om du inte har begärt nytt lösenord, bortse från meddelandet, ingen förändring kommer att ske av ditt
+            lösenord.
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_account_password_reset_confirmation</template_code>
+    </row>
+    <row>
+        <block_id>56</block_id>
+        <block_name>mt_email_block_text2</block_name>
+        <var_key>text2_text</var_key>
+        <var_value>Om länken inte fungerar kan du kopiera och klistra in den i din webbläsare. URL:&lt;a
+            class="mteditor-contenteditable" href=" {{var subscriber.getConfirmationLink()}}"&gt; {{var
+            subscriber.getConfirmationLink()}}&lt;/a&gt;&lt;br&gt;&lt;br&gt;Om du har mottagit detta email av misstag,
+            vänligen radera det. Ingen prenumeration sker om du inte bekräftar genom ovan länk.
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+    </row>
+    <row>
+        <block_id>53</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{var subscriber.getConfirmationLink()}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+    </row>
+    <row>
+        <block_id>53</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Bekräfta min prenumeration</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+    </row>
+    <row>
+        <block_id>52</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Tack för att du prenumererar på vårt nyhetsbrev</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+    </row>
+    <row>
+        <block_id>52</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>För att börja ta emot nyhetsbrevet måste du först bekräfta din prenumeration genom att klicka för
+            godkännande:
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+    </row>
+    <row>
+        <block_id>51</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Prenumeration bekräftad</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+    </row>
+    <row>
+        <block_id>63</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url=''}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscr_success</template_code>
+    </row>
+    <row>
+        <block_id>63</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Gå till shoppen</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscr_success</template_code>
+    </row>
+    <row>
+        <block_id>62</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Tack för att du prenumererar på vårt nyhetsbrev</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscr_success</template_code>
+    </row>
+    <row>
+        <block_id>62</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din prenumerationn är bekräftad.
+            Om Du vid något tillfälle önskar avbryta din prenumeration av vårt nyhetsbrev, kan du klicka på
+            "Avregistrera" länken i sidfoten av nyhetsbrevet.
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscr_success</template_code>
+    </row>
+    <row>
+        <block_id>61</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Prenumerationen är genomförd</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_subscr_success</template_code>
+    </row>
+    <row>
+        <block_id>73</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url=''}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_unsubscr_success</template_code>
+    </row>
+    <row>
+        <block_id>73</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Gå till shoppen</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_unsubscr_success</template_code>
+    </row>
+    <row>
+        <block_id>72</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Avregistrering genomförd</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_unsubscr_success</template_code>
+    </row>
+    <row>
+        <block_id>72</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din e-postadress har tagits bort från nyhetsbrevets prenumerationslista.</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_unsubscr_success</template_code>
+    </row>
+    <row>
+        <block_id>71</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Avregistrering genomförd</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_newsletter_unsubscr_success</template_code>
+    </row>
+    <row>
+        <block_id>83</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url="customer/account/"}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_customer_password_remind</template_code>
+    </row>
+    <row>
+        <block_id>83</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Gå till mitt konto</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_customer_password_remind</template_code>
+    </row>
+    <row>
+        <block_id>82</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$customer.name}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_customer_password_remind</template_code>
+    </row>
+    <row>
+        <block_id>82</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Ditt lösenord har ändrats.
+            Du kan förändra ditt lösenord när som genom att logga in på &lt;a href="{{store url='customer/account/'}}"
+            &gt;Mitt konto&lt;/a&gt;</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_customer_password_remind</template_code>
+    </row>
+    <row>
+        <block_id>81</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Nytt lösenord</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_customer_password_remind</template_code>
+    </row>
+    <row>
+        <block_id>92</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Välkommen {{htmlescape var=$name}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_product_share</template_code>
+    </row>
+    <row>
+        <block_id>92</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Se här &lt;a href="{{var product_url}}"&gt;{{var product_name}}&lt;/a&gt;.
+            &lt;br&gt;Ett meddelande från en vän:&lt;br&gt;
+            {{var message}}&lt;br&gt;&lt;br&gt;Tackar!&lt;br&gt;&lt;/td&gt;
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_product_share</template_code>
+    </row>
+    <row>
+        <block_id>91</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Delat produkt</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_product_share</template_code>
+    </row>
+    <row>
+        <block_id>102</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej,</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_wishlist_share</template_code>
+    </row>
+    <row>
+        <block_id>102</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Se min önskelista från {{var store.getFrontendName()}}.
+            &lt;br&gt;&lt;br&gt;
+            {{var message}}
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_wishlist_share</template_code>
+    </row>
+    <row>
+        <block_id>101</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Delad önseklista</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_wishlist_share</template_code>
+    </row>
+    <row>
+        <block_id>103</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{var viewOnSiteLink}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_wishlist_share</template_code>
+    </row>
+    <row>
+        <block_id>103</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Se alla produkter i önskelsta</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_wishlist_share</template_code>
+    </row>
+    <row>
+        <block_id>104</block_id>
+        <block_name>mt_email_block_text2</block_name>
+        <var_key>text2_text</var_key>
+        <var_value>Tackar!</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_wishlist_share</template_code>
+    </row>
+    <row>
+        <block_id>111</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Ny order</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_new</template_code>
+    </row>
+    <row>
+        <block_id>112</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Tack för att du beställer från {{var store.getFrontendName()}}!
+            När din beställning har skickats sänder vi dig en e-post med länk där du kan spåra din order. Du kan
+            kontrollera orderstatus genom att logga in på ditt konto &lt;a href="{{store url='customer/account/'}}"&gt;account&lt;/a&gt;.&lt;br&gt;
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_new</template_code>
+    </row>
+    <row>
+        <block_id>112</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getCustomerName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_new</template_code>
+    </row>
+    <row>
+        <block_id>121</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Ny order</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>122</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Tack för att du beställer från {{var store.getFrontendName()}}! När din beställning har skickats
+            sänder vi dig en e-post med länk där du kan spåra din order.
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>122</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>131</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Kreditnota nr: {{var creditmemo.increment_id}}&lt;br&gt;for order: #{{var order.getIncrementId()}}
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_new</template_code>
+    </row>
+    <row>
+        <block_id>132</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Kreditnota har skapats. Du kan kontrollera orderstatus genom att logga in på ditt konto &lt;a
+            href="{{store url='customer/account/'}}"&gt;Mitt konto&lt;/a&gt;</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_new</template_code>
+    </row>
+    <row>
+        <block_id>132</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getCustomerName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_new</template_code>
+    </row>
+    <row>
+        <block_id>141</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Kreditnota nr: {{var creditmemo.increment_id}}&lt;br&gt;
+            for order: #{{var order.getIncrementId()}}
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>142</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>142</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Återbetalning har genomförts, beroende på betalningssätt kan det ta 2-5 bankdagar innan ni ser
+            beloppet på ert konto.
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>151</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Faktura nr: {{var invoice.increment_id}}&lt;br&gt;
+            for order nr: {{var order.increment_id}}
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_new</template_code>
+    </row>
+    <row>
+        <block_id>152</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Tack för din beställning you {{var store.getFrontendName()}}! Din faktura har skapats. Du kan
+            kontrollera orderstatus genom att logga in på ditt konto &lt;a class="" href="{{store
+            url='customer/account/'}}" &gt;konto&lt;/a&gt;.
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_new</template_code>
+    </row>
+    <row>
+        <block_id>152</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getCustomerName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_new</template_code>
+    </row>
+    <row>
+        <block_id>162</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Tack för att du beställer från {{var store.getFrontendName()}}! Din faktura har skapats.</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>162</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>161</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>faktura nr: {{var invoice.increment_id}}&lt;br&gt;
+            for order nr: {{var order.increment_id}}
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>172</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din order är på väg till dig! Du kan kontrollera orderstatus genom att logga in på ditt konto &lt;a
+            class="" href="{{store url='customer/account/'}}"
+            contenteditable="true"&gt;konto&lt;/a&gt;.&lt;br&gt;</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_new</template_code>
+    </row>
+    <row>
+        <block_id>172</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getCustomerName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_new</template_code>
+    </row>
+    <row>
+        <block_id>171</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Försändelse nr: {{var shipment.increment_id}}&lt;br&gt;
+            för order nr: {{var order.increment_id}}
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_new</template_code>
+    </row>
+    <row>
+        <block_id>182</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Tack för att du beställer från {{var store.getFrontendName()}}! Din order är på väg till dig!
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>182</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>181</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Försändelse nr: {{var shipment.increment_id}}&lt;br&gt;
+            för order nr: {{var order.increment_id}}
+        </var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_new_guest</template_code>
+    </row>
+    <row>
+        <block_id>203</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url='customer/account/'}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_update</template_code>
+    </row>
+    <row>
+        <block_id>203</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Till mitt konto</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_update</template_code>
+    </row>
+    <row>
+        <block_id>212</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>212</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din order {{var order.getIncrementId()}} har blivit {{var order.getStatusLabel()}}.</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>211</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Uppdatering kreditnota</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_creditmemo_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>223</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url='customer/account/'}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_update</template_code>
+    </row>
+    <row>
+        <block_id>223</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Till mitt konto</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_update</template_code>
+    </row>
+    <row>
+        <block_id>222</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getCustomerName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_update</template_code>
+    </row>
+    <row>
+        <block_id>222</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din order {{var order.getIncrementId()}} har blivit {{var order.getStatusLabel()}}. Du kan
+            kontrollera orderstatus genom att logga in på ditt konto &lt;a href="{{store url='customer/account/'}}" &gt;konto&lt;/a&gt;</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_update</template_code>
+    </row>
+    <row>
+        <block_id>221</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Uppdatering faktura</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_update</template_code>
+    </row>
+    <row>
+        <block_id>232</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>232</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din order {{var order.getIncrementId()}} har fått {{var order.getStatusLabel()}}.</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>231</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Uppdatering faktura</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_invoice_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>243</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url='customer/account/'}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_update</template_code>
+    </row>
+    <row>
+        <block_id>243</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Till mitt konto</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_update</template_code>
+    </row>
+    <row>
+        <block_id>242</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getCustomerName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_update</template_code>
+    </row>
+    <row>
+        <block_id>242</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din order {{var order.getIncrementId()}} har blivit {{var order.getStatusLabel()}}. Du kan
+            kontrollera orderstatus genom att logga in på ditt konto &lt;a href="{{store url='customer/account/'}}" &gt;konto&lt;/a&gt;</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_update</template_code>
+    </row>
+    <row>
+        <block_id>241</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Uppdatering order</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_update</template_code>
+    </row>
+    <row>
+        <block_id>252</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>252</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din order {{var order.getIncrementId()}} har fått {{var order.getStatusLabel()}}.</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>251</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Uppdatering order</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_order_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>261</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Uppdatering försändelse</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_update</template_code>
+    </row>
+    <row>
+        <block_id>262</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din order {{var order.getIncrementId()}} har blivit {{var order.getStatusLabel()}}. Du kan
+            kontrollera orderstatus genom att logga in på ditt konto &lt;a href="{{store url='customer/account/'}}" &gt;konto&lt;/a&gt;</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_update</template_code>
+    </row>
+    <row>
+        <block_id>262</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getCustomerName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_update</template_code>
+    </row>
+    <row>
+        <block_id>263</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_text</var_key>
+        <var_value>Till mitt konto</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_update</template_code>
+    </row>
+    <row>
+        <block_id>263</block_id>
+        <block_name>mt_email_block_button1</block_name>
+        <var_key>button1_href</var_key>
+        <var_value>{{store url='customer/account/'}}</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_update</template_code>
+    </row>
+    <row>
+        <block_id>271</block_id>
+        <block_name>mt_email_block_header</block_name>
+        <var_key>header_text</var_key>
+        <var_value>Uppdatering försändelse</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>272</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_text</var_key>
+        <var_value>Din order {{var order.getIncrementId()}} har fått {{var order.getStatusLabel()}}.</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_update_guest</template_code>
+    </row>
+    <row>
+        <block_id>272</block_id>
+        <block_name>mt_email_block_text1</block_name>
+        <var_key>text1_header_text</var_key>
+        <var_value>Hej {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+        <global>0</global>
+
+        <template_code>mtemail_default_sales_shipment_update_guest</template_code>
+    </row>
+
+    <!-- Global variables -->
+    <row>
+        <block_name>mt_email_block_signature</block_name>
+        <var_key>signature_text</var_key>
+        <var_value>If you have any questions about your account or any other matter, please feel free to contact
+            us at {{config path='trans_email/ident_support/email'}} or by phone at {{config
+            path='general/store_information/phone'}}
+        </var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_signature</block_name>
+        <var_key>signature_text_2</var_key>
+        <var_value>Thank you again!</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_info</block_name>
+        <var_key>order_info_billing_title</var_key>
+        <var_value>Billing Information:</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_info</block_name>
+        <var_key>order_info_payment_title</var_key>
+        <var_value>Payment Method:</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_info</block_name>
+        <var_key>order_info_shipping_title</var_key>
+        <var_value>Shipping Information:</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_info</block_name>
+        <var_key>order_info_shipping_method_title</var_key>
+        <var_value>Shipping Method:</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_items</block_name>
+        <var_key>order_item_name</var_key>
+        <var_value>Item</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_items</block_name>
+        <var_key>order_item_sku</var_key>
+        <var_value>Sku</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_items</block_name>
+        <var_key>order_item_qty</var_key>
+        <var_value>Qty</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_items</block_name>
+        <var_key>order_item_subtotal</var_key>
+        <var_value>Subtotal</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_totals</block_name>
+        <var_key>order_totals_table_label_2194aaec8cc7086ab0e93f74547e5f53</var_key>
+        <var_value>Subtotal</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_totals</block_name>
+        <var_key>order_totals_table_label_1985beaea5d87dc3d72ed84c931834dd</var_key>
+        <var_value>Grand Total</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_totals</block_name>
+        <var_key>order_totals_table_label_022515e2ed327537af8b214ddfd3288f</var_key>
+        <var_value>Shipping &amp; Handling</var_value>
+        <global>1</global>
+    </row>
+
+    <row>
+        <block_name>mt_email_block_sales_order_totals</block_name>
+        <var_key>order_totals_table_label_4b78ac8eb158840e9638a3aeb26c4a9d</var_key>
+        <var_value>Tax</var_value>
+        <global>1</global>
+    </row>
+
+</table>

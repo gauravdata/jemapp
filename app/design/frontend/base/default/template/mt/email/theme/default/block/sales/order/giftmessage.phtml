@@ -1,0 +1,108 @@
+<?php $_order = $this->getOrder(); ?>
+<?php $var = $this->getVarModel(); ?>
+<?php $helper = Mage::helper('mtemail');?>
+
+
+<?php if (Mage::helper('giftmessage/message')->isMessagesAvailable('order', $_order, $_order->getStore()) && $_order->getGiftMessageId()): ?>
+    <?php $_giftMessage = $this->helper('giftmessage/message')->getGiftMessage($_order->getGiftMessageId()); ?>
+    <?php if ($_giftMessage): ?>
+<table
+    width="100%"
+    style="width:100% !important; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"
+    cellspacing="0" cellpadding="0" border="0">
+
+    <tr>
+        <td height="30"></td>
+    </tr>
+    <tr>
+        <td style="font-size: 15px;  color: #707582; text-align: left;">
+            <table width="100%"  style="width: 100% !important;" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>
+                        <table  class="column-half payment-method" width="48%" style="width: 48%;" border="0" cellspacing="0" cellpadding="0" align="<?php echo $_order->getIsNotVirtual()?'left':'right'; ?>">
+                            <tr>
+                                <td style="font-size: 15px;  color: #707582;  ">
+                                    <table width="100%" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;width: 100% !important;" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td align="<?php echo $helper->isRTL()?'right':'left';?>">
+                                                <span
+                                                    <?php echo $var->getTextEditAttribute('order_giftmessage_title');?>
+                                                    <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_title_style', "color: #707582; font-size: 14px; font-weight: 700;"); ?>
+                                                    class="mteditor-color table-title">
+                                                    <?php echo $var->getValue('order_giftmessage_title', $this->__('Gift Message for this Order:'), false);?>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="<?php echo $helper->isRTL()?'right':'left';?>">
+                                               <span
+                                                   <?php echo $var->getTextEditAttribute('order_giftmessage_from');?>
+                                                   <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_from_style', "color: #707582; font-size: 14px; font-weight: 700;"); ?>
+                                                   class="mteditor-color table-title">
+                                                    <?php echo $var->getValue('order_giftmessage_from', $this->__('From:'), false);?>
+                                                </span>
+                                                <span
+                                                    <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_from_text2_style', "color: #707582; font-size: 14px; font-weight: normal;"); ?>
+                                                    class="mteditor-color table-title">
+                                                    <?php echo $this->escapeHtml($_giftMessage->getSender()) ?>
+                                                </span>
+
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="<?php echo $helper->isRTL()?'right':'left';?>">
+                                                <span
+                                                    <?php echo $var->getTextEditAttribute('order_giftmessage_to');?>
+                                                    <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_to_style', "color: #707582; font-size: 14px; font-weight: 700;"); ?>
+                                                    class="mteditor-color table-title">
+                                                    <?php echo $var->getValue('order_giftmessage_to', $this->__('To:'), false);?>
+                                                </span>
+                                                <span
+                                                    <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_to_text2_style', "color: #707582; font-size: 14px; font-weight: normal;"); ?>
+                                                    class="mteditor-color table-title">
+                                                    <?php echo $this->escapeHtml($_giftMessage->getRecipient()) ?>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="<?php echo $helper->isRTL()?'right':'left';?>">
+                                                <span
+                                                    <?php echo $var->getTextEditAttribute('order_giftmessage_message');?>
+                                                    <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_message_style', "color: #707582; font-size: 14px; font-weight: 700;"); ?>
+                                                    class="mteditor-color table-title">
+                                                    <?php echo $var->getValue('order_giftmessage_message', $this->__('Message:'), false);?>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="<?php echo $helper->isRTL()?'right':'left';?>">
+                                                 <span
+                                                     <?php echo $var->getHtmlAttribute('style', 'order_giftmessage_message_text_style', "color: #707582; font-size: 14px; font-weight: normal;"); ?>
+                                                     class="mteditor-color table-title">
+                                                     <?php echo $this->escapeHtml($_giftMessage->getMessage()) ?>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td height="30" style="height: 30px; font-size: 5px; line-height: 5px">&nbsp;</td>
+    </tr>
+    <tr>
+        <td height="1"
+            <?php echo $var->getHtmlAttribute('style', 'order_totals_table_bottom_line_style', 'background-color: #e26a0a; font-size:1px; line-height:1px; height:1px;'); ?>
+            <?php echo $var->getHtmlAttribute('bgcolor', 'order_totals_table_bottom_line_bg', '#e26a0a'); ?>
+            class="mteditor-bgcolor item-line-color ">&nbsp;</td>
+    </tr>
+</table>
+    <?php endif; ?>
+<?php endif; ?>

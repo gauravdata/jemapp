@@ -1,0 +1,25 @@
+<?php
+    $var = $this->getParentBlock()->getParentBlock()->getVarModel();
+    $_order  = $this->getOrder();
+    $_source = $this->getSource();
+    $label = 'Tax';
+?>
+<?php  ?>
+<tr>
+    <td
+
+        <?php echo $var->getHtmlAttribute('style', 'order_totals_table_label_style'.md5($label), 'color: #707582; font-size: 14px; font-weight: bold;'); ?>
+        <?php echo $var->getTextEditAttribute('order_totals_table_label_'.md5($label));?>
+
+        class="mteditor-color total-color">
+        <?php echo $var->getValue('order_totals_table_label_'.md5($label), $this->escapeHtml($label), false);?>
+
+    </td>
+    <td width="15" height="25"  style="width: 15px !important; height: 25px"></td>
+    <td
+        <?php echo $var->getHtmlAttribute('style', 'order_totals_table_value_style'.md5($label), 'color: #707582; font-size: 14px; text-align: right;'); ?>
+        class="mteditor-color total-color"
+        align="right">
+        <?php echo $_order->formatPrice($_source->getTaxAmount()) ?>
+    </td>
+</tr>

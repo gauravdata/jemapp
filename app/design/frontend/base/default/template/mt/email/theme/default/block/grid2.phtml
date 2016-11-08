@@ -1,0 +1,60 @@
+<?php $var = $this->getVarModel();?>
+<?php $helper = Mage::helper('mtemail');?>
+<table
+    width="100%"
+    style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;width:100% !important;"
+    cellspacing="0" cellpadding="0" border="0">
+
+
+    <tr>
+        <td>
+            <!--[if mso]><table width="540"><tr><td width="270"><![endif]-->
+            <table  class="column-half" width="100%" style="width: 100%; max-width: 270px" border="0" cellspacing="0" cellpadding="0" align="<?php echo $helper->isRTL()?'right':'left';?>">
+                <tr>
+                    <td height="33" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td class="column-half-left">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td
+                                    <?php echo $var->getTextEditAttribute('grid2_text_left');?>
+                                    <?php echo $var->getHtmlAttribute('style', 'grid2_text_left_style', 'font-size: 15px; line-height: 26px; color: #707582; '); ?>
+                                    class="mteditor-color secondary-text"  align="<?php echo $helper->isRTL()?'right':'left';?>">
+                                    <?php echo $var->getValue('grid2_text_left', "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.", false);?>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!--[if mso]></td><td width="270"><![endif]-->
+            <table  class="column-half" width="100%" style="width: 100%; max-width: 270px" border="0" cellspacing="0" cellpadding="0" align="<?php echo $helper->isRTL()?'right':'left';?>">
+                <tr>
+                    <td height="33" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td class="column-half-right">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td
+                                    <?php echo $var->getTextEditAttribute('grid2_text_right');?>
+                                    <?php echo $var->getHtmlAttribute('style', 'grid2_text_right_style', 'font-size: 15px; line-height: 26px; color: #707582; '); ?>
+                                    class="mteditor-color secondary-text"  align="<?php echo $helper->isRTL()?'right':'left';?>">
+                                    <?php echo $var->getValue('grid2_text_right', "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.", false);?>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <!--[if mso]></td></tr></table><![endif]-->
+        </td>
+    </tr>
+    <tr>
+        <td  height="15"></td>
+    </tr>
+</table>
+
+
