@@ -1,0 +1,50 @@
+<?php $templateId = $this->getTemplateId(); ?>
+<?php $blockId = $this->getTemplateId(); ?>
+<?php $var = $this->getVarModel();?>
+<table
+    dir="<?php echo $this->getDirection();?>"
+    width="100%"
+    border="0" cellpadding="0" cellspacing="0"
+    class="mteditor-bgcolor body-bg-color"
+
+    <?php echo $var->getHtmlAttribute('style', 'body-bg-color', 'width: 100% !important; max-width: 100% !important; background-color: #f1f1f1'); ?>
+    <?php echo $var->getHtmlAttribute('bgcolor', 'body-bg-color-bgcolor', '#f1f1f1'); ?>
+
+    data-block-id="<?php echo $this->getBlockId();?>"
+    data-block-name="<?php echo $this->getBlockName();?>">
+
+    <?php if ($this->getMargintop() > 0):?>
+        <tr>
+            <td colspan="3" height="<?php echo $this->getMargintop();?>" style="height: <?php echo $this->getMarginTop();?>px"></td>
+        </tr>
+    <?php endif; ?>
+
+    <tr>
+        <td width="2%" style="width: 2%!important;"></td>
+        <td
+            align="center" >
+            <table
+                width="600"
+                cellspacing="0" cellpadding="0" border="0"
+                class="mteditor-bgcolor secondary-bg-color"
+
+                <?php echo $var->getHtmlAttribute('style', 'secondary-bg-color', 'width: 100% !important; max-width: 600px !important; background-color: #FFFFFF;'); ?>
+                <?php echo $var->getHtmlAttribute('bgcolor', 'secondary-bg-color-color', '#FFFFFF'); ?>
+
+                data-block-content="<?php echo $this->getId();?>" >
+                <tr>
+                    <?php if ($this->getNoborder() != 1):?>
+                    <td width="5%" style="width: 5%!important;"></td>
+                    <?php endif; ?>
+                    <td align="center">
+                        <?php echo $this->getChildHtml();?>
+                    </td>
+                    <?php if ($this->getNoborder() != 1):?>
+                        <td width="5%" style="width: 5%!important;"></td>
+                    <?php endif; ?>
+                </tr>
+            </table>
+        </td>
+        <td width="2%" style="width: 2%!important;"></td>
+    </tr>
+</table>

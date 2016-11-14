@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <magetrend translate="label" module="mtemail">
+            <label>MageTrend Extensions</label>
+            <sort_order>401</sort_order>
+        </magetrend>
+    </tabs>
+    <sections>
+        <mtemail translate="label" module="mtemail">
+            <label>MT Email</label>
+            <tab>magetrend</tab>
+            <sort_order>500</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <is_active translate="label">
+                            <label>Is Active</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </is_active>
+
+                        <direction translate="label">
+                            <label>Direction</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>mtemail/adminhtml_system_config_source_direction</source_model>
+                        </direction>
+                    </fields>
+                </general>
+
+                <actions translate="label">
+                    <label>Mass actions</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <create_buttons translate="label">
+                            <label>Create templates</label>
+                            <frontend_model>mtemail/adminhtml_system_config_form_button_install</frontend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </create_buttons>
+
+                        <delete_buttons translate="label">
+                            <label>Delete templates</label>
+                            <frontend_model>mtemail/adminhtml_system_config_form_button_delete</frontend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </delete_buttons>
+
+                        <replace_buttons translate="label">
+                            <label>Update system config</label>
+                            <frontend_model>mtemail/adminhtml_system_config_form_button_replace</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </replace_buttons>
+
+                        <revert_buttons translate="label">
+                            <label>Restore system config</label>
+                            <frontend_model>mtemail/adminhtml_system_config_form_button_revert</frontend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </revert_buttons>
+                    </fields>
+                </actions>
+                <template translate="label">
+                    <label>Template settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <show_sku translate="label">
+                            <label>Show SKU in the order grid</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </show_sku>
+                    </fields>
+                </template>
+                <editor translate="label">
+                    <label>MT Editor settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <font_family translate="label">
+                            <label>Font Family List</label>
+                            <frontend_model>mtemail/adminhtml_system_config_form_button_grid</frontend_model>
+                            <backend_model>mtemail/adminhtml_system_config_backend_button</backend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </font_family>
+                    </fields>
+                </editor>
+                <preview translate="label">
+                    <label>Preview settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <order_id translate="label">
+                            <label>Order ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_id>
+                        <invoice_id translate="label">
+                            <label>Invoice ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoice_id>
+                        <creditmemo_id translate="label">
+                            <label>Creditmemo ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </creditmemo_id>
+                        <shipment_id translate="label">
+                            <label>Shipment ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shipment_id>
+                    </fields>
+                </preview>
+            </groups>
+        </mtemail>
+        <mtlicense translate="label" module="mtemail">
+            <label>Licenses</label>
+            <tab>magetrend</tab>
+            <sort_order>9990</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <mtemail translate="label">
+                    <label>MT Email</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <key_input translate="label">
+                            <label>License Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>The license key you can find here: https://www.magetrend.com >> Login >> My Downloads</comment>
+                        </key_input>
+                        <key translate="label">
+                            <label></label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </key>
+                        <key_status translate="label">
+                            <label></label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </key_status>
+                    </fields>
+                </mtemail>
+            </groups>
+        </mtlicense>
+    </sections>
+</config>
