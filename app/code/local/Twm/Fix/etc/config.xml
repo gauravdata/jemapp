@@ -30,5 +30,16 @@
                 <class>Twm_Fix_Helper</class>
             </twm_fix>
         </helpers>
+        <events>
+            <checkout_cart_save_before>
+                <observers>
+                    <check_session_cart_save_before>
+                        <type>singleton</type>
+                        <class>twm_fix/observer</class>
+                        <method>checkCartBefore</method>
+                    </check_session_cart_save_before>
+                </observers>
+            </checkout_cart_save_before>
+        </events>
     </global>
 </config>
