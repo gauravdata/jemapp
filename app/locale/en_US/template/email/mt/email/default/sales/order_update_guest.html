@@ -1,0 +1,134 @@
+<!--@subject {{var store.getFrontendName()}}: Order # {{var order.increment_id}} update @-->
+<!--@vars
+{
+"store url=''":"Store Url",
+"var store.getFrontendName()":"Store frontend name",
+
+"config path='trans_email/ident_support/email'":"Support email",
+"config path='trans_email/ident_general/email'":"General email",
+"config path='general/store_information/phone'":"Phone",
+
+
+"var order.getStatusLabel()":"Order Status",
+"var order.increment_id":"Order Id",
+"var comment":"Order Comment",
+"htmlescape var=$order.getBillingAddress().getName()":"Guest Customer Name",
+"var customer.email":"Customer email",
+
+
+"layout handle=\"mt_email_block_header\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_header\"  noborder=\"1\" margintop=30 ":"mt_email_block_header",
+"mt/email/theme/default/block/images/header.png":"mt_email_block_header_image",
+
+"layout handle=\"mt_email_block_text1\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_text1\" ":"mt_email_block_text1",
+"mt/email/theme/default/block/images/text1.png":"mt_email_block_text1_image",
+
+"layout handle=\"mt_email_block_text2\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_text2\" ":"mt_email_block_text2",
+"mt/email/theme/default/block/images/text2.png":"mt_email_block_text2_image",
+
+"layout handle=\"mt_email_block_grid2\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_grid2\" ":"mt_email_block_grid2",
+"mt/email/theme/default/block/images/grid2.png":"mt_email_block_grid2_image",
+
+"layout handle=\"mt_email_block_button1\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_button1\" ":"mt_email_block_button1",
+"mt/email/theme/default/block/images/button1.png":"mt_email_block_button1_image",
+
+"layout handle=\"mt_email_block_signature\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_signature\" ":"mt_email_block_signature",
+"mt/email/theme/default/block/images/signature.png":"mt_email_block_signature_image",
+
+"layout handle=\"mt_email_block_footer\" theme=\"default\" template_id=$this.id block_id=0 block_name=\"mt_email_block_footer\" noborder=1":"mt_email_block_footer",
+"mt/email/theme/default/block/images/footer.png":"mt_email_block_footer_image"
+
+}
+@-->
+
+<!--@styles
+body, html {
+    padding: 0;
+    margin: 0;
+}
+
+@media (min-width: 640px) {
+    .header-logo,
+    .header-logo td{
+        text-align: left !important;
+        float: left !important;
+    }
+
+    .header-title td,
+    .header-title {
+        text-align: right  !important;
+        float: right;
+    }
+}
+
+@media (max-width: 640px) {
+
+    *[data-hide-on-mobile="true"] {
+        display: none;
+    }
+
+    *[data-show-on-mobile="true"] {
+        display: block;
+    }
+    .header-logo,
+    .header-title {
+        width: 100% !important;
+    }
+
+    .header-logo td,
+    .header-title td{
+        text-align: center !important;
+    }
+
+    .header-logo {
+        margin-bottom: 10px;
+    }
+}
+
+
+@media (max-width: 540px) {
+    .column-half {
+        width: 100% !important;
+        max-width: 100% !important;
+        clear: both;
+    }
+
+    .column-half-left  {
+        padding-right: 0 !important;
+    }
+
+    .column-half-right  {
+        padding-left: 0 !important;
+    }
+
+    td.separator {
+        height: 0 !important;
+    }
+}
+
+.column-half-left  {
+    padding-right: 10px;
+}
+
+.column-half-right  {
+    padding-left: 10px;
+}
+
+@-->
+
+<!--@plain
+Order update
+
+Hello {{htmlescape var=$order.getBillingAddress().getName()}},
+Your order #{{var order.getIncrementId()}} has been {{var order.getStatusLabel()}}.
+
+
+If you have any questions about your account or any other matter, please feel free to contact us at {{config path='trans_email/ident_support/email'}} or by phone at {{config path='general/store_information/phone'}}
+Thank you again!
+
+{{config path='design/footer/copyright'}}
+@-->
+
+{{layout handle="mt_email_block_header" theme="default" template_id=$this.id block_id=251 block_name="mt_email_block_header" noborder=1 margintop=30 }}
+{{layout handle="mt_email_block_text1" theme="default" template_id=$this.id block_id=252 block_name="mt_email_block_text1" }}
+{{layout handle="mt_email_block_signature" theme="default" template_id=$this.id block_id=254 block_name="mt_email_block_signature" }}
+{{layout handle="mt_email_block_footer" theme="default" template_id=$this.id block_id=255 block_name="mt_email_block_footer"  noborder=1 }}

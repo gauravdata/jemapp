@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="utf8"?>
+
+<table name="mt_email_var">
+	<row>
+		<block_id>11</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>New account</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new</template_code>
+	</row>
+	<row>
+		<block_id>12</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Dear {{htmlescape var=$customer.name}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new</template_code>
+	</row>
+	<row>
+		<block_id>12</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Welcome to {{var store.getFrontendName()}}! To log in when visiting our site just click &lt;a class="" href="{{store url='customer/account/'}}"&gt;Login&lt;/a&gt; or &lt;a class="" href="{{store url='customer/account/'}}"&gt;My account&lt;/a&gt; at the top of every page, and then enter your e-mail address and password.</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new</template_code>
+	</row>
+	<row>
+		<block_id>13</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url='customer/account/'}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new</template_code>
+	</row>
+	<row>
+		<block_id>13</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Go to my account</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new</template_code>
+	</row>
+	<row>
+		<block_id>21</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>New account confirmation</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>22</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Dear {{htmlescape var=$customer.name}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>22</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your e-mail must be confirmed before using it to log in to our store.
+To confirm the e-mail and instantly log in, please, use this &lt;a  href="{{store url='customer/account/confirm/' _query_id=$customer.id _query_key=$customer.confirmation _query_back_url=$back_url}}"&gt;link&lt;/a&gt; or press the button below. This link is valid only once.</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>23</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url='customer/account/confirm/' _query_id=$customer.id _query_key=$customer.confirmation _query_back_url=$back_url}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>23</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Confirm my account</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>201</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Credit memo update</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_update</template_code>
+	</row>
+	<row>
+		<block_id>202</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getCustomerName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_update</template_code>
+	</row>
+	<row>
+		<block_id>202</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your order #{{var order.getIncrementId()}} has been {{var order.getStatusLabel()}}. You can check the status of your order by logging into your &lt;a href="{{store url='customer/account/'}}" &gt;account&lt;/a&gt;</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_update</template_code>
+	</row>
+
+	<row>
+		<block_id>31</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Account Confirmation</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new_confirmed</template_code>
+	</row>
+	<row>
+		<block_id>32</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getCustomerName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new_confirmed</template_code>
+	</row>
+	<row>
+		<block_id>32</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your account has been confirmed! To log in when visiting our site just click on the button bellow or My Account at the top of every page, and then enter your email address and password.</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new_confirmed</template_code>
+	</row>
+
+	<row>
+		<block_id>33</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url='customer/account/'}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new_confirmed</template_code>
+	</row>
+	<row>
+		<block_id>33</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Go to my account</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_new_confirmed</template_code>
+	</row>
+	<row>
+		<block_id>43</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url='customer/account/resetpassword/' _query_id=$customer.id _query_token=$customer.rp_token}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_password_reset_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>43</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Reset password</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_password_reset_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>42</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Dear {{htmlescape var=$customer.name}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_password_reset_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>42</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>There was recently a request to change the password for your account.
+If you requested this password change, please click below on the button.</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_password_reset_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>41</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Password reset</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_password_reset_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>46</block_id>
+		<block_name>mt_email_block_text2</block_name>
+		<var_key>text2_text</var_key>
+		<var_value>If clicking the link does not work, please copy and paste the this link into your browser. Link: &lt;a href="{{store url='customer/account/resetpassword/' _query_id=$customer.id _query_token=$customer.rp_token}}"&gt;{{store url='customer/account/resetpassword/' _query_id=$customer.id _query_token=$customer.rp_token}}&lt;/a&gt;
+
+If you did not make this request, you can ignore this message and your password will remain the same.</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_account_password_reset_confirmation</template_code>
+	</row>
+	<row>
+		<block_id>56</block_id>
+		<block_name>mt_email_block_text2</block_name>
+		<var_key>text2_text</var_key>
+		<var_value>If clicking the link does not work, please copy and paste the URL into your browser instead. URL:&lt;a class="mteditor-contenteditable" href=" {{var subscriber.getConfirmationLink()}}"&gt; {{var subscriber.getConfirmationLink()}}&lt;/a&gt;&lt;br&gt;&lt;br&gt;If you received this email by mistake, simply delete it. You won't be subscribed if you don't click the confirmation link above.
+</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+	</row>
+	<row>
+		<block_id>53</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{var subscriber.getConfirmationLink()}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+	</row>
+	<row>
+		<block_id>53</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Confirm my subscription</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+	</row>
+	<row>
+		<block_id>52</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Thank you for subscribing to our newsletter</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+	</row>
+	<row>
+		<block_id>52</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>To begin receiving the newsletter, you must first confirm your subscription by clicking on the following button:</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+	</row>
+	<row>
+		<block_id>51</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Subscription confirmation</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscription_confirm</template_code>
+	</row>
+	<row>
+		<block_id>63</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url=''}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscr_success</template_code>
+	</row>
+	<row>
+		<block_id>63</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Go to store</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscr_success</template_code>
+	</row>
+	<row>
+		<block_id>62</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value> 	Thank you for subscribing to our newsletter </var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscr_success</template_code>
+	</row>
+	<row>
+		<block_id>62</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value> 	Your subscription has been confirmed.
+If at any time you wish to stop receiving our newsletters, you can click on the "Unsubscribe" link in the bottom of newsletter.</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscr_success</template_code>
+	</row>
+	<row>
+		<block_id>61</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Subscription success</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_subscr_success</template_code>
+	</row>
+	<row>
+		<block_id>73</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url=''}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_unsubscr_success</template_code>
+	</row>
+	<row>
+		<block_id>73</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Go to store</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_unsubscr_success</template_code>
+	</row>
+	<row>
+		<block_id>72</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Unsubscribe successful</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_unsubscr_success</template_code>
+	</row>
+	<row>
+		<block_id>72</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your email address has been removed from newsletters subscriber list.</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_unsubscr_success</template_code>
+	</row>
+	<row>
+		<block_id>71</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Unsubscribe successful</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_newsletter_unsubscr_success</template_code>
+	</row>
+	<row>
+		<block_id>83</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url="customer/account/"}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_customer_password_remind</template_code>
+	</row>
+	<row>
+		<block_id>83</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Go to my account</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_customer_password_remind</template_code>
+	</row>
+	<row>
+		<block_id>82</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Dear {{htmlescape var=$customer.name}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_customer_password_remind</template_code>
+	</row>
+	<row>
+		<block_id>82</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your password has been changed.
+You can change your password at any time by logging into &lt;a href="{{store url='customer/account/'}}" &gt;your account&lt;/a&gt;</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_customer_password_remind</template_code>
+	</row>
+	<row>
+		<block_id>81</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>New password</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_customer_password_remind</template_code>
+	</row>
+	<row>
+		<block_id>92</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Welcome {{htmlescape var=$name}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_product_share</template_code>
+	</row>
+	<row>
+		<block_id>92</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value> Please look at &lt;a href="{{var product_url}}"&gt;{{var product_name}}&lt;/a&gt;.
+&lt;br&gt;Here is the message from friend:&lt;br&gt;
+{{var message}}&lt;br&gt;&lt;br&gt;Thank you!&lt;br&gt;&lt;/td&gt;
+</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_product_share</template_code>
+	</row>
+	<row>
+		<block_id>91</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Shared product</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_product_share</template_code>
+	</row>
+	<row>
+		<block_id>102</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hey,</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_wishlist_share</template_code>
+	</row>
+	<row>
+		<block_id>102</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Take a look at my wishlist from {{var store.getFrontendName()}}.
+&lt;br&gt;&lt;br&gt;
+{{var message}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_wishlist_share</template_code>
+	</row>
+	<row>
+		<block_id>101</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Shared wishlist</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_wishlist_share</template_code>
+	</row>
+	<row>
+		<block_id>103</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{var viewOnSiteLink}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_wishlist_share</template_code>
+	</row>
+	<row>
+		<block_id>103</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>View all wishlist items</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_wishlist_share</template_code>
+	</row>
+	<row>
+		<block_id>104</block_id>
+		<block_name>mt_email_block_text2</block_name>
+		<var_key>text2_text</var_key>
+		<var_value>Thank you!</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_wishlist_share</template_code>
+	</row>
+	<row>
+		<block_id>111</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>New order</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_new</template_code>
+	</row>
+	<row>
+		<block_id>112</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Thank you for your order from {{var store.getFrontendName()}}! 
+Once your package ships we will send an email with a link to track your order. You can check the status of your order by logging into your &lt;a href="{{store url='customer/account/'}}"&gt;account&lt;/a&gt;.&lt;br&gt;
+</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_new</template_code>
+	</row>
+	<row>
+		<block_id>112</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getCustomerName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_new</template_code>
+	</row>
+	<row>
+		<block_id>121</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>New order</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>122</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Thank you for your order from {{var store.getFrontendName()}}! Once your package ships we will send an email with a link to track your order. </var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>122</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>131</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Credit memo: #{{var creditmemo.increment_id}}&lt;br&gt;for order: #{{var order.getIncrementId()}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_new</template_code>
+	</row>
+	<row>
+		<block_id>132</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Credit memo has been created. You can check the status of your order by logging into your &lt;a  href="{{store url='customer/account/'}}"&gt;account&lt;/a&gt;</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_new</template_code>
+	</row>
+	<row>
+		<block_id>132</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getCustomerName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_new</template_code>
+	</row>
+	<row>
+		<block_id>141</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Credit memo: #{{var creditmemo.increment_id}}&lt;br&gt;
+for order: #{{var order.getIncrementId()}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>142</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>142</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Refund has been submited. Your money is on the way to you!</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>151</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Invoice: #{{var invoice.increment_id}}&lt;br&gt;
+for order: #{{var order.increment_id}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_new</template_code>
+	</row>
+	<row>
+		<block_id>152</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value> Thank you again for your order from {{var store.getFrontendName()}}! Your invoice has been created. You can check the status of your order by logging into your &lt;a class="" href="{{store url='customer/account/'}}" &gt;account&lt;/a&gt;.</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_new</template_code>
+	</row>
+	<row>
+		<block_id>152</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getCustomerName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_new</template_code>
+	</row>
+	<row>
+		<block_id>162</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Thank you again for your order from {{var store.getFrontendName()}}! Your invoice has been created. </var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>162</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>161</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Invoice: #{{var invoice.increment_id}}&lt;br&gt;
+for order: #{{var order.increment_id}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>172</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>  Your order is on the way to you! You can check the status of your order by logging into your &lt;a class="" href="{{store url='customer/account/'}}" contenteditable="true"&gt;account&lt;/a&gt;.&lt;br&gt;</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_new</template_code>
+	</row>
+	<row>
+		<block_id>172</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getCustomerName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_new</template_code>
+	</row>
+	<row>
+		<block_id>171</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Shipment: #{{var shipment.increment_id}}&lt;br&gt;
+for order: #{{var order.increment_id}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_new</template_code>
+	</row>
+	<row>
+		<block_id>182</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Thank you again for order from {{var store.getFrontendName()}}! Your order is on the way to you!</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>182</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>181</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Shipment: #{{var shipment.increment_id}}&lt;br&gt;
+for order: #{{var order.increment_id}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_new_guest</template_code>
+	</row>
+	<row>
+		<block_id>203</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url='customer/account/'}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_update</template_code>
+	</row>
+	<row>
+		<block_id>203</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Go to my account</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_update</template_code>
+	</row>
+	<row>
+		<block_id>212</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>212</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your order #{{var order.getIncrementId()}} has been {{var order.getStatusLabel()}}. </var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>211</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Credit memo update</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_creditmemo_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>223</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url='customer/account/'}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_update</template_code>
+	</row>
+	<row>
+		<block_id>223</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Go to my account</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_update</template_code>
+	</row>
+	<row>
+		<block_id>222</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getCustomerName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_update</template_code>
+	</row>
+	<row>
+		<block_id>222</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your order #{{var order.getIncrementId()}} has been {{var order.getStatusLabel()}}. You can check the status of your order by logging into your &lt;a href="{{store url='customer/account/'}}" &gt;account&lt;/a&gt;</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_update</template_code>
+	</row>
+	<row>
+		<block_id>221</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Invoice update</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_update</template_code>
+	</row>
+	<row>
+		<block_id>232</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>232</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your order #{{var order.getIncrementId()}} has been {{var order.getStatusLabel()}}. </var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>231</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Invoice update</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_invoice_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>243</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url='customer/account/'}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_update</template_code>
+	</row>
+	<row>
+		<block_id>243</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Go to my account</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_update</template_code>
+	</row>
+	<row>
+		<block_id>242</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getCustomerName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_update</template_code>
+	</row>
+	<row>
+		<block_id>242</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your order #{{var order.getIncrementId()}} has been {{var order.getStatusLabel()}}. You can check the status of your order by logging into your &lt;a href="{{store url='customer/account/'}}" &gt;account&lt;/a&gt;</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_update</template_code>
+	</row>
+	<row>
+		<block_id>241</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Order update</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_update</template_code>
+	</row>
+	<row>
+		<block_id>252</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>252</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your order #{{var order.getIncrementId()}} has been {{var order.getStatusLabel()}}. </var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>251</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Order update</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_order_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>261</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Shipment update</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_update</template_code>
+	</row>
+	<row>
+		<block_id>262</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your order #{{var order.getIncrementId()}} has been {{var order.getStatusLabel()}}. You can check the status of your order by logging into your &lt;a href="{{store url='customer/account/'}}" &gt;account&lt;/a&gt;</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_update</template_code>
+	</row>
+	<row>
+		<block_id>262</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getCustomerName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_update</template_code>
+	</row>
+	<row>
+		<block_id>263</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_text</var_key>
+		<var_value>Go to my account</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_update</template_code>
+	</row>
+	<row>
+		<block_id>263</block_id>
+		<block_name>mt_email_block_button1</block_name>
+		<var_key>button1_href</var_key>
+		<var_value>{{store url='customer/account/'}}</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_update</template_code>
+	</row>
+	<row>
+		<block_id>271</block_id>
+		<block_name>mt_email_block_header</block_name>
+		<var_key>header_text</var_key>
+		<var_value>Shipment update</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>272</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_text</var_key>
+		<var_value>Your order #{{var order.getIncrementId()}} has been {{var order.getStatusLabel()}}. </var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_update_guest</template_code>
+	</row>
+	<row>
+		<block_id>272</block_id>
+		<block_name>mt_email_block_text1</block_name>
+		<var_key>text1_header_text</var_key>
+		<var_value>Hello {{htmlescape var=$order.getBillingAddress().getName()}},</var_value>
+		<global>0</global>
+		<is_default>1</is_default>
+		<template_code>mtemail_default_sales_shipment_update_guest</template_code>
+	</row>
+
+	<!-- Global variables -->
+	<row>
+		<block_name>mt_email_block_signature</block_name>
+		<var_key>signature_text</var_key>
+		<var_value>If you have any questions about your account or any other matter, please feel free to contact
+			us at {{config path='trans_email/ident_support/email'}} or by phone at {{config
+			path='general/store_information/phone'}}
+		</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_signature</block_name>
+		<var_key>signature_text_2</var_key>
+		<var_value>Thank you again!</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_info</block_name>
+		<var_key>order_info_billing_title</var_key>
+		<var_value>Billing Information:</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_info</block_name>
+		<var_key>order_info_payment_title</var_key>
+		<var_value>Payment Method:</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_info</block_name>
+		<var_key>order_info_shipping_title</var_key>
+		<var_value>Shipping Information:</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_info</block_name>
+		<var_key>order_info_shipping_method_title</var_key>
+		<var_value>Shipping Method:</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_items</block_name>
+		<var_key>order_item_name</var_key>
+		<var_value>Item</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_items</block_name>
+		<var_key>order_item_sku</var_key>
+		<var_value>Sku</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_items</block_name>
+		<var_key>order_item_qty</var_key>
+		<var_value>Qty</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_items</block_name>
+		<var_key>order_item_subtotal</var_key>
+		<var_value>Subtotal</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_totals</block_name>
+		<var_key>order_totals_table_label_2194aaec8cc7086ab0e93f74547e5f53</var_key>
+		<var_value>Subtotal</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_totals</block_name>
+		<var_key>order_totals_table_label_1985beaea5d87dc3d72ed84c931834dd</var_key>
+		<var_value>Grand Total</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_totals</block_name>
+		<var_key>order_totals_table_label_022515e2ed327537af8b214ddfd3288f</var_key>
+		<var_value>Shipping &amp; Handling</var_value>
+		<global>1</global>
+	</row>
+
+	<row>
+		<block_name>mt_email_block_sales_order_totals</block_name>
+		<var_key>order_totals_table_label_4b78ac8eb158840e9638a3aeb26c4a9d</var_key>
+		<var_value>Tax</var_value>
+		<global>1</global>
+	</row>
+
+</table>
