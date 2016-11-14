@@ -18,7 +18,7 @@ class Twm_Fix_Model_Observer {
         $session = $db->fetchOne($select);
         if ($id && !$session) {
             //session_regenerate_id();
-            die('renew');
+            //die('renew');
         }
     }
 }
