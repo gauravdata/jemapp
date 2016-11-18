@@ -16,9 +16,8 @@ class Twm_Fix_Model_Observer {
         $select = $db->select()->from($sessionTable)->where('session_id = ?', $id);
 
         $session = $db->fetchOne($select);
-        if ($id && !$session) {
-            //session_regenerate_id();
-            //die('renew');
+        if (!$session) {
+            session_regenerate_id();
         }
     }
 }
