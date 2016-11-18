@@ -48,7 +48,7 @@
                 </connection>
             </default_setup>
         </resources>
-        <session_save><![CDATA[files]]></session_save>
+        <session_save><![CDATA[db]]></session_save>
 	
 	<!-- example of redis cache -->
         <cache>
