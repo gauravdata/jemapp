@@ -1,5 +1,6 @@
 <?php $var = $this->getVarModel();?>
 <?php $_order = $this->getOrder(); ?>
+<?php $shownCredit=false;?>
 
 <table
     <?php echo $var->getHtmlAttribute('style', 'order_totals_table_style', "background-color: #ffffff; width: 100% !important; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"); ?>
@@ -28,7 +29,6 @@
                                 <?php else:?>
                                     <tr>
                                         <td
-
                                             <?php echo $var->getHtmlAttribute('style', 'order_totals_table_label_style'.$code, 'color: #707582; font-size: 14px; font-weight: bold;'); ?>
                                             <?php echo $var->getTextEditAttribute('order_totals_table_label_'.$code);?>
 
@@ -46,11 +46,13 @@
                                     </tr>
 
                                 <?php endif?>
-                                <?php if ($_order->getCustomerCreditAmount()):?>
+				                <?php if ($_total->getBlockName() == 'tax') $shownCredit=true; ?>
+                                <?php if ($_order->getCustomerCreditAmount() && $shownCredit):?>
                                     <tr>
-                                        <td colspan="3" align="right" style="padding:3px 9px"><?php echo $this->__('Internal Credit') ?></td>
-                                        <td align="right" style="padding:3px 9px">-<?php echo $_order->formatPrice($_order->getCustomerCreditAmount()) ?></td>
+                                        <td align="left" class="mteditor-color total-color" style="color: #707582; font-size: 14px; font-weight: bold;"><?php echo $this->__('Internal Credit') ?></td>
+                                        <td align="right" style="color: #707582; font-size: 14px; text-align: right;">-<?php echo $_order->formatPrice($_order->getCustomerCreditAmount()) ?></td>
                                     </tr>
+                                 <?php $shownCredit=false;?>
                                 <?php endif;?>
                             <?php endforeach?>
                             <tr >
