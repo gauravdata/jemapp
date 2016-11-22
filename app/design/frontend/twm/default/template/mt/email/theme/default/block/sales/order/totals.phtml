@@ -46,10 +46,11 @@
                                     </tr>
 
                                 <?php endif?>
-				                <?php if ($_total->getBlockName() == 'tax') $shownCredit=true; ?>
-                                <?php if ($_order->getCustomerCreditAmount() && $shownCredit):?>
+                                <?php if ($_total->getBlockName() == 'tax') $shownCredit=true; ?>
+                                <?php if ($_order->getCustomerCreditAmount() && $shownCredit && $_order->getCustomerCreditAmount()):?>
                                     <tr>
                                         <td align="left" class="mteditor-color total-color" style="color: #707582; font-size: 14px; font-weight: bold;"><?php echo $this->__('Jouw Tegoed') ?></td>
+                                        <td width="15" height="25"  style="width: 15px !important; height: 25px"></td>
                                         <td align="right" style="color: #707582; font-size: 14px; text-align: right;">-<?php echo $_order->formatPrice($_order->getCustomerCreditAmount()) ?></td>
                                     </tr>
                                  <?php $shownCredit=false;?>
