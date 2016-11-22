@@ -49,7 +49,7 @@
 				                <?php if ($_total->getBlockName() == 'tax') $shownCredit=true; ?>
                                 <?php if ($_order->getCustomerCreditAmount() && $shownCredit):?>
                                     <tr>
-                                        <td align="left" class="mteditor-color total-color" style="color: #707582; font-size: 14px; font-weight: bold;"><?php echo $this->__('Internal Credit') ?></td>
+                                        <td align="left" class="mteditor-color total-color" style="color: #707582; font-size: 14px; font-weight: bold;"><?php echo $this->__('Jouw Tegoed') ?></td>
                                         <td align="right" style="color: #707582; font-size: 14px; text-align: right;">-<?php echo $_order->formatPrice($_order->getCustomerCreditAmount()) ?></td>
                                     </tr>
                                  <?php $shownCredit=false;?>
