@@ -92,7 +92,7 @@ class Uni_Autoregister_Model_Observer {
         	                    //        ->setIsDefaultShipping('1')
                 	            ->setSaveInAddressBook('1');
 			
-				if (!$this->sameAddress($_orderBilling, $_orderShipping)) {
+				if ($this->sameAddress($_orderBilling, $_orderShipping)) {
 					$address->setIsDefaultShipping('1');
 					$useForShipping = true;
 				}
