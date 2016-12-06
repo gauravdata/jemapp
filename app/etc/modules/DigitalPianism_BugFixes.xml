@@ -2,7 +2,7 @@
 <config>
     <modules>
         <DigitalPianism_BugFixes>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>
         </DigitalPianism_BugFixes>
     </modules>
