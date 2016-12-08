@@ -57,7 +57,7 @@
             <server>127.0.0.1</server>                               <!-- or absolute path to unix socket -->
             <port>6379</port>
             <persistent></persistent>                                <!-- Specify unique string to enable persistent connections. E.g.: sess-db0; bugs with phpredis and php-fpm are known: https://github.com/nicolasff/phpredis/issues/70 -->
-            <database>1</database>                                   <!-- Redis database number; protection against accidental data loss is improved by not sharing databases -->
+            <database>11</database>                                   <!-- Redis database number; protection against accidental data loss is improved by not sharing databases -->
             <password></password>                                    <!-- Specify if your Redis server requires authentication -->
             <force_standalone>0</force_standalone>                   <!-- 0 for phpredis, 1 for standalone PHP -->
             <connect_retries>1</connect_retries>                     <!-- Reduces errors due to random connection failures; a value of 1 will not retry after the first failure -->
