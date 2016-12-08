@@ -737,11 +737,11 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
                 return;
             }
 
-            if (!$flowPassword->checkCustomerForgotPasswordFlowIp()) {
-                $this->_getSession()->addError($this->__('You have exceeded requests to times per hour from 1 IP.'));
-                $this->_redirect('*/*/forgotpassword');
-                return;
-            }
+//            if (!$flowPassword->checkCustomerForgotPasswordFlowIp()) {
+//                $this->_getSession()->addError($this->__('You have exceeded requests to times per hour from 1 IP.'));
+//                $this->_redirect('*/*/forgotpassword');
+//                return;
+//            }
 
             if (!Zend_Validate::is($email, 'EmailAddress')) {
                 $this->_getSession()->setForgottenEmail($email);
