@@ -92,7 +92,7 @@ class Uni_Autoregister_Model_Observer {
         	                    //        ->setIsDefaultShipping('1')
                 	            ->setSaveInAddressBook('1');
 			
-				if (!$this->sameAddress($_orderBilling, $_orderShipping)) {
+				if ($this->sameAddress($_orderBilling, $_orderShipping)) {
 					$address->setIsDefaultShipping('1');
 					$useForShipping = true;
 				}
@@ -126,6 +126,7 @@ class Uni_Autoregister_Model_Observer {
 /////***Save Address End***/////////                
                 } catch (Exception $e) {
                     Mage::logException($e);
+		die($e->getMessage());
                 }
                 Mage::getSingleton('checkout/session')->unsIsGuest();
             }
@@ -134,6 +135,8 @@ class Uni_Autoregister_Model_Observer {
 
     private function sameAddress($address1, $address2) {
 	$excludeKeys = array('entity_id', 'customer_address_id', 'quote_address_id', 'region_id', 'customer_id', 'address_type', 'default_billing', 'default_shipping');
+	if (!$address1) return false;
+	if (!$address2) return false;
 	$data1 = $address1->getData();
 	$data2 = $address2->getData();
 	$dataFiltered1 = array_diff_key($data1, array_flip($excludeKeys));
