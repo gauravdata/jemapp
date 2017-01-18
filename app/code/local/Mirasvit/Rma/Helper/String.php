@@ -9,30 +9,34 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
 
 class Mirasvit_Rma_Helper_String extends Varien_Object
 {
-    public function generateRandNum($length) {
+    public function generateRandNum($length)
+    {
         $characters = '0123456789';
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, strlen($characters) - 1)];
         }
+
         return $randomString;
     }
 
-    public function generateRandString($length) {
+    public function generateRandString($length)
+    {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, strlen($characters) - 1)];
         }
+
         return $randomString;
     }
 
@@ -45,34 +49,34 @@ class Mirasvit_Rma_Helper_String extends Varien_Object
      * With detail level 3, the output might be like "5 hours 3 minutes 20 seconds ago",
      *   "2 years 1 month 2 weeks from now", etc.
      */
-    public function nicetime($timestamp, $detailLevel = 1) {
-        $periods = array("sec", "min", "hour", "day", "week", "month", "year", "decade");
-        $lengths = array("60", "60", "24", "7", "4.35", "12", "10");
+    public function nicetime($timestamp, $detailLevel = 1)
+    {
+        $periods = array('sec', 'min', 'hour', 'day', 'week', 'month', 'year', 'decade');
+        $lengths = array('60', '60', '24', '7', '4.35', '12', '10');
 
         $now = time();
 
         // check validity of date
-        if(empty($timestamp)) {
-            return "Unknown time";
+        if (empty($timestamp)) {
+            return 'Unknown time';
         }
 
         // is it future date or past date
-        if($now > $timestamp) {
+        if ($now > $timestamp) {
             $difference = $now - $timestamp;
-            $tense = "ago";
-
+            $tense = 'ago';
         } else {
             $difference = $timestamp - $now;
-            $tense = "from now";
+            $tense = 'from now';
         }
 
         if ($difference == 0) {
-            return "1 sec ago";
+            return '1 sec ago';
         }
 
         $remainders = array();
 
-        for($j = 0; $j < count($lengths); $j++) {
+        for ($j = 0; $j < count($lengths); $j++) {
             $remainders[$j] = floor(fmod($difference, $lengths[$j]));
             $difference = floor($difference / $lengths[$j]);
         }
@@ -81,17 +85,17 @@ class Mirasvit_Rma_Helper_String extends Varien_Object
 
         $remainders[] = $difference;
 
-        $string = "";
+        $string = '';
 
         for ($i = count($remainders) - 1; $i >= 0; $i--) {
             if ($remainders[$i]) {
-                $string .= $remainders[$i] . " " . $periods[$i];
+                $string .= $remainders[$i].' '.$periods[$i];
 
-                if($remainders[$i] != 1) {
-                    $string .= "s";
+                if ($remainders[$i] != 1) {
+                    $string .= 's';
                 }
 
-                $string .= " ";
+                $string .= ' ';
 
                 $detailLevel--;
 
@@ -101,8 +105,6 @@ class Mirasvit_Rma_Helper_String extends Varien_Object
             }
         }
 
-        return $string . $tense;
-
+        return $string.$tense;
     }
 }
-

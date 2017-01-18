@@ -9,10 +9,11 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Model_Resource_Item extends Mage_Core_Model_Mysql4_Abstract
@@ -24,33 +25,39 @@ class Mirasvit_Rma_Model_Resource_Item extends Mage_Core_Model_Mysql4_Abstract
 
     protected function _afterLoad(Mage_Core_Model_Abstract $object)
     {
+        /** @var  Mirasvit_Rma_Model_Item $object */
         if (!$object->getIsMassDelete()) {
         }
         if ($options = $object->getProductOptions()) {
             $object->setProductOptions(@unserialize($options));
         }
+
         return parent::_afterLoad($object);
     }
 
     protected function _beforeSave(Mage_Core_Model_Abstract $object)
     {
+        /** @var  Mirasvit_Rma_Model_Item $object */
         if (!$object->getId()) {
             $object->setCreatedAt(Mage::getSingleton('core/date')->gmtDate());
         }
         $object->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
-        if ($options = $object->getProductOptions()) {
+        $options = $object->getProductOptions();
+        if (is_array($options)) {
             $object->setProductOptions(@serialize($options));
         }
+
         return parent::_beforeSave($object);
     }
 
     protected function _afterSave(Mage_Core_Model_Abstract $object)
     {
+        /** @var  Mirasvit_Rma_Model_Item $object */
         if (!$object->getIsMassStatus()) {
         }
+
         return parent::_afterSave($object);
     }
 
     /************************/
-
 }

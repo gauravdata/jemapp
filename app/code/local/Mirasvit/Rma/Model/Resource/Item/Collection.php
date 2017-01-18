@@ -9,15 +9,21 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/**
+ * @method Mirasvit_Rma_Model_Item getFirstItem()
+ * @method Mirasvit_Rma_Model_Item getLastItem()
+ * @method Mirasvit_Rma_Model_Resource_Item_Collection|Mirasvit_Rma_Model_Item[] addFieldToFilter
+ * @method Mirasvit_Rma_Model_Resource_Item_Collection|Mirasvit_Rma_Model_Item[] setOrder
+ */
 class Mirasvit_Rma_Model_Resource_Item_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
-
     protected function _construct()
     {
         $this->_init('rma/item');
@@ -29,9 +35,11 @@ class Mirasvit_Rma_Model_Resource_Item_Collection extends Mage_Core_Model_Mysql4
         if ($emptyOption) {
             $arr[0] = array('value' => 0, 'label' => Mage::helper('rma')->__('-- Please Select --'));
         }
+        /** @var Mirasvit_Rma_Model_Item $item */
         foreach ($this as $item) {
             $arr[] = array('value' => $item->getId(), 'label' => $item->getName());
         }
+
         return $arr;
     }
 
@@ -41,22 +49,21 @@ class Mirasvit_Rma_Model_Resource_Item_Collection extends Mage_Core_Model_Mysql4
         if ($emptyOption) {
             $arr[0] = Mage::helper('rma')->__('-- Please Select --');
         }
+        /** @var Mirasvit_Rma_Model_Item $item */
         foreach ($this as $item) {
             $arr[$item->getId()] = $item->getName();
         }
+
         return $arr;
     }
-
 
     protected function initFields()
     {
         $select = $this->getSelect();
-        // $select->joinLeft(array('product' => $this->getTable('catalog/product')), 'main_table.product_id = product.entity_id', array('product_name' => 'product.name'));
         $select->joinLeft(array('reason' => $this->getTable('rma/reason')), 'main_table.reason_id = reason.reason_id', array('reason_name' => 'reason.name'));
         $select->joinLeft(array('resolution' => $this->getTable('rma/resolution')), 'main_table.resolution_id = resolution.resolution_id', array('resolution_name' => 'resolution.name'));
         $select->joinLeft(array('condition' => $this->getTable('rma/condition')), 'main_table.condition_id = condition.condition_id', array('condition_name' => 'condition.name'));
-        //$select->joinLeft(array('rma' => $this->getTable('rma/rma')), 'main_table.rma_id = rma.rma_id', array('rma_increment_id' => 'rma.increment_id'));
-        // $select->columns(array('is_replied' => new Zend_Db_Expr("answer <> ''")));
+        $select->where('is_removed = 0');
     }
 
     protected function _initSelect()
@@ -66,5 +73,4 @@ class Mirasvit_Rma_Model_Resource_Item_Collection extends Mage_Core_Model_Mysql4
     }
 
      /************************/
-
 }

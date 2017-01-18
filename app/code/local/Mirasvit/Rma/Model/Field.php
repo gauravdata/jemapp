@@ -9,15 +9,32 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/**
+ * @method Mirasvit_Rma_Model_Resource_Field_Collection|Mirasvit_Rma_Model_Field[] getCollection()
+ * @method Mirasvit_Rma_Model_Field load(int $id)
+ * @method bool getIsMassDelete()
+ * @method Mirasvit_Rma_Model_Field setIsMassDelete(bool $flag)
+ * @method bool getIsMassStatus()
+ * @method Mirasvit_Rma_Model_Field setIsMassStatus(bool $flag)
+ * @method Mirasvit_Rma_Model_Resource_Field getResource()
+ * @method string getCode();
+ * @method $this setCode(string $param);
+ * @method string getType();
+ * @method $this setType(string $param);
+ * @method bool getIsRequiredStaff();
+ * @method $this setIsRequiredStaff(bool $param);
+ * @method bool getIsRequiredCustomer();
+ * @method $this setIsRequiredCustomer(bool $param);
+ */
 class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
 {
-
     protected function _construct()
     {
         $this->_init('rma/field');
@@ -25,7 +42,7 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
 
     public function toOptionArray($emptyOption = false)
     {
-    	return $this->getCollection()->toOptionArray($emptyOption);
+        return $this->getCollection()->toOptionArray($emptyOption);
     }
 
     public function getName()
@@ -36,6 +53,7 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
     public function setName($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'name', $value);
+
         return $this;
     }
 
@@ -47,6 +65,7 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
     public function setDescription($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'description', $value);
+
         return $this;
     }
 
@@ -58,6 +77,7 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
     public function setValues($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'values', $value);
+
         return $this;
     }
 
@@ -80,12 +100,12 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
 
         return parent::addData($data);
     }
-	/************************/
+    /************************/
 
-	public function getValues($emptyOption = false)
+    public function getValues($emptyOption = false)
     {
         $values = Mage::helper('rma/storeview')->getStoreViewValue($this, 'values');
-    	$arr =  explode("\n", $values);
+        $arr = explode("\n", $values);
         $values = array();
         foreach ($arr as $value) {
             $value = explode('|', $value);
@@ -93,24 +113,25 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
                 $values[trim($value[0])] = trim($value[1]);
             }
         }
-    	if ($emptyOption) {
+        if ($emptyOption) {
             $res = array();
-            $res[] = array('value'=>'', 'label'=> Mage::helper('rma')->__('-- Please Select --'));
+            $res[] = array('value' => '', 'label' => Mage::helper('rma')->__('-- Please Select --'));
             foreach ($values as $index => $value) {
                 $res[] = array(
                    'value' => $index,
-                   'label' => $value
+                   'label' => $value,
                 );
             }
             $values = $res;
         }
+
         return $values;
     }
 
     public function getVisibleCustomerStatus()
     {
         if (is_string($this->getData('visible_customer_status'))) {
-            $this->setData('visible_customer_status', explode(",", $this->getData('visible_customer_status')));
+            $this->setData('visible_customer_status', explode(',', $this->getData('visible_customer_status')));
         }
 
         return $this->getData('visible_customer_status');
@@ -121,6 +142,7 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
         if (!$this->getId()) {
             $this->setIsNew(true);
         }
+
         return parent::_beforeSave();
     }
 
@@ -132,7 +154,11 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
             $resource = Mage::getSingleton('core/resource');
             $writeConnection = $resource->getConnection('core_write');
             $tableName = $resource->getTableName('rma/rma');
-            $query = "ALTER TABLE `{$tableName}` ADD `{$this->getCode()}` TEXT";
+            $fieldType = 'TEXT';
+            if($this->getType() == 'date') {
+                $fieldType = 'TIMESTAMP';
+            }
+            $query = "ALTER TABLE `{$tableName}` ADD `{$this->getCode()}` " . $fieldType;
             $writeConnection->query($query);
             $writeConnection->resetDdlCache();
         }
@@ -142,6 +168,7 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
     {
         $field = Mage::getModel('rma/field')->load($this->getId());
         $this->setDbCode($field->getCode());
+
         return parent::_beforeDelete();
     }
 

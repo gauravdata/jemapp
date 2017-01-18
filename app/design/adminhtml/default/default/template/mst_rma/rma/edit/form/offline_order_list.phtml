@@ -1,0 +1,194 @@
+<?php
+/** @var Mirasvit_Rma_Block_Adminhtml_Rma_Edit_Form_Offline_OrderList $this */
+$rma = $this->getRma();
+?>
+<div id="add_new_offline_order_container">
+    <?php foreach ($this->getOrderCollection() as $order):
+        $items = $this->getItemCollection($order);
+        if (!$items->count()) {
+            continue;
+        }
+        ?>
+        <div class="entry-edit UI-ORDER-CONTAINER">
+            <div class="entry-edit-head">
+                <h4 class="fieldset-legend ">
+                    <?php echo $this->__('Items for Order #%s', $order->getReceiptNumber()) ?>
+                </h4>
+            </div>
+            <div class="fieldset">
+                <div id="rma_item_edit_grid">
+                    <div class="grid">
+                        <div class="hor-scroll">
+                            <table cellspacing="0" class="data" id="rma_item_edit_grid_table">
+                                <thead>
+                                <tr class="headings">
+                                    <th class="no-link"><span
+                                            class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Qty to Return') ?></span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Reason to Return') ?></span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Item Condition') ?></span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Resolution') ?></span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $i = 0;
+                                foreach ($items as $item):
+                                    $i++;
+                                    $orderItemId = '['.$order->getId().']['.($item->getId() ? $item->getId() : $i).']';
+                                    ?>
+                                    <input name='offline_order_id[]' value='<?php echo $order->getId() ?>' type='hidden'>
+
+                                    <tr <?php echo $rma->getId() > 0 && $item->getQtyRequested() == 0 ? "style='display:none;' class='even hidden_items'" : "class='even'"?>>
+                                        <td>
+                                            <?php echo $this->escapeHtml($item->getName())?></td>
+                                        <input name='offline_items<?php echo $orderItemId ?>[offline_order_id]'
+                                               value='<?php echo $item->getOfflineOrderId() ?>' type='hidden'>
+                                        <td>
+                                            <input name='offline_items<?php echo $orderItemId ?>[offline_item_id]'
+                                                   value='<?php echo $item->getId()?>' type='hidden'>
+                                            <input id='offline_items<?php echo $orderItemId ?>[rma_item_qty]'
+                                                   value='<?php echo $item->getQtyRequested() ? $item->getQtyRequested() : 0?>' type='hidden'>
+
+                                            <input name='offline_items<?php echo $orderItemId ?>[qty_requested]'
+                                                   class="input-text required-entry"
+                                                   value='<?php echo $item->getQtyRequested() ? $item->getQtyRequested() : 0?>'
+                                                   onKeyUp="checkQtyOrdered(this)">
+                                        </td>
+                                        <td>
+                                            <select name="offline_items<?php echo $orderItemId ?>[reason_id]">
+                                                <option value=""><?php echo $this->__('--')?></option>
+                                                <?php foreach ($this->getReasonCollection() as $reason): ?>
+                                                    <option
+                                                        value="<?php echo $reason->getId() ?>" <?php echo $reason->getId() == $item->getReasonId() ? 'selected' : '' ?>><?php echo $reason->getName() ?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="offline_items<?php echo $orderItemId ?>[condition_id]">
+                                                <option value=""><?php echo $this->__('--')?></option>
+                                                <?php foreach ($this->getConditionCollection() as $condition): ?>
+                                                    <option
+                                                        value="<?php echo $condition->getId() ?>" <?php echo $condition->getId() == $item->getConditionId() ? 'selected' : '' ?>><?php echo $condition->getName() ?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="offline_items<?php echo $orderItemId ?>[resolution_id]">
+                                                <option value=""><?php echo $this->__('--')?></option>
+                                                <?php foreach ($this->getResolutionCollection() as $resolution): ?>
+                                                    <option
+                                                        value="<?php echo $resolution->getId() ?>" <?php echo $resolution->getId() == $item->getResolutionId() ? 'selected' : '' ?>><?php echo $resolution->getName() ?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<?php if ($this->getIsOfflineOrdersAllowed()): ?>
+    <div>
+        <button title="Add Another Offline Order" type="button" class="scalable add_new_offline_order" style=""><span><span><span><?php echo $this->__('Add Another Offline Order') ?></span></span></span></button>
+        <br>
+        <br>
+    </div>
+<?php endif; ?>
+
+<script id="order_id_template" type="text/x-custom-template">
+    <div class="entry-edit  UI-ORDER-CONTAINER">
+        <div class="entry-edit-head">
+            <h4 class="fieldset-legend ">
+                <span><?php echo Mage::helper('adminhtml')->__('Offline Order'); ?></span>
+                <span class="UI-OFFLINE-ORDER-NAME"></span>
+            </h4>
+            <div class="form-buttons">
+                <button class="add_offline_item" type="button">
+                    <span><span><span><?php echo Mage::helper('adminhtml')->__('Add Another Item'); ?></span></span></span>
+                </button>
+                <button class="delete_offline_order" type="button">
+                    <span><span><span><?php echo Mage::helper('adminhtml')->__('Delete order'); ?></span></span></span>
+                </button>
+            </div>
+        </div>
+        <div class="fieldset">
+            <div id="rma_item_edit_grid">
+                <div>
+                    <?php echo $this->getOfflineOrderNameForm()->toHtml() ?>
+                </div>
+                <div class="grid">
+                    <div class="hor-scroll">
+                        <table cellspacing="0" class="data" id="rma_item_edit_grid_table">
+                            <thead>
+                            <tr class="headings">
+                                <th class="no-link"><span class="nobr"><?php echo $this->__('Returned Item') ?></span></th>
+                                <th class="no-link"><span class="nobr"><?php echo $this->__('Qty to Return') ?></span></th>
+                                <th class="no-link"><span class="nobr"><?php echo $this->__('Reason to Return') ?></span></th>
+                                <th class="no-link"><span class="nobr"><?php echo $this->__('Item Condition') ?></span></th>
+                                <th class="no-link"><span class="nobr"><?php echo $this->__('Resolution') ?></span></th>
+                                <th class="no-link"><span class="nobr"></span></th>
+                            </tr>
+                            </thead>
+                            <tbody class="offline_items"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="order_item_template" type="text/x-custom-template">
+    <tr class="UI-OFFLINE-PRODUCT">
+        <td>
+            <input type='text' name='offline[item_id][]' value='' class="UI-ITEMNAME">
+            <input type='hidden' name='offline[order_id][]' value='' class="UI-ORDER-ID">
+        </td>
+        <td>
+            <input type="number" min="1" name='offline[qty_requested][]' class="input-text required-entry UI-ITEMQTY" value='1'>
+        </td>
+        <td>
+            <select name="offline[reason_id][]" class="UI-REASON">
+                <option value=""><?php echo $this->__('--')?></option>
+                <?php foreach ($this->getReasonCollection() as $reason): ?>
+                    <option value="<?php echo $reason->getId() ?>">
+                        <?php echo $reason->getName() ?>
+                    </option>
+                <?php endforeach;?>
+            </select>
+        </td>
+        <td>
+            <select name="offline[condition_id][]" class="UI-CONDITION">
+                <option value=""><?php echo $this->__('--')?></option>
+                <?php foreach ($this->getConditionCollection() as $condition): ?>
+                    <option value="<?php echo $condition->getId() ?>">
+                        <?php echo $condition->getName() ?>
+                    </option>
+                <?php endforeach;?>
+            </select>
+        </td>
+        <td>
+            <select name="offline[resolution_id][]" class="UI-RESOLUTION">
+                <option value=""><?php echo $this->__('--')?></option>
+                <?php foreach ($this->getResolutionCollection() as $resolution): ?>
+                    <option value="<?php echo $resolution->getId() ?>">
+                        <?php echo $resolution->getName() ?>
+                    </option>
+                <?php endforeach;?>
+            </select>
+        </td>
+        <td>
+            <button class="delete_offline_item" type="button">
+                <span><span><span><?php echo Mage::helper('adminhtml')->__('Delete'); ?></span></span></span>
+            </button>
+        </td>
+    </tr>
+</script>

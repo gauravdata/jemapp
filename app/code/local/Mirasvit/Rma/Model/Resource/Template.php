@@ -9,10 +9,11 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Model_Resource_Template extends Mage_Core_Model_Mysql4_Abstract
@@ -24,6 +25,7 @@ class Mirasvit_Rma_Model_Resource_Template extends Mage_Core_Model_Mysql4_Abstra
 
     protected function loadStoreIds(Mage_Core_Model_Abstract $object)
     {
+        /* @var  Mirasvit_Rma_Model_Template $object */
         $select = $this->_getReadAdapter()->select()
             ->from($this->getTable('rma/template_store'))
             ->where('ts_template_id = ?', $object->getId());
@@ -34,17 +36,19 @@ class Mirasvit_Rma_Model_Resource_Template extends Mage_Core_Model_Mysql4_Abstra
             }
             $object->setData('store_ids', $array);
         }
+
         return $object;
     }
 
     protected function saveStoreIds($object)
     {
+        /* @var  Mirasvit_Rma_Model_Template $object */
         $condition = $this->_getWriteAdapter()->quoteInto('ts_template_id = ?', $object->getId());
         $this->_getWriteAdapter()->delete($this->getTable('rma/template_store'), $condition);
-        foreach ((array)$object->getData('store_ids') as $id) {
+        foreach ((array) $object->getData('store_ids') as $id) {
             $objArray = array(
-                'ts_template_id'  => $object->getId(),
-                'ts_store_id' => $id
+                'ts_template_id' => $object->getId(),
+                'ts_store_id' => $id,
             );
             $this->_getWriteAdapter()->insert(
                 $this->getTable('rma/template_store'), $objArray);
@@ -53,29 +57,34 @@ class Mirasvit_Rma_Model_Resource_Template extends Mage_Core_Model_Mysql4_Abstra
 
     protected function _afterLoad(Mage_Core_Model_Abstract $object)
     {
+        /** @var  Mirasvit_Rma_Model_Template $object */
         if (!$object->getIsMassDelete()) {
             $this->loadStoreIds($object);
         }
+
         return parent::_afterLoad($object);
     }
 
     protected function _beforeSave(Mage_Core_Model_Abstract $object)
     {
+        /** @var  Mirasvit_Rma_Model_Template $object */
         if (!$object->getId()) {
             $object->setCreatedAt(Mage::getSingleton('core/date')->gmtDate());
         }
         $object->setUpdatedAt(Mage::getSingleton('core/date')->gmtDate());
+
         return parent::_beforeSave($object);
     }
 
     protected function _afterSave(Mage_Core_Model_Abstract $object)
     {
+        /** @var  Mirasvit_Rma_Model_Template $object */
         if (!$object->getIsMassStatus()) {
             $this->saveStoreIds($object);
         }
+
         return parent::_afterSave($object);
     }
 
     /************************/
-
 }

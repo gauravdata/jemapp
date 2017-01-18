@@ -9,21 +9,22 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Model_System_Config_Source_Status  extends Mage_Eav_Model_Entity_Attribute_Backend_Abstract
 {
-
     public function getAllOptions()
     {
         $options = array(
-            array('value'=>'1', 'label'=> Mage::helper('rma')->__('Yes')),
-            array('value'=>'0', 'label'=> Mage::helper('rma')->__('No'))
+            array('value' => '1', 'label' => Mage::helper('rma')->__('Yes')),
+            array('value' => '0', 'label' => Mage::helper('rma')->__('No')),
         );
+
         return $options;
     }
 
@@ -35,8 +36,8 @@ class Mirasvit_Rma_Model_System_Config_Source_Status  extends Mage_Eav_Model_Ent
                 return $option['label'];
             }
         }
+
         return false;
     }
-	/************************/
-
+    /************************/
 }

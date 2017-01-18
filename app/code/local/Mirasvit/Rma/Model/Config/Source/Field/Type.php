@@ -9,15 +9,15 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Model_Config_Source_Field_Type
 {
-
     public function toArray()
     {
         return array(
@@ -31,9 +31,10 @@ class Mirasvit_Rma_Model_Config_Source_Field_Type
     public function toOptionArray()
     {
         $result = array();
-        foreach($this->toArray() as $k=>$v) {
-            $result[] = array('value'=>$k, 'label'=>$v);
+        foreach ($this->toArray() as $k => $v) {
+            $result[] = array('value' => $k, 'label' => $v);
         }
+
         return $result;
     }
 

@@ -9,16 +9,24 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
 
+/**
+ * @method Mirasvit_Rma_Model_Resource_Template_Collection|Mirasvit_Rma_Model_Template[] getCollection()
+ * @method Mirasvit_Rma_Model_Template load(int $id)
+ * @method bool getIsMassDelete()
+ * @method Mirasvit_Rma_Model_Template setIsMassDelete(bool $flag)
+ * @method bool getIsMassStatus()
+ * @method Mirasvit_Rma_Model_Template setIsMassStatus(bool $flag)
+ * @method Mirasvit_Rma_Model_Resource_Template getResource()
+ */
 class Mirasvit_Rma_Model_Template extends Mage_Core_Model_Abstract
 {
-
     protected function _construct()
     {
         $this->_init('rma/template');
@@ -44,11 +52,11 @@ class Mirasvit_Rma_Model_Template extends Mage_Core_Model_Abstract
             'address' => Mage::getStoreConfig('general/store_information/address', $storeId),
         ));
         $user = Mage::getSingleton('admin/session')->getUser();
- 
+
         $result = Mage::helper('mstcore/parsevariables')->parse($this->getTemplate(), array(
             'rma' => $rma,
             'store' => $store,
-            'user' => $user
+            'user' => $user,
         ),
             array(), $store->getId());
 
