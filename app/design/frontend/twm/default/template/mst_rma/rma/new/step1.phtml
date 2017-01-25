@@ -29,14 +29,14 @@ $orders = $this->getAllowedOrders();
                                 ?>
                                 <thead class="order collapsible" data-order="<?php echo $order->getId() ?>">
                                 <tr>
-                                    <th>
+                                    <th class="no-wrap">
                                         <input id="my-orders-table_collapseable_<?php echo $order->getId(); ?>-state" type="hidden" value="0">
                                         <input type="checkbox" name="orders[]" id="reorder-item-<?php echo $order->getId() ?>" value="<?php echo $order->getId() ?>"
                                                class="checkbox select-order UI-SELECT-ORDER" onChange="forceUnfold(this, 'order-<?php echo $order->getId() ?>')" data-order="<?php echo $order->getId() ?>">
                                     </th>
-                                    <th width="120px"><?php echo $order->getRealOrderId() ?></th>
-                                    <th width="100px"><span class="nobr"><?php echo $this->formatDate($order->getCreatedAtStoreDate()) ?></span></th>
-                                    <th width="126px" class="remove-text-transformation order-retuurn-status">
+                                    <th class="no-wrap" width="120px"><?php echo $order->getRealOrderId() ?></th>
+                                    <th class="no-wrap" width="100px"><span class="nobr"><?php echo $this->formatDate($order->getCreatedAtStoreDate()) ?></span></th>
+                                    <th class="no-wrap" width="126px" class="remove-text-transformation order-retuurn-status">
                                         <?php
                                         if (Mage::helper('rma')->isReturnAllowed($order)) {
                                             if ($daysLeft > 0) {
@@ -49,9 +49,9 @@ $orders = $this->getAllowedOrders();
                                         }
                                         ?>
                                     </th>
-                                    <th class="remove-text-transformation"><?php echo $order->getShippingAddress() ? $this->escapeHtml($order->getShippingAddress()->getName()) : '&nbsp;' ?></th>
-                                    <th><?php echo $order->formatPrice($order->getGrandTotal()) ?></th>
-                                    <th colspan="2" class="order-status-aling-center"><em><?php echo $order->getStatusLabel() ?></em></th>
+                                    <th class="no-wrap" class="remove-text-transformation"><?php echo $order->getShippingAddress() ? $this->escapeHtml($order->getShippingAddress()->getName()) : '&nbsp;' ?></th>
+                                    <th class="no-wrap"><?php echo $order->formatPrice($order->getGrandTotal()) ?></th>
+                                    <th class="no-wrap" colspan="2" class="order-status-aling-center"><em><?php echo $order->getStatusLabel() ?></em></th>
                                 </tr>
                                 </thead>
                                 <tbody id="order-<?php echo $order->getId() ?>" data-order="<?php echo $order->getId() ?>" style="display: none;">

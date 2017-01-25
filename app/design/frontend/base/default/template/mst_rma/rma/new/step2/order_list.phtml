@@ -14,7 +14,7 @@
         }
         ?>
         <tr>
-            <td>
+            <td class="no-wrap">
                 <input name="orders[<?php echo $order->getId() ?>]" type="hidden" value="<?php echo $order->getId() ?>">
                 <input type="hidden" name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId(); ?>][order_id]" value="<?php echo $order->getId() ?>">
                 <input type="hidden" name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId(); ?>][order_item_id]" value="<?php echo $item->getOrderItemId() ?>">
@@ -29,14 +29,14 @@
                     <img id="image" src="<?php echo $this->helper('catalog/image')->init($item->getProduct(), 'thumbnail')->resize(200) ?>" width="100px" />
                 <?php endif; ?>
             </td>
-            <td>
+            <td class="no-wrap">
                 <b><?php echo Mage::helper('rma')->getOrderItemLabel($item) ?></b>
             </td>
-            <td>
+            <td class="no-wrap">
                 <?php echo $qty; ?>
             </td>
-            <td><?php echo Mage::helper('rma')->getOrderLabel($order); ?></td>
-            <td>
+            <td class="no-wrap"><?php echo Mage::helper('rma')->getOrderLabel($order); ?></td>
+            <td class="no-wrap">
                 <?php if ($this->getConfig()->isCustomerReasonRequired()): ?>
                     <div class="rma__customer-option">
                         <label id="user-conditional" class="required"><?php echo $this->__('Reason') ?><em id="em-requered"> *</em></label>
