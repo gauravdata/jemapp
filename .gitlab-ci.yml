@@ -11,7 +11,7 @@ deploy to test:
 clear cache on test:
   stage: deploy
   script:  ssh -i ~/.ssh/unsecure_twm_id_rsa root@cs32.thewebmen.com 'cd /home/test/public_html; n98-magerun c:cl;'
-  environment: tets
+  environment: test
   when: manual
   only:
     - 1.9.2.3
