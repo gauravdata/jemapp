@@ -3,7 +3,7 @@ stages:
 
 deploy to test:
   stage: deploy
-  script:  ssh -i ~/.ssh/unsecure_twm_id_rsa root@cs32.thewebmen.com 'cd /home/test/public_html; sudo -u test git pull;'
+  script:  ssh -i ~/.ssh/unsecure_twm_id_rsa root@cs32.thewebmen.com 'cd /home/test/public_html; sudo -u test git pull; chown -R test: *; chmod -R a+rw var media;'
   environment: test
   only:
     - 1.9.2.3
