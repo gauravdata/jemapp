@@ -9,12 +9,14 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/** @var Mage_Core_Model_Resource_Setup $installer */
 $installer = $this;
 $version = Mage::helper('mstcore/version')->getModuleVersionFromDb('mst_rma');
 if ($version == '1.0.0') {
@@ -144,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `{$this->getTable('rma/condition')}` (
 CREATE TABLE IF NOT EXISTS `{$this->getTable('rma/comment')}` (
     `comment_id` int(11) NOT NULL AUTO_INCREMENT,
     `rma_id` INT(11) NOT NULL,
-    `user_id` ".(Mage::getVersion() >= '1.6.0.0'? 'int(10)': 'mediumint(11)')." unsigned,
+    `user_id` ".(Mage::getVersion() >= '1.6.0.0' ? 'int(10)' : 'mediumint(11)')." unsigned,
     `customer_id` int(10) unsigned,
     `customer_name` VARCHAR(255) NOT NULL DEFAULT '',
     `text` TEXT,
@@ -169,58 +171,12 @@ CREATE TABLE IF NOT EXISTS `{$this->getTable('rma/comment')}` (
 $installer->run($sql);
 
 $sql = "
-   INSERT INTO `{$this->getTable('rma/reason')}` (name,is_active,sort_order) VALUES ('Out of Service','1','10');
-   INSERT INTO `{$this->getTable('rma/reason')}` (name,is_active,sort_order) VALUES ('Don\'t like','1','20');
-   INSERT INTO `{$this->getTable('rma/reason')}` (name,is_active,sort_order) VALUES ('Wrong color','1','30');
-   INSERT INTO `{$this->getTable('rma/reason')}` (name,is_active,sort_order) VALUES ('Wrong size','1','40');
-   INSERT INTO `{$this->getTable('rma/reason')}` (name,is_active,sort_order) VALUES ('Other','1','50');
-
-   INSERT INTO `{$this->getTable('rma/condition')}` (name,is_active,sort_order) VALUES ('Unopened','1','10');
-   INSERT INTO `{$this->getTable('rma/condition')}` (name,is_active,sort_order) VALUES ('Opened','1','20');
-   INSERT INTO `{$this->getTable('rma/condition')}` (name,is_active,sort_order) VALUES ('Damaged','1','30');
-
-   INSERT INTO `{$this->getTable('rma/resolution')}` (name,is_active,sort_order) VALUES ('Exchange','1','10');
-   INSERT INTO `{$this->getTable('rma/resolution')}` (name,is_active,sort_order) VALUES ('Refund','1','20');
-   INSERT INTO `{$this->getTable('rma/resolution')}` (name,is_active,sort_order) VALUES ('Store Credit','1','30');
-
-   INSERT INTO `{$this->getTable('rma/status')}` (name,is_active,sort_order,is_rma_resolved,customer_message,history_message,admin_message) VALUES ('Pending Approval','1','10','0',
-'Dear {{var customer.name}},<br><br>
-
-Your Return request has been received. You will be notified when your request is reviewed.',
-'Return request has been received. You will be notified when your request is reviewed.',
-'RMA #{{var rma.increment_id}} has been created.');
-   INSERT INTO `{$this->getTable('rma/status')}` (name,is_active,sort_order,is_rma_resolved,customer_message,history_message) VALUES ('Approved','1','20','1',
-'Dear {{var customer.name}},<br><br>
-
-Your Return request has been approved.
-<br>
-Please, print <a href=\'{{var rma.guest_print_url}}\'>RMA Packing Slip</a>{{depend rma.guest_print_label_url}}, <a href=\'{{var rma.guest_print_label_url}}\'>RMA Shipping Label</a>
-{{/depend}} and send package to:<br>
-{{var rma.return_address_html}}',
-'Your Return request has been approved.
-<br>
-Please, print <a href=\'{{var rma.guest_print_url}}\'>RMA Packing Slip</a>{{depend rma.guest_print_label_url}}, <a href=\'{{var rma.guest_print_label_url}}\'>RMA Shipping Label</a>
-{{/depend}} and send package to:<br>
-{{var rma.return_address_html}}'
-);
-   INSERT INTO `{$this->getTable('rma/status')}` (name,is_active,sort_order,is_rma_resolved,customer_message,history_message) VALUES ('Rejected','1','30','0',
-'Dear {{var customer.name}},<br><br>
-
-Return request has been rejected.',
-'Return request has been rejected.'
-);
-   INSERT INTO `{$this->getTable('rma/status')}` (name,is_active,sort_order,is_rma_resolved,customer_message,history_message) VALUES ('Closed','1','40','0',
-'Dear {{var customer.name}},<br><br>
-
-Your Return request has been closed.',
-'Return request has been closed.'
-);
-
    ALTER TABLE `{$this->getTable('rma/rma')}` ADD UNIQUE INDEX `increment_id` (`increment_id`);
+
 ";
-$installer->run($sql);
+$helper = Mage::helper('rma/migration');
+$helper->trySql($installer, $sql);
 
-/**                                    **/
-
+/*                                    **/
 
 $installer->endSetup();

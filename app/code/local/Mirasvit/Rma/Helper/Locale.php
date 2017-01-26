@@ -9,24 +9,25 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Helper_Locale
 {
     public function setLocaleValue($object, $field, $value)
     {
-        $storeId = (int)$object->getStoreId();
+        $storeId = (int) $object->getStoreId();
         $serializedValue = $object->getData($field);
         $arr = $this->unserialize($serializedValue);
 
         if ($storeId === 0) {
-            $arr[0] =  $value;
+            $arr[0] = $value;
         } else {
-            $arr[$storeId] =  $value;
+            $arr[$storeId] = $value;
             if (!isset($arr[0])) {
                 $arr[0] = $value;
             }
@@ -37,7 +38,7 @@ class Mirasvit_Rma_Helper_Locale
 
     public function getLocaleValue($object, $field)
     {
-        $storeId = (int)$object->getStoreId();
+        $storeId = ($object->getStoreId()) ? (int) $object->getStoreId() : Mage::app()->getStore()->getId();
         $serializedValue = $object->getData($field);
         $arr = $this->unserialize($serializedValue);
         // pr($arr);die;
@@ -53,7 +54,6 @@ class Mirasvit_Rma_Helper_Locale
         }
 
         return $localizedValue;
-
     }
 
     public function unserialize($string)

@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -19,9 +19,33 @@
 class Mirasvit_Rma_Block_Adminhtml_Sales_Order_View_Tabs_Rma extends Mage_Adminhtml_Block_Widget
 implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
+    /** @var Mirasvit_Rma_Block_Adminhtml_Rma_Grid $grid */
+    protected $grid;
+    protected $gridHtml;
+    protected function _prepareLayout()
+    {
+        $id = $this->getOrderId();
+
+        /** @var Mirasvit_Rma_Block_Adminhtml_Rma_Grid $grid */
+        $grid = $this->getLayout()->createBlock('rma/adminhtml_rma_grid');
+        $grid->setId('rma_grid_internal');
+        $grid->setActiveTab('RMA');
+        $grid->addCustomFilter('order_id', $id);
+        $grid->setFilterVisibility(false);
+        $grid->setExportVisibility(false);
+        $grid->setPagerVisibility(0);
+
+        $grid->setTabMode(true);
+
+        $this->grid = $grid;
+        $this->gridHtml = $this->grid->toHtml();
+
+        return parent::_prepareLayout();
+    }
+
     public function getTabLabel()
     {
-        return Mage::helper('rma')->__('RMA');
+        return Mage::helper('rma')->__('RMA (%s)', $this->grid->getFormattedNumberOfRMA());
     }
 
     public function getTabTitle()
@@ -39,24 +63,37 @@ implements Mage_Adminhtml_Block_Widget_Tab_Interface
         return false;
     }
 
+    /**
+     * @return int
+     */
+    protected function getOrderId()
+    {
+        return $this->getRequest()->getParam('order_id');
+    }
+
+    /**
+     * @param int $orderId
+     *
+     * @return int
+     */
+    protected function getOrderCustomerId($orderId)
+    {
+        /** @var Mage_Sales_Model_Order $order */
+        $order = Mage::getModel('sales/order')->load($orderId);
+
+        return $order->getCustomerId();
+    }
+
     protected function _toHtml()
     {
-        $id = $this->getRequest()->getParam('order_id');
-        $rmaNewUrl = $this->getUrl('rmaadmin/adminhtml_rma/add', array('order_id' => $id));
+        $id = $this->getOrderId();
+        $customerId = $this->getOrderCustomerId($id);
+        $rmaNewUrl = $this->getUrl('adminhtml/rma_rma/add', array('orders_id' => $id, 'customer_id' => $customerId));
         $button = $this->getLayout()->createBlock('adminhtml/widget_button')
             ->setClass('add')
             ->setType('button')
-            ->setOnClick('window.location.href=\'' . $rmaNewUrl . '\'')
+            ->setOnClick('window.location.href=\''.$rmaNewUrl.'\'')
             ->setLabel($this->__('Create RMA for this order'));
-
-
-        $grid = $this->getLayout()->createBlock('rma/adminhtml_rma_grid');
-        $grid->addCustomFilter('order_id', $id);
-        $grid->setFilterVisibility(false);
-        $grid->setExportVisibility(false);
-        $grid->setPagerVisibility(0);
-
-        $grid->setTabMode(true);
 
         if (Mage::helper('rma')->isReturnAllowed($id)) {
             $meetMessage = $this->__('Order meets RMA policy');
@@ -65,11 +102,7 @@ implements Mage_Adminhtml_Block_Widget_Tab_Interface
         }
 
         return '<br>
-        <div>' . $button->toHtml() . '<div style="float:right;color:#eb5e00"><i>'.$meetMessage.'</i></div>
-        <br><br>'. $grid->toHtml().'</div>' ;
-
-        // return '<div class="content-buttons-placeholder" style="height:25px;">' .
-        // '<p class="content-buttons form-buttons" >' . $button->toHtml() . '</p>' .
-        // '</div>' . $grid->toHtml();
+        <div>'.$button->toHtml().'<div style="float:right;color:#eb5e00"><i>'.$meetMessage.'</i></div>
+        <br><br>'.$this->gridHtml.'</div>';
     }
 }
