@@ -235,7 +235,7 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
     {
         $orderItem = $item->getOrderItem();
         if ($orderItem->getId()) {
-            return Mage::helper('core')->currencyByStore($orderItem->getPrice(), $orderItem->getStore(), true, false);
+            return Mage::helper('core')->currencyByStore($orderItem->getOriginalPrice(), $orderItem->getStore(), true, false);
         } else {
             return '';
         }
