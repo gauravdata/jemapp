@@ -9,31 +9,28 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/** @var Mage_Core_Model_Resource_Setup $installer */
 $installer = $this;
 $version = Mage::helper('mstcore/version')->getModuleVersionFromDb('mst_rma');
 if ($version == '1.0.11') {
     return;
 } elseif ($version != '1.0.10') {
-    die("Please, run migration Rma 1.0.10");
+    die('Please, run migration Rma 1.0.10');
 }
 $installer->startSetup();
-if (Mage::registry('mst_allow_drop_tables')) {
-    $sql = "
-    ";
-    $installer->run($sql);
-}
 $sql = "
 ALTER TABLE `{$this->getTable('rma/field')}` ADD COLUMN `is_show_in_confirm_shipping` TINYINT(1) NOT NULL DEFAULT 0;
 ";
-$installer->run($sql);
+$helper = Mage::helper('rma/migration');
+$helper->trySql($installer, $sql);
 
-/**                                    **/
-
+/*                                    **/
 
 $installer->endSetup();

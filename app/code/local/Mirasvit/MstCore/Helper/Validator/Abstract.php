@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -22,13 +22,13 @@ class Mirasvit_MstCore_Helper_Validator_Abstract extends Mage_Core_Helper_Abstra
     const INFO    = 3;
     const FAILED  = 0;
 
-    public function runTests()
+    public function runTests($testType)
     {
         $results = array();
 
         $methods = get_class_methods($this);
         foreach ($methods as $method) {
-            if (substr($method, 0, 4) == 'test') {
+            if (substr($method, 0, strlen($testType)) == $testType) {
                 $key = get_class($this).$method;
                 try {
                     $results[$key] = call_user_func(array($this, $method));
@@ -68,8 +68,10 @@ class Mirasvit_MstCore_Helper_Validator_Abstract extends Mage_Core_Helper_Abstra
 
         foreach ($tables as $table) {
             if (!$this->dbTableExists($table)) {
-                $description[] = "Table '$table' doesn't exist";
+                $tableName = $this->_dbRes()->getTableName($table);
+                $description[] = "Table '$tableName' doesn't exist";
                 $result = self::FAILED;
+                continue;
             }
             if ($table == 'catalogsearch/fulltext') {
                 continue;
@@ -162,7 +164,6 @@ class Mirasvit_MstCore_Helper_Validator_Abstract extends Mage_Core_Helper_Abstra
      */
     protected function getHandleNodesFromLayout($layoutName, $handleName)
     {
-        $container = array();
         $appEmulation = Mage::getSingleton('core/app_emulation');
         $initialEnvironmentInfo = $appEmulation->startEnvironmentEmulation(
             Mage::app()->getDefaultStoreView()->getId(),
@@ -173,12 +174,8 @@ class Mirasvit_MstCore_Helper_Validator_Abstract extends Mage_Core_Helper_Abstra
         $catalogSearchXml = new Zend_Config_Xml($catalogSearchLayoutFile, $handleName);
         $catalogSearchArray = $catalogSearchXml->toArray();
 
-        array_walk_recursive(
-            $catalogSearchArray,
-            function ($el) use (&$container) {
-                $container[] = $el;
-            }
-        );
+        $iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($catalogSearchArray));
+        $container = iterator_to_array($iterator, false);
 
         $appEmulation->stopEnvironmentEmulation($initialEnvironmentInfo);
 

@@ -9,60 +9,63 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Block_Adminhtml_Condition_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
-    protected function _prepareForm() {
+    protected function _prepareForm()
+    {
         $form = new Varien_Data_Form(
             array(
                 'id' => 'edit_form',
-                'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'),'store' => (int)$this->getRequest()->getParam('store'))),
+                'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'), 'store' => (int) $this->getRequest()->getParam('store'))),
                 'method' => 'post',
-                'enctype' => 'multipart/form-data'
+                'enctype' => 'multipart/form-data',
             )
         );
 
+        /** @var Mirasvit_Rma_Model_Condition $condition */
         $condition = Mage::registry('current_condition');
 
-        $fieldset = $form->addFieldset('edit_fieldset', array('legend'=> Mage::helper('rma')->__('General Information')));
+        $fieldset = $form->addFieldset('edit_fieldset', array('legend' => Mage::helper('rma')->__('General Information')));
         if ($condition->getId()) {
             $fieldset->addField('condition_id', 'hidden', array(
-                'name'      => 'condition_id',
-                'value'     => $condition->getId(),
+                'name' => 'condition_id',
+                'value' => $condition->getId(),
             ));
         }
         $fieldset->addField('store_id', 'hidden', array(
-            'name'  => 'store_id',
-            'value' => (int)$this->getRequest()->getParam('store')
+            'name' => 'store_id',
+            'value' => (int) $this->getRequest()->getParam('store'),
         ));
 
         $fieldset->addField('name', 'text', array(
-            'label'     => Mage::helper('rma')->__('Title'),
-            'name'      => 'name',
-            'value'     => $condition->getName(),
+            'label' => Mage::helper('rma')->__('Title'),
+            'name' => 'name',
+            'value' => $condition->getName(),
             'after_element_html' => ' [STORE VIEW]',
         ));
         $fieldset->addField('sort_order', 'text', array(
-            'label'     => Mage::helper('rma')->__('Sort Order'),
-            'name'      => 'sort_order',
-            'value'     => $condition->getSortOrder(),
+            'label' => Mage::helper('rma')->__('Sort Order'),
+            'name' => 'sort_order',
+            'value' => $condition->getSortOrder(),
         ));
         $fieldset->addField('is_active', 'select', array(
-            'label'     => Mage::helper('rma')->__('Is Active'),
-            'name'      => 'is_active',
-            'value'     => $condition->getIsActive(),
-            'values'    => Mage::getSingleton('adminhtml/system_config_source_yesno')->toOptionArray()
+            'label' => Mage::helper('rma')->__('Is Active'),
+            'name' => 'is_active',
+            'value' => $condition->getIsActive(),
+            'values' => Mage::getSingleton('adminhtml/system_config_source_yesno')->toOptionArray(),
         ));
 
         $form->setUseContainer(true);
         $this->setForm($form);
+
         return parent::_prepareForm();
     }
     /************************/
-
 }

@@ -9,39 +9,30 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/** @var Mage_Core_Model_Resource_Setup $installer */
 $installer = $this;
 $version = Mage::helper('mstcore/version')->getModuleVersionFromDb('mst_rma');
 if ($version == '1.0.5') {
     return;
 } elseif ($version != '1.0.4') {
-    die("Please, run migration Rma 1.0.4");
+    die('Please, run migration Rma 1.0.4');
 }
 $installer->startSetup();
-if (Mage::registry('mst_allow_drop_tables')) {
-    $sql = "
-    ";
-    $installer->run($sql);
-}
 $sql = "
 ALTER TABLE `{$this->getTable('rma/status')}` ADD COLUMN `code` VARCHAR(255) NOT NULL DEFAULT '';
 ALTER TABLE `{$this->getTable('rma/rma')}` ADD COLUMN `last_reply_name` VARCHAR(255) NOT NULL DEFAULT '';
 ALTER TABLE `{$this->getTable('rma/rma')}` ADD COLUMN `last_reply_at` TIMESTAMP NULL;
 ";
-$installer->run($sql);
+$helper = Mage::helper('rma/migration');
+$helper->trySql($installer, $sql);
 
-$sql = "
-   INSERT INTO `{$this->getTable('rma/status')}` (name,is_active,sort_order,code,is_rma_resolved,customer_message,history_message,admin_message) VALUES ('Package Sent','1','25','package_sent','0','','','Package is sent.');
-
-";
-$installer->run($sql);
-
-/**                                    **/
-
+/*                                    **/
 
 $installer->endSetup();

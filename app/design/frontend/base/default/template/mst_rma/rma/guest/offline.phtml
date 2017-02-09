@@ -1,0 +1,141 @@
+<?php
+/* $this Mirasvit_Rma_Block_Rma_Guest_Offline */
+?>
+<?php if ($this->getConfig()->getGeneralIsOfflineOrdersAllowed()): ?>
+    <?php if ($this->getConfig()->getPolicyAllowGuestOfflineRMA()): ?>
+        <div class="page-title">
+            <h1><?php echo $this->__('Request Offline RMA')?></h1>
+        </div>
+        <p>
+            <?php echo $this->__('Your order # does not exists. Please, provide additional info to complete Offline RMA:')?>
+        </p>
+        <br>
+        <form class="guest_offline_rma" action="<?php echo $this->getSubmitPostUrl() ?>" method="POST" id="rma-form-validate" >
+            <div class='fieldset'>
+                <h2 class="legend" id="customer-information"><?php echo $this->__('Customer Information') ?></h2>
+                <ul class="form-list">
+                    <li>
+                        <label for="firstname" class="required"><em>*</em><?php echo $this->__('First Name') ?></label>
+                        <div class="input-box">
+                            <input type='text' name="firstname" id='firstname' class="input-text required-entry"/>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="lastname" class="required"><em>*</em><?php echo $this->__('Last Name') ?></label>
+                        <div class="input-box">
+                            <input type='text' name="lastname" id='lastname' class="input-text required-entry"/>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="add_new_offline_order">
+                <button type="button" title="<?php echo $this->__('Add items manually') ?>" class="button button-secondary">
+                    <span><span><?php echo $this->__('Add items manually') ?></span></span>
+                </button>
+            </div>
+            <div id="add_new_offline_order_container"></div>
+
+            <button type="button" title="<?php echo $this->__('Add another order'); ?>" class="button add-other-manual-order" onclick="jQuery('#add_new_offline_order button').click()" style="display: none">
+                <span><span><?php echo $this->__('Add another order') ?></span></span>
+            </button>
+
+            <button type="submit" title="<?php echo $this->__('Next Step') ?>" class="button go-step2">
+                <span><span><?php echo $this->__('Next Step') ?></span></span>
+            </button>
+
+        </form>
+
+        <script id="order_offline_template" type="text/x-custom-template">
+            <table class="data-table order collapseable" id="my-orders-table_collapseable_{{order_id}}-head" collapse-id="my-orders-table_collapseable_{{order_id}}">
+                <thead>
+                <tr>
+                    <th>
+                        <input type="hidden" name="offline_orders[]" id="reorder-item-{{order_id}}" value="{{order_id}}" title="" class="checkbox select-order">
+                        <input type="hidden" name="offline_orders[{{order_id}}][address]" value="{{order_address}}" title="" class="checkbox select-order">
+                        <input type="checkbox" name="offline_orders[{{order_id}}][id]" id="reorder-item-{{order_id}}" value="{{order_id}}" title="" class="checkbox select-order">
+                    </th>
+                    <th>{{order_id}}</th>
+                    <th><a href="#">&nbsp;</a></th>
+                </tr>
+                </thead>
+                <tbody id="my-orders-table_collapseable_{{order_id}}" class="collapseable" style="display: none;">
+                {{order_items}}
+                </tbody>
+            </table>
+        </script>
+        <script id="order_items_offline_template" type="text/x-custom-template">
+            <tr>
+                <td><input type="checkbox" name="offline_items[{{order_id}}][{{item_id}}]" value="offline" title="" class="checkbox select-order-item"></td>
+                <td>
+                    <input type="hidden" name="offline_items[{{order_id}}][{{item_id}}][name]" value="{{item_name}}">
+                    <b>{{item_name}}</b>
+                </td>
+                <td>
+                    <input type="hidden" name="offline_items[{{order_id}}][{{item_id}}][qty_requested]" value="{{item_qty}}">
+                    {{item_qty}}
+                </td>
+            </tr>
+        </script>
+
+        <script id="order_id_template" type="text/x-custom-template">
+            <div class="order-container rma__order-offline UI-ORDER-CONTAINER">
+                <div class="field name-itemname">
+                    <label for="itemname" class="required"><?php echo $this->__('Order or Receipt #') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="orders[]" class="input-text UI-OFFLINE-ORDER-INPUT required-entry">
+                        <input type="hidden" name="" value="" class="offline_order_id">
+                    </div>
+
+                    <button class="delete_offline_order button button-secondary" type="button" title="<?php echo $this->__('Delete Order') ?>">
+                        <span><span><?php echo $this->__('Delete Order') ?></span></span>
+                    </button>
+                </div>
+                <div class="offline_items"></div>
+            </div>
+        </script>
+
+        <script id="order_item_template" type="text/x-custom-template">
+            <div class="rma__order-offline-item UI-OFFLINE-PRODUCT">
+                <div class="field name-itemname">
+                    <label for="itemname" class="required"><?php echo $this->__('Returned Item') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="itemname[]" value="" title="Item Name" maxlength="255" class="input-text itemname required-entry UI-ITEMNAME">
+                        <input type="hidden" name="" value="1" title="" class="UI-OFFLINE-SELECT-ORDER">
+                        <input type="hidden" name="" value="1" title="" class="UI-IS-OFFLINE">
+                    </div>
+                </div>
+
+                <div class="field name-itemqty">
+                    <label for="itemqty" class="required"><?php echo $this->__('Returned Qty') ?></label>
+                    <div class="input-box">
+                        <input type="number" name="itemqty[]" value="" title="Qty" maxlength="255" class="input-text itemqty required-entry UI-ITEMQTY">
+                    </div>
+                </div>
+
+                <div class="field name-remove">
+                    <button class="delete_offline_item button button-secondary" type="button" title="<?php echo $this->__('Delete item') ?>">
+                        <span><span><?php echo $this->__('Delete') ?></span></span>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <button class="add_offline_item button" type="button" title="<?php echo $this->__('Add another item') ?>">
+                    <span><span><?php echo $this->__('Add another item') ?></span></span>
+                </button>
+            </div>
+        </script>
+    <?php else: ?>
+        <p>
+            <?php echo $this->__('RMA policy forbids submitting offline RMA for guests. Please, <a href="'
+                . Mage::getUrl('customer/account/create') . '">register</a> or <a href="'
+                . Mage::getUrl('customer/account/login') .'">login</a> and submit your offline RMA')?>
+        </p>
+    <?php endif ?>
+<?php else: ?>
+    <p>
+        <?php echo $this->__('RMA policy forbids submitting offline RMA')?>
+    </p>
+<?php endif ?>
+
+

@@ -1,4 +1,5 @@
 <?php
+
 /*
 if (in_array($_SERVER['REMOTE_ADDR'], ['95.97.31.66', '83.163.148.49', '145.131.208.232']) === false)
 {
@@ -77,7 +78,7 @@ if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
     Mage::setIsDeveloperMode(true);
 }
 
-//ini_set('display_errors', 1);
+#ini_set('display_errors', 1);
 
 umask(0);
 

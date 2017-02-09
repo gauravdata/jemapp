@@ -8,8 +8,13 @@
             <rma module="rma">
                 <title>RMA</title>
                 <sort_order>10</sort_order>
-                <action>rmaadmin/adminhtml_rma</action>
+                <action>adminhtml/rma_rma</action>
             </rma>
+            <archive module="rma">
+                <title>Archive</title>
+                <sort_order>15</sort_order>
+                <action>adminhtml/rma_archive</action>
+            </archive>
             <dictionary module="rma">
                 <title>Dictionaries</title>
                 <sort_order>20</sort_order>
@@ -17,59 +22,69 @@
                 <status module="rma">
                     <title>Statuses</title>
                     <sort_order>10</sort_order>
-                    <action>rmaadmin/adminhtml_status</action>
+                    <action>adminhtml/rma_status</action>
                 </status>
                 <reason module="rma">
                     <title>Reasons</title>
                     <sort_order>20</sort_order>
-                    <action>rmaadmin/adminhtml_reason</action>
+                    <action>adminhtml/rma_reason</action>
                 </reason>
                 <condition module="rma">
                     <title>Conditions</title>
                     <sort_order>30</sort_order>
-                    <action>rmaadmin/adminhtml_condition</action>
+                    <action>adminhtml/rma_condition</action>
                 </condition>
                 <resolution module="rma">
                     <title>Resolutions</title>
                     <sort_order>40</sort_order>
-                    <action>rmaadmin/adminhtml_resolution</action>
+                    <action>adminhtml/rma_resolution</action>
                 </resolution>
                 <field module="rma">
                     <title>Custom Fields</title>
                     <sort_order>50</sort_order>
-                    <action>rmaadmin/adminhtml_field</action>
+                    <action>adminhtml/rma_field</action>
                 </field>
                 <template module="rma">
                     <title>Quick Responses</title>
                     <sort_order>60</sort_order>
-                    <action>rmaadmin/adminhtml_template</action>
+                    <action>adminhtml/rma_template</action>
                 </template>
                 </children>
             </dictionary>
+            <rule module="rma">
+                <title>Workflow Rules</title>
+                <sort_order>30</sort_order>
+                <action>adminhtml/rma_rule</action>
+            </rule>
             <report module="rma">
                 <title>Reports</title>
-                <sort_order>30</sort_order>
+                <sort_order>40</sort_order>
                 <children>
                 <report_rma module="rma">
                     <title>RMA</title>
                     <sort_order>10</sort_order>
-                    <action>rmaadmin/adminhtml_report_rma</action>
+                    <action>adminhtml/rma_report_rma</action>
                 </report_rma>
                 <report_rma_product module="rma">
                     <title>RMA by Product</title>
                     <sort_order>20</sort_order>
-                    <action>rmaadmin/adminhtml_report_rma_product</action>
+                    <action>adminhtml/rma_report_rma_product</action>
                 </report_rma_product>
                 <report_rma_brand module="rma">
                     <title>RMA by Brand</title>
                     <sort_order>30</sort_order>
-                    <action>rmaadmin/adminhtml_report_rma_brand</action>
+                    <action>adminhtml/rma_report_rma_brand</action>
                 </report_rma_brand>
                 </children>
             </report>
+            <validate module="rma">
+                <title>Validate Installation</title>
+                <sort_order>49</sort_order>
+                <action>adminhtml/mstcore_validator/index/modules/RMA</action>
+            </validate>
             <settings module="rma">
                 <title>Settings</title>
-                <sort_order>40</sort_order>
+                <sort_order>50</sort_order>
                 <action>adminhtml/system_config/edit/section/rma</action>
             </settings>
             </children>
@@ -89,8 +104,13 @@
                     <rma module="rma">
                         <title>RMA</title>
                         <sort_order>10</sort_order>
-                        <action>rmaadmin/adminhtml_rma</action>
+                        <action>adminhtml/rma_rma</action>
                     </rma>
+                    <archive module="rma">
+                        <title>Archive</title>
+                        <sort_order>15</sort_order>
+                        <action>adminhtml/rma_archive</action>
+                    </archive>
                     <dictionary module="rma">
                         <title>Dictionaries</title>
                         <sort_order>20</sort_order>
@@ -98,60 +118,70 @@
                         <status module="rma">
                             <title>Statuses</title>
                             <sort_order>10</sort_order>
-                            <action>rmaadmin/adminhtml_status</action>
+                            <action>adminhtml/rma_status</action>
                         </status>
                         <reason module="rma">
                             <title>Reasons</title>
                             <sort_order>20</sort_order>
-                            <action>rmaadmin/adminhtml_reason</action>
+                            <action>adminhtml/rma_reason</action>
                         </reason>
                         <condition module="rma">
                             <title>Conditions</title>
                             <sort_order>30</sort_order>
-                            <action>rmaadmin/adminhtml_condition</action>
+                            <action>adminhtml/rma_condition</action>
                         </condition>
                         <resolution module="rma">
                             <title>Resolutions</title>
                             <sort_order>40</sort_order>
-                            <action>rmaadmin/adminhtml_resolution</action>
+                            <action>adminhtml/rma_resolution</action>
                         </resolution>
                         <field module="rma">
                             <title>Custom Fields</title>
                             <sort_order>50</sort_order>
-                            <action>rmaadmin/adminhtml_field</action>
+                            <action>adminhtml/rma_field</action>
                         </field>
                         <template module="rma">
                             <title>Quick Responses</title>
                             <sort_order>60</sort_order>
-                            <action>rmaadmin/adminhtml_template</action>
+                            <action>adminhtml/rma_template</action>
                         </template>
                         </children>
                     </dictionary>
+                    <rule module="rma">
+                        <title>Workflow Rules</title>
+                        <sort_order>30</sort_order>
+                        <action>adminhtml/rma_rule</action>
+                    </rule>
                     <report module="rma">
                         <title>Reports</title>
-                        <sort_order>30</sort_order>
-                        <action>rmaadmin/adminhtml_report</action>
+                        <sort_order>40</sort_order>
+                        <action>adminhtml/rma_report</action>
                         <children>
                         <report_rma module="rma">
                             <title>RMA</title>
                             <sort_order>10</sort_order>
-                            <action>rmaadmin/adminhtml_report_rma</action>
+                            <action>adminhtml/rma_report_rma</action>
                         </report_rma>
                         <report_rma_product module="rma">
                             <title>RMA by Product</title>
                             <sort_order>20</sort_order>
-                            <action>rmaadmin/adminhtml_report_rma_product</action>
+                            <action>adminhtml/rma_report_rma_product</action>
                         </report_rma_product>
                         <report_rma_brand module="rma">
                             <title>RMA by Brand</title>
                             <sort_order>30</sort_order>
-                            <action>rmaadmin/adminhtml_report_rma_brand</action>
+                            <action>adminhtml/rma_report_rma_brand</action>
                         </report_rma_brand>
                         </children>
                     </report>
+                    <validate module="rma">
+                        <title>Validate Installation</title>
+                        <sort_order>49</sort_order>
+                        <action>adminhtml/mstcore_validator/index/modules/RMA</action>
+                    </validate>
                     <settings module="rma">
                         <title>Settings</title>
-                        <sort_order>40</sort_order>
+                        <sort_order>50</sort_order>
                         <action>adminhtml/system_config/edit/section/rma</action>
                     </settings>
                     </children>

@@ -9,42 +9,44 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
 
-class Mirasvit_Rma_Block_Rma_Guest_New extends Mirasvit_Rma_Block_Rma_New
+class Mirasvit_Rma_Block_Rma_Guest_New extends Mirasvit_Rma_Block_Rma_Guest_Abstract
 {
+    /**
+     * @return string
+     */
     public function getStep1PostUrl()
     {
-        return Mage::getUrl('rma/guest/new');
+        return Mage::helper('rma/url')->getGuestRmaUrl();
     }
 
-    public function getStep2PostUrl()
-    {
-        return Mage::getUrl('rma/guest/save');
-    }
-
+    /**
+     * @return Mage_Sales_Model_Order
+     */
     public function getOrder()
     {
         return Mage::registry('current_order');
     }
 
+    /**
+     * @return string
+     */
     public function getOrderIncrementId()
     {
         return Mage::app()->getRequest()->getParam('order_increment_id');
     }
 
+    /**
+     * @return string
+     */
     public function getEmail()
     {
         return Mage::app()->getRequest()->getParam('email');
-    }
-
-    public function getAllowGift()
-    {
-        return $this->getConfig()->getGeneralIsGiftActive();
     }
 }

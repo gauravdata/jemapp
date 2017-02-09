@@ -9,30 +9,29 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Block_Adminhtml_Reason_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
-    public function __construct ()
+    public function __construct()
     {
         parent::__construct();
         $this->_objectId = 'reason_id';
         $this->_controller = 'adminhtml_reason';
         $this->_blockGroup = 'rma';
 
-
         $this->_updateButton('save', 'label', Mage::helper('rma')->__('Save'));
         $this->_updateButton('delete', 'label', Mage::helper('rma')->__('Delete'));
 
-
         $this->_addButton('saveandcontinue', array(
-            'label'     => Mage::helper('rma')->__('Save And Continue Edit'),
-            'onclick'   => 'saveAndContinueEdit()',
-            'class'     => 'save',
+            'label' => Mage::helper('rma')->__('Save And Continue Edit'),
+            'onclick' => 'saveAndContinueEdit()',
+            'class' => 'save',
         ), -100);
 
         $this->_formScripts[] = "
@@ -40,8 +39,6 @@ class Mirasvit_Rma_Block_Adminhtml_Reason_Edit extends Mage_Adminhtml_Block_Widg
                 editForm.submit($('edit_form').action + 'back/edit/');
             }
         ";
-
-        return $this;
     }
 
     protected function _prepareLayout()
@@ -59,7 +56,7 @@ class Mirasvit_Rma_Block_Adminhtml_Reason_Edit extends Mage_Adminhtml_Block_Widg
         }
     }
 
-    public function getHeaderText ()
+    public function getHeaderText()
     {
         if ($reason = $this->getReason()) {
             return Mage::helper('rma')->__("Edit Reason '%s'", $this->htmlEscape($reason->getName()));
@@ -76,9 +73,9 @@ class Mirasvit_Rma_Block_Adminhtml_Reason_Edit extends Mage_Adminhtml_Block_Widg
             $this->getUrl('*/*/*/', array('store' => null, '_current' => true))
         );
         $html = $switcher->toHtml().$html;
+
         return $html;
     }
 
     /************************/
-
 }

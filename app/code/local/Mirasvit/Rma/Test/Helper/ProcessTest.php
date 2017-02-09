@@ -9,44 +9,44 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
-if (Mage::helper('mstcore')->isModuleInstalled('Mirasvit_Helpdesk')) {
 
-class Mirasvit_Rma_Test_Model_ProcessTest extends EcomDev_PHPUnit_Test_Case
-{
-    protected $helper;
-    protected function setUp()
+if (Mage::helper('mstcore')->isModuleInstalled('Mirasvit_Helpdesk')) {
+    class Mirasvit_Rma_Test_Model_ProcessTest extends EcomDev_PHPUnit_Test_Case
     {
-        $this->helper = Mage::helper('rma/process');
-        $this->mockConfigMethod(array(
+    protected $helper;
+        protected function setUp()
+        {
+            $this->helper = Mage::helper('rma/process');
+            $this->mockConfigMethod(array(
             'getNotificationAdminEmail' => 'notification@example.com',
             'isActiveHelpdesk' => 1,
         ));
-        if (!Mage::registry('isSecureArea')) {
-            Mage::register('isSecureArea', true);
-        }
+            if (!Mage::registry('isSecureArea')) {
+                Mage::register('isSecureArea', true);
+            }
         //
             $this->markTestSkipped(
               'The Help Desk extension is not available.'
             );
         // }
-    }
+        }
 
-    protected function mockConfigMethod($methods)
-    {
-        $config = $this->getModelMock('rma/config', array_keys($methods));
-        foreach ($methods as $method => $value) {
-            $config->expects($this->any())
+        protected function mockConfigMethod($methods)
+        {
+            $config = $this->getModelMock('rma/config', array_keys($methods));
+            foreach ($methods as $method => $value) {
+                $config->expects($this->any())
                 ->method($method)
                 ->will($this->returnValue($value));
+            }
+            $this->replaceByMock('singleton', 'rma/config', $config);
         }
-        $this->replaceByMock('singleton', 'rma/config', $config);
-    }
 
     /**
      * @test
@@ -100,6 +100,5 @@ class Mirasvit_Rma_Test_Model_ProcessTest extends EcomDev_PHPUnit_Test_Case
         $this->assertEquals(2, $email->getAttachments()->count());
         $this->assertEquals(2, $comment->getAttachments()->count());
     }
-}
-
+    }
 }

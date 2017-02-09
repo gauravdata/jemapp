@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -33,11 +33,14 @@ class Mirasvit_Rma_Block_Rma_View extends Mage_Core_Block_Template
         }
     }
 
-    public function getId()
+    public function getGuestId()
     {
-        return $this->getRma()->getId();
+        return $this->getRma()->getGuestId();
     }
 
+    /**
+     * @return Mirasvit_Rma_Model_Rma
+     */
     public function getRma()
     {
         return Mage::registry('current_rma');
@@ -53,6 +56,11 @@ class Mirasvit_Rma_Block_Rma_View extends Mage_Core_Block_Template
         return Mage::getUrl('rma/rma/savecomment');
     }
 
+    public function getListUrl()
+    {
+        return Mage::getUrl('rma/rma/list');
+    }
+
     protected $commentCollection = false;
     public function getCommentCollection()
     {
@@ -61,6 +69,7 @@ class Mirasvit_Rma_Block_Rma_View extends Mage_Core_Block_Template
                 ->addFieldToFilter('is_visible_in_frontend', true)
                 ;
         }
+
         return $this->commentCollection;
     }
 
@@ -71,7 +80,7 @@ class Mirasvit_Rma_Block_Rma_View extends Mage_Core_Block_Template
 
     public function getPrintUrl()
     {
-        return $this->getRma()->getGuestPrintUrl();
+        return $this->getRma()->getPrintUrl();
     }
 
     public function getPrintLabelUrl()
@@ -82,12 +91,14 @@ class Mirasvit_Rma_Block_Rma_View extends Mage_Core_Block_Template
     public function getCustomFields($isEdit = false)
     {
         $collection = Mage::helper('rma/field')->getVisibleCustomerCollection($this->getRma()->getStatusId(), $isEdit);
+
         return $collection;
     }
 
     public function getShippingConfirmationFields()
     {
         $collection = Mage::helper('rma/field')->getShippingConfirmationFields();
+
         return $collection;
     }
 
@@ -95,16 +106,22 @@ class Mirasvit_Rma_Block_Rma_View extends Mage_Core_Block_Template
     {
         $str = $this->getConfig()->getGeneralShippingConfirmationText();
         $str = str_replace('"', '\'', $str);
+
         return $str;
     }
 
     public function getIsRequireShippingConfirmation()
     {
-        if ($this->getRma()->getStatus()->getCode() == Mirasvit_Rma_Model_Status::PACKAGE_SENT) {
+        $dontShowShippingConfirmationButton = array(
+            Mirasvit_Rma_Model_Status::PACKAGE_SENT,
+            Mirasvit_Rma_Model_Status::REJECTED,
+            Mirasvit_Rma_Model_Status::CLOSED,
+        );
+
+        if (in_array($this->getRma()->getStatus()->getCode(), $dontShowShippingConfirmationButton)) {
             return false;
         }
+
         return $this->getConfig()->getGeneralIsRequireShippingConfirmation();
     }
-
-
 }

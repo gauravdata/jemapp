@@ -9,10 +9,11 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Model_Resource_Report_Rma_Collection extends Mage_Sales_Model_Mysql4_Report_Collection_Abstract
@@ -37,6 +38,7 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Collection extends Mage_Sales_Model
         if (!is_null($this->_to)) {
             $this->getSelect()->where($this->_periodFormat.' <= ?', $this->_to);
         }
+
         return $this;
     }
 
@@ -61,6 +63,7 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Collection extends Mage_Sales_Model
         } elseif ($storeIds[0] != '') {
             $this->getSelect()->where('store_id IN(?)', $storeIds);
         }
+
         return $this;
     }
 
@@ -71,6 +74,7 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Collection extends Mage_Sales_Model
         } else {
             $this->_reportType = 'all';
         }
+
         return $this;
     }
 
@@ -84,7 +88,7 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Collection extends Mage_Sales_Model
             $this->_periodFormat = 'DATE_FORMAT(main_table.created_at, \'%Y-%m-%d\')';
         }
 
-            $this->_selectedColumns = array(
+        $this->_selectedColumns = array(
                 'created_at' => $this->_periodFormat,
                 // 'new_rma_cnt' => 'SUM(if (status_id = 1, 1, 0))',
                 // 'approved_rma_cnt' => 'SUM(if (status_id = 2, 1, 0))',
@@ -93,12 +97,12 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Collection extends Mage_Sales_Model
                 'total_rma_cnt' => 'COUNT(*)',
                 'total_product_cnt' => 'SUM(rma_item.qty_requested)',
             );
-            foreach(Mage::helper('rma')->getStatusCollection() as $status) {
-                $this->_selectedColumns["{$status->getId()}_cnt"] = "SUM(if (status_id = {$status->getId()}, 1, 0))";
-            }
-            if ($this->_reportType == 'by_product') {
-                $this->_selectedColumns['product_id'] = 'rma_item.product_id';
-            }
+        foreach (Mage::helper('rma')->getStatusCollection() as $status) {
+            $this->_selectedColumns["{$status->getId()}_cnt"] = "SUM(if (status_id = {$status->getId()}, 1, 0))";
+        }
+        if ($this->_reportType == 'by_product') {
+            $this->_selectedColumns['product_id'] = 'rma_item.product_id';
+        }
 
         // if ($this->isTotals()) {
         // }
@@ -108,10 +112,10 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Collection extends Mage_Sales_Model
         return $this->_selectedColumns;
     }
 
-    protected  function _initSelect()
+    protected function _initSelect()
     {
         $select = $this->getSelect();
-        $select->from(array('main_table' => $this->getResource()->getMainTable()) , $this->_getSelectedColumns());
+        $select->from(array('main_table' => $this->getResource()->getMainTable()), $this->_getSelectedColumns());
 
         if (!$this->isTotals() && !$this->isSubTotals()) {
             //поля по которым будут сделаны группировки при выводе отчета
@@ -133,5 +137,4 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Collection extends Mage_Sales_Model
     }
 
     /************************/
-
 }

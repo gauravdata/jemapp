@@ -9,30 +9,27 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/** @var Mage_Core_Model_Resource_Setup $installer */
 $installer = $this;
 $version = Mage::helper('mstcore/version')->getModuleVersionFromDb('mst_rma');
 if ($version == '1.0.9') {
     return;
 } elseif ($version != '1.0.8') {
-    die("Please, run migration Rma 1.0.8");
+    die('Please, run migration Rma 1.0.8');
 }
 $installer->startSetup();
-if (Mage::registry('mst_allow_drop_tables')) {
-    $sql = "
-    ";
-    $installer->run($sql);
-}
 $sql = "
 ALTER TABLE `{$this->getTable('rma/item')}` ADD COLUMN `to_stock` TINYINT(1) NOT NULL DEFAULT 0;
 ";
-$installer->run($sql);
-
+$helper = Mage::helper('rma/migration');
+$helper->trySql($installer, $sql);
 
 $sql = "
 update `{$this->getTable('rma/status')}` set code='pending' where status_id = 1 and code='';
@@ -41,7 +38,6 @@ update `{$this->getTable('rma/status')}` set code='rejected' where status_id = 3
 update `{$this->getTable('rma/status')}` set code='closed' where status_id = 4 and code='';
 ";
 $installer->run($sql);
-/**                                    **/
-
+/*                                    **/
 
 $installer->endSetup();

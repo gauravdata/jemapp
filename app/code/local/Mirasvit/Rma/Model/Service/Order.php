@@ -9,57 +9,59 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
 
 /**
- * Quote submit service model
+ * Quote submit service model.
  */
 class Mirasvit_Rma_Model_Service_Order
 {
     /**
-     * Order object
+     * Order object.
      *
      * @var Mage_Sales_Model_Order
      */
     protected $_order;
 
     /**
-     * Quote convert object
+     * Quote convert object.
      *
      * @var Mage_Sales_Model_Convert_Order
      */
     protected $_convertor;
 
     /**
-     * Class constructor
+     * Class constructor.
      *
      * @param Mage_Sales_Model_Order $order
      */
     public function __construct(Mage_Sales_Model_Order $order)
     {
-        $this->_order       = $order;
-        $this->_convertor   = Mage::getModel('sales/convert_order');
+        $this->_order = $order;
+        $this->_convertor = Mage::getModel('sales/convert_order');
     }
 
     /**
-     * Quote convertor declaration
+     * Quote convertor declaration.
      *
-     * @param   Mage_Sales_Model_Convert_Order $convertor
-     * @return  Mage_Sales_Model_Service_Order
+     * @param Mage_Sales_Model_Convert_Order $convertor
+     *
+     * @return Mage_Sales_Model_Service_Order
      */
     public function setConvertor(Mage_Sales_Model_Convert_Order $convertor)
     {
         $this->_convertor = $convertor;
+
         return $this;
     }
 
     /**
-     * Get assigned order object
+     * Get assigned order object.
      *
      * @return Mage_Sales_Model_Order
      */
@@ -69,9 +71,10 @@ class Mirasvit_Rma_Model_Service_Order
     }
 
     /**
-     * Updates numeric data taking into account locale
+     * Updates numeric data taking into account locale.
      *
      * @param array $data
+     *
      * @return Mage_Sales_Model_Service_Order
      */
     public function updateLocaleNumbers(&$data)
@@ -83,13 +86,15 @@ class Mirasvit_Rma_Model_Service_Order
                 }
             }
         }
+
         return $this;
     }
 
     /**
-     * Perform numbers conversion according to locale
+     * Perform numbers conversion according to locale.
      *
      * @param mixed $value
+     *
      * @return float
      */
     protected function _getLocaleNumber($value)
@@ -102,6 +107,7 @@ class Mirasvit_Rma_Model_Service_Order
      * prepare only specified items, otherwise all containing in the order.
      *
      * @param array $qtys
+     *
      * @return Mage_Sales_Model_Order_Invoice
      */
     public function prepareInvoice($qtys = array())
@@ -116,7 +122,7 @@ class Mirasvit_Rma_Model_Service_Order
             $item = $this->_convertor->itemToInvoiceItem($orderItem);
             if ($orderItem->isDummy()) {
                 $qty = $orderItem->getQtyOrdered() ? $orderItem->getQtyOrdered() : 1;
-            } else if (!empty($qtys)) {
+            } elseif (!empty($qtys)) {
                 if (isset($qtys[$orderItem->getId()])) {
                     $qty = (float) $qtys[$orderItem->getId()];
                 }
@@ -130,13 +136,15 @@ class Mirasvit_Rma_Model_Service_Order
         $invoice->setTotalQty($totalQty);
         $invoice->collectTotals();
         $this->_order->getInvoiceCollection()->addItem($invoice);
+
         return $invoice;
     }
 
     /**
-     * Prepare order shipment based on order items and requested items qty
+     * Prepare order shipment based on order items and requested items qty.
      *
      * @param array $qtys
+     *
      * @return Mage_Sales_Model_Order_Shipment
      */
     public function prepareShipment($qtys = array())
@@ -187,13 +195,15 @@ class Mirasvit_Rma_Model_Service_Order
         }
 
         $shipment->setTotalQty($totalQty);
+
         return $shipment;
     }
 
     /**
-     * Prepare order creditmemo based on order items and requested params
+     * Prepare order creditmemo based on order items and requested params.
      *
      * @param array $data
+     *
      * @return Mage_Sales_Model_Order_Creditmemo
      */
     public function prepareCreditmemo($data = array())
@@ -204,7 +214,6 @@ class Mirasvit_Rma_Model_Service_Order
         $this->updateLocaleNumbers($qtys);
 
         foreach ($this->_order->getAllItems() as $orderItem) {
-
             if (!$this->_canRefundItem($orderItem, $qtys)) {
                 continue;
             }
@@ -230,14 +239,16 @@ class Mirasvit_Rma_Model_Service_Order
         $this->_initCreditmemoData($creditmemo, $data);
 
         $creditmemo->collectTotals();
+
         return $creditmemo;
     }
 
     /**
-     * Prepare order creditmemo based on invoice items and requested requested params
+     * Prepare order creditmemo based on invoice items and requested requested params.
      *
      * @param Mage_Sales_Model_Order_Invoice $invoice
-     * @param array $data
+     * @param array                          $data
+     *
      * @return Mage_Sales_Model_Order_Creditmemo
      */
     public function prepareInvoiceCreditmemo($invoice, $data = array())
@@ -250,10 +261,10 @@ class Mirasvit_Rma_Model_Service_Order
         $creditmemo->setInvoice($invoice);
 
         $invoiceQtysRefunded = array();
-        foreach($invoice->getOrder()->getCreditmemosCollection() as $createdCreditmemo) {
+        foreach ($invoice->getOrder()->getCreditmemosCollection() as $createdCreditmemo) {
             if ($createdCreditmemo->getState() != Mage_Sales_Model_Order_Creditmemo::STATE_CANCELED
                 && $createdCreditmemo->getInvoiceId() == $invoice->getId()) {
-                foreach($createdCreditmemo->getAllItems() as $createdCreditmemoItem) {
+                foreach ($createdCreditmemo->getAllItems() as $createdCreditmemoItem) {
                     $orderItemId = $createdCreditmemoItem->getOrderItem()->getId();
                     if (isset($invoiceQtysRefunded[$orderItemId])) {
                         $invoiceQtysRefunded[$orderItemId] += $createdCreditmemoItem->getQty();
@@ -265,7 +276,7 @@ class Mirasvit_Rma_Model_Service_Order
         }
 
         $invoiceQtysRefundLimits = array();
-        foreach($invoice->getAllItems() as $invoiceItem) {
+        foreach ($invoice->getAllItems() as $invoiceItem) {
             $invoiceQtyCanBeRefunded = $invoiceItem->getQty();
             $orderItemId = $invoiceItem->getOrderItem()->getId();
             if (isset($invoiceQtysRefunded[$orderItemId])) {
@@ -273,7 +284,6 @@ class Mirasvit_Rma_Model_Service_Order
             }
             $invoiceQtysRefundLimits[$orderItemId] = $invoiceQtyCanBeRefunded;
         }
-
 
         foreach ($invoice->getAllItems() as $invoiceItem) {
             $orderItem = $invoiceItem->getOrderItem();
@@ -320,20 +330,21 @@ class Mirasvit_Rma_Model_Service_Order
         }
 
         $creditmemo->collectTotals();
+
         return $creditmemo;
     }
 
     /**
-     * Initialize creditmemo state based on requested parameters
+     * Initialize creditmemo state based on requested parameters.
      *
      * @param Mage_Sales_Model_Order_Creditmemo $creditmemo
-     * @param array $data
+     * @param array                             $data
      */
     protected function _initCreditmemoData($creditmemo, $data)
     {
         $this->updateLocaleNumbers($data);
         if (isset($data['shipping_amount'])) {
-            $creditmemo->setBaseShippingAmount((float)$data['shipping_amount']);
+            $creditmemo->setBaseShippingAmount((float) $data['shipping_amount']);
         }
 
         if (isset($data['adjustment_positive'])) {
@@ -347,13 +358,14 @@ class Mirasvit_Rma_Model_Service_Order
 
     /**
      * Check if order item can be invoiced. Dummy item can be invoiced or with his childrens or
-     * with parent item which is included to invoice
+     * with parent item which is included to invoice.
      *
      * @param Mage_Sales_Model_Order_Item $item
-     * @param array $qtys
+     * @param array                       $qtys
+     *
      * @return bool
      */
-    protected function _canInvoiceItem($item, $qtys=array())
+    protected function _canInvoiceItem($item, $qtys = array())
     {
         if ($item->getLockedDoInvoice()) {
             return false;
@@ -373,8 +385,9 @@ class Mirasvit_Rma_Model_Service_Order
                         }
                     }
                 }
+
                 return false;
-            } else if($item->getParentItem()) {
+            } elseif ($item->getParentItem()) {
                 $parent = $item->getParentItem();
                 if (empty($qtys)) {
                     return $parent->getQtyToInvoice() > 0;
@@ -389,13 +402,14 @@ class Mirasvit_Rma_Model_Service_Order
 
     /**
      * Check if order item can be shiped. Dummy item can be shiped or with his childrens or
-     * with parent item which is included to shipment
+     * with parent item which is included to shipment.
      *
      * @param Mage_Sales_Model_Order_Item $item
-     * @param array $qtys
+     * @param array                       $qtys
+     *
      * @return bool
      */
-    protected function _canShipItem($item, $qtys=array())
+    protected function _canShipItem($item, $qtys = array())
     {
         if ($item->getIsVirtual() || $item->getLockedDoShip()) {
             return false;
@@ -421,8 +435,9 @@ class Mirasvit_Rma_Model_Service_Order
                         }
                     }
                 }
+
                 return false;
-            } else if($item->getParentItem()) {
+            } elseif ($item->getParentItem()) {
                 $parent = $item->getParentItem();
                 if (empty($qtys)) {
                     return $parent->getQtyToShip() > 0;
@@ -431,19 +446,20 @@ class Mirasvit_Rma_Model_Service_Order
                 }
             }
         } else {
-            return $item->getQtyToShip()>0;
+            return $item->getQtyToShip() > 0;
         }
     }
 
     /**
-     * Check if order item can be refunded
+     * Check if order item can be refunded.
      *
      * @param Mage_Sales_Model_Order_Item $item
-     * @param array $qtys
-     * @param array $invoiceQtysRefundLimits
+     * @param array                       $qtys
+     * @param array                       $invoiceQtysRefundLimits
+     *
      * @return bool
      */
-    protected function _canRefundItem($item, $qtys=array(), $invoiceQtysRefundLimits=array())
+    protected function _canRefundItem($item, $qtys = array(), $invoiceQtysRefundLimits = array())
     {
         $this->updateLocaleNumbers($qtys);
         if ($item->isDummy()) {
@@ -459,8 +475,9 @@ class Mirasvit_Rma_Model_Service_Order
                         }
                     }
                 }
+
                 return false;
-            } else if($item->getParentItem()) {
+            } elseif ($item->getParentItem()) {
                 $parent = $item->getParentItem();
                 if (empty($qtys)) {
                     return $this->_canRefundNoDummyItem($parent, $invoiceQtysRefundLimits);
@@ -474,13 +491,14 @@ class Mirasvit_Rma_Model_Service_Order
     }
 
     /**
-     * Check if no dummy order item can be refunded
+     * Check if no dummy order item can be refunded.
      *
      * @param Mage_Sales_Model_Order_Item $item
-     * @param array $invoiceQtysRefundLimits
+     * @param array                       $invoiceQtysRefundLimits
+     *
      * @return bool
      */
-    protected function _canRefundNoDummyItem($item, $invoiceQtysRefundLimits=array())
+    protected function _canRefundNoDummyItem($item, $invoiceQtysRefundLimits = array())
     {
         if ($item->getQtyToRefund() < 0) {
             return false;
@@ -492,5 +510,4 @@ class Mirasvit_Rma_Model_Service_Order
 
         return true;
     }
-
 }

@@ -9,18 +9,20 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/** @var Mage_Core_Model_Resource_Setup $installer */
 $installer = $this;
 $version = Mage::helper('mstcore/version')->getModuleVersionFromDb('mst_rma');
 if ($version == '1.0.2') {
     return;
 } elseif ($version != '1.0.0') {
-    die("Please, run migration Rma 1.0.0");
+    die('Please, run migration Rma 1.0.0');
 }
 $installer->startSetup();
 if (Mage::registry('mst_allow_drop_tables')) {
@@ -49,7 +51,6 @@ CREATE TABLE IF NOT EXISTS `{$this->getTable('rma/field')}` (
 ";
 $installer->run($sql);
 
-/**                                    **/
-
+/*                                    **/
 
 $installer->endSetup();

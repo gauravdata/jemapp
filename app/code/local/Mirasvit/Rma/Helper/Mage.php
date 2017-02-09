@@ -9,26 +9,27 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Helper_Mage extends Mirasvit_MstCore_Helper_Help
 {
     public function getBackendCustomerUrl($customerId)
     {
-        if (Mage::getVersion() >= '1.4.1.1') {
-            return Mage::helper("adminhtml")->getUrl('adminhtml/customer/edit', array('id'=>$customerId));
+        if (version_compare(Mage::getVersion(), '1.4.1.1') != -1) {
+            return Mage::helper('adminhtml')->getUrl('adminhtml/customer/edit', array('id' => $customerId));
         } else {
-            return Mage::helper("adminhtml")->getUrl('adminhtml/customer/edit', array('customer_id'=>$customerId));
+            return Mage::helper('adminhtml')->getUrl('adminhtml/customer/edit', array('customer_id' => $customerId));
         }
     }
 
     public function getOrderCollection()
     {
-        if (Mage::getVersion() >= '1.4.1.1') {
+        if (version_compare(Mage::getVersion(), '1.4.1.1') != -1) {
             $collection = Mage::getResourceModel('sales/order_grid_collection')
                 ->setOrder('entity_id');
         } else {
@@ -46,7 +47,7 @@ class Mirasvit_Rma_Helper_Mage extends Mirasvit_MstCore_Helper_Help
                     array('shipping_firstname', 'shipping_lastname'))
                 ;
         }
+
         return $collection;
     }
-
 }

@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -19,9 +19,35 @@
 class Mirasvit_Rma_Block_Adminhtml_Customer_Edit_Tabs_Rma extends Mage_Adminhtml_Block_Widget
 implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
+    /** @var Mirasvit_Rma_Block_Adminhtml_Rma_Grid $grid */
+    protected $grid;
+    protected $gridHtml;
+    protected function _prepareLayout()
+    {
+        $customer = Mage::registry('current_customer');
+        if (!$this->getId() || !$customer) {
+            return;
+        }
+        $id = $this->getId();
+
+        /** @var Mirasvit_Rma_Block_Adminhtml_Rma_Grid $grid */
+        $grid = $this->getLayout()->createBlock('rma/adminhtml_rma_grid');
+        $grid->setId('rma_grid_internal');
+        $grid->addCustomFilter('main_table.customer_id', $id);
+        $grid->setFilterVisibility(false);
+        $grid->setExportVisibility(false);
+        $grid->setPagerVisibility(0);
+        $grid->setTabMode(true);
+
+        $this->grid = $grid;
+        $this->gridHtml = $this->grid->toHtml();
+
+        return parent::_prepareLayout();
+    }
+
     public function getTabLabel()
     {
-        return Mage::helper('rma')->__('RMA');
+        return Mage::helper('rma')->__('RMA (%s)', $this->grid->getFormattedNumberOfRMA());
     }
 
     public function getTabTitle()
@@ -50,25 +76,13 @@ implements Mage_Adminhtml_Block_Widget_Tab_Interface
             return '';
         }
         $id = $this->getId();
-        $rmaNewUrl = $this->getUrl('rmaadmin/adminhtml_rma/add', array('customer_id' => $id));
+        $rmaNewUrl = $this->getUrl('adminhtml/rma_rma/add', array('customer_id' => $id));
         $button = $this->getLayout()->createBlock('adminhtml/widget_button')
             ->setClass('add')
             ->setType('button')
-            ->setOnClick('window.location.href=\'' . $rmaNewUrl . '\'')
+            ->setOnClick('window.location.href=\''.$rmaNewUrl.'\'')
             ->setLabel($this->__('Create RMA for this customer'));
 
-
-        $grid = $this->getLayout()->createBlock('rma/adminhtml_rma_grid');
-        $grid->addCustomFilter('main_table.customer_id', $id);
-        $grid->setFilterVisibility(false);
-        $grid->setExportVisibility(false);
-        $grid->setPagerVisibility(0);
-        $grid->setTabMode(true);
-
-        return '<div>' . $button->toHtml() . '<br><br>'. $grid->toHtml().'</div>' ;
-
-        // return '<div class="content-buttons-placeholder" style="height:25px;">' .
-        // '<p class="content-buttons form-buttons" >' . $button->toHtml() . '</p>' .
-        // '</div>' . $grid->toHtml();
+        return '<div>'.$button->toHtml().'<br><br>'.$this->grid->toHtml().'</div>';
     }
 }
