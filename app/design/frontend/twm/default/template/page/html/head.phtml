@@ -72,3 +72,24 @@
 	}(document, 'script'));
 </script>
 <?php endif; ?>
+
+<script>
+// fix cookie problem
+var count = (document.cookie.match(/frontend=/g) || []).length;
+if (count > 1) {
+var cookies = document.cookie.split(";");
+
+for (var i = 0; i < cookies.length; i++) {
+	var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+	document.cookie = name + "=; path=/; domain=.www.jemappelle.nl; expires=Thu, 01 Jan 1970 00:00:00 GMT; secure";
+	document.cookie = name + "=; path=/; domain=www.jemappelle.nl; expires=Thu, 01 Jan 1970 00:00:00 GMT; secure";
+	document.cookie = name + "=; path=/; domain=; expires=Thu, 01 Jan 1970 00:00:00 GMT; secure";
+	document.cookie = name + "=; path=/customer; domain=.jemappelle.nl; expires=Thu, 01 Jan 1970 00:00:00 GMT; secure";
+	document.cookie = name + "=; path=/; domain=jemappelle.nl; expires=Thu, 01 Jan 1970 00:00:00 GMT; secure";
+}
+//document.cookie = "frontend=; expires=Thu, 01 Jan 1970 00:00:00 GMT; secure";
+//document.cookie = "frontend_cid=; expires=Thu, 01 Jan 1970 00:00:00 GMT; secure";
+}
+</script>

@@ -9,29 +9,30 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
 {
     protected $_collection = null;
-    protected $_pageVarName     = 'p';
-    protected $_orderVarName        = 'order';
-    protected $_directionVarName    = 'dir';
-    protected $_modeVarName         = 'mode';
-    protected $_limitVarName        = 'limit';
-    protected $_availableOrder      = array();
-    protected $_availableMode       = array();
-    protected $_enableViewSwitcher  = true;
-    protected $_isExpanded          = true;
-    protected $_orderField          = null;
-    protected $_direction           = 'asc';
-    protected $_viewMode            = null;
-    protected $_availableLimit  = array();
-    protected $_defaultAvailableLimit  = array(10=>10,20=>20,50=>50);
+    protected $_pageVarName = 'p';
+    protected $_orderVarName = 'order';
+    protected $_directionVarName = 'dir';
+    protected $_modeVarName = 'mode';
+    protected $_limitVarName = 'limit';
+    protected $_availableOrder = array();
+    protected $_availableMode = array();
+    protected $_enableViewSwitcher = true;
+    protected $_isExpanded = true;
+    protected $_orderField = null;
+    protected $_direction = 'asc';
+    protected $_viewMode = null;
+    protected $_availableLimit = array();
+    protected $_defaultAvailableLimit = array(10 => 10,20 => 20,50 => 50);
     protected $_paramsMemorizeAllowed = true;
 
     protected function _construct()
@@ -47,7 +48,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
                 break;
 
             case 'grid-list':
-                $this->_availableMode = array('grid' => $this->__('Grid'), 'list' =>  $this->__('List'));
+                $this->_availableMode = array('grid' => $this->__('Grid'), 'list' => $this->__('List'));
                 break;
 
             case 'list-grid':
@@ -57,19 +58,21 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Disable list state params memorizing
+     * Disable list state params memorizing.
      */
     public function disableParamsMemorizing()
     {
         $this->_paramsMemorizeAllowed = false;
+
         return $this;
     }
 
     /**
-     * Memorize parameter value for session
+     * Memorize parameter value for session.
      *
      * @param string $param parameter name
-     * @param mixed $value parameter value
+     * @param mixed  $value parameter value
+     *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     protected function _memorizeParam($param, $value)
@@ -78,13 +81,15 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
         if ($this->_paramsMemorizeAllowed && !$session->getParamsMemorizeDisabled()) {
             $session->setData($param, $value);
         }
+
         return $this;
     }
 
     /**
-     * Set collection to pager
+     * Set collection to pager.
      *
      * @param Varien_Data_Collection $collection
+     *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     public function setCollection($collection)
@@ -94,18 +99,19 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
         $this->_collection->setCurPage($this->getCurrentPage());
 
         // we need to set pagination only if passed value integer and more that 0
-        $limit = (int)$this->getLimit();
+        $limit = (int) $this->getLimit();
         if ($limit) {
             $this->_collection->setPageSize($limit);
         }
         if ($this->getCurrentOrder()) {
             $this->_collection->setOrder($this->getCurrentOrder(), $this->getCurrentDirection());
         }
+
         return $this;
     }
 
     /**
-     * Return products collection instance
+     * Return products collection instance.
      *
      * @return Mage_Core_Model_Mysql4_Collection_Abstract
      */
@@ -115,7 +121,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Getter for $_pageVarName
+     * Getter for $_pageVarName.
      *
      * @return string
      */
@@ -125,7 +131,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Retrieve order field GET var name
+     * Retrieve order field GET var name.
      *
      * @return string
      */
@@ -135,7 +141,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Retrieve sort direction GET var name
+     * Retrieve sort direction GET var name.
      *
      * @return string
      */
@@ -145,7 +151,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Retrieve view mode GET var name
+     * Retrieve view mode GET var name.
      *
      * @return string
      */
@@ -155,7 +161,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Getter for $_limitVarName
+     * Getter for $_limitVarName.
      *
      * @return string
      */
@@ -165,7 +171,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Return current page from request
+     * Return current page from request.
      *
      * @return int
      */
@@ -174,11 +180,12 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
         if ($page = (int) $this->getRequest()->getParam($this->getPageVarName())) {
             return $page;
         }
+
         return 1;
     }
 
     /**
-     * Get grit products sort order field
+     * Get grit products sort order field.
      *
      * @return string
      */
@@ -215,11 +222,12 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
             $order = $defaultOrder;
         }
         $this->setData('_current_grid_order', $order);
+
         return $order;
     }
 
     /**
-     * Retrieve current direction
+     * Retrieve current direction.
      *
      * @return string
      */
@@ -246,13 +254,15 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
             $dir = $this->_direction;
         }
         $this->setData('_current_grid_direction', $dir);
+
         return $dir;
     }
 
     /**
-     * Set default Order field
+     * Set default Order field.
      *
      * @param string $field
+     *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     public function setDefaultOrder($field)
@@ -260,13 +270,15 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
         if (isset($this->_availableOrder[$field])) {
             $this->_orderField = $field;
         }
+
         return $this;
     }
 
     /**
-     * Set default sort direction
+     * Set default sort direction.
      *
      * @param string $dir
+     *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     public function setDefaultDirection($dir)
@@ -274,11 +286,12 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
         if (in_array(strtolower($dir), array('asc', 'desc'))) {
             $this->_direction = strtolower($dir);
         }
+
         return $this;
     }
 
     /**
-     * Retrieve available Order fields list
+     * Retrieve available Order fields list.
      *
      * @return array
      */
@@ -288,31 +301,35 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Set Available order fields list
+     * Set Available order fields list.
      *
      * @param array $orders
+     *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     public function setAvailableOrders($orders)
     {
         $this->_availableOrder = $orders;
+
         return $this;
     }
 
     /**
-     * Add order to available orders
+     * Add order to available orders.
      *
      * @param string $order
      * @param string $value
+     *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     public function addOrderToAvailableOrders($order, $value)
     {
         $this->_availableOrder[$order] = $value;
+
         return $this;
     }
     /**
-     * Remove order from available orders if exists
+     * Remove order from available orders if exists.
      *
      * @param string $order
      * @param Mage_Catalog_Block_Product_List_Toolbar
@@ -322,13 +339,15 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
         if (isset($this->_availableOrder[$order])) {
             unset($this->_availableOrder[$order]);
         }
+
         return $this;
     }
 
     /**
-     * Compare defined order field vith current order field
+     * Compare defined order field vith current order field.
      *
      * @param string $order
+     *
      * @return bool
      */
     public function isOrderCurrent($order)
@@ -337,10 +356,11 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Retrieve Pager URL
+     * Retrieve Pager URL.
      *
      * @param string $order
      * @param string $direction
+     *
      * @return string
      */
     public function getOrderUrl($order, $direction)
@@ -348,31 +368,34 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
         if (is_null($order)) {
             $order = $this->getCurrentOrder() ? $this->getCurrentOrder() : $this->_availableOrder[0];
         }
+
         return $this->getPagerUrl(array(
-            $this->getOrderVarName()=>$order,
-            $this->getDirectionVarName()=>$direction,
-            $this->getPageVarName() => null
+            $this->getOrderVarName() => $order,
+            $this->getDirectionVarName() => $direction,
+            $this->getPageVarName() => null,
         ));
     }
 
     /**
-     * Return current URL with rewrites and additional parameters
+     * Return current URL with rewrites and additional parameters.
      *
      * @param array $params Query parameters
+     *
      * @return string
      */
-    public function getPagerUrl($params=array())
+    public function getPagerUrl($params = array())
     {
-        $url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+        $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         if (count($params) > 0) {
             $query = http_build_query($params);
             $url .= '?'.$query;
         }
+
         return $url;
     }
 
     /**
-     * Retrieve current View mode
+     * Retrieve current View mode.
      *
      * @return string
      */
@@ -399,13 +422,15 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
             $mode = $defaultMode;
         }
         $this->setData('_current_grid_mode', $mode);
+
         return $mode;
     }
 
     /**
-     * Compare defined view mode with current active mode
+     * Compare defined view mode with current active mode.
      *
      * @param string $mode
+     *
      * @return bool
      */
     public function isModeActive($mode)
@@ -414,7 +439,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Retrieve availables view modes
+     * Retrieve availables view modes.
      *
      * @return array
      */
@@ -424,54 +449,59 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Set available view modes list
+     * Set available view modes list.
      *
      * @param array $modes
+     *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     public function setModes($modes)
     {
-        if(!isset($this->_availableMode)){
+        if (!isset($this->_availableMode)) {
             $this->_availableMode = $modes;
         }
+
         return $this;
     }
 
     /**
-     * Retrive URL for view mode
+     * Retrive URL for view mode.
      *
      * @param string $mode
+     *
      * @return string
      */
     public function getModeUrl($mode)
     {
-        return $this->getPagerUrl( array($this->getModeVarName()=>$mode, $this->getPageVarName() => null) );
+        return $this->getPagerUrl(array($this->getModeVarName() => $mode, $this->getPageVarName() => null));
     }
 
     /**
-     * Disable view switcher
+     * Disable view switcher.
      *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     public function disableViewSwitcher()
     {
         $this->_enableViewSwitcher = false;
+
         return $this;
     }
 
     /**
-     * Enable view switcher
+     * Enable view switcher.
      *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     public function enableViewSwitcher()
     {
         $this->_enableViewSwitcher = true;
+
         return $this;
     }
 
     /**
-     * Is a enabled view switcher
+     * Is a enabled view switcher.
      *
      * @return bool
      */
@@ -481,29 +511,31 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Disable Expanded
+     * Disable Expanded.
      *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     public function disableExpanded()
     {
         $this->_isExpanded = false;
+
         return $this;
     }
 
     /**
-     * Enable Expanded
+     * Enable Expanded.
      *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
     public function enableExpanded()
     {
         $this->_isExpanded = true;
+
         return $this;
     }
 
     /**
-     * Check is Expanded
+     * Check is Expanded.
      *
      * @return bool
      */
@@ -513,7 +545,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Retrieve default per page values
+     * Retrieve default per page values.
      *
      * @return string (comma separated)
      */
@@ -523,36 +555,40 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
             if ($default = $this->getDefaultListPerPage()) {
                 return $default;
             }
+
             return Mage::getStoreConfig('catalog/frontend/list_per_page');
-        }
-        elseif ($this->getCurrentMode() == 'grid') {
+        } elseif ($this->getCurrentMode() == 'grid') {
             if ($default = $this->getDefaultGridPerPage()) {
                 return $default;
             }
+
             return Mage::getStoreConfig('catalog/frontend/grid_per_page');
         }
+
         return 0;
     }
 
     /**
-     * Add new limit to pager for mode
+     * Add new limit to pager for mode.
      *
      * @param string $mode
      * @param string $value
      * @param string $label
+     *
      * @return Mage_Catalog_Block_Product_List_Toolbar
      */
-    public function addPagerLimit($mode, $value, $label='')
+    public function addPagerLimit($mode, $value, $label = '')
     {
         if (!isset($this->_availableLimit[$mode])) {
             $this->_availableLimit[$mode] = array();
         }
         $this->_availableLimit[$mode][$value] = empty($label) ? $value : $label;
+
         return $this;
     }
 
     /**
-     * Retrieve available limits for current view mode
+     * Retrieve available limits for current view mode.
      *
      * @return array
      */
@@ -567,7 +603,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Retrieve available limits for specified view mode
+     * Retrieve available limits for specified view mode.
      *
      * @return array
      */
@@ -576,19 +612,19 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
         if (isset($this->_availableLimit[$mode])) {
             return $this->_availableLimit[$mode];
         }
-        $perPageConfigKey = 'catalog/frontend/' . $mode . '_per_page_values';
-        $perPageValues = (string)Mage::getStoreConfig($perPageConfigKey);
+        $perPageConfigKey = 'catalog/frontend/'.$mode.'_per_page_values';
+        $perPageValues = (string) Mage::getStoreConfig($perPageConfigKey);
         $perPageValues = explode(',', $perPageValues);
         $perPageValues = array_combine($perPageValues, $perPageValues);
         if (Mage::getStoreConfigFlag('catalog/frontend/list_allow_all')) {
-            return ($perPageValues + array('all'=>$this->__('All')));
+            return ($perPageValues + array('all' => $this->__('All')));
         } else {
             return $perPageValues;
         }
     }
 
     /**
-     * Get specified products limit display per page
+     * Get specified products limit display per page.
      *
      * @return string
      */
@@ -621,20 +657,22 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
         }
 
         $this->setData('_current_limit', $limit);
+
         return $limit;
     }
 
     /**
-     * Retrieve Limit Pager URL
+     * Retrieve Limit Pager URL.
      *
      * @param int $limit
+     *
      * @return string
      */
     public function getLimitUrl($limit)
     {
         return $this->getPagerUrl(array(
             $this->getLimitVarName() => $limit,
-            $this->getPageVarName() => null
+            $this->getPageVarName() => null,
         ));
     }
 
@@ -646,13 +684,15 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     public function getFirstNum()
     {
         $collection = $this->getCollection();
-        return $collection->getPageSize()*($collection->getCurPage()-1)+1;
+
+        return $collection->getPageSize() * ($collection->getCurPage() - 1) + 1;
     }
 
     public function getLastNum()
     {
         $collection = $this->getCollection();
-        return $collection->getPageSize()*($collection->getCurPage()-1)+$collection->count();
+
+        return $collection->getPageSize() * ($collection->getCurPage() - 1) + $collection->count();
     }
 
     public function getTotalNum()
@@ -671,7 +711,7 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
     }
 
     /**
-     * Render pagination HTML
+     * Render pagination HTML.
      *
      * @return string
      */
@@ -688,18 +728,20 @@ class Mirasvit_Rma_Block_Rma_List_Toolbar extends Mage_Core_Block_Template
             ->setFrameLength(Mage::getStoreConfig('design/pagination/pagination_frame'))
             ->setJump(Mage::getStoreConfig('design/pagination/pagination_frame_skip'))
             ->setCollection($this->getCollection());
+
         return $pagerBlock->toHtml();
     }
 }
 class Mirasvit_Rma_Block_Rma_List_Pager extends Mage_Page_Block_Html_Pager
 {
-    public function getPagerUrl($params=array())
+    public function getPagerUrl($params = array())
     {
-        $url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+        $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         if (count($params) > 0) {
             $query = http_build_query($params);
             $url .= '?'.$query;
         }
+
         return $url;
     }
 }

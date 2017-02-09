@@ -1,6 +1,7 @@
 <?php
+/* @var $this Mirasvit_Rma_Block_Adminhtml_Rma_Edit_Form_History */
+
 $rma = $this->getRma();
-$isFirst = 0;
 ?>
 <div class="rma-comments">
 <?php foreach ($rma->getCommentCollection() as $comment): ?>
@@ -8,22 +9,12 @@ $isFirst = 0;
         <div class="comment-header">
                 <?php if ($comment->getTriggeredBy() == Mirasvit_Rma_Model_Config::CUSTOMER): ?>
                     <?php echo $comment->getCustomerName() ?>
-                    <?php if ($comment->getCustomerEmail() != ''): ?>
-                        , <?php echo $comment->getCustomerEmail() ?>
-                    <?php endif; ?>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
                 <?php elseif ($comment->getTriggeredBy() == Mirasvit_Rma_Model_Config::USER): ?>
                     <?php echo $comment->getUserName() ?>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
                 <?php endif; ?>
                 <?php echo Mage::helper('core')->formatDate($comment->getCreatedAt(), 'medium') ?> <?php echo Mage::helper('core')->formatTime($comment->getCreatedAt(), 'short') ?>
-                <?php if ($comment->getTriggeredBy() == Mirasvit_Rma_Model_Config::CUSTOMER && ($isFirst++ == 0)): ?>
-                    <?php if ($rma->getIsAdminRead()): ?>
-                        <a href="<?php echo $this->getUrl('*/*/markRead', array('rma_id' => $rma->getId(), 'is_read' => 0))?>" style="color: #ea7601;font-weight: normal;"><?php echo $this->__('Mark as unread') ?></a>
-                    <?php else:?>
-                        <a href="<?php echo $this->getUrl('*/*/markRead', array('rma_id' => $rma->getId(), 'is_read' => 1))?>" style="color: #ea7601;font-weight: normal;"><?php echo $this->__('Mark as read') ?></a>
-                    <?php endif;?>
-                <?php endif;?>
         </div>
 
         <div class="comment-text">

@@ -1,182 +1,357 @@
-<?php //0046a
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo('Site error: the file <b>'.__FILE__.'</b> requires the ionCube PHP Loader '.basename($__ln).' to be installed by the website operator. If you are the website operator please use the <a href="http://www.ioncube.com/lw/">ionCube Loader Wizard</a> to assist with installation.');exit(199);
-?>
-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
+<?php
+
+error_reporting(-1);
+ini_set('display_errors', 'On');
+
+class Dealer4dealer_Exactonline_Model_Main
+{
+	private $settings;
+	private $log;
+
+	// Determines which modules to sync
+	private $_enableProducts            = true;
+	private $_enableCustomers           = true;
+	private $_enableTransactions        = false;
+	private $_enableSalesInvoices       = true; // ONLY CREDITS!!
+	private $_enableSalesOrders         = true;
+	private $_enableDeliveries          = false;
+	private $_enableStockSync           = true;
+
+    // Exact > Magento
+    private $_enableExactProductSync    = false;
+    private $_enableExactCustomerSync   = false; // LET OP!!!! in install SQL de code uit commentaar halen voor het aanmaken van het veld adressID in Magento!!!!
+    private $_enablePriceListSync       = false;
+
+	protected $_dateFormat = 'Y-n-j H:i:s';
+
+	public function runUpdate()
+	{
+		$this->log      = Mage::getSingleton('exactonline/tools_log');
+		$this->settings = Mage::getSingleton('exactonline/tools_settings');
+
+        $this->_initSyncStatus();
+
+        if($this->isReadyToGo()) {
+
+            // @todo check for settings enable/disable etc. Create install script.
+            $this->settings->saveSetting("running_since",date($this->_dateFormat));
+
+            // Lock the synchronisation to avoid double synchronisations
+            $this->setLock("lock");
+
+            // Get the last synchronisation dates
+            $lastSyncdateProduct     = $this->settings->getSetting("productsyncdate");
+            $lastSyncdateCustomer    = $this->settings->getSetting("customersyncdate");
+            $lastSyncdateOrder       = $this->settings->getSetting("ordersyncdate");
+            $lastSyncdateCreditOrder = $this->settings->getSetting("creditordersyncdate");
+            $lastSyncdateDelivery    = $this->settings->getSetting('deliverysyncdate');
+            $lastSyncdatePricelist   = $this->settings->getSetting('priscelistsyncdate');
+            $syncStartDate           = $this->settings->getSetting('sync_startdate');
+
+            $this->log->writeLog('Starting synchronisation');
+
+            /**** Exact > Magento Product Sync ****/
+            if($this->_enableExactProductSync) {
+                $exactProductSynchronize = Mage::getModel('exactonline/sync_exact_product');
+                $exactProductSynchronize->runUpdate();
+            }
+
+            if (!$this->canContinue()) {
+                return false;
+            }
+
+            /***** Exact > Magento Customer Sync ****/
+            if ($this->_enableExactCustomerSync) {
+                 $customerSync = Mage::getModel('exactonline/sync_exact_customer');
+                 $customerSync->runUpdate();
+            }
+
+            if (!$this->canContinue()) {
+                return false;
+            }
+
+            /********* PRODUCTS ********/
+            if($this->_enableProducts) {
+                $this->log->writeLog('Starting product synchronisation','Products');
+
+                // Create filters to build a collection of products to sync.
+                $filter = array('type_id' => array('in'=>array('simple','bundle')));
+
+                // Start synchronisation
+                $magentoProduct = Mage::getModel('exactonline/sync_magento_product');
+                if($magentoProduct->synchronizeProducts($filter,$lastSyncdateProduct)) {
+                    $this->log->writeLog('Product synchronisation finished without error','Products');
+                }else {
+                    $this->log->writeLog('Product synchronisation finished with errrors','Products');
+                }
+            }
+            /****** END PRODUCTS ******/
+
+            if (!$this->canContinue()) {
+                return false;
+            }
+
+            /********* CUSTOMERS *******/
+            if($this->_enableCustomers) {
+                $this->log->writeLog('Starting customer synchronisation','Customers');
+
+                // Create filters to build a collection of customers to sync
+                $customGroups = explode(',', $this->settings->getSetting('not_sync_customer_groups'));
+                $filter = array('group_id' => array('nin' => $customGroups));
+
+                $magentoCustomer = Mage::getModel('exactonline/sync_magento_customer');
+                if($magentoCustomer->synchronizeCustomers($filter,$lastSyncdateCustomer)) {
+                    $this->log->writeLog('Customer synchronisation finished without error','Customers');
+                }else {
+                    $this->log->writeLog('Customer synchronisation finished with errrors','Customers');
+                }
+            }
+            /****** END CUSTOMERS ******/
+
+            if (!$this->canContinue()) {
+                return false;
+            }
+
+            /********* VERKOOPBOEKINGEN *******/
+            if($this->_enableTransactions) {
+                $this->log->writeLog('Starting transaction synchronisation','Transactions');
+
+                // Create filters to build a collection of orders to sync
+                $filter = array(
+                    'updated_at'=>array('from'=>$lastSyncdateOrder),
+                    'status'=> array('in'=>explode(',',$this->settings->getSetting('order_sync_status')))
+                );
+
+                $magentoTransaction = Mage::getModel('exactonline/sync_magento_transaction');
+                if($magentoTransaction->synchronizeTransactions($filter, $lastSyncdateOrder)) {
+                    $this->log->writeLog('Transaction synchronisation finished without errors','Transactions');
+                }else {
+                    $this->log->writeLog('Transaction synchronisation finished with errors','Transactions');
+                }
+
+                // Credit transactions
+                $this->log->writeLog('Starting Credit Invoice synchronisation','CreditInvoice');
+
+                // Create filter to build collection of credits to sync
+                $filter = array('updated_at'=>array('from'=>$lastSyncdateCreditOrder));
+
+                $magentoTransactionCredit = Mage::getModel('exactonline/sync_magento_transaction_credit');
+                if($magentoTransactionCredit->synchronizeCreditTransactions($filter)) {
+                    $this->log->writeLog('CreditTransction synchronisation finished without errors','CreditTransaction');
+                }else {
+                    $this->log->writeLog('CreditTransction synchronisation finished with errors','CreditTransaction');
+                }
+            }
+
+            /******* END VERKOOPBOEKINGEN *****/
+
+            if (!$this->canContinue()) {
+                return false;
+            }
+
+            /********* VERKOOPFACTUUR *******/
+            if($this->_enableSalesInvoices) {
+/*                $this->log->writeLog('Starting Invoices synchronisation','Invoices');
+
+                // Create filters to buid a collection of orders to sync
+                $filter = array('updated_at' => array('from'=>$lastSyncdateOrder),'status' => array('in' => explode(',',$this->settings->getSetting('order_sync_status'))));
+
+                // Build XML and send to Exact Online
+                $magentoOrder = Mage::getModel('exactonline/sync_magento_invoice');
+                if($magentoOrder->synchronizeInvoices($filter,$lastSyncdateOrder)) {
+                    $this->log->writeLog('Invoice synchronisation finished without errors','Invoices');
+                }else {
+                    $this->log->writeLog('Invoice synchronisation finished with errors','Invoices');
+                }*/
+
+                $this->log->writeLog('Starting Credit Invoice synchronisation','CreditInvoice');
+
+                // Create filter to build collection of credits to sync
+                $filter = array(
+                    'created_at' => array('from'=>$syncStartDate),
+                    'updated_at'=>array('from'=>$lastSyncdateCreditOrder));
+
+                $magentoInvoiceCredit = Mage::getModel('exactonline/sync_magento_invoice_credit');
+                if($magentoInvoiceCredit->synchronizeCreditInvoices($filter, $lastSyncdateCreditOrder)) {
+                    $this->log->writeLog('CreditInvoice synchronisation finished without errors','CreditInvoice');
+                }else {
+                    $this->log->writeLog('CreditInvoice synchronisation finished with errors','CreditInvoice');
+                }
+            }
+            /******** END VERKOOPFACTUUR ****/
+
+            if (!$this->canContinue()) {
+                return false;
+            }
+
+            /********* VERKOOP ORDER *******/
+            if($this->_enableSalesOrders) {
+
+                $this->log->writeLog('Startig SalesOrders synchronisation','SalesOrders');
+
+                $filter = array(
+                    'created_at' => array('from'=>$syncStartDate),
+                    'updated_at' => array('from'=>$lastSyncdateOrder),'status' => array('in' => explode(',',$this->settings->getSetting('order_sync_status'))));
+
+                $magentoOrder = Mage::getModel('exactonline/sync_magento_order');
+                if($magentoOrder->synchronizeOrders($filter,$lastSyncdateOrder)) {
+                    $this->log->writeLog('SalesOrder synchronisation finished without errors','SalesOrders');
+                }else {
+                    $this->log->writeLog('SalesOrder synchronisation finished with errors','SalesOrders');
+                }
+            }
+            /******** END VERKOOP ORDER ****/
+
+            if (!$this->canContinue()) {
+                return false;
+            }
+
+            /********* LEVERINGEN *******/
+            if($this->_enableDeliveries) {
+
+                $this->log->writeLog('Starting Delivery synchronisation','Deliveries');
+                $filter = array('updated_at' => array('from'=>$lastSyncdateDelivery));
+
+                $magentoOrder = Mage::getModel('exactonline/sync_magento_delivery');
+                if($magentoOrder->syncDeliveries($filter)) {
+                    $this->log->writeLog('Delivery synchronisation finished without errors','Deliveries');
+                }else {
+                    $this->log->writeLog('Delivery synchronisation finished with errors','Deliveries');
+                }
+            }
+
+            if (!$this->canContinue()) {
+                return false;
+            }
+
+            if($this->_enableStockSync) {
+                $exactStock = Mage::getModel('exactonline/sync_exact_stock');
+                $exactStock->synchronizeStock();
+            }
+
+            if (!$this->canContinue()) {
+                return false;
+            }
+
+            /********* PRIJSLIJSTEN *******/
+            if ($this->_enablePriceListSync) {
+                $listSync = Mage::getModel('exactonline/sync_magento_price_list');
+                $listSync->runUpdate($lastSyncdatePricelist);
+            }
+            /******** END PRIJSLIJSTEN ****/
+
+            $this->setLock("unlock");
+        } else {
+            throw new Exception(Mage::helper('exactonline')->__('Could not start the module. The module is locked or turned off.'));
+        }
+	}
+
+    /**
+     * Check if the connector is enabled and unlocked. When an error occurs during the sync
+     * the connector stays locked. We check how long the connector is locked and unlock it
+     * when 3 hours have passed.
+     *
+     * @return bool
+     */
+	private function isReadyToGo()
+	{
+		// Check if the module is disabled
+		$moduleEnabled = ($this->settings->getSetting("link_enabled") == 'true') ? true : false;
+
+        if(!$moduleEnabled){
+			$this->log->writeLog('Synchronisation is disabled. Use link_enabled to activate the module');
+			return false;
+		}
+
+		// Check if the module is currently running or is locked
+		$locked = $this->settings->getSetting('lock') == '1' ? true : false;
+
+		if($locked) {
+			//$runningSince   = strtotime($this->settings->getSetting('running_since'));
+            $runningSince   = strtotime($this->settings->getSetting('last_heartbeat'));
+			$currentTime    = strtotime(date($this->_dateFormat));
+			$lockedSince    = abs($currentTime-$runningSince);
+
+			if($lockedSince > 900) {
+				$this->setLock('unlock');
+				$this->log->writeLog('No heartbeat detected for 15 minutes, unlocking module.');
+				return true;
+			}else {
+				$this->log->writeLog('Module is locked. Synchronisation not started.');
+				return false;
+			}
+		}else {
+			return true;
+		}
+	}
+
+	private function setLock($lock)
+	{
+		switch($lock) {
+			case 'lock':
+				$this->settings->saveSetting('lock',1);
+				break;
+			case 'unlock':
+			$this->settings->saveSetting('lock', 0);
+			break;
+		}
+	}
+
+    protected function _isDebugMode()
+    {
+        $debugMode = $this->settings->getSetting('debug_mode');
+
+        if($debugMode == '1') {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function _initSyncStatus()
+    {
+        if ($this->settings->getSetting('enable_products') == '0') {
+            $this->_enableProducts = false;
+            $this->_enableExactProductSync = false;
+        }
+
+        if ($this->settings->getSetting('enable_customers') == '0') {
+            $this->_enableCustomers = false;
+            $this->_enableExactCustomerSync = false;
+        }
+
+        if ($this->settings->getSetting('enable_orders') == '0') {
+            $this->_enableTransactions = false;
+            $this->_enableSalesOrders = false;
+        }
+
+        if ($this->settings->getSetting('enable_credits') == '0') {
+            $this->_enableSalesInvoices = false;
+        }
+
+        if ($this->settings->getSetting('enable_delivery') == '0') {
+            $this->_enableDeliveries = false;
+        }
+
+        if ($this->settings->getSetting('enable_stock') == '0') {
+            $this->_enableStockSync = false;
+        }
+
+        if ($this->settings->getSetting('enable_pricelist') == '0') {
+            $this->_enablePriceListSync = false;
+        }
+    }
+
+    public function canContinue()
+    {
+        $tool = Mage::getSingleton('exactonline/tools_tooling');
+        if(!$tool->canContinue($this->settings->getSetting("running_since"), $this->settings->getSetting("max_script_runtime"))) {
+            $this->log->writeLog('Maximum time exceeded after customer sync. Aborting synchronisation.');
+            $this->setLock("unlock");
+            return false;
+        }
+
+        return true;
+    }
+
+}

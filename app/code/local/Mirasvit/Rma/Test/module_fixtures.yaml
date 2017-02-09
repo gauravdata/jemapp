@@ -160,3 +160,32 @@ tables:
   rma/rma:
     - rma_id: 2
       is_admin_read: 2
+  rma/rule:
+    - rule_id: 2
+      name: John Doe
+      event: string
+      email_subject: john_test@example.com
+      email_body: john_test@example.com
+      is_active: 2
+      conditions_serialized:  |
+        text, text, text
+        text, text, text
+        text, text, text.
+      is_send_owner: 2
+      is_send_department: 2
+      is_send_user: 2
+      other_email: john_test@example.com
+      sort_order: 2
+      is_stop_processing: 2
+      status_id: 2
+      user_id: 2
+      is_send_attachment: 2
+      is_resolved: 2
+  rma/rma_order:
+    - rma_order_id: 2
+      rma_id: 2
+      exchange_order_id: 2
+  rma/rma_creditmemo:
+    - rma_creditmemo_id: 2
+      rma_id: 2
+      credit_memo_id: 2

@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -19,7 +19,7 @@
 class Varien_Data_Form_Element_Mfile extends Varien_Data_Form_Element_Abstract
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $data
      */
@@ -30,7 +30,7 @@ class Varien_Data_Form_Element_Mfile extends Varien_Data_Form_Element_Abstract
     }
 
     /**
-     * Return element html code
+     * Return element html code.
      *
      * @return string
      */
@@ -48,7 +48,7 @@ class Varien_Data_Form_Element_Mfile extends Varien_Data_Form_Element_Abstract
     }
 
     /**
-     * Return html code of delete checkbox element
+     * Return html code of delete checkbox element.
      *
      * @return string
      */
@@ -59,11 +59,11 @@ class Varien_Data_Form_Element_Mfile extends Varien_Data_Form_Element_Abstract
             $label = Mage::helper('core')->__('Delete File');
             $html .= '<span class="delete-image">';
             $html .= '<input type="checkbox"'
-                . ' name="' . parent::getName() . '[delete]" value="1" class="checkbox"'
-                . ' id="' . $this->getHtmlId() . '_delete"' . ($this->getDisabled() ? ' disabled="disabled"': '')
-                . ' style="margin-left: -25px;"/>';
-            $html .= '<label for="' . $this->getHtmlId() . '_delete"'
-                . ($this->getDisabled() ? ' class="disabled"' : '') . '> ' . $label . '</label>';
+                .' name="'.parent::getName().'[delete]" value="1" class="checkbox"'
+                .' id="'.$this->getHtmlId().'_delete"'.($this->getDisabled() ? ' disabled="disabled"' : '')
+                .' style="margin-left: -25px;"/>';
+            $html .= '<label for="'.$this->getHtmlId().'_delete"'
+                .($this->getDisabled() ? ' class="disabled"' : '').'> '.$label.'</label>';
             $html .= $this->_getHiddenInput();
             $html .= '</span>';
         }
@@ -72,17 +72,17 @@ class Varien_Data_Form_Element_Mfile extends Varien_Data_Form_Element_Abstract
     }
 
     /**
-     * Return html code of hidden element
+     * Return html code of hidden element.
      *
      * @return string
      */
     protected function _getHiddenInput()
     {
-        return '<input type="hidden" name="' . parent::getName() . '[value]" value="' . $this->getValue() . '" />';
+        return '<input type="hidden" name="'.parent::getName().'[value]" value="'.$this->getValue().'" />';
     }
 
     /**
-     * Return name
+     * Return name.
      *
      * @return string
      */

@@ -66,36 +66,88 @@ class Uni_Autoregister_Model_Observer {
                         $write = $resource->getConnection ( 'core_write' );
                         $write->query ( "UPDATE ".Mage::getSingleton('core/resource')->getTableName('sales_flat_order')." SET customer_id = '" . $_custid . "', customer_is_guest = '0', customer_group_id = '1' WHERE entity_id = '" . $_order->getId() . "'" );
 
-                        /*
                         $_orderBilling = $_orderDetails->getBillingAddress();
+			$_orderShipping = $_orderDetails->getShippingAddress();
 
-                        $address = Mage::getModel("customer/address");
-                        $address->setCustomerId($_custid)
-                            ->setFirstname($customer->getFirstname())
-                            ->setMiddleName($customer->getMiddlename())
-                            ->setLastname($customer->getLastname())
-                            ->setCountryId($_orderBilling->getCountryId())
-                            //->setRegionId('1') //state/province, only needed if the country is USA
-                            ->setPostcode($_orderBilling->getPostcode())
-                            ->setCity($_orderBilling->getCity())
-                            ->setTelephone($_orderBilling->getTelephone())
-                            ->setFax($_orderBilling->getFax())
-                            ->setCompany($_orderBilling->getCompany())
-                            ->setStreet($_orderBilling->getStreet())
-                            ->setRegionId($_orderBilling->getRegionId())
-                            ->setIsDefaultBilling('1')
-                            //        ->setIsDefaultShipping('1')
-                            ->setSaveInAddressBook('1');
-                        $address->save();
-                        */
+			$defaultBilling = $customer->getDefaultBillingAddress();
+			$defaultShipping = $customer->getDefaultShippingAddress();
+			$useForShipping = false;
+
+			if (!$this->sameAddress($_orderBilling, $defaultBilling)) {
+	                        $address = Mage::getModel("customer/address");
+        	                $address->setCustomerId($_custid)
+                	            ->setFirstname($customer->getFirstname())
+                        	    ->setMiddleName($customer->getMiddlename())
+	                            ->setLastname($customer->getLastname())
+        	                    ->setCountryId($_orderBilling->getCountryId())
+                	            //->setRegionId('1') //state/province, only needed if the country is USA
+                        	    ->setPostcode($_orderBilling->getPostcode())
+		                    ->setCity($_orderBilling->getCity())
+                	            ->setTelephone($_orderBilling->getTelephone())
+	                            ->setFax($_orderBilling->getFax())
+	                            ->setCompany($_orderBilling->getCompany())
+        	                    ->setStreet($_orderBilling->getStreet())
+                	            ->setRegionId($_orderBilling->getRegionId())
+	                            ->setIsDefaultBilling('1')
+        	                    //        ->setIsDefaultShipping('1')
+                	            ->setSaveInAddressBook('1');
+			
+				if ($this->sameAddress($_orderBilling, $_orderShipping)) {
+					$address->setIsDefaultShipping('1');
+					$useForShipping = true;
+				}
+        	                $address->save();
+			}
+
+			if (!$this->sameAddress($_orderBilling, $defaultShipping)) {
+				if (!$useForShipping) {
+		                        $address = Mage::getModel("customer/address");
+        		                $address->setCustomerId($_custid)
+                		            ->setFirstname($customer->getFirstname())
+                        		    ->setMiddleName($customer->getMiddlename())
+		                            ->setLastname($customer->getLastname())
+        			            ->setCountryId($_orderShipping->getCountryId())
+                	        	    //->setRegionId('1') //state/province, only needed if the country is USA
+	                	            ->setPostcode($_orderShipping->getPostcode())
+        	                	    ->setCity($_orderShipping->getCity())
+	                	            ->setTelephone($_orderShipping->getTelephone())
+        		              	    ->setFax($_orderShipping->getFax())
+		        	            ->setCompany($_orderShipping->getCompany())
+	                	            ->setStreet($_orderShipping->getStreet())
+        	                	    ->setRegionId($_orderShipping->getRegionId())
+	        	                    //->setIsDefaultBilling('1')
+        	        	            ->setIsDefaultShipping('1')
+		               	            ->setSaveInAddressBook('1');
+	        	                $address->save();
+				}
+			}
+                        
                     }
 /////***Save Address End***/////////                
                 } catch (Exception $e) {
                     Mage::logException($e);
+		die($e->getMessage());
                 }
                 Mage::getSingleton('checkout/session')->unsIsGuest();
             }
         }
+    }
+
+    private function sameAddress($address1, $address2) {
+	$excludeKeys = array('entity_id', 'customer_address_id', 'quote_address_id', 'region_id', 'customer_id', 'address_type', 'default_billing', 'default_shipping');
+	if (!$address1) return false;
+	if (!$address2) return false;
+	$data1 = $address1->getData();
+	$data2 = $address2->getData();
+	$dataFiltered1 = array_diff_key($data1, array_flip($excludeKeys));
+	$dataFiltered2 = array_diff_key($data2, array_flip($excludeKeys));
+
+	$diff = array_diff($dataFiltered1, $dataFiltered2);
+	if ($diff) {
+		//Mage::log(implode('-', $diff), null, 'twm.log'');
+		return false;
+	}
+	return true;
     }
 
 }

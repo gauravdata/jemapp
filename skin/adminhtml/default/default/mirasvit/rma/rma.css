@@ -18,7 +18,6 @@ li.visibility-2 {
     padding-top: 5px;
 }
 
-
 .rma-comments .comment {
   *zoom: 1;
   position: relative;
@@ -28,7 +27,9 @@ li.visibility-2 {
   -moz-border-radius: 0px 5px 5px 0px;
   border-radius: 0px 5px 5px 0px;
   padding: 10px;
+  word-wrap: break-word;
 }
+
 .rma-comments {
 	margin-top: -20px;
 	margin-bottom: -40px;
@@ -102,7 +103,8 @@ li.visibility-2 {
 }
 
 .rmaadmin-adminhtml-rma-edit .hor-scroll table.form-list td.value textarea#reply,
-.rmaadmin-adminhtml-rma-add .hor-scroll table.form-list td.value textarea#reply {
+.rmaadmin-adminhtml-rma-add .hor-scroll table.form-list td.value textarea#reply,
+textarea#reply{
   height: 15em;
   width: 100%;
   padding: 10px 13px;
@@ -111,8 +113,35 @@ li.visibility-2 {
   border-left: 5px solid #8eb589;
 }
 .rmaadmin-adminhtml-rma-edit .hor-scroll table.form-list td.value textarea#reply.internal,
-.rmaadmin-adminhtml-rma-add .hor-scroll table.form-list td.value textarea#reply.internal {
+.rmaadmin-adminhtml-rma-add .hor-scroll table.form-list td.value textarea#reply.internal,
+textarea#reply.internal {
   border: 1px solid #dd9898;
   background: #fffafa;
   border-left: 5px solid #dd9898;
+}
+
+
+h3.icon-head.head-adminhtml-reason,
+h3.icon-head.head-adminhtml-condition,
+h3.icon-head.head-adminhtml-resolution,
+h3.icon-head.head-adminhtml-rule {
+  background-image: url('../../images/fam_folder_database.gif');
+}
+h3.icon-head.head-adminhtml-report-rma,
+h3.icon-head.head-adminhtml-report-rma-product,
+h3.icon-head.head-adminhtml-report-rma-brand {
+  background-image: url('../../images/fam_money.gif');
+}
+h3.icon-head.head-adminhtml-rma {
+  background-image: url('../../images/fam_folder_table.gif');
+}
+
+#sales_order_view_tabs_rma b,
+#customer_info_tabs_rma b,
+#ticket_tabs_rma b {
+    color: #a94442;
+}
+
+button.delete.margin-right-40px {
+  margin-right: 40px;
 }

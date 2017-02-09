@@ -9,15 +9,21 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/**
+ * @method Mirasvit_Rma_Model_Condition getFirstItem()
+ * @method Mirasvit_Rma_Model_Condition getLastItem()
+ * @method Mirasvit_Rma_Model_Resource_Condition_Collection|Mirasvit_Rma_Model_Condition[] addFieldToFilter
+ * @method Mirasvit_Rma_Model_Resource_Condition_Collection|Mirasvit_Rma_Model_Condition[] setOrder
+ */
 class Mirasvit_Rma_Model_Resource_Condition_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
-
     protected function _construct()
     {
         $this->_init('rma/condition');
@@ -29,9 +35,11 @@ class Mirasvit_Rma_Model_Resource_Condition_Collection extends Mage_Core_Model_M
         if ($emptyOption) {
             $arr[0] = array('value' => 0, 'label' => Mage::helper('rma')->__('-- Please Select --'));
         }
+        /** @var Mirasvit_Rma_Model_Condition $item */
         foreach ($this as $item) {
             $arr[] = array('value' => $item->getId(), 'label' => $item->getName());
         }
+
         return $arr;
     }
 
@@ -41,12 +49,13 @@ class Mirasvit_Rma_Model_Resource_Condition_Collection extends Mage_Core_Model_M
         if ($emptyOption) {
             $arr[0] = Mage::helper('rma')->__('-- Please Select --');
         }
+        /** @var Mirasvit_Rma_Model_Condition $item */
         foreach ($this as $item) {
             $arr[$item->getId()] = $item->getName();
         }
+
         return $arr;
     }
-
 
     protected function initFields()
     {
@@ -63,6 +72,7 @@ class Mirasvit_Rma_Model_Resource_Condition_Collection extends Mage_Core_Model_M
     public function setStoreId($storeId)
     {
         $this->storeId = $storeId;
+
         return $this;
     }
 
@@ -76,5 +86,4 @@ class Mirasvit_Rma_Model_Resource_Condition_Collection extends Mage_Core_Model_M
     }
 
      /************************/
-
 }

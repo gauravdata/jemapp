@@ -1,3 +1,6 @@
+SetEnvIf X-Forwarded-Proto https HTTPS=on
+SetEnvIf X-Forwarded-Proto https HAPROXY=on
+
 # ----------------------------------------------------------------------
 # | Forcing `https://`                                                 |
 # ----------------------------------------------------------------------
@@ -6,11 +9,14 @@
 # https://wiki.apache.org/httpd/RewriteHTTPToHTTPS
 
 <IfDefine !DEV>
+<IfDefine !HAPROXY>
 <IfModule mod_rewrite.c>
    RewriteEngine On
+   RewriteCond %{REQUEST_URI} !^/media/xmlFeedExport
    RewriteCond %{HTTPS} !=on
    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 </IfModule>
+</IfDefine>
 </IfDefine>
 
 ############################################
@@ -270,6 +276,7 @@ RewriteRule ^retour\.pdf retour-nt.pdf [L]
     ExpiresByType image/gif                             "access plus 1 month"
     ExpiresByType image/jpeg                            "access plus 1 month"
     ExpiresByType image/png                             "access plus 1 month"
+    ExpiresByType image/webp                             "access plus 1 month"
     ExpiresByType video/mp4                             "access plus 1 month"
     ExpiresByType video/ogg                             "access plus 1 month"
     ExpiresByType video/webm                            "access plus 1 month"
@@ -286,6 +293,10 @@ RewriteRule ^retour\.pdf retour-nt.pdf [L]
     ExpiresByType image/svg+xml                         "access plus 1 month"
 
 </IfModule>
+
+<filesMatch ".(css|jpg|jpeg|png|gif|js|ico)$">
+Header set Cache-Control "max-age=2592000, public"
+</filesMatch>
 
 SetEnvIf Host no\-tomatoes\.de MAGE_RUN_CODE=default_de
 

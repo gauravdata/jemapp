@@ -1,0 +1,57 @@
+<script type="text/javascript">
+    //<![CDATA[
+    function <?php echo $this->getButtonId();?>MtEmailAction() {
+        var respDiv = document.getElementById('mtemail_apply_message_<?php echo $this->getButtonId();?>');
+        var respDiv2 = document.getElementById('mtemail_apply_message_error_<?php echo $this->getButtonId();?>');
+        respDiv.style.display = 'none';
+        respDiv2.style.display = 'none';
+
+        new Ajax.Request('<?php echo $this->getAjaxCheckUrl() ?>', {
+            method:     'get',
+            onSuccess: function(transport){
+                if (transport.responseText){
+                    response = JSON.parse(transport.responseText);
+                    if (response.success) {
+                        document.getElementById('mtemail_apply_response_<?php echo $this->getButtonId();?>').innerHTML = response.success;
+                        respDiv.style.display = 'block';
+                    } else {
+                        document.getElementById('mtemail_apply_response_error_<?php echo $this->getButtonId();?>').innerHTML = response.error;
+                        respDiv2.style.display = 'block';
+                    }
+
+                }
+            }
+        });
+    }
+
+    //]]>
+</script>
+
+<span><?php echo $this->getButtonHtml() ?></span>
+<p class="note">
+    <span id="mtemail_apply_button_note"><?php echo $this->getNote(); ?></span>
+</p>
+
+<div id="mtemail_apply_message_<?php echo $this->getButtonId();?>" style="display: none">
+    <ul class="messages">
+        <li class="success-msg">
+            <ul>
+                <li>
+                    <span id="mtemail_apply_response_<?php echo $this->getButtonId();?>"></span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div id="mtemail_apply_message_error_<?php echo $this->getButtonId();?>" style="display: none">
+    <ul class="messages">
+        <li class="error-msg">
+            <ul>
+                <li>
+                    <span id="mtemail_apply_response_error_<?php echo $this->getButtonId();?>"></span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
