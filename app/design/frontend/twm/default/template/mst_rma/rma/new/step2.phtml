@@ -10,17 +10,22 @@
         <?php echo $this->getBlockHtml('formkey')?>
         <input name="form_uid" type="hidden" value="<?php echo rand(1, 1000) ?>">
 
-        <h2 class="legend"><?php echo $this->__('Enter information for each item') ?></h2>
+        <div class="fieldset">
+            <h2 class="legend"><?php echo $this->__('Enter information for each item') ?></h2>
+        </div>
         <?php if ($this->getAllowGift()): ?>
             <?php echo $this->getChildHtml('rma.new.gift') ?>
         <?php endif?>
 
-        <table width="100%">
+        <table class="data-table order" id="my-orders-reason-table">
             <thead>
                 <tr>
                     <th></th>
                     <th>
                         <?php echo $this->__('Product Name') ?>
+                    </th>
+                    <th>
+                        <?php echo $this->__('Qty') ?>
                     </th>
                     <th>
                         <?php echo $this->__('Order') ?>
