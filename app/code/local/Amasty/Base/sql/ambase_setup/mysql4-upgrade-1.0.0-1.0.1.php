@@ -1,13 +1,14 @@
 <?php
-/**
- * @author Amasty Team
- * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
- * @package Amasty_Base
- */
-
 $this->startSetup();
 
-Amasty_Base_Helper_Module::baseModuleInstalled();
+$v = Mage::getStoreConfig('ambase/feed/installed');
+if (!$v){
+    Mage::getModel('core/config_data')
+        ->setScope('default')
+        ->setPath('ambase/feed/installed')
+        ->setValue(time())
+        ->save();     
+}
 
 $feedData = array();
 $feedData[] = array(

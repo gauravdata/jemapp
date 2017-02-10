@@ -1,47 +1,6 @@
 <?php
-/**
- * @author Amasty Team
- * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
- * @package Amasty_Base
- */
-
 class Amasty_Base_Adminhtml_BaseController extends Mage_Adminhtml_Controller_Action
 {
-    protected $_moduleHelper;
-    
-    protected function _getModuleHelper($code)
-    {
-        if (!$this->_moduleHelper)
-        {
-            $this->_moduleHelper = Mage::helper("ambase/module")->init($code);
-        }
-        
-        return $this->_moduleHelper;
-    }
-    
-    public function closeUpdateAction()
-    {
-        $code = Mage::app()->getRequest()->getParam('code');
-        
-        $moduleHelper = $this->_getModuleHelper($code);
-        
-        if ($moduleHelper->isNewVersionAvailable())
-        {
-            $moduleHelper->setModuleUpdated();
-        }
-    }
-    
-    public function closePromoAction()
-    {
-        $collection = Mage::helper("ambase/promo")->getNotificationsCollection();
-        
-        foreach($collection as $notification)
-        {
-            $notification->setIsRead(true);
-            $notification->save();
-        }
-    }
-    
     public function ajaxAction()
     {
         $helper = Mage::helper("ambase");
