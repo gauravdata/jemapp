@@ -1,8 +1,6 @@
 <?php
 /**
- * @author Amasty Team
- * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
- * @package Amasty_Base
+ * @copyright   Copyright (c) 2010 Amasty (http://www.amasty.com)
  */ 
 class Amasty_Base_Block_Adminhtml_Debug_Rewrite extends Amasty_Base_Block_Adminhtml_Debug_Base
 {
