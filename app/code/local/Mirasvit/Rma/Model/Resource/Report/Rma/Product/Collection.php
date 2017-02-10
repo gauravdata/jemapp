@@ -9,10 +9,11 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Model_Resource_Report_Rma_Product_Collection extends Mage_Sales_Model_Mysql4_Report_Collection_Abstract
@@ -37,19 +38,21 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Product_Collection extends Mage_Sal
         if (!is_null($this->_to)) {
             $this->getSelect()->where($this->_periodFormat.' <= ?', $this->_to);
         }
+
         return $this;
     }
+
 
     public function _applyStoresFilter()
     {
-        return $this;
+        $this->getSelect()->where('store_id = 0');
+//        return $this->_applyStoresFilterToSelect($this->getSelect());
     }
-
     public function setFilterData($filterData)
     {
-        // if (isset($filterData['report_type'])) {
-        //     $this->_reportType = $filterData['report_type'];
-        // }
+        if (isset($filterData['report_type'])) {
+            $this->_reportType = $filterData['report_type'];
+        }
         return $this;
     }
 
@@ -69,6 +72,23 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Product_Collection extends Mage_Sal
             'qty_items' => 'sum(qty_requested)',
         );
 
+        if ($this->_reportType == 'resolution') {
+            $reasons = Mage::getModel('rma/resolution')->getCollection()
+                ->addFieldToFilter('is_active', true);
+        } elseif ($this->_reportType == 'condition') {
+                $reasons = Mage::getModel('rma/condition')->getCollection()
+                    ->addFieldToFilter('is_active', true);
+        } else {
+            $reasons = Mage::getModel('rma/reason')->getCollection()
+                ->addFieldToFilter('is_active', true);
+
+        }
+
+        foreach ($reasons as $reason) {
+            $this->_selectedColumns['reason'.$reason->getId()] = 'SUM(if(reason_id = '.$reason->getId().', 1, 0))';
+        }
+
+
         // if ($this->isTotals()) {
         // }
 
@@ -77,10 +97,10 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Product_Collection extends Mage_Sal
         return $this->_selectedColumns;
     }
 
-    protected  function _initSelect()
+    protected function _initSelect()
     {
         $select = $this->getSelect();
-        $select->from(array('main_table' => $this->getResource()->getMainTable()) , $this->_getSelectedColumns());
+        $select->from(array('main_table' => $this->getResource()->getMainTable()), $this->_getSelectedColumns());
 
         $select->joinLeft(array('product' => $this->getTable('catalog/product')), 'main_table.product_id = product.entity_id', array('product_sku' => 'product.sku'));        //$select->joinLeft(array('customer' => $this->getTable('customer/customer')), 'main_table.customer_id = customer.customer_id', array('customer_name' => 'customer.name'));
         // $select->joinLeft(array('product_varchar' => $this->getTable('catalog/product')), 'main_table.product_id = product.entity_id', array('product_sku' => 'product.sku'));        //$select->joinLeft(array('customer' => $this->getTable('customer/customer')), 'main_table.customer_id = customer.customer_id', array('customer_name' => 'customer.name'));
@@ -89,7 +109,7 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Product_Collection extends Mage_Sal
         // alias then field name
         $productAttributes = array('product_name' => 'name');
         foreach ($productAttributes as $alias => $attributeCode) {
-            $tableAlias = $attributeCode . '_table';
+            $tableAlias = $attributeCode.'_table';
             $attribute = Mage::getSingleton('eav/config')
             ->getAttribute(Mage_Catalog_Model_Product::ENTITY, $attributeCode);
 
@@ -100,14 +120,13 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Product_Collection extends Mage_Sal
                     array($alias => 'value')
             );
         }
-        $select->where('qty_requested > 0');
-
+        $select->where('qty_requested > 0 and store_id = 0');
 
         if (!$this->isTotals() && !$this->isSubTotals()) {
             //поля по которым будут сделаны группировки при выводе отчета
             $select->group(array(
                 $this->_periodFormat,
-                'product_id'
+                'product_id',
             ));
         }
         if ($this->isSubTotals()) {
@@ -116,10 +135,9 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Product_Collection extends Mage_Sal
             ));
         }
 
-        // echo $this->getSelect();
+//                 echo $this->getSelect();
         return $this;
     }
 
     /************************/
-
 }

@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -33,4 +33,8 @@ class Mirasvit_Rma_Block_Rma_Guest_View extends Mirasvit_Rma_Block_Rma_View
         return Mage::getUrl('rma/guest/savecomment', array('id' => $this->getRma()->getGuestId(), 'shipping_confirmation' => true));
     }
 
+    public function getListUrl()
+    {
+        return Mage::getUrl('rma/guest/list');
+    }
 }

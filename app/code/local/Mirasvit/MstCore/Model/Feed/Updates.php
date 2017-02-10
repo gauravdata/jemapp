@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -19,7 +19,9 @@ class Mirasvit_MstCore_Model_Feed_Updates extends Mirasvit_MstCore_Model_Feed_Ab
 {
     public function check()
     {
-        if (time() - intval(Mage::app()->loadCache(Mirasvit_MstCore_Helper_Config::UPDATES_FEED_URL)) > 12 * 60 * 60) {
+        if (Mage::helper('mstcore/config')->isNotificationsEnabled() &&
+            time() - intval(Mage::app()->loadCache(Mirasvit_MstCore_Helper_Config::UPDATES_FEED_URL)) > 12 * 60 * 60
+        ) {
             $this->refresh();
         }
     }
@@ -50,7 +52,9 @@ class Mirasvit_MstCore_Model_Feed_Updates extends Mirasvit_MstCore_Model_Feed_Ab
                 }
             }
 
-            Mage::getModel('adminnotification/inbox')->parse($items);
+            if (Mage::getModel('adminnotification/inbox')) {
+                Mage::getModel('adminnotification/inbox')->parse($items);
+            }
         } catch (Exception $ex) {
             Mage::logException($ex);
         }

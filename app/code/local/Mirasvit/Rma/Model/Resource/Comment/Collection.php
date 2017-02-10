@@ -9,15 +9,21 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/**
+ * @method Mirasvit_Rma_Model_Comment getFirstItem()
+ * @method Mirasvit_Rma_Model_Comment getLastItem()
+ * @method Mirasvit_Rma_Model_Resource_Comment_Collection|Mirasvit_Rma_Model_Comment[] addFieldToFilter
+ * @method Mirasvit_Rma_Model_Resource_Comment_Collection|Mirasvit_Rma_Model_Comment[] setOrder
+ */
 class Mirasvit_Rma_Model_Resource_Comment_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
-
     protected function _construct()
     {
         $this->_init('rma/comment');
@@ -29,9 +35,11 @@ class Mirasvit_Rma_Model_Resource_Comment_Collection extends Mage_Core_Model_Mys
         if ($emptyOption) {
             $arr[0] = array('value' => 0, 'label' => Mage::helper('rma')->__('-- Please Select --'));
         }
+        /** @var Mirasvit_Rma_Model_Comment $item */
         foreach ($this as $item) {
             $arr[] = array('value' => $item->getId(), 'label' => $item->getName());
         }
+
         return $arr;
     }
 
@@ -41,18 +49,19 @@ class Mirasvit_Rma_Model_Resource_Comment_Collection extends Mage_Core_Model_Mys
         if ($emptyOption) {
             $arr[0] = Mage::helper('rma')->__('-- Please Select --');
         }
+        /** @var Mirasvit_Rma_Model_Comment $item */
         foreach ($this as $item) {
             $arr[$item->getId()] = $item->getName();
         }
+
         return $arr;
     }
-
 
     protected function initFields()
     {
         $select = $this->getSelect();
         $select->joinLeft(array('status' => $this->getTable('rma/status')), 'main_table.status_id = status.status_id', array('status_name' => 'status.name'));
-        $select->joinLeft(array('user' => $this->getTable('admin/user')), 'main_table.user_id = user.user_id', array('user_name' => 'CONCAT(user.firstname, user.lastname)'));
+        $select->joinLeft(array('user' => $this->getTable('admin/user')), 'main_table.user_id = user.user_id', array('user_name' => 'CONCAT(user.firstname, \' \', user.lastname)'));
         // $select->joinLeft(array('customer' => $this->getTable('customer/entity')), 'main_table.customer_id = customer.customer_id', array('customer_name' => 'customer.name'));
         // $select->columns(array('is_replied' => new Zend_Db_Expr("answer <> ''")));
         $this->setOrder('created_at');
@@ -65,5 +74,4 @@ class Mirasvit_Rma_Model_Resource_Comment_Collection extends Mage_Core_Model_Mys
     }
 
      /************************/
-
 }

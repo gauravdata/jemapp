@@ -9,60 +9,62 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
-class Mirasvit_Rma_GuestController extends Mage_Core_Controller_Front_Action
+require_once Mage::getModuleDir('controllers', 'Mirasvit_Rma').DS.'AbstractRmaController.php';
+
+/**
+ * Public form for enter to RMA as guest.
+ *
+ * Class Mirasvit_Rma_Rma_GuestController
+ */
+class Mirasvit_Rma_GuestController extends Mirasvit_Rma_AbstractRmaController
 {
-
-    protected function _getSession()
+    /**
+     * Post action. Checks for correct email/order
+     * @return void
+     */
+    public function guestAction()
     {
-        return Mage::getSingleton('customer/session');
-    }
-
-    public function _initOrder()
-    {
-        if (($orderId = Mage::app()->getRequest()->getParam('order_increment_id')) &&
-            ($email = Mage::app()->getRequest()->getParam('email'))) {
-        	$orderId = trim($orderId);
-        	$orderId = str_replace('#', '', $orderId);
-            $collection = Mage::getModel('sales/order')->getCollection()
-                ->addAttributeToSelect('*')
-                ->addFieldToFilter('increment_id', $orderId);
-                ;
-            if ($collection->count()) {
-                $order =  $collection->getFirstItem();
-                $email = trim(strtolower($email));
-                if ($email != strtolower($order->getCustomerEmail())
-                    && $email != strtolower($order->getCustomerLastname())) {
-                    return false;
-                }
-                return $order;
-            }
+        $session = $this->_getSession();
+        $customer = Mage::getSingleton('customer/session')->getCustomer();
+        if ($customer->getId()) {
+            $this->_redirectUrl(Mage::helper('rma/url')->getNewRmaUrl());
+            return;
         }
-    }
-
-    public function newAction()
-    {
-        $session  = $this->_getSession();
-    	$customer = Mage::getSingleton('customer/session')->getCustomer();
-    	if ($customer->getId()) {
-    		$this->_redirect('rma/rma/new');
-    		return;
-    	}
         try {
             $order = $this->_initOrder();
             if ($order) {
+                // Check for return eligibility
                 if (!Mage::helper('rma')->isReturnAllowed($order)) {
-                    throw new Mage_Core_Exception(Mage::helper('rma')->__("This order were placed more than %s days ago. Please, contact customer service.", Mage::helper('rma')->getReturnPeriod()));
+                    $daysLeft = Mage::helper('rma/order')->getOrderAvailableDays($order->getId());
+                    if ($daysLeft < 0) {
+                        $errMessage = Mage::helper('rma')->__(
+                            'This order were placed more than %s days ago. Please, contact customer service.',
+                            Mage::helper('rma')->getReturnPeriod());
+                    } else {
+                        $errMessage = Mage::helper('rma')->__(
+                            'This order is fully processed, returns unavailable.');
+                    }
+                    throw new Mage_Core_Exception($errMessage);
                 }
-                Mage::register('current_order', $order);
-                $this->_getSession()->setRMAGuestOrderId($order->getId());
+                $this->_getSession()->setRmaGuestOrderId($order->getId());
+                $this->_getSession()->setRmaGuestEmail($order->getCustomerEmail());
+                $this->_redirectUrl(Mage::helper('rma/url')->getGuestRmaListUrl());
+
+                return;
             } elseif (Mage::app()->getRequest()->getParam('order_increment_id')) {
-                throw new Mage_Core_Exception(Mage::helper('rma')->__("Wrong Order #, Email or Last Name"));
+                $store = Mage::app()->getStore();
+                if (Mage::getSingleton('rma/config')->getPolicyAllowGuestOfflineRMA($store)) {
+                    $this->_getSession()->setRmaGuestEmail(Mage::app()->getRequest()->getParam('email'));
+                    $this->_redirectUrl(Mage::helper('rma/url')->getGuestOfflineRmaUrl());
+                } else {
+                    throw new Mage_Core_Exception(Mage::helper('rma')->__('Wrong Order #, Email or Last Name'));
+                }
             }
         } catch (Mage_Core_Exception $e) {
             $session->addError($e->getMessage());
@@ -73,107 +75,56 @@ class Mirasvit_Rma_GuestController extends Mage_Core_Controller_Front_Action
         $this->renderLayout();
     }
 
-    protected function _initRma()
+    /**
+     * @return void
+     */
+    public function offlineAction()
     {
-        if ($id = $this->getRequest()->getParam('id')) {
-            $rma = Mage::getModel('rma/rma')->getCollection()
-              ->addFieldToFilter('main_table.guest_id', $id)
-              ->getFirstItem();
-
-            if ($rma->getId() > 0) {
-                Mage::register('current_rma', $rma);
-                Mage::register('external_rma', true);
-                return $rma;
-            }
-        }
-    }
-
-    public function viewAction()
-    {
-        if ($rma = $this->_initRma()) {
-            if ($this->getRequest()->getParam('shipping_confirmation')) {
-                $rma->confirmShipping();
-            }
-            $this->markAsRead($rma);
-            $this->loadLayout();
-            $this->_initLayoutMessages('customer/session');
-            $this->renderLayout();
-        } else {
-            $this->_forward('no_rote');
-        }
-    }
-
-    public function saveAction()
-    {
-        $session  = $this->_getSession();
-        $data = $this->getRequest()->getParams();
-        $items = $data['items'];
-        unset($data['items']);
-
-        try {
-            if ($session->getRMAGuestOrderId() != $data['order_id']) {
-                throw new Mage_Core_Exception("Error Processing Request", 1);
-            }
-
-            $rma = Mage::helper('rma/process')->createRmaFromPost($data, $items);
-            $session->addSuccess($this->__('RMA was successfuly created'));
-            $this->_redirectUrl($rma->getGuestUrl());
-        } catch (Mage_Core_Exception $e) {
-            $session->addError($e->getMessage());
-            $session->setFormData($data);
-            $this->_redirect('*/*/*');
-        }
-    }
-
-    public function savecommentAction()
-    {
-        $session  = $this->_getSession();
-        $customer = $session->getCustomer();
-        $rmaId = $this->getRequest()->getParam('id');
-        if (!$rma = $this->_initRma()) {
-            throw new Mage_Core_Exception("Error Processing Request", 1);
-        }
-
-        try {
-            Mage::helper('rma/process')->createCommentFromPost($rma, $this->getRequest()->getParams());
-            if ($this->getRequest()->getParam('shipping_confirmation')) {
-                $rma->confirmShipping();
-                $session->addSuccess(Mage::helper('rma')->__('Shipping is confirmed. Thank you!'));
-            } else {
-                $session->addSuccess($this->__('Your comment was successfuly added'));
-            }
-            $this->_redirectUrl($rma->getGuestUrl());
-        } catch (Mage_Core_Exception $e) {
-            $session->addError($e->getMessage());
-            $this->_redirect('*/*/index');
-        }
-    }
-
-    public function printAction()
-    {
-        if (!$rma = $this->_initRma()) {
-            return;
-        }
-        $this->loadLayout('print');
+        $this->loadLayout();
+        $this->_initLayoutMessages('customer/session');
         $this->renderLayout();
     }
 
-    public function printlabelAction()
+    /**
+     * @param Mirasvit_Rma_Model_Rma $rma
+     *
+     * @return string
+     */
+    protected function getRmaViewUrl($rma)
     {
-        if (!$rma = $this->_initRma()) {
-            return;
-        }
-
-        if ($label = $rma->getReturnLabel()) {
-            $this->_redirectUrl($label->getUrl());
-        } else {
-            $this->_forward('no_rote');
-        }
+        return Mage::helper('rma/url')->getGuestRmaViewUrl($rma);
     }
 
-    protected function markAsRead($rma) {
-        if ($comment = $rma->getLastComment()) {
-            $comment->setIsRead(true)->save();
+    /**
+     * @return string
+     */
+    protected function getRmaListUrl()
+    {
+        return Mage::helper('rma/url')->getGuestRmaListUrl();
+    }
+
+    /**
+     * @return false|Mage_Sales_Model_Order
+     */
+    protected function _initOrder()
+    {
+        if (($orderId = Mage::app()->getRequest()->getParam('order_increment_id')) &&
+            ($email = Mage::app()->getRequest()->getParam('email'))) {
+            $orderId = trim($orderId);
+            $orderId = str_replace('#', '', $orderId);
+            $collection = Mage::getModel('sales/order')->getCollection()
+                ->addAttributeToSelect('*')
+                ->addFieldToFilter('increment_id', $orderId);
+            if ($collection->count()) {
+                $order = $collection->getFirstItem();
+                $email = trim(strtolower($email));
+                if ($email != strtolower($order->getCustomerEmail())
+                    && $email != strtolower($order->getCustomerLastname())) {
+                    return false;
+                }
+
+                return $order;
+            }
         }
     }
 }

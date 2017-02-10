@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -39,40 +39,41 @@ class Mirasvit_Rma_Block_Adminhtml_Report_Rma_Brand_Grid extends Mirasvit_Rma_Bl
         }
 
         $this->addColumn('created_at', array(
-            'header'            => Mage::helper('reports')->__('Period'),
-            'index'             => 'created_at',
-            'width'             => 100,
-            'sortable'          => false,
-            'period_type'       => $this->getPeriodType(),
-            'renderer'          => 'adminhtml/report_sales_grid_column_renderer_date',
-            'totals_label'  => Mage::helper('adminhtml')->__('Total'),
-            'subtotals_label'   => Mage::helper('adminhtml')->__('SubTotal')
+            'header' => Mage::helper('reports')->__('Period'),
+            'index' => 'created_at',
+            'width' => 100,
+            'sortable' => false,
+            'period_type' => $this->getPeriodType(),
+            'renderer' => 'adminhtml/report_sales_grid_column_renderer_date',
+            'totals_label' => Mage::helper('adminhtml')->__('Total'),
+            'subtotals_label' => Mage::helper('adminhtml')->__('SubTotal'),
         ));
-        
+
         $this->addColumn('product_brand_option', array(
-            'header'    => Mage::helper('rma')->__('Brand'),
-            'index'     => 'product_brand_option',
-            'type'      => 'text',
-            'sortable'  => false,
+            'header' => Mage::helper('rma')->__('Brand'),
+            'index' => 'product_brand_option',
+            'type' => 'text',
+            'sortable' => false,
             )
         );
         $this->addColumn('qty_returns', array(
-            'header'    => Mage::helper('rma')->__('Number of returns'),
-            'index'     => 'qty_returns',
-            'type'      => 'number',
-            'sortable'  => false,
+            'header' => Mage::helper('rma')->__('Number of returns'),
+            'index' => 'qty_returns',
+            'type' => 'number',
+            'sortable' => false,
             )
         );
         $this->addColumn('qty_items', array(
-            'header'    => Mage::helper('rma')->__('Number of returned items'),
-            'index'     => 'qty_items',
-            'type'      => 'number',
-            'sortable'  => false,
+            'header' => Mage::helper('rma')->__('Number of returned items'),
+            'index' => 'qty_items',
+            'type' => 'number',
+            'sortable' => false,
             )
         );
 
         $this->addExportType('*/*/exportCsv', Mage::helper('adminhtml')->__('CSV'));
         $this->addExportType('*/*/exportExcel', Mage::helper('adminhtml')->__('Excel XML'));
+
         return parent::_prepareColumns();
     }
 
@@ -96,9 +97,9 @@ class Mirasvit_Rma_Block_Adminhtml_Report_Rma_Brand_Grid extends Mirasvit_Rma_Bl
         if (!$data->hasData('report_type')) {
             $data->setData('report_type', 'all');
         }
+
         return $data;
     }
 
     /************************/
-
 }

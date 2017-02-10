@@ -9,90 +9,178 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Block_Adminhtml_Rma_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
-    public function __construct ()
+    /**
+     * Contruct.
+     */
+    public function __construct()
     {
         parent::__construct();
         $this->_objectId = 'rma_id';
         $this->_controller = 'adminhtml_rma';
         $this->_blockGroup = 'rma';
 
-
         // $this->_updateButton('save', 'label', Mage::helper('rma')->__('Save'));
         $this->_removeButton('save');
-        $this->_updateButton('delete', 'label', Mage::helper('rma')->__('Delete'));
+        $this->_removeButton('delete');
 
+        $this->_addButton('update_continue', array(
+             'label' => Mage::helper('rma')->__('Update And Continue Edit'),
+             'onclick' => 'saveAndContinueEdit()',
+             'class' => 'save saveAndContinueRmaBtn',
+         ), -100);
 
-        // $this->_addButton('update_continue', array(
-        //     'label'     => Mage::helper('helpdesk')->__('Update And Continue Edit'),
-        //     'onclick'   => 'saveAndContinueEdit()',
-        //     'class'     => 'save saveAndContinueRmaBtn',
-        // ), -100);
         $this->_addButton('update', array(
-            'label'     => Mage::helper('rma')->__('Update'),
-            'onclick'   => 'saveEdit()',
-            'class'     => 'save saveRmaBtn',
+            'label' => Mage::helper('rma')->__('Update'),
+            'onclick' => 'saveEdit()',
+            'class' => 'save saveRmaBtn',
         ), -100);
 
         $this->_formScripts[] = "
             function saveEdit(){
-                editForm.submit($('edit_form').action);
+                if (validateOfflineOrder()) {
+                    editForm.submit($('edit_form').action);
+                }
             }
             function saveAndContinueEdit(){
-                editForm.submit($('edit_form').action + 'back/edit/');
+                if (validateOfflineOrder()) {
+                    editForm.submit($('edit_form').action + 'back/edit/');
+                } else {
+                    alert('".
+                        Mage::helper('sales')->__("\'Order or Receipt #\' and \'Returned Item\' are required").
+                    "')
+                }
+            }
+            function disableActionButton(button) {
+                button.disabled = true;
+                button.classList.add('disabled');
+            }
+            function validateOfflineOrder() {
+                var isValid = true;
+                if ($$('.UI-ORDER-CONTAINER').length) {
+                    $$('.UI-OFFLINE-ORDER-INPUT').each(function(item) {
+                        if (!item.value.length) {
+                            isValid = false;
+                        }
+                    });
+                    $$('.UI-ITEMNAME').each(function(item) {
+                        if (!item.value.length) {
+                            isValid = false;
+                        }
+                    });
+                }
+
+                return isValid;
             }
         ";
         $rma = $this->getRma();
         if ($rma) {
-            if (Mage::helper('rma/order')->canCreateCreditmemo($rma)) {
-                $mode = Mage::getSingleton('rma/config')->getGeneralIsManualCreditmemo();
-                if ($mode == 1 || $mode == 2) {
-                    $order = $rma->getOrder();
-                    $this->_addButton('order_creditmemo_manual', array(
-                        'label'     => Mage::helper('sales')->__('Create Credit Memo'.($mode==2?' Manually':'')),
-                        'onclick'   => 'var win = window.open(\'' . $this->getCreditmemoUrl($order) . '\', \'_blank\');win.focus();',
-                    ));
-                }
+            $this->_addButton('print', array(
+                'label' => Mage::helper('sales')->__('Print'),
+                'onclick' => 'var win = window.open(\''.$rma->getPrintUrl().'\', \'_blank\');win.focus();',
+            ));
 
-                if ($mode == 0 || $mode == 2) {
-                    $this->_addButton('order_creditmemo_auto', array(
-                        'label'     => Mage::helper('sales')->__('Create Credit Memo'.($mode==2?' Auto':'')),
-                        'onclick'   => 'window.location = \'' . $this->getUrl('*/*/creditmemo', array('rma_id' => $rma->getId())) . '\';',
-                    ));
-                }
+            $this->_addButton('order_exchange', array(
+                'label' => Mage::helper('sales')->__('Exchange Order'),
+                'onclick' => 'disableActionButton(this); var win = window.open(\''.
+                    $this->getCreateOrderUrl($rma).'\', \'_blank\');win.focus();',
+            ));
+
+            $this->_addButton('order_replace', array(
+                'label' => Mage::helper('sales')->__('Replacement Order'),
+                'class' => ($rma->getExchangeOrderIds()) ? 'disabled' : '',
+                'disabled' => $rma->getExchangeOrderIds(),
+                'onclick' => 'disableActionButton(this); var win = window.open(\''.
+                    Mage::helper('adminhtml')->getUrl('adminhtml/rma_rma/createReplacement/',
+                        array('customer_id' => $rma->getCustomerId(), 'store_id' => $rma->getStoreId(),
+                            'rma_id' => $rma->getId())).'\', \'_blank\');win.focus();',
+            ));
+        }
+
+        if ($this->getRma()) {
+            if ($this->isArchive()) {
+                $this->_addButton('restore', array(
+                    'label' => Mage::helper('rma')->__('Restore RMA'),
+                    'onclick' => 'setLocation(\''.$this->getRestoreUrl().'\')',
+                    'class' => 'save rma-archive-button',
+                ), -1, 1);
+            } else {
+                $this->_addButton('archive', array(
+                    'label' => Mage::helper('rma')->__('Archive'),
+                    'onclick' => "deleteConfirm('Are you sure you want to do this?','".$this->getArchiveUrl()."')",
+                    'class' => 'delete rma-archive-button',
+                ), -1, 1);
             }
-            if (!$rma->getExchangeOrderId() && Mage::helper('rma/order')->canCreateExchangeOrder($rma)) {
-                $this->_addButton('order_exchange', array(
-                    'label'     => Mage::helper('sales')->__('Create Exchange Order'),
-                    // 'onclick'   => "jQuery.remodal.lookup[jQuery('[data-remodal-id=order-exchange-popup]').data('remodal')].open()",
-                    'onclick'   => 'window.location = \'' . $this->getUrl('*/*/exchange', array('rma_id' => $rma->getId())) . '\';',
-                ));
-            }
+            $this->_addButton('delete', array(
+                'label' => Mage::helper('adminhtml')->__('Delete'),
+                'class' => 'delete margin-right-40px',
+                'label' => Mage::helper('rma')->__('Delete'),
+                'onclick' => 'deleteConfirm(\''
+                    .Mage::helper('core')->jsQuoteEscape(
+                        Mage::helper('adminhtml')->__('Are you sure you want to do this?')
+                    )
+                    .'\', \''
+                    .$this->getDeleteUrl()
+                    .'\')',
+            ), -1, 4);
         }
 
         return $this;
     }
 
-    public function getCreditmemoUrl($order)
+    /**
+     * @return bool
+     */
+    public function isArchive()
     {
-        $collection = Mage::getModel('sales/order_invoice')->getCollection()
-                    ->addFieldToFilter('order_id', $order->getId());
-        // echo $collection->getSelect();die;
-        if ($collection->count() == 1) {
-            $invoice = $collection->getFirstItem();
-            return $this->getUrl('adminhtml/sales_order_creditmemo/new', array('order_id' => $order->getId(), 'invoice_id' => $invoice->getId()));
-        } else {
-            return $this->getUrl('adminhtml/sales_order_creditmemo/new', array('order_id' => $order->getId()));
-        }
+        return Mage::registry('is_archive');
     }
 
+    /**
+     * @return string
+     */
+    public function getArchiveUrl()
+    {
+        return $this->getUrl('*/*/archive', array('id' => $this->getRma()->getId()));
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeleteUrl()
+    {
+        return $this->getUrl('*/*/delete', array('id' => $this->getRma()->getId()));
+    }
+
+    /**
+     * @return string
+     */
+    public function getRestoreUrl()
+    {
+        return $this->getUrl('*/*/restore', array('id' => $this->getRma()->getId()));
+    }
+
+    /**
+     * @param Mirasvit_Rma_Model_Rma $rma
+     *
+     * @return string
+     */
+    public function getCreateOrderUrl($rma)
+    {
+        return $this->getUrl('adminhtml/sales_order_create/index/',
+            array('customer_id' => $rma->getCustomerId(), 'store_id' => $rma->getStoreId(), 'rma_id' => $rma->getId()));
+    }
+
+    /**
+     */
     protected function _prepareLayout()
     {
         parent::_prepareLayout();
@@ -101,6 +189,9 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Edit extends Mage_Adminhtml_Block_Widget_
         }
     }
 
+    /**
+     * @return Mirasvit_Rma_Model_Rma
+     */
     public function getRma()
     {
         if (Mage::registry('current_rma') && Mage::registry('current_rma')->getId()) {
@@ -108,15 +199,17 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Edit extends Mage_Adminhtml_Block_Widget_
         }
     }
 
-    public function getHeaderText ()
+    /**
+     * @return string
+     */
+    public function getHeaderText()
     {
         if ($rma = $this->getRma()) {
-            return Mage::helper('rma')->__("RMA #%s - %s", $rma->getIncrementId(), $rma->getStatus()->getName());
+            return Mage::helper('rma')->__('RMA #%s - %s', $rma->getIncrementId(), $rma->getStatus()->getName());
         } else {
             return Mage::helper('rma')->__('Create New RMA');
         }
     }
 
     /************************/
-
 }

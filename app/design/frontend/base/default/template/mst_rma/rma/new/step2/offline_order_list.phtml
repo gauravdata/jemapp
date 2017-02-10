@@ -1,0 +1,69 @@
+<?php
+/* @var $this Mirasvit_Rma_Block_Rma_New_Step2_OfflineOrderList */
+?>
+<?php foreach ($this->getItems() as $receiptNumber => $items): ?>
+    <?php
+    $order = $this->getOrderByReceiptNumber($receiptNumber);
+    ?>
+    <?php foreach ($items as $itemName => $item): ?>
+        <?php
+        $qty = $item['qty'];
+        ?>
+        <tr>
+            <td>
+                <input type="hidden" name="offline_items[<?php echo $order->getId() ?>][<?php echo $itemName; ?>][receipt_number]" value="<?php echo $order->getReceiptNumber() ?>">
+                <input type="hidden" name="offline_items[<?php echo $order->getId() ?>][<?php echo $itemName; ?>][qty_requested]"
+                       value="<?php echo $qty; ?>"
+                    >
+                <input type="hidden" name="offline_items[<?php echo $order->getId() ?>][<?php echo $itemName; ?>][name]"
+                       value="<?php echo $itemName ?>"
+                    >
+            </td>
+            <td>
+                <b><?php echo $itemName ?></b>
+            </td>
+            <td>
+                <?php echo $qty; ?>
+            </td>
+            <td><?php echo $receiptNumber; ?></td>
+            <td>
+                <?php if ($this->getConfig()->isCustomerReasonRequired()): ?>
+                    <div class="rma__customer-option">
+                        <label id="user-conditional" class="required"><?php echo $this->__('Reason') ?><em id="em-requered"> *</em></label>
+
+                        <select name="offline_items[<?php echo $order->getId() ?>][<?php echo $itemName ?>][reason_id]" id="reason_id<?php echo $itemName ?>" class="required-entry">
+                            <option value=""><?php echo $this->__('-- Select a Reason --')?></option>
+                            <?php foreach ($this->getReasonCollection() as $reason): ?>
+                                <option value="<?php echo $reason->getId()?>"><?php echo $reason->getName() ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                <?php endif ?>
+                <?php if ($this->getConfig()->isCustomerConditionRequired()): ?>
+                    <div class="rma__customer-option">
+                        <label id="user-conditional" class="required"><?php echo $this->__('Condition') ?><em id="em-requered"> *</em></label>
+
+                        <select name="offline_items[<?php echo $order->getId() ?>][<?php echo $itemName ?>][condition_id]" id="condition_id<?php echo $itemName ?>" class="required-entry">
+                            <option value=""><?php echo $this->__('-- Select a Condition --')?></option>
+                            <?php foreach ($this->getConditionCollection() as $condition): ?>
+                                <option value="<?php echo $condition->getId()?>"><?php echo $condition->getName() ?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                <?php endif ?>
+                <?php if ($this->getConfig()->isCustomerResolutionRequired()): ?>
+                    <div class="rma__customer-option">
+                        <label id="user-conditional" class="required"><?php echo $this->__('Resolution') ?><em id="em-requered"> *</em></label>
+
+                        <select name="offline_items[<?php echo $order->getId() ?>][<?php echo $itemName ?>][resolution_id]" id="resolution_id<?php echo $itemName ?>" class="required-entry">
+                            <option value=""><?php echo $this->__('-- Select a Resolution --')?></option>
+                            <?php foreach ($this->getResolutionCollection() as $resolution): ?>
+                                <option value="<?php echo $resolution->getId()?>"><?php echo $resolution->getName() ?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                <?php endif; ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+<?php endforeach; ?>

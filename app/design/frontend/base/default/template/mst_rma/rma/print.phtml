@@ -1,19 +1,22 @@
+<?php /* @var Mirasvit_Rma_Block_Rma_Print $this */ ?>
 <?php
 $printComments = false; //you can change this
 
-
 $rma = $this->getRma();
-$order = $rma->getOrder();
+$orders = $rma->getOrders();
 $customFields = $this->getCustomFields();
 ?>
 
 <h1><?php echo $this->__('RMA #%s', $rma->getIncrementId()) ?></h1>
 
-<div class="rma-barcode">*<?php echo $rma->getIncrementId() ?>*</div>
+<!--<div class="rma-barcode">*--><?php //echo $rma->getIncrementId() ?><!--*</div>-->
 
 <p class="order-date">
     <?php echo $this->__('Date: %s', $this->formatDate($rma->getCreatedAt(), 'long')) ?><br>
-    <?php echo $this->__('Original order: #%s', $rma->getOrder()->getIncrementId()) ?>
+    <?php echo $this->__('Original orders: ') ?>
+    <?php foreach ($orders as $order): ?>
+        <div>#<?php echo $order->getIncrementId(); ?></div>
+    <?php endforeach; ?>
 </p>
 <div class="col3-set">
     <div class="col-1">
@@ -29,8 +32,16 @@ $customFields = $this->getCustomFields();
         <h2><?php echo $this->__('Additional Information') ?></h2>
         <address>
         <?php foreach ($customFields as $field): ?>
-        <?php if (!$value = Mage::helper('rma/field')->getValue($rma, $field)) continue; ?>
-            <b><?php echo $this->__($field->getName()) ?>:</b> <?php echo $value ?><br>
+        <?php if (!$value = Mage::helper('rma/field')->getValue($rma, $field)) {
+    continue;
+} ?>
+            <b><?php
+                if($field->getType() == 'textarea') {
+                    echo $this->__($field->getName()) . ':</b><br>' . nl2br($value);
+                } else {
+                    echo $this->__($field->getName()) . ':</b>' . $value;
+                }
+                ?><br>
         <?php endforeach; ?>
         </address>
     </div>
@@ -44,8 +55,9 @@ $customFields = $this->getCustomFields();
     <col width="1" />
     <thead>
         <tr>
-            <th><?php echo $this->__('Code') ?></th>
+<!--            <th>--><?php //echo $this->__('Code') ?><!--</th>-->
             <th width="50%"><?php echo $this->__('Product Name') ?></th>
+            <th><?php echo $this->__('Order') ?></th>
             <th><?php echo $this->__('SKU') ?></th>
             <th class="a-center"  width="10%"><?php echo $this->__('Qty') ?></th>
         </tr>
@@ -54,11 +66,25 @@ $customFields = $this->getCustomFields();
         <?php echo $this->getChildHtml('order_totals') ?>
     </tfoot>
     <tbody>
-    <?php foreach($rma->getItemCollection() as $item):?>
+    <?php foreach ($rma->getItemCollection() as $item):?>
         <tr class="border">
-            <td class="v-middle"><div class="rma-barcode">*<?php echo $item->getProduct()->getId() ?>*</div></td>
-            <td class="v-middle"><h3 class="product-name"><?php echo $item->getProduct()->getName() ?></h3></td>
-            <td class="v-middle"><?php echo $item->getProduct()->getSku() ?></td>
+<!--            <td class="v-middle"><div class="rma-barcode">*--><?php //echo $item->getProduct()->getId() ?><!--*</div></td>-->
+            <td class="v-middle"><h3 class="product-name"><?php echo Mage::helper('rma')->getOrderItemLabel($item) ?></h3></td>
+            <td class="v-middle">
+                <?php echo Mage::helper('rma')->getOrderLabel($item->getOrderId()); ?>
+            </td>
+            <td class="v-middle"><?php echo $item->getProductSku() ?></td>
+            <td class="a-center v-middle"><?php echo $item->getQtyRequested() ?></td>
+        </tr>
+    <?php endforeach?>
+    <?php foreach ($rma->getOfflineItemCollection() as $item):?>
+        <tr class="border">
+            <!--            <td class="v-middle"><div class="rma-barcode">*--><?php //echo $item->getProduct()->getId() ?><!--*</div></td>-->
+            <td class="v-middle"><h3 class="product-name"><?php echo $item->getName() ?></h3></td>
+            <td class="v-middle">
+                <?php echo $item->getOfflineOrder()->getReceiptNumber(); ?>
+            </td>
+            <td class="v-middle">-</td>
             <td class="a-center v-middle"><?php echo $item->getQtyRequested() ?></td>
         </tr>
     <?php endforeach?>
@@ -66,8 +92,8 @@ $customFields = $this->getCustomFields();
 </table>
 <?php if ($printComments && $this->getCommentCollection()->count()): ?>
 <div class="fieldset rma-history">
-    <h2 class="legend"><?php echo $this->__("RMA History") ?></h2>
-    <?php foreach($this->getCommentCollection() as $comment):?>
+    <h2 class="legend"><?php echo $this->__('RMA History') ?></h2>
+    <?php foreach ($this->getCommentCollection() as $comment):?>
     <div class="fieldset">
         <h2 class="legend">
             <?php if ($comment->getCustomerName()):?>

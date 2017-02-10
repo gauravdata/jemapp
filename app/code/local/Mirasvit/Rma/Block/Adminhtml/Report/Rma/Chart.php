@@ -9,12 +9,16 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/**
+ * @method Mirasvit_Rma_Block_Adminhtml_Report_Rma_Grid getGrid()
+ */
 class Mirasvit_Rma_Block_Adminhtml_Report_Rma_Chart extends Mage_Core_Block_Template
 {
     public function getCollection()
@@ -25,12 +29,12 @@ class Mirasvit_Rma_Block_Adminhtml_Report_Rma_Chart extends Mage_Core_Block_Temp
     public function isShowChart()
     {
         $collection = $this->getCollection();
-        if ($this->getCollection()->count() > 1 && $this->getFilterData()->getReportType() == 'all'){
+        if ($this->getCollection()->count() > 1 && $this->getFilterData()->getReportType() == 'all') {
             return true;
         }
+
         return false;
     }
 
     /************************/
-
 }

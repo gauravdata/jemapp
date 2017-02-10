@@ -9,10 +9,11 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Model_Resource_Report_Rma_Brand_Collection extends Mage_Sales_Model_Mysql4_Report_Collection_Abstract
@@ -37,12 +38,12 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Brand_Collection extends Mage_Sales
         if (!is_null($this->_to)) {
             $this->getSelect()->where($this->_periodFormat.' <= ?', $this->_to);
         }
+
         return $this;
     }
 
     public function _applyStoresFilter()
     {
-        return $this;
     }
 
     public function setFilterData($filterData)
@@ -77,17 +78,27 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Brand_Collection extends Mage_Sales
         return $this->_selectedColumns;
     }
 
-    protected  function _initSelect()
+    protected function _initSelect()
     {
-       $select = $this->getSelect();
-        $select->from(array('main_table' => $this->getResource()->getMainTable()) , $this->_getSelectedColumns());
+        $select = $this->getSelect();
+        $select->from(array('main_table' => $this->getResource()->getMainTable()), $this->_getSelectedColumns());
 
-        $select->joinLeft(array('product' => $this->getTable('catalog/product')), 'main_table.product_id = product.entity_id', array('product_sku' => 'product.sku'));        //$select->joinLeft(array('customer' => $this->getTable('customer/customer')), 'main_table.customer_id = customer.customer_id', array('customer_name' => 'customer.name'));
-        // $select->joinLeft(array('product_varchar' => $this->getTable('catalog/product')), 'main_table.product_id = product.entity_id', array('product_sku' => 'product.sku'));        //$select->joinLeft(array('customer' => $this->getTable('customer/customer')), 'main_table.customer_id = customer.customer_id', array('customer_name' => 'customer.name'));
+        // Wrong select for configurables fix - when product is configurable, make join on SKU
+        $select->joinLeft(array('order_item' => $this->getTable('sales/order_item')), 'main_table.order_item_id = order_item.item_id',
+            array('product_sku' => 'IF(INSTR(order_item.sku, "-") > 0 AND product.type_id != "simple", LEFT(order_item.sku, INSTR(order_item.sku, "-") - 1) , order_item.sku)'));
+        $select->joinLeft(array('product' => $this->getTable('catalog/product')), 'product.sku = IF(INSTR(order_item.sku, "-") > 0 AND product.type_id != "simple", LEFT(order_item.sku, INSTR(order_item.sku, "-") - 1) , order_item.sku)',
+            array('product_real_id' => 'product.entity_id'));
+
+        // Old selects - just for debug purpose
+        //$select->joinLeft(array('customer' => $this->getTable('customer/customer')), 'main_table.customer_id = customer.customer_id', array('customer_name' => 'customer.name'));
+        //$select->joinLeft(array('product' => $this->getTable('catalog/product')), 'main_table.product_id = product.entity_id', array('product_sku' => 'product.sku'));
+        //$select->joinLeft(array('customer' => $this->getTable('customer/customer')), 'main_table.customer_id = customer.customer_id', array('customer_name' => 'customer.name'));
+        //$select->joinLeft(array('product_varchar' => $this->getTable('catalog/product')), 'main_table.product_id = product.entity_id', array('product_sku' => 'product.sku'));
+        //$select->joinLeft(array('customer' => $this->getTable('customer/customer')), 'main_table.customer_id = customer.customer_id', array('customer_name' => 'customer.name'));
 
         $brandAttributeCode = Mage::getSingleton('rma/config')->getGeneralBrandAttribute();
         if (!$brandAttributeCode) {
-             die("Code of Brand Attribute is empty. Please, set it via RMA configuration.");
+            die('Code of Brand Attribute is empty. Please, set it via RMA configuration.');
         }
         $attribute = Mage::getSingleton('eav/config')
             ->getAttribute(Mage_Catalog_Model_Product::ENTITY, $brandAttributeCode);
@@ -98,17 +109,17 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Brand_Collection extends Mage_Sales
         // alias then field name
         $productAttributes = array('product_brand' => $brandAttributeCode);
         foreach ($productAttributes as $alias => $attributeCode) {
-            $tableAlias = $attributeCode . '_table';
+            $tableAlias = $attributeCode.'_table';
             $attribute = Mage::getSingleton('eav/config')
             ->getAttribute(Mage_Catalog_Model_Product::ENTITY, $attributeCode);
 
             //Add eav attribute value
             $this->getSelect()->joinLeft(
                     array($tableAlias => $attribute->getBackendTable()),
-                    "main_table.product_id = $tableAlias.entity_id AND $tableAlias.attribute_id={$attribute->getId()}",
+                    "product.entity_id = $tableAlias.entity_id AND $tableAlias.attribute_id={$attribute->getId()}",
                     array($alias => 'value')
             );
-            $tableOptionsAlias = $attributeCode . '_option_table';
+            $tableOptionsAlias = $attributeCode.'_option_table';
             //Add eav attribute value
             $this->getSelect()->joinLeft(
                     array($tableOptionsAlias => Mage::getConfig()->getTablePrefix().'eav_attribute_option_value'),
@@ -122,7 +133,7 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Brand_Collection extends Mage_Sales
             //поля по которым будут сделаны группировки при выводе отчета
             $select->group(array(
                 $this->_periodFormat,
-                'product_brand'
+                'product_brand',
             ));
         }
         if ($this->isSubTotals()) {
@@ -131,10 +142,9 @@ class Mirasvit_Rma_Model_Resource_Report_Rma_Brand_Collection extends Mage_Sales
             ));
         }
 
-        // echo $this->getSelect();
+//         echo $this->getSelect();
         return $this;
     }
 
     /************************/
-
 }

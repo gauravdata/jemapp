@@ -9,130 +9,229 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Helper_Order
 {
-
-    public function canCreateCreditmemo($rma)
+    /**
+     * @param Mirasvit_Rma_Model_Rma $rma
+     * @param Mage_Sales_Model_Order $order
+     *
+     * @return bool
+     */
+    public function canCreateCreditmemo($rma, $order)
     {
-        $order = $rma->getOrder();
-        if (!$order->canCreditmemo() || $rma->getCreditMemoId()) {
+        $creditModuleInstalled = Mage::helper('mstcore')->isModuleInstalled('Mirasvit_Credit');
+        if ($rma->getCreditMemoIds()) {
+            foreach ($rma->getCreditMemoIds() as $id) {
+                $creditmemo = Mage::getModel('sales/order_creditmemo')->load($id);
+                if ($creditmemo->getOrderId() == $order->getId()) {
+                    return false;
+                }
+            }
+        }
+
+        $refundResolution = Mage::helper('rma')->getResolutionByCode('refund');
+        $creditResolution = Mage::helper('rma')->getResolutionByCode('credit');
+
+        if ($creditModuleInstalled) {
+            if (!$creditResolution) {
+                return false;
+            }
+            $realPaidAmount = $rma->getStore()->roundPrice($order->getTotalPaid() + $order->getCreditInvoiced());
+            $realRefunded = $rma->getStore()->roundPrice($order->getTotalRefunded() + $order->getCreditTotalRefunded());
+            if (!$order->canCreditmemo() && abs($realPaidAmount - $realRefunded) < .0001) {
+                return false;
+            }
+        } else if (!$order->canCreditmemo() || !$refundResolution) {
             return false;
         }
+
         $haveItems = false;
-        if (!$status = Mage::helper('rma')->getResolutionByCode('refund')) {
-            return false;
-        }
-        $refundResolutionId = $status->getId();
-        foreach ($rma->getItemCollection() as $item) {
-            if ($item->getResolutionId() != $refundResolutionId) {
+        foreach (Mage::helper('rma')->getRmaItems($order, $rma) as $item) {
+            if ($item->getResolutionId() != $refundResolution->getId()) {
+                if ($creditModuleInstalled && $item->getResolutionId() == $creditResolution->getId()) {
+                    $haveItems = true;
+                }
                 continue;
             }
+
             $haveItems = true;
         }
+
         return $haveItems;
     }
 
-    public function canCreateExchangeOrder($rma)
+    /**
+     * Sends notification about new order creation
+     * @param Mage_Sales_Model_Order $order
+     * @return void
+     */
+    protected function sendOrderNotification($order)
     {
-        $haveItems = false;
-        if (!$status = Mage::helper('rma')->getResolutionByCode('exchange')) {
-            return false;
-        }
-        $exchangeResolutionId = $status->getId();
-        foreach ($rma->getItemCollection() as $item) {
-            if ($item->getResolutionId() != $exchangeResolutionId) {
-                continue;
+        try {
+            $order->sendNewOrderEmail();
+            $historyItem = Mage::getResourceModel('sales/order_status_history_collection')
+                ->getUnnotifiedForInstance($order, Mage_Sales_Model_Order::HISTORY_ENTITY_NAME);
+            if ($historyItem) {
+                $historyItem->setIsCustomerNotified(1);
+                $historyItem->save();
             }
-            $haveItems = true;
+        } catch (Exception $e) {
+            $this->_getSession()->addError($this->__('Failed to send replacement order email.'));
+            Mage::logException($e);
         }
-        return $haveItems;
     }
 
-	public function createExchangeOrder($rma)
-	{
-        $origOrder = $rma->getOrder();
-        $customer = $rma->getCustomer();
+    /**
+     * Updates order credentials with data from original orders
+     * @param Mage_Sales_Model_Order $order
+     * @param Mirasvit_Rma_Model_Rma $rma
+     * @return void
+     */
+    protected function updateOrderCredentials($order, $rma)
+    {
+        $origOrders = $rma->getOrders();
+        foreach ($origOrders as $origOrder) {
+            if ($origOrder->getIsOffline()) {
+                continue;
+            }
+
+            $order->setGlobalCurrencyCode($origOrder->getGlobalCurrencyCode())
+                ->setBaseCurrencyCode($origOrder->getBaseCurrencyCode())
+                ->setStoreCurrencyCode($origOrder->getStoreCurrencyCode())
+                ->setOrderCurrencyCode($origOrder->getOrderCurrencyCode());
+
+            // set Billing Address, if customer has no default billing address
+            if (!$order->getBillingAddress()) {
+                $data = $origOrder->getBillingAddress()->getData();
+                unset($data['entity_id']);
+                $billingAddress = Mage::getModel('sales/order_address')
+                    ->setData($data);
+                $order->setBillingAddress($billingAddress);
+            }
+
+            if ($origOrder->getShippingAddress()) {
+                $data = $origOrder->getShippingAddress()->getData();
+                unset($data['entity_id']);
+                $shippingAddress = Mage::getModel('sales/order_address')
+                    ->setData($data);
+                $order->setShippingAddress($shippingAddress)
+                    ->setShipping_method('flatrate_flatrate');
+            }
+        }
+    }
+
+    /**
+     * @param Mage_Catalog_Model_Product $product
+     * @param int $stockQty
+     * @param int $storeId
+     * @return void
+     */
+    public function updateStockQty($product, $stockQty, $storeId)
+    {
+        if (!($stockItem = $product->getStockItem())) {
+            $stockItem = Mage::getModel('cataloginventory/stock_item');
+            $stockItem->assignProduct($product)
+                ->setData('stock_id', 1)
+                ->setData('store_id', $storeId);
+        }
+
+        $stockQty = $stockItem->getQty() - $stockQty;
+        $stockItem->setData('qty', $stockQty)
+            ->setData('is_in_stock', $stockQty > 0 ? 1 : 0)
+            ->setData('manage_stock', 1)
+            ->setData('use_config_manage_stock', 0)
+            ->save();
+    }
+
+    /**
+     * @param Mirasvit_Rma_Model_Rma $rma
+     *
+     * @return void
+     * @throws Exception
+     * @throws Mage_Core_Exception
+     * @throws bool
+     */
+    public function createReplacementOrder($rma)
+    {
+        if (!$customer = $rma->getCustomer()) {
+            throw new Mage_Core_Exception('Replacement Orders available only for registered customers!');
+        }
 
         $transaction = Mage::getModel('core/resource_transaction');
-        $storeId = $origOrder->getStoreId();
+        $storeId = $rma->getStoreId();
+        if (!$storeId) {
+            $order = $rma->getOrders()->getLastItem();
+            if ($order) {
+                $storeId = $order->getStore()->getId();
+            }
+        }
         $reservedOrderId = Mage::getSingleton('eav/config')->getEntityType('order')->fetchNewIncrementId($storeId);
 
         $order = Mage::getModel('sales/order')
             ->setIncrementId($reservedOrderId)
             ->setStoreId($storeId)
             ->setQuoteId(0)
-            ->setGlobalCurrencyCode($origOrder->getGlobalCurrencyCode())
-            ->setBaseCurrencyCode($origOrder->getBaseCurrencyCode())
-            ->setStoreCurrencyCode($origOrder->getStoreCurrencyCode())
-            ->setOrderCurrencyCode($origOrder->getOrderCurrencyCode());
-
-        // set Customer data
-        $order->setCustomerEmail($customer->getEmail())
+            ->setCustomerEmail($customer->getEmail())
             ->setCustomerFirstname($customer->getFirstname())
             ->setCustomerLastname($customer->getLastname())
             ->setCustomerGroupId($customer->getGroupId())
             ->setCustomerIsGuest(0)
             ->setCustomer($customer);
 
-        // set Billing Address
-        $billing = $customer->getDefaultBillingAddress();
-        $data = $origOrder->getBillingAddress()->getData();
-        unset($data['entity_id']);
-        $billingAddress = Mage::getModel('sales/order_address')
-            ->setData($data);
-        $order->setBillingAddress($billingAddress);
-
-        $shipping = $customer->getDefaultShippingAddress();
-        $data = $origOrder->getShippingAddress()->getData();
-        unset($data['entity_id']);
-        $shippingAddress = Mage::getModel('sales/order_address')
-            ->setData($data);
-        $order->setShippingAddress($shippingAddress)
-            ->setShipping_method('flatrate_flatrate');
-        /*->setShippingDescription($this->getCarrierName('flatrate'));*/
-        /*some error i am getting here need to solve further*/
-
-        //you can set your payment method name here as per your need
         $orderPayment = Mage::getModel('sales/order_payment')
             ->setStoreId($storeId)
             ->setCustomerPaymentId(0)
             ->setMethod('purchaseorder')
-            // ->setPo_number(' – ')
-            ;
+        ;
         $order->setPayment($orderPayment);
+
+        // Emulate quote (some shipping/packaging software need it) by creating it from order
+        $converter = Mage::getModel('sales/convert_order');
+        $fakeQuote = $converter->toQuote($order);
+        $fakeQuote->save();
+
+        $order->setQuote($fakeQuote);
 
         // let say, we have 2 products
         //check that your products exists
         //need to add code for configurable products if any
         $subTotal = 0;
         $haveItems = false;
-        $exchangeResolutionId = Mage::helper('rma')->getResolutionByCode('exchange')->getId();
-        foreach ($rma->getItemCollection() as $item) {
-            if ($item->getResolutionId() != $exchangeResolutionId) {
+        foreach ($rma->getItemsCollection() as $item) {
+            if (!$item->isExchange()) {
                 continue;
             }
-            $product = $item->getProduct();
+
+            if (!$product = $item->getProduct()) {
+                continue;
+            };
+
             $qty = $item->getQtyRequested();
-            $rowTotal = $product->getPrice() * $qty;
+
+            $this->updateStockQty($product, $qty, $storeId);
+
             $rowTotal = 0;
 
             $orderItem = Mage::getModel('sales/order_item')
                 ->setStoreId($storeId)
                 ->setQuoteItemId(0)
-                ->setQuoteParentItemId(NULL)
+                ->setQuoteParentItemId(null)
                 ->setProductId($product->getId())
                 ->setProductType($product->getTypeId())
-                ->setQtyBackordered(NULL)
+                ->setQtyBackordered(null)
                 ->setTotalQtyOrdered($qty)
                 ->setQtyOrdered($qty)
                 ->setName($product->getName())
-                ->setSku($product->getSku())
+                ->setSku($item->getProductSku())
+                ->setWeight($item->getProduct()->getWeight())
+                ->setRowWeight($item->getOrderItem()->getRowWeight())
                 ->setPrice($product->getPrice())
                 ->setBasePrice($product->getPrice())
                 ->setOriginalPrice($product->getPrice())
@@ -144,7 +243,7 @@ class Mirasvit_Rma_Helper_Order
             $haveItems = true;
         }
         if (!$haveItems) {
-        	throw new Mage_Core_Exception("RMA does not have items with Exchange Resolution");
+            throw new Mage_Core_Exception('RMA does not contain valid items with Exchange Resolution');
         }
 
         $order->setSubtotal($subTotal)
@@ -152,167 +251,100 @@ class Mirasvit_Rma_Helper_Order
             ->setGrandTotal($subTotal)
             ->setBaseGrandTotal($subTotal);
 
+        $this->updateOrderCredentials($order, $rma);
+
         $transaction->addObject($order);
         $transaction->addCommitCallback(array($order, 'place'));
         $transaction->addCommitCallback(array($order, 'save'));
         $transaction->save();
-        $rma->setExchangeOrderId($order->getId())
-            ->save();
-        if ($this->getConfig()->getGeneralIsSendExchangeOrderConfirmation()) {
-            $order->sendNewOrderEmail();
-        }
-	}
 
-    public function createCreditMemo($rma)
-    {
-        $order = $rma->getOrder();
-        if (!$order->canCreditmemo()) {
-            throw new Mage_Core_Exception("You can't create a Credit Memo for order of this RMA");
-        }
+        //we have fake empty quote here. we need it for this event.
+        $quote = Mage::getModel('sales/quote')->setInventoryProcessed(false);
+        Mage::dispatchEvent('checkout_submit_all_after', array('order' => $order, 'quote' => $quote));
 
-        $service = Mage::getModel('rma/service_order', $order);
-        $data = array(
-            'items' => array(),
-            'qtys' => array(),
-            'comment_text' => 'auto created credit memo',
-            'shipping_amount' => 0,
-            'adjustment_positive' => 0,
-            'adjustment_negative' => 0,
-        );
-        $refundResolutionId = Mage::helper('rma')->getResolutionByCode('refund')->getId();
-        $haveItems = false;
-        foreach ($rma->getItemCollection() as $item) {
-            if ($item->getResolutionId() != $refundResolutionId) {
-                continue;
-            }
-            $orderItemId = $item->getOrderItemId();
-            $orderItem = Mage::getModel('sales/order_item')->load($orderItemId);
-            if ($item->getProduct()->isConfigurable()) {
-                $data['qtys'][$orderItem->getId()] = $item->getQtyRequested();
-                $data['items'][$orderItem->getId()] = array('qty' => $item->getQtyRequested());
-                $collection = Mage::getModel('sales/order_item')->getCollection()
-                                ->addFieldToFilter('parent_item_id', $orderItem->getId());
-                $orderItem = $collection->getFirstItem();
-            }
-            $data['qtys'][$orderItem->getId()] = $item->getQtyRequested();
-            $data['items'][$orderItem->getId()] = array('qty' => $item->getQtyRequested());
-
-            $haveItems = true;
-        }
-        if (!$haveItems) {
-            throw new Mage_Core_Exception("RMA does not have items with Refund Resolution");
-        }
-
-        //$creditmemo = $service->prepareCreditmemo($data);
-        $invoice = $this->getInvoiceByOrder($order);
-        $creditmemo = $service->prepareInvoiceCreditmemo($invoice, $data);
-
-        foreach ($creditmemo->getAllItems() as $creditmemoItem) {
-            foreach ($rma->getItemCollection() as $item) {
-                if ($item->getProductId() == $creditmemoItem->getProductId()) {
-                    $creditmemoItem->setBackToStock($item->getToStock());
-                    if ($item->getToStock()) {
-                        foreach ($creditmemo->getAllItems() as $creditmemoItem2) {
-                            if ($creditmemoItem->getSku() === $creditmemoItem2->getSku()) {
-                                $creditmemoItem2->setBackToStock($item->getToStock());
-                            }
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-// pr($data);die;
-//
-        if ($this->isOnlineRefundAllowed($creditmemo)) {
-            $creditmemo->setOfflineRequested(false);
-        } else {
-            $creditmemo->setOfflineRequested(true);
-        }
-        $creditmemo->setRefundRequested(true);
-        $this->setupAdjustment($creditmemo, $order);
-        $this->setupShippingFee($creditmemo, $order);
-
-        $creditmemo->setGrandTotal(0);
-        $creditmemo->setBaseGrandTotal(0);
-        $creditmemo->setBaseTaxAmount(0);
-        $creditmemo->setTaxAmount(0);
-        $creditmemo->collectTotals();
-        $creditmemo->register();
-
-        $this->_saveCreditmemo($creditmemo);
-
-        $rma->setCreditMemoId($creditmemo->getId())
-            ->save();
+        $this->sendOrderNotification($order);
     }
 
-    protected function isOnlineRefundAllowed($creditmemo)
-    {
-        if (!$this->getConfig()->getGeneralIsOnlineRefund()) {
-            return false;
-        }
-        if ($creditmemo->canRefund()) {
-            if ($creditmemo->getInvoice() && $creditmemo->getInvoice()->getTransactionId()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    protected function _saveCreditmemo($creditmemo)
-    {
-        $transactionSave = Mage::getModel('core/resource_transaction')
-            ->addObject($creditmemo)
-            ->addObject($creditmemo->getOrder());
-        if ($creditmemo->getInvoice()) {
-            $transactionSave->addObject($creditmemo->getInvoice());
-        }
-        $transactionSave->save();
-
-        return $this;
-    }
-
-    public function setupAdjustment($creditmemo, $order)
-    {
-        $fee = Mage::getSingleton('rma/config')->getGeneralCreditMemoAdjustmentFee();
-        if ($fee == '') {
-            return;
-        }
-        if (strpos($fee, '%')) {
-            $fee = str_replace('%', '', trim($fee));
-            $fee = floatval($fee);
-            $fee = $fee/100 * $creditmemo->getSubtotal();
-        } else {
-            $fee = floatval($fee);
-        }
-        if ($fee != 0 && $creditmemo->getSubtotal() > $fee) {
-            $creditmemo->setAdjustmentNegative($fee);
-        }
-    }
-
-    public function setupShippingFee($creditmemo, $order)
-    {
-        $baseAllowedAmount = $order->getBaseShippingAmount()-$order->getBaseShippingRefunded();
-        if ($this->getConfig()->getGeneralIsRefundShippingFee()) {
-            $creditmemo->setBaseShippingAmount($baseAllowedAmount);
-        } else {
-            $creditmemo->setBaseShippingAmount(0);
-        }
-    }
-
-
-    public function getInvoiceByOrder($order)
-    {
-        $collection = Mage::getModel('sales/order_invoice')->getCollection()
-                    ->addFieldToFilter('order_id', $order->getId());
-        if ($collection->count()) {
-            return $collection->getFirstItem();
-        }
-    }
-
+    /**
+     * @return Mirasvit_Rma_Model_Config
+     */
     public function getConfig()
     {
         return Mage::getSingleton('rma/config');
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Varien_Object
+     *
+     * @throws Exception
+     */
+    public function createOfflineOrder($data)
+    {
+        $order = new Varien_Object();
+        $order->setId(Mirasvit_Rma_Model_Config::RMA_OFFLINE_PREFIX.$data['id']);
+        $order->setName($data['id']);
+        $order->setEntity($data['id']);
+        $order->setIncrementId($data['id']);
+        $order->setIsOffline(true);
+        $order->setStoreId(Mage::app()->getStore()->getId());
+
+        if (!empty($data['customer_id'])) {
+            $order->setCustomerId($data['customer_id']);
+        }
+
+        if (!empty($data['items'])) {
+            $orderItems = $data['items'];
+        } else {
+            $orderItems = Mage::app()->getRequest()->getParam('items', array());
+        }
+
+        if (isset($data['address'])) {
+            $order->setOfflineAddress($data['address']);
+        }
+
+        $itemCollection = new Varien_Data_Collection();
+        if ($orderItems) {
+            $orderId = Mirasvit_Rma_Model_Config::RMA_OFFLINE_PREFIX.$data['id'];
+            foreach ($orderItems[$orderId] as $itemId => $v) {
+                $item = new Varien_Object();
+                $item->setData($orderItems[$orderId][$itemId]);
+                $item->setId($itemId);
+                $item->setName($itemId);
+                $item->setOrderItemId($itemId);
+                $item->setQtyAvailable($item->getQty());
+
+                $itemCollection->addItem($item);
+            }
+        }
+
+        $order->setItems($itemCollection);
+
+        return $order;
+    }
+
+    /**
+     * @param int $orderId
+     *
+     * @return int
+     */
+    public function getOrderAvailableDays($orderId)
+    {
+        $allowedStatuses = $this->getConfig()->getPolicyAllowInStatuses();
+        $limitDate = Mage::helper('rma')->getLastReturnGmtDate();
+
+        /** @var Mage_Sales_Model_Resource_Order_Status_History_Collection $collection */
+        $collection = Mage::getModel('sales/order_status_history')->getCollection();
+
+        $collection->getSelect()
+            ->columns('DATEDIFF(NOW(), main_table.created_at) as days_passed')
+            ->where('main_table.parent_id = '.$orderId)
+            ->where("main_table.status IN ('".implode("','", $allowedStatuses)."')")
+            ->where("main_table.created_at > '".$limitDate."'")
+            ->order('main_table.created_at ASC')
+        ;
+
+        return Mage::helper('rma')->getReturnPeriod() - $collection->getFirstItem()->getDaysPassed();
     }
 }

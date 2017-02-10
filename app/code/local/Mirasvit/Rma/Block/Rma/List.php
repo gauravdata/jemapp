@@ -9,48 +9,39 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
-class Mirasvit_Rma_Block_Rma_List extends Mage_Core_Block_Template
+
+class Mirasvit_Rma_Block_Rma_List extends Mirasvit_Rma_Block_Rma_List_List
 {
-    protected $_collection;
-	protected function _prepareLayout()
+    /**
+     * @return void
+     */
+    protected function _prepareLayout()
     {
         parent::_prepareLayout();
         if ($headBlock = $this->getLayout()->getBlock('head')) {
             $headBlock->setTitle(Mage::helper('rma')->__('My Returns'));
         }
-        $toolbar = $this->getLayout()->createBlock('rma/rma_list_toolbar', 'rma.toolbar')
-            ->setTemplate('mst_rma/rma/list/toolbar.phtml')
-            ->setAvailableListModes('list')
-            ;
-        $toolbar->setCollection($this->getRmaCollection());
-        $this->append($toolbar);
     }
 
-    public function getConfig() {
+    /**
+     * @return Mirasvit_Rma_Model_Config
+     */
+    public function getConfig()
+    {
         return Mage::getSingleton('rma/config');
     }
 
-    public function getRmaCollection()
+    /**
+     * @return string
+     */
+    public function getNewRmaUrl()
     {
-        if (!$this->_collection) {
-            $this->_collection = Mage::getModel('rma/rma')->getCollection()
-                                    ->addFieldToFilter('main_table.customer_id', $this->getCustomer()->getId())
-                                    ->setOrder('created_at', 'desc');
-        }
-        return $this->_collection;
+        return Mage::helper('rma/url')->getNewRmaUrl();
     }
-
-    /************************/
-
-    protected function getCustomer()
-    {
-        return Mage::getSingleton('customer/session')->getCustomer();
-    }
-
 }

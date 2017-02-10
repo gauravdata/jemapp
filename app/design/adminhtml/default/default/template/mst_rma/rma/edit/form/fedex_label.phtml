@@ -1,0 +1,51 @@
+<?php
+/** @var Mirasvit_Rma_Block_Adminhtml_Rma_Edit_Form_FedexLabel $this */
+?>
+<div style="margin-top: 20px;">
+    <div id="fedex-labels">
+        <div class="entry-edit-head">
+            <h4><?php echo Mage::helper('rma')->__('FedEx Labels') ?></h4>
+        </div>
+        <div class="grid">
+            <div class="hor-scroll">
+                <table class="data" cellspacing="0" name="rma-labels" id="rma-labels">
+                    <thead>
+                    <tr class="headings">
+                        <th class="no-link"><span class="nobr"><?php echo Mage::helper('rma')->__('Package') ?></span></th>
+                        <th class="no-link"><span class="nobr"><?php echo Mage::helper('rma')->__('Track Number') ?></span></th>
+                        <th class="no-link"><span class="nobr"><?php echo Mage::helper('rma')->__('Date') ?></span></th>
+                        <th class="no-link"><span class="nobr"><?php echo Mage::helper('rma')->__('Download Label') ?></span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($this->getLabels() as $label): ?>
+                        <tr>
+                            <td class="name"><?php echo $label->getPackageNumber() ?></td>
+                            <td class="name">
+                                <?php echo $label->getTrackNumber() ?>
+                            </td>
+                            <td class="name">
+                                <?php echo $label->getLabelDate() ?>
+                            </td>
+                            <td class="name">
+                                <a target="_blank" href='<?php echo $this->getUrl('*/rma_rma/downloadFedExLabel', array('label_id' => $label->getId())); ?>'>
+                                    link
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <button
+        <?php if (!Mage::helper('rma/fedex')->isEnabled()) {
+            echo 'class="disabled"';
+        } ?> onclick="showFedexModal(true)"
+        <?php if (!Mage::helper('rma/fedex')->isEnabled()) {
+            echo 'disabled';
+        } ?> type="button">
+        <span><span><span><?php echo Mage::helper('adminhtml')->__('Create New FedEx Label'); ?></span></span></span>
+    </button>
+</div>

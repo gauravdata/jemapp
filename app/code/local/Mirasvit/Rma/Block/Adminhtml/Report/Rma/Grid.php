@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -39,52 +39,53 @@ class Mirasvit_Rma_Block_Adminhtml_Report_Rma_Grid extends Mirasvit_Rma_Block_Ad
         }
 
         $this->addColumn('created_at', array(
-            'header'            => Mage::helper('reports')->__('Period'),
-            'index'             => 'created_at',
-            'width'             => 100,
-            'sortable'          => false,
-            'period_type'       => $this->getPeriodType(),
-            'renderer'          => 'adminhtml/report_sales_grid_column_renderer_date',
-            'totals_label'  => Mage::helper('adminhtml')->__('Total'),
-            'subtotals_label'   => Mage::helper('adminhtml')->__('SubTotal')
+            'header' => Mage::helper('reports')->__('Period'),
+            'index' => 'created_at',
+            'width' => 100,
+            'sortable' => false,
+            'period_type' => $this->getPeriodType(),
+            'renderer' => 'adminhtml/report_sales_grid_column_renderer_date',
+            'totals_label' => Mage::helper('adminhtml')->__('Total'),
+            'subtotals_label' => Mage::helper('adminhtml')->__('SubTotal'),
         ));
         if ($this->getFilterData()->getReportType() == 'by_product') {
             $this->addColumn('product_name', array(
-                'header'    => Mage::helper('rma')->__('Product'),
-                'index'     => 'product_name',
-                'type'      => 'text',
-                'sortable'  => false,
-                'frame_callback'   => array($this, '_productNameFormat'),
+                'header' => Mage::helper('rma')->__('Product'),
+                'index' => 'product_name',
+                'type' => 'text',
+                'sortable' => false,
+                'frame_callback' => array($this, '_productNameFormat'),
                 )
             );
         }
 
-        foreach(Mage::helper('rma')->getStatusCollection() as $status) {
+        foreach (Mage::helper('rma')->getStatusCollection() as $status) {
             $this->addColumn("{$status->getId()}_cnt", array(
-                'header'    => Mage::helper('rma')->__("{$status->getName()} RMAs Number"),
-                'index'     => "{$status->getId()}_cnt",
-                'type'      => 'number',
-                'sortable'  => false,
+                'header' => Mage::helper('rma')->__("{$status->getName()} RMAs Number"),
+                'index' => "{$status->getId()}_cnt",
+                'type' => 'number',
+                'sortable' => false,
                 )
             );
         }
         $this->addColumn('total_rma_cnt', array(
-            'header'    => Mage::helper('rma')->__('Total RMAs Number'),
-            'index'     => 'total_rma_cnt',
-            'type'      => 'number',
-            'sortable'  => false,
+            'header' => Mage::helper('rma')->__('Total RMAs Number'),
+            'index' => 'total_rma_cnt',
+            'type' => 'number',
+            'sortable' => false,
             )
         );
         $this->addColumn('total_product_cnt', array(
-            'header'    => Mage::helper('rma')->__('Total Products Number'),
-            'index'     => 'total_product_cnt',
-            'type'      => 'number',
-            'sortable'  => false,
+            'header' => Mage::helper('rma')->__('Total Products Number'),
+            'index' => 'total_product_cnt',
+            'type' => 'number',
+            'sortable' => false,
             )
         );
 
         $this->addExportType('*/*/exportCsv', Mage::helper('adminhtml')->__('CSV'));
         $this->addExportType('*/*/exportExcel', Mage::helper('adminhtml')->__('Excel XML'));
+
         return parent::_prepareColumns();
     }
 
@@ -108,6 +109,7 @@ class Mirasvit_Rma_Block_Adminhtml_Report_Rma_Grid extends Mirasvit_Rma_Block_Ad
         if (!$data->hasData('report_type')) {
             $data->setData('report_type', 'all');
         }
+
         return $data;
     }
 
@@ -120,13 +122,15 @@ class Mirasvit_Rma_Block_Adminhtml_Report_Rma_Grid extends Mirasvit_Rma_Block_Ad
             $product = Mage::getModel('catalog/product')->load($productId);
             $products[$productId] = $product;
         }
+
         return $products[$productId];
     }
 
     public function _productNameFormat($renderedValue, $row, $column, $isExport)
     {
         $product = $this->getProduct($row['product_id']);
-        $url = Mage::helper("adminhtml")->getUrl("adminhtml/catalog_product/edit", array('id' => $product->getId()));
-        return "<a href='$url' target='_blank'>".$product->getName()."</a>";
+        $url = Mage::helper('adminhtml')->getUrl('adminhtml/catalog_product/edit', array('id' => $product->getId()));
+
+        return "<a href='$url' target='_blank'>".$product->getName().'</a>';
     }
 }

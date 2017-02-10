@@ -9,15 +9,24 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/**
+ * @method Mirasvit_Rma_Model_Resource_Reason_Collection|Mirasvit_Rma_Model_Reason[] getCollection()
+ * @method Mirasvit_Rma_Model_Reason load(int $id)
+ * @method bool getIsMassDelete()
+ * @method Mirasvit_Rma_Model_Reason setIsMassDelete(bool $flag)
+ * @method bool getIsMassStatus()
+ * @method Mirasvit_Rma_Model_Reason setIsMassStatus(bool $flag)
+ * @method Mirasvit_Rma_Model_Resource_Reason getResource()
+ */
 class Mirasvit_Rma_Model_Reason extends Mage_Core_Model_Abstract
 {
-
     protected function _construct()
     {
         $this->_init('rma/reason');
@@ -25,7 +34,7 @@ class Mirasvit_Rma_Model_Reason extends Mage_Core_Model_Abstract
 
     public function toOptionArray($emptyOption = false)
     {
-    	return $this->getCollection()->toOptionArray($emptyOption);
+        return $this->getCollection()->toOptionArray($emptyOption);
     }
 
     public function getName()
@@ -36,6 +45,7 @@ class Mirasvit_Rma_Model_Reason extends Mage_Core_Model_Abstract
     public function setName($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'name', $value);
+
         return $this;
     }
 
@@ -45,8 +55,8 @@ class Mirasvit_Rma_Model_Reason extends Mage_Core_Model_Abstract
             $this->setName($data['name']);
             unset($data['name']);
         }
+
         return parent::addData($data);
     }
-	/************************/
-
+    /************************/
 }
