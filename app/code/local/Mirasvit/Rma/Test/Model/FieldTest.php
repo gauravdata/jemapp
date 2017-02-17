@@ -9,10 +9,11 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Model_FieldTest extends EcomDev_PHPUnit_Test_Case
@@ -26,7 +27,8 @@ class Mirasvit_Rma_Model_FieldTest extends EcomDev_PHPUnit_Test_Case
      * @test
      * @loadFixture data
      */
-    public function exampleTest() {
+    public function exampleTest()
+    {
         $this->assertEquals(1, 1);
     }
 
@@ -34,8 +36,12 @@ class Mirasvit_Rma_Model_FieldTest extends EcomDev_PHPUnit_Test_Case
      * @test
      * @loadFixture data
      * @dataProvider exampleProvider
+     *
+     * @param int $expected
+     * @param int $input
      */
-    public function example2Test($expected, $input) {
+    public function example2Test($expected, $input)
+    {
         $result = $input;
         $this->assertEquals($expected, $result);
     }

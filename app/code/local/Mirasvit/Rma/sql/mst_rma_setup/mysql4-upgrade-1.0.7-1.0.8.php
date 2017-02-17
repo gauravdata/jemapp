@@ -9,40 +9,30 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/** @var Mage_Core_Model_Resource_Setup $installer */
 $installer = $this;
 $version = Mage::helper('mstcore/version')->getModuleVersionFromDb('mst_rma');
 if ($version == '1.0.8') {
     return;
 } elseif ($version != '1.0.7') {
-    die("Please, run migration Rma 1.0.7");
+    die('Please, run migration Rma 1.0.7');
 }
 $installer->startSetup();
-if (Mage::registry('mst_allow_drop_tables')) {
-    $sql = "
-    ";
-    $installer->run($sql);
-}
 $sql = "
 ALTER TABLE `{$this->getTable('rma/rma')}` ADD COLUMN `exchange_order_id` INT(11) ;
 ALTER TABLE `{$this->getTable('rma/rma')}` ADD COLUMN `credit_memo_id` INT(11) ;
 ALTER TABLE `{$this->getTable('rma/resolution')}` ADD COLUMN `code` VARCHAR(255) NOT NULL DEFAULT '';
 ";
-$installer->run($sql);
+$helper = Mage::helper('rma/migration');
+$helper->trySql($installer, $sql);
 
-$sql = "
-update `{$this->getTable('rma/resolution')}` set code='exchange' where resolution_id = 1 and code='';
-update `{$this->getTable('rma/resolution')}` set code='refund' where resolution_id = 2 and code='';
-update `{$this->getTable('rma/resolution')}` set code='credit' where resolution_id = 3 and code='';
-";
-$installer->run($sql);
-
-/**                                    **/
-
+/*                                    **/
 
 $installer->endSetup();

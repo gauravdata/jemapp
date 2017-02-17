@@ -9,25 +9,26 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
-class Mirasvit_Rma_Model_System_Config_Source_Email_Template extends Mage_Adminhtml_Model_System_Config_Source_Email_Template {
 
+class Mirasvit_Rma_Model_System_Config_Source_Email_Template extends Mage_Adminhtml_Model_System_Config_Source_Email_Template
+{
     public function toOptionArray()
     {
         $options = parent::toOptionArray();
-        array_unshift( $options,
+        array_unshift($options,
             array(
                  'value' => 'none',
-                 'label' => Mage::helper('rma')->__("- Disable these emails -")
+                 'label' => Mage::helper('rma')->__('- Disable these emails -'),
             ));
+
         return $options;
     }
 
-	/************************/
-
+    /************************/
 }

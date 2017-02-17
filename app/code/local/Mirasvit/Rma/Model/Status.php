@@ -9,24 +9,42 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/**
+ * @method Mirasvit_Rma_Model_Resource_Status_Collection|Mirasvit_Rma_Model_Status[] getCollection()
+ * @method Mirasvit_Rma_Model_Status load(int $id)
+ * @method bool getIsMassDelete()
+ * @method Mirasvit_Rma_Model_Status setIsMassDelete(bool $flag)
+ * @method bool getIsMassStatus()
+ * @method Mirasvit_Rma_Model_Status setIsMassStatus(bool $flag)
+ * @method Mirasvit_Rma_Model_Resource_Status getResource()
+ */
 class Mirasvit_Rma_Model_Status extends Mage_Core_Model_Abstract
 {
+    const APPROVED = 'approved';
     const PACKAGE_SENT = 'package_sent';
+    const REJECTED = 'rejected';
+    const CLOSED = 'closed';
 
     protected function _construct()
     {
         $this->_init('rma/status');
     }
 
+    public function getOptionArray($emptyOption = false)
+    {
+        return $this->getCollection()->setOrder('sort_order', 'asc')->getOptionArray($emptyOption);
+    }
+
     public function toOptionArray($emptyOption = false)
     {
-    	return $this->getCollection()->setOrder('sort_order', 'asc')->toOptionArray($emptyOption);
+        return $this->getCollection()->setOrder('sort_order', 'asc')->toOptionArray($emptyOption);
     }
 
     public function getName()
@@ -37,6 +55,7 @@ class Mirasvit_Rma_Model_Status extends Mage_Core_Model_Abstract
     public function setName($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'name', $value);
+
         return $this;
     }
 
@@ -48,6 +67,7 @@ class Mirasvit_Rma_Model_Status extends Mage_Core_Model_Abstract
     public function setCustomerMessage($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'customer_message', $value);
+
         return $this;
     }
 
@@ -59,6 +79,7 @@ class Mirasvit_Rma_Model_Status extends Mage_Core_Model_Abstract
     public function setHistoryMessage($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'history_message', $value);
+
         return $this;
     }
 
@@ -70,6 +91,7 @@ class Mirasvit_Rma_Model_Status extends Mage_Core_Model_Abstract
     public function setAdminMessage($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'admin_message', $value);
+
         return $this;
     }
 
@@ -97,7 +119,23 @@ class Mirasvit_Rma_Model_Status extends Mage_Core_Model_Abstract
 
         return parent::addData($data);
     }
-	/************************/
+
+    /**
+     * @param string $code
+     *
+     * @return bool|Mirasvit_Rma_Model_Status
+     */
+    public function loadByCode($code)
+    {
+        $collection = $this->getCollection()
+            ->addFieldToFilter('code', $code);
+        if ($collection->count() > 0) {
+            return $collection->getFirstItem();
+        } else {
+            return false;
+        }
+    }
+    /************************/
 
     public function __toString()
     {

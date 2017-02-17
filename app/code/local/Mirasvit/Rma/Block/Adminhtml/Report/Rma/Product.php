@@ -9,16 +9,15 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
 
 class Mirasvit_Rma_Block_Adminhtml_Report_Rma_Product extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
-
     public function __construct()
     {
         $this->_controller = 'adminhtml_report_rma_product';
@@ -28,17 +27,17 @@ class Mirasvit_Rma_Block_Adminhtml_Report_Rma_Product extends Mage_Adminhtml_Blo
         $this->setTemplate('report/grid/container.phtml');
         $this->_removeButton('add');
         $this->addButton('filter_form_submit', array(
-            'label'     => Mage::helper('reports')->__('Show Report'),
-            'onclick'   => 'filterFormSubmit()'
+            'label' => Mage::helper('reports')->__('Show Report'),
+            'onclick' => 'filterFormSubmit()',
         ));
     }
 
     public function getFilterUrl()
     {
         $this->getRequest()->setParam('filter', null);
+
         return $this->getUrl('*/*/index', array('_current' => true));
     }
 
     /************************/
-
 }

@@ -9,49 +9,51 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/** @var Mage_Core_Model_Resource_Setup $installer */
 $installer = $this;
 $version = Mage::helper('mstcore/version')->getModuleVersionFromDb('mst_rma');
 if ($version == '1.0.13') {
     return;
 } elseif ($version != '1.0.12') {
-    die("Please, run migration Rma 1.0.12");
+    die('Please, run migration Rma 1.0.12');
 }
 $setup = new Mage_Eav_Model_Entity_Setup('core_setup');
 $installer->startSetup();
-if (Mage::registry('mst_allow_drop_tables')) {
-    $sql = "
-    ";
-    $installer->run($sql);
-}
+$sql = '
+';
+$installer->run($sql);
 
 //PRODUCT
 $setup->addAttribute('catalog_product', 'rma_status', array(
-    'input'         => 'select',
-    'type'          => 'int',
-    'source'        => 'rma/system_config_source_status',
-    'label'         => 'Allow RMA',
-    'backend'       => '',
-    'visible'       => 1,
-    'required'      => 0,
-    'user_defined'  => 1,
-    'sort_order'    => 100000,
-    'global'        => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_STORE,
+    'input' => 'select',
+    'type' => 'int',
+    'source' => 'rma/system_config_source_status',
+    'label' => 'Allow RMA',
+    'backend' => '',
+    'visible' => 1,
+    'required' => 0,
+    'user_defined' => 1,
+    'sort_order' => 100000,
+    'global' => Mage_Catalog_Model_Resource_Eav_Attribute::SCOPE_STORE,
 ));
 
 $attributeId = $setup->getAttributeId('catalog_product', 'rma_status');
 $allAttributeSetIds = $setup->getAllAttributeSetIds('catalog_product');
 foreach ($allAttributeSetIds as $attributeSetId) {
-    $attributeGroupId = $setup->getAttributeGroupId('catalog_product', $attributeSetId, 'General');
-    $setup->addAttributeToSet('catalog_product', $attributeSetId, $attributeGroupId, $attributeId);
+    try {
+        $attributeGroupId = $setup->getAttributeGroupId('catalog_product', $attributeSetId, 'General');
+        $setup->addAttributeToSet('catalog_product', $attributeSetId, $attributeGroupId, $attributeId);
+    } catch (Exception $e) {
+    }
 }
-
 
 $installer->endSetup();
 
-/**                                    **/
+/*                                    **/

@@ -1,0 +1,155 @@
+<?php
+/** @var Mirasvit_Rma_Block_Adminhtml_Rma_Edit_Form_OrderList $this */
+$rma = $this->getRma();
+?>
+<div id="add_new_order_container">
+    <?php foreach ($this->getOrderCollection() as $order):
+        $items = $this->getItems($order);
+        if (!count($items)) {
+            continue;
+        }
+        ?>
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="fieldset-legend ">
+                    <?php echo $this->__('Items for Order %s', Mage::helper('rma')->getOrderLabel($order, $this->getOrderUrl($order))) ?>
+                </h4>
+                <div class="form-buttons">
+                    <?php
+                    if (Mage::helper('rma/order')->canCreateCreditmemo($rma, $order)):
+                        ?>
+                        <button onclick="disableActionButton(this); var win = window.open('<?php echo $this->getCreditmemoUrl($rma, $order) ?>');" type="button">
+                            <span><span><span><?php echo Mage::helper('adminhtml')->__('Credit Memo'); ?></span></span></span>
+                        </button>
+                    <?php
+                    endif;
+                    ?>
+                </div>
+            </div>
+            <div class="fieldset">
+                <div id="rma_item_edit_grid">
+                    <?php
+                    if ($creditMemos = $this->getCreditmemos($order)): ?>
+                        <div>
+                            <?php echo $this->__('Credit Memo:') ?>
+                            <?php foreach ($creditMemos as $creditmemo): ?>
+                                <a href='<?php echo $this->getCreditmemoViewUrl($creditmemo) ?>'>
+                                    #<?php echo $creditmemo->getIncrementId()?><div>&nbsp;</div>
+                                </a>
+                            <?php endforeach;?>
+                        </div>
+                    <?php endif;?>
+                    <div class="grid">
+                        <div class="hor-scroll">
+                            <table cellspacing="0" class="data" id="rma_item_edit_grid_table">
+                                <thead>
+                                <tr class="headings">
+                                    <th class="no-link"><span
+                                            class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                                    <th class="no-link"><span class="nobr">SKU</span></th>
+                                    <th class="no-link"><span class="nobr">Price</span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Stock Qty') ?></span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Ordered Qty') ?></span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Available Qty') ?></span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Qty to Return') ?></span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Reason to Return') ?></span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Item Condition') ?></span></th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Resolution') ?></span>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $unusedItems = 0;
+                                $i = 0;
+                                foreach ($items as $item):
+                                    $i++;
+                                        $orderItemId = '['.$item->getOrderId().']['.($item->getId() ? $item->getId() : $i).']';
+                                    ?>
+                                    <?php if ($item->getProductType() == 'bundle'): ?>
+                                    <tr class="even">
+                                        <td><?php echo Mage::helper('rma')->getOrderItemLabel($item) ?> <?php echo $this->__('(Bundled Product)') ?></td>
+                                        <td><?php echo $item->getProductSku() ?></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <?php
+                                    continue;
+                                endif;
+                                    $class = "class='even'";
+                                    if ($rma->getId() > 0 && $item->getQtyRequested() == 0) {
+                                        $class = "style='display:none;' class='even hidden_items'";
+                                        ++$unusedItems;
+                                    }
+                                    ?>
+                                    <tr <?php echo $rma->getId() > 0 && $item->getQtyRequested() == 0 ? "style='display:none;' class='even hidden_items'" : "class='even'"?>>
+                                        <td>
+                                            <?php if ($item->getIsBundleItem()): ?> &nbsp;&nbsp;&nbsp; <?php endif;?>
+                                            <?php echo Mage::helper('rma')->getOrderItemLabel($item)?></td>
+                                        <input name='items<?php echo $orderItemId ?>[order_id]'
+                                               value='<?php echo $item->getOrderId() ?>' type='hidden'>
+                                        <td><?php echo $item->getProductSku() ?></td>
+                                        <td><?php echo Mage::helper('rma')->getOrderItemPriceFormatted($item) ?>
+                                        </td>
+                                        <td><?php echo $item->getQtyStock()?></td>
+                                        <td id="items<?php echo $orderItemId ?>[qtyOrdered]"> <?php  echo $item->getQtyOrdered() ?> </td>
+                                        <td id="items<?php echo $orderItemId ?>[qtyAvailable]"> <?php  echo $item->getQtyAvailable() ?> </td>
+                                        <td>
+                                            <input name='items<?php echo $orderItemId ?>[item_id]'
+                                                   value='<?php echo $item->getId()?>' type='hidden'>
+                                            <input name='items<?php echo $orderItemId ?>[order_item_id]'
+                                                   value='<?php echo $item->getOrderItemId()?>' type='hidden'>
+                                            <input id='items<?php echo $orderItemId ?>[rma_item_qty]'
+                                                   value='<?php echo $item->getQtyRequested() ? $item->getQtyRequested() : 0?>' type='hidden'>
+
+                                            <input name='items<?php echo $orderItemId ?>[qty_requested]'
+                                                   class="input-text required-entry"
+                                                   value='<?php echo $item->getQtyRequested() ? $item->getQtyRequested() : 0?>'
+                                                   onKeyUp="checkQtyOrdered(this)">
+                                        </td>
+                                        <td>
+                                            <select name="items<?php echo $orderItemId ?>[reason_id]">
+                                                <option value=""><?php echo $this->__('--')?></option>
+                                                <?php foreach ($this->getReasonCollection() as $reason): ?>
+                                                    <option
+                                                        value="<?php echo $reason->getId() ?>" <?php echo $reason->getId() == $item->getReasonId() ? 'selected' : '' ?>><?php echo $reason->getName() ?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="items<?php echo $orderItemId ?>[condition_id]">
+                                                <option value=""><?php echo $this->__('--')?></option>
+                                                <?php foreach ($this->getConditionCollection() as $condition): ?>
+                                                    <option
+                                                        value="<?php echo $condition->getId() ?>" <?php echo $condition->getId() == $item->getConditionId() ? 'selected' : '' ?>><?php echo $condition->getName() ?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="items<?php echo $orderItemId ?>[resolution_id]">
+                                                <option value=""><?php echo $this->__('--')?></option>
+                                                <?php foreach ($this->getResolutionCollection() as $resolution): ?>
+                                                    <option
+                                                        value="<?php echo $resolution->getId() ?>" <?php echo $resolution->getId() == $item->getResolutionId() ? 'selected' : '' ?>><?php echo $resolution->getName() ?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <?php if ($rma->getId() > 0 && $unusedItems) : ?>
+                        <a href='#'
+                           onclick="$(this).up().select('table tr.hidden_items').each(Element.show);$(this).hide(); return false"><?php echo $this->__('Show all order items') ?></a>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>

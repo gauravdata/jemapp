@@ -59,4 +59,20 @@ jQuery(document).ready(function($) {
             updateSaveBtn();
         }
     });
+
+    $('#rma_rma_create_order_grid_table input[name="selected_orders"]').change(function() {
+        selectOrder();
+    });
+
+    $('#rma_rma_create_order_grid_massaction table.massaction a').click(function() {
+        selectOrder();
+    });
+
+    function selectOrder() {
+        if ($('#rma_rma_create_order_grid_table input:checked').length) {//if order selected
+            $('#create_rma').hide();
+        } else {
+            $('#create_rma').show();
+        }
+    }
 });

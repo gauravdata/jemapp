@@ -9,63 +9,122 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
+
+/**
+ * @method Mirasvit_Rma_Model_Resource_Comment_Collection|Mirasvit_Rma_Model_Comment[] getCollection()
+ * @method Mirasvit_Rma_Model_Comment load(int $id)
+ * @method bool getIsMassDelete()
+ * @method Mirasvit_Rma_Model_Comment setIsMassDelete(bool $flag)
+ * @method bool getIsMassStatus()
+ * @method Mirasvit_Rma_Model_Comment setIsMassStatus(bool $flag)
+ * @method Mirasvit_Rma_Model_Resource_Comment getResource()
+ * @method int getStatusId()
+ * @method Mirasvit_Rma_Model_Comment setStatusId(int $statusId)
+ * @method int getUserId()
+ * @method Mirasvit_Rma_Model_Comment setUserId(int $userId)
+ * @method int getCustomerId()
+ * @method Mirasvit_Rma_Model_Comment setCustomerId(int $entityId)
+ * @method string getCustomerName()
+ * @method $this setCustomerName(string $param)
+ * @method string getCreatedAt()
+ * @method $this setCreatedAt(string $param)
+ * @method string getUpdatedAt()
+ * @method $this setUpdatedAt(string $param)
+ * @method string getText()
+ */
 class Mirasvit_Rma_Model_Comment extends Mage_Core_Model_Abstract
 {
-
+    /**
+     * Constructor
+     * @return void
+     */
     protected function _construct()
     {
         $this->_init('rma/comment');
     }
 
+    /**
+     * @param bool $emptyOption
+     * @return array
+     */
     public function toOptionArray($emptyOption = false)
     {
-    	return $this->getCollection()->toOptionArray($emptyOption);
+        return $this->getCollection()->toOptionArray($emptyOption);
     }
 
+    /**
+     * @var Mirasvit_Rma_Model_Status
+     */
     protected $_status = null;
+
+    /**
+     * @return bool|Mirasvit_Rma_Model_Status
+     */
     public function getStatus()
     {
         if (!$this->getStatusId()) {
             return false;
         }
-    	if ($this->_status === null) {
+        if ($this->_status === null) {
             $this->_status = Mage::getModel('rma/status')->load($this->getStatusId());
-    	}
-    	return $this->_status;
+        }
+
+        return $this->_status;
     }
 
+    /**
+     * @var Mage_Customer_Model_Customer
+     */
     protected $_user = null;
+
+    /**
+     * @return bool|Mirasvit_Rma_Model_User
+     */
     public function getUser()
     {
         if (!$this->getUserId()) {
             return false;
         }
-    	if ($this->_user === null) {
+        if ($this->_user === null) {
             $this->_user = Mage::getModel('admin/user')->load($this->getUserId());
-    	}
-    	return $this->_user;
+        }
+
+        return $this->_user;
     }
 
+    /**
+     * @var Mage_Customer_Model_Customer
+     */
     protected $_customer = null;
+
+    /**
+     * @return bool|Mirasvit_Rma_Model_Customer
+     */
     public function getCustomer()
     {
         if (!$this->getCustomerId()) {
             return false;
         }
-    	if ($this->_customer === null) {
+        if ($this->_customer === null) {
             $this->_customer = Mage::getModel('customer/customer')->load($this->getCustomerId());
-    	}
-    	return $this->_customer;
+        }
+
+        return $this->_customer;
     }
 
-	/************************/
+    /************************/
 
+    /**
+     * @param string $text
+     * @param bool $isHtml
+     * @return Mirasvit_Rma_Model_Comment
+     */
     public function setText($text, $isHtml)
     {
         $this->setIsHtml($isHtml);
@@ -73,9 +132,13 @@ class Mirasvit_Rma_Model_Comment extends Mage_Core_Model_Abstract
             $text = strip_tags($text);
         }
         $this->setData('text', $text);
+
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getTextHtml()
     {
         if ($this->getIsHtml()) {
@@ -85,26 +148,55 @@ class Mirasvit_Rma_Model_Comment extends Mage_Core_Model_Abstract
         }
     }
 
-    public function getAttachments() {
-        return Mage::helper('mstcore/attachment')->getAttachments('COMMENT', $this->getId());
+    /**
+     * @return array
+     */
+    public function getAttachments()
+    {
+        $attachments = array();
+
+        $attaches = Mage::getModel('rma/attachment')->getCollection()
+            ->addFieldToFilter('comment_id', $this->getId());
+
+        foreach ($attaches as $attachment) {
+            $attachments[] = $attachment;
+        }
+
+        if ($oldAttach = Mage::helper('mstcore/attachment')->getAttachments('COMMENT', $this->getId())) {
+            foreach ($oldAttach as $attachment) {
+                $attachments[] = $attachment;
+            }
+        }
+
+        return $attachments;
     }
 
+    /**
+     * @return int
+     */
     public function getTriggeredBy()
     {
         if ($this->getUser()) {
-           return Mirasvit_Rma_Model_Config::USER;
+            return Mirasvit_Rma_Model_Config::USER;
         } elseif ($this->getCustomer()) {
             return Mirasvit_Rma_Model_Config::CUSTOMER;
         } elseif ($this->getCustomerName()) {
             return Mirasvit_Rma_Model_Config::CUSTOMER; //guest
+        } else {
+            // automated reply also should count as staff
+            return Mirasvit_Rma_Model_Config::USER;
         }
     }
 
+    /**
+     * @return int
+     */
     public function getType()
     {
         if ($this->getIsVisibleInFrontend()) {
             return Mirasvit_Rma_Model_Config::COMMENT_PUBLIC;
         }
+
         return Mirasvit_Rma_Model_Config::COMMENT_INTERNAL;
     }
 }

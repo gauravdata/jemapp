@@ -9,29 +9,32 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Block_Adminhtml_Rma extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
-
-    public function __construct ()
+    public function __construct()
     {
         $this->_controller = 'adminhtml_rma';
         $this->_blockGroup = 'rma';
-        $this->_headerText = Mage::helper('rma')->__('RMA');
+        if (Mage::registry('is_archive')) {
+            $this->_headerText = Mage::helper('rma')->__('RMA Archive');
+        } else {
+            $this->_headerText = Mage::helper('rma')->__('RMA');
+        }
         $this->_addButtonLabel = Mage::helper('rma')->__('Add New RMA');
         parent::__construct();
     }
 
-    public function getCreateUrl ()
+    public function getCreateUrl()
     {
         return $this->getUrl('*/*/add');
     }
 
     /************************/
-
 }

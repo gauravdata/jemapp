@@ -9,16 +9,15 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
 
 class Mirasvit_Rma_Model_Config_Source_Cms_Block
 {
-
     protected $_options;
 
     public function toOptionArray()
@@ -26,8 +25,14 @@ class Mirasvit_Rma_Model_Config_Source_Cms_Block
         if (!$this->_options) {
             $this->_options = Mage::getResourceModel('cms/block_collection')
                 ->load()->toOptionArray();
+            array_unshift($this->_options,
+                array(
+                    'value' => 'none',
+                    'label' => Mage::helper('rma')->__('- Disabled -'),
+                ));
+
         }
+
         return $this->_options;
     }
-
 }

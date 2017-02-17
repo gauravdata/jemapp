@@ -9,10 +9,11 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Block_Rma_View_Items extends Mage_Core_Block_Template
@@ -20,7 +21,51 @@ class Mirasvit_Rma_Block_Rma_View_Items extends Mage_Core_Block_Template
     protected function _construct()
     {
         parent::_construct();
-        $this->setData('area','frontend');
+        $this->setData('area', 'frontend');
         $this->setTemplate('mst_rma/rma/email/items.phtml');
+    }
+
+    /**
+     * @return Mirasvit_Rma_Model_Item[]|Mirasvit_Rma_Model_Resource_Item_Collection
+     */
+    public function getItemsCollection()
+    {
+        $rma = $this->getRma();
+        $collection = Mage::getModel('rma/item')->getCollection()
+            ->addFieldToFilter('rma_id', $rma->getId())
+            ->addFieldToFilter('qty_requested', array('gt' => 0));
+        if ($resolutionId = $this->getResolutionId()) {
+            $collection->addFieldToFilter('main_table.resolution_id', $resolutionId);
+        }
+        if ($reasonId = $this->getReasonId()) {
+            $collection->addFieldToFilter('main_table.reason_id', $reasonId);
+        }
+        if ($conditionId = $this->getConditionId()) {
+            $collection->addFieldToFilter('main_table.condition_id', $conditionId);
+        }
+
+        return $collection;
+    }
+
+    /**
+     * @return Mirasvit_Rma_Model_Item[]|Mirasvit_Rma_Model_Resource_Item_Collection
+     */
+    public function getOfflineItemsCollection()
+    {
+        $rma = $this->getRma();
+        $collection = Mage::getModel('rma/offline_item')->getCollection()
+            ->addFieldToFilter('rma_id', $rma->getId())
+            ->addFieldToFilter('qty_requested', array('gt' => 0));
+        if ($resolutionId = $this->getResolutionId()) {
+            $collection->addFieldToFilter('main_table.resolution_id', $resolutionId);
+        }
+        if ($reasonId = $this->getReasonId()) {
+            $collection->addFieldToFilter('main_table.reason_id', $reasonId);
+        }
+        if ($conditionId = $this->getConditionId()) {
+            $collection->addFieldToFilter('main_table.condition_id', $conditionId);
+        }
+
+        return $collection;
     }
 }

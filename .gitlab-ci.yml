@@ -1,0 +1,18 @@
+stages:
+- deploy
+
+deploy to test:
+  stage: deploy
+  script:  ssh -i ~/.ssh/unsecure_twm_id_rsa root@cs32.thewebmen.com 'cd /home/test/public_html; git pull; chown -R test *; chmod -R a+rw var media;'
+  environment: test
+  only:
+    - 1.9.2.3
+  
+clear cache on test:
+  stage: deploy
+  script:  ssh -i ~/.ssh/unsecure_twm_id_rsa root@cs32.thewebmen.com 'cd /home/test/public_html; n98-magerun c:cl;'
+  environment: test
+  when: manual
+  only:
+    - 1.9.2.3
+ 

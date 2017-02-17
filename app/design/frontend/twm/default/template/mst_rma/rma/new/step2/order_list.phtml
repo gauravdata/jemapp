@@ -1,0 +1,103 @@
+<?php
+/* @var $this Mirasvit_Rma_Block_Rma_New_Step2_OrderList */
+?>
+<?php foreach ($this->getItems() as $orderId => $items): ?>
+    <?php
+    $order = $this->getOrderById($orderId);
+    ?>
+    <?php foreach ($items as $itemId => $item): ?>
+        <?php
+        $qty = $item['qty'];
+        $item = $this->getOrderItemById($itemId);
+        if (!$this->getIsAllowedToShow($item)) {
+            continue;
+        }
+        ?>
+        <tr>
+            <td>
+                <input name="orders[<?php echo $order->getId() ?>]" type="hidden" value="<?php echo $order->getId() ?>">
+                <input type="hidden" name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId(); ?>][order_id]" value="<?php echo $order->getId() ?>">
+                <input type="hidden" name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId(); ?>][order_item_id]" value="<?php echo $item->getOrderItemId() ?>">
+                <input type="hidden" name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId(); ?>][is_return]" value="1">
+                <input type="hidden" name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId(); ?>][qty_requested]"
+                       value="<?php echo $qty; ?>"
+                >
+                <input type="hidden" name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId(); ?>][name]"
+                       value="<?php echo isset($orderItems[$order->getId()][$item->getOrderItemId()]['name']) ? $orderItems[$order->getId()][$item->getOrderItemId()]['name'] : ''; ?>"
+                >
+                <?php if ($item->getProduct()): ?>
+                    <img id="image" src="<?php echo $this->helper('catalog/image')->init($item->getProduct(), 'thumbnail')->resize(200) ?>" width="100px" />
+                <?php endif; ?>
+            </td>
+            <td class="item-description control">
+                <input type="checkbox" id="<?php echo $item->getOrderItemId() ?>" value="1">
+                <label for="<?php echo $item->getOrderItemId() ?>">
+                    <?php echo Mage::helper('rma')->getOrderItemLabel($item) ?>
+                </label>
+            </td>
+            <td>
+                <?php echo $qty; ?>
+            </td>
+            <td><?php echo Mage::helper('rma')->getOrderLabel($order); ?></td>
+        </tr>
+        <tr id="item-row-<?php echo $item->getOrderItemId() ?>" style="display: none;">
+            <td colspan="4">
+                <?php if ($this->getConfig()->isCustomerReasonRequired()): ?>
+                    <div class="rma__customer-option field">
+                        <div class="select-overlay">
+                            <select name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId() ?>][reason_id]" id="reason_id<?php echo $item->getOrderItemId() ?>" class="required-entry">
+                                <option value=""><?php echo $this->__('-- Select a Reason --')?></option>
+                                <?php foreach ($this->getReasonCollection() as $reason): ?>
+                                    <option value="<?php echo $reason->getId()?>"><?php echo $reason->getName() ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <label id="user-conditional" class="required"><?php echo $this->__('Reason') ?><em id="em-requered"> *</em></label>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <?php if ($this->getConfig()->isCustomerConditionRequired()): ?>
+                    <div class="rma__customer-option field">
+                        <div class="select-overlay">
+                            <select name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId() ?>][condition_id]" id="condition_id<?php echo $item->getOrderItemId() ?>" class="required-entry">
+                                <option value=""><?php echo $this->__('-- Select a Condition --')?></option>
+                                <?php foreach ($this->getConditionCollection() as $condition): ?>
+                                    <option value="<?php echo $condition->getId()?>"><?php echo $condition->getName() ?></option>
+                                <?php endforeach;?>
+                            </select>
+                            <label id="user-conditional" class="required"><?php echo $this->__('Condition') ?><em id="em-requered"> *</em></label>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <?php if ($this->getConfig()->isCustomerResolutionRequired()): ?>
+                    <div class="rma__customer-option field">
+                        <div class="select-overlay">
+                            <select name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId() ?>][resolution_id]" id="resolution_id<?php echo $item->getOrderItemId() ?>" class="required-entry">
+                                <option value=""><?php echo $this->__('-- Select a Resolution --')?></option>
+                                <?php foreach ($this->getResolutionCollection() as $resolution): ?>
+                                    <option value="<?php echo $resolution->getId()?>"><?php echo $resolution->getName() ?></option>
+                                <?php endforeach;?>
+                            </select>
+                            <label id="user-conditional" class="required"><?php echo $this->__('Resolution') ?><em id="em-requered"> *</em></label>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php $another = $this->getRmasByOrderItem($item->getOrderItem()) ?>
+                <?php if ($another): ?>
+                    <div id="another-rma">
+                        <?php echo $this->__('Another RMA for this product: %s', $another) ?>
+                    </div>
+                <?php endif ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+
+<?php endforeach; ?>
+
+<script type="text/javascript">
+    jQuery(function(){
+        jQuery('.item-description.control input').click(function(){
+            console.log(jQuery(this).attr('id'));
+            jQuery('#item-row-' + jQuery(this).attr('id')).toggle();
+        });
+    });
+</script>

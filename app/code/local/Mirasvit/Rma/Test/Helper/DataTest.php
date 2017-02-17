@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -34,10 +34,12 @@ class Mirasvit_Rma_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
         $rma = Mage::getModel('rma/rma')->load(2);
 
         Mage::helper('msttest/mock')->mockSingletonMethod('rma/config', array(
-            'getNumberFormat' => 'NM-[store]-[order]-[counter]',
+//            'getNumberFormat' => 'NM-[store]-[order]-[counter]',
+            'getNumberFormat' => 'NM-[store]-[counter]',
         ));
         $result = $this->helper->generateIncrementId($rma);
-        $this->assertEquals('NM-1-1000032-00000002', $result);
+//        $this->assertEquals('NM-1-1000032-00000002', $result);
+        $this->assertEquals('NM-1-00000002', $result);
 
         Mage::helper('msttest/mock')->mockSingletonMethod('rma/config', array(
             'getNumberFormat' => '[store][counter]',
@@ -45,5 +47,4 @@ class Mirasvit_Rma_Helper_DataTest extends EcomDev_PHPUnit_Test_Case
         $result = $this->helper->generateIncrementId($rma);
         $this->assertEquals('100000002-2', $result);
     }
-
 }

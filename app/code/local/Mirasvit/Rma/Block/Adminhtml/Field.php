@@ -9,16 +9,16 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Block_Adminhtml_Field extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
-
-    public function __construct ()
+    public function __construct()
     {
         parent::__construct();
         $this->_controller = 'adminhtml_field';
@@ -27,11 +27,10 @@ class Mirasvit_Rma_Block_Adminhtml_Field extends Mage_Adminhtml_Block_Widget_Gri
         $this->_addButtonLabel = Mage::helper('rma')->__('Add New Field');
     }
 
-    public function getCreateUrl ()
+    public function getCreateUrl()
     {
         return $this->getUrl('*/*/add');
     }
 
     /************************/
-
 }

@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -30,10 +30,44 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Create extends Mage_Adminhtml_Block_Widge
         $this->setId('rma_rma_create');
         $this->removeButton('save');
         $this->removeButton('reset');
+        if (Mage::getSingleton('rma/config')->getGeneralIsOfflineOrdersAllowed()) {
+            $this->_addButton('reset', array(
+                'label' => Mage::helper('adminhtml')->__('Create Offline'),
+                'onclick' => 'setLocation(\''.$this->getOfflineUrl().'\')',
+                'id' => 'create_rma',
+            ), -1);
+        }
     }
 
-    public function getHeaderText ()
+    /**
+     * @return string
+     */
+    public function getHeaderText()
     {
         return Mage::helper('rma')->__('Create New RMA');
+    }
+
+    /**
+     * @return string
+     */
+    public function getOfflineUrl()
+    {
+        return $this->getUrl('*/*/add', array(
+                'orders_id' => -1,
+                'customer_id' => Mage::app()->getRequest()->getParam('customer_id'),
+                'ticket_id' => Mage::app()->getRequest()->getParam('ticket_id'),
+            )
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackUrl()
+    {
+        return $this->getUrl('*/*/add', array(
+                'ticket_id' => Mage::app()->getRequest()->getParam('ticket_id'),
+            )
+        );
     }
 }

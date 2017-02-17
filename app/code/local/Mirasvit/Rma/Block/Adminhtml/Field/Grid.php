@@ -9,15 +9,15 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
+
 
 
 class Mirasvit_Rma_Block_Adminhtml_Field_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -32,37 +32,38 @@ class Mirasvit_Rma_Block_Adminhtml_Field_Grid extends Mage_Adminhtml_Block_Widge
         $collection = Mage::getModel('rma/field')
             ->getCollection();
         $this->setCollection($collection);
+
         return parent::_prepareCollection();
     }
 
     protected function _prepareColumns()
     {
-        
         $this->addColumn('field_id', array(
-            'header'    => Mage::helper('rma')->__('ID'),
+            'header' => Mage::helper('rma')->__('ID'),
 //          'align'     => 'right',
 //          'width'     => '50px',
-            'index'     => 'field_id',
-            'filter_index'     => 'main_table.field_id',
+            'index' => 'field_id',
+            'filter_index' => 'main_table.field_id',
             )
         );
         $this->addColumn('name', array(
-            'header'    => Mage::helper('rma')->__('Title'),
+            'header' => Mage::helper('rma')->__('Title'),
 //          'align'     => 'right',
 //          'width'     => '50px',
-            'index'     => 'name',
-            'frame_callback'   => array($this, '_renderCellName'),
-            'filter_index'     => 'main_table.name',
+            'index' => 'name',
+            'frame_callback' => array($this, '_renderCellName'),
+            'filter_index' => 'main_table.name',
             )
         );
         $this->addColumn('sort_order', array(
-            'header'    => Mage::helper('rma')->__('Sort Order'),
+            'header' => Mage::helper('rma')->__('Sort Order'),
 //          'align'     => 'right',
 //          'width'     => '50px',
-            'index'     => 'sort_order',
-            'filter_index'     => 'main_table.sort_order',
+            'index' => 'sort_order',
+            'filter_index' => 'main_table.sort_order',
             )
         );
+
         return parent::_prepareColumns();
     }
 
@@ -76,28 +77,29 @@ class Mirasvit_Rma_Block_Adminhtml_Field_Grid extends Mage_Adminhtml_Block_Widge
         $this->setMassactionIdField('field_id');
         $this->getMassactionBlock()->setFormFieldName('field_id');
         $statuses = array(
-                array('label'=>'', 'value'=>''),
-                array('label'=>$this->__('Disabled'), 'value'=> 0),
-                array('label'=>$this->__('Enabled'), 'value'=> 1),
+                array('label' => '', 'value' => ''),
+                array('label' => $this->__('Disabled'), 'value' => 0),
+                array('label' => $this->__('Enabled'), 'value' => 1),
         );
         $this->getMassactionBlock()->addItem('is_active', array(
-             'label'=> Mage::helper('rma')->__('Change status'),
-             'url'  => $this->getUrl('*/*/massChange', array('_current'=>true)),
+             'label' => Mage::helper('rma')->__('Change status'),
+             'url' => $this->getUrl('*/*/massChange', array('_current' => true)),
              'additional' => array(
                     'visibility' => array(
                          'name' => 'is_active',
                          'type' => 'select',
                          'class' => 'required-entry',
                          'label' => Mage::helper('rma')->__('Status'),
-                         'values' => $statuses
-                     )
-             )
+                         'values' => $statuses,
+                     ),
+             ),
         ));
         $this->getMassactionBlock()->addItem('delete', array(
-            'label'    => Mage::helper('rma')->__('Delete'),
-            'url'      => $this->getUrl('*/*/massDelete'),
-            'confirm'  => Mage::helper('rma')->__('Are you sure?')
+            'label' => Mage::helper('rma')->__('Delete'),
+            'url' => $this->getUrl('*/*/massDelete'),
+            'confirm' => Mage::helper('rma')->__('Are you sure?'),
         ));
+
         return $this;
     }
 
@@ -107,5 +109,4 @@ class Mirasvit_Rma_Block_Adminhtml_Field_Grid extends Mage_Adminhtml_Block_Widge
     }
 
     /************************/
-
 }

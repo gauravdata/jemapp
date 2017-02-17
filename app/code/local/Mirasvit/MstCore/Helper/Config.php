@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   1.0.7
- * @build     658
- * @copyright Copyright (C) 2015 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.0
+ * @build     1607
+ * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -20,6 +20,25 @@ class Mirasvit_MstCore_Helper_Config extends Mage_Core_Helper_Data
     const UPDATES_FEED_URL    = 'http://mirasvit.com/blog/category/updates/feed/';
     const EXTENSIONS_FEED_URL = 'http://mirasvit.com/pc/feed/';
     const STORE_URL           = 'http://mirasvit.com/estore/';
+    const DEVELOPER_IP        = 'mstcore/logger/developer_ip';
+    const NOTIFICATION_STATUS = 'mstcore/notification/status';
+
+    public function getDeveloperIp()
+    {
+        $ips = explode(',', Mage::getStoreConfig(self::DEVELOPER_IP));
+
+        return $ips;
+    }
+
+    /**
+     * Is Mirasvit notifications enabled
+     *
+     * @return int
+     */
+    public function isNotificationsEnabled()
+    {
+        return (int)Mage::getStoreConfig(self::NOTIFICATION_STATUS);
+    }
 }
 
 if (!function_exists('pr')) {
