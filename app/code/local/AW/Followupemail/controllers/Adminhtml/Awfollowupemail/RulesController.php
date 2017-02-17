@@ -408,13 +408,13 @@ class AW_Followupemail_Adminhtml_Awfollowupemail_RulesController extends Mage_Ad
                 if ($this->getRequest()->getParam('sendTest')) {
                     $email = $data['test_recipient'];
                     $validator = new Zend_Validate_EmailAddress();
-                    if (!$validator->isValid($email)) {
-                        $session->addError($this->__("Incorrect e-mail for 'Test recipient' field"));
-                        $this->_redirect(
-                            '*/*/edit', array('id' => $model->getId(), 'tab' => 'followupemail_tabs_sendtest')
-                        );
-                        return;
-                    }
+                    //if (!$validator->isValid($email)) {
+                    //    $session->addError($this->__("Incorrect e-mail for 'Test recipient' field"));
+                    //    $this->_redirect(
+                    //        '*/*/edit', array('id' => $model->getId(), 'tab' => 'followupemail_tabs_sendtest')
+                    //    );
+                    //    return;
+                    //}
 
                     if (!$data['test_recipient']) {
                         $session->addError(
