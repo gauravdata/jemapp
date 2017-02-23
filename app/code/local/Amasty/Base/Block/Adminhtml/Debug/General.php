@@ -1,8 +1,6 @@
 <?php
 /**
- * @author Amasty Team
- * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
- * @package Amasty_Base
+ * @copyright   Copyright (c) 2010 Amasty (http://www.amasty.com)
  */ 
 class Amasty_Base_Block_Adminhtml_Debug_General extends Amasty_Base_Block_Adminhtml_Debug_Base
 {
@@ -46,17 +44,16 @@ class Amasty_Base_Block_Adminhtml_Debug_General extends Amasty_Base_Block_Adminh
     }
     
     function getCrontabConfig() {
+        $returnValue = null;
 
-        $resource = Mage::getSingleton('core/resource');
-        $readConnection = $resource->getConnection('core_read');
+        if(function_exists('exec')) {
+            exec('crontab -l', $returnValue);
+            if(!count($returnValue)) {
+                $returnValue = null;
+            }
+        }
         
-        $tableName = $resource->getTableName('cron/schedule');
-        
-        $query = "SELECT * FROM " . $tableName . "  order by schedule_id desc limit 5";
- 
-        $data = $readConnection->fetchAll($query);
-        
-        return $data;
+        return $returnValue;
     }
     
 }

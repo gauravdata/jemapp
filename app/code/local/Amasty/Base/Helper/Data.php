@@ -1,8 +1,6 @@
 <?php
 /**
- * @author Amasty Team
- * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
- * @package Amasty_Base
+ * @copyright  Copyright (c) 2010 Amasty (http://www.amasty.com)
  */  
 class Amasty_Base_Helper_Data extends Mage_Core_Helper_Abstract
 {
