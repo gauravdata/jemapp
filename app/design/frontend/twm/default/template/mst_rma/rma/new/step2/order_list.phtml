@@ -30,62 +30,63 @@
                 <?php endif; ?>
             </td>
             <td class="item-description control">
-                <input id="<?php echo $item->getOrderItemId()?>" type='checkbox' name="items[<?php echo $item->getOrderItemId() ?>][is_return]" value='1' <?php echo $item->getQtyAvailable() == 0? 'disabled': '' ?> <?php echo $item->getIsRmaAllowed()? '': 'style="visibility:hidden"' ?>>
-                <label for="<?php echo $item->getOrderItemId()?>"><?php echo Mage::helper('rma')->getOrderItemLabel($item) ?></label>
+                <input type="checkbox" id="<?php echo $item->getOrderItemId() ?>" value="1">
+                <label for="<?php echo $item->getOrderItemId() ?>">
+                    <?php echo Mage::helper('rma')->getOrderItemLabel($item) ?>
+                </label>
+            </td>
+            <td>
+                <?php echo $qty; ?>
             </td>
             <td><?php echo Mage::helper('rma')->getOrderLabel($order); ?></td>
         </tr>
-        <tr id='item<?php echo $item->getOrderItemId() ?>' class="item-options" style='display:none'>
-            <td colspan="3">
-                <div class="field">
-                    <div class="select-overlay">
-                        <select name="items[<?php echo $item->getOrderItemId() ?>][qty_requested]" id="qty_requested<?php echo $item->getOrderItemId() ?>" class="required-entry validate-rma-quantity digits-range-1-<?php echo $item->getQtyAvailable() ?>">
-                            <?php $i = 1; while($i <= $item->getQtyAvailable()): ?>
-                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                <?php $i++; endwhile; ?>
-                        </select>
-                        <label><em>*</em><?php echo $this->__("Quantity to return") ?></label>
-                    </div>
-                </div>
-                <?php $another = $this->getRmasByOrderItem($item->getOrderItem()) ?>
-                <?php if ($another): ?>
-                    <div class="field">
-                        <?php echo $this->__("Another RMA for this product: %s",$another) ?>
+        <tr id="item-row-<?php echo $item->getOrderItemId() ?>" style="display: none;">
+            <td colspan="4">
+                <?php if ($this->getConfig()->isCustomerReasonRequired()): ?>
+                    <div class="rma__customer-option field">
+                        <div class="select-overlay">
+                            <select name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId() ?>][reason_id]" id="reason_id<?php echo $item->getOrderItemId() ?>" class="required-entry">
+                                <option value=""><?php echo $this->__('-- Select a Reason --')?></option>
+                                <?php foreach ($this->getReasonCollection() as $reason): ?>
+                                    <option value="<?php echo $reason->getId()?>"><?php echo $reason->getName() ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <label id="user-conditional" class="required"><?php echo $this->__('Reason') ?><em id="em-requered"> *</em></label>
+                        </div>
                     </div>
                 <?php endif ?>
-                <div class="field">
-                    <div class="select-overlay">
-                        <select name="items[<?php echo $item->getOrderItemId() ?>][reason_id]" id="reason_id<?php echo $item->getOrderItemId() ?>" class="required-entry">
-                            <option value=""><?php echo $this->__("-- Select a Reason --")?></option>
-                            <?php foreach ($this->getReasonCollection() as $reason): ?>
-                                <option value="<?php echo $reason->getId()?>"><?php echo $reason->getName() ?></option>
-                            <?php endforeach;?>
-                        </select>
-                        <label><em>*</em><?php echo $this->__("Reason") ?></label>
+                <?php if ($this->getConfig()->isCustomerConditionRequired()): ?>
+                    <div class="rma__customer-option field">
+                        <div class="select-overlay">
+                            <select name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId() ?>][condition_id]" id="condition_id<?php echo $item->getOrderItemId() ?>" class="required-entry">
+                                <option value=""><?php echo $this->__('-- Select a Condition --')?></option>
+                                <?php foreach ($this->getConditionCollection() as $condition): ?>
+                                    <option value="<?php echo $condition->getId()?>"><?php echo $condition->getName() ?></option>
+                                <?php endforeach;?>
+                            </select>
+                            <label id="user-conditional" class="required"><?php echo $this->__('Condition') ?><em id="em-requered"> *</em></label>
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <div class="select-overlay">
-                        <select name="items[<?php echo $item->getOrderItemId() ?>][condition_id]" id="condition_id<?php echo $item->getOrderItemId() ?>" class="required-entry">
-                            <option value=""><?php echo $this->__("-- Select a Condition --")?></option>
-                            <?php foreach ($this->getConditionCollection() as $condition): ?>
-                                <option value="<?php echo $condition->getId()?>"><?php echo $condition->getName() ?></option>
-                            <?php endforeach;?>
-                        </select>
-                        <label><em>*</em><?php echo $this->__("Condition") ?></label>
+                <?php endif ?>
+                <?php if ($this->getConfig()->isCustomerResolutionRequired()): ?>
+                    <div class="rma__customer-option field">
+                        <div class="select-overlay">
+                            <select name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId() ?>][resolution_id]" id="resolution_id<?php echo $item->getOrderItemId() ?>" class="required-entry">
+                                <option value=""><?php echo $this->__('-- Select a Resolution --')?></option>
+                                <?php foreach ($this->getResolutionCollection() as $resolution): ?>
+                                    <option value="<?php echo $resolution->getId()?>"><?php echo $resolution->getName() ?></option>
+                                <?php endforeach;?>
+                            </select>
+                            <label id="user-conditional" class="required"><?php echo $this->__('Resolution') ?><em id="em-requered"> *</em></label>
+                        </div>
                     </div>
-                </div>
-                <div class="field wide">
-                    <div class="select-overlay">
-                        <select name="items[<?php echo $item->getOrderItemId() ?>][resolution_id]" id="resolution_id<?php echo $item->getOrderItemId() ?>" class="required-entry">
-                            <option value=""><?php echo $this->__("-- Select a Resolution --")?></option>
-                            <?php foreach ($this->getResolutionCollection() as $resolution): ?>
-                                <option value="<?php echo $resolution->getId()?>"><?php echo $resolution->getName() ?></option>
-                            <?php endforeach;?>
-                        </select>
-                        <label><em>*</em><?php echo $this->__("Resolution") ?></label>
+                <?php endif; ?>
+                <?php $another = $this->getRmasByOrderItem($item->getOrderItem()) ?>
+                <?php if ($another): ?>
+                    <div id="another-rma">
+                        <?php echo $this->__('Another RMA for this product: %s', $another) ?>
                     </div>
-                </div>
+                <?php endif ?>
             </td>
         </tr>
     <?php endforeach; ?>
@@ -93,11 +94,10 @@
 <?php endforeach; ?>
 
 <script type="text/javascript">
-    //<![CDATA[
-    jQuery(function() {
-        jQuery('.item-description.control input').click(function() {
-            jQuery('#item' + jQuery(this).attr('id')).toggle();
+    jQuery(function(){
+        jQuery('.item-description.control input').click(function(){
+            console.log(jQuery(this).attr('id'));
+            jQuery('#item-row-' + jQuery(this).attr('id')).toggle();
         });
-    })
-    //]]>
+    });
 </script>
