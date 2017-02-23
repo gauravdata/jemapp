@@ -42,6 +42,7 @@
             <codePool>local</codePool>
             <depends>
                 <MageWorx_Adminhtml />
+                <Dealer4dealer_Syncinfo />
             </depends>
             <extension_name>Customer Credit</extension_name>
         </MageWorx_CustomerCredit>
