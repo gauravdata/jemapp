@@ -18,7 +18,6 @@ class Twm_Changegrid_Model_Observer {
                 array(
                     'header' => Mage::helper('customer')->__('City'),
                     'index'  => 'city',
-		    'filter' => false
                 ),
                 'shipping_name'
             );
