@@ -57,6 +57,8 @@
             <?php echo $this->getChildHtml('media') ?>
         </div>
 
+        <?php echo $this->getChildHtml('aw_zblocks.product.img.box.bottom'); ?>
+
         <div class="product-options-wrapper">
             <div class="product-shop">
                 <div class="product-name">
@@ -156,8 +158,6 @@
     //]]>
     </script>
 </div>
-
-<?php echo $this->getChildHtml('aw_zblocks.product.img.box.bottom'); ?>
 
 <?php if ($_product->getDescription()):?>
     <div class="description" id="more">
