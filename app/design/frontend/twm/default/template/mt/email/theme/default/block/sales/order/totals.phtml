@@ -30,11 +30,13 @@
                                     <tr>
                                         <td
                                             <?php echo $var->getHtmlAttribute('style', 'order_totals_table_label_style'.$code, 'color: #707582; font-size: 14px; font-weight: bold;'); ?>
-                                            <?php echo $var->getTextEditAttribute('order_totals_table_label_'.$code);?>
-
+                                            <?php if($code != 'discount') { echo $var->getTextEditAttribute('order_totals_table_label_'.$code); }?>
                                             class="mteditor-color total-color">
-                                            <?php echo $var->getValue('order_totals_table_label_'.$code, $this->escapeHtml($_total->getLabel()), false);?>
-
+                                            <?php if($code == 'discount') {
+                                                echo $this->escapeHtml($this->__($_total->getLabel()));
+                                            } else {
+                                                echo $var->getValue('order_totals_table_label_'.$code, $this->escapeHtml($_total->getLabel()), false);
+                                            } ?>
                                         </td>
                                         <td width="15" height="25"  style="width: 15px !important; height: 25px"></td>
                                         <td

@@ -316,3 +316,44 @@
 	color: $m-grey;
 	padding-right: $xxs-spacing;
 }
+
+/*======================================================
+	Z-BLOCK
+======================================================*/
+.zblock {
+	&.zblock-product-img-box-bottom {
+		@include transform(-50%, 0);
+		position: absolute;
+		height: 50px;
+		line-height: 50px;
+		background-color: #2ecc71;
+		color: $white;
+		left: 40%;
+		margin-top: -50px;
+		z-index: 999;
+		width: 675px;
+		padding: 0 48px 0 $s-spacing;
+		font-size: $l-font;
+		display: none;
+
+		&:after {
+			position: absolute;
+			content: "\e082";
+			font-family: simple-line-icons;
+			line-height: 50px;
+			top: 0;
+			right: $s-spacing;
+			font-size: 18px;
+			cursor: pointer;
+		}
+
+		.zblock-item {
+			.icons {
+				margin-right: $xs-spacing;
+			}
+			p {
+				margin-bottom: 0;
+			}
+		}
+	}
+}

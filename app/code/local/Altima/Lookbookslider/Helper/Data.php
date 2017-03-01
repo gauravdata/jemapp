@@ -362,7 +362,7 @@ protected static function isCategoryAcceptable(Mage_Catalog_Model_Category $cate
     public function canRun($dev = false) {
 
         $temp = trim($this->temp);
-        $m = $temp[0];
+        $m = (isset($temp[0]))?$temp[0]:'';
         $temp = substr($temp, 1);
         if ($m) {
             $base_url = parse_url(Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB));

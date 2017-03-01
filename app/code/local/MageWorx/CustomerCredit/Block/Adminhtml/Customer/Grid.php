@@ -28,7 +28,7 @@
  * @package    MageWorx_CustomerCredit
  * @author     MageWorx Dev Team
  */
-class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Grid extends Mage_Adminhtml_Block_Customer_Grid
+class MageWorx_CustomerCredit_Block_Adminhtml_Customer_Grid extends Dealer4dealer_Syncinfo_Block_Customer_Column
 {   
     public function setCollection($collection) {
         

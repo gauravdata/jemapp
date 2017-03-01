@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_Changegrid>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Transsmart_Shipping/>
+            </depends>
+        </Twm_Changegrid>
+    </modules>
+</config>
