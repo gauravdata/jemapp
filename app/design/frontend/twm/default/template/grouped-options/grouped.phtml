@@ -60,25 +60,8 @@
             <?php if ($_item->isSaleable()) : ?>
                 <div class="row thin">
                     <div class="col-6 col-fixed">
-                        <div class="select-overlay">
-                            <select name="super_group[<?php echo $_item->getId() ?>]" title="<?php echo $this->__('Qty') ?>">
-                                <option value=""><?php echo $this->__('Choose an Option...') ?></option>
-                                <?php
-                                $i = 1;
-                                $selected = '';
-                                while($i <= 60) {
-                                    if($i == $_item->getQty()*1) {
-                                        $selected = ' selected="selected"';
-                                    } else {
-                                        $selected = '';
-                                    }
-                                    echo '<option value="' . $i . '"' . $selected . '>' . $i . '</option>';
-                                    $i++;
-                                }
-                                ?>
-                            </select>
-                            <label><em>*</em><?php echo $this->__('Qty') ?></label>
-                        </div>
+                        <input type="hidden" name="super_group[<?php echo $_item->getId() ?>]" value="1">
+                        &nbsp;
                     </div>
                     <?php if ($_item->isSuper() || $_item->getHasOptions()) : ?>
                         <div class="col-6 col-fixed">
