@@ -316,3 +316,81 @@
 	color: $m-grey;
 	padding-right: $xxs-spacing;
 }
+
+/*======================================================
+	Z-BLOCK
+======================================================*/
+.product-essential {
+	position: relative;
+	overflow: hidden;
+}
+
+.zblock {
+	&.zblock-product-img-box-bottom {
+		@include transform(-50%, 0);
+		position: absolute;
+		height: 50px;
+		line-height: 50px;
+		background-color: #404041;
+		color: $white;
+		left: 40%;
+		margin-top: 0;
+		z-index: 999;
+		width: 675px;
+		padding: 0 48px 0 $s-spacing;
+		font-size: $l-font;
+        -webkit-transition: all 0.6s ease-in-out;
+        -moz-transition: all 0.6s ease-in-out;
+        -ms-transition: all 0.6s ease-in-out;
+        -o-transition: all 0.6s ease-in-out;
+        transition: all 0.6s ease-in-out;
+        cursor: pointer;
+
+		&:after {
+			position: absolute;
+			content: "\e082";
+			font-family: simple-line-icons;
+			line-height: 50px;
+			top: 0;
+			right: $s-spacing;
+			font-size: 18px;
+		}
+
+        &.show {
+            margin-top: -50px;
+        }
+
+		&.hide {
+            margin-top: -15px;
+
+            .zblock-item {
+                opacity: 0;
+            }
+
+            &:after {
+                content: "\e607";
+                font-size: 10px;
+                position: absolute;
+                left: 50%;
+                line-height: 15px;
+            }
+		}
+
+		.zblock-item {
+            opacity: 1;
+
+            -webkit-transition: all 0.6s ease-in-out;
+            -moz-transition: all 0.6s ease-in-out;
+            -ms-transition: all 0.6s ease-in-out;
+            -o-transition: all 0.6s ease-in-out;
+            transition: all 0.6s ease-in-out;
+
+			.icons {
+				margin-right: $xs-spacing;
+			}
+			p {
+				margin-bottom: 0;
+			}
+		}
+	}
+}

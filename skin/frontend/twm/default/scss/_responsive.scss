@@ -188,6 +188,14 @@
 			}
 		}
 	}
+	.zblock {
+		&.zblock-product-img-box-bottom {
+			@include transform(0,0);
+			left: 0;
+			right: 0;
+            width: auto;
+		}
+	}
 
 	/*= Checkout =*/
 	.progress-bar {

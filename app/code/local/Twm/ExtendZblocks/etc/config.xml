@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_ExtendZblocks>
+            <version>0.1.0</version>
+        </Twm_ExtendZblocks>
+    </modules>
+    <global>
+        <models>
+            <twm_extendzblocks>
+                <class>Twm_ExtendZblocks_Model</class>
+                <resourceModel>twm_extendzblocks_resource</resourceModel>
+            </twm_extendzblocks>
+            <twm_extendzblocks_resource>
+                <class>Twm_ExtendZblocks_Model_Resource</class>
+            </twm_extendzblocks_resource>
+            <zblocks>
+                <rewrite>
+                    <source_position>Twm_ExtendZblocks_Model_Source_Position</source_position>
+                </rewrite>
+            </zblocks>
+        </models>
+    </global>
+</config>

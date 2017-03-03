@@ -150,6 +150,24 @@ jQuery(window).load(function(){
 		}
 	});
 
+	// Z-blocks
+	var zBlocks = jQuery('.zblock-product-img-box-bottom');
+	var blockNumber = Math.floor(Math.random() * zBlocks.length);
+
+	var zBlock = zBlocks.eq(blockNumber);
+
+	if(zBlock.find('.zblock-item').html() != '&nbsp;') {
+        setTimeout(function () {
+            zBlock.addClass('show');
+        }, 1000);
+        setTimeout(function () {
+            zBlock.addClass('hide');
+        }, 11000);
+        zBlock.click(function () {
+            jQuery(this).toggleClass('hide');
+        });
+    }
+
 });
 
 var lastScrollTop = 0;
