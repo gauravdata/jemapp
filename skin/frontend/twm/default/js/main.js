@@ -150,15 +150,20 @@ jQuery(window).load(function(){
 		}
 	});
 
-	// close z-block
-	if(jQuery('.zblock-product-img-box-bottom .zblock-item').html() != '&nbsp;') {
+	// Z-blocks
+	var zBlocks = jQuery('.zblock-product-img-box-bottom');
+	var blockNumber = Math.floor(Math.random() * zBlocks.length);
+
+	var zBlock = zBlocks.eq(blockNumber);
+
+	if(zBlock.find('.zblock-item').html() != '&nbsp;') {
         setTimeout(function () {
-            jQuery('.zblock-product-img-box-bottom').slideDown('slow');
+            zBlock.slideDown('slow');
         }, 1000);
         setTimeout(function () {
-            jQuery('.zblock-product-img-box-bottom').slideUp('slow');
+            zBlock.slideUp('slow');
         }, 11000);
-        jQuery('.zblock-product-img-box-bottom').click(function () {
+        zBlock.click(function () {
             jQuery(this).slideUp('slow');
         });
     }
