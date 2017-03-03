@@ -191,9 +191,9 @@
 	.zblock {
 		&.zblock-product-img-box-bottom {
 			@include transform(0,0);
-			position: static;
-			margin: 0;
-			width: auto;
+			left: 0;
+			right: 0;
+            width: auto;
 		}
 	}
 
