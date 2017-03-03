@@ -158,13 +158,13 @@ jQuery(window).load(function(){
 
 	if(zBlock.find('.zblock-item').html() != '&nbsp;') {
         setTimeout(function () {
-            zBlock.slideDown('slow');
+            zBlock.addClass('show');
         }, 1000);
         setTimeout(function () {
-            zBlock.slideUp('slow');
+            zBlock.addClass('hide');
         }, 11000);
         zBlock.click(function () {
-            jQuery(this).slideUp('slow');
+            jQuery(this).toggleClass('hide');
         });
     }
 
