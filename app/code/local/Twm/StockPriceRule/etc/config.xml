@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+ * Extend Mage_SalesRule_Model_Rule_Condition_Product to allow condition based on product stock
+-->
+<config>
+    <modules>
+        <Twm_StockPriceRule>
+            <version>1.0.0</version>
+        </Twm_StockPriceRule>
+    </modules>
+    <global>
+        <models>
+            <twm_stockpricerule>
+                <class>Twm_StockPriceRule_Model</class>
+            </twm_stockpricerule>
+            <salesrule>
+                <rewrite>
+                    <rule_condition_product>Twm_StockPriceRule_Model_SalesRule_Rule_Condition_Product</rule_condition_product>
+                </rewrite>
+            </salesrule>
+            <catalogrule>
+                <rewrite>
+                    <rule_condition_product>Twm_StockPriceRule_Model_CatalogRule_Rule_Condition_Product</rule_condition_product>
+                </rewrite>
+            </catalogrule>
+        </models>
+    </global>
+</config>

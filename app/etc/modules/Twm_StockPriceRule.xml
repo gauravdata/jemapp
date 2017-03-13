@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_StockPriceRule>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_CatalogInventory />
+                <Mage_SalesRule />
+                <Mage_CatalogRule />
+            </depends>
+        </Twm_StockPriceRule>
+    </modules>
+</config>
