@@ -95,6 +95,7 @@
         jQuery('.product-visual-wrapper').addClass('show');
         jQuery('.zoom-image').css('background-image', 'url(' + jQuery(this).find('img').data('zoom-image') + ')');
         jQuery('.product-options-wrapper').addClass('hide');
+        jQuery('.zblock-product-img-box-bottom').hide();
         if(jQuery(window).width() < 1024) {
             viewport = document.querySelector("meta[name=viewport]");
             viewport.setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, user-scalable=1');
@@ -109,6 +110,7 @@
     }).click(function() {
         jQuery('.product-visual-wrapper').removeClass('show');
         jQuery('.product-options-wrapper').removeClass('hide');
+        jQuery('.zblock-product-img-box-bottom').show();
         if(jQuery(window).width() < 1024) {
             viewport = document.querySelector("meta[name=viewport]");
             viewport.setAttribute('content', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1');
