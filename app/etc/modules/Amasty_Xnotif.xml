@@ -5,7 +5,7 @@
 <config>
     <modules>
         <Amasty_Xnotif>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </Amasty_Xnotif>
     </modules>
