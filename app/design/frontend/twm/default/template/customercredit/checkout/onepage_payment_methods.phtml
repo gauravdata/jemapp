@@ -64,7 +64,6 @@ if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->
                 <?php echo $this->getChildHtml('payment.custom.value'); ?>
             <?php endif; ?>
         </dt>
-        <?php if($html = $this->getChildHtml('payment.method.'.$_code)): ?>
         <dd>
             <?php echo $html; ?>
         </dd>
