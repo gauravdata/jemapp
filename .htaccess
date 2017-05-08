@@ -1,4 +1,4 @@
-SetEnvIf X-Forwarded-Proto https HTTPS=on
+#SetEnvIf X-Forwarded-Proto https HTTPS=on
 SetEnvIf X-Forwarded-Proto https HAPROXY=on
 
 # ----------------------------------------------------------------------
@@ -9,14 +9,14 @@ SetEnvIf X-Forwarded-Proto https HAPROXY=on
 # https://wiki.apache.org/httpd/RewriteHTTPToHTTPS
 
 <IfDefine !DEV>
-<IfDefine !HAPROXY>
+#<IfDefine !HAPROXY>
 <IfModule mod_rewrite.c>
    RewriteEngine On
    RewriteCond %{REQUEST_URI} !^/media/xmlFeedExport
    RewriteCond %{HTTPS} !=on
    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 </IfModule>
-</IfDefine>
+#</IfDefine>
 </IfDefine>
 
 ############################################
