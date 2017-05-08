@@ -449,6 +449,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
      */
     private function _validateMXRecords()
     {
+	return true; // TWM not check
         $mxHosts = array();
         $hostname = $this->_hostname;
 
