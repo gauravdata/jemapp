@@ -27,7 +27,7 @@
 			left: 0;
 			visibility: hidden;
 			opacity: 0;
-			z-index: 998;
+			z-index: 8999;
 
 			-moz-transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
 			-webkit-transition: visibility 0.5s linear .25s, opacity .25s linear .25s;
@@ -344,6 +344,9 @@
 	#wrapper.hidden-header {
 		#header {
 			top: -$header-height;
+		}
+		#side-nav {
+			top: 0;
 		}
 		> .block.block-cart {
 			&.show {
