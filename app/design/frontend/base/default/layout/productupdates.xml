@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/productupdates.css</stylesheet></action>
+            <action method="addJs"><script>productupdates/productupdates.js</script></action>
+            <action method="addJs"><script>productupdates/configurable.js</script></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="productupdates.subscribe.wrapper" after="-" template="productupdates/subscribe_wrapper.phtml" />
+        </reference>
+    </default>
+</layout>

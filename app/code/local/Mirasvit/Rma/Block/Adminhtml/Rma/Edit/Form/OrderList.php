@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -35,7 +35,8 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Edit_Form_OrderList extends Mirasvit_Rma_
         $collection = Mage::getModel('sales/order')->getCollection();
         if ($this->getRma()->getId()) {
             if ($this->getRma()->getCustomerId()) {
-                $collection->addFieldToFilter('customer_id', $this->getRma()->getCustomerId());
+                $collection->addFieldToFilter(array('customer_id', 'customer_email'),
+                    array($this->getRma()->getCustomerId(), $this->getRma()->getEmail()));
             } else {
                 $collection->addFieldToFilter('customer_email', $this->getRma()->getEmail());
             }

@@ -145,3 +145,30 @@ h3.icon-head.head-adminhtml-rma {
 button.delete.margin-right-40px {
   margin-right: 40px;
 }
+
+div.custom-fields {
+  display: none;
+}
+
+div.custom-field {
+  width: 100%;
+}
+
+div.custom-field select, div.custom-field input, div.custom-field textarea {
+  width: 90%;
+}
+
+div.custom-field input[type="checkbox"] {
+  width: auto !important;
+}
+
+p.note {
+  margin: 0;
+  padding: 0 0 0 13px;
+  background: url(../../images/note_bg.gif) 1px 6px no-repeat;
+  font-size: 11px;
+}
+
+td.custom-field-cell div.field {
+  margin-left: 5px;
+}

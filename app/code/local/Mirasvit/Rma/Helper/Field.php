@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -19,12 +19,14 @@
 class Mirasvit_Rma_Helper_Field extends Mage_Core_Helper_Abstract
 {
     /**
+     * @param bool   $isProduct
      * @return Mirasvit_Rma_Model_Field[]|Mirasvit_Rma_Model_Resource_Field_Collection
      */
-    public function getEditableCustomerCollection()
+    public function getEditableCustomerCollection($isProduct = false)
     {
         return Mage::getModel('rma/field')->getCollection()
                     ->addFieldToFilter('is_active', true)
+                    ->addFieldToFilter('is_product', $isProduct)
                     ->addFieldToFilter('is_editable_customer', true)
                     ->setOrder('sort_order', 'asc');
     }
@@ -32,13 +34,15 @@ class Mirasvit_Rma_Helper_Field extends Mage_Core_Helper_Abstract
     /**
      * @param string $status
      * @param bool   $isEdit
+     * @param bool   $isProduct
      *
      * @return Mirasvit_Rma_Model_Field[]|Mirasvit_Rma_Model_Resource_Field_Collection
      */
-    public function getVisibleCustomerCollection($status, $isEdit)
+    public function getVisibleCustomerCollection($status, $isEdit, $isProduct = false)
     {
         $collection = Mage::getModel('rma/field')->getCollection()
                     ->addFieldToFilter('is_active', true)
+                    ->addFieldToFilter('is_product', $isProduct)
                     ->addFieldToFilter('visible_customer_status', array('like' => "%,$status,%"))
                     ->setOrder('sort_order', 'asc');
         if ($isEdit) {
@@ -49,12 +53,14 @@ class Mirasvit_Rma_Helper_Field extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * @param bool   $isProduct
      * @return Mirasvit_Rma_Model_Field[]|Mirasvit_Rma_Model_Resource_Field_Collection
      */
-    public function getShippingConfirmationFields()
+    public function getShippingConfirmationFields($isProduct = false)
     {
         $collection = Mage::getModel('rma/field')->getCollection()
                     ->addFieldToFilter('is_active', true)
+                    ->addFieldToFilter('is_product', $isProduct)
                     ->addFieldToFilter('is_show_in_confirm_shipping', true)
                     // ->addFieldToFilter('is_editable_customer', true)
                     ->setOrder('sort_order', 'asc');
@@ -63,12 +69,14 @@ class Mirasvit_Rma_Helper_Field extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * @param bool   $isProduct
      * @return Mirasvit_Rma_Model_Field[]|Mirasvit_Rma_Model_Resource_Field_Collection
      */
-    public function getStaffCollection()
+    public function getStaffCollection($isProduct = false)
     {
         return Mage::getModel('rma/field')->getCollection()
                     ->addFieldToFilter('is_active', true)
+                    ->addFieldToFilter('is_product', $isProduct)
                     ->setOrder('sort_order', 'asc');
     }
 
@@ -83,13 +91,14 @@ class Mirasvit_Rma_Helper_Field extends Mage_Core_Helper_Abstract
     {
         $value = $object ? $object->getData($field->getCode()) : '';
         switch($field->getType()) {
-            case 'checkbox':
-                $value = 1; break;
-            case 'date': {
-                if($value == '0000-00-00 00:00:00') {
+            case Mirasvit_Rma_Model_Field::TYPE_CHECKBOX:
+                $value = 1;
+                break;
+            case Mirasvit_Rma_Model_Field::TYPE_DATE:
+                if ($value == '0000-00-00 00:00:00') {
                     $value = '';
                 }
-            } break;
+                break;
         }
         return array(
             'label' => Mage::helper('rma')->__($field->getName()),
@@ -105,11 +114,46 @@ class Mirasvit_Rma_Helper_Field extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * @param string $field
+     * @param Varien_Object $object
+     * @return string
+     */
+    public function getTemplateInputControl($field, $object)
+    {
+        $value = $object ? $object->getData($field->getCode()) : '';
+
+        $fieldHtml = '<label for="'. $field->getCode() . ' "></label>';
+        switch($field->getType()) {
+            case Mirasvit_Rma_Model_Field::TYPE_CHECKBOX:
+                $value = 1;
+                break;
+            case Mirasvit_Rma_Model_Field::TYPE_DATE:
+                if ($value == '0000-00-00 00:00:00') {
+                    $value = '';
+                }
+                break;
+            case Mirasvit_Rma_Model_Field::TYPE_MULTILINE:
+                $value = '';
+                break;
+            case Mirasvit_Rma_Model_Field::TYPE_SELECT:
+                $value = 1;
+                break;
+            case Mirasvit_Rma_Model_Field::TYPE_TEXT:
+                $value = '';
+                break;
+        }
+
+        return $fieldHtml;
+    }
+
+    /**
      * @param Mirasvit_Rma_Model_Field $field
+     * @param string $namePrefix
+     * @param Varien_Object $object
      *
      * @return string
      */
-    public function getInputHtml($field)
+    public function getInputHtml($field, $namePrefix = '', $object = null)
     {
         $params = $this->getInputParams($field, false);
         unset($params['label']);
@@ -117,11 +161,22 @@ class Mirasvit_Rma_Helper_Field extends Mage_Core_Helper_Abstract
         $element = new $className($params);
         $element->setForm(new Varien_Object());
         $element->setId($field->getCode());
+        $element->setName($namePrefix . '[' . $field->getCode() . ']');
         $element->setNoSpan(true);
         $element->addClass($field->getType());
-        // $element->setRenderer(new Mirasvit_Rma_Helper_Field_Renderer()); //in some cases its not working without this line. but it maybe wrong for other cases.
+
+        // $element->setRenderer(new Mirasvit_Rma_Helper_Field_Renderer());
+        // in some cases its not working without this line. but it maybe wrong for other cases.
+
         if ($field->getIsRequiredCustomer()) {
             $element->addClass('required-entry');
+        }
+        if (is_object($object)) {
+            if ($object && $field->getType() != Mirasvit_Rma_Model_Field::TYPE_CHECKBOX) {
+                $element->setValue($object->getData($field->getCode()));
+            } else {
+                $element->setChecked($object->getData($field->getCode()));
+            }
         }
         //store may have wrong renderer. so we can't use ->toHtml() here;
         return $element->getDefaultHtml();
@@ -132,6 +187,7 @@ class Mirasvit_Rma_Helper_Field extends Mage_Core_Helper_Abstract
      * @param Varien_Object $object
      *
      * @throws Mage_Core_Exception
+     * @return void
      */
     public function processPost($post, $object)
     {

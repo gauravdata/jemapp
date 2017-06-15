@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -262,6 +262,19 @@ class Mirasvit_Rma_Helper_Fedex extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Returns product property, that should be used as description
+     *
+     * @param int $productId
+     * @return string
+     */
+    protected function getProductDescription($productId)
+    {
+        return Mage::getResourceModel('catalog/product')->getAttributeRawValue($productId,
+            $this->getConfigData('fedex_description_attr',
+            false), $this->getStore()->getId());
+    }
+
+    /**
      * Creates Commodity Block (shipment item list) for SOAP request.
      *
      * @param items $items
@@ -276,7 +289,7 @@ class Mirasvit_Rma_Helper_Fedex extends Mage_Core_Helper_Abstract
             $commodity[] = array(
                 'Name' => $item['name'],
                 'NumberOfPieces' => 1,
-                'Description' => $product->getDescription(),
+                'Description' => $this->getProductDescription($item['product_id']),
                 'CountryOfManufacture' =>
                     $product->getCountryOfManufacture() ? $product->getCountryOfManufacture() : 'US',
                 'Weight' => array(

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_awpun_productupdates_index>
+        <reference name="content">
+            <block type="productupdates/adminhtml_productupdates" name="productupdates" as="productupdates" />
+        </reference>
+    </adminhtml_awpun_productupdates_index>
+    <adminhtml_awpun_productupdatesstatistics_index>
+        <reference name="content">
+            <block type="productupdates/adminhtml_productupdatesStatistics" name="productupdates_statistics" as="productupdates_statistics" />
+        </reference>
+    </adminhtml_awpun_productupdatesstatistics_index>
+</layout>

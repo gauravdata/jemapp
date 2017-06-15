@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -293,6 +293,16 @@ class Mirasvit_Rma_Model_Config
      *
      * @return bool
      */
+    public function getGeneralIsWysiwygEnabled($store = null)
+    {
+        return Mage::getStoreConfig('rma/general/is_wysiwyg_enabled', $store);
+    }
+
+    /**
+     * @param Mage_Core_Model_Store|int $store
+     *
+     * @return bool
+     */
     public function isCustomerReasonRequired($store = null)
     {
         $config = $this->getGeneralCustomerRequirement($store);
@@ -412,6 +422,16 @@ class Mirasvit_Rma_Model_Config
      *
      * @return string
      */
+    public function getFedexDescriptionAttr($store = null)
+    {
+        return Mage::getStoreConfig('rma/fedex/fedex_description_attr', $store);
+    }
+
+    /**
+     * @param Mage_Core_Model_Store|int $store
+     *
+     * @return string
+     */
     public function getFedexDefaultWeight($store = null)
     {
         return Mage::getStoreConfig('rma/fedex/fedex_default_weight', $store);
@@ -472,11 +492,45 @@ class Mirasvit_Rma_Model_Config
      *
      * @return array
      */
+    public function getPolicyAllowReplacementResolutions($store = null)
+    {
+        $value = Mage::getStoreConfig('rma/policy/allow_replacement_resolutions', $store);
+
+        return explode(',', $value);
+    }
+
+    /**
+     * @param Mage_Core_Model_Store|int $store
+     *
+     * @return array
+     */
+    public function getPolicyAllowCreditMemoResolutions($store = null)
+    {
+        $value = Mage::getStoreConfig('rma/policy/allow_creditmemo_resolutions', $store);
+
+        return explode(',', $value);
+    }
+
+    /**
+     * @param Mage_Core_Model_Store|int $store
+     *
+     * @return array
+     */
     public function getPolicyAllowInStatuses($store = null)
     {
         $value = Mage::getStoreConfig('rma/policy/allow_in_statuses', $store);
 
         return explode(',', $value);
+    }
+
+    /**
+     * @param Mage_Core_Model_Store|int $store
+     *
+     * @return string
+     */
+    public function getPolicyAllowStoreCreditReturn($store = null)
+    {
+        return Mage::getStoreConfig('rma/policy/allow_storecredit_return', $store);
     }
 
     /**
@@ -497,6 +551,16 @@ class Mirasvit_Rma_Model_Config
     public function getPolicyAllowGuestOfflineRMA($store = null)
     {
         return Mage::getStoreConfig('rma/policy/is_allow_guest_offline_rma', $store);
+    }
+
+    /**
+     * @param Mage_Core_Model_Store|int $store
+     *
+     * @return bool
+     */
+    public function getPolicyAllowMultipleOrderRMA($store = null)
+    {
+        return Mage::getStoreConfig('rma/policy/is_allow_multiple_order', $store);
     }
 
     /**

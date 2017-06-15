@@ -6,6 +6,20 @@ $order = $this->getOrder();
 ?>
 
 <script>
+    function removeFedExLabel(trackNum) {
+        // Make Ajax request so we can create shipment and FedEx label
+        new Ajax.Request('<?php echo $this->getUrl('*/rma_rma/removeFedExLabel'); ?>', {
+            method: 'post',
+            parameters: {
+                rma_id: <?php echo $rma->getId() ?>,
+                track_number: trackNum,
+            },
+            onComplete: function(response) {
+                window.location.assign(response.responseText);
+            }
+        });
+    }
+
     function showFedexModal(mode) {
         if(mode) {
             $('shade').style.setProperty('display', 'block');

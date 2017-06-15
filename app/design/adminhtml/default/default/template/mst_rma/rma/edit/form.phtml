@@ -190,8 +190,7 @@ $isCreditEnabled = $this->getIsCreditEnabled();
                                 </tr>
                                 <tr>
                                     <td class="value">
-                                        <textarea id="reply" name="reply" rows="2" cols="30" class=" textarea"
-                                                  style="width:92%"></textarea>
+                                        <?php echo $this->getEditorForm()->toHtml() ?>
                                     </td>
                                 </tr>
                                 <tr>

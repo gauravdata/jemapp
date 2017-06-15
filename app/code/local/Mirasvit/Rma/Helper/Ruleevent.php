@@ -9,18 +9,28 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
 
 class Mirasvit_Rma_Helper_Ruleevent extends Mage_Core_Helper_Abstract
 {
+    /**
+     * @var array
+     */
     protected $_sentEmails = array();
+
+    /**
+     * @var array
+     */
     protected $_processedEvents = array();
 
+    /**
+     * @return Mirasvit_Rma_Model_Config
+     */
     public function getConfig()
     {
         return Mage::getSingleton('rma/config');
@@ -29,6 +39,7 @@ class Mirasvit_Rma_Helper_Ruleevent extends Mage_Core_Helper_Abstract
     /**
      * @param string                 $eventType
      * @param Mirasvit_Rma_Model_Rma $rma
+     * @return void
      */
     public function newEvent($eventType, $rma)
     {
@@ -83,17 +94,18 @@ class Mirasvit_Rma_Helper_Ruleevent extends Mage_Core_Helper_Abstract
             $rma->setIsArchived(0);
         }
 
-//        if ($tags = $rule->getAddTags()) {
-//            Mage::helper('rma/tag')->addTags($rma, $tags);
-//        }
-//        if ($tags = $rule->getRemoveTags()) {
-//            Mage::helper('rma/tag')->removeTags($rma, $tags);
-//        }
+        //        if ($tags = $rule->getAddTags()) {
+        //            Mage::helper('rma/tag')->addTags($rma, $tags);
+        //        }
+        //        if ($tags = $rule->getRemoveTags()) {
+        //            Mage::helper('rma/tag')->removeTags($rma, $tags);
+        //        }
         if (!$rma->getId()) {
             Mage::register('rma_created', 'yes');
         }
 
         $rma->save();
+        Mage::dispatchEvent('mst_rma_changed', array('rma'=>$rma));
 
         /* send notifications **/
         if ($rule->getIsSendUser()) {
@@ -125,6 +137,7 @@ class Mirasvit_Rma_Helper_Ruleevent extends Mage_Core_Helper_Abstract
      * @param string                  $name
      * @param Mirasvit_Rma_Model_Rule $rule
      * @param Mirasvit_Rma_Model_Rma  $rma
+     * @return void
      */
     protected function _sendEventNotification($email, $name, $rule, $rma)
     {
