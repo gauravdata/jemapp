@@ -181,6 +181,15 @@
                                 <![CDATA[select here RMA Items properties, which should be set at frontend by customer, the others should be set by agent in backend]]>
                             </comment>
                         </rma_customer_requirement>
+                        <is_wysiwyg_enabled translate="label">
+                            <label>Use WYSIWYG editor in backend</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_wysiwyg_enabled>
                     </fields>
                 </general>
                 <fedex>
@@ -286,6 +295,15 @@
                             <show_in_store>1</show_in_store>
                             <comment>used, if packaged item has no weight (lbs)</comment>
                         </fedex_default_weight>
+                        <fedex_description_attr translate="label">
+                            <label>Product Description Attribute</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>set here product attribute, that should be used as description</comment>
+                        </fedex_description_attr>
                         <fedex_charges_payor translate="label">
                             <label>FedEx Shipment Charges Pays</label>
                             <frontend_type>select</frontend_type>
@@ -360,11 +378,39 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </allow_in_statuses>
+                        <allow_replacement_resolutions translate="label">
+                            <label>Allow to create Replacement Order, when item has resolution</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>rma/config_source_rma_resolution</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allow_replacement_resolutions>
+                        <allow_creditmemo_resolutions translate="label">
+                            <label>Allow to create Credit Memo, when item has resolution</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>rma/config_source_rma_resolution</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allow_creditmemo_resolutions>
+                        <allow_storecredit_return translate="label">
+                            <label>Allow return to Store Credit</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>works only if Mirasvit Store Credit installed</comment>
+                        </allow_storecredit_return>
                         <bundle_one_by_one translate="label">
                             <label>Allow bundled items return one by one</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>30</sort_order>
+                            <sort_order>60</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -373,16 +419,25 @@
                             <label>Allow Guest Offline RMA</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>40</sort_order>
+                            <sort_order>70</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </is_allow_guest_offline_rma>
+                        <is_allow_multiple_order translate="label">
+                            <label>Allow RMA for multiple orders</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </is_allow_multiple_order>
                         <is_active translate="label">
                             <label>Ask to agree with RMA policy text</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>50</sort_order>
+                            <sort_order>90</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -391,7 +446,7 @@
                             <label>CMS block with RMA policy text</label>
                             <frontend_type>select</frontend_type>
                             <source_model>rma/config_source_cms_block</source_model>
-                            <sort_order>60</sort_order>
+                            <sort_order>100</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>

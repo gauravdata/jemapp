@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -297,4 +297,25 @@ class Mirasvit_Rma_Model_Item extends Mirasvit_Rma_Model_ItemAbstract
 
         return false;
     }
+
+    /**
+     * @return float
+     */
+    public function getOrderItemPrice()
+    {
+        $orderItem = $this->getOrderItem();
+        if ($orderItem->getId()) {
+            $store = ($orderItem->getOrder()) ? $orderItem->getOrder()->getStore() : $this->getRma()->getStore();
+            if (Mage::getStoreConfig('tax/calculation/price_includes_tax', $store->getId())) {
+                $price = Mage::helper('tax')->getPrice($orderItem->getProduct(),
+                    $orderItem->getProduct()->getFinalPrice(), true);
+            } else {
+                $price = $orderItem->getPrice();
+            }
+            return $price;
+        } else {
+            return 0;
+        }
+    }
+
 }

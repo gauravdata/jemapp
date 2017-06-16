@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -94,9 +94,20 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Edit extends Mage_Adminhtml_Block_Widget_
                     $this->getCreateOrderUrl($rma).'\', \'_blank\');win.focus();',
             ));
 
+            // Check, whether Replacements are allowed in current RMA
+            $allowedReplacements = false;
+            $replaceResolutions = Mage::getSingleton('rma/config')->getPolicyAllowReplacementResolutions();
+            foreach ($replaceResolutions as $resolution) {
+                $currentResolution = Mage::helper('rma')->getResolutionByCode($resolution);
+                if ($rma->getHasItemsWithResolution($currentResolution->getId())) {
+                    $allowedReplacements = true;
+                    break;
+                }
+            }
+
             $this->_addButton('order_replace', array(
                 'label' => Mage::helper('sales')->__('Replacement Order'),
-                'class' => ($rma->getExchangeOrderIds()) ? 'disabled' : '',
+                'class' => ($rma->getExchangeOrderIds() || !$allowedReplacements) ? 'disabled' : '',
                 'disabled' => $rma->getExchangeOrderIds(),
                 'onclick' => 'disableActionButton(this); var win = window.open(\''.
                     Mage::helper('adminhtml')->getUrl('adminhtml/rma_rma/createReplacement/',

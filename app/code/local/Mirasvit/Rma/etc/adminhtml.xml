@@ -49,6 +49,11 @@
                     <sort_order>60</sort_order>
                     <action>adminhtml/rma_template</action>
                 </template>
+                <return_address module="rma">
+                    <title>Return Addresses</title>
+                    <sort_order>70</sort_order>
+                    <action>adminhtml/rma_return_address</action>
+                </return_address>
                 </children>
             </dictionary>
             <rule module="rma">

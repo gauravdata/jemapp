@@ -9,18 +9,20 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
 class Mirasvit_MstCore_Model_Feed_Updates extends Mirasvit_MstCore_Model_Feed_Abstract
 {
+    const VAR_MST_FEED_UPDATE = 'mst_feed_update';
+
     public function check()
     {
         if (Mage::helper('mstcore/config')->isNotificationsEnabled() &&
-            time() - intval(Mage::app()->loadCache(Mirasvit_MstCore_Helper_Config::UPDATES_FEED_URL)) > 12 * 60 * 60
+            time() - intval(Mage::helper('mstcore')->getVar(self::VAR_MST_FEED_UPDATE)) > 12 * 60 * 60
         ) {
             $this->refresh();
         }
@@ -35,7 +37,7 @@ class Mirasvit_MstCore_Model_Feed_Updates extends Mirasvit_MstCore_Model_Feed_Ab
                 $params['modules'][$name] = (string) $module->version;
             }
 
-            Mage::app()->saveCache(time(), Mirasvit_MstCore_Helper_Config::UPDATES_FEED_URL);
+            Mage::helper('mstcore')->setVar(self::VAR_MST_FEED_UPDATE, time());
 
             $xml = $this->getFeed(Mirasvit_MstCore_Helper_Config::UPDATES_FEED_URL, $params);
 

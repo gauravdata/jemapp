@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -78,6 +78,7 @@ abstract class Mirasvit_Rma_Helper_Rma_Save_AbstractSave
         // Hack for custom fields of date format
         $customDates = Mage::getModel('rma/field')->getCollection()
             ->addFieldToFilter('type', 'date')
+            ->addFieldToFilter('is_product', false)
             ->addFieldToFilter('is_active', true);
         foreach ($customDates as $customDate) {
             $format = Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT);
@@ -88,13 +89,16 @@ abstract class Mirasvit_Rma_Helper_Rma_Save_AbstractSave
         $this->setCustomerData($rma);
         $this->setUserData($rma);
 
-        $this->setRmaAddress($rma);
-
         if ($rma->getStatusId() != $rma->getOrigData('status_id') && $rma->getStatus()->getCustomerMessage()) {
             $rma->setIsAdminRead(true);
         }
 
         if (!$rma->getCustomerId()) {
+            $rma->unsetData('customer_id');
+        }
+
+        $customer = Mage::getModel('customer/customer')->load($rma->getCustomerId());
+        if (!$customer->getId()) {
             $rma->unsetData('customer_id');
         }
 
@@ -106,6 +110,8 @@ abstract class Mirasvit_Rma_Helper_Rma_Save_AbstractSave
 
         $orderIds = array_merge(array_keys($items), $offlineNumbers);
         $rma->setData('orders', $orderIds);
+        $this->setRmaAddress($rma);
+
         if (!$rma->getStoreId()) {
             foreach ($orderIds as $orderId) {
                 $order = Mage::getModel('sales/order')->load($orderId);
@@ -146,7 +152,29 @@ abstract class Mirasvit_Rma_Helper_Rma_Save_AbstractSave
     protected function setRmaAddress($rma)
     {
         $customer = $rma->getCustomer();
-        $address = $customer->getDefaultBillingAddress();
+
+        preg_match_all('/ebay guest/ims', $rma->getCustomer()->getFirstname(), $matches);
+        if (count($matches)) {
+            // If it is predefined eBay customer, pick up Invoice, and get address from there
+            $orderIds = $rma->getData('orders');
+            $baseOrder = null;
+            foreach ($orderIds as $orderId) {
+                $order = Mage::getModel('sales/order')->load($orderId);
+                if ($order->getId()) {
+                    $baseOrder = $order;
+                    break;
+                }
+            }
+            if ($baseOrder) {
+                $invoice = $baseOrder->getInvoiceCollection()->getFirstItem();
+                $address = Mage::getModel('sales/order_address')->load($invoice->getBillingAddressId());
+            } else {
+                $address = $customer->getDefaultBillingAddress();
+            }
+        } else {
+            $address = $customer->getDefaultBillingAddress();
+        }
+
         if ($address) {
             $this->setRmaAddressData($rma, $address);
         }
@@ -235,7 +263,6 @@ abstract class Mirasvit_Rma_Helper_Rma_Save_AbstractSave
                 $rmaItem->setOrderId($order->getId());
                 $orderItem = Mage::getModel('sales/order_item')->load((int) $item['order_item_id']);
                 $rmaItem->initFromOrderItem($orderItem);
-
 
                 $rmaItem->save();
             }

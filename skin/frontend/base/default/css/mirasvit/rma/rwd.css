@@ -387,3 +387,21 @@ img.accordion-btn {
 .UI-ORDER-BLOCK.data-table th.order-status-aling-center {
   text-align: center;
 }
+
+/* Custom Fields styles */
+
+div.custom-fields {
+  display: none;
+}
+
+div.custom-field {
+  width: 100%;
+}
+
+div.custom-field select, div.custom-field input, div.custom-field textarea {
+  width: 90%;
+}
+
+div.custom-field input[type="checkbox"] {
+  width: auto !important;
+}

@@ -1,0 +1,36 @@
+<!--@subject Price for product {{var product.getName()}} has changed @-->
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+        <td> 
+             <p style="font-size:12px; line-height:16px; margin:0;">
+                Dear {{var subscribers.getFullname()}},
+             </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+             <p style="font-size:12px; line-height:16px; margin:0;">
+                <a href ="{{var product.getProductUrl()}}" target="_blank">{{var product.getName()}}</a> price has been changed! Now it's only {{var product.getAwPreparedPrice()}}
+             </p>
+        </td>      
+    </tr>  
+    <tr>        
+        <td>
+            <p style="font-size:12px; line-height:16px; margin:0;">
+            If you want to unsubscribe from {{var product.name}} notifications, simply click <a href="{{var unsubscribe_link}}">unsubscribe</a>.<br />
+                By clicking to <a href="{{var unsubscribe_all_link}}">unsubscribe all</a> link you will unsubscribe from all notifications.
+            </p>
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+
+
+
+
+
+
+

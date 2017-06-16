@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -417,6 +417,20 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Grid extends Mage_Adminhtml_Block_Widget_
             'confirm' => Mage::helper('rma')->__('Are you sure?'),
         ));
 
+        $this->getMassactionBlock()->addItem('change_status', array(
+            'label' => Mage::helper('rma')->__('Change Status'),
+            'url' => $this->getUrl('*/*/massChange', array('_current' => true)),
+            'additional' => array(
+                'visibility' => array(
+                    'name' => 'status',
+                    'type' => 'select',
+                    'class' => 'required-entry',
+                    'label' => Mage::helper('rma')->__('Status'),
+                    'values' => Mage::getSingleton('rma/status')->toOptionArray(),
+                ),
+            ),
+            'confirm' => Mage::helper('rma')->__('Are you sure?'),
+        ));
         $this->getMassactionBlock()->addItem('restore_archive', array(
             'label' => Mage::helper('rma')->__('Restore from archive'),
             'url' => $this->getTabMode()

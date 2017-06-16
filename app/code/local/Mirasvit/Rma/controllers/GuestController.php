@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -39,19 +39,6 @@ class Mirasvit_Rma_GuestController extends Mirasvit_Rma_AbstractRmaController
         try {
             $order = $this->_initOrder();
             if ($order) {
-                // Check for return eligibility
-                if (!Mage::helper('rma')->isReturnAllowed($order)) {
-                    $daysLeft = Mage::helper('rma/order')->getOrderAvailableDays($order->getId());
-                    if ($daysLeft < 0) {
-                        $errMessage = Mage::helper('rma')->__(
-                            'This order were placed more than %s days ago. Please, contact customer service.',
-                            Mage::helper('rma')->getReturnPeriod());
-                    } else {
-                        $errMessage = Mage::helper('rma')->__(
-                            'This order is fully processed, returns unavailable.');
-                    }
-                    throw new Mage_Core_Exception($errMessage);
-                }
                 $this->_getSession()->setRmaGuestOrderId($order->getId());
                 $this->_getSession()->setRmaGuestEmail($order->getCustomerEmail());
                 $this->_redirectUrl(Mage::helper('rma/url')->getGuestRmaListUrl());
@@ -83,6 +70,29 @@ class Mirasvit_Rma_GuestController extends Mirasvit_Rma_AbstractRmaController
         $this->loadLayout();
         $this->_initLayoutMessages('customer/session');
         $this->renderLayout();
+    }
+
+    /**
+     * Frontend function to download FedEx labels
+     *
+     * @return void
+     * @throws Zend_Controller_Response_Exception
+     */
+    public function getFedExLabelAction()
+    {
+        $label = Mage::getModel('rma/fedex_label')->load($this->getRequest()->getParam('label_id'));
+        if ($label) {
+            $this->getResponse()->clearHeaders();
+            $this->getResponse()
+                ->setHttpResponseCode(200)
+                ->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0', true)
+                ->setHeader('Pragma', 'public', true)
+                ->setHeader('Content-Disposition', 'attachment; filename=fedexlabel_'.$label->getTrackNumber().'.pdf')
+                ->setHeader('Content-type', 'application/x-pdf');
+            $this->getResponse()->sendHeaders();
+            $this->getResponse()->clearBody();
+            echo $label->getLabelBody();
+        }
     }
 
     /**

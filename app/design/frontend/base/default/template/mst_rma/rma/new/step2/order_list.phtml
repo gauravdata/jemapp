@@ -1,5 +1,6 @@
 <?php
 /* @var $this Mirasvit_Rma_Block_Rma_New_Step2_OrderList */
+$customFields = Mage::helper('rma/field')->getVisibleCustomerCollection('initial', true, true);
 ?>
 <?php foreach ($this->getItems() as $orderId => $items): ?>
     <?php
@@ -21,10 +22,10 @@
                 <input type="hidden" name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId(); ?>][is_return]" value="1">
                 <input type="hidden" name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId(); ?>][qty_requested]"
                        value="<?php echo $qty; ?>"
-                >
+                    >
                 <input type="hidden" name="items[<?php echo $order->getId() ?>][<?php echo $item->getOrderItemId(); ?>][name]"
                        value="<?php echo isset($orderItems[$order->getId()][$item->getOrderItemId()]['name']) ? $orderItems[$order->getId()][$item->getOrderItemId()]['name'] : ''; ?>"
-                >
+                    >
                 <?php if ($item->getProduct()): ?>
                     <img id="image" src="<?php echo $this->helper('catalog/image')->init($item->getProduct(), 'thumbnail')->resize(200) ?>" width="100px" />
                 <?php endif; ?>
@@ -73,6 +74,22 @@
                         </select>
                     </div>
                 <?php endif; ?>
+                <?php if (count($customFields)): ?>
+                    <a href="#" onclick="event.preventDefault(); showCustomFields(this.parentNode)">Show/hide additional fields</a>
+                    <div class="custom-fields">
+                        <?php foreach ($customFields as $field): ?>
+                            <div class="field">
+                                <label for="<?php echo $field->getCode()?>" <?php echo $field->getIsRequiredCustomer() ? 'class="required"><em>*</em>' : '>' ?><b><?php echo $this->__($field->getName()) ?></b>
+                                </label>
+                                <div class="input-box custom-field">
+                                    <?php echo Mage::helper('rma/field')->getInputHtml($field, 'items[' . $order->getId() . '][' . $item->getOrderItemId() . ']' , $item)?>
+                                    <p class="rma-mute"><?php echo $field->getDescription() ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+
                 <?php $another = $this->getRmasByOrderItem($item->getOrderItem()) ?>
                 <?php if ($another): ?>
                     <div id="another-rma">
@@ -82,5 +99,4 @@
             </td>
         </tr>
     <?php endforeach; ?>
-
 <?php endforeach; ?>
