@@ -238,8 +238,9 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
         if ($orderItem->getId()) {
             $store = ($orderItem->getOrder()) ? $orderItem->getOrder()->getStore() : $item->getRma()->getStore();
             if (Mage::getStoreConfig('tax/calculation/price_includes_tax', $store->getId())) {
-                $basePrice = Mage::helper('tax')->getBasePrice($orderItem->getProduct(),
-                    $orderItem->getProduct()->getFinalPrice(), true);
+                //$basePrice = Mage::helper('tax')->getBasePrice($orderItem->getProduct(),
+                //    $orderItem->getProduct()->getFinalPrice(), true);
+                $basePrice = $orderItem->getPriceInclTax() * $item->getQtyOrdered();
             } else {
                 $basePrice = $orderItem->getBasePrice();
             }
