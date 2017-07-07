@@ -20,7 +20,7 @@
  *
  * @category    Mage
  * @package     Mage_Catalog
- * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @copyright  Copyright (c) 2006-2017 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -305,7 +305,7 @@ class Mage_Catalog_Model_Product_Image extends Mage_Core_Model_Abstract
         $baseFile = $baseDir . $file;
 
         if ((!$file) || (!file_exists($baseFile))) {
-//            throw new Exception(Mage::helper('catalog')->__('Image file was not found.'));
+            throw new Exception(Mage::helper('catalog')->__('Image file was not found.'));
         }
 
         $this->_baseFile = $baseFile;

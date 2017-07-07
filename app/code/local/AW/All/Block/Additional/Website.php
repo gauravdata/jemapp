@@ -18,8 +18,8 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_Zblocks
- * @version    2.5.4
+ * @package    AW_Productupdates
+ * @version    2.1.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
@@ -85,7 +85,7 @@ class AW_All_Block_Additional_Website extends Mage_Adminhtml_Block_Abstract
         if (null === $this->_rewrites) {
             $result = array();
             foreach ($this->getModulesArray() as $moduleName => $options) {
-                if (!array_key_exists('codePool', $options)) {
+                if (!is_array($options) || !array_key_exists('codePool', $options)) {
                     continue;
                 }
 

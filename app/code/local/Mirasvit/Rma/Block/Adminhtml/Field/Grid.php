@@ -9,15 +9,18 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
 
 class Mirasvit_Rma_Block_Adminhtml_Field_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
+    /**
+     * Mirasvit_Rma_Block_Adminhtml_Field_Grid constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -27,6 +30,9 @@ class Mirasvit_Rma_Block_Adminhtml_Field_Grid extends Mage_Adminhtml_Block_Widge
         $this->setSaveParametersInSession(true);
     }
 
+    /**
+     * @return Mage_Adminhtml_Block_Widget_Grid
+     */
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('rma/field')
@@ -36,20 +42,24 @@ class Mirasvit_Rma_Block_Adminhtml_Field_Grid extends Mage_Adminhtml_Block_Widge
         return parent::_prepareCollection();
     }
 
+    /**
+     * @return Mirasvit_Rma_Block_Adminhtml_Field_Grid
+     * @throws Exception
+     */
     protected function _prepareColumns()
     {
         $this->addColumn('field_id', array(
             'header' => Mage::helper('rma')->__('ID'),
-//          'align'     => 'right',
-//          'width'     => '50px',
+        //          'align'     => 'right',
+        //          'width'     => '50px',
             'index' => 'field_id',
             'filter_index' => 'main_table.field_id',
             )
         );
         $this->addColumn('name', array(
             'header' => Mage::helper('rma')->__('Title'),
-//          'align'     => 'right',
-//          'width'     => '50px',
+        //          'align'     => 'right',
+        //          'width'     => '50px',
             'index' => 'name',
             'frame_callback' => array($this, '_renderCellName'),
             'filter_index' => 'main_table.name',
@@ -57,21 +67,55 @@ class Mirasvit_Rma_Block_Adminhtml_Field_Grid extends Mage_Adminhtml_Block_Widge
         );
         $this->addColumn('sort_order', array(
             'header' => Mage::helper('rma')->__('Sort Order'),
-//          'align'     => 'right',
-//          'width'     => '50px',
+        //          'align'     => 'right',
+        //          'width'     => '50px',
             'index' => 'sort_order',
             'filter_index' => 'main_table.sort_order',
+            )
+        );
+
+        $this->addColumn('is_active', array(
+                'header' => Mage::helper('rma')->__('Active'),
+                'index' => 'is_active',
+                'filter_index' => 'main_table.is_active',
+                'type' => 'options',
+                'options' => array(
+                    0 => $this->__('No'),
+                    1 => $this->__('Yes'),
+                ),
+            )
+        );
+
+        $this->addColumn('is_product', array(
+                'header' => Mage::helper('rma')->__('Product'),
+                'index' => 'is_product',
+                'filter_index' => 'main_table.is_product',
+                'type' => 'options',
+                'options' => array(
+                    0 => $this->__('No'),
+                    1 => $this->__('Yes'),
+                ),
             )
         );
 
         return parent::_prepareColumns();
     }
 
+    /**
+     * @param string $renderedValue
+     * @param Varien_Object $item
+     * @param string $column
+     * @param bool $isExport
+     * @return Mirasvit_Rma_Block_Adminhtml_Field_Grid
+     */
     public function _renderCellName($renderedValue, $item, $column, $isExport)
     {
         return $item->getName();
     }
 
+    /**
+     * @return Mirasvit_Rma_Block_Adminhtml_Field_Grid
+     */
     protected function _prepareMassaction()
     {
         $this->setMassactionIdField('field_id');
@@ -103,6 +147,10 @@ class Mirasvit_Rma_Block_Adminhtml_Field_Grid extends Mage_Adminhtml_Block_Widge
         return $this;
     }
 
+    /**
+     * @param Varien_Object $row
+     * @return string
+     */
     public function getRowUrl($row)
     {
         return $this->getUrl('*/*/edit', array('id' => $row->getId()));

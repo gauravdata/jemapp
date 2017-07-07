@@ -76,3 +76,19 @@ jQuery(document).ready(function($) {
         }
     }
 });
+
+function showCustomFields(container)
+{
+    var fieldset = container.getElementsByClassName('custom-fields')[0];
+    if(fieldset.style.display == 'none' || fieldset.style.display == '') {
+        fieldset.style.display = 'block';
+    } else {
+        fieldset.style.display = 'none';
+    }
+}
+
+window.addEventListener("change", function (event) {
+    if(event.target.tagName == 'INPUT' && event.target.type == 'checkbox') {
+        event.target.value = event.target.checked;
+    }
+}, false);

@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -217,6 +217,47 @@ class Mirasvit_MstCore_Helper_Data extends Mage_Core_Helper_Data
         }
 
         return array();
+    }
+
+    /**
+     * Set value for custom variable.
+     * Create variable if it does not exist.
+     *
+     * @param string $code
+     * @param string $value
+     *
+     * @return Mage_Core_Model_Variable
+     */
+    public function setVar($code, $value)
+    {
+        $variable = Mage::getModel('core/variable');
+        $variable = $variable->loadByCode($code);
+
+        if (!$variable->getId()) {
+            $variable->setCode($code)
+                ->setName($code);
+        }
+
+        $variable->setPlainValue($value)
+            ->setHtmlValue($variable->getPlainValue())
+            ->save();
+
+        return $variable;
+    }
+
+    /**
+     * Get custom variable plain value by code.
+     *
+     * @param string $code
+     *
+     * @return string|null
+     */
+    public function getVar($code)
+    {
+        $variable = Mage::getModel('core/variable');
+        $variable = $variable->loadByCode($code);
+
+        return $variable->getPlainValue();
     }
 }
 

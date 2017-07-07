@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -131,11 +131,10 @@ class Mirasvit_Rma_Model_Rule_Condition_Rma extends Mage_Rule_Model_Condition_Ab
             } else {
                 return false;
             }
-            $result = $this->_compareValues($validatedValue, $value);
-            if ($this->getOperatorForValidate() == '==') {
-                return $result;
+            if ($validatedValue && $this->getOperatorForValidate() == '==') {
+                return $validatedValue;
             } else {
-                return !$result;
+                return false;
             }
         } elseif (strpos($attrCode, 'hours_since_') === 0) {
             $attrCode = str_replace('hours_since_', '', $attrCode);

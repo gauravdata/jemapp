@@ -1,0 +1,32 @@
+#punContent {
+  .input-box {
+    float: none;
+  }
+  form label em, form label span.required {
+    float: none;
+  }
+  form label {
+    width: auto;
+    display: inline-block;
+    padding: 0 0 4px;
+  }
+  dd {
+    -webkit-margin-start: 0;
+  }
+
+  #pun-subscribe .group-select {
+    padding: 10px;
+  }
+
+  #pun-subscribe .button-set {
+    margin: 4px 0 4px 4px;
+  }
+
+  #pun-subscribe .group-select li .input-box .input-text, #pun-subscribe .pun-super-attribute-select, #aw-pun-configurable-stock {
+    width: 290px;
+  }
+
+  .form-list li:first-child {
+    display: none;
+  }
+}

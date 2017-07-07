@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -153,6 +153,15 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Edit_Form extends Mage_Adminhtml_Block_Wi
             'value' => $rma->getStatusId(),
             'values' => Mage::getModel('rma/status')->getCollection()->setOrder('sort_order', 'asc')->toOptionArray(),
         ));
+
+        $fieldset->addField('return_address_id', 'select', array(
+            'label' => Mage::helper('rma')->__('Alternative Return Address'),
+            'name' => 'return_address_id',
+            'value' => $rma->getReturnAddressId(),
+            'values' => Mage::getModel('rma/return_address')->getCollection()->setOrder('sort_order', 'asc')
+                ->toOptionArray(true),
+        ));
+
         $fieldset->addField('return_label', 'mfile', array(
             'label' => Mage::helper('rma')->__('Upload Return Label'),
             'name' => 'return_label',
@@ -181,6 +190,7 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Edit_Form extends Mage_Adminhtml_Block_Wi
                 'target' => '_blank',
             ));
         }
+
         if ($rma->getExchangeOrderIds()) {
             $links = array();
             foreach ($rma->getExchangeOrderIds() as $id) {
@@ -297,6 +307,35 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Edit_Form extends Mage_Adminhtml_Block_Wi
             $element->setAfterElementHtml(implode("\n", $values));
         }
 
+        return $form;
+    }
+
+    /**
+     * @return Varien_Data_Form
+     */
+    public function getEditorForm()
+    {
+        $form = new Varien_Data_Form();
+        $rma = Mage::registry('current_rma');
+        if (Mage::getSingleton('rma/config')->getGeneralIsWysiwygEnabled($rma->getStore()->getId())) {
+            $form->addField('reply', 'editor', array(
+                'required' => false,
+                'name' => 'reply',
+                'value' => '',
+                'config' => Mage::getSingleton('rma/config_wysiwyg')->getConfig(),
+                'wysiwyg' => true,
+                'style' => 'height:15em',
+            ));
+        } else {
+            $form->addField('reply', 'textarea', array(
+                'required' => false,
+                'name' => 'reply',
+                'value' => '',
+                'rows' => 2,
+                'cols' => 60,
+                'style' => 'width: 92%',
+            ));
+        }
         return $form;
     }
 
@@ -613,5 +652,16 @@ class Mirasvit_Rma_Block_Adminhtml_Rma_Edit_Form extends Mage_Adminhtml_Block_Wi
             return $this->getUrl('adminhtml/sales_order_creditmemo/new',
                 array('order_id' => $order->getId(), 'rma_id' => $rma->getId()));
         }
+    }
+
+    /**
+     * @param Mirasvit_Rma_Model_Rma $rma
+     * @param Mage_Sales_Model_Order $order
+     * @return string
+     */
+    public function getStoreCreditRefundUrl($rma, $order)
+    {
+        return $this->getUrl('*/rma_rma/refundToCredit',
+            array('rma_id' => $rma->getId(), 'order_id' => $order->getId()));
     }
 }

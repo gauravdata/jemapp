@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Mirasvit_Rma>
-            <version>1.0.23</version>
+            <version>1.0.25</version>
         </Mirasvit_Rma>
     </modules>
     <global>
@@ -73,6 +73,9 @@
                     <attachment>
                         <table>m_rma_attachment</table>
                     </attachment>
+                    <return_address>
+                        <table>m_rma_return_address</table>
+                    </return_address>
                 </entities>
             </rma_resource>
         </models>
@@ -280,11 +283,13 @@
                 <file_storage>database</file_storage>
                 <rma_grid_columns>increment_id,order_increment_id,customer_name,user_id,last_reply_name,status_id,created_at,updated_at</rma_grid_columns>
                 <rma_customer_requirement>reason,condition,resolution</rma_customer_requirement>
+                <is_wysiwyg_enabled>0</is_wysiwyg_enabled>
             </general>
             <fedex>
                 <fedex_enable>0</fedex_enable>
                 <fedex_method>international_economy</fedex_method>
                 <fedex_default_weight>1</fedex_default_weight>
+                <fedex_description_attr>description</fedex_description_attr>
                 <fedex_charges_payor>RECIPIENT</fedex_charges_payor>
                 <fedex_smartpost_indicia>PARCEL_SELECT</fedex_smartpost_indicia>
             </fedex>
@@ -295,6 +300,9 @@
                 <return_period>360</return_period>
                 <bundle_one_by_one>1</bundle_one_by_one>
                 <is_allow_guest_offline_rma>0</is_allow_guest_offline_rma>
+                <is_allow_multiple_order>1</is_allow_multiple_order>
+                <allow_replacement_resolutions>exchange</allow_replacement_resolutions>
+                <allow_creditmemo_resolutions>refund</allow_creditmemo_resolutions>
                 <allow_in_statuses>complete</allow_in_statuses>
             </policy>
             <number>

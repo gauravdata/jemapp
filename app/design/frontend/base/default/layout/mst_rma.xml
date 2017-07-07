@@ -95,6 +95,9 @@
     </rma_rma_new_step3>
 
     <rma_rma_new_success translate="label">
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/code/rma/frontend/customer.js</script></action>
+        </reference>
         <reference name="content">
             <block type="rma/rma_new_success" name="rma.rma.success" template="mst_rma/rma/new/success.phtml">
             </block>

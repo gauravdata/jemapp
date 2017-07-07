@@ -20,7 +20,7 @@
  *
  * @category    Mage
  * @package     Mage_Checkout
- * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @copyright  Copyright (c) 2006-2017 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -517,12 +517,12 @@ class Mage_Checkout_Model_Type_Onepage
             }
         } else if (self::METHOD_GUEST == $this->getQuote()->getCheckoutMethod()) {
             $email = $address->getData('email');
-            //if (!Zend_Validate::is($email, 'EmailAddress')) {
-            //    return array(
-            //        'error'   => -1,
-            //        'message' => Mage::helper('checkout')->__('Invalid email address "%s"', $email)
-            //    );
-            //}
+            if (!Zend_Validate::is($email, 'EmailAddress')) {
+                return array(
+                    'error'   => -1,
+                    'message' => Mage::helper('checkout')->__('Invalid email address "%s"', $email)
+                );
+            }
         }
 
         return true;

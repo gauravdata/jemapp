@@ -9,15 +9,18 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
 
 class Mirasvit_Rma_Helper_Mail
 {
+    /**
+     * @var array $emails
+     */
     public $emails = array();
 
     /**
@@ -28,13 +31,29 @@ class Mirasvit_Rma_Helper_Mail
         return Mage::getSingleton('rma/config');
     }
 
+    /**
+     * @return string
+     */
     protected function getSender()
     {
         return $this->getConfig()->getNotificationSenderEmail();
     }
 
-    protected function send($templateName, $senderName, $senderEmail, $recipientEmail, $recipientName, $variables, $storeId, $code, $attachments)
-    {
+    /**
+     * @param string $templateName
+     * @param string $senderName
+     * @param string $senderEmail
+     * @param string $recipientEmail
+     * @param string $recipientName
+     * @param array $variables
+     * @param int $storeId
+     * @param string $code
+     * @param array $attachments
+     * @return bool
+     */
+    protected function send($templateName, $senderName, $senderEmail, $recipientEmail, $recipientName, $variables,
+        $storeId, $code, $attachments
+    ) {
         if (!$senderEmail || !$recipientEmail || $templateName == 'none') {
             return false;
         }
@@ -58,7 +77,8 @@ class Mirasvit_Rma_Helper_Mail
 
         $template = Mage::getModel('core/email_template');
         foreach ($attachments as $attachment) {
-            $template->getMail()->createAttachment($attachment->getBody(), $attachment->getType())->filename = $attachment->getName();
+            $template->getMail()->createAttachment($attachment->getBody(),
+                $attachment->getType())->filename = $attachment->getName();
         }
 
         // All notificators are auto-submitted and not eligible to fetch by Help Desk, if integration enabled
@@ -92,17 +112,23 @@ class Mirasvit_Rma_Helper_Mail
                  ),
                  $recipientEmail, $recipientName, $variables);
 
-        $text = $template->getProcessedTemplate($variables, true);
+                 $text = $template->getProcessedTemplate($variables, true);
 
-        $this->emails[] = array('text' => $text, 'recipient_email' => $recipientEmail, 'recipient_name' => $recipientName);
-        $translate->setTranslateInline(true);
-        // restore previous design settings
-        $this->_setDesignConfig($currentDesignConfig->getData());
-        $this->_applyDesignConfig();
+                 $this->emails[] = array('text' => $text, 'recipient_email' => $recipientEmail,
+                     'recipient_name' => $recipientName);
+                 $translate->setTranslateInline(true);
+                 // restore previous design settings
+                 $this->_setDesignConfig($currentDesignConfig->getData());
+                 $this->_applyDesignConfig();
 
-        return true;
+                 return true;
     }
 
+    /**
+     * @param Mirasvit_Rma_Model_Rma $rma
+     * @param string $comment
+     * @return void
+     */
     public function sendNotificationCustomerEmail($rma, $comment)
     {
         $attachments = array();
@@ -110,9 +136,10 @@ class Mirasvit_Rma_Helper_Mail
             $attachments = $comment->getAttachments();
             $comment = $comment->getTextHtml();
         }
-        $storeId = Mage::helper('rma')->getStoreByOrder($rma->getOrder())->getId();
-        Mage::app()->setCurrentStore(($storeId) ? $storeId : $rma->getStore()->getId());
-        $templateName = $this->getConfig()->getNotificationCustomerEmailTemplate($rma->getStore());
+        $storeId = $rma->getOrder()->getId() ? Mage::helper('rma')->getStoreByOrder($rma->getOrder())->getId()
+            : $rma->getStore()->getId();
+        Mage::app()->setCurrentStore($storeId);
+        $templateName = $this->getConfig()->getNotificationCustomerEmailTemplate($storeId);
 
         $recipientEmail = $rma->getEmail();
         $recipientName = $rma->getName();
@@ -127,9 +154,15 @@ class Mirasvit_Rma_Helper_Mail
         $senderName = Mage::getStoreConfig("trans_email/ident_{$this->getSender()}/name");
         $senderEmail = Mage::getStoreConfig("trans_email/ident_{$this->getSender()}/email");
 
-        $this->send($templateName, $senderName, $senderEmail, $recipientEmail, $recipientName, $variables, $storeId, $rma->getCode(), $attachments);
+        $this->send($templateName, $senderName, $senderEmail, $recipientEmail, $recipientName, $variables, $storeId,
+            $rma->getCode(), $attachments);
     }
 
+    /**
+     * @param Mirasvit_Rma_Model_Rma $rma
+     * @param string $comment
+     * @return void
+     */
     public function sendNotificationAdminEmail($rma, $comment)
     {
         $attachments = array();
@@ -137,9 +170,12 @@ class Mirasvit_Rma_Helper_Mail
             $attachments = $comment->getAttachments();
             $comment = $comment->getTextHtml();
         }
-        $storeId = Mage::helper('rma')->getStoreByOrder($rma->getOrder())->getId();
-        Mage::app()->setCurrentStore(($storeId) ? $storeId : $rma->getStore()->getId());
-        $templateName = $this->getConfig()->getNotificationAdminEmailTemplate();
+
+        $storeId = $rma->getOrder()->getId() ? Mage::helper('rma')->getStoreByOrder($rma->getOrder())->getId()
+            : $rma->getStore()->getId();
+        Mage::app()->setCurrentStore($storeId);
+
+        $templateName = $this->getConfig()->getNotificationAdminEmailTemplate($storeId);
         if ($user = $rma->getUser()) {
             $recipientEmail = $user->getEmail();
         } else {
@@ -158,7 +194,8 @@ class Mirasvit_Rma_Helper_Mail
 
         $senderName = Mage::getStoreConfig("trans_email/ident_{$this->getSender()}/name");
         $senderEmail = Mage::getStoreConfig("trans_email/ident_{$this->getSender()}/email");
-        $this->send($templateName, $senderName, $senderEmail, $recipientEmail, $recipientName, $variables, $storeId, $rma->getCode(), $attachments);
+        $this->send($templateName, $senderName, $senderEmail, $recipientEmail, $recipientName, $variables, $storeId,
+            $rma->getCode(), $attachments);
     }
 
     /**
@@ -166,6 +203,7 @@ class Mirasvit_Rma_Helper_Mail
      * @param string                  $recipientName
      * @param Mirasvit_Rma_Model_Rule $rule
      * @param Mirasvit_Rma_Model_Rma  $rma
+     * @return void
      */
     public function sendNotificationRule($recipientEmail, $recipientName, $rule, $rma)
     {
@@ -179,9 +217,10 @@ class Mirasvit_Rma_Helper_Mail
             $text = $comment->getTextHtml();
         }
 
-        $storeId = Mage::helper('rma')->getStoreByOrder($rma->getOrder())->getId();
-        Mage::app()->setCurrentStore(($storeId) ? $storeId : $rma->getStore()->getId());
-        $templateName = $this->getConfig()->getNotificationRuleTemplate($rma->getStoreId());
+        $storeId = $rma->getOrder()->getId() ? Mage::helper('rma')->getStoreByOrder($rma->getOrder())->getId()
+            : $rma->getStore()->getId();
+        Mage::app()->setCurrentStore($storeId);
+        $templateName = $this->getConfig()->getNotificationRuleTemplate($storeId);
 
         $variables = array(
             'customer' => $rma->getCustomer(),
@@ -194,9 +233,14 @@ class Mirasvit_Rma_Helper_Mail
         $variables['comment'] = $text;
         $variables['email_subject'] = $this->processVariable($variables['email_subject'], $variables, $storeId);
         $variables['email_body'] = $this->processVariable($variables['email_body'], $variables, $storeId);
+
+        // Add this message to the history
+        $rma->addComment($variables['email_body'], true, null, null, false, true, false);
+
         $senderName = Mage::getStoreConfig("trans_email/ident_{$this->getSender()}/name");
         $senderEmail = Mage::getStoreConfig("trans_email/ident_{$this->getSender()}/email");
-        $this->send($templateName, $senderName, $senderEmail, $recipientEmail, $recipientName, $variables, $storeId, $rma->getCode(), $attachments);
+        $this->send($templateName, $senderName, $senderEmail, $recipientEmail, $recipientName, $variables, $storeId,
+            $rma->getCode(), $attachments);
     }
 
     /**
@@ -225,6 +269,10 @@ class Mirasvit_Rma_Helper_Mail
         return $html;
     }
 
+    /**
+     * @param Mage_Core_Model_Store $store
+     * @return string
+     */
     protected function _getLogoUrl($store)
     {
         $store = Mage::app()->getStore($store);
@@ -240,6 +288,10 @@ class Mirasvit_Rma_Helper_Mail
         return Mage::getDesign()->getSkinUrl('images/logo_email.gif');
     }
 
+    /**
+     * @param Mage_Core_Model_Store $store
+     * @return string
+     */
     protected function _getLogoAlt($store)
     {
         $store = Mage::app()->getStore($store);
@@ -251,7 +303,15 @@ class Mirasvit_Rma_Helper_Mail
         return $store->getFrontendName();
     }
 
+    /**
+     * @var Varien_Object
+     */
     protected $_designConfig;
+
+    /**
+     * @param array $config
+     * @return $this
+     */
     protected function _setDesignConfig(array $config)
     {
         $this->_getDesignConfig()->setData($config);
@@ -259,9 +319,12 @@ class Mirasvit_Rma_Helper_Mail
         return $this;
     }
 
+    /**
+     * @return Varien_Object
+     */
     protected function _getDesignConfig()
     {
-        if (is_null($this->_designConfig)) {
+        if ($this->_designConfig === null) {
             $store = is_object(Mage::getDesign()->getStore())
                 ? Mage::getDesign()->getStore()->getId()
                 : Mage::getDesign()->getStore();
@@ -277,6 +340,10 @@ class Mirasvit_Rma_Helper_Mail
         return $this->_designConfig;
     }
 
+    /**
+     * @return $this
+     * @throws Mage_Core_Exception
+     */
     protected function _applyDesignConfig()
     {
         $designConfig = $this->_getDesignConfig();
@@ -324,7 +391,7 @@ class Mirasvit_Rma_Helper_Mail
     {
         $variables = array(
             'rma' => $rma,
-//            'order' => $rma->getOrder(),
+        //            'order' => $rma->getOrder(),
             'status' => $rma->getStatus(),
             'customer' => $rma->getCustomer(),
             'store' => $rma->getStore(),

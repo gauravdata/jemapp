@@ -9,12 +9,40 @@ $orders = $this->getAllowedOrders();
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 
 <?php if (($orders && $orders->count()) || $this->getConfig()->getGeneralIsOfflineOrdersAllowed()): ?>
+    <script language="JavaScript">
+        Event.observe(document, 'change', function(event){
+            if(event.target.tagName == 'INPUT' && event.target.type == "checkbox" && event.target.id.startsWith("reorder-item-")) {
+                var orderKey = event.target.id.replace("reorder-item-", "order-");
+                forceUnfold(event.target, orderKey);
+
+
+                <?php if (!$this->getConfig()->getPolicyAllowMultipleOrderRMA()): ?>
+                    var orders = document.getElementsByClassName("select-order");
+                    for (var i = 0; i < orders.length; i++) {
+                        if((orders[i].id != event.target.id) && (orders[i].checked == true)) {
+                            orders[i].checked = false;
+                            var otherOrderKey = orders[i].id.replace("reorder-item-", "order-");
+                            forceUnfold(orders[i], otherOrderKey);
+
+                            var itemsBody = document.getElementById(otherOrderKey);
+                            var items = itemsBody.getElementsByClassName("select-order-item");
+                            for (var j = 0; j < orders.length; j++) {
+                                items[j].checked = false;
+                            }
+                        }
+                    }
+                <?php endif; ?>
+
+            }
+        });
+
+    </script>
+
     <form action="<?php echo $this->getStep1PostUrl() ?>" method="POST" id="rma-form-validate" >
         <div class='fieldset'>
             <h2 class="legend" id="please-select-order">
                 <?php echo $this->__('Select order items for return') ?>
             </h2>
-
             <ul class="form-list">
                 <li class="wide">
                     <?php if ($orders && !$orders->count()): ?>
@@ -32,7 +60,7 @@ $orders = $this->getAllowedOrders();
                                     <th>
                                         <input id="my-orders-table_collapseable_<?php echo $order->getId(); ?>-state" type="hidden" value="0">
                                         <input type="checkbox" name="orders[]" id="reorder-item-<?php echo $order->getId() ?>" value="<?php echo $order->getId() ?>"
-                                               class="checkbox select-order UI-SELECT-ORDER" onChange="forceUnfold(this, 'order-<?php echo $order->getId() ?>')" data-order="<?php echo $order->getId() ?>">
+                                               class="checkbox select-order UI-SELECT-ORDER" data-order="<?php echo $order->getId() ?>">
                                     </th>
                                     <th width="120px"><?php echo $order->getRealOrderId() ?></th>
                                     <th width="100px"><span class="nobr"><?php echo $this->formatDate($order->getCreatedAtStoreDate()) ?></span></th>
