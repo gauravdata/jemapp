@@ -3,6 +3,7 @@
 
 /* @var $rma Mirasvit_Rma_Model_Rma */
 $rma = $this->getRma();
+$customFields = Mage::helper('rma/field')->getVisibleCustomerCollection($rma->getStatusId(), false, true);
 ?>
 
 <script>
@@ -78,6 +79,9 @@ $rma = $this->getRma();
                     <?php if (Mage::helper('rma')->getConfig()->isCustomerResolutionRequired()): ?>
                         <th><?php echo $this->__('Resolution') ?></th>
                     <?php endif; ?>
+                    <?php if (count($customFields)): ?>
+                        <th><?php echo $this->__('Additional') ?></th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -104,6 +108,24 @@ $rma = $this->getRma();
                     <?php if (Mage::helper('rma')->getConfig()->isCustomerResolutionRequired()): ?>
                         <td class="rma-italic"><?php echo $this->__($item->getResolutionName()) ?></td>
                     <?php endif; ?>
+                    <?php if (count($customFields)): ?>
+                        <td>
+                            <a href="#" onclick="event.preventDefault(); showCustomFields(this.parentNode)">Show/hide additional fields</a>
+                            <?php $order = Mage::getModel('sales/order')->load($item->getOrderId()); ?>
+                            <div class="custom-fields">
+                                <?php foreach ($customFields as $field): ?>
+                                    <div class="field">
+                                        <label for="<?php echo $field->getCode()?>" <?php echo $field->getIsRequiredCustomer() ? 'class="required"><em>*</em>' : '>' ?><b><?php echo $this->__($field->getName()) ?></b>
+                                        </label>
+                                        <div class="input-box custom-field">
+                                            <?php echo Mage::helper('rma/field')->getInputHtml($field, 'items[' . $order->getId() . '][' . $item->getOrderItemId() . ']' , $item)?>
+                                            <p class="rma-mute"><?php echo $field->getDescription() ?></p>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </td>
+                    <?php endif; ?>
                 </tr>
                 <?php endforeach?>
                 <?php foreach ($rma->getOfflineItemCollection() as $item):?>
@@ -125,6 +147,24 @@ $rma = $this->getRma();
                         <?php endif; ?>
                         <?php if (Mage::helper('rma')->getConfig()->isCustomerResolutionRequired()): ?>
                             <td class="rma-italic"><?php echo $this->__($item->getResolutionName()) ?></td>
+                        <?php endif; ?>
+                        <?php if (count($customFields)): ?>
+                            <td>
+                                <a href="#" onclick="event.preventDefault(); showCustomFields(this.parentNode)">Show/hide additional fields</a>
+                                <?php $orderId = $item->getOfflineOrder()->getId(); ?>
+                                <div class="custom-fields">
+                                    <?php foreach ($customFields as $field): ?>
+                                        <div class="field">
+                                            <label for="<?php echo $field->getCode()?>" <?php echo $field->getIsRequiredCustomer() ? 'class="required"><em>*</em>' : '>' ?><b><?php echo $this->__($field->getName()) ?></b>
+                                            </label>
+                                            <div class="input-box custom-field">
+                                                <?php echo Mage::helper('rma/field')->getInputHtml($field, 'offline_items[' . $orderId . '][' . $item->getOrderItemId() . ']' , $item)?>
+                                                <p class="rma-mute"><?php echo $field->getDescription() ?></p>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </td>
                         <?php endif; ?>
                     </tr>
                 <?php endforeach?>

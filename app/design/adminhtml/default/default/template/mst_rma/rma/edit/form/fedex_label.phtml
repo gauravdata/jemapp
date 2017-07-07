@@ -15,6 +15,7 @@
                         <th class="no-link"><span class="nobr"><?php echo Mage::helper('rma')->__('Track Number') ?></span></th>
                         <th class="no-link"><span class="nobr"><?php echo Mage::helper('rma')->__('Date') ?></span></th>
                         <th class="no-link"><span class="nobr"><?php echo Mage::helper('rma')->__('Download Label') ?></span></th>
+                        <th class="no-link"><span class="nobr"></span></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,6 +32,9 @@
                                 <a target="_blank" href='<?php echo $this->getUrl('*/rma_rma/downloadFedExLabel', array('label_id' => $label->getId())); ?>'>
                                     link
                                 </a>
+                            </td>
+                            <td class="name" style="width: 1%;">
+                                <button type="button" onClick="removeFedExLabel('<?php echo $label->getTrackNumber() ?>')"><?php echo Mage::helper('rma')->__('Remove') ?></span></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>

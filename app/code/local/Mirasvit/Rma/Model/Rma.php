@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -199,7 +199,19 @@ class Mirasvit_Rma_Model_Rma extends Mage_Core_Model_Abstract
         return $this->offlineOrders;
     }
 
-
+    /**
+     * @param int $index
+     * @return Mage_Sales_Model_Order
+     */
+    public function getOrder($index = 0)
+    {
+        $orders = array_values($this->getOrders()->getItems());
+        if (count($orders) <= $index) {
+            return new Varien_Object();
+        }
+        $order = $orders[$index];
+        return ($order->getId()) ? $order : new Varien_Object();
+    }
 
     /**
      * @return array
@@ -556,7 +568,11 @@ class Mirasvit_Rma_Model_Rma extends Mage_Core_Model_Abstract
      */
     public function getReturnAddress()
     {
-        return Mage::getSingleton('rma/config')->getGeneralReturnAddress($this->getStoreId());
+        if ($this->getReturnAddressId()) {
+            return Mage::getModel('rma/return_address')->load($this->getReturnAddressId())->getAddress();
+        } else {
+            return Mage::getSingleton('rma/config')->getGeneralReturnAddress($this->getStoreId());
+        }
     }
 
     /**
@@ -586,7 +602,7 @@ class Mirasvit_Rma_Model_Rma extends Mage_Core_Model_Abstract
     ) {
         $comment = Mage::getModel('rma/comment')
             ->setRmaId($this->getId())
-            ->setText($text, $isHtml)
+            ->setText(Mage::helper('rma/mail')->parseVariables($text, $this), $isHtml)
             ->setIsVisibleInFrontend($isVisible)
             ->setIsCustomerNotified($isNotify)
             ->save();

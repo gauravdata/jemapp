@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -36,7 +36,12 @@ class Mirasvit_Rma_Helper_Order
             }
         }
 
-        $refundResolution = Mage::helper('rma')->getResolutionByCode('refund');
+        $resolutionCodes = $this->getConfig()->getPolicyAllowCreditMemoResolutions($order->getStore());
+        $allowedResolutions = array();
+        foreach ($resolutionCodes as $code) {
+            $allowedResolutions[] = Mage::helper('rma')->getResolutionByCode($code)->getId();
+        }
+
         $creditResolution = Mage::helper('rma')->getResolutionByCode('credit');
 
         if ($creditModuleInstalled) {
@@ -48,13 +53,13 @@ class Mirasvit_Rma_Helper_Order
             if (!$order->canCreditmemo() && abs($realPaidAmount - $realRefunded) < .0001) {
                 return false;
             }
-        } else if (!$order->canCreditmemo() || !$refundResolution) {
+        } else if (!$order->canCreditmemo() || !count($allowedResolutions)) {
             return false;
         }
 
         $haveItems = false;
         foreach (Mage::helper('rma')->getRmaItems($order, $rma) as $item) {
-            if ($item->getResolutionId() != $refundResolution->getId()) {
+            if (!in_array($item->getResolutionId(), $allowedResolutions)) {
                 if ($creditModuleInstalled && $item->getResolutionId() == $creditResolution->getId()) {
                     $haveItems = true;
                 }
@@ -65,6 +70,30 @@ class Mirasvit_Rma_Helper_Order
         }
 
         return $haveItems;
+    }
+
+    /**
+     * @param Mirasvit_Rma_Model_Rma $rma
+     * @param Mage_Sales_Model_Order $order
+     * @return bool
+     */
+    public function canReturnToStoreCredit($rma, $order)
+    {
+        $enabled = $this->getConfig()->getPolicyAllowStoreCreditReturn($rma->getStore());
+        if ($creditModuleInstalled = Mage::helper('mstcore')->isModuleInstalled('Mirasvit_Credit') && $enabled) {
+            if ($creditResolution = Mage::helper('rma')->getResolutionByCode('credit')) {
+                $haveItems = false;
+                foreach (Mage::helper('rma')->getRmaItems($order, $rma) as $item) {
+                    if ($creditModuleInstalled && $item->getResolutionId() == $creditResolution->getId()) {
+                        $haveItems = true;
+                    }
+                    continue;
+                }
+                return $haveItems;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -125,6 +154,20 @@ class Mirasvit_Rma_Helper_Order
                     ->setShipping_method('flatrate_flatrate');
             }
         }
+    }
+
+    /**
+     * @param Mirasvit_Rma_Model_Item $item
+     * @return bool
+     */
+    public function isReplacementAllowed($item)
+    {
+        $resolution = Mage::getModel('rma/resolution')->load($item->getResolutionId());
+        if (in_array($resolution->getCode(),
+            Mage::getSingleton('rma/config')->getPolicyAllowReplacementResolutions())) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -205,7 +248,7 @@ class Mirasvit_Rma_Helper_Order
         $subTotal = 0;
         $haveItems = false;
         foreach ($rma->getItemsCollection() as $item) {
-            if (!$item->isExchange()) {
+            if (!$this->isReplacementAllowed($item)) {
                 continue;
             }
 
@@ -218,6 +261,12 @@ class Mirasvit_Rma_Helper_Order
             $this->updateStockQty($product, $qty, $storeId);
 
             $rowTotal = 0;
+
+            // Get actual tax percent for a product
+            $taxCalculation = Mage::getModel('tax/calculation');
+            $request = $taxCalculation->getRateRequest(null, null, null, $order->getStore());
+            $taxClassId = $product->getTaxClassId();
+            $percent = $taxCalculation->getRate($request->setProductClassId($taxClassId));
 
             $orderItem = Mage::getModel('sales/order_item')
                 ->setStoreId($storeId)
@@ -235,6 +284,9 @@ class Mirasvit_Rma_Helper_Order
                 ->setPrice($product->getPrice())
                 ->setBasePrice($product->getPrice())
                 ->setOriginalPrice($product->getPrice())
+                ->setBaseOriginalPrice($product->getPrice())
+                ->setBaseCost(($product->getCost()) ? $product->getCost() : $product->getPrice())
+                ->setTaxPercent($percent)
                 ->setRowTotal($rowTotal)
                 ->setBaseRowTotal($rowTotal);
 

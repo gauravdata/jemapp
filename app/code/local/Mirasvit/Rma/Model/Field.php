@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -35,21 +35,42 @@
  */
 class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
 {
+    const TYPE_CHECKBOX = 'checkbox';
+    const TYPE_DATE = 'date';
+    const TYPE_MULTILINE = 'textarea';
+    const TYPE_SELECT = 'select';
+    const TYPE_TEXT = 'text';
+
+    /**
+     * Constructor
+     * @return void
+     */
     protected function _construct()
     {
         $this->_init('rma/field');
     }
 
+    /**
+     * @param bool $emptyOption
+     * @return array
+     */
     public function toOptionArray($emptyOption = false)
     {
         return $this->getCollection()->toOptionArray($emptyOption);
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return Mage::helper('rma/storeview')->getStoreViewValue($this, 'name');
     }
 
+    /**
+     * @param string $value
+     * @return Mirasvit_Rma_Model_Field
+     */
     public function setName($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'name', $value);
@@ -57,11 +78,18 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription()
     {
         return Mage::helper('rma/storeview')->getStoreViewValue($this, 'description');
     }
 
+    /**
+     * @param string $value
+     * @return Mirasvit_Rma_Model_Field
+     */
     public function setDescription($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'description', $value);
@@ -74,6 +102,10 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
     //     return Mage::helper('rma/storeview')->getStoreViewValue($this, 'values');
     // }
 
+    /**
+     * @param string $value
+     * @return Mirasvit_Rma_Model_Field
+     */
     public function setValues($value)
     {
         Mage::helper('rma/storeview')->setStoreViewValue($this, 'values', $value);
@@ -81,6 +113,10 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
         return $this;
     }
 
+    /**
+     * @param array $data
+     * @return Varien_Object
+     */
     public function addData(array $data)
     {
         if (isset($data['name']) && strpos($data['name'], 'a:') !== 0) {
@@ -102,6 +138,10 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
     }
     /************************/
 
+    /**
+     * @param bool $emptyOption
+     * @return array|null
+     */
     public function getValues($emptyOption = false)
     {
         $values = Mage::helper('rma/storeview')->getStoreViewValue($this, 'values');
@@ -128,6 +168,9 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
         return $values;
     }
 
+    /**
+     * @return bool
+     */
     public function getVisibleCustomerStatus()
     {
         if (is_string($this->getData('visible_customer_status'))) {
@@ -137,6 +180,9 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
         return $this->getData('visible_customer_status');
     }
 
+    /**
+     * @return Mage_Core_Model_Abstract
+     */
     protected function _beforeSave()
     {
         if (!$this->getId()) {
@@ -146,24 +192,75 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
         return parent::_beforeSave();
     }
 
+    /**
+     * @return void
+     */
+    protected function createRealField()
+    {
+        $resource = Mage::getSingleton('core/resource');
+        $writeConnection = $resource->getConnection('core_write');
+        $fieldType = 'TEXT';
+        if ($this->getType() == 'date') {
+            $fieldType = 'TIMESTAMP';
+        }
+
+        if ($this->getIsProduct()) {
+            $tableName = $resource->getTableName('rma/item');
+            $query = "ALTER TABLE `{$tableName}` ADD `{$this->getCode()}` " . $fieldType . ';';
+            $tableName = $resource->getTableName('rma/offline_item');
+            $query .= "ALTER TABLE `{$tableName}` ADD `{$this->getCode()}` " . $fieldType . ';';
+        } else {
+            $tableName = $resource->getTableName('rma/rma');
+            $query = "ALTER TABLE `{$tableName}` ADD `{$this->getCode()}` " . $fieldType;
+        }
+
+        $writeConnection->query($query);
+        $writeConnection->resetDdlCache();
+    }
+
+    /**
+     * @param bool $useOrigData
+     * @return void
+     */
+    protected function removeRealField($useOrigData = false)
+    {
+        $fieldMark = ($useOrigData) ? $this->getOrigData('is_product') : $this->getIsProduct();
+        $resource = Mage::getSingleton('core/resource');
+        $writeConnection = $resource->getConnection('core_write');
+        if ($fieldMark) {
+            $tableName = $resource->getTableName('rma/item');
+            $query = "ALTER TABLE `{$tableName}` DROP `{$this->getCode()}`;";
+            $tableName = $resource->getTableName('rma/offline_item');
+            $query .= "ALTER TABLE `{$tableName}` DROP `{$this->getCode()}`;";
+        } else {
+            $tableName = $resource->getTableName('rma/rma');
+            $query = "ALTER TABLE `{$tableName}` DROP `{$this->getCode()}`";
+        }
+        $writeConnection->query($query);
+        $writeConnection->resetDdlCache();
+
+    }
+
+    /**
+     * @return void
+     */
     protected function _afterSaveCommit()
     {
         parent::_afterSaveCommit();
 
         if ($this->getIsNew()) {
-            $resource = Mage::getSingleton('core/resource');
-            $writeConnection = $resource->getConnection('core_write');
-            $tableName = $resource->getTableName('rma/rma');
-            $fieldType = 'TEXT';
-            if($this->getType() == 'date') {
-                $fieldType = 'TIMESTAMP';
+            $this->createRealField();
+        } else {
+            if ($this->getOrigData('is_product') != $this->getIsProduct()) {
+                $this->removeRealField(true);
+                $this->createRealField();
             }
-            $query = "ALTER TABLE `{$tableName}` ADD `{$this->getCode()}` " . $fieldType;
-            $writeConnection->query($query);
-            $writeConnection->resetDdlCache();
         }
     }
 
+    /**
+     * @return Mage_Core_Model_Abstract
+     */
     protected function _beforeDelete()
     {
         $field = Mage::getModel('rma/field')->load($this->getId());
@@ -172,15 +269,12 @@ class Mirasvit_Rma_Model_Field extends Mage_Core_Model_Abstract
         return parent::_beforeDelete();
     }
 
+    /**
+     * @return void
+     */
     protected function _afterDeleteCommit()
     {
         parent::_afterDeleteCommit();
-
-        $resource = Mage::getSingleton('core/resource');
-        $writeConnection = $resource->getConnection('core_write');
-        $tableName = $resource->getTableName('rma/rma');
-        $query = "ALTER TABLE `{$tableName}` DROP `{$this->getDbCode()}`";
-        $writeConnection->query($query);
-        $writeConnection->resetDdlCache();
+        $this->removeRealField();
     }
 }

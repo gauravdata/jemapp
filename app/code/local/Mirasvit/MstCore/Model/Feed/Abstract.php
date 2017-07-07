@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -21,6 +21,7 @@ class Mirasvit_MstCore_Model_Feed_Abstract extends Mage_Core_Model_Abstract
     {
         $curl = new Varien_Http_Adapter_Curl();
         $curl->write(Zend_Http_Client::POST, $url, '1.1', array(), http_build_query($params));
+        $curl->addOption('timeout', 10);
         $data = $curl->read();
 
         if ($data === false) {

@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -50,7 +50,8 @@ class Mirasvit_Rma_Helper_Rma_Save_User extends Mirasvit_Rma_Helper_Rma_Save_Abs
     /**
      * {@inheritdoc}
      */
-    protected function setCustomerData($rma) {
+    protected function setCustomerData($rma) 
+    {
         $data = $this->dataProcessor->getRmaData();
         if (!$data['customer_id'] && $this->dataProcessor->getNewCustomerData()) {
             $customer = Mage::helper('rma/rma_save_customerFactory')->loadOrCreate(
@@ -65,7 +66,8 @@ class Mirasvit_Rma_Helper_Rma_Save_User extends Mirasvit_Rma_Helper_Rma_Save_Abs
     /**
      * {@inheritdoc}
      */
-    protected function setUserData($rma) {
+    protected function setUserData($rma) 
+    {
         if (!$rma->getUserId()) {
             $rma->setUserId($this->user->getId());
         }
@@ -83,7 +85,7 @@ class Mirasvit_Rma_Helper_Rma_Save_User extends Mirasvit_Rma_Helper_Rma_Save_Abs
                 $isNotify = $isVisible = false;
             }
             $user = Mage::getSingleton('admin/session')->getUser();
-            $rma->addComment(trim($data['reply']), false, false, $user, $isNotify, $isVisible);
+            $rma->addComment(trim($data['reply']), true, false, $user, $isNotify, $isVisible);
         }
     }
 }

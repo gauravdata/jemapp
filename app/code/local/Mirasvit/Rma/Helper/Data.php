@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -227,18 +227,33 @@ class Mirasvit_Rma_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Returns e.g. $295.00.
      *
-     * @param Mirasvit_Rma_Model_Item $item
+     * @param Mage_Sales_Model_Order_Item $item
      *
      * @return string
      */
     public function getOrderItemPriceFormatted($item)
     {
+        $price     = '';
         $orderItem = $item->getOrderItem();
         if ($orderItem->getId()) {
-            return Mage::helper('core')->currencyByStore($orderItem->getOriginalPrice(), $orderItem->getStore(), true, false);
-        } else {
-            return '';
+            $store = ($orderItem->getOrder()) ? $orderItem->getOrder()->getStore() : $item->getRma()->getStore();
+            if (Mage::getStoreConfig('tax/calculation/price_includes_tax', $store->getId())) {
+                //$basePrice = Mage::helper('tax')->getBasePrice($orderItem->getProduct(),
+                //    $orderItem->getProduct()->getFinalPrice(), true);
+                $basePrice = $orderItem->getPriceInclTax() * $item->getQtyOrdered();
+            } else {
+                $basePrice = $orderItem->getBasePrice();
+            }
+
+            $price = Mage::helper('core')->currencyByStore($basePrice, $orderItem->getStoreId(), true, false);
+            if ($orderItem->getOrder()->isCurrencyDifferent() && Mage::app()->getStore()->isAdmin()) {
+                $price .= '<br>' .
+                    '[' . Mage::helper('core')->currency($basePrice, true, false) . ']'
+                ;
+            }
         }
+
+        return $price;
     }
 
     /**

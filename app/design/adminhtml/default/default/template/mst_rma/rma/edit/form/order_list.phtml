@@ -1,6 +1,7 @@
 <?php
 /** @var Mirasvit_Rma_Block_Adminhtml_Rma_Edit_Form_OrderList $this */
 $rma = $this->getRma();
+$customFields = Mage::helper('rma/field')->getStaffCollection(true);
 ?>
 <div id="add_new_order_container">
     <?php foreach ($this->getOrderCollection() as $order):
@@ -22,6 +23,15 @@ $rma = $this->getRma();
                             <span><span><span><?php echo Mage::helper('adminhtml')->__('Credit Memo'); ?></span></span></span>
                         </button>
                     <?php
+                    endif;
+                    ?>
+                    <?php
+                    if (Mage::helper('rma/order')->canReturnToStoreCredit($rma, $order)):
+                        ?>
+                        <button onclick="disableActionButton(this); window.location = '<?php echo $this->getStoreCreditRefundUrl($rma, $order) ?>';" type="button">
+                            <span><span><span><?php echo Mage::helper('adminhtml')->__('Refund to Store Credit'); ?></span></span></span>
+                        </button>
+                        <?php
                     endif;
                     ?>
                 </div>
@@ -54,8 +64,10 @@ $rma = $this->getRma();
                                     <th class="no-link"><span class="nobr"><?php echo $this->__('Qty to Return') ?></span></th>
                                     <th class="no-link"><span class="nobr"><?php echo $this->__('Reason to Return') ?></span></th>
                                     <th class="no-link"><span class="nobr"><?php echo $this->__('Item Condition') ?></span></th>
-                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Resolution') ?></span>
-                                    </th>
+                                    <th class="no-link"><span class="nobr"><?php echo $this->__('Resolution') ?></span></th>
+                                    <?php if (count($customFields)): ?>
+                                        <th class="no-link"><span class="nobr"><?php echo $this->__('Additional') ?></span></th>
+                                    <?php endif; ?>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -89,7 +101,8 @@ $rma = $this->getRma();
                                     <tr <?php echo $rma->getId() > 0 && $item->getQtyRequested() == 0 ? "style='display:none;' class='even hidden_items'" : "class='even'"?>>
                                         <td>
                                             <?php if ($item->getIsBundleItem()): ?> &nbsp;&nbsp;&nbsp; <?php endif;?>
-                                            <?php echo Mage::helper('rma')->getOrderItemLabel($item)?></td>
+                                            <?php echo Mage::helper('rma')->getOrderItemLabel($item)?>
+                                        </td>
                                         <input name='items<?php echo $orderItemId ?>[order_id]'
                                                value='<?php echo $item->getOrderId() ?>' type='hidden'>
                                         <td><?php echo $item->getProductSku() ?></td>
@@ -138,6 +151,24 @@ $rma = $this->getRma();
                                                 <?php endforeach;?>
                                             </select>
                                         </td>
+                                        <?php if (count($customFields)): ?>
+                                            <td class="custom-field-cell">
+                                                <a href="#" onclick="event.preventDefault(); showCustomFields(this.parentNode)">Show/hide additional fields</a>
+                                                <div class="custom-fields">
+                                                    <?php foreach ($customFields as $field): ?>
+                                                        <div class="field">
+                                                            <label for="<?php echo $field->getCode()?>" >
+                                                                <b><?php echo $this->__($field->getName()) ?>:</b>
+                                                            </label>
+                                                            <div class="input-box custom-field">
+                                                                <?php echo Mage::helper('rma/field')->getInputHtml($field, 'items' . $orderItemId, $item)?>
+                                                                <p class="note"><?php echo $field->getDescription() ?></p>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            </td>
+                                        <?php endif; ?>
                                     </tr>
                                 <?php endforeach; ?>
                                 </tbody>

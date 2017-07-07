@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <productupdates module="productupdates">
+                    <title>Update Notifications</title>
+                    <sort_order>200</sort_order>
+                    <children>
+                        <productupdates module="productupdates">
+                            <title>Manage subscribers</title>
+                            <action>adminhtml/awpun_productupdates</action>
+                        </productupdates>
+                        <statistics module="productupdates">
+                            <title>Statistics</title>
+                            <action>adminhtml/awpun_productupdatesStatistics</action>
+                        </statistics>
+                         <settings module="productupdates"> 
+                                <title>Configuration Settings</title>
+                                <sort_order>30</sort_order>
+                                <action>adminhtml/system_config/edit/section/productupdates</action>
+                         </settings>
+                    </children>
+                </productupdates>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <productupdates module="productupdates">
+                                <title>Update Notifications</title>
+                                <sort_order>200</sort_order>
+                                <children>
+                                    <productupdates module="productupdates">
+                                        <title>Manage subscribers</title>
+                                        <action>adminhtml/awpun_productupdates</action>
+                                    </productupdates>
+                                    <statistics module="productupdates">
+                                        <title>Statistics</title>
+                                        <action>adminhtml/awpun_productupdatesStatistics</action>
+                                    </statistics>
+                                    <settings module="productupdates"> 
+                                        <title>Configuration Settings</title>
+                                        <sort_order>30</sort_order>
+                                        <action>adminhtml/system_config/edit/section/productupdates</action>
+                                    </settings>
+                                </children>
+                            </productupdates>
+                        </children>
+                    </catalog>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <productupdates>
+                                        <title>aheadWorks - Products Update Notifications Settings Section</title>
+                                    </productupdates>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>   
+</config>

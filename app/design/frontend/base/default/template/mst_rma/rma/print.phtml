@@ -5,6 +5,7 @@ $printComments = false; //you can change this
 $rma = $this->getRma();
 $orders = $rma->getOrders();
 $customFields = $this->getCustomFields();
+$productFields = Mage::helper('rma/field')->getVisibleCustomerCollection($rma->getStatusId(), false, true);
 ?>
 
 <h1><?php echo $this->__('RMA #%s', $rma->getIncrementId()) ?></h1>
@@ -60,6 +61,9 @@ $customFields = $this->getCustomFields();
             <th><?php echo $this->__('Order') ?></th>
             <th><?php echo $this->__('SKU') ?></th>
             <th class="a-center"  width="10%"><?php echo $this->__('Qty') ?></th>
+            <?php if (count($productFields)): ?>
+                <th><?php echo $this->__('Additional') ?></th>
+            <?php endif; ?>
         </tr>
     </thead>
     <tfoot>
@@ -75,6 +79,21 @@ $customFields = $this->getCustomFields();
             </td>
             <td class="v-middle"><?php echo $item->getProductSku() ?></td>
             <td class="a-center v-middle"><?php echo $item->getQtyRequested() ?></td>
+            <?php if (count($productFields)): ?>
+                <td>
+                    <div class="custom-fields">
+                        <?php foreach ($productFields as $field): ?>
+                            <div class="field">
+                                <b><?php echo $this->__($field->getName()) ?>: </b>
+                                <div class="custom-field">
+                                    <i><?php echo Mage::helper('rma/field')->getValue($item, $field) ?></i>
+                                    <p class="rma-mute"><?php echo $field->getDescription() ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </td>
+            <?php endif; ?>
         </tr>
     <?php endforeach?>
     <?php foreach ($rma->getOfflineItemCollection() as $item):?>
@@ -86,6 +105,21 @@ $customFields = $this->getCustomFields();
             </td>
             <td class="v-middle">-</td>
             <td class="a-center v-middle"><?php echo $item->getQtyRequested() ?></td>
+            <?php if (count($productFields)): ?>
+                <td>
+                    <div class="custom-fields">
+                        <?php foreach ($productFields as $field): ?>
+                            <div class="field">
+                                <b><?php echo $this->__($field->getName()) ?>: </b>
+                                <div class="custom-field">
+                                    <i><?php echo Mage::helper('rma/field')->getValue($item, $field) ?></i>
+                                    <p class="rma-mute"><?php echo $field->getDescription() ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </td>
+            <?php endif; ?>
         </tr>
     <?php endforeach?>
     </tbody>

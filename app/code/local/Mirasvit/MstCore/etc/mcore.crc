@@ -20,8 +20,8 @@ e4d0ad76eb22e566222143be337ea4ee  app/code/local/Mirasvit/MstCore/Model/Urlrewri
 43d82ceeb6ffb1e0966a20ea02f736ad  app/code/local/Mirasvit/MstCore/Model/Wysiwyg/Config.php
 0e1b6150e222fc3323ea48a85093706f  app/code/local/Mirasvit/MstCore/Model/Notification.php
 98d8b993b9cbfb3d44744d7db04d3e8f  app/code/local/Mirasvit/MstCore/Model/Feed/Extensions.php
-a17d3bca02b1921a578c443b8aec2a57  app/code/local/Mirasvit/MstCore/Model/Feed/Abstract.php
-59b0070b752269a4b7e9e248dc02b7e5  app/code/local/Mirasvit/MstCore/Model/Feed/Updates.php
+df51077c8a78f90912d66d0b92fa2f09  app/code/local/Mirasvit/MstCore/Model/Feed/Abstract.php
+dfad60dcc4769c4d95ee89943f6167a9  app/code/local/Mirasvit/MstCore/Model/Feed/Updates.php
 85347e0317b65e41ba1c2dc14a047f45  app/code/local/Mirasvit/MstCore/Model/Media/Config.php
 7817d12db2d1534f27d6bb7036f3d082  app/code/local/Mirasvit/MstCore/Model/Resource/Urlrewrite.php
 ce05a13955dd27e034f6fe4e9e0900eb  app/code/local/Mirasvit/MstCore/Model/Resource/Attachment/Collection.php
@@ -60,7 +60,7 @@ b8b849826fa08b212d2b7f7560979940  app/code/local/Mirasvit/MstCore/Test/Helper/Ur
 0bcb74c0d35c0b335d894cda8628a247  app/code/local/Mirasvit/MstCore/Helper/Validator.php
 faa50b66aaebefba0bef38d633b2a1f1  app/code/local/Mirasvit/MstCore/Helper/Logger.php
 e41f31d53d8d4db1dbd743caeb78d930  app/code/local/Mirasvit/MstCore/Helper/Attachment.php
-a32bf9664f24a91366b9400247768447  app/code/local/Mirasvit/MstCore/Helper/Data.php
+eefa431b65e88d507d0b6a41bef0c0f5  app/code/local/Mirasvit/MstCore/Helper/Data.php
 bbd5f82bedbfd12450ad7c98bec932df  app/code/local/Mirasvit/MstCore/Helper/Validator/Crc.php
 26785419738179083675f7659875e7ae  app/code/local/Mirasvit/MstCore/Helper/Validator/Conflict.php
 bc15b8def589e68a2542d9c482215ade  app/code/local/Mirasvit/MstCore/Helper/Validator/Abstract.php

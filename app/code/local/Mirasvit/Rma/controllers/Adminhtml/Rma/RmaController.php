@@ -9,9 +9,9 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
@@ -392,6 +392,56 @@ class Mirasvit_Rma_Adminhtml_Rma_RmaController extends Mage_Adminhtml_Controller
     }
 
     /**
+     * Governs mass status change in RMA Grid.
+     * @return void
+     */
+    public function massChangeAction()
+    {
+        $ids = $this->getRequest()->getParam('rma_id');
+        if (!is_array($ids)) {
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select rma(s)'));
+        } else {
+            try {
+                /* @var Mirasvit_Rma_Model_Status $status */
+                $statusId = $this->getRequest()->getParam('status');
+                $status = Mage::getModel('rma/status')->load($statusId);
+                $saved = 0;
+                foreach ($ids as $id) {
+                    /* @var Mirasvit_Rma_Model_Rma $rma */
+                    $rma = Mage::getModel('rma/rma')
+                        ->load($id);
+
+                    $rma->setStatusId($statusId)
+                        ->setIsArchived(0)
+                        ->save()
+                    ;
+
+                    // Fire change event to have rules properly work
+                    Mage::dispatchEvent('mst_rma_changed', array('rma'=>$rma));
+                    ++$saved;
+                }
+
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('adminhtml')->__(
+                        'Total of %d record(s) were successfully changed to ' . $status->getName(), $saved
+                    )
+                );
+            } catch (Mage_Core_Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            }
+        }
+        // Proper redirect if mass action was conducted in Tab Mode
+        // see in Mirasvit_Rma_Block_Adminhtml_Rma_Grid::_prepareMassaction()
+        if ($this->getRequest()->getParam('back_url')) {
+            $backUrl = base64_decode(strtr($this->getRequest()->getParam('back_url'), '-_,', '+/='));
+            $this->_redirectUrl($backUrl);
+
+            return;
+        }
+        $this->_redirect('*/*/index');
+    }
+
+    /**
      * Initializes RMA. If integration is turned on, binds RMA to a ticket.
      *
      * @return Mirasvit_Rma_Model_Rma
@@ -569,7 +619,7 @@ class Mirasvit_Rma_Adminhtml_Rma_RmaController extends Mage_Adminhtml_Controller
     }
 
     /**
-     *  Controller function to allow users create FedEx Label from popup dialog.
+     * Controller function to allow users create FedEx Label from popup dialog.
      * @return void
      */
     public function createFedExLabelAction()
@@ -584,6 +634,32 @@ class Mirasvit_Rma_Adminhtml_Rma_RmaController extends Mage_Adminhtml_Controller
             $this->getResponse()->setBody(Mage::helper('adminhtml')->getUrl('*/*/edit', array('id' => $rma->getId())));
         } else {
             $this->getResponse()->setBody(implode('<br>', $result['errata']));
+        }
+    }
+
+    /**
+     * Controller function to allow users to remove FedEx Label.
+     * @return void
+     */
+    public function removeFedExLabelAction()
+    {
+        $rma = Mage::getModel('rma/rma')->load((int) $this->getRequest()->getParam('rma_id'));
+        $collection = Mage::getModel('rma/fedex_label')->getCollection()
+            ->addFieldToFilter('track_number', $this->getRequest()->getParam('track_number'));
+        $fedexLabel = $collection->getLastItem();
+        $status = 'success';
+        if ($fedexLabel->getId()) {
+            $fedexLabel->delete();
+        } else {
+            $status = 'fail';
+        }
+
+        if ($status == 'success') {
+            $this->_getSession()->addSuccess(Mage::helper('rma')->__('FedEx Label was successfully removed!'));
+            $this->getResponse()->setBody(Mage::helper('adminhtml')->getUrl('*/*/edit', array('id' => $rma->getId())));
+        } else {
+            $this->_getSession()->addError(Mage::helper('rma')->__('FedEx Label remove was failed!'));
+            $this->getResponse()->setBody('failed');
         }
     }
 
@@ -606,5 +682,88 @@ class Mirasvit_Rma_Adminhtml_Rma_RmaController extends Mage_Adminhtml_Controller
             $this->getResponse()->clearBody();
             echo $label->getLabelBody();
         }
+    }
+
+    /**
+     * Refunds item to Store Credit (SCR should be installed)
+     * @return void
+     * @throws Exception
+     */
+    public function refundToCreditAction()
+    {
+        if ($creditModuleInstalled = Mage::helper('mstcore')->isModuleInstalled('Mirasvit_Credit')) {
+            $rma = Mage::getModel('rma/rma')->load((int) $this->getRequest()->getParam('rma_id'));
+            $order = Mage::getModel('sales/order')->load((int) $this->getRequest()->getParam('order_id'));
+
+            // Pick up proper customer
+            $customer = Mage::getModel('customer/customer')->load($rma->getCustomerId());
+            if (!$customer->getId()) {
+                $customer = Mage::getModel("customer/customer");
+                $customer->setWebsiteId($order->getStore()->getWebsiteId());
+                $customer->loadByEmail($order->getCustomerEmail());
+            }
+
+            if ($customer->getId()) {
+                $balance = Mage::getModel('credit/balance')->loadByCustomer($customer->getId());
+
+                $total = 0;
+
+                $transactions = Mage::getModel('credit/transaction')->getCollection()
+                    ->addFieldToFilter('message', array('like' => '%#r|'.$rma->getIncrementId().'%'))
+                    ->addFieldToFilter('action', Mirasvit_Credit_Model_Transaction::ACTION_REFUNDED);
+
+                if (!count($transactions)) {
+                    $creditResolution = Mage::helper('rma')->getResolutionByCode('credit');
+
+                    // Pure store credit order, refund full amount
+                    foreach (Mage::helper('rma')->getRmaItems($order, $rma) as $item) {
+                        if ($item->getResolutionId() == $creditResolution->getId()) {
+                            $itemRefund = $item->getOrderItemPrice() * $item->getQtyRequested();
+                            $total += $itemRefund;
+
+                            // Add proper refund information to order item
+                            $orderItem = $item->getOrderItem();
+
+                            $orderItem->setQtyRefunded($orderItem->getQtyRefunded() + $item->getQtyRequested())
+                                ->setAmountRefunded($orderItem->getAmountRefunded() + $itemRefund)
+                                ->setBaseAmountRefunded($orderItem->getBaseAmountRefunded() + $itemRefund)
+                                ->save();
+
+                            Mage::helper('rma/order')->updateStockQty($orderItem->getProduct(),
+                                -$item->getQtyRequested(), $orderItem->getOrder()->getStore()->getId());
+                        }
+                    }
+
+                    // When full refund of store credit order detected, return all paid amount
+                    if ($order->getBaseGrandTotal() == 0 && $order->getCreditAmount() > 0
+                        && $order->getBaseSubtotal() == $total) {
+                        $total = $order->getCreditAmount();
+                    }
+
+
+                    $balance->addTransaction(
+                        $total,
+                        Mirasvit_Credit_Model_Transaction::ACTION_REFUNDED,
+                        'Order #o|' . $order->getIncrementId() . ', RMA #r|' . $rma->getIncrementId()
+                    );
+
+                    // Add proper refund information to order
+                    $order->setBaseCreditRefunded($order->getBaseCreditRefunded() + $total)
+                        ->setCreditRefunded($order->getCreditRefunded() + $total)
+                        ->setBaseCreditTotalRefunded($order->getBaseCreditTotalRefunded() + $total)
+                        ->setCreditTotalRefunded($order->getCreditTotalRefunded() + $total)
+                        ->save();
+
+                    $this->_getSession()->addSuccess(Mage::helper('rma')->__(
+                        'Item(s) were successfully refunded to Store Credit!'));
+                } else {
+                    $this->_getSession()->addError(Mage::helper('rma')->__(
+                        'Store Credit Refund was already created for this RMA!'));
+                }
+
+            }
+        }
+
+        $this->_redirectUrl(Mage::helper('adminhtml')->getUrl('*/*/edit', array('id' => $rma->getId())));
     }
 }

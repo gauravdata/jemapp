@@ -9,21 +9,27 @@
  *
  * @category  Mirasvit
  * @package   RMA
- * @version   2.4.0
- * @build     1607
- * @copyright Copyright (C) 2016 Mirasvit (http://mirasvit.com/)
+ * @version   2.4.5
+ * @build     1677
+ * @copyright Copyright (C) 2017 Mirasvit (http://mirasvit.com/)
  */
 
 
 
 class Mirasvit_Rma_Block_Adminhtml_Field_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
+    /**
+     * @return Mage_Adminhtml_Block_Widget_Form
+     * @throws Exception
+     */
     protected function _prepareForm()
     {
         $form = new Varien_Data_Form(
             array(
                 'id' => 'edit_form',
-                'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'), 'store' => (int) $this->getRequest()->getParam('store'))),
+                'action' => $this->getUrl('*/*/save',
+                    array('id' => $this->getRequest()->getParam('id'),
+                        'store' => (int) $this->getRequest()->getParam('store'))),
                 'method' => 'post',
                 'enctype' => 'multipart/form-data',
             )
@@ -31,7 +37,8 @@ class Mirasvit_Rma_Block_Adminhtml_Field_Edit_Form extends Mage_Adminhtml_Block_
 
         $field = Mage::registry('current_field');
 
-        $fieldset = $form->addFieldset('edit_fieldset', array('legend' => Mage::helper('rma')->__('General Information')));
+        $fieldset = $form->addFieldset('edit_fieldset',
+            array('legend' => Mage::helper('rma')->__('General Information')));
         if ($field->getId()) {
             $fieldset->addField('field_id', 'hidden', array(
                 'name' => 'field_id',
@@ -75,7 +82,8 @@ class Mirasvit_Rma_Block_Adminhtml_Field_Edit_Form extends Mage_Adminhtml_Block_
             'label' => Mage::helper('rma')->__('Options list'),
             'name' => 'values',
             'value' => Mage::helper('rma/storeview')->getStoreViewValue($field, 'values'),
-            'note' => Mage::helper('rma')->__('Only for drop-down list. <br>Enter each value from the new line using format: <br>value1 | label1<br>value2 | label2'),
+            'note' => Mage::helper('rma')->__('Only for drop-down list. <br>' .
+                'Enter each value from the new line using format: <br>value1 | label1<br>value2 | label2'),
             'after_element_html' => ' [STORE VIEW]',
         ));
         $fieldset->addField('is_active', 'select', array(
@@ -83,6 +91,14 @@ class Mirasvit_Rma_Block_Adminhtml_Field_Edit_Form extends Mage_Adminhtml_Block_
             'name' => 'is_active',
             'value' => $field->getIsActive(),
             'values' => Mage::getSingleton('adminhtml/system_config_source_yesno')->toOptionArray(),
+        ));
+        $fieldset->addField('is_product', 'select', array(
+            'label' => Mage::helper('rma')->__('Product field'),
+            'name' => 'is_product',
+            'value' => $field->getIsProduct(),
+            'values' => Mage::getSingleton('adminhtml/system_config_source_yesno')->toOptionArray(),
+            'note' => Mage::helper('rma')->__('WARNING: <br> Editing this field can destroy all data, ' .
+                'that were saved in previous mode.'),
         ));
         $fieldset->addField('sort_order', 'text', array(
             'label' => Mage::helper('rma')->__('Sort order'),

@@ -20,7 +20,7 @@
  *
  * @category    Mage
  * @package     Mage_Customer
- * @copyright  Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @copyright  Copyright (c) 2006-2017 X.commerce, Inc. and affiliates (http://www.magento.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -737,11 +737,11 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
                 return;
             }
 
-//            if (!$flowPassword->checkCustomerForgotPasswordFlowIp()) {
-//                $this->_getSession()->addError($this->__('You have exceeded requests to times per hour from 1 IP.'));
-//                $this->_redirect('*/*/forgotpassword');
-//                return;
-//            }
+            if (!$flowPassword->checkCustomerForgotPasswordFlowIp()) {
+                $this->_getSession()->addError($this->__('You have exceeded requests to times per hour from 1 IP.'));
+                $this->_redirect('*/*/forgotpassword');
+                return;
+            }
 
             if (!Zend_Validate::is($email, 'EmailAddress')) {
                 $this->_getSession()->setForgottenEmail($email);

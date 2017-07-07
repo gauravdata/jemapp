@@ -1,0 +1,72 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Productupdates
+ * @version    2.1.0
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><div id="pun-subscribe">
+    <div class="group-select">
+        <form id="productupdates-form" method="post" action="<?php echo $this->getFormUrl() ?>">
+            <div class="pun-right">
+                <img style="cursor:pointer;" id="productupdates-cancel" onclick="window.Productupdates.prototype.deactivate(); return false;" src="<?php echo $this->getSkinUrl('images/btn_window_close.gif'); ?>" />
+            </div>
+            <h4 id = 'aw_pun_heading'><?php echo $this->__('Subscribe to %s notifications',$this->getProductName()) ?></h4>
+                 <?php echo $this->getChildHtml('configurable_options'); ?>
+            <div>
+                <div>
+                    <ul class="form-list">
+                        <li>
+                            <label for="subscribe:fullname"><?php echo $this->__('Your full name') ?> <label class="required"><em>*</em></label></label><br />
+                            <div class="input-box">
+                                <input class="input-text required-entry" size="40" type="text" id="subscribe:fullname" name="subscribe[fullname]" value="<?php echo $this->getSubscriberName() ?>" title="<?php echo $this->__('Fullname') ?>" />
+                            </div>
+                        </li>
+                        <li>
+                            <label for="subscribe:email"><?php echo $this->__('Your email') ?> <label class="required"><em>*</em></label></label><br />
+                            <div class="input-box">
+                                <input class="input-text required-entry validate-email" size="40" type="text" id="subscribe:email" name="subscribe[email]" value="<?php echo $this->getSubscriberEmail() ?>" title="<?php echo $this->__('Email') ?>" />
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <input type="hidden" name="type" value="<?php echo $this->getSubscriptionType(); ?>" />
+                <div class="button-set">
+                    <button class="form-button button" type="submit"><span><span><?php echo $this->__('Submit');?></span></span></button>
+                    <button class="form-button button" id="productupdates-cancel-button" type="button" onclick="window.Productupdates.prototype.deactivate(); return false;"><span><span><?php echo $this->__('Cancel');?></span></span></button>
+                </div>
+            </div>           
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    if (document.head.innerHTML == "") {
+        var meta = document.createElement('meta');
+        meta.name = 'robots';
+        meta.content = 'NOINDEX,FOLLOW';
+        document.head.appendChild(meta);
+    }
+</script>
+
+<script type="text/javascript">
+    var productupdatesForm = new ProductupdatesForm('productupdates-form');
+</script>

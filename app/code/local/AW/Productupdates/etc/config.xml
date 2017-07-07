@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <modules>
+        <AW_Productupdates>
+            <version>2.1.0</version><platform>ce</platform>
+        </AW_Productupdates>
+    </modules>
+
+    <frontend>
+        <layout>
+            <updates>
+                <productupdates module="AW_Productupdates">
+                    <file>productupdates.xml</file>
+                </productupdates>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <AW_Productupdates>
+                    <files>
+                        <default>AW_Productupdates.csv</default>
+                    </files>
+                </AW_Productupdates>
+            </modules>
+        </translate>
+        <routers>
+            <productupdates>
+                <use>standard</use>
+                <args>
+                    <module>AW_Productupdates</module>
+                    <frontName>productupdates</frontName>
+                </args>
+            </productupdates>
+        </routers>
+        <events>
+             <core_block_abstract_to_html_after>
+                    <observers>
+                        <aw_pun_render_block_after>
+                            <class>productupdates/observer</class>
+                            <method>blockAbstractToHtmlAfter</method>
+                        </aw_pun_render_block_after>
+                    </observers>
+             </core_block_abstract_to_html_after>
+        </events>
+    </frontend>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <awpun after="Mage_Adminhtml">AW_Productupdates_Adminhtml</awpun>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <menu>
+            <catalog>
+                <children>
+                    <productupdates module="productupdates">
+                        <title>Update Notifications</title>
+                        <sort_order>200</sort_order>
+                        <children>
+                            <productupdates module="productupdates">
+                                <title>Manage subscribers</title>
+                                <action>adminhtml/awpun_productupdates</action>
+                            </productupdates>
+                            <statistics module="productupdates">
+                                <title>Statistics</title>
+                                <action>adminhtml/awpun_productupdatesStatistics</action>
+                            </statistics>
+                            <settings module="productupdates"> 
+                                <title>Configuration Settings</title>
+                                <sort_order>30</sort_order>
+                                <action>adminhtml/system_config/edit/section/productupdates</action>
+                            </settings>
+                        </children>
+                    </productupdates>
+                </children>
+            </catalog>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <catalog>
+                            <children>
+                                <productupdates module="productupdates">
+                                    <title>Update Notifications</title>
+                                    <sort_order>200</sort_order>
+                                    <children>
+                                        <productupdates module="productupdates">
+                                            <title>Manage subscribers</title>
+                                            <action>adminhtml/awpun_productupdates</action>
+                                        </productupdates>
+                                        <statistics module="productupdates">
+                                            <title>Statistics</title>
+                                            <action>adminhtml/awpun_productupdatesStatistics</action>
+                                        </statistics>
+                                         <settings module="productupdates"> 
+                                            <title>Configuration Settings</title>
+                                            <sort_order>30</sort_order>
+                                            <action>adminhtml/system_config/edit/section/productupdates</action>
+                                         </settings>
+                                    </children>
+                                </productupdates>
+                            </children>
+                        </catalog>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <productupdates>
+                                            <title>aheadWorks - Products Update Notifications Settings Section</title>
+                                        </productupdates>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <productupdates>
+                    <file>productupdates.xml</file>
+                </productupdates>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <AW_Productupdates>
+                    <files>
+                        <default>AW_Productupdates.csv</default>
+                    </files>
+                </AW_Productupdates>
+            </modules>
+        </translate>
+        <events>
+            <catalog_product_save_after>
+                 <observers>
+                    <aw_pun_save_after_product>
+                        <class>productupdates/observer</class>
+                        <method>prepareSending</method>
+                    </aw_pun_save_after_product>
+                     <aw_pun_save_after_product_stock_index>
+                         <class>productupdates/observer</class>
+                         <method>updateStockIndex</method>
+                     </aw_pun_save_after_product_stock_index>
+                 </observers>                        
+            </catalog_product_save_after>            
+             <controller_action_postdispatch_adminhtml_promo_catalog_applyRules>
+                  <observers> 
+                    <aw_pun_catalog_rules_postdispatch>
+                        <class>productupdates/observer</class>
+                        <method>updateCatalogRules</method>
+                    </aw_pun_catalog_rules_postdispatch> 
+                 </observers>  
+             </controller_action_postdispatch_adminhtml_promo_catalog_applyRules>   
+        </events>
+    </adminhtml>
+
+    <global>
+        <models>
+            <productupdates>
+                <class>AW_Productupdates_Model</class>
+                <resourceModel>productupdates_mysql4</resourceModel>
+            </productupdates>
+            <productupdates_mysql4>
+                <class>AW_Productupdates_Model_Mysql4</class>
+                <entities>
+                    <productupdates>
+                        <table>aw_productupdates_notific</table>
+                    </productupdates>
+                    <subscribers>
+                        <table>aw_productupdates_subscribers</table>
+                    </subscribers>
+                    <schedule>
+                        <table>aw_productupdates_schedule</table>
+                    </schedule>
+                    <queue>
+                        <table>aw_productupdates_queue</table>
+                    </queue>
+                    <catalogrule>
+                          <table>aw_productupdates_catalogrule</table>                        
+                    </catalogrule>
+                    <priceindex>
+                         <table>aw_productupdates_priceindex</table>           
+                    </priceindex>
+                    <inventoryindex>
+                          <table>aw_productupdates_inventoryindex</table>   
+                    </inventoryindex>
+                </entities>
+            </productupdates_mysql4>
+        </models>
+        <resources>
+            <productupdates_setup>
+                <setup>
+                    <module>AW_Productupdates</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </productupdates_setup>
+            <productupdates_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </productupdates_write>
+            <productupdates_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </productupdates_read>
+        </resources>
+        <blocks>
+            <productupdates>
+                <class>AW_Productupdates_Block</class>
+            </productupdates>
+            <catalog>
+                <rewrite>
+                </rewrite>
+                <drewrite>
+                    <product_view>AW_Productupdates_Block_Product</product_view>
+                </drewrite>
+            </catalog>
+            <adminhtml>
+                <rewrite>
+                </rewrite>
+                <drewrite>
+                    <catalog_product_edit>AW_Productupdates_Block_Adminhtml_Catalog</catalog_product_edit>
+                </drewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <productupdates>
+                <class>AW_Productupdates_Helper</class>
+            </productupdates>
+        </helpers>
+
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <front_controller_predispatch>
+                        <type>singleton</type>
+                        <class>productupdates/observer</class>
+                        <method>prepareRewrites</method>
+                    </front_controller_predispatch>
+                </observers>
+            </controller_action_predispatch>
+
+            <customer_save_after>
+                <observers>
+                    <productupdates>
+                        <class>productupdates/observer</class>
+                        <method>customerSaveAfter</method>
+                    </productupdates>
+                </observers>
+            </customer_save_after>
+        </events>
+         <template>
+            <email>
+                <productupdates_notifications_price_changed translate="label" module="productupdates">
+                    <label>AW Product Updates - Product price has been changed</label>
+                    <file>aw_productupdates/price_changed.html</file>
+                    <type>html</type>
+                </productupdates_notifications_price_changed>
+                <productupdates_notifications_stock_changed translate="label" module="productupdates">
+                    <label>AW Product Updates - Product stock been changed</label>
+                    <file>aw_productupdates/stock_changed.html</file>
+                    <type>html</type>
+                </productupdates_notifications_stock_changed>               
+            </email>
+        </template>
+    </global>
+    <default>
+        <productupdates>
+            <configuration>
+                <unsubscribetext><![CDATA[If you want to unsubscribe from {{var product.name}} notifications, simply click <a href="{{var unsubscribe_link}}">unsubscribe</a>.<br />
+By clicking to <a href="{{var unsubscribe_all_link}}">unsubscribe all</a> link you will unsubscribe from all notifications.]]></unsubscribetext>
+                <notificationtitle><![CDATA[{{var product.name}} update]]></notificationtitle>
+                <unsubscribe>1</unsubscribe>
+                <blockpositions>no_positioning</blockpositions>
+            </configuration>
+            <notifications>
+                <general_send>productupdates_notifications_general_send</general_send>
+                <general_send_enable>1</general_send_enable>                
+            </notifications>
+        </productupdates>
+    </default>
+
+    <crontab>
+        <jobs>       
+             <aw_pun_prepare_changes>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>productupdates/cron::prepareQueue</model>
+                </run>
+            </aw_pun_prepare_changes>        
+            <aw_pun_product_changes>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>productupdates/cron::sendNotifications</model>
+                </run>
+            </aw_pun_product_changes>            
+             <aw_pun_reindex>
+                <schedule>
+                    <cron_expr>0 */2 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>productupdates/cron::reindexAll</model>
+                </run>              
+             </aw_pun_reindex>                                             
+             <aw_pun_catalogrule_apply_all>
+                <schedule>
+                    <cron_expr>0 2 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>productupdates/cron::reindexPrices</model>
+                </run>
+            </aw_pun_catalogrule_apply_all>        
+        </jobs>
+    </crontab>
+
+</config>
