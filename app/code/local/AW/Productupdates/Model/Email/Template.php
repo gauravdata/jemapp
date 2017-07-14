@@ -25,8 +25,8 @@
  */
 
 
-if (Mage::helper('productupdates')->extensionEnabled('AW_Customsmtp')) {
-    class AW_Productupdates_Model_Email_Template_Abstract extends AW_Customsmtp_Model_Email_Template
+if (Mage::helper('productupdates')->extensionEnabled('Ebizmarts_Mandrill')) {
+    class AW_Productupdates_Model_Email_Template_Abstract extends Ebizmarts_Mandrill_Model_Email_Template
     {
     }
 } else {
@@ -34,7 +34,7 @@ if (Mage::helper('productupdates')->extensionEnabled('AW_Customsmtp')) {
     {
     }
 }
- 
+
 class AW_Productupdates_Model_Email_Template extends AW_Productupdates_Model_Email_Template_Abstract
 {
     const GENERAL_TEMPLATE_ID = 'productupdates_notifications_general_send';
@@ -50,19 +50,19 @@ class AW_Productupdates_Model_Email_Template extends AW_Productupdates_Model_Ema
         }
         return $this;
     }
-    
+
     protected function _helper()
     {
         return Mage::helper('productupdates');
     }
-    
+
     protected function _store()
     {
         return $this->getQueue()->getStoreId();
     }
-    
+
     public function combineBody($body)
-    {        
+    {
         $body = "<p>{$body}</p>";
         if ($this->_helper()->config('configuration/unsubscribe', $this->_store())) {
             $body .= "<p>{$this->_helper()->config('configuration/unsubscribetext', $this->_store())}</p>";
