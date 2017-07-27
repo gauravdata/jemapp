@@ -193,7 +193,7 @@ class AW_Productupdates_IndexController extends Mage_Core_Controller_Front_Actio
         try {
             $this->_model()->subscribeUser($userInfo);
         } catch (Exception $e) {
-            $this->_singleton()->addError($this->_helper()->__('Registration failed'));
+            $this->_singleton()->addError($this->_helper()->__('Registration failed ('.$e->getMessage()));
             return $this->getResponse()->setRedirect($this->_getRefererUrl());
         }
 
