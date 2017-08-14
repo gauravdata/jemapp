@@ -27,7 +27,7 @@
 <config>
     <modules>
         <Symmetrics_Buyerprotect>
-            <active>false</active>
+            <active>true</active>
             <codePool>community</codePool>
             <depends>
                 <Mage_Catalog />
