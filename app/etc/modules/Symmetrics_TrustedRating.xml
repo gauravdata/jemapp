@@ -27,7 +27,7 @@
 <config>
     <modules>
         <Symmetrics_TrustedRating>
-            <active>false</active>
+            <active>true</active>
             <codePool>community</codePool>
             <depends>
                 <Mage_Core />

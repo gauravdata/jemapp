@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Amasty_Shopby>
-            <active>false</active>
+            <active>true</active>
             <codePool>local</codePool>
         </Amasty_Shopby>
     </modules>
