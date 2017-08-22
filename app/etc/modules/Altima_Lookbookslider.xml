@@ -22,7 +22,7 @@
 <config>
     <modules>
         <Altima_Lookbookslider>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
             <depends>
                 <Mage_Core/>

@@ -2,7 +2,7 @@
 <config>
     <modules>
         <AW_Helpdeskultimate>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </AW_Helpdeskultimate>
     </modules>

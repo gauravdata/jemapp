@@ -28,10 +28,11 @@
 $installer = $this;
 $installer->startSetup();
 
+/*
 $installer->run("
 
 ALTER TABLE {$this->getTable('productupdates/productupdates')}
 ADD `subscr_store_id` INT(10) unsigned NOT NULL default 1
 ");
-
+*/
 $installer->endSetup();

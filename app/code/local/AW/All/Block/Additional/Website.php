@@ -85,7 +85,7 @@ class AW_All_Block_Additional_Website extends Mage_Adminhtml_Block_Abstract
         if (null === $this->_rewrites) {
             $result = array();
             foreach ($this->getModulesArray() as $moduleName => $options) {
-                if (!array_key_exists('codePool', $options)) {
+                if (!is_array($options) || !array_key_exists('codePool', $options)) {
                     continue;
                 }
 
