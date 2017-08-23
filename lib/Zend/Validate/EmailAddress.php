@@ -119,7 +119,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
         'mx'       => false,
         'deep'     => false,
         'domain'   => false,
-        'allow'    => Zend_Validate_Hostname::ALLOW_ALL,
+        'allow'    => Zend_Validate_Hostname::ALLOW_DNS,
         'hostname' => null
     );
 
