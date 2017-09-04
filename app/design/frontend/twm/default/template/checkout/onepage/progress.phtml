@@ -60,6 +60,7 @@
     </div>
 </div>
 <script type="application/javascript">
+if (typeof(Checkout) !== 'undefined') {
     Checkout.prototype.reloadStep = Checkout.prototype.reloadStep.wrap(function(parentMethod){
         parentMethod();
         var updater = new Ajax.Updater('totals-progress-opcheckout', this.progressUrl, {
@@ -68,4 +69,5 @@
             parameters: {prevStep: 'totals'}
         });
     });
+}
 </script>

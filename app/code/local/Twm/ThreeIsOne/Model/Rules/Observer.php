@@ -58,7 +58,7 @@ class Twm_ThreeIsOne_Model_Rules_Observer extends Amasty_Rules_Model_Observer {
             $this->collectingTotals = false;
             foreach ($items as $item) {
                 if (!$item->getParentItemId()){
-                    continue;
+                    //continue;
                 }
                 $item = ( $item->getParentItem() ? $item->getParentItem() : $item );
                 $appliedIds = $item->getAppliedRuleIds();
