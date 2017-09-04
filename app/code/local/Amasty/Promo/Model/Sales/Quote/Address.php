@@ -42,7 +42,8 @@ class Amasty_Promo_Model_Sales_Quote_Address extends Mage_Sales_Model_Quote_Addr
             ) //skip all except shipping and subtotal collectors
             {
                 if ($item->getIsPromo()) {
-                    unset($items[$key]);
+                    $items = array();
+                    break;
                 }
             }
         }
