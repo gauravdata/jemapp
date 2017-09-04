@@ -786,6 +786,7 @@ Payment.prototype = {
                     method = elements[i].value;
                 }
             } else {
+		if (elements[i].type == 'hidden') continue;
                 elements[i].disabled = true;
             }
             elements[i].setAttribute('autocomplete','off');
