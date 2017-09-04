@@ -10,7 +10,7 @@
     <em><?php echo $this->__('* Required Fields') ?></em>
     <button type="submit"><?php echo $this->__('Continue') ?></button>
 </footer>
-</form>
+<?php echo $this->getBlockHtml("formkey") ?></form>
 <script type="text/javascript">
     //<![CDATA[
     var form = new VarienForm('co-payment-form', '<?php echo $this->getUrl('checkout/onepage/savePayment') ?>');

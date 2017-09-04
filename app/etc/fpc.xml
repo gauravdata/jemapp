@@ -24,7 +24,7 @@
             <backend_options>
                 <server>127.0.0.1</server>
                 <port>6379</port>
-                <persistent>cache-fpc</persistent>
+                <persistent></persistent>
                 <database>12</database>
                 <password></password>
                 <force_standalone>0</force_standalone>
