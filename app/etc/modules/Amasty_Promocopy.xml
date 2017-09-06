@@ -9,7 +9,7 @@
 <config>
     <modules>
         <Amasty_Promocopy>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </Amasty_Promocopy>
     </modules>
