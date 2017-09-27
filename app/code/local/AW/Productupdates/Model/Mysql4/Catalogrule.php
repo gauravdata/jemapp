@@ -238,23 +238,24 @@ class AW_Productupdates_Model_Mysql4_Catalogrule extends AW_Productupdates_Model
             if (!isset($scope[$key + 1])
                 || ($scope[$key + 1]['product_id'] != $item['product_id'])
                 || ($scope[$key + 1]['website_id'] != $item['website_id'])) {
-                try {                    
-                    Mage::getModel('productupdates/schedule')
-                        ->setProductId($item['main_product'])
-                        ->setWebsiteId($item['website_id'])
-                        ->setCustomerGroupIds(implode(',', $customerGroups))
-                        ->setStatus(AW_Productupdates_Model_Schedule::READY)
-                        ->setSource($data['source'])
-                        ->setStoreIds($this->_storesByWebsite[$item['website_id']])
-                        ->setSendType($data['type'])
-                        ->setCreatedAt(gmdate('Y-m-d H:i:s'))
-                        ->setAdditional(Zend_Json::encode($scheduleAdditional))
-                        ->save()
-                    ;
-                } catch (Exception $e) {
-                    Mage::helper('productupdates')->log($e);
+                if ((string)$data['type'] != '1') {
+                    try {
+                        Mage::getModel('productupdates/schedule')
+                            ->setProductId($item['main_product'])
+                            ->setWebsiteId($item['website_id'])
+                            ->setCustomerGroupIds(implode(',', $customerGroups))
+                            ->setStatus(AW_Productupdates_Model_Schedule::READY)
+                            ->setSource($data['source'])
+                            ->setStoreIds($this->_storesByWebsite[$item['website_id']])
+                            ->setSendType($data['type'])
+                            ->setCreatedAt(gmdate('Y-m-d H:i:s'))
+                            ->setAdditional(Zend_Json::encode($scheduleAdditional))
+                            ->save();
+                    } catch (Exception $e) {
+                        Mage::helper('productupdates')->log($e);
+                    }
+                    $customerGroups = $scheduleAdditional = array();
                 }
-                $customerGroups = $scheduleAdditional = array();
             }
         }
     }

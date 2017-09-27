@@ -1,4 +1,4 @@
-<?php
+w<?php
 /**
  * aheadWorks Co.
  *
@@ -53,8 +53,9 @@ class AW_Productupdates_Model_Cron
         }
         
         foreach ($notifications as $notification) {
-            try {
-                Mage::getModel('productupdates/queue')
+            if ((string)$schedule->getSendType() != '1'){
+                try {
+                    Mage::getModel('productupdates/queue')
                         ->setProductId($schedule->getProductId())
                         ->setCustomerId($notification->getRegId())
                         ->setSubscriberId($notification->getSubscriberId())
@@ -64,8 +65,9 @@ class AW_Productupdates_Model_Cron
                         ->setStatus(AW_Productupdates_Model_Schedule::READY)
                         ->setCreatedAt(gmdate('Y-m-d H:i:s'))
                         ->save();
-            } catch (Exception $e) {
-                $this->_log($e);
+                } catch (Exception $e) {
+                    $this->_log($e);
+                }
             }
         }
 
