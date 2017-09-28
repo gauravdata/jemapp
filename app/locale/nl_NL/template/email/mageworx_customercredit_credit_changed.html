@@ -32,7 +32,7 @@ style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; fo
         width="650" style="border:1px solid #E0E0E0;">
           <tbody>
             <tr>
-              <td valign="top"><a href="{{store url='' _autologin='1' _autologin_customer=$order.getCustomerEmail()}}"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/></a></td>
+              <td valign="top"><a href="{{store url='' _autologin='1' _autologin_customer=$customer.email}}"><img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/></a></td>
             </tr>
             <!-- [ middle starts here] -->
             <tr>
@@ -44,7 +44,7 @@ style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; fo
                 style="font-size:12px; line-height:16px; margin:0 0 10px 0;"><span
                 style="font-size: 10pt"><br>
                 Je tegoed in <strong><a
-                href="{{store url='' _autologin='1' _autologin_customer=$customerEmail}}">{{var
+                href="{{store url='' _autologin='1' _autologin_customer=$customer.email}}">{{var
                 store.getFrontendName()}}</a></strong> is bijgewerkt!
                 </span></p>
 
@@ -59,7 +59,7 @@ style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; fo
                 <p style="font-size: 10pt">Wat moet je doen:</p>
 
                 <p style="font-size: 10pt">1. <a name="Klik" id="Klik"
-                href="{{store url='' _autologin='1' _autologin_customer=$customerEmail}}">Klik
+                href="{{store url='' _autologin='1' _autologin_customer=$customer.email}}">Klik
                 hier om naar de site te gaan en direct in te loggen.</a></p>
 
                 <p style="font-size: 10pt">2. Je bent nu ingelogd. Plaats de
@@ -76,7 +76,7 @@ style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; fo
                 <p style="font-size: 10pt">3. Kies bij BETAALWIJZE op 'Mijn
                 tegoed'. Je ziet hier het bedrag wat je tegoed hebt in
                 <strong><a
-                href="{{store url='' _autologin='1' _autologin_customer=$customerEmail}}">{{var
+                href="{{store url='' _autologin='1' _autologin_customer=$customer.email}}">{{var
                 store.getFrontendName()}}</a></strong>. Wanneer je deze optie
                 aanklikt, wordt het tegoed besteedt aan je bestelling en kun je
                 je bestelling plaatsen!</p>
@@ -107,7 +107,7 @@ style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; fo
               style="background:#EAEAEA; text-align:center;">
                 <center>
                 <p style="font-size:12px; margin:0;"><strong><a
-                href="{{store url= _autologin=&#x2019;1&#x2019; _autologin_customer=&#x2019;customer_email&#x2019;}}">{{var
+                href="{{store url='' _autologin='1' _autologin_customer=$customer.email}}">{{var
                 store.getFrontendName()}}</a></strong></p>
                 </center>
               </td>
