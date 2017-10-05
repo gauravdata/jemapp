@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_ExtendCustomerCredit>
+            <version>0.1.0</version>
+        </Twm_ExtendCustomerCredit>
+    </modules>
+    <global>
+        <helpers>
+            <customercredit>
+                <rewrite>
+                    <data>Twm_ExtendCustomerCredit_Helper_CustomerCredit_Data</data>
+                </rewrite>
+            </customercredit>
+        </helpers>
+    </global>
+</config>

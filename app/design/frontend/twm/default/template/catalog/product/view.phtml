@@ -163,7 +163,8 @@
     <div class="description" id="more">
         <div class="row wide">
             <div class="col-6">
-		<?php if ($_product->hasPropertyImage() && $_product->getPropertyImage() != 'no_selection'): ?>
+		<?php if ($_product->hasPropertyImage() && $_product->getPropertyImage() != 'no_selection' && !empty($_product->getPropertyImage())): ?>
+<?php var_dump($_product->getPropertyImage()); die(); ?>
                     <div class="content-box-img-left" style="background-image: url('<?php echo $this->helper('catalog/image')->init($_product, 'property_image')->keepFrame(false)->resize(1000,null); ?>');"><span></span></div>
                 <?php else: ?>
                     <div class="content-box-img-left" style="background-image: url('http://placehold.it/1000x800');"><span></span></div>
