@@ -1,0 +1,13 @@
+<?php if (is_array($this->getTotal()->getFullInfo())) : ?>
+<?php foreach ($this->getTotal()->getFullInfo() as $info): ?>
+    <tr class="summary-details-amrules summary-details">
+        <td class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+            <?php echo $info['label']; ?>
+            <br />
+        </td>
+        <td class="a-right" rowspan="1">
+            <?php echo $this->helper('checkout')->formatPrice($info['amount']); ?>-
+        </td>
+    </tr>
+<?php endforeach; ?>
+<?php endif; ?>
