@@ -318,7 +318,7 @@ By clicking to <a href="{{var unsubscribe_all_link}}">unsubscribe all</a> link y
             </aw_pun_product_changes>            
              <aw_pun_reindex>
                 <schedule>
-                    <cron_expr>0 */2 * * *</cron_expr>
+                    <cron_expr>*/5 * * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>productupdates/cron::reindexAll</model>
