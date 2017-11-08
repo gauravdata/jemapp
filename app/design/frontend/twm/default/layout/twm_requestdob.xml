@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <twm_requestdob_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="requestdob" template="requestdob/index.phtml" />
+        </reference>
+    </twm_requestdob_index_index>
+
+    <twm_requestdob_index_save>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="requestdob" template="requestdob/success.phtml" />
+        </reference>
+    </twm_requestdob_index_save>
+
+</layout>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_RequestDob>
+            <version>0.0.1</version>
+        </Twm_RequestDob>
+    </modules>
+    <frontend>
+        <routers>
+            <twm_requestdob>
+                <use>standard</use>
+                <args>
+                    <frontName>jouw-geboortedatum</frontName>
+                    <module>Twm_RequestDob</module>
+                </args>
+            </twm_requestdob>
+        </routers>
+        <layout>
+            <updates>
+                <twm_requestdob>
+                    <file>twm_requestdob.xml</file>
+                </twm_requestdob>
+            </updates>
+        </layout>
+    </frontend>
+</config>
