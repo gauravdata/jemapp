@@ -133,7 +133,7 @@ class AW_Productupdates_Model_Observer
                     );
                     Mage::getModel('productupdates/schedule')
                         ->setWebsiteId($website)
-                        ->setSendType(AW_Productupdates_Model_Source_SubscriptionTypes::GENERAL_SUBSCRIPTION_TYPE)
+                        ->setSendType(AW_Productupdates_Model_Source_SubscriptionTypes::WAITING_STOCK_CHANGE)
                         ->setStatus(AW_Productupdates_Model_Schedule::READY)
                         ->setSource(AW_Productupdates_Model_Source_Sourcefrom::PRODUCT_CHANGE)
                         ->setCreatedAt($gmt)

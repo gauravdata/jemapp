@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_ExtendCustomerCredit>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <MageWorx_CustomerCredit/>
+
+            </depends>
+        </Twm_ExtendCustomerCredit>
+    </modules>
+</config>
