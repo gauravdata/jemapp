@@ -18,11 +18,12 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_Followupemail
- * @version    3.6.5
+ * @package    AW_Points
+ * @version    1.9.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
+
 
 class AW_Core_Block_Adminhtml_System_Config_Form_Fieldset extends Mage_Adminhtml_Block_System_Config_Form_Fieldset
 {
@@ -45,9 +46,9 @@ class AW_Core_Block_Adminhtml_System_Config_Form_Fieldset extends Mage_Adminhtml
             <tr>
                 <td class=\"label\"></td>
                 <td class=\"value\">
-                <button class=\"scalable\" onclick=\"window.location='" . Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/awcore_viewlog/index') . "'\" type=\"button\">
-                    <span>View log</span>
-                </button
+                    <button class=\"scalable\" onclick=\"window.location='" . Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/awcore_viewlog/index') . "'\" type=\"button\">
+                        <span>View log</span>
+                    </button
                 </td>
             </tr>
         ";

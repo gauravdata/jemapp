@@ -18,11 +18,12 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_Followupemail
- * @version    3.6.5
+ * @package    AW_Points
+ * @version    1.9.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
+
 
 class AW_Core_Helper_Logger extends Mage_Core_Helper_Abstract
 {
@@ -50,6 +51,7 @@ class AW_Core_Helper_Logger extends Mage_Core_Helper_Abstract
     protected function _getLogger()
     {
         if (self::$_logger instanceof AW_Core_Model_Logger) {
+
         } else {
             self::$_logger = Mage::getSingleton('awcore/logger');
         }
@@ -61,13 +63,14 @@ class AW_Core_Helper_Logger extends Mage_Core_Helper_Abstract
      *
      * @param object $Object
      * @param string $message
-     * @param object $severity [optional]
+     * @param string|null $severity
+     * @param string|null $description
+     * @param string|null $line
      *
      * @return AW_Core_Helper_Logger
      */
     public function log($Object, $message, $severity = null, $description = null, $line = null)
     {
-
         if (!Mage::getStoreConfig(self::XML_PATH_ENABLE_LOG)) {
             return $this;
         }
@@ -117,7 +120,7 @@ class AW_Core_Helper_Logger extends Mage_Core_Helper_Abstract
     /**
      * Deletes all old log records
      *
-     * @return
+     * @return AW_Core_Helper_Logger
      */
     public function exorcise()
     {

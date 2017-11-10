@@ -18,21 +18,17 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_Followupemail
- * @version    3.6.5
+ * @package    AW_Points
+ * @version    1.9.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
+
 
 class AW_Core_Object extends Varien_Object
 {
     /**
      * Logs entry wrapper
-     *
-     * @param object $message
-     * @param object $severity [optional]
-     *
-     * @return
      */
     public function log($message, $severity = null, $details = '')
     {
