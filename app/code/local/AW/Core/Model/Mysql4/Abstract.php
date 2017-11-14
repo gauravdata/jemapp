@@ -18,13 +18,14 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_Followupemail
- * @version    3.6.5
+ * @package    AW_Points
+ * @version    1.9.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
 
-class AW_Core_Model_Mysql4_Abstract extends Mage_Core_Model_Mysql4_Abstract
+
+abstract class AW_Core_Model_Mysql4_Abstract extends Mage_Core_Model_Mysql4_Abstract
 {
     /**
      * Logs entry wrapper
@@ -32,10 +33,9 @@ class AW_Core_Model_Mysql4_Abstract extends Mage_Core_Model_Mysql4_Abstract
      * @param object $message
      * @param object $severity [optional]
      *
-     * @return
+     * @return void
      */
-    public function log($message, $severity = null)
-    {
+    public function log($message, $severity=null) {
         Mage::helper('awcore/logger')->log($this, $message, $severity);
     }
 }

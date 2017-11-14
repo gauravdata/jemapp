@@ -18,20 +18,23 @@
  * =================================================================
  *
  * @category   AW
- * @package    AW_Followupemail
- * @version    3.6.5
+ * @package    AW_Points
+ * @version    1.9.0
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
 
-class AW_Core_Adminhtml_Awcore_ViewlogController extends Mage_Adminhtml_Controller_Action
+
+class AW_Core_Adminhtml_Awcore_ViewlogController extends Mage_Adminhtml_Controller_action
 {
+
     public function indexAction()
     {
         $this
             ->loadLayout()
             ->_addContent($this->getLayout()->createBlock('awcore/adminhtml_log'))
-            ->renderLayout();
+            ->renderLayout()
+        ;
     }
 
     /**
@@ -45,7 +48,6 @@ class AW_Core_Adminhtml_Awcore_ViewlogController extends Mage_Adminhtml_Controll
             Mage::getResourceSingleton('awcore/logger')->truncateAll();
             Mage::getSingleton('adminhtml/session')->addSuccess("Log successfully cleared");
             $this->_redirect('*/*');
-
         } catch (Mage_Core_Exception $E) {
             Mage::getSingleton('adminhtml/session')->addError($E->getMessage());
             $this->_redirectReferer();
