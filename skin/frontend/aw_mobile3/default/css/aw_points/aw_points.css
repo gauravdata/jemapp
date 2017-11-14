@@ -1,0 +1,20 @@
+.points-notice-msg{
+    margin: 15px 15px 0;
+    background: scroll 10px 10px lemonchiffon !important;
+    border: 1px solid #95A486 !important;
+    color: #3D6611 !important;
+    padding: 10px;
+    font-size: 11px;
+}
+.points-notice-msg img {
+    display: inline;
+    vertical-align: middle;
+    padding-bottom: 2px;
+}
+.aw-points-widget .block-content {
+    font-size: 20px;
+}
+
+.aw-points-widget {
+    text-align: center;
+}

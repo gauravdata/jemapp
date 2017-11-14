@@ -1,0 +1,70 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Points
+ * @version    1.9.0
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php if ($this->isEnabled()): ?>
+    <div  id="aw_points-notification-box" >
+        <form action="<?php echo $this->getAction() ?>" method="post" id="form-validate">
+            <fieldset class="awpoints__edit-section">
+                <legend class="awpoints__edit-section-title"><?php echo $this->__('Email Notification Settings') ?></legend>
+
+                <?php echo $this->getBlockHtml('formkey') ?>
+                <p class="form__field">
+                    <span class="checkbox">
+                        <input type="checkbox" id="aw_points-subscription" class="checkbox__self" name="is_subscribed" value="1" title="<?php echo $this->__('Subscribe to balance update') ?>"<?php if ($this->getIsSubscribed()): ?> checked="checked"<?php endif; ?>  />
+                        <label for="aw_points-subscription" class="form__label checkbox__label">
+                            <span class="checkbox__icon-wrapper">
+                                <svg class="checkbox__icon checkbox__icon--unchecked svg-icon"><use xlink:href="#icon-checkbox" /></svg>
+                                <svg class="checkbox__icon checkbox__icon--checked svg-icon"><use xlink:href="#icon-checkbox--checked" /></svg>
+                            </span>
+                            <span class="checkbox__text"><?php echo $this->__('Subscribe to balance update') ?></span>
+                        </label>
+                    </span>
+                </p>
+                <p class="form__field">
+                    <span class="checkbox">
+                        <input  type="checkbox" id="aw_points-subscription_exp" class="checkbox__self" name="is_subscribed_exp" value="1" title="<?php echo $this->__('Subscribe to points expiration notification') ?>"<?php if ($this->getIsSubscribedToExpireNotification()): ?> checked="checked"<?php endif; ?>  />
+                        <label for="aw_points-subscription_exp" class="form__label checkbox__label">
+                            <span class="checkbox__icon-wrapper">
+                                <svg class="checkbox__icon checkbox__icon--unchecked svg-icon"><use xlink:href="#icon-checkbox" /></svg>
+                                <svg class="checkbox__icon checkbox__icon--checked svg-icon"><use xlink:href="#icon-checkbox--checked" /></svg>
+                            </span>
+                            <span class="checkbox__text"><?php echo $this->__('Subscribe to points expiration notification') ?></span>
+                        </label>
+                    </span>
+                </p>
+
+                <p class="form__field">
+                    <button type="submit" title="<?php echo $this->__('Save Subscription Settings') ?>" class="button">
+                        <span>
+                            <span>
+                                <?php echo $this->__('Save Subscription Settings') ?>
+                            </span>
+                        </span>
+                    </button>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+<?php endif; ?>
