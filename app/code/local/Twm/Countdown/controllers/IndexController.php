@@ -11,79 +11,85 @@ class Twm_Countdown_IndexController extends Mage_Core_Controller_Front_Action
 
     public function indexAction()
     {
-        $myRoot = Mage::getBaseDir('code') . '/local/Twm/Countdown/';
+        $customer = Mage::getSingleton('customer/customer')->load($this->getRequest()->getParam('cid'));
+        $expiringPoints = Mage::getSingleton('points/transaction')->load($this->getRequest()->getParam('tid'));
 
-        date_default_timezone_set('America/Halifax');
-        include $myRoot . 'vendor/SeanJA/countdown-clock/GIFEncoder.class.php';
-
-        $future_date = new DateTime();
-        $future_date->setDate(2017,12,18);
-        $future_date->setTime(0,0,0);
-
-        $now = new DateTime();
-
-        $frames = [];
-        $delays = [];
-
-        $image = imagecreatefrompng($myRoot . self::BACKGROUND);
-        $delay = 100; // milliseconds
-        $font = [
-            'size'     => 40,
-            'angle'    => 0,
-            'x-offset' => 10,
-            'y-offset' => 70,
-            'file'     => Mage::getBaseDir('skin') . self::FONT,
-            'color'    => imagecolorallocate($image, 50, 164, 0)
-        ];
-
-        for ($i = 0; $i <= 60; $i++)
+        if ($expiringPoints->getCustomer() == $customer)
         {
-            $interval = date_diff($future_date, $now);
-            if ($future_date < $now)
+            $myRoot = Mage::getBaseDir('code') . '/local/Twm/Countdown/';
+
+            date_default_timezone_set('Europe/Amsterdam');
+            include $myRoot . 'vendor/SeanJA/countdown-clock/GIFEncoder.class.php';
+
+            $future_date = new DateTime($expiringPoints->getData('expiration_date'));
+
+            $now = new DateTime();
+
+            $frames = [];
+            $delays = [];
+
+            $image = imagecreatefrompng($myRoot . self::BACKGROUND);
+            $delay = 100; // milliseconds
+            $font = [
+                'size'     => 40,
+                'angle'    => 0,
+                'x-offset' => 10,
+                'y-offset' => 70,
+                'file'     => Mage::getBaseDir('skin') . self::FONT,
+                'color'    => imagecolorallocate($image, 50, 164, 0)
+            ];
+
+            for ($i = 0; $i <= 60; $i++)
             {
-                // Open the first source image and add the text.
-                $image = imagecreatefrompng($myRoot . self::BACKGROUND);;
-                $text = $interval->format('00:00:00:00');
-                imagettftext($image, $font['size'], $font['angle'], $font['x-offset'], $font['y-offset'], $font['color'], $font['file'], $text);
-                ob_start();
-                imagegif($image);
-                $frames[] = ob_get_contents();
-                $delays[] = $delay;
-                $loops = 1;
-                ob_end_clean();
-                break;
-            }
-            else
-            {
-                // Open the first source image and add the text.
-                $image = imagecreatefrompng($myRoot . self::BACKGROUND);;
-                $text = $interval->format('%a:%H:%I:%S');
-                // %a is weird in that it doesn’t give you a two digit number
-                // check if it starts with a single digit 0-9
-                // and prepend a 0 if it does
-                if (preg_match('/^[0-9]\:/', $text))
+                $interval = date_diff($future_date, $now);
+                if ($future_date < $now)
                 {
-                    $text = '0' . $text;
+                    // Open the first source image and add the text.
+                    $image = imagecreatefrompng($myRoot . self::BACKGROUND);;
+                    $text = $interval->format('00:00:00:00');
+                    imagettftext($image, $font['size'], $font['angle'], $font['x-offset'], $font['y-offset'], $font['color'], $font['file'], $text);
+                    ob_start();
+                    imagegif($image);
+                    $frames[] = ob_get_contents();
+                    $delays[] = $delay;
+                    $loops = 1;
+                    ob_end_clean();
+                    break;
                 }
+                else
+                {
+                    // Open the first source image and add the text.
+                    $image = imagecreatefrompng($myRoot . self::BACKGROUND);;
+                    $text = $interval->format('%a:%H:%I:%S');
+                    // %a is weird in that it doesn’t give you a two digit number
+                    // check if it starts with a single digit 0-9
+                    // and prepend a 0 if it does
+                    if (preg_match('/^[0-9]\:/', $text))
+                    {
+                        $text = '0' . $text;
+                    }
 
-                imagettftext($image, $font['size'], $font['angle'], $font['x-offset'], $font['y-offset'], $font['color'], $font['file'], $text);
-                ob_start();
-                imagegif($image);
-                $frames[] = ob_get_contents();
-                $delays[] = $delay;
-                $loops = 0;
-                ob_end_clean();
+                    imagettftext($image, $font['size'], $font['angle'], $font['x-offset'], $font['y-offset'], $font['color'], $font['file'], $text);
+                    ob_start();
+                    imagegif($image);
+                    $frames[] = ob_get_contents();
+                    $delays[] = $delay;
+                    $loops = 0;
+                    ob_end_clean();
 
+                }
+                $now->modify('+1 second');
             }
-            $now->modify('+1 second');
-        }
 
-        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-        header('Cache-Control: no-store, no-cache, must-revalidate');
-        header('Cache-Control: post-check=0, pre-check=0', false);
-        header('Pragma: no-cache');
-        $gif = new AnimatedGif($frames, $delays, $loops);
-        $gif->display();
+            header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+            header('Cache-Control: no-store, no-cache, must-revalidate');
+            header('Cache-Control: post-check=0, pre-check=0', false);
+            header('Pragma: no-cache');
+            $gif = new AnimatedGif($frames, $delays, $loops);
+            $gif->display();
+        }
+        else
+            return $this->getResponse()->setHttpResponseCode(404);
     }
 }
