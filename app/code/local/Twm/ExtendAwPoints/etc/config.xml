@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_ExtendAwPoints>
+            <version>0.1.0</version>
+        </Twm_ExtendAwPoints>
+    </modules>
+    <global>
+        <blocks>
+            <pointsandrewards>
+                <class>Twm_ExtendAwPoints_Block</class>
+            </pointsandrewards>
+            <checkout>
+                <rewrite>
+                    <onepage_payment_methods>Twm_ExtendAwPoints_Block_Points_Checkout_Onepage_Payment_Methods</onepage_payment_methods>
+                </rewrite>
+            </checkout>
+        </blocks>
+        <models>
+            <pointsandrewards>
+                <class>Twm_ExtendAwPoints_Model</class>
+            </pointsandrewards>
+        </models>
+    </global>
+    <default>
+        <payment>
+            <pointsandrewards>
+                <active>1</active>
+                <model>pointsandrewards/method_pointsandrewards</model>
+                <order_status>pending</order_status>
+                <title>Points and Rewards</title>
+                <allowspecific>0</allowspecific>
+                <payment_action>sale</payment_action>
+            </pointsandrewards>
+        </payment>
+    </default>
+</config>
