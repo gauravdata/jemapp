@@ -1,0 +1,51 @@
+.awpoints__wrapper{
+    padding: 15px;
+}
+.aw-points-link{
+    word-wrap: break-word;
+}
+.awpoints__send-nvitation-section-title{
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.awpoints__back-button{
+    margin-top: 15px;
+}
+
+.aw_points_input {
+    width: 254px !important;
+}
+
+#invitelist-table td.last {
+    width: 270px;
+}
+
+#aw_sendinvitation textarea{
+    height: 75px;
+}
+
+.aw-points-referral .aw-points-link {
+    font-weight: bold;
+}
+#invitelist-table{
+    width: 100%;
+    margin-bottom: 10px;
+}
+#invitelist-table tr{
+    border-bottom: 1px solid #b2b2b2;
+}
+#invitelist-table td {
+    padding-bottom: 5px;
+}
+#invitelist-table tr .email{
+    text-align: left;
+    float: left;
+    width: 50%;
+}
+#invitelist-table tr .status{
+    text-align: right;
+    float: right;
+    width: 50%;
+}

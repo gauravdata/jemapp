@@ -1,0 +1,54 @@
+.awpoints__wrapper{
+    padding: 15px;
+}
+.awpoints__edit-section-title, #aw_points-history-box h2{
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+.awpoints__edit-section{
+    margin-bottom: 20px;
+}
+#aw_points-summary-box dl.box-content dt {
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+#aw_points-summary-box .learnmore {
+    font-size: 10px;
+}
+
+#aw_points-summary-box .box-content dt.expiration span {
+    color: #cc0000;
+}
+#aw_points-summary-box{
+    margin-bottom: 15px;
+}
+#aw_points-history-box {
+    margin-bottom: 15px;
+}
+#aw_points-history-box table#points-history-table{
+    width: 100%;
+    margin-bottom: 10px;
+}
+#aw_points-history-box table#points-history-table tr.last  {
+    border-bottom: 1px solid #b2b2b2;
+    margin-bottom: 10px;
+}
+
+#aw_points-history-box table#points-history-table .aw-expiration-in-table {
+    color: gray;
+}
+
+#aw_points-button-to-subscribe {
+    margin-bottom: 15px;
+}
+
+#aw_points-summary-box h2 {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#points-history-table {
+    border-spacing: 0;
+}

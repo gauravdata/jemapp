@@ -14,7 +14,7 @@
     </crontab>
     <modules>
         <AW_Core>
-            <version>1.0.3</version><platform>ce</platform>
+            <version>1.0.2</version><platform>ce</platform>
         </AW_Core>
     </modules>
     <global>
@@ -97,7 +97,6 @@
                 <args>
                     <modules>
                         <awcore after="Mage_Adminhtml">AW_Core_Adminhtml</awcore>
-                        <frontName>awcore</frontName>
                     </modules>
                 </args>
             </adminhtml>

@@ -1,0 +1,121 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Points
+ * @version    1.9.0
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+$summaryForCustomer = $this->getSummaryForCustomer();
+$textForPoints = Mage::helper('points/config')->getPointUnitName();
+$defaultValue = Mage::app()->getRequest()->getParam('payment[points_amount]');
+$helper = Mage::helper('points');
+?>
+
+<?php if ($this->pointsSectionAvailable()): ?>
+    <div class="sp-methods checkout-reward checkout-onepage-payment-additional-reward">
+        <ul class="checkout-payment__methods">
+            <li class="checkout-payment__method checkout-step__island">
+                <span class="checkbox">
+                    <input type="checkbox" class="checkbox__self" name="payment[use_points]" value="1" id="use_points" autocomplete="off">
+
+                    <label class="form__label checkbox__label" for="use_points">
+                        <span class="checkbox__icon-wrapper">
+                            <svg class="checkbox__icon checkbox__icon--unchecked svg-icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-checkbox"></use></svg>
+                            <svg class="checkbox__icon checkbox__icon--checked svg-icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-checkbox--checked"></use></svg>
+                        </span>
+                        <span class="checkbox__text">
+                            <?php echo $this->__('Use my %s (%s %s (%s) available)', $textForPoints, $summaryForCustomer->getPoints(), $textForPoints, $this->getMoneyForPoints()) ?>
+                        </span>
+                    </label>
+
+                    <input type="text" class="form__textfield textfield textfield--dark" name="payment[points_amount]" value ="<?php echo $defaultValue; ?>" id="points_amount" onchange="awPointsConfig.pointsAmountChanged()" />
+                    <input type="hidden" name="base_grand_total" id="points_base_grand_total" value="<?php echo $this->getBaseGrandTotalInPointsToPay() ?>" disabled />
+                </span>
+            </li>
+        </ul>
+    </div>
+<?php endif; ?>
+<?php $oneMethod = false;?>
+<div class="checkout-payment__methods" id="checkout-payment-methods-container">
+    <?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+        <?php if (!$this->pointsSectionAvailable() || $_code != 'free' || $this->getBaseGrandTotalInPointsToPay() > 0): ?>
+            <div class="checkout-payment__method checkout-step__island">
+                <?php if (sizeof($this->getMethods()) > 1): ?>
+                    <span class="radio">
+                        <input class="radio__self" type="radio" name="payment[method]" id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" onclick="payment.switchMethod('<?php echo $_code ?>')" <?php if($this->getSelectedMethodCode()==$_code): ?>checked<?php endif; ?>>
+                        <label class="form__label radio__label" for="p_method_<?php echo $_code ?>">
+                            <span class="radio__icon-wrapper">
+                                <svg class="radio__icon radio__icon--unchecked svg-icon"><use xlink:href="#icon-radio" /></svg>
+                                <svg class="radio__icon radio__icon--checked svg-icon"><use xlink:href="#icon-radio--checked" /></svg>
+                            </span>
+                            <span class="radio__text"><?php echo $this->getMethodTitle($_method) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></span>
+                        </label>
+                    </span>
+                <?php else: ?>
+                    <?php $oneMethod = $_method->getCode();?>
+                    <span class="radio radio--disabled">
+                        <input class="radio__self" type="radio" name="payment[method]" id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" checked>
+                        <label class="form__label radio__label" for="p_method_<?php echo $_code ?>">
+                            <span class="radio__icon-wrapper">
+                                <svg class="radio__icon radio__icon--unchecked svg-icon"><use xlink:href="#icon-radio" /></svg>
+                                <svg class="radio__icon radio__icon--checked svg-icon"><use xlink:href="#icon-radio--checked" /></svg>
+                            </span>
+                            <span class="radio__text"><?php echo $this->getMethodTitle($_method) ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></span>
+                        </label>
+                    </span>
+                <?php endif; ?>
+
+                <?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+                    <?php echo $html; ?>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>
+<div id="checkout-payment-method-free" style="display: none;">
+    <?php $freePaymentMethod = $this->getFreePaymentMethod(); ?>
+    <input id="p_method_<?php echo $freePaymentMethod->getCode() ?>" value="<?php echo $freePaymentMethod->getCode() ?>" type="hidden" name="payment[method]" disabled />
+    <label><?php echo $this->getMethodTitle($freePaymentMethod) ?> <?php echo $this->getMethodLabelAfterHtml($freePaymentMethod) ?></label>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    <?php echo $this->getChildChildHtml('scripts'); ?>
+    <?php if ($helper->magentoIsEnterprise() && $this->getLayout()->getBlock('giftcardaccount_scripts')): ?>
+        Payment.prototype.initOriginal = Payment.prototype.init;
+        Payment.prototype.init = function() {
+            this.initOriginal();
+            this.afterInit();
+        }
+    <?php endif; ?>
+    payment.init();
+    <?php if (is_string($oneMethod)): ?>
+        payment.switchMethod('<?php echo $oneMethod ?>');
+    <?php endif; ?>
+
+    window.paymentLabels = [];
+
+    <?php foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+        window.paymentLabels[<?php echo Zend_Json::encode($_code) ?>] = "<?php echo $this->htmlEscape($_method->getTitle()) ?>";
+    <?php endforeach; ?>
+    //]]>
+</script>
