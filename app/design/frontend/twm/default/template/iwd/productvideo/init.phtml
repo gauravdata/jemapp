@@ -1,5 +1,5 @@
 <?php
-$product_id = $this->getProduct()->getId();
+$product_id = Mage::registry('current_product')->getId();
 $videos = $this->getVideosCollection($product_id); ?>
 
 <?php if(isset($videos) && !empty($videos) && Mage::getStoreConfig('iwd_productvideo/general/enabled') ): ?>
