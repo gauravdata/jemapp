@@ -25,7 +25,7 @@
  */
 
 
-class AW_Points_Block_Checkout_Onepage_Payment_Methods extends Mage_Checkout_Block_Onepage_Payment_Methods
+class AW_Points_Block_Checkout_Onepage_Payment_Methods extends MageWorx_CustomerCredit_Block_Checkout_Onepage_Payment_Methods // Mage_Checkout_Block_Onepage_Payment_Methods
 {
     protected $_summaryForCustomer;
 

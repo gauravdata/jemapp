@@ -156,9 +156,18 @@ ul.checkout-types {
 	}
 
 	.subtotal {
-		text-align: right;
 		padding-top: $xs-spacing;
 		border-top: 1px solid $m-grey;
+		display: flex;
+
+		> span {
+			font-weight: bold;
+			color: $secondary;
+		}
+
+		strong {
+			margin-left: auto;
+		}
 	}
 	.actions {
 		text-align: right;
