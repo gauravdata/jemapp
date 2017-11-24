@@ -1,0 +1,160 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Points
+ * @version    1.9.0
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+$summaryForCustomer = $this->getSummaryForCustomer();
+$textForPoints = Mage::helper('points/config')->getPointUnitName();
+$defaultValue = Mage::app()->getRequest()->getParam('payment[points_amount]');
+$helper = Mage::helper('points');
+
+$isPartial = $this->isPartialPayment();
+$isCheckedCustomercredit = Mage::getSingleton('checkout/session')->getUseInternalCredit();
+if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->setMethod('customercredit');
+?>
+
+<?php if ($this->pointsSectionAvailable()): ?>
+    <dt>
+        <input type="checkbox" name="payment[use_points]" id="use_points" checked="checked" />
+        <label for="use_points"><?php echo $this->__('Use my %s', $textForPoints) ?></label>
+    </dt>
+    <dt>
+        <input type="text" name="payment[points_amount]" value ="<?php echo $defaultValue; ?>" id="points_amount" onchange="awPointsConfig.pointsAmountChanged()" />
+        <input type="hidden" name="base_grand_total" id="points_base_grand_total" value="<?php echo $this->getBaseGrandTotalInPointsToPay() ?>" disabled />
+        <label for="points_amount"><?php echo Mage::helper('points')->__('of %s %s (%s) available', $summaryForCustomer->getPoints(), $textForPoints, $this->getMoneyForPoints()) ?></label>
+    </dt>
+<?php endif; ?>
+<?php $oneMethod = false;?>
+<div id="checkout-payment-methods-container">
+	<div class="payment-methods">
+		<dl id="checkout-payment-method-load">
+			<?php
+				foreach ($this->getMethods() as $_method):
+				$_code = $_method->getCode();
+				if ($_code=='customercredit' && ($isPartial == -2 || $isPartial == -3)) continue; // hide customer credit
+			?>
+
+				<?php if (!$this->pointsSectionAvailable() || $_code != 'free' || $this->getBaseGrandTotalInPointsToPay() > 0): ?>
+					<dt class="control">
+						<?php if (sizeof($this->getMethods()) > 1): ?>
+							<?php if ($_code=='customercredit' && $isPartial==1): ?>
+								<input id="p_method_<?php echo $_code ?>" value="1" type="checkbox" name="payment[use_internal_credit]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="checkbox" onclick="creditPayment.switchPMethod('<?php echo $_code ?>');" <?php if ($isCheckedCustomercredit) { ?>checked="checked"<?php } ?> />
+							<?php elseif ($_code=='customercredit' && $isPartial==-3): ?>
+								<input id="p_method_<?php echo $_code ?>_disabled" disabled="disabled" value="1" type="checkbox" name="payment[use_internal_credit]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="checkbox" />
+							<?php elseif ($_code=='customercredit' && $isPartial==-1): ?>
+								<input id="p_method_<?php echo $_code ?>_disabled" disabled="disabled" value="1" type="checkbox" name="payment[use_internal_credit]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="checkbox" />
+							<?php elseif ($_code=='customercredit' && $isPartial==0) : ?>
+								<input id="p_method_<?php echo $_code ?>_disabled" disabled="disabled" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="radio" />
+							<?php else: ?>
+								<input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" class="radio" onclick="creditPayment.switchPMethod('<?php echo $_code ?>')"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> />
+							<?php endif; ?>
+						<?php else: ?>
+							<span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" checked="checked" /></span>
+						<?php endif; ?>
+						<label for="p_method_<?php echo $_code ?>">
+							<?php echo $this->__($_method->getTitle()); ?>
+							<?php if ($_code=='customercredit' && (Mage::helper('customercredit')->isEnabledCodes() || $this->needShowRechageLink())):?>
+								(<a href="<?php echo $this->getUrl('customercredit/') ?>" target="_blank"><?php echo Mage::helper('customercredit')->__('Recharge') ?></a>)
+							<?php endif; ?>
+						</label>
+						<?php if (($_code=='customercredit') && Mage::getStoreConfig('mageworx_customers/customercredit_credit/enable_custom_value')): ?>
+							<?php echo $this->getChildHtml('payment.custom.value'); ?>
+						<?php endif; ?>
+					</dt>
+					<?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+						<dd>
+							<?php echo $html; ?>
+						</dd>
+					<?php endif; ?>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</dl>
+	</div>
+</div>
+<dt id="checkout-payment-method-free" style="display: none;">
+    <?php $freePaymentMethod = $this->getFreePaymentMethod(); ?>
+    <input id="p_method_<?php echo $freePaymentMethod->getCode() ?>" value="<?php echo $freePaymentMethod->getCode() ?>" type="hidden" name="payment[method]" disabled />
+    <label><?php echo $this->getMethodTitle($freePaymentMethod) ?> <?php echo $this->getMethodLabelAfterHtml($freePaymentMethod) ?></label>
+</dt>
+<?php echo $this->getChildChildHtml('additional'); ?>
+<script type="text/javascript">
+    //<![CDATA[
+    <?php echo $this->getChildChildHtml('scripts'); ?>
+    <?php if ($helper->magentoIsEnterprise() && $this->getLayout()->getBlock('giftcardaccount_scripts')): ?>
+    Payment.prototype.initOriginal = Payment.prototype.init;
+    Payment.prototype.init = function() {
+        this.initOriginal();
+        this.afterInit();
+    }
+    <?php endif; ?>
+    payment.init();
+    <?php if (is_string($oneMethod)): ?>
+    payment.switchMethod('<?php echo $oneMethod ?>');
+    <?php endif; ?>
+    //]]>
+</script>
+
+<script type="text/javascript">
+	//<![CDATA[
+	<?php //echo $this->getChildChildHtml('scripts'); ?>
+	payment.init();
+	el = $('p_method_customercredit');
+	if (el) el.disabled = false;
+	<?php if ($isPartial==1 && $isCheckedCustomercredit) { ?>payment.switchMethod('customercredit');<?php } ?>
+	var creditPayment = {
+		switchPMethod: function(code) {
+			el = $('p_method_customercredit');
+			if (el && el.checked==true) {
+				payment.switchMethod('customercredit');
+			} else if(code=='customercredit') {
+				payment.switchMethod('');
+			} else {
+				payment.switchMethod(code);
+			}
+
+			$$('ul[id^="payment_form_"], div[id^="payment_form_"]').each(function(form){  // div need to fix for SagePay Form
+				pCode = form.id.replace('payment_form_','');
+				if (!$('p_method_'+pCode) || !$('p_method_'+pCode).checked) {
+					form.hide();
+					var elements = form.getElementsByTagName('input');
+					for (var i=0; i<elements.length; i++) {
+						if (elements[i].type == 'hidden') continue;
+						elements[i].disabled = true;
+					}
+					var elements = form.getElementsByTagName('select');
+					for (var i=0; i<elements.length; i++) elements[i].disabled = true;
+				} else {
+					form.show();
+					var elements = form.getElementsByTagName('input');
+					for (var i=0; i<elements.length; i++) elements[i].disabled = false;
+					var elements = form.getElementsByTagName('select');
+					for (var i=0; i<elements.length; i++) elements[i].disabled = false;
+				}
+			});
+
+		}
+	};
+	//]]>
+</script>
+

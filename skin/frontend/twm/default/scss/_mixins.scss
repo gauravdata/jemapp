@@ -27,8 +27,4 @@
 	-o-transform: translateX($transformX) translateY($transformY);
 	-ms-transform: translateX($transformX) translateY($transformY);
 	transform: translateX($transformX) translateY($transformY);
-
-	-webkit-transform-style: preserve-3d;
-	-moz-transform-style: preserve-3d;
-	transform-style: preserve-3d;
 }
