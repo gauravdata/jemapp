@@ -69,8 +69,22 @@
                 </div>
 
                 <?php echo $this->getChildHtml('alert_urls') ?>
-                <?php echo $this->getChildHtml('product_type_data') ?>
-                <?php echo $this->getTierPriceHtml() ?>
+				<div class="price-wrapper">
+					<div class="price-left">
+                		<?php echo $this->getChildHtml('product_type_data') ?>
+					</div>
+					<div class="price-right">
+						<div class="price-right-price">
+							<?php echo $this->getChildHtml('catalog_product_points'); ?>
+						</div>
+						<div class="price-right-text">
+							<span>Spaar</span>
+							<span>CLUB</span>
+							<span>points</span>
+						</div>
+					</div>
+				</div>
+				<?php echo $this->getTierPriceHtml() ?>
                 <?php echo $this->getChildHtml('extrahint') ?>
 
                 <?php if (!$this->hasOptions()):?>
