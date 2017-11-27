@@ -456,6 +456,11 @@
 		}
 	}
 	.product-visual-wrapper {
+
+		.iwd-pv-video {
+			left: 0;
+		}
+
 		#product-image-slider {
 			.product-visual {
 				height: auto;
@@ -484,7 +489,24 @@
 			}
 		}
 		.more-views {
-			display: none;
+			left: auto;
+			bottom: auto;
+			right: 0;
+			top: 0;
+
+			a:not(.iwd-pv-thumb-video) {
+				display: none;
+			}
+			a.iwd-pv-thumb-video {
+				width: 77px;
+				height: 58px;
+				background-image: url('../../images/VideoButton.png');
+
+				img,
+				i {
+					display: none;
+				}
+			}
 		}
 	}
 	.content-box-img-left:before,
