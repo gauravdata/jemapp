@@ -119,6 +119,18 @@
 		}
 	}
 
+	.iwd-pv-video {
+		left: -10%;
+
+		.video-js {
+			background-color: $xs-grey;
+
+			.vjs-control-bar {
+				display: none;
+			}
+		}
+	}
+
 	.product-visual {
 		width: 100%;
 		height: 675px;

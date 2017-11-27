@@ -34,27 +34,26 @@ $isCheckedCustomercredit = Mage::getSingleton('checkout/session')->getUseInterna
 if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->setMethod('customercredit');
 ?>
 
-<?php if ($this->pointsSectionAvailable()): ?>
-    <dt>
-        <input type="checkbox" name="payment[use_points]" id="use_points" checked="checked" />
-        <label for="use_points"><?php echo $this->__('Use my %s', $textForPoints) ?></label>
-    </dt>
-    <dt>
-        <input type="text" name="payment[points_amount]" value ="<?php echo $defaultValue; ?>" id="points_amount" onchange="awPointsConfig.pointsAmountChanged()" />
-        <input type="hidden" name="base_grand_total" id="points_base_grand_total" value="<?php echo $this->getBaseGrandTotalInPointsToPay() ?>" disabled />
-        <label for="points_amount"><?php echo Mage::helper('points')->__('of %s %s (%s) available', $summaryForCustomer->getPoints(), $textForPoints, $this->getMoneyForPoints()) ?></label>
-    </dt>
-<?php endif; ?>
-<?php $oneMethod = false;?>
+<?php $oneMethod = false; ?>
 <div id="checkout-payment-methods-container">
 	<div class="payment-methods">
 		<dl id="checkout-payment-method-load">
+			<?php if ($this->pointsSectionAvailable()): ?>
+				<dt class="control control_points">
+					<input type="checkbox" name="payment[use_points]" id="use_points" checked="checked" />
+					<label for="use_points"><?php echo $this->__('Use my %s', $textForPoints) ?></label>
+				</dt>
+				<dt class="control control_points">
+					<input type="text" name="payment[points_amount]" value ="<?php echo $defaultValue; ?>" id="points_amount" onchange="awPointsConfig.pointsAmountChanged()" />
+					<input type="hidden" name="base_grand_total" id="points_base_grand_total" value="<?php echo $this->getBaseGrandTotalInPointsToPay() ?>" disabled />
+					<label for="points_amount"><?php echo Mage::helper('points')->__('of %s %s (%s) available', $summaryForCustomer->getPoints(), $textForPoints, $this->getMoneyForPoints()) ?></label>
+				</dt>
+			<?php endif; ?>
 			<?php
 				foreach ($this->getMethods() as $_method):
 				$_code = $_method->getCode();
 				if ($_code=='customercredit' && ($isPartial == -2 || $isPartial == -3)) continue; // hide customer credit
 			?>
-
 				<?php if (!$this->pointsSectionAvailable() || $_code != 'free' || $this->getBaseGrandTotalInPointsToPay() > 0): ?>
 					<dt class="control">
 						<?php if (sizeof($this->getMethods()) > 1): ?>
@@ -82,7 +81,7 @@ if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->
 							<?php echo $this->getChildHtml('payment.custom.value'); ?>
 						<?php endif; ?>
 					</dt>
-					<?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
+					<?php if($html = $this->getChildHtml('payment.method.'.$_code)): ?>
 						<dd>
 							<?php echo $html; ?>
 						</dd>
@@ -102,22 +101,16 @@ if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->
     //<![CDATA[
     <?php echo $this->getChildChildHtml('scripts'); ?>
     <?php if ($helper->magentoIsEnterprise() && $this->getLayout()->getBlock('giftcardaccount_scripts')): ?>
-    Payment.prototype.initOriginal = Payment.prototype.init;
-    Payment.prototype.init = function() {
-        this.initOriginal();
-        this.afterInit();
-    }
+		Payment.prototype.initOriginal = Payment.prototype.init;
+		Payment.prototype.init = function() {
+			this.initOriginal();
+			this.afterInit();
+		}
     <?php endif; ?>
     payment.init();
     <?php if (is_string($oneMethod)): ?>
-    payment.switchMethod('<?php echo $oneMethod ?>');
+    	payment.switchMethod('<?php echo $oneMethod ?>');
     <?php endif; ?>
-    //]]>
-</script>
-
-<script type="text/javascript">
-	//<![CDATA[
-	<?php //echo $this->getChildChildHtml('scripts'); ?>
 	payment.init();
 	el = $('p_method_customercredit');
 	if (el) el.disabled = false;
@@ -157,4 +150,3 @@ if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->
 	};
 	//]]>
 </script>
-
