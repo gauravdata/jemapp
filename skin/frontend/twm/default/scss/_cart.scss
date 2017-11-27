@@ -48,6 +48,45 @@ ul.checkout-types {
 }
 
 /*======================================================
+	PRICE POINT
+======================================================*/
+.price-point-cart {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin: -45px 0 $m-spacing;
+	color: $secondary;
+
+	.price-point-text {
+		margin-right: 10px;
+		text-align: center;
+		text-transform: uppercase;
+		line-height: 0.9;
+
+		span {
+			display: block;
+
+			&:nth-child(1) {
+				color: $m-grey;
+				font-size: 12px;
+			}
+			&:nth-child(2) {
+				font-size: 15px;
+				font-weight: 500;
+			}
+			&:nth-child(3) {
+				font-size: 11px;
+				font-weight: 500;
+			}
+		}
+	}
+	.price-point-price {
+		font-size: $xxl-font;
+		font-weight: 500;
+	}
+}
+
+/*======================================================
 	TOTALS
 ======================================================*/
 #shopping-cart-totals-table {
