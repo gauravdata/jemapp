@@ -15,18 +15,28 @@
 	}
 	.third-price {
 		color: $xl-grey;
-		font-size: $xl-font;
 
 		.price {
 			color: $success;
 			font-weight: bold;
-			font-size: $xxl-font;
 		}
 
 		.icon-question {
 			margin-left: $xxs-spacing;
 			font-size: $l-font;
 			display: none;
+		}
+	}
+}
+
+.product-options-wrapper {
+	.price-box {
+		.third-price {
+			font-size: $xl-font;
+
+			.price {
+				font-size: $xxl-font;
+			}
 		}
 	}
 }
