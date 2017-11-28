@@ -2,10 +2,15 @@
 <config>
     <modules>
         <Twm_ExtendAwPoints>
-            <version>0.1.0</version>
+            <version>1.0.0</version>
         </Twm_ExtendAwPoints>
     </modules>
     <global>
+        <helpers>
+            <pointsandrewards>
+                <class>Twm_ExtendAwPoints_Helper</class>
+            </pointsandrewards>
+        </helpers>
         <blocks>
             <pointsandrewards>
                 <class>Twm_ExtendAwPoints_Block</class>
@@ -21,6 +26,13 @@
                 <class>Twm_ExtendAwPoints_Model</class>
             </pointsandrewards>
         </models>
+        <resources>
+            <pointsandrewards_setup>
+                <setup>
+                    <module>Twm_ExtendAwPoints</module>
+                </setup>
+            </pointsandrewards_setup>
+        </resources>
     </global>
     <default>
         <payment>
