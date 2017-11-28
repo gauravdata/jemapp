@@ -194,7 +194,7 @@
 			&.iwd-pv-thumb-video {
 				@include radius(10px);
 				background-color: $l-grey;
-				height: 80px;
+				height: 50px;
 				position: relative;
 				color: $white;
 				display: flex;
@@ -229,6 +229,10 @@
 
 			a {
 				float: left;
+
+				&.iwd-pv-thumb-video {
+					margin-top: 25px;
+				}
 			}
 		}
 	}
