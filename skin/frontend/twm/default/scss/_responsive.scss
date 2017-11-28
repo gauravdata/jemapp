@@ -456,6 +456,11 @@
 		}
 	}
 	.product-visual-wrapper {
+
+		.iwd-pv-video {
+			left: 0;
+		}
+
 		#product-image-slider {
 			.product-visual {
 				height: auto;
@@ -484,7 +489,30 @@
 			}
 		}
 		.more-views {
-			display: none;
+			left: auto;
+			bottom: auto;
+			right: 0;
+			top: 0;
+
+			a:not(.iwd-pv-thumb-video) {
+				display: none;
+			}
+			a.iwd-pv-thumb-video {
+				width: 55px;
+				height: 35px;
+				font-size: 12px;
+				line-height: 1.25;
+			}
+
+			&.double-row {
+				width: 65px !important;
+
+				a {
+					&.iwd-pv-thumb-video {
+						margin-top: 10px;
+					}
+				}
+			}
 		}
 	}
 	.content-box-img-left:before,

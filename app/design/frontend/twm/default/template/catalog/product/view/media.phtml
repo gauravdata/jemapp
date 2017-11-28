@@ -79,9 +79,25 @@
                     }
                 });
                 jQuery('.product-img-box .more-views a').click(function(){
-                    productImageOwl.trigger('to.owl.carousel', [jQuery(this).index()]);
-                    return false;
+					productImageOwl.trigger('to.owl.carousel', [jQuery(this).index()]);
+
+					if(!jQuery(this).data('video-id')) {
+						return false;
+					}
                 });
+				productImageOwl.on('translated.owl.carousel', function(event) {
+					try{
+						if(jQuery('.owl-item.active').find('.iwd-pv-video').length > 0) {
+							jQuery('.vjs-tech').get(0).play();
+						} else {
+							if(jQuery('.vjs-tech').length > 0) {
+								jQuery('.vjs-tech').get(0).pause();
+							}
+						}
+					} catch(e) {
+						console.log('The play() request was interrupted by a call to pause().');
+					}
+				});
             });
         </script>
     <?php else: ?>

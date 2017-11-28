@@ -23,17 +23,8 @@
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
-?><?php
-$helperConfig = Mage::helper('points/config');
-?>
-<?php if ($this->getPoints() > 0): ?>
-    <div class="points-notice-sidebar-msg">
-        <?php if ($this->getMoney()): ?>
-            <?php echo $this->__('Checkout now and earn %s %s (%s) !', $this->getPoints(), $helperConfig->getPointUnitName(), Mage::app()->getStore()->convertPrice($this->getMoney(), true)) ?>
-        <?php else: ?>
-            <?php echo $this->__('Checkout now and earn %s %s !', $this->getPoints(), $helperConfig->getPointUnitName()) ?>
-        <?php endif; ?>
-        <?php echo $this->getChildHtml('infopage.link') ?>
-    </div>
+?><?php if (Mage::helper('points/config')->getInfoPageId()): ?>
+    <a href="<?php echo $this->getUrl('points/index/infopage') ?>" title="<?php echo $this->__('What is it?') ?>">
+        <i class="icon-question icons"></i>
+    </a>
 <?php endif; ?>
-
