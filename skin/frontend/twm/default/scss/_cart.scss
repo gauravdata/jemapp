@@ -83,6 +83,11 @@ ul.checkout-types {
 	.price-point-price {
 		font-size: $xxl-font;
 		font-weight: 500;
+
+		.icons {
+			font-size: $xl-font;
+			color: $xl-grey;
+		}
 	}
 }
 
