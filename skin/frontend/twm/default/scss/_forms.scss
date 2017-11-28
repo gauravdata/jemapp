@@ -226,8 +226,14 @@ form .control {
 		}
 	}
 
-	&.control_points:not(:first-child) {
-		margin-top: 20px;
+	&.control_points_amount {
+		display: flex;
+
+		input {
+			width: 65px;
+			text-align: center;
+			margin-right: 10px;
+		}
 	}
 
 	input:disabled {
