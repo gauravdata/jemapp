@@ -498,10 +498,20 @@
 				display: none;
 			}
 			a.iwd-pv-thumb-video {
-				width: 50px;
+				width: 55px;
 				height: 35px;
 				font-size: 12px;
 				line-height: 1.25;
+			}
+
+			&.double-row {
+				width: 65px !important;
+
+				a {
+					&.iwd-pv-thumb-video {
+						margin-top: 10px;
+					}
+				}
 			}
 		}
 	}
