@@ -498,14 +498,10 @@
 				display: none;
 			}
 			a.iwd-pv-thumb-video {
-				width: 39px;
-				height: 29px;
-				background-image: url('../../images/VideoButton.png');
-
-				img,
-				i {
-					display: none;
-				}
+				width: 50px;
+				height: 35px;
+				font-size: 12px;
+				line-height: 1.25;
 			}
 		}
 	}

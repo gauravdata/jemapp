@@ -190,6 +190,40 @@
 			img {
 				display: block;
 			}
+
+			&.iwd-pv-thumb-video {
+				@include radius(10px);
+				background-color: $l-grey;
+				height: 50px;
+				position: relative;
+				color: $white;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				width: 75px;
+				padding: 0 10px;
+
+				&:hover {
+					background-color: $black;
+				}
+
+				&:before {
+					content: "\e071";
+					font-family: simple-line-icons;
+					speak: none;
+				}
+				&:after {
+					content: "Video";
+					text-transform: uppercase;
+					font-weight: 500;
+				}
+
+				i,
+				img {
+					display: none;
+				}
+			}
 		}
 
 		&.double-row {
