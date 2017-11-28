@@ -194,15 +194,13 @@
 			&.iwd-pv-thumb-video {
 				@include radius(10px);
 				background-color: $l-grey;
-				height: 50px;
+				height: 80px;
 				position: relative;
 				color: $white;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				width: 75px;
-				padding: 0 10px;
 
 				&:hover {
 					background-color: $black;
