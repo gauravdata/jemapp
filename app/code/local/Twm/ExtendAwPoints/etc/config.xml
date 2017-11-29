@@ -20,6 +20,11 @@
                     <onepage_payment_methods>Twm_ExtendAwPoints_Block_Points_Checkout_Onepage_Payment_Methods</onepage_payment_methods>
                 </rewrite>
             </checkout>
+            <points>
+                <rewrite>
+                    <catalog_product_points>Twm_ExtendAwPoints_Block_Points_Catalog_Product_Points</catalog_product_points>
+                </rewrite>
+            </points>
         </blocks>
         <models>
             <pointsandrewards>
