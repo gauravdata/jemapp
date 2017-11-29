@@ -427,7 +427,7 @@
 		}
 		ul.products-grid {
 			li.item {
-				width: 50%;
+				width: 100%;
 			}
 		}
 		.sorter {
@@ -573,6 +573,13 @@
 		}
 		ol#cart-sidebar {
 			display: none;
+		}
+	}
+
+	.price-point-cart {
+		.price-point-price {
+			font-size: 14px;
+			font-weight: 500;
 		}
 	}
 

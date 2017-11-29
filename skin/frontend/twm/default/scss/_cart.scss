@@ -52,33 +52,16 @@ ul.checkout-types {
 ======================================================*/
 .price-point-cart {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
 	margin: -45px 0 $m-spacing;
 	color: $secondary;
+	padding: 0 $s-spacing $m-spacing;
+	border-bottom: 1px dotted #888;
 
-	.price-point-text {
-		margin-right: 10px;
-		text-align: center;
-		text-transform: uppercase;
-		line-height: 0.9;
-
-		span {
-			display: block;
-
-			&:nth-child(1) {
-				color: $m-grey;
-				font-size: 12px;
-			}
-			&:nth-child(2) {
-				font-size: 15px;
-				font-weight: 500;
-			}
-			&:nth-child(3) {
-				font-size: 11px;
-				font-weight: 500;
-			}
-		}
+	img {
+		width: 110px;
+		margin-right: $s-spacing;
 	}
 	.price-point-price {
 		font-size: $xxl-font;
