@@ -97,7 +97,7 @@
                 <stylesheet>css/aw_points/aw_points_cart.css</stylesheet>
             </action>
         </reference>
-        <reference name="product.info">
+        <reference name="product.info.addtocart">
             <block type="points/catalog_product_points" name="catalog.product.points" as="catalog_product_points" template="aw_points/catalog/product/points.phtml">
                 <block type="core/template" name="infopage.link" template="aw_points/infopagelink.phtml"/>
             </block>

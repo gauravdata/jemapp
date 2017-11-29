@@ -98,8 +98,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="points/catalog_product_points" name="catalog.product.points"
-                   template="aw_points/catalog/product/points.phtml" before="-">
+            <block type="points/catalog_product_points" name="catalog.product.points" template="aw_points/catalog/product/points.phtml" before="-">
                 <block type="core/template" name="infopage.link" template="aw_points/infopagelink.phtml"/>
             </block>
         </reference>

@@ -25,8 +25,15 @@
  */
 ?><?php /* @var $this AW_Points_Block_Catalog_Product_Points */ ?>
 <?php $helperConfig = Mage::helper('points/config'); ?>
+
 <?php if ($this->getMoney()) : ?>
-	<?php echo $this->getPoints(); ?>
+	<?php $points = $this->getPoints(); ?>
 <?php else : ?>
-	<?php echo $this->getPoints(); ?>
+	<?php $points = $this->getPoints(); ?>
 <?php endif; ?>
+
+<div class="product-points">
+	<?php echo $this->__('Checkout now and earn %s %s!', $points, $helperConfig->getPointUnitName()) ?>
+	<a href="#modal-points" class="show-modal"><i class="icon-question icons"></i></a>
+	<img src="<?php echo $this->getSkinUrl('images/logo-club-jma.png')?>" alt="Club JMA" />
+</div>
