@@ -138,6 +138,9 @@
                 <?php endif ?>
                 </li>
             <?php endif ?>
+            <?php
+            echo $this->getLayout()->createBlock('points/checkout_cart_points')->setTemplate('extendawpoints/signup_clubjma.phtml')->toHtml();
+            ?>
 
             <?php if ($this->isTaxvatEnabled()):?>
                 <li><?php echo $this->getTaxvatHtml() ?></li>
