@@ -312,53 +312,6 @@
 		display: none;
 	}
 
-	.price-wrapper {
-		display: flex;
-		flex-wrap: nowrap;
-		align-items: flex-end;
-		-webkit-font-smoothing: antialiased;
-
-		.price-right {
-			margin-top: auto;
-			margin-left: auto;
-			margin-bottom: 10px;
-			display: flex;
-			flex-wrap: nowrap;
-			color: $secondary;
-			align-items: flex-end;
-
-			.price-right-price {
-				margin-right: 8px;
-				font-weight: bold;
-				font-size: $xxl-font;
-				margin-bottom: 2px;
-			}
-			.price-right-text {
-				line-height: 0.9;
-				text-transform: uppercase;
-				font-size: 14px;
-				text-align: center;
-
-				span {
-					display: block;
-
-					&:nth-child(1) {
-						color: $l-grey;
-						font-size: 13px;
-					}
-					&:nth-child(2) {
-						font-weight: bold;
-						font-size: 17px;
-					}
-					&:nth-child(3) {
-						font-weight: bold;
-						font-size: 12px;
-					}
-				}
-			}
-		}
-	}
-
 	.product-shop {
 		.third-price {
 			.icon-question {
@@ -383,6 +336,26 @@
 
 	&.hide {
 		@extend .fade-in-transition;
+	}
+
+	.product-points {
+		margin-top: $m-spacing;
+		color: $secondary;
+		font-weight: 600;
+		font-size: 16px;
+		display: flex;
+		align-items: center;
+
+		a {
+			color: $l-grey;
+			font-size: 20px;
+			margin: 0 $xs-spacing;
+		}
+
+		img {
+			width: 100px;
+			margin-left: auto;
+		}
 	}
 }
 
