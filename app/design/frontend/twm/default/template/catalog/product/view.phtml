@@ -69,21 +69,7 @@
                 </div>
 
                 <?php echo $this->getChildHtml('alert_urls') ?>
-				<div class="price-wrapper">
-					<div class="price-left">
-                		<?php echo $this->getChildHtml('product_type_data') ?>
-					</div>
-					<div class="price-right">
-						<div class="price-right-price">
-							<?php echo $this->getChildHtml('catalog_product_points'); ?>
-						</div>
-						<div class="price-right-text">
-							<span>Spaar</span>
-							<span>CLUB</span>
-							<span>points</span>
-						</div>
-					</div>
-				</div>
+				<?php echo $this->getChildHtml('product_type_data') ?>
 				<?php echo $this->getTierPriceHtml() ?>
                 <?php echo $this->getChildHtml('extrahint') ?>
 
@@ -250,3 +236,21 @@
         </div>
     </div>
 <?php endif;  ?>
+
+<div class="modal-wrapper" id="modal-points">
+	<div class="modal-overlay"></div>
+	<div class="modal-container">
+		<div class="modal-box">
+			<a href="#" class="modal-close">
+				<i class="icon-close icons"></i>
+			</a>
+			<h2 class="modal-title">
+				<?php echo Mage::getModel('cms/page')->load('club', 'identifier')->getTitle(); ?>
+			</h2>
+			<div class="modal-content">
+				<?php echo Mage::getModel('cms/page')->load('club', 'identifier')->getContent(); ?>
+			</div>
+		</div>
+		<div class="modal-click-area"></div>
+	</div>
+</div>

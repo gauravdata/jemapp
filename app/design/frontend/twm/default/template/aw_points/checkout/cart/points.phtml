@@ -29,18 +29,13 @@ $helperConfig = Mage::helper('points/config');
 
 <?php if ($this->getPoints() > 0): ?>
 	<div class="price-point-cart">
-		<div class="price-point-text">
-			<span>Spaar</span>
-			<span>CLUB</span>
-			<span>points</span>
-		</div>
+		<img src="<?php echo $this->getSkinUrl('images/logo-club-jma.png')?>" alt="Club JMA" />
 		<div class="price-point-price">
 			<?php if ($this->getMoney()): ?>
 				<?php echo $this->__('Checkout now and earn %s %s (%s) !', $this->getPoints(), $helperConfig->getPointUnitName(), Mage::app()->getStore()->convertPrice($this->getMoney(), true)) ?>
 			<?php else: ?>
 				<?php echo $this->__('Checkout now and earn %s %s !', $this->getPoints(), $helperConfig->getPointUnitName()) ?>
 			<?php endif; ?>
-			<?php echo $this->getChildHtml('infopage.link') ?>
 		</div>
 	</div>
 	<?php if ($this->customerIsGuest()): ?>
