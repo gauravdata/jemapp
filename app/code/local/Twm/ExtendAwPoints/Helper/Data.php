@@ -25,6 +25,15 @@ class Twm_ExtendAwPoints_Helper_Data
         }
     }
 
+    public function hasFlags()
+    {
+        $customer = Mage::getModel('customer/session')->getCustomer();
+        /** @var AW_Points_Model_Summary $summary */
+        $summary = Mage::getModel('points/summary')->loadByCustomer($customer);
+
+        return $summary->getBalanceUpdateNotification() && $summary->getPointsExpirationNotification();
+    }
+
     public function isClubJmaMember()
     {
         $customer = Mage::getModel('customer/session')->getCustomer();

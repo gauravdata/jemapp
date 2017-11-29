@@ -10,6 +10,25 @@ class Twm_Email_Model_Core_Email_Template extends Ebizmarts_Mandrill_Model_Email
 {
     public function sendTransactional($templateId, $sender, $email, $name, $vars=array(), $storeId=null)
     {
+        if (isset($vars['pointstotal'])) {
+            try
+            {
+                $points = $vars['pointstotal'];
+                $websiteId = Mage::app()->getStore()->getWebsiteId();
+                $money = Mage::getModel('points/rate')->load(2)
+                    ->setCurrentWebsite(Mage::app()->getWebsite($websiteId))
+                    ->loadByDirection(AW_Points_Model_Rate::POINTS_TO_CURRENCY)
+                    ->exchange($points);
+
+                $vars['pointsmoney'] = number_format($money, 2, ',', '.');
+            }
+            catch (\Exception $e)
+            {
+                $vars['pointsmoney'] = '0,00';
+                Mage::logException($e);
+            }
+        }
+
         $this->setSentSuccess(false);
         if (($storeId === null) && $this->getDesignConfig()->getStore()) {
             $storeId = $this->getDesignConfig()->getStore();
