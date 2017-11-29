@@ -64,9 +64,6 @@
                             <label for="is_subscribed"><?php echo $this->__('Sign Up for Newsletter') ?></label>
                         </li>
                         <?php endif ?>
-                        <?php
-                            echo $this->getLayout()->createBlock('points/checkout_cart_points')->setTemplate('extendawpoints/signup_clubjma.phtml')->toHtml();
-                        ?>
                     <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
                     <?php if ($_dob->isEnabled()): ?>
                         <li><?php echo $_dob->setDate($this->getFormData()->getDob())->toHtml() ?></li>
