@@ -24,6 +24,9 @@
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
 ?><?php
+
+$twmHelper = Mage::helper('pointsandrewards');
+
 $summaryForCustomer = $this->getSummaryForCustomer();
 $textForPoints = Mage::helper('points/config')->getPointUnitName();
 $defaultValue = Mage::app()->getRequest()->getParam('payment[points_amount]');
@@ -36,8 +39,11 @@ if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->
 
 <?php $oneMethod = false; ?>
 <div id="checkout-payment-methods-container">
-	<div class="payment-methods">
+    <div class="payment-methods">
 		<dl id="checkout-payment-method-load">
+            <?php
+            echo $this->getLayout()->createBlock('points/checkout_cart_points')->setTemplate('extendawpoints/signup_clubjma.phtml')->toHtml();
+            ?>
 			<?php if ($this->pointsSectionAvailable()): ?>
 				<dt class="control control_points">
 					<input type="checkbox" name="payment[use_points]" id="use_points" checked="checked" />
@@ -112,6 +118,7 @@ if ($isPartial==2 && $isCheckedCustomercredit) $this->getQuote()->getPayment()->
     	payment.switchMethod('<?php echo $oneMethod ?>');
     <?php endif; ?>
 	payment.init();
+	document.getElementById('club_jma').disabled = false;
 	el = $('p_method_customercredit');
 	if (el) el.disabled = false;
 	<?php if ($isPartial==1 && $isCheckedCustomercredit) { ?>payment.switchMethod('customercredit');<?php } ?>
