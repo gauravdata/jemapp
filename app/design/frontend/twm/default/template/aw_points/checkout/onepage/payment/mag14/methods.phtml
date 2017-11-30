@@ -38,9 +38,6 @@ $helper = Mage::helper('points');
 <div id="checkout-payment-methods-container">
     <div class="payment-methods">
 		<dl id="checkout-payment-method-load">
-            <?php
-            echo $this->getLayout()->createBlock('points/checkout_cart_points')->setTemplate('extendawpoints/signup_clubjma.phtml')->toHtml();
-            ?>
 			<?php if ($this->pointsSectionAvailable()): ?>
 				<dt class="control control_points">
 					<input type="checkbox" name="payment[use_points]" id="use_points" checked="checked" />
@@ -74,7 +71,10 @@ $helper = Mage::helper('points');
 					<?php endif; ?>
 				<?php endif; ?>
 			<?php endforeach; ?>
-		</dl>
+            <?php
+            echo $this->getLayout()->createBlock('points/checkout_cart_points')->setTemplate('extendawpoints/signup_clubjma.phtml')->toHtml();
+            ?>
+        </dl>
 	</div>
 </div>
 <dt id="checkout-payment-method-free" style="display: none;">
