@@ -1,0 +1,5 @@
+<?php
+
+class AW_Storecredit_Block_Adminhtml_Customer_Edit_Tabs_Storecredit_History extends Mage_Adminhtml_Block_Template
+{
+}
