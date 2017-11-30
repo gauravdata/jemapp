@@ -38,7 +38,7 @@
 <config>
     <modules>
         <MageWorx_CustomerCredit>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
             <depends>
                 <MageWorx_Adminhtml />

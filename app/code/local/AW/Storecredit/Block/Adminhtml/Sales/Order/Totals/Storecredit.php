@@ -1,0 +1,5 @@
+<?php
+class AW_Storecredit_Block_Adminhtml_Sales_Order_Totals_Storecredit extends Mage_Adminhtml_Block_Sales_Order_Totals_Item
+{
+
+}
