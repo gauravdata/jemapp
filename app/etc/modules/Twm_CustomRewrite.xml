@@ -4,10 +4,6 @@
         <Twm_CustomRewrite>
             <active>true</active>
             <codePool>local</codePool>
-            <depends>
-                <MageWorx_CustomerCredit/>
-
-            </depends>
         </Twm_CustomRewrite>
     </modules>
 </config>
