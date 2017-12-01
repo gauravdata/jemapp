@@ -8,11 +8,17 @@
 		margin: 0 !important;
 	}
 
+	.regular-price {
+		.show-modal {
+			color: $xl-grey;
+		}
+	}
 	.third-price {
 		color: $xl-grey;
 
 		.price {
 			color: $success;
+			font-weight: bold;
 		}
 
 		.icon-question {
@@ -20,9 +26,17 @@
 			font-size: $l-font;
 			display: none;
 		}
+	}
+}
 
-		.show-modal {
-			color: $xl-grey;
+.product-options-wrapper {
+	.price-box {
+		.third-price {
+			font-size: $xl-font;
+
+			.price {
+				font-size: $xxl-font;
+			}
 		}
 	}
 }

@@ -48,6 +48,33 @@ ul.checkout-types {
 }
 
 /*======================================================
+	PRICE POINT
+======================================================*/
+.price-point-cart {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: -45px 0 $m-spacing;
+	color: $secondary;
+	padding: 0 $s-spacing $m-spacing;
+	border-bottom: 1px dotted #888;
+
+	img {
+		width: 110px;
+		margin-right: $s-spacing;
+	}
+	.price-point-price {
+		font-size: $xxl-font;
+		font-weight: 500;
+
+		.icons {
+			font-size: $xl-font;
+			color: $xl-grey;
+		}
+	}
+}
+
+/*======================================================
 	TOTALS
 ======================================================*/
 #shopping-cart-totals-table {
@@ -156,9 +183,18 @@ ul.checkout-types {
 	}
 
 	.subtotal {
-		text-align: right;
 		padding-top: $xs-spacing;
 		border-top: 1px solid $m-grey;
+		display: flex;
+
+		> span {
+			font-weight: bold;
+			color: $secondary;
+		}
+
+		strong {
+			margin-left: auto;
+		}
 	}
 	.actions {
 		text-align: right;

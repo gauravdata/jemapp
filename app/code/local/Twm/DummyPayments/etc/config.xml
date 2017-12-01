@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_DummyPayments>
+            <version>0.1.0</version>
+        </Twm_DummyPayments>
+    </modules>
+    <global>
+        <models>
+            <twm_dummypayments>
+                <class>Twm_DummyPayments_Model</class>
+                <resourceModel>twm_dummypayments_resource</resourceModel>
+            </twm_dummypayments>
+            <twm_dummypayments_resource>
+                <class>Twm_DummyPayments_Model_Resource</class>
+            </twm_dummypayments_resource>
+        </models>
+    </global>
+    <default>
+                <payment>
+                        <customercredit>
+                                <active>1</active>
+                                <model>twm_dummypayments/method_customercredit</model>
+                                <order_status>pending</order_status>
+                                <title>Old customer credit payment</title>
+                                <payment_action>authorize</payment_action>
+                                <capture_auto>1</capture_auto>
+                                <shipment_auto>0</shipment_auto>
+                        </customercredit>
+                </payment>
+    </default>
+</config>
