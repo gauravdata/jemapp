@@ -77,6 +77,13 @@ $helper = Mage::helper('points');
         </dl>
 	</div>
 </div>
+<?php if ($this->pointsSectionAvailable()): ?>
+<dt id="checkout-payment-method-free" style="display: none;">
+    <?php $freePaymentMethod = $this->getFreePaymentMethod(); ?>
+    <input id="p_method_<?php echo $freePaymentMethod->getCode() ?>" value="<?php echo $freePaymentMethod->getCode() ?>" type="hidden" name="payment[method]" disabled />
+    <label><?php echo $this->getMethodTitle($freePaymentMethod) ?> <?php echo $this->getMethodLabelAfterHtml($freePaymentMethod) ?></label>
+</dt>
+<?php endif; ?>
 <?php echo $this->getChildChildHtml('additional'); ?>
 <script type="text/javascript">
     //<![CDATA[
@@ -94,5 +101,39 @@ $helper = Mage::helper('points');
     <?php endif; ?>
 	payment.init();
 	document.getElementById('club_jma').disabled = false;
-	//]]>
+
+    var creditPayment = {
+        switchPMethod: function(code) {
+            el = $('p_method_customercredit');
+            if (el && el.checked==true) {
+                payment.switchMethod('customercredit');
+            } else if(code=='customercredit') {
+                payment.switchMethod('');
+            } else {
+                payment.switchMethod(code);
+            }
+
+            $$('ul[id^="payment_form_"], div[id^="payment_form_"]').each(function(form){  // div need to fix for SagePay Form
+                pCode = form.id.replace('payment_form_','');
+                if (!$('p_method_'+pCode) || !$('p_method_'+pCode).checked) {
+                    form.hide();
+                    var elements = form.getElementsByTagName('input');
+                    for (var i=0; i<elements.length; i++) {
+                        if (elements[i].type == 'hidden') continue;
+                        elements[i].disabled = true;
+                    }
+                    var elements = form.getElementsByTagName('select');
+                    for (var i=0; i<elements.length; i++) elements[i].disabled = true;
+                } else {
+                    form.show();
+                    var elements = form.getElementsByTagName('input');
+                    for (var i=0; i<elements.length; i++) elements[i].disabled = false;
+                    var elements = form.getElementsByTagName('select');
+                    for (var i=0; i<elements.length; i++) elements[i].disabled = false;
+                }
+            });
+
+        }
+
+    //]]>
 </script>
