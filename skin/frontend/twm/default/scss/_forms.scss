@@ -199,6 +199,7 @@ form .control {
 
 		&:not([for="points_amount"]) {
 			padding-left: 38px;
+			padding-right: 5px;
 
 			&:before {
 				@extend .main-transition;
@@ -253,8 +254,8 @@ form .control {
 	}
 
 	// checkbox
-	.input-box.checkbox-checked ~ label:before,
-	input[type=checkbox] ~ :before {
+	.input-box.checkbox-checked + label:before,
+	input[type=checkbox] + :before {
 		content: "\e604";
 		border-color: $primary;
 	}
