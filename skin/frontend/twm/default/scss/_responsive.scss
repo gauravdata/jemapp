@@ -498,10 +498,11 @@
 				display: none;
 			}
 			a.iwd-pv-thumb-video {
-				width: 55px;
-				height: 35px;
+				width: 65px;
+				height: 40px;
 				font-size: 12px;
 				line-height: 1.25;
+				z-index: 9989;
 			}
 
 			&.double-row {
@@ -701,6 +702,22 @@
 	/*= Cookie =*/
 	.notice-cookie {
 		width: 90%;
+	}
+
+	/* Video modal */
+	.pv-iwd-modal {
+		.pv-iwd-modal-dialog {
+			width: calc(100% - 20px);
+
+			.pv-iwd-modal-body {
+				padding: 0 20px 15px !important;
+
+				.iwd-pv-video-block {
+					width: auto;
+					height: calc(100vh - 111px);
+				}
+			}
+		}
 	}
 }
 
