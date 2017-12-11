@@ -13,5 +13,12 @@
                 </rewrite>
             </aw_storecredit>
         </helpers>
+        <blocks>
+            <aw_storecredit>
+                <rewrite>
+                    <adminhtml_customer_edit_tabs_storecredit_balance>Twm_ExtendAwStoreCredit_Block_Storecredit_Adminhtml_Customer_Edit_Tabs_Storecredit_Balance</adminhtml_customer_edit_tabs_storecredit_balance>
+                </rewrite>
+            </aw_storecredit>
+        </blocks>
     </global>
 </config>
