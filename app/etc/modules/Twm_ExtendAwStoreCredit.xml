@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twm_ExtendAwStoreCredit>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <AW_Storecredit/>
+
+            </depends>
+        </Twm_ExtendAwStoreCredit>
+    </modules>
+</config>
