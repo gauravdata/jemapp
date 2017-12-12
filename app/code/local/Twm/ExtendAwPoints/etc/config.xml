@@ -50,16 +50,4 @@
             </controller_action_postdispatch_checkout_onepage_savePayment>
         </events>
     </global>
-    <default>
-        <payment>
-            <pointsandrewards>
-                <active>1</active>
-                <model>pointsandrewards/method_pointsandrewards</model>
-                <order_status>pending</order_status>
-                <title>Points and Rewards</title>
-                <allowspecific>0</allowspecific>
-                <payment_action>sale</payment_action>
-            </pointsandrewards>
-        </payment>
-    </default>
 </config>
