@@ -20,12 +20,5 @@
                 </rewrite>
             </aw_storecredit>
         </blocks>
-        <models>
-            <aw_storecredit>
-                <rewrite>
-                    <observer_storecredit>Twm_ExtendAwStoreCredit_Model_Storecredit_Observer_Storecredit</observer_storecredit>
-                </rewrite>
-            </aw_storecredit>
-        </models>
     </global>
 </config>
