@@ -27,15 +27,6 @@
                                 <?php  if ($_total->getBlockName()): ?>
                                     <?php echo $this->getTotalHtml($_total->getBlockName()); ?>
                                 <?php else:?>
-                                    <?php
-                                        if ($code == 'subtotal' && $_order->hasData('points_balance_change') && $_order->getData('points_balance_change') > 0):
-                                    ?>
-                                        <tr>
-                                            <td style="color: #707582; font-size: 14px; font-weight: bold;"><?php echo $this->__('Club JMA discount')?></td>
-                                            <td width="15" height="25"  style="width: 15px !important; height: 25px"></td>
-                                            <td style="color: #707582; font-size: 14px; text-align: right;">&euro; <?php echo number_format($_order->getData('money_for_points'), 2,',', '.'); ?></td>
-                                        </tr>
-                                    <?php endif; ?>
                                     <tr>
                                         <td
                                             <?php echo $var->getHtmlAttribute('style', 'order_totals_table_label_style'.$code, 'color: #707582; font-size: 14px; font-weight: bold;'); ?>
@@ -55,7 +46,15 @@
                                             <?php echo $this->formatValue($_total) ?>
                                         </td>
                                     </tr>
-
+                                    <?php
+                                    if ($code == 'subtotal' && $_order->hasData('points_balance_change') && $_order->getData('points_balance_change') > 0):
+                                        ?>
+                                        <tr>
+                                            <td style="color: #707582; font-size: 14px; font-weight: bold;"><?php echo $this->__('Club JMA discount')?></td>
+                                            <td width="15" height="25"  style="width: 15px !important; height: 25px"></td>
+                                            <td style="color: #707582; font-size: 14px; text-align: right;">&euro; <?php echo number_format($_order->getData('money_for_points'), 2,',', '.'); ?></td>
+                                        </tr>
+                                    <?php endif; ?>
                                 <?php endif?>
                                 <?php if ($_total->getBlockName() == 'tax') $shownCredit=true; ?>
                             <?php endforeach?>
