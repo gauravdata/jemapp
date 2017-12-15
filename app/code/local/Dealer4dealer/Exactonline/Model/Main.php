@@ -133,10 +133,7 @@ class Dealer4dealer_Exactonline_Model_Main
                 $this->log->writeLog('Starting Credit Invoice synchronisation','CreditInvoice');
 
                 // Create filter to build collection of credits to sync
-                $filter = array(
-                    'updated_at' => array('from' => $lastSyncdateCreditOrder),
-                    'invoice_id' => array('null' => false));
-                    // TWM: Only send invoice credits, skip others.
+                $filter = array('updated_at'=>array('from'=>$lastSyncdateCreditOrder));
 
                 $magentoTransactionCredit = Mage::getModel('exactonline/sync_magento_transaction_credit');
                 if($magentoTransactionCredit->synchronizeCreditTransactions($filter)) {
