@@ -39,6 +39,24 @@
             </pointsandrewards_setup>
         </resources>
         <events>
+            <sales_model_service_quote_submit_failure>
+                <observers>
+                    <pointsandrewards>
+                        <type>singleton</type>
+                        <class>pointsandrewards/observer</class>
+                        <method>salesOrderPaymentCancel</method>
+                    </pointsandrewards>
+                </observers>
+            </sales_model_service_quote_submit_failure>
+            <sales_order_payment_cancel>
+                <observers>
+                    <pointsandrewards>
+                        <type>singleton</type>
+                        <class>pointsandrewards/observer</class>
+                        <method>salesOrderPaymentCancel</method>
+                    </pointsandrewards>
+                </observers>
+            </sales_order_payment_cancel>
             <controller_action_postdispatch_checkout_onepage_savePayment>
                 <observers>
                     <pointsandrewards>
