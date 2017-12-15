@@ -49,8 +49,8 @@ class Twm_ExtendAwPoints_Helper_Data
 
             $summary = Mage::getModel('points/summary')->loadByCustomer($customer);
 
-            $summary->setBalanceUpdateNotification($toggle)
-                    ->setPointsExpirationNotification($toggle)
+            $summary->setBalanceUpdateNotification(1)
+                    ->setPointsExpirationNotification(1)
                     ->setUpdateDate(true)
                     ->save();
         }
