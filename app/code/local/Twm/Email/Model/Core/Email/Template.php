@@ -28,9 +28,6 @@ class Twm_Email_Model_Core_Email_Template extends Ebizmarts_Mandrill_Model_Email
                 Mage::logException($e);
             }
 
-            $expirationDate = new DateTime();
-            $expirationDate->add(new DateInterval(sprintf('P%sD', Mage::getStoreConfig(AW_Points_Helper_Config::NOTIFICATIONS_POINT_BEFORE_EXPIRE_EMAIL_SENT))));
-            $vars['pointsexpirationdate'] = $expirationDate->format('Y-m-d 00:00:00');
             $vars['pointsexpirationlink'] = Mage::getBaseUrl().'/points-countdown-timer?date='.$vars['pointsexpirationdate'];
             $vars['pointsexpirationimage'] = '<img src="'.Mage::getBaseUrl().'/points-countdown-timer?date='.$vars['pointsexpirationdate'].'">';
         }
