@@ -259,6 +259,7 @@ abstract class AW_Points_Model_Actions_Abstract
                     array(
                          'store'        => $store,
                          'comment'      => $this->getCommentHtml(self::FRONTEND),
+                         'pointsexpirationdate' => $this->getTransaction()->getData('expiration_date'), // TWM: Expiration date is required for some transactional emails
                          'pointsupdate' => $this->getTransaction()->getBalanceChange(),
                          'pointstotal'  => $this->getSummary()->getPoints(),
                          'pointsname'   => Mage::helper('points/config')->getPointUnitName(),
