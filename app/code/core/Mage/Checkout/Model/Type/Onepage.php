@@ -517,12 +517,12 @@ class Mage_Checkout_Model_Type_Onepage
             }
         } else if (self::METHOD_GUEST == $this->getQuote()->getCheckoutMethod()) {
             $email = $address->getData('email');
-            /*if (!Zend_Validate::is($email, 'EmailAddress')) {
+            if (!Zend_Validate::is($email, 'EmailAddress')) {
                 return array(
                     'error'   => -1,
                     'message' => Mage::helper('checkout')->__('Invalid email address "%s"', $email)
                 );
-            }*/
+            }
         }
 
         return true;
