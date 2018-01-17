@@ -118,7 +118,7 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
     protected $_options = array(
         'mx'       => false,
         'deep'     => false,
-        'domain'   => false,
+        'domain'   => true,
         'allow'    => Zend_Validate_Hostname::ALLOW_DNS,
         'hostname' => null
     );
@@ -448,7 +448,6 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
      */
     private function _validateMXRecords()
     {
-	return true; // TWM not check
         $mxHosts = array();
         $hostname = $this->_hostname;
 
