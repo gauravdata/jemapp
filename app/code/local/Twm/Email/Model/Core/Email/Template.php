@@ -31,6 +31,16 @@ class Twm_Email_Model_Core_Email_Template extends Ebizmarts_Mandrill_Model_Email
             $vars['pointsexpirationlink'] = Mage::getBaseUrl().'/points-countdown-timer?date='.$vars['pointsexpirationdate'];
             $vars['pointsexpirationimage'] = '<img src="'.Mage::getBaseUrl().'/points-countdown-timer?date='.$vars['pointsexpirationdate'].'">';
         }
+        elseif (isset($vars['pointstoexpire'])) {
+
+            $expirationDate = new DateTime();
+            $expirationDate->add(new DateInterval("P".$vars['expirationdays'].'D'));
+
+            $vars['pointsexpirationdate'] = $expirationDate->format('Y-m-d H:i:s');
+
+            $vars['pointsexpirationlink'] = Mage::getBaseUrl().'/points-countdown-timer?date='.$vars['pointsexpirationdate'];
+            $vars['pointsexpirationimage'] = '<img src="'.Mage::getBaseUrl().'/points-countdown-timer?date='.$vars['pointsexpirationdate'].'">';
+        }
 
         $this->setSentSuccess(false);
         if (($storeId === null) && $this->getDesignConfig()->getStore()) {
@@ -76,3 +86,4 @@ class Twm_Email_Model_Core_Email_Template extends Ebizmarts_Mandrill_Model_Email
         return $ids[$idx];
     }
 }
+
