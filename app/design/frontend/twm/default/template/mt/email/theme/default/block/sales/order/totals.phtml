@@ -2,6 +2,16 @@
 <?php $_order = $this->getOrder(); ?>
 <?php $shownCredit=false;?>
 
+<?php
+
+$quote = $_order->getQuote();
+$storeCredits = Mage::helper('aw_storecredit/totals')->getQuoteStoreCredit($quote->getId());
+if (!is_array($storeCredits)) {
+    $storeCredits = array();
+}
+
+?>
+
 <table
     <?php echo $var->getHtmlAttribute('style', 'order_totals_table_style', "background-color: #ffffff; width: 100% !important; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;"); ?>
     <?php echo $var->getHtmlAttribute('bgcolor', 'order_totals_table_bgcolor', '#ffffff'); ?>
@@ -47,14 +57,39 @@
                                         </td>
                                     </tr>
                                     <?php
-                                    if ($code == 'subtotal' && $_order->hasData('points_balance_change') && $_order->getData('points_balance_change') > 0):
-                                        ?>
-                                        <tr>
-                                            <td style="color: #707582; font-size: 14px; font-weight: bold;"><?php echo $this->__('Club Points')?></td>
-                                            <td width="15" height="25"  style="width: 15px !important; height: 25px"></td>
-                                            <td style="color: #707582; font-size: 14px; text-align: right;">&euro; <?php echo number_format($_order->getData('money_for_points'), 2,',', '.'); ?></td>
-                                        </tr>
-                                    <?php endif; ?>
+                                        if ($code == 'subtotal')
+                                        {
+                                            if (count($storeCredits) > 0)
+                                            {
+                                                foreach ($storeCredits as $storeCredit):
+                                                ?>
+                                                    <tr>
+                                                        <td style="color: #707582; font-size: 14px; font-weight: bold;"><?php echo $this->__('Store Credit'); ?></td>
+                                                        <td width="15" height="25"
+                                                            style="width: 15px !important; height: 25px"></td>
+                                                        <td style="color: #707582; font-size: 14px; text-align: right;">
+                                                            -&euro; <?php echo number_format($storeCredit->getStorecreditAmount(), 2, ',', '.'); ?>
+                                                        </td>
+                                                    </tr>
+
+                                                <?php
+                                                endforeach;
+                                            }
+
+                                            if ($_order->hasData('points_balance_change') && $_order->getData('points_balance_change') > 0)
+                                            {
+                                                ?>
+                                                <tr>
+                                                    <td style="color: #707582; font-size: 14px; font-weight: bold;"><?php echo $this->__('Club Points') ?></td>
+                                                    <td width="15" height="25"
+                                                        style="width: 15px !important; height: 25px"></td>
+                                                    <td style="color: #707582; font-size: 14px; text-align: right;">
+                                                        &euro; <?php echo number_format($_order->getData('money_for_points'), 2, ',', '.'); ?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                    ?>
                                 <?php endif?>
                                 <?php if ($_total->getBlockName() == 'tax') $shownCredit=true; ?>
                             <?php endforeach?>
