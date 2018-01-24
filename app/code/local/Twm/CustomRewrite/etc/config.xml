@@ -19,6 +19,11 @@
                     <observer>Twm_CustomRewrite_Model_Ec_Observer</observer>
                 </rewrite>
             </ec>
+            <core>
+                <rewrite>
+                    <session_abstract_varien>Twm_CustomRewrite_Model_Core_Session_Abstract_Varien</session_abstract_varien>
+                </rewrite>
+            </core>
         </models>
         <blocks>
             <twm_customrewrite>
