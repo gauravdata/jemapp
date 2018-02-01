@@ -297,6 +297,47 @@
 	visibility: visible;
 	opacity: 1;
 
+	&.product-options-wrapper-grouped {
+		@include transform(0, 0);
+		position: static;
+		display: block;
+		max-width: none;
+
+		.product-shop {
+			display: flex;
+
+			.product-select {
+				flex-grow: 1;
+				padding: $m-spacing;
+
+				.price-field-wrapper {
+					display: flex;
+					flex-wrap: wrap;
+					margin-left: -$m-spacing;
+					margin-right: -$m-spacing;
+
+					.price-field {
+						flex-basis: 33.33333%;
+						width: 33.33333%;
+						padding-left: $m-spacing;
+						padding-right: $m-spacing;
+						margin-bottom: $m-spacing;
+
+						.pull-left,
+						.pull-right {
+							float: none !important;
+							width: 100% !important;
+						}
+					}
+				}
+			}
+			.product-cta {
+				min-width: 360px;
+				padding: $m-spacing;
+			}
+		}
+	}
+
 	h1,
 	h2,
 	.price-box,
@@ -389,7 +430,7 @@
 /*======================================================
 	Z-BLOCK
 ======================================================*/
-.product-essential {
+.product-img-box {
 	position: relative;
 	overflow: hidden;
 }
