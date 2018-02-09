@@ -10,21 +10,6 @@
 			}
 		}
 	}
-
-	.product-options-wrapper {
-		&.product-options-wrapper-grouped {
-			.product-shop {
-				.product-select {
-					.price-field-wrapper {
-						.price-field {
-							flex-basis: 50%;
-							width: 50%;
-						}
-					}
-				}
-			}
-		}
-	}
 }
 @media(max-width: 1250px) {
 

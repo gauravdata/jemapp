@@ -41,38 +41,36 @@
 <div class="price-field-wrapper">
     <?php foreach ($_associatedProducts as $_item): ?>
 		<div class="price-field">
-			<?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
-			<div class="clearfix">
-				<div class="pull-left">
-					<a href="<?php echo $_item->getProductUrl() ?>">
-						<strong><?php echo $this->htmlEscape($_item->getName()) ?></strong>
-					</a>
-				</div>
-				<div class="pull-right">
-					<?php if ($this->helper('groupedoptions')->getCanShowProductPrice($this, $_product)): ?>
-						<?php if ($this->helper('groupedoptions')->getCanShowProductPrice($this, $_item)): ?>
-							<?php echo $this->getPriceHtml($_item, true) ?>
-							<?php echo $this->getTierPriceHtml($_item) ?>
-						<?php endif; ?>
-					<?php endif; ?>
-				</div>
+			<div class="price-field-left">
+				<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>" class="product-image">
+					<img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(117) ?>" width="117" height="117" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" />
+				</a>
 			</div>
+			<div class="price-field-right">
+				<?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
+				<a href="<?php echo $_item->getProductUrl() ?>">
+					<strong><?php echo $this->htmlEscape($_item->getName()) ?></strong>
+				</a>
 
-			<?php if ($_product->isSaleable()): ?>
-				<?php if ($_item->isSaleable()) : ?>
-					<div class="row thin">
-						<?php if ($_item->isSuper() || $_item->getHasOptions()) : ?>
-							<div class="col-6 col-fixed pull-right">
-								<input type="hidden" name="super_group[<?php echo $_item->getId() ?>]" value="1">
-								<!-- Display Product Options if available -->
-								<?php echo $this->getChild('groupedoptions')->setProduct($_item)->toHtml(); ?>
-							</div>
-						<?php endif; ?>
-					</div>
-				<?php else: ?>
-					<p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+				<?php if ($this->helper('groupedoptions')->getCanShowProductPrice($this, $_product)): ?>
+					<?php if ($this->helper('groupedoptions')->getCanShowProductPrice($this, $_item)): ?>
+						<?php echo $this->getPriceHtml($_item, true) ?>
+						<?php echo $this->getTierPriceHtml($_item) ?>
+					<?php endif; ?>
 				<?php endif; ?>
-			<?php endif; ?>
+
+				<?php if ($_product->isSaleable()): ?>
+					<?php if ($_item->isSaleable()) : ?>
+						<?php if ($_item->isSuper() || $_item->getHasOptions()) : ?>
+							<input type="hidden" name="super_group[<?php echo $_item->getId() ?>]" value="1">
+							<!-- Display Product Options if available -->
+							<?php echo $this->getChild('groupedoptions')->setProduct($_item)->toHtml(); ?>
+						<?php endif; ?>
+					<?php else: ?>
+						<p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+					<?php endif; ?>
+				<?php endif; ?>
+			</div>
 		</div>
     <?php endforeach; ?>
 </div>

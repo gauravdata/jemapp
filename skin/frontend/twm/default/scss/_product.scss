@@ -317,16 +317,27 @@
 					margin-right: -$m-spacing;
 
 					.price-field {
-						flex-basis: 33.33333%;
-						width: 33.33333%;
+						flex-basis: 50%;
+						width: 50%;
 						padding-left: $m-spacing;
 						padding-right: $m-spacing;
 						margin-bottom: $m-spacing;
+						display: flex;
 
-						.pull-left,
-						.pull-right {
-							float: none !important;
-							width: 100% !important;
+						.price-field-left {
+							width: 90px;
+							overflow: hidden;
+							display: flex;
+							justify-content: center;
+
+							img {
+								max-width: 117px;
+							}
+						}
+
+						.price-field-right {
+							flex-grow: 1;
+							margin-left: $s-spacing;
 						}
 					}
 				}
