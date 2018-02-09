@@ -61,7 +61,6 @@
 
         <div class="product-options-wrapper<?php if ($_product->isGrouped()): ?> product-options-wrapper-grouped<?php endif; ?>">
             <div class="product-shop">
-
 				<div class="product-select">
 					<div class="product-name">
 						<h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
@@ -75,7 +74,7 @@
 					<?php echo $this->getTierPriceHtml() ?>
 					<?php echo $this->getChildHtml('extrahint') ?>
 				</div>
-
+				<?php if ($_product->isGrouped()): ?>
 				<div class="product-cta">
 					<?php if (!$this->hasOptions()):?>
 						<div class="add-to-box">
@@ -101,12 +100,18 @@
 						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_usps')->toHtml(); ?>
 					</div>
 				</div>
-
+				<?php endif; ?>
             </div>
 
             <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                 <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
             <?php endif;?>
+
+			<?php if (!$_product->isGrouped()): ?>
+				<div class="product-usps">
+					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_usps')->toHtml(); ?>
+				</div>
+			<?php endif; ?>
 
         </div>
     </form>
