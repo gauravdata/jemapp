@@ -43,7 +43,7 @@
 		<div class="price-field">
 			<div class="price-field-left">
 				<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->htmlEscape($_item->getName()) ?>" class="product-image">
-					<img src="<?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize(117) ?>" width="117" height="117" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" />
+					<img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(88,117) ?>" alt="<?php echo $this->htmlEscape($_item->getName()) ?>" />
 				</a>
 			</div>
 			<div class="price-field-right">

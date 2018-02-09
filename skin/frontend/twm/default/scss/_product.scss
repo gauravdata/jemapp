@@ -325,13 +325,10 @@
 						display: flex;
 
 						.price-field-left {
-							width: 90px;
-							overflow: hidden;
-							display: flex;
-							justify-content: center;
+							flex-shrink: 1;
 
 							img {
-								max-width: 117px;
+								width: 88px;
 							}
 						}
 
