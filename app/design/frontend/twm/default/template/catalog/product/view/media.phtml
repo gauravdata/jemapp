@@ -110,7 +110,7 @@
     jQuery('.product-visual').click(function() {
         jQuery('.product-visual-wrapper').addClass('show');
         jQuery('.zoom-image').css('background-image', 'url(' + jQuery(this).find('img').data('zoom-image') + ')');
-        jQuery('.product-options-wrapper').addClass('hide');
+        jQuery('.product-options-wrapper:not(.product-options-wrapper-grouped)').addClass('hide');
         jQuery('.zblock-product-img-box-bottom').hide();
         if(jQuery(window).width() < 1024) {
             viewport = document.querySelector("meta[name=viewport]");
@@ -125,7 +125,7 @@
         $this.css('background-position', relX + '%' + relY + '%');
     }).click(function() {
         jQuery('.product-visual-wrapper').removeClass('show');
-        jQuery('.product-options-wrapper').removeClass('hide');
+        jQuery('.product-options-wrapper:not(.product-options-wrapper-grouped)').removeClass('hide');
         jQuery('.zblock-product-img-box-bottom').show();
         if(jQuery(window).width() < 1024) {
             viewport = document.querySelector("meta[name=viewport]");
