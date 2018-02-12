@@ -76,38 +76,23 @@
 				</div>
 
 				<div class="product-cta">
+					<?php if (!$this->hasOptions()):?>
+						<div class="add-to-box">
+							<?php if($_product->isSaleable()): ?>
+								<?php echo $this->getChildHtml('addtocart') ?>
+							<?php endif; ?>
+							<?php echo $this->getChildHtml('addto') ?>
+						</div>
+						<?php echo $this->getChildHtml('extra_buttons') ?>
+					<?php elseif (!$_product->isSaleable()): ?>
+						<div class="add-to-box">
+							<?php echo $this->getChildHtml('addto') ?>
+						</div>
+					<?php endif; ?>
 					<?php if ($_product->isGrouped()): ?>
-						<?php if (!$this->hasOptions()):?>
-							<div class="add-to-box">
-								<?php if($_product->isSaleable()): ?>
-									<?php echo $this->getChildHtml('addtocart') ?>
-								<?php endif; ?>
-								<?php echo $this->getChildHtml('addto') ?>
-							</div>
-							<?php echo $this->getChildHtml('extra_buttons') ?>
-						<?php elseif (!$_product->isSaleable()): ?>
-							<div class="add-to-box">
-								<?php echo $this->getChildHtml('addto') ?>
-							</div>
-						<?php endif; ?>
-
 						<div class="product-usps">
 							<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('product_usps')->toHtml(); ?>
 						</div>
-					<?php else: ?>
-						<?php if (!$this->hasOptions()):?>
-							<div class="add-to-box">
-								<?php if($_product->isSaleable()): ?>
-									<?php echo $this->getChildHtml('addtocart') ?>
-								<?php endif; ?>
-								<?php echo $this->getChildHtml('addto') ?>
-							</div>
-							<?php echo $this->getChildHtml('extra_buttons') ?>
-						<?php elseif (!$_product->isSaleable()): ?>
-							<div class="add-to-box">
-								<?php echo $this->getChildHtml('addto') ?>
-							</div>
-						<?php endif; ?>
 					<?php endif; ?>
 				</div>
 
