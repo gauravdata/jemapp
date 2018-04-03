@@ -62,7 +62,7 @@
 				<?php if ($_product->isSaleable()): ?>
 					<?php if ($_item->isSaleable()) : ?>
 						<?php if ($_item->isSuper() || $_item->getHasOptions()) : ?>
-							<input type="hidden" name="super_group[<?php echo $_item->getId() ?>]" value="1">
+							<input type="hidden" name="super_group[<?php echo $_item->getId() ?>]" value="0" id="super_group_<?php echo $_item->getId()?>">
 							<!-- Display Product Options if available -->
 							<?php echo $this->getChild('groupedoptions')->setProduct($_item)->toHtml(); ?>
 						<?php endif; ?>
