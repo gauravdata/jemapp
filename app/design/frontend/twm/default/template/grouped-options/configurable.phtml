@@ -42,7 +42,7 @@ $_formJsVar = "productAddToCartForm".$_product->getId();
     <?php foreach($_attributes as $_attribute): ?>
     <div class="grouped-option field">
         <div class="select-overlay">
-            <select name="super_attribute[<?php echo $_product->getId() ?>][<?php echo $_attribute->getAttributeId() ?>]" id="<?php echo $this->helper('groupedoptions')->getHtmlConfigAttributeId($_attribute);?>" class="go-qty-required-entry super-attribute-select">
+            <select name="super_attribute[<?php echo $_product->getId() ?>][<?php echo $_attribute->getAttributeId() ?>]" id="<?php echo $this->helper('groupedoptions')->getHtmlConfigAttributeId($_attribute);?>" class="go-qty-required-entry super-attribute-select" data-id="<?php echo $_product->getId() ?>">
                 <option><?php echo $this->__('Choose an Option...') ?></option>
             </select>
             <label class="grouped-option-title"><span class="required">*&nbsp;</span><?php echo $_attribute->getLabel() ?></label>
@@ -63,6 +63,22 @@ $_formJsVar = "productAddToCartForm".$_product->getId();
                             this.form.submit();
                     }
             }.bind(<?php echo $_formJsVar ?>);
+
+            jQuery('#<?php echo $this->helper('groupedoptions')->getHtmlConfigAttributeId($_attribute); ?>').on('change', function(e)
+            {
+                var pId = jQuery(this).data('id');
+                var fieldName = '#super_group_'+pId;
+                var val = jQuery('option:selected', this).val();
+
+                if (val != null && val != 'undefined' && val.trim() != '')
+                {
+                    jQuery(fieldName).val('1');
+                }
+                else
+                {
+                    jQuery(fieldName).val('0');
+                }
+            });
     //]]>
     </script>
 <?php endif;?>
