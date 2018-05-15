@@ -66,6 +66,45 @@
                     </pointsandrewards>
                 </observers>
             </controller_action_postdispatch_checkout_onepage_savePayment>
+            <controller_action_postdispatch_checkout_onepage_saveBilling>
+                <observers>
+                    <pointsandrewards>
+                        <type>singleton</type>
+                        <class>pointsandrewards/observer</class>
+                        <method>onepageCheckClubJmaValue</method>
+                    </pointsandrewards>
+                </observers>
+            </controller_action_postdispatch_checkout_onepage_saveBilling>
+            <controller_action_predispatch_checkout_onepage_success>
+                <observers>
+                    <pointsandrewards>
+                        <type>singleton</type>
+                        <class>pointsandrewards/observer</class>
+                        <method>onepageSaveClubJmaValue</method>
+                    </pointsandrewards>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_success>
+            <controller_action_postdispatch_customer_account_editPost>
+                <observers>
+                    <pointsandrewards>
+                        <type>singleton</type>
+                        <class>pointsandrewards/observer</class>
+                        <method>accountEditToggleJma</method>
+                    </pointsandrewards>
+                </observers>
+            </controller_action_postdispatch_customer_account_editPost>
         </events>
     </global>
+    <default>
+        <payment>
+            <pointsandrewards>
+                <active>1</active>
+                <model>pointsandrewards/method_pointsandrewards</model>
+                <order_status>pending</order_status>
+                <title>Points and Rewards</title>
+                <allowspecific>0</allowspecific>
+                <payment_action>sale</payment_action>
+            </pointsandrewards>
+        </payment>
+    </default>
 </config>
