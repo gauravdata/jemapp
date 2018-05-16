@@ -15,6 +15,13 @@ class Twm_ExtendAwPoints_Model_Observer
         }
     }
 
+    public function accountEditToggleJma(Varien_Event_Observer $observer)
+    {
+        $request = Mage::app()->getRequest();
+
+        Mage::helper('pointsandrewards')->toggleAllFlags((bool)(int)$request->getPost('club_jma'));
+    }
+
     public function salesOrderPaymentCancel(Varien_Event_Observer $observer)
     {
         $order = $observer->getEvent()->getPayment()->getOrder();
