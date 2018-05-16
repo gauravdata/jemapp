@@ -227,23 +227,23 @@ function scrollToId(scrollId) {
 	return false;
 }
 
-window.addEventListener("load", function(){
-    window.cookieconsent.initialise({
-        "palette": {
-            "popup": {
-                "background": "#efefef",
-                "text": "#404040"
-            },
-            "button": {
-                "background": "transparent",
-                "text": "#8ec760",
-                "border": "#8ec760"
-            }
-        },
-        "content": {
-            "message": "Om je beter en persoonlijker te helpen, gebruiken wij cookies en vergelijkbare technieken. Met de cookies volgen wij en derde partijen jouw internetgedrag binnen onze site. ",
-            "dismiss": "Ok!",
-            "link": "Lees meer",
-            "href": "/over-je-m-appelle/cookies"
-        }
-    })});
+// window.addEventListener("load", function(){
+//     window.cookieconsent.initialise({
+//         "palette": {
+//             "popup": {
+//                 "background": "#efefef",
+//                 "text": "#404040"
+//             },
+//             "button": {
+//                 "background": "transparent",
+//                 "text": "#8ec760",
+//                 "border": "#8ec760"
+//             }
+//         },
+//         "content": {
+//             "message": "Om je beter en persoonlijker te helpen, gebruiken wij cookies en vergelijkbare technieken. Met de cookies volgen wij en derde partijen jouw internetgedrag binnen onze site. ",
+//             "dismiss": "Ok!",
+//             "link": "Lees meer",
+//             "href": "/over-je-m-appelle/cookies"
+//         }
+//     })});
