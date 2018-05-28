@@ -31,16 +31,15 @@
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD-License 2
  */
 
-class Mollie_Mpm_Model_Void02 extends Mollie_Mpm_Model_Api
+class Mollie_Mpm_Model_Mysql4_Payments_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
 
     /**
-     * @var string
+     * Constructor.
      */
-    protected $_code = "mpm_void_02";
-
-    /**
-     * @var int
-     */
-    protected $_index = 2;
+    public function _construct()
+    {
+        parent::_construct();
+        $this->_init('mpm/payments');
+    }
 }
