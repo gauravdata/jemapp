@@ -25,8 +25,6 @@
  */
 ?><?php
 
-$twmHelper = Mage::helper('pointsandrewards');
-
 $summaryForCustomer = $this->getSummaryForCustomer();
 $textForPoints = Mage::helper('points/config')->getPointUnitName();
 $defaultValue = Mage::app()->getRequest()->getParam('payment[points_amount]');
@@ -69,9 +67,6 @@ $helper = Mage::helper('points');
 					<?php endif; ?>
 				<?php endif; ?>
 			<?php endforeach; ?>
-            <?php
-            echo $this->getLayout()->createBlock('points/checkout_cart_points')->setTemplate('extendawpoints/signup_clubjma.phtml')->toHtml();
-            ?>
         </dl>
 	</div>
 </div>
