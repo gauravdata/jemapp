@@ -52,6 +52,7 @@ Default layout, loads most of the pages
                 <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
 
                 <action method="addCss"><stylesheet>dist/css/owl.carousel.css</stylesheet></action>
+                <!--<action method="addCss"><stylesheet>dist/css/cookieconsent.min.css</stylesheet></action>-->
                 <action method="addCss"><stylesheet>dist/css/default.css</stylesheet></action>
                 <action method="addItem"><type>skin_css</type><name>dist/css/styles-ie9.css</name><params/><if>lte IE 9</if></action>
 
@@ -63,6 +64,7 @@ Default layout, loads most of the pages
                 <action method="addItem"><type>skin_js</type><name>js/syncheight.js</name><params/></action>
                 <action method="addItem"><type>skin_js</type><name>js/owl.carousel.min.js</name><params/></action>
                 <action method="addItem"><type>skin_js</type><name>js/js.cookie.js</name><params/></action>
+                <!--<action method="addItem"><type>skin_js</type><name>js/cookieconsent.js</name><params/></action>-->
 				<action method="addItem"><type>skin_js</type><name>js/main.js</name><params/></action>
             </block>
 
