@@ -1,16 +1,17 @@
 <?php
+
 /**
- * Copyright (c) 2012-2018, Mollie B.V.
+ * Copyright (c) 2012-2014, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
  * - Redistributions of source code must retain the above copyright notice,
- *   this list of conditions and the following disclaimer.
- * - Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer.
+ * - Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -27,54 +28,41 @@
  * @category    Mollie
  * @package     Mollie_Mpm
  * @author      Mollie B.V. (info@mollie.nl)
- * @copyright   Copyright (c) 2012-2018 Mollie B.V. (https://www.mollie.nl)
- * @license     http://www.opensource.org/licenses/bsd-license.php  BSD-License 2
- */
+ * @copyright   Copyright (c) 2012-2014 Mollie B.V. (https://www.mollie.nl)
+ * @license     http://www.opensource.org/licenses/bsd-license.php  Berkeley Software Distribution License (BSD-License 2)
+ *
+ **/
 
-/** @var $installer Mage_Catalog_Model_Resource_Setup */
 $installer = $this;
-$installer->startSetup();
+$method_table = $installer->getTable('mollie_methods');
+$order_table = $installer->getTable('sales_flat_order_payment');
 
-$methodTable = $installer->getTable('mollie_methods');
-$orderTable = $installer->getTable('sales_flat_order_payment');
+$installer->run("
+	DELETE n1 FROM `".$method_table."` n1, `".$method_table."` n2 WHERE n1.id > n2.id AND n1.method_id = n2.method_id;
+");
 
-$installer->run(
-    sprintf(
-        "DELETE n1 FROM `%s` n1, `%s` n2 WHERE n1.id > n2.id AND n1.method_id = n2.method_id;",
-        $methodTable,
-        $methodTable
-    )
-);
-
-if ($installer->tableExists($methodTable)) {
-    $installer->run(
-        sprintf(
-            "DROP TABLE IF EXISTS `%s`",
-            $methodTable
-        )
-    );
+// restart with a clean method table
+if ($installer->tableExists($method_table))
+{
+	$installer->run(
+		sprintf("DROP TABLE IF EXISTS `%s`", $method_table)
+	);
 }
-
 $installer->run(
-    sprintf(
-        "CREATE TABLE IF NOT EXISTS `%s` (
+	sprintf("
+		CREATE TABLE IF NOT EXISTS `%s` (
 		  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 		  `method_id` varchar(32) NOT NULL DEFAULT '',
 		  `description` varchar(32) NOT NULL DEFAULT '',
 		  PRIMARY KEY (`id`),
 		  UNIQUE KEY `method_id` (`method_id`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
-        $methodTable
-    )
+		$method_table
+	)
 );
 
-for ($i = 0; $i < 10; $i++) {
-    $installer->run(
-        sprintf(
-            "UPDATE `%s` SET `method` = 'mpm_void_0" . $i . "' WHERE `method` = 'mpm_void_" . $i . "';",
-            $orderTable
-        )
-    );
+// add leading zeroes to methods
+for ($i = 0; $i < 10; $i++)
+{
+	$installer->run("UPDATE `".$order_table."` SET `method` = 'mpm_void_0".$i."' WHERE `method` = 'mpm_void_".$i."';");
 }
-
-$installer->endSetup();
