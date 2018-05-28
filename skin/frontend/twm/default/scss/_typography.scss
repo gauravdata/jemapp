@@ -225,8 +225,8 @@ table {
 	@extend .clearfix;
 	position: fixed;
 	z-index: 10000;
-	padding: $s-spacing $m-spacing;
-	color: $m-grey;
+	padding: 5px;
+	color: #333333;
 	left: 50%;
 	background-color: #ffffff;
 	min-width: 50%;
