@@ -226,14 +226,14 @@ table {
 	position: fixed;
 	z-index: 10000;
 	padding: $s-spacing $m-spacing;
-	color: $white;
+	color: $m-grey;
 	left: 50%;
-	background-color: transparentize($xl-grey, 0.3);
+	background-color: #ffffff;
 	min-width: 50%;
 	max-width: 80%;
 
 	a {
-		color: $white;
+		color: #000000;
 		text-decoration: underline;
 	}
 
@@ -267,7 +267,8 @@ table {
 				width: 50px;
 				height: 100%;
 				padding: 0;
-				background-color: $l-grey;
+				color: $m-grey;
+				background-color: #ffffff;
 				border: none;
 				right: 0;
 				top: 0;
@@ -280,10 +281,6 @@ table {
 					content: "\e082";
 					font-family: 'simple-line-icons';
 					font-size: $xl-font;
-				}
-				&:hover,
-				&:focus {
-					color: $m-grey;
 				}
 			}
 		}
