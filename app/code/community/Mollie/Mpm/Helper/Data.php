@@ -1,16 +1,17 @@
 <?php
+
 /**
- * Copyright (c) 2012-2018, Mollie B.V.
+ * Copyright (c) 2012-2014, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
  * - Redistributions of source code must retain the above copyright notice,
- *   this list of conditions and the following disclaimer.
- * - Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer.
+ * - Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -27,580 +28,383 @@
  * @category    Mollie
  * @package     Mollie_Mpm
  * @author      Mollie B.V. (info@mollie.nl)
- * @copyright   Copyright (c) 2012-2018 Mollie B.V. (https://www.mollie.nl)
- * @license     http://www.opensource.org/licenses/bsd-license.php  BSD-License 2
- */
+ * @copyright   Copyright (c) 2012-2014 Mollie B.V. (https://www.mollie.nl)
+ * @license     http://www.opensource.org/licenses/bsd-license.php  Berkeley Software Distribution License (BSD-License 2)
+ **/
 
 class Mollie_Mpm_Helper_Data extends Mage_Core_Helper_Abstract
 {
+	public $update_url    = 'https://github.com/mollie/Magento';
+	public $should_update = 'maybe';
 
-    const XPATH_MODULE_ENABLED = 'payment/mollie/active';
-    const XPATH_API_KEY = 'payment/mollie/apikey';
-    const XPATH_DESCRIPTION = 'payment/mollie/description';
-    const XPATH_SHOW_IMAGES = 'payment/mollie/show_images';
-    const XPATH_SHOW_IDEAL_ISSUERS = 'payment/mollie/show_bank_list';
-    const XPATH_SHOW_GIFTCARD_ISSUERS = 'payment/mollie/show_giftcard_list';
-    const XPATH_BANKTRANSFER_DUE_DAYS = 'payment/mollie/banktransfer_due_date_days';
-    const XPATH_LOCALE = 'payment/mollie/locale';
-    const XPATH_FORCE_BASE_CURRENCY = 'payment/mollie/force_base_currency';
-    const XPATH_LOADING_SCREEN = 'payment/mollie/loading_screen';
-    const XPATH_IMPORT_PAYMENT_INFO = 'payment/mollie/import_payment_info';
-    const XPATH_ORDER_STATUS_PENDING = 'payment/mollie/order_status_pending';
-    const XPATH_ORDER_STATUS_PROCESSING = 'payment/mollie/order_status_processing';
-    const XPATH_SKIP_ORDER_EMAIL = 'payment/mollie/skip_order_mails';
-    const XPATH_SKIP_INVOICE_EMAIL = 'payment/mollie/skip_invoice_mails';
-    const XPATH_DEBUG = 'payment/mollie/debug';
-    const XPATH_METHOD_TITLE = 'payment/{method}/title';
-    const XPATH_METHOD_SORT_ORDER = 'payment/{method}/sort_order';
-    const XPATH_METHOD_SPECIFICCOUNTRY = 'payment/{method}/specificcountry';
-    const XPATH_METHOD_ALLOWSPECIFIC = 'payment/{method}/allowspecific';
+	/**
+	 * Get the title for the given payment method
+	 *
+	 * @param string $id
+	 * @param int $storeId
+	 * @return string
+	 */
+	public function getMethodTitle($id, $storeId = NULL)
+	{
+		return Mage::getStoreConfig("payment/mollie_title/{$id}", $storeId ?: $this->getCurrentStore());
+	}
 
-    /**
-     * @var null
-     */
-    public $debug = null;
+	/**
+	 * Get payment bank status by order_id
+	 *
+	 * @return array
+	 */
+	public function getStatusById ($transaction_id)
+	{
+		/** @var $connection Varien_Db_Adapter_Interface */
+		$connection = Mage::getSingleton('core/resource')->getConnection('core_read');
+		$status     = $connection->fetchAll(
+			sprintf(
+				"SELECT `bank_status`, `updated_at` FROM `%s` WHERE `transaction_id` = %s",
+				Mage::getSingleton('core/resource')->getTableName('mollie_payments'),
+				$connection->quote($transaction_id)
+			)
+		);
 
-    /**
-     * Module Enabled Check.
-     *
-     * @param null $storeId
-     * @param null $websiteId
-     *
-     * @return bool
-     */
-    public function isModuleEnabled($storeId = null, $websiteId = null)
-    {
-        $active = $this->getStoreConfig(self::XPATH_MODULE_ENABLED, $storeId, $websiteId);
-        if (!$active) {
-            return false;
-        }
+		return $status[0];
+	}
 
-        $apiKey = $this->getApiKey($storeId, $websiteId);
-        if (empty($apiKey)) {
-            return false;
-        }
+	/**
+	 * Get order_id by transaction_id
+	 *
+	 * @return int|null
+	 */
+	public function getOrderIdByTransactionId ($transaction_id)
+	{
+		/** @var $connection Varien_Db_Adapter_Interface */
+		$connection = Mage::getSingleton('core/resource')->getConnection('core_read');
+		$id         = $connection->fetchAll(
+			sprintf(
+				"SELECT `order_id` FROM `%s` WHERE `transaction_id` = %s",
+				Mage::getSingleton('core/resource')->getTableName('mollie_payments'),
+				$connection->quote($transaction_id)
+			)
+		);
 
-        return true;
-    }
+		if (sizeof($id) > 0)
+		{
+			return $id[0]['order_id'];
+		}
 
-    /**
-     * Get Store config value based on StoreId, WebsiteId or current.
-     *
-     * @param     $path
+		return NULL;
+	}
+
+	/**
+	 * Get transaction_id by order_id
+	 *
+	 * @return int|null
+	 */
+	public function getTransactionIdByOrderId ($order_id)
+	{
+		/** @var $connection Varien_Db_Adapter_Interface */
+		$connection = Mage::getSingleton('core/resource')->getConnection('core_read');
+		$id         = $connection->fetchAll(
+			sprintf(
+				"SELECT `transaction_id` FROM `%s` WHERE `order_id` = %s",
+				Mage::getSingleton('core/resource')->getTableName('mollie_payments'),
+				$connection->quote($order_id)
+			)
+		);
+
+		if (sizeof($id) > 0)
+		{
+			return $id[0]['transaction_id'];
+		}
+
+		return NULL;
+	}
+
+	public function getStoredMethods ()
+	{
+		$connection = Mage::getSingleton('core/resource')->getConnection('core_read');
+		$methods    = $connection->fetchAll(
+			sprintf(
+				"SELECT * FROM `%s`",
+				Mage::getSingleton('core/resource')->getTableName('mollie_methods')
+			)
+		);
+
+		return $methods;
+	}
+
+	public function setStoredMethods (array $methods)
+	{
+		$connection = Mage::getSingleton('core/resource')->getConnection('core_write');
+		$table_name = Mage::getSingleton('core/resource')->getTableName('mollie_methods');
+
+		foreach ($methods as $method)
+		{
+			$connection->query(sprintf(
+				"INSERT INTO `%s` (`method_id`, `description`) VALUES (%s, %s) ON DUPLICATE KEY UPDATE `id`=`id`",
+				$table_name,
+				$connection->quote($method['method_id']),
+				$connection->quote($method['description'])
+			));
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Gets Api key from `config_core_data`
+	 *
+	 * @return string
+	 */
+	public function getApiKey ()
+	{
+		return trim(Mage::getStoreConfig("payment/mollie/apikey", $this->getCurrentStore()));
+	}
+
+	/**
+	 * Gets Bank Transfer due date days key from `config_core_data`
+	 *
+	 * @return string
+	 */
+	public function getBankTransferDueDateDays ()
+	{
+		return trim(Mage::getStoreConfig("payment/mollie/banktransfer_due_date_days"));
+	}
+
+	/**
+	 * Get store config
+	 *
+	 * @param string $paymentmethod
+	 * @param string $key
      * @param int $storeId
-     * @param int $websiteId
-     *
-     * @return mixed
-     */
-    public function getStoreConfig($path, $storeId = null, $websiteId = null)
-    {
-        if ($websiteId > 0) {
-            try {
-                $value = Mage::app()->getWebsite($websiteId)->getConfig($path);
-            } catch (\Exception $e) {
-                $this->addLog('getStoreConfig [ERR]', $e->getMessage());
-                $value = null;
-            }
-        } elseif ($storeId > 0) {
-            $value = Mage::getStoreConfig($path, $storeId);
-        } else {
-            $value = Mage::getStoreConfig($path);
-        }
+	 *
+	 * @return string
+	 */
+	public function getConfig ($paymentmethod = NULL, $key = NULL, $storeId = NULL)
+	{
+		$arr            = array('active', 'apikey', 'description', 'skip_invoice', 'skip_order_mails', 'skip_invoice_mails', 'show_images', 'show_bank_list', 'banktransfer_due_date_days');
+		$paymentmethods = array('mollie');
 
-        return trim($value);
-    }
+		if(
+			in_array($key, $arr) && in_array($paymentmethod, $paymentmethods)
+			|| substr($paymentmethod, 0, 9) == 'mpm_void_'
+		) {
+			return Mage::getStoreConfig("payment/{$paymentmethod}/{$key}", $storeId ?: $this->getCurrentStore());
+		}
 
-    /**
-     * @param $function
-     * @param $data
-     */
-    public function addLog($function, $data)
-    {
-        if ($this->debug === null) {
-            $this->debug = $this->getStoreConfig(self::XPATH_DEBUG);
-        }
+		return NULL;
+	}
 
-        if ($this->debug) {
-            if (is_array($data)) {
-                $log = $function . ': ' . json_encode($data, true);
-            } elseif (is_object($data)) {
-                $log = $function . ': ' . json_encode($data, true);
-            } else {
-                $log = $function . ': ' . $data;
-            }
+	/**
+	 * Gets selected store in admin
+	 *
+	 * @return string
+	 */
+	public function getCurrentStore ()
+	{
+		return Mage::app()->getStore()->getId();
+	}
 
-            Mage::log($log, null, 'mollie.log');
-        }
-    }
+	/**
+	 * @return string
+	 * @codeCoverageIgnore
+	 */
+	public function getModuleStatus ($method_count, $method_limit)
+	{
+		/* Precedence:
+		 * 1) Missing files
+		 * 2) Magento version
+		 * 3) New version on github
+		 * 4) Method limit
+		 * 5) Disabled check
+		 */
 
-    /**
-     * ApiKey value based on StoreId, WebsiteId or current.
-     *
-     * @param null $storeId
-     * @param null $websiteId
-     *
-     * @return mixed
-     */
-    public function getApiKey($storeId = null, $websiteId = null)
-    {
-        return $this->getStoreConfig(self::XPATH_API_KEY, $storeId, $websiteId);
-    }
+		$core = Mage::helper('core');
 
-    /**
-     * Module version number.
-     *
-     * @return mixed
-     */
-    public function getModuleVersion()
-    {
-        return Mage::getConfig()->getNode('modules')->children()->Mollie_Mpm->version;
-    }
+		// 1) Check missing files
+		$needFiles = array();
+		$modFiles  = array(
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Exception/IncompatiblePlatform.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/Customer/Mandate.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/Payment/Refund.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/Customer.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/Issuer.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/List.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/Method.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/Organization.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/Payment.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/Permission.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/Profile.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Object/Settlement.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Customers/Mandates.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Customers/Payments.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Payments/Refunds.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Base.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Customers.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Issuers.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Methods.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Organizations.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Payments.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Permissions.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Profiles.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Settlements.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Resource/Undefined.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Autoloader.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/cacert.pem",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Client.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/CompatibilityChecker.php",
+			Mage::getBaseDir('lib') . "/Mollie/src/Mollie/API/Exception.php",
 
-    /**
-     * Magento version number.
-     *
-     * @return string
-     */
-    public function getMagentoVersion()
-    {
-        return Mage::getVersion();
-    }
+			Mage::getRoot() .'/design/adminhtml/default/default/template/mollie/system/config/status.phtml',
+			Mage::getRoot() .'/design/frontend/base/default/layout/mpm.xml',
+			Mage::getRoot() .'/design/frontend/base/default/template/mollie/page/exception.phtml',
+			Mage::getRoot() .'/design/frontend/base/default/template/mollie/page/fail.phtml',
+			Mage::getRoot() .'/design/frontend/base/default/template/mollie/form/details.phtml',
 
-    /**
-     * @param      $method
-     * @param null $storeId
-     *
-     * @return mixed
-     */
-    public function getMethodSortOrder($method, $storeId = null)
-    {
-        if (strpos($method, 'mpm_void_') === false) {
-            $method = 'mpm_void_' . str_pad($method, 2, "0", STR_PAD_LEFT);
-        }
+			Mage::getRoot() .'/code/community/Mollie/Mpm/Block/Adminhtml/System/Config/Status.php',
+			Mage::getRoot() .'/code/community/Mollie/Mpm/Block/Payment/Api/Form.php',
+			Mage::getRoot() .'/code/community/Mollie/Mpm/Block/Payment/Api/Info.php',
+			Mage::getRoot() .'/code/community/Mollie/Mpm/controllers/ApiController.php',
+			Mage::getRoot() .'/code/community/Mollie/Mpm/etc/adminhtml.xml',
+			Mage::getRoot() .'/code/community/Mollie/Mpm/etc/config.xml',
+			Mage::getRoot() .'/code/community/Mollie/Mpm/etc/system.xml',
+			Mage::getRoot() .'/code/community/Mollie/Mpm/Helper/Data.php',
+			Mage::getRoot() .'/code/community/Mollie/Mpm/Helper/Api.php',
+			Mage::getRoot() .'/code/community/Mollie/Mpm/Model/Api.php',
+		);
 
-        return $this->getStoreConfig(str_replace('{method}', $method, self::XPATH_METHOD_SORT_ORDER), $storeId);
-    }
+		for ($i = 0; $i < $method_limit; $i++)
+		{
+			$I = ($i < 10 ? '0'.$i : $i);
+			$modFiles[] = Mage::getRoot() .'/code/community/Mollie/Mpm/Model/Void'.$I.'.php';
+		}
 
-    /**
-     * @param      $method
-     * @param null $storeId
-     *
-     * @return mixed
-     */
-    public function getMethodTitle($method, $storeId = null)
-    {
-        if (strpos($method, 'mpm_void_') === false) {
-            $method = 'mpm_void_' . str_pad($method, 2, "0", STR_PAD_LEFT);
-        }
+		foreach ($modFiles as $file)
+		{
+			if(!file_exists($file))
+			{
+				$needFiles[] = '<span style="color:red">'.$file.'</span>';
+			}
+		}
 
-        return $this->getStoreConfig(str_replace('{method}', $method, self::XPATH_METHOD_TITLE), $storeId);
-    }
+		if (count($needFiles) > 0)
+		{
+			return '<b>'.$core->__('Missing file(s) detected!').'</b><br />' . implode('<br />', $needFiles);
+		}
 
-    /**
-     * @param      $method
-     * @param null $storeId
-     *
-     * @return mixed
-     */
-    public function getMethodSpecificCountry($method, $storeId = null)
-    {
-        if (strpos($method, 'mpm_void_') === false) {
-            $method = 'mpm_void_' . str_pad($method, 2, "0", STR_PAD_LEFT);
-        }
+		// 2) Check magento version
+		if ( version_compare(Mage::getVersion(), '1.4.1.0', '<'))
+		{
+			return '<b>'.$core->__('Version incompatible!').'</b><br />
+				<span style="color:red">'.$core->__('Your Magento version is incompatible with this module!').'<br>
+				- '.$core->__('Minimal version requirement: ').'1.4.1.x<br>
+				- '.$core->__('Current version: ').Mage::getVersion() .'
+				</span>
+			';
+		}
 
-        $config = $this->getStoreConfig(str_replace('{method}', $method, self::XPATH_METHOD_SPECIFICCOUNTRY), $storeId);
-        return explode(',', $config);
-    }
+		// 3) Check github version
+		if ($this->should_update === 'yes')
+		{
+			return '<b>'.$core->__('Status').'</b><br /><span style="color:#EB5E00">'.$core->__('Module status: Outdated!').'</span>';
+		}
 
-    /**
-     * @param      $method
-     * @param null $storeId
-     *
-     * @return mixed
-     */
-    public function getMethodAllowSpecific($method, $storeId = null)
-    {
-        if (strpos($method, 'mpm_void_') === false) {
-            $method = 'mpm_void_' . str_pad($method, 2, "0", STR_PAD_LEFT);
-        }
+		// 4) Check method limit
+		if ($method_count > $method_limit)
+		{
+			return '<b>'.$core->__('Module outdated!').'</b><br />
+				<span style="color:#EB5E00">'.sprintf($core->__('Mollie currently provides %d payment methods, while this module only supports %d method slots.'), $method_count, $method_limit).'</span><br />
+				'.$core->__('To enable all supported payment methods, get the latest Magento plugin from the <a href="https://www.mollie.nl/betaaldiensten/ideal/modules/" title="Mollie Modules">Mollie Modules list</a>.').'
+				<br />
+				If no newer version is available, please <a href="https://www.mollie.nl/bedrijf/contact" title="Mollie Support">contact Mollie BV</a>.
+			';
+		}
 
-        return $this->getStoreConfig(str_replace('{method}', $method, self::XPATH_METHOD_ALLOWSPECIFIC), $storeId);
-    }
+		// 5) Check if disabled
+		if (!Mage::helper('mpm')->getConfig('mollie', 'active'))
+		{
+			return '<b>'.$core->__('Status').'</b><br /><span style="color:#EB5E00">'.$core->__('Module status: Disabled!').'</span>';
+		}
 
-    /**
-     * @return mixed
-     */
-    public function getCountryOptionArray()
-    {
-        return Mage::getModel('adminhtml/system_config_source_country')->toOptionArray();
-    }
+		// All is fine
+		return '<b>'.$core->__('Status').'</b><br /><span style="color:green">'.$core->__('Module status: OK!').'</span>';
+	}
 
-    /**
-     * Get selected storeId in admin config.
-     *
-     * @return int
-     */
-    public function getConfigStoreId()
-    {
-        $storeId = (int)Mage::app()->getRequest()->getParam('store', 0);
-        return $storeId;
-    }
+	/**
+	 * Gets status from order_id
+	 *
+	 * @param int $order_id
+	 * @return string|NULL
+	 */
+	public function getWaitingPayment($order_id)
+	{
+		$order = Mage::getModel('sales/order')->loadByIncrementId($order_id);
 
-    /**
-     * Get selected websiteId in admin config.
-     *
-     * @return int
-     */
-    public function getConfigWebsiteId()
-    {
-        $websiteId = (int)Mage::app()->getRequest()->getParam('website', 0);
-        return $websiteId;
-    }
+		if ($order['status'] == Mage_Sales_Model_Order::STATE_PENDING_PAYMENT)
+		{
+			return '<span class="mpm_waiting_msg">'. Mage::helper('core')->__($this->__('Your order is awaiting payment before being released for processing and shipment.')) .'</span>';
+		}
 
-    /**
-     * @return false|string
-     */
-    public function getCurrentMysqlDate()
-    {
-        return Mage::getModel('core/date')->gmtDate('Y-m-d H:i:s');
-    }
+		return NULL;
+	}
 
-    /**
-     * @param Mage_Sales_Model_Order $order
-     *
-     * @return mixed
-     */
-    public function getDescription($order)
-    {
-        $incrementId = $order->getIncrementId();
-        $default = $this->getStoreConfig(self::XPATH_DESCRIPTION);
-        return str_replace('%', $incrementId, $default);
-    }
+	public function getModuleVersion()
+	{
+		return Mage::getConfig()->getNode('modules')->children()->Mollie_Mpm->version;
+	}
 
-    /**
-     * @param null $storeId
-     *
-     * @return mixed
-     */
-    public function showImages($storeId = null)
-    {
-        return $this->getStoreConfig(self::XPATH_SHOW_IMAGES, $storeId);
-    }
+	/**
+	 * @return string
+	 */
+	public function _getUpdateMessage()
+	{
+		$core = Mage::helper('core');
+		$update_message = '';
+		$update_xml = $this->_getUpdateXML();
+		if ($update_xml === FALSE)
+		{
+			$this->should_update = 'maybe';
+			$update_message = $core->__('Warning: Could not retrieve update xml file from github.', 'mollie');
+		}
+		else
+		{
+			/** @var SimpleXMLElement $tags */
+			$tags = new SimpleXMLElement($update_xml);
+			if (!empty($tags) && isset($tags->entry, $tags->entry[0], $tags->entry[0]->id))
+			{
+				$title = $tags->entry[0]->id;
+				$latest_version = preg_replace("/[^0-9,.]/", "", substr($title, strrpos($title, '/')));
+				$this_version = $this->getModuleVersion();
+				if (!version_compare($this_version, $latest_version, '>='))
+				{
+					$update_message = sprintf(
+						'<a href=%s/releases>' .
+						$core->__('You are currently using version %s. We strongly recommend you to upgrade to the new version %s!', 'mollie') .
+						'</a><br /><span style="font-size: small;">' .
+						$core->__('Note: version information is accurate only when the cache is cleared.', 'mollie') .
+						'</span>',
+						$this->update_url, $this_version, $latest_version
+					);
+					$this->should_update = 'yes';
+				}
+				else
+				{
+					$this->should_update = 'no';
+				}
+			}
+			else
+			{
+				$this->should_update = 'maybe';
+				$update_message = $core->__('Warning: Update xml file from github follows an unexpected format.', 'mollie');
+			}
+		}
+		return $update_message;
+	}
 
-    /**
-     * @param null $storeId
-     *
-     * @return mixed
-     */
-    public function showIdealIssuers($storeId = null)
-    {
-        return $this->getStoreConfig(self::XPATH_SHOW_IDEAL_ISSUERS, $storeId);
-    }
-
-    /**
-     * @param null $storeId
-     *
-     * @return mixed
-     */
-    public function showGiftcardIssuers($storeId = null)
-    {
-        return $this->getStoreConfig(self::XPATH_SHOW_GIFTCARD_ISSUERS, $storeId);
-    }
-
-    /**
-     * @param null $storeId
-     *
-     * @return mixed
-     */
-    public function getStatusPending($storeId = null)
-    {
-        return $this->getStoreConfig(self::XPATH_ORDER_STATUS_PENDING, $storeId);
-    }
-
-    /**
-     * @param null $storeId
-     *
-     * @return mixed
-     */
-    public function getStatusProcessing($storeId = null)
-    {
-        return $this->getStoreConfig(self::XPATH_ORDER_STATUS_PROCESSING, $storeId);
-    }
-
-    /**
-     * @param null $storeId
-     *
-     * @return bool
-     */
-    public function sendInvoiceEmail($storeId = null)
-    {
-        if ($this->getStoreConfig(self::XPATH_SKIP_INVOICE_EMAIL, $storeId)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @param null $storeId
-     *
-     * @return mixed
-     */
-    public function getBankTransferDueDateDays($storeId = null)
-    {
-        $offset = $this->getStoreConfig(self::XPATH_BANKTRANSFER_DUE_DAYS, $storeId);
-        if ($offset > 0) {
-            return date("Y-m-d", strtotime("+" . $offset . " day"));
-        } else {
-            return date("Y-m-d", strtotime("+14 days"));
-        }
-    }
-
-    /**
-     * @param null $storeId
-     *
-     * @return bool
-     */
-    public function importPaymentInfo($storeId = null)
-    {
-        return (boolean)$this->getStoreConfig(self::XPATH_IMPORT_PAYMENT_INFO, $storeId);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function useLoadingScreen()
-    {
-        return $this->getStoreConfig(self::XPATH_LOADING_SCREEN);
-    }
-
-    /**
-     * @param null $storeId
-     *
-     * @return bool
-     */
-    public function sendOrderEmail($storeId = null)
-    {
-        if ($this->getStoreConfig(self::XPATH_SKIP_ORDER_EMAIL, $storeId)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Build url for Redirect.
-     *
-     * @return string
-     */
-    public function getRedirectUrl()
-    {
-        return Mage::getUrl('mpm/api/payment');
-    }
-
-    /**
-     * @return string
-     */
-    public function getWebhookUrl()
-    {
-        return Mage::getUrl('mpm/api/webhook');
-    }
-
-    /**
-     * @param $orderId
-     *
-     * @return string
-     */
-    public function getReturnUrl($orderId)
-    {
-        return Mage::getUrl('mpm/api/return', array('_query' => 'order_id=' . $orderId . '&utm_nooverride=1'));
-    }
-
-    /**
-     * @return string
-     */
-    public function getCartUrl()
-    {
-        return Mage::getUrl('checkout/cart');
-    }
-
-    /**
-     * @return string
-     */
-    public function getLocaleCode()
-    {
-        $locale = $this->getStoreConfig(self::XPATH_LOCALE);
-
-        if (!$locale) {
-            return null;
-        }
-
-        if ($locale == 'store') {
-            $localeCode = Mage::app()->getLocale()->getLocaleCode();
-            if (in_array($localeCode, $this->getSupportedLocal())) {
-                return $localeCode;
-            } else {
-                return null;
-            }
-        }
-
-        return $locale;
-    }
-
-    /**
-     * List of supported local codes Mollie.
-     *
-     * @return array
-     */
-    public function getSupportedLocal()
-    {
-        return array('en_US', 'de_AT', 'de_CH', 'de_DE', 'es_ES', 'fr_BE', 'fr_FR', 'nl_BE', 'nl_NL');
-    }
-
-    /**
-     * @param Mage_Sales_Model_Order $order
-     *
-     * @return array
-     */
-    public function getOrderAmountByOrder($order)
-    {
-        $baseCurrency = $this->useBaseCurrency($order->getStoreId());
-
-        if ($baseCurrency) {
-            $orderAmount = array(
-                "currency" => $order->getBaseCurrencyCode(),
-                "value"    => number_format($order->getBaseGrandTotal(), 2, '.', '')
-            );
-        } else {
-            $orderAmount = array(
-                "currency" => $order->getOrderCurrencyCode(),
-                "value"    => number_format($order->getGrandTotal(), 2, '.', '')
-            );
-        }
-
-        return $orderAmount;
-    }
-
-    /**
-     * @param Mage_Sales_Model_Quote $quote
-     *
-     * @return array
-     */
-    public function getOrderAmountByQuote($quote)
-    {
-        $baseCurrency = $this->useBaseCurrency($quote->getStoreId());
-
-        if ($baseCurrency) {
-            $orderAmount = array(
-                "currency" => $quote->getBaseCurrencyCode(),
-                "value"    => number_format($quote->getBaseGrandTotal(), 2, '.', '')
-            );
-        } else {
-            $orderAmount = array(
-                "currency" => $quote->getQuoteCurrencyCode(),
-                "value"    => number_format($quote->getGrandTotal(), 2, '.', '')
-            );
-        }
-
-        return $orderAmount;
-    }
-
-    /**
-     * @param $storeId
-     *
-     * @return bool
-     */
-    public function useBaseCurrency($storeId)
-    {
-        return $this->getStoreConfig(self::XPATH_FORCE_BASE_CURRENCY, $storeId);
-    }
-
-    /**
-     * Restore Cart Session.
-     */
-    public function restoreCart()
-    {
-        $orderId = Mage::getSingleton('checkout/session')->getLastOrderId();
-        if (!empty($orderId)) {
-            /** @var $order Mage_Sales_Model_Order */
-            $order = Mage::getModel('sales/order')->load($orderId);
-            $quoteId = $order->getQuoteId();
-            $quote = Mage::getModel('sales/quote')->load($quoteId)->setIsActive(true)->save();
-            Mage::getSingleton('checkout/session')->replaceQuote($quote);
-        }
-    }
-
-    /**
-     * @return Mage_Sales_Model_Order
-     */
-    public function getOrderFromSession()
-    {
-        $orderId = Mage::getSingleton('checkout/session')->getLastOrderId();
-        if (!empty($orderId)) {
-            /** @var $order Mage_Sales_Model_Order */
-            $order = Mage::getModel('sales/order')->load($orderId);
-            return $order;
-        }
-    }
-
-    /**
-     * @param $error
-     */
-    public function setError($error)
-    {
-        $msg = $this->__($error);
-        Mage::getSingleton('core/session')->addError($msg);
-    }
-
-    /**
-     * @param $issuer
-     *
-     * @return mixed
-     */
-    public function getBankByIssuer($issuer)
-    {
-        $banks = array(
-            "ideal_ABNANL2A" => "ABN AMRO",
-            "ideal_ASNBNL21" => "ASN Bank",
-            "ideal_BUNQNL2A" => "Bunq",
-            "ideal_INGBNL2A" => "ING",
-            "ideal_KNABNL2H" => "Knab",
-            "ideal_RABONL2U" => "Rabobank",
-            "ideal_RBRBNL21" => "RegioBank",
-            "ideal_SNSBNL2A" => "SNS Bank",
-            "ideal_TRIONL2U" => "Triodos Bank",
-            "ideal_FVLBNL22" => "van Lanschot",
-            "ideal_MOYONL21" => "Moneyou",
-            "ideal_TESTNL99" => "Test Bank"
-        );
-
-        if (isset($banks[$issuer])) {
-            return $banks[$issuer];
-        }
-    }
-
-    /**
-     * @param array $request
-     *
-     * @return mixed
-     */
-    public function validateRequestData($request)
-    {
-        if (isset($request['billingAddress'])) {
-            foreach ($request['billingAddress'] as $k => $v) {
-                if ((empty($v)) && ($k != 'region')) {
-                    unset($request['billingAddress']);
-                }
-            }
-        }
-        if (isset($request['shippingAddress'])) {
-            foreach ($request['shippingAddress'] as $k => $v) {
-                if ((empty($v)) && ($k != 'region')) {
-                    unset($request['shippingAddress']);
-                }
-            }
-        }
-
-        return $request;
-    }
+	/**
+	 * @return string
+	 */
+	protected function _getUpdateXML()
+	{
+		return @file_get_contents($this->update_url . '/releases.atom');
+	}
 }
