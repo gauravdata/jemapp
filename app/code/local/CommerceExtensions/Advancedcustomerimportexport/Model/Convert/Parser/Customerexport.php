@@ -198,11 +198,21 @@ class CommerceExtensions_Advancedcustomerimportexport_Model_Convert_Parser_Custo
 		$overallcount = 1;
 		$recordlimitstart = $this->getVar('recordlimitstart');
 		$recordlimitend = $this->getVar('recordlimitend');
+		if($this->getVar('filter_by_city') != "") {
+			$entityIds = Mage::getModel('customer/customer')->getCollection();
+			$entityIds->joinAttribute('billing_city', 'customer_address/city', 'default_billing', null, 'left');
+			$entityIds->addFieldToFilter('billing_city',$this->getVar('filter_by_city'));
+		} else {
+       	 	$entityIds = $this->getData();
+		}
 
-        $entityIds = $this->getData();
-
-        foreach ($entityIds as $i => $entityId) {
-				if ($overallcount < $recordlimitend && $overallcount >= $recordlimitstart) {
+        foreach ($entityIds as $i => $dataentityId) {
+			if ($overallcount < $recordlimitend && $overallcount >= $recordlimitstart) {
+				if(is_array($dataentityId) || is_object($dataentityId)) {
+					$entityId = $dataentityId['entity_id'];
+				} else {
+					$entityId = $dataentityId;
+				}
             $customer = $this->getCustomerModel()
                 ->setData(array())
                 ->load($entityId);

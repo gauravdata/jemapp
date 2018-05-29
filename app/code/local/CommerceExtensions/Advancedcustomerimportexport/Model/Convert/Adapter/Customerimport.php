@@ -597,7 +597,7 @@ class CommerceExtensions_Advancedcustomerimportexport_Model_Convert_Adapter_Cust
 			}
 		}
 		
-		if($this->getBatchParams('update_customer_address') == "true") {
+		if($this->getBatchParams('update_customer_address') == "true" || !$customer->getId()) {
 		
         $importBillingAddress = $importShippingAddress = true;
         $savedBillingAddress = $savedShippingAddress = false;
