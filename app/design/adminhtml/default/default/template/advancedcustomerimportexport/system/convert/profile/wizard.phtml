@@ -522,7 +522,7 @@ Event.observe(window, 'load', function(){
                 </span>
                 <span class="field-row profile_direction_export">
                     <label for="profile_filter_by_city"><?php echo $this->__("Billing City:") ?></label>
-                    <input class="required-entry input-text" id="profile_filter_by_city" name="gui_data[unparse][filter_by_city]" value="<?php echo (($filter_by_city = $this->getValue('gui_data/unparse/filter_by_city')) ? $filter_by_city : '') ?>"/>
+                    <input class="input-text" id="profile_filter_by_city" name="gui_data[unparse][filter_by_city]" value="<?php echo (($filter_by_city = $this->getValue('gui_data/unparse/filter_by_city')) ? $filter_by_city : '') ?>"/>
                 </span>
                 <span class="field-row">
                     <label for="customer_filter_created_at_from"><?php echo $this->__("Customer Since:") ?></label>
