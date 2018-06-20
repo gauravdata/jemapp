@@ -172,6 +172,9 @@ class CommerceExtensions_Advancedcustomerimportexport_Model_Profile extends Mage
 			
 			$exportMultipleAddresses = isset($p['unparse']['export_multiple_addresses']) ? $p['unparse']['export_multiple_addresses'] : 'false';
 			$parseDataXml .= '    <var name="export_multiple_addresses"><![CDATA[' . $exportMultipleAddresses . ']]></var>' . $nl;
+			
+			$filter_by_city = isset($p['unparse']['filter_by_city']) ? $p['unparse']['filter_by_city'] : '';
+			$parseDataXml .= '    <var name="filter_by_city"><![CDATA[' . $filter_by_city . ']]></var>' . $nl;
             
             $parseDataXml .= '</action>' . $nl . $nl;
         }
