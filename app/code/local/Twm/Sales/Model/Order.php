@@ -8,6 +8,7 @@
 
 class Twm_Sales_Model_Order extends Mage_Sales_Model_Order {
 
+    const STATUS_RETURNED = 'returned';
     /**
      * Send email with order data
      *
@@ -109,4 +110,28 @@ class Twm_Sales_Model_Order extends Mage_Sales_Model_Order {
         return $ids[$idx];
     }
 
+    /**
+     * Retrieve order hold availability
+     *
+     * @return bool
+     */
+    public function canReceiveRma()
+    {
+        $status = $this->getStatus();
+        if ( $status === self::STATE_PROCESSING) {
+            return true;
+        }
+        return false;
+
+    }
+
+
+    public function receiveRma()
+    {
+        if (!$this->canReceiveRma()) {
+            Mage::throwException(Mage::helper('sales')->__('ReceiveRma action is not available.'));
+        }
+        $this->setStatus(self::STATUS_RETURNED, true);
+        return $this;
+    }
 } 
