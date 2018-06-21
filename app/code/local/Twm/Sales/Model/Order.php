@@ -8,7 +8,7 @@
 
 class Twm_Sales_Model_Order extends Mage_Sales_Model_Order {
 
-    const STATE_RETURNED = 'returned';
+    const STATUS_RETURNED = 'returned';
     /**
      * Send email with order data
      *
@@ -131,7 +131,7 @@ class Twm_Sales_Model_Order extends Mage_Sales_Model_Order {
         if (!$this->canReceiveRma()) {
             Mage::throwException(Mage::helper('sales')->__('ReceiveRma action is not available.'));
         }
-        $this->setStatus(self::STATE_RETURNED, true);
+        $this->setStatus(self::STATUS_RETURNED, true);
         return $this;
     }
 } 
