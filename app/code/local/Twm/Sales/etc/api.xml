@@ -9,7 +9,7 @@
                 <methods>
                     <receiveRma translate="title" module="sales">
                         <title>Receive RMA</title>
-                        <acl>sales/order</acl>
+                        <acl>sales/order/change</acl>
                     </receiveRma>
                 </methods>
             </sales_order>

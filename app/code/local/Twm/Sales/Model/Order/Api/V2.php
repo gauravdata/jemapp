@@ -18,11 +18,12 @@ class Twm_Sales_Model_Order_Api_V2 extends Mage_Sales_Model_Order_Api_V2
      */
     public function receiveRma($orderIncrementId)
     {
-
+        /** @var Twm_Sales_Model_Order $order */
         $order = $this->_initOrder($orderIncrementId);
 
         try {
-            $this->execute($orderIncrementId);
+            $order->receiveRma();
+            $order->save();
         } catch (Mage_Core_Exception $e) {
             $this->_fault('status_not_changed', $e->getMessage());
         }
@@ -32,10 +33,6 @@ class Twm_Sales_Model_Order_Api_V2 extends Mage_Sales_Model_Order_Api_V2
     }
 
 
-    protected function execute($orderIncrementId){
-        // TODO
-        Mage::log("called receiveRma voor de order $orderIncrementId", Zend_Log::INFO, 'receiveRma.log');
-    }
 
 
 }
