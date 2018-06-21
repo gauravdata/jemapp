@@ -13,6 +13,7 @@
             <sales>
                 <rewrite>
                     <order>Twm_Sales_Model_Order</order>
+                    <order_api_v2>Twm_Sales_Model_Order_Api_V2</order_api_v2>
                 </rewrite>
             </sales>
         </models>
@@ -29,4 +30,5 @@
             </sales>
         </blocks>
     </global>
+
 </config>

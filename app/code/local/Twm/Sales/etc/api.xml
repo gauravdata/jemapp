@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <sales_order translate="title" module="sales">
+                <model>sales/order_api</model>
+                <title>Order API</title>
+                <acl>sales/order</acl>
+                <methods>
+                    <receiveRma translate="title" module="sales">
+                        <title>Receive RMA</title>
+                        <acl>sales/order</acl>
+                    </receiveRma>
+                </methods>
+            </sales_order>
+            <resources_alias>
+                <order>sales_order</order>
+            </resources_alias>
+        </resources>
+    </api>
+</config>
