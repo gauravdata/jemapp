@@ -72,8 +72,8 @@
 		
 		checkoutProducts.push(
 		{
-			'name': 		'<?php echo $args->name ?>',
-			'category': 	'<?php echo $category->getName() ?>',
+            'name': 		<?php echo json_encode($args->name) ?>,
+            'category': 	<?php echo json_encode($category->getName()) ?>,
 			'id': 			'<?php echo $args->id ?>',
 			'price': 		'<?php echo $item->getProduct()->getFinalPrice() ?>',
 			'quantity': 	'<?php echo $item->getQty() ?>',

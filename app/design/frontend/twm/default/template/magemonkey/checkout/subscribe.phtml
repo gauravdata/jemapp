@@ -17,9 +17,10 @@ $force = $this->getForce();
             subscribeValue = checkedLists + ',';
             $('magemonkey-subscribe').remove();
         }
+        if (element == null) return;
 
         //if checked add this element else remove it
-        if (element.checked) {
+        if (element && $(element).checked) {
             var inputer = new Element('input', {
                 name: "magemonkey_subscribe",
                 id: "magemonkey-subscribe",
