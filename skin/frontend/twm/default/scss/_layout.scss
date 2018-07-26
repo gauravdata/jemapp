@@ -718,3 +718,24 @@ ul.social {
 		margin: 0;
 	}
 }
+
+@media(max-width: 1600px) {
+	#wrapper {
+		.tss-ls-footer-controls {
+			width: 300px;
+			position: absolute;
+			right: 0;
+			bottom: 0;
+		}
+		#tss-ls-locations {
+			padding-bottom: 50px;
+		}
+	}
+}
+@media(min-width: 1200px) {
+	#wrapper {
+		.tss-ls-footer-controls {
+			min-width: 410px;
+		}
+	}
+}
