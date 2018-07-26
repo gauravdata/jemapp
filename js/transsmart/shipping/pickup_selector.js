@@ -822,6 +822,9 @@ Transsmart.Shipping.Pickup = Class.create({
             var containerHeight = container.offsetHeight;
             var selector = container.select('.tss-selector')[0];
             var headerHeight = container.select('.tss-ls-header')[0].offsetHeight;
+
+            var jmaHeaderHeight = document.getElementById('header').offsetHeight;
+
             var footerHeight = container.select('.tss-ls-footer-controls')[0].offsetHeight;
             var padding = 20;
             var contentHeight = containerHeight - headerHeight - footerHeight - (padding * 2);
@@ -841,7 +844,7 @@ Transsmart.Shipping.Pickup = Class.create({
                 headerHeight = 0;
                 footerHeight = 0;
             }
-            var marginTop = Math.round((containerHeight - contentHeight - headerHeight - footerHeight) / 2);
+            var marginTop = Math.round(((containerHeight - contentHeight - headerHeight - footerHeight) - (jmaHeaderHeight / 2)) / 2);
             if (marginTop < padding) {
                 marginTop = padding;
             }
