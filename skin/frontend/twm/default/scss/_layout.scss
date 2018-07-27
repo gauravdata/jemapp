@@ -719,7 +719,10 @@ ul.social {
 	}
 }
 
-@media(max-width: 1600px) {
+/*======================================================
+	SERVICE POINT
+======================================================*/
+@media screen and (max-width: 1600px) and (min-width: 770px) {
 	#wrapper {
 		.tss-ls-footer-controls {
 			width: 300px;
