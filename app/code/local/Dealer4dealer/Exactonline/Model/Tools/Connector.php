@@ -1,276 +1,398 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+<?php
+class Dealer4dealer_Exactonline_Model_Tools_Connector extends Mage_Core_Model_Abstract
+{
+    private static $_connector_instance;
+
+    private $log;
+    private $partnerKey;
+    private $settings;
+    private $division;
+    private $xmlAnalizer;
+    private $utilities;
+
+    protected $_maxLifetime = 600;
+    protected $_tokenTime = 0;
+
+    protected $_apiClientId;
+
+    public static function getInstance()
+    {
+        if (!isset(self::$_connector_instance)) {
+            $class = __CLASS__;
+            self::$_connector_instance = new $class;
+        }
+
+        return self::$_connector_instance;
+    }
+
+    public function __construct()
+    {
+        $this->settings         = Mage::getSingleton('exactonline/tools_settings');
+        $this->log              = Mage::getSingleton('exactonline/tools_log');
+        $this->xmlAnalizer      = Mage::getSingleton('exactonline/tools_xml_analyzer');
+        $this->utilities        = Mage::getSingleton('exactonline/tools_utilities');
+
+        $this->_apiClientId     = $this->settings->getSetting('api_client_id');
+        $this->partnerKey       = $this->settings->getSetting("partnerkey");
+        $this->division         = $this->settings->getSetting('exact_division');
+
+        parent::__construct();
+    }
+
+    private function initCurl($url)
+    {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        $this->refreshTokens();
+
+        $header = array();
+        $header[] = 'X-ExactOnline-ApplicationKey: ' . $this->_apiClientId;
+        $header[] = 'content-type: application/json';
+        $header[] = 'accept: application/json';
+        $header[] = 'Authorization: Bearer ' . base64_decode(Mage::helper('core')->decrypt($this->settings->getSetting('access_token')));
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+        return $ch;
+    }
+
+    /**
+     * @param $type
+     * @param $xml
+     * @return array
+     */
+    public function sendXML($type, $xml)
+    {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        $url = sprintf('https://start.exactonline.nl/docs/XMLUpload.aspx?Topic=%s&_Division_=%s&PartnerKey=%s', $type, $this->division, urlencode($this->_apiClientId));
+
+        try {
+            $ch = $this->initCurl($url);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
+
+            $response = curl_exec($ch);
+
+            if ($response === false) {
+                $error = curl_error($ch);
+                $this->log->writeLog('Error while sending XML for ' . $type. ' Error: ' . $error);
+            } else {
+                $this->log->writeLog('XML send successfully for ' . $type);
+            }
+
+            return array('result' => $response, 'ch' => $ch);
+
+        } catch (Exception $e) {
+            $this->log->writeLog('Error while sending XML for ' . $type. ' Error: ' . $e->getMessage(). ' Aborting synchronisation.');
+            curl_close($ch);
+            die('Aborting Synchronisation');
+        }
+    }
+
+    public function setDivision($divisionNr)
+    {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        $this->division = $divisionNr;
+
+        $this->log->writeLog('Switching Division to ' . $divisionNr);
+    }
+
+    public function refreshTokens()
+    {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        if ((time() - $this->_tokenTime) > $this->_maxLifetime) {
+
+            $this->log->writeLog('AccessToken expired. Refreshing oAuth2 Token');
+
+            $client = new Zend_Http_Client();
+
+            $refreshToken   = base64_decode(Mage::helper('core')->decrypt($this->settings->getSetting('refresh_token')));
+            $userId         = $this->settings->getSetting('api_user_id');
+            $apiKey         = $this->settings->getSetting('api_key');
+            $apiKey         = base64_decode(Mage::helper('core')->decrypt($apiKey));
+            $country        = $this->settings->getSetting('api_country');
+
+            $url = $this->settings->getSetting('api_url');
+            $url = $url . '/refresh.php?refresh_token=%s&connector_id=%s&api_key=%s&country=%s';
+            $url = sprintf($url, urlencode($refreshToken), urlencode($userId), urlencode($apiKey), urlencode($country));
+
+            $client->setUri($url);
+            $client->setMethod('POST');
+            $response = $client->request();
+
+            if ($response->isSuccessful()) {
+
+                $data = $response->getBody();
+
+                $tokens = Zend_Json::decode($data);
+
+                $this->settings->saveSetting('access_token', Mage::helper('core')->encrypt(base64_encode($tokens['access_token'])));
+                $this->settings->saveSetting('refresh_token', Mage::helper('core')->encrypt(base64_encode($tokens['refresh_token'])));
+
+                $this->_tokenTime = time();
+            } else {
+
+                $this->log->writeLog('Error while refreshing AccessToken. Aborting Synchronisation.');
+                die('Aborting Synchronisation');
+            }
+        } else {
+            $this->log->writeLog('AccessToken is still valid. Do not  refresh oAuth2 tokens');
+        }
+    }
+
+    public function getStockXML()
+    {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        $this->log->writeLog('Starting Stock synchronisation');
+
+        $downloadId = $this->settings->getSetting('download_id_stock');
+        if(is_null($downloadId) || $downloadId == '') {
+            $downloadId = 'D4D';
+        }
+
+        $url = "https://start.exactonline.nl/docs/XMLDownload.aspx?Topic=StockPositions&PartnerKey=".$this->partnerKey."&Params_DownloadID=".$downloadId.'&_Division_='.$this->division; //.'&username='.$this->_username.'&password='.$this->_password;
+
+        $ch = $this->initCurl($url);
+
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, utf8_encode($url));
+
+        $result = curl_exec($ch);
+
+        if (curl_error($ch) != '') {
+            $this->log->writeLog('Error while sending Stock XML');
+            return false;
+        } else {
+            $this->log->writeLog('Stock XML received');
+            return $result;
+        }
+    }
+
+    public function getProducts()
+    {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        $this->log->writeLog('Start downloading Product XML');
+
+        $downloadId = $this->settings->getSetting('download_id');
+        if(is_null($downloadId) || $downloadId == '') {
+            $downloadId = 'D4D';
+        }
+
+        $url = sprintf('https://start.exactonline.nl/docs/XMLDownload.aspx?Topic=Items&PartnerKey=%s&Params_DownloadID=%s&_Division_=%s', $this->_apiClientId, $downloadId, $this->division);
+
+        $ch = $this->initCurl($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, utf8_encode($url));
+        $result = curl_exec($ch);
+
+        if(curl_error($ch) != '') {
+            $this->log->writeLog('Error while sending Product XML');
+            return false;
+        } else {
+            $this->log->writeLog('Product XML received.');
+            return $result;
+        }
+    }
+
+    public function getCustomers()
+    {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        $this->log->writeLog('Start downloading Customer XML');
+
+        $downloadId = $this->settings->getSetting('download_id');
+        if(is_null($downloadId) || $downloadId == '') {
+            $downloadId = 'D4D';
+        }
+
+        $url = sprintf('https://start.exactonline.nl/docs/XMLDownload.aspx?Topic=Accounts&PartnerKey=%s&Params_DownloadID=%s&Params_ValidEmailAddress=%s&_Division_=%s', $this->_apiClientId, $downloadId, 1, $this->division);
+
+        $ch = $this->initCurl($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, utf8_encode($url));
+        $result = curl_exec($ch);
+
+        if(curl_error($ch) != '') {
+            $this->log->writeLog('Error while sending Product XML');
+            return false;
+        } else {
+            $this->log->writeLog('Customers XML received.');
+            return $result;
+        }
+    }
+
+    /**
+     * @deprecated Used in older versions of the connector to check if orders has been synchronised.
+     * @return mixed|string
+     */
+    public function getOrderNumbersXML()
+    {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        $this->log->writeLog('Starting downloading Order XML');
+
+        $downloadId = $this->settings->getSetting('download_id');
+        if(is_null($downloadId) || $downloadId == '') {
+            $downloadId = 'D4D';
+        }
+
+        $url = 'https://start.exactonline.nl/docs/XMLDownload.aspx?Topic=SalesOrders&PartnerKey='.$this->partnerKey.'&_Division_='. $this->division.'&Params_DownloadID='.$downloadId;
+
+        $ch = $this->initCurl($url);
+
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, utf8_encode($url));
+        $result = curl_exec($ch);
+
+        if(curl_error($ch) != '') {
+            $this->log->writeLog('Error while downloading Order XML');
+
+            return false;
+
+        } else {
+            $this->log->writeLog('Order XML received');
+
+            return $result;
+        }
+    }
+
+    public function findDebtor($emailAddress)
+    {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        $this->log->writeLog('Looking for debtor with email address ' . $emailAddress);
+
+        try {
+
+            $this->refreshTokens();
+
+            $contentType = 'application/json';
+
+            $client = new Zend_Http_Client();
+            $client->setHeaders(array(
+                'X-ExactOnline-PartnerKey' => $this->_apiClientId,
+                'Content-Type' => $contentType,
+                'Accept' => $contentType,
+                'Authorization: Bearer ' . base64_decode(Mage::helper('core')->decrypt($this->settings->getSetting('access_token')))
+            ));
+
+            $url = sprintf('https://start.exactonline.nl//api/v1/%s/crm/Accounts?$filter=Email+eq+%s&$select=ID,Code,Email', $this->division, "'".$emailAddress."'");
+
+            $client->setUri($url);
+            $response = $client->request('GET');
+
+            if ($response->isSuccessful()) {
+
+                $body = $response->getBody();
+                $data = Zend_Json::decode($body);
+
+                if (isset($data['d']['results'])) {
+                    return array_shift($data['d']['results']);
+                }
+
+                $this->log->writeLog('No debtor found with email address ' . $emailAddress);
+            }
+            else
+            {
+                $this->log->writeLog('No Valid response for account: ' . $emailAddress);
+                $this->log->writeLog('HTTP-Status: ' . $response->getStatus() );
+                $this->log->writeLog('HTTP-Message: ' . $response->getMessage() );
+            }
+
+        } catch (Exception $e) {
+            $this->log->writeLog('Error while looking for debtor with email address ' . $emailAddress. ': ' . $e->getMessage());
+        }
+
+        return false;
+    }
+
+    public function getCustomerByDebtorId($debtorId)
+    {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        $url = sprintf('https://start.exactonline.nl/docs/XMLDownload.aspx?Topic=Accounts&PartnerKey=%s&Params_Code=%s&_Division_=%s',$this->_apiClientId,$debtorId, $this->division);
+
+        $ch = $this->initCurl($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, utf8_encode($url));
+
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch) != '') {
+            $this->log->writeLog('Error while downloading customer information.');
+            return false;
+        } else {
+            return simplexml_load_string($response);
+        }
+    }
+
+    public function getPriceLists($lastSyncDate){
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        try {
+
+            $this->refreshTokens();
+
+            $url = sprintf('https://start.exactonline.nl/api/v1/%s/sales/PriceLists?$select=%s&$orderby=%s&$filter=Modified+gt+DateTime\'%s\'', $this->division, 'Code,ID,Modified', 'Modified', urlencode($lastSyncDate));
+
+            $client = new Zend_Http_Client($url);
+
+            $header = array(
+                'X-ExactOnline-ApplicationKey'  => $this->_apiClientId,
+                'content-type'                  => 'application/json',
+                'accept'                        => 'application/json',
+                'Authorization'                 => 'Bearer ' . base64_decode(Mage::helper('core')->decrypt($this->settings->getSetting('access_token')))
+            );
+
+            $client->setHeaders($header);
+
+            $response = $client->request('GET');
+
+            if ($response->isSuccessful()) {
+
+                $body = $response->getBody();
+
+                $data = Zend_Json::decode($body);
+
+                return $data['d']['results'];
+            }
+        } catch (Exception $e) {
+            $this->log->writeLog('Error while getting pricelists: ' .  $e->getMessage());
+        }
+
+        return array();
+    }
+
+    public function getPricelist($priceListGuid) {
+        $this->settings->saveSetting('last_heartbeat', date('Y-m-d H:i:s'));
+        try {
+            $client = new Zend_Http_Client();
+
+            $this->refreshTokens();
+
+            $header = array(
+                'X-ExactOnline-ApplicationKey' => $this->_apiClientId,
+                'content-type' => 'application/json',
+                'accept' => 'application/json',
+                'Authorization' => 'Bearer ' . base64_decode(Mage::helper('core')->decrypt($this->settings->getSetting('access_token')))
+            );
+
+            $client->setHeaders($header);
+
+            $url = sprintf('https://start.exactonline.nl/docs/SlsPriceListSearch.aspx?Export=1&_Division_=%s&PriceList=%s&SysExporting=4&csvdelimiter=%s&exportlines=%', $this->division, urlencode($priceListGuid), urlencode(';'), 0);
+            $client->setUri($url);
+
+            $response = $client->request('POST');
+
+            if ($response->isSuccessful()) {
+                return $response->getBody();
+            }
+        } catch (Exception $e) {
+            $this->log->writeLog('Error while getting pricelist: ' .  $e->getMessage());
+        }
+
+        return false;
+    }
+}
