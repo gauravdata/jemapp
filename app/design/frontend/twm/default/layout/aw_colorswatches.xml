@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+             <action method="addCss" ifconfig="awcolorswatches/global/enabled">
+                 <stylesheet>aw_colorswatches/css/style.css</stylesheet>
+             </action>
+            <action method="addItem" ifconfig="awcolorswatches/global/enabled">
+                <type>skin_js</type><name>aw_colorswatches/js/colorswatches.js</name>
+            </action>
+        </reference>
+    </default>
+    <PRODUCT_TYPE_configurable>
+        <reference name="after_body_start">
+            <block type="core/template" name="awcs.js.init" template="aw_colorswatches/catalog/product/init.phtml"/>
+        </reference>
+        <reference name="product.info.options.wrapper">
+            <block type="catalog/product_view_type_configurable" name="awcs.product.info.options.configurable" after="-" template="aw_colorswatches/catalog/product/view/type/options/configurable.phtml"/>
+        </reference>
+    </PRODUCT_TYPE_configurable>
+    <aw_colorswatches_category_handle>
+        <reference name="head">
+            <action method="addJs"><script>varien/product.js</script></action>
+            <action method="addJs"><script>varien/configurable.js</script></action>
+            <action method="addItem" ifconfig="awcolorswatches/global/enabled">
+                <type>skin_js</type><name>aw_colorswatches/js/category.js</name>
+            </action>
+        </reference>
+        <reference name="after_body_start">
+            <block type="core/template" name="awcs.js.init" template="aw_colorswatches/catalog/category/init.phtml"/>
+        </reference>
+    </aw_colorswatches_category_handle>
+    <catalog_category_default>
+        <update handle="aw_colorswatches_category_handle" />
+        <reference name="product_list">
+            <action method="addPriceBlockType"><type>configurable</type><block>awcolorswatches/catalog_category_configurable_price</block></action>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_view>
+        <update handle="aw_colorswatches_category_handle" />
+        <reference name="product_list">
+            <action method="addPriceBlockType"><type>configurable</type><block>awcolorswatches/catalog_category_configurable_price</block></action>
+        </reference>
+    </catalog_category_view>
+    <catalog_category_layered>
+        <update handle="aw_colorswatches_category_handle" />
+        <reference name="product_list">
+            <action method="addPriceBlockType"><type>configurable</type><block>awcolorswatches/catalog_category_configurable_price</block></action>
+        </reference>
+    </catalog_category_layered>
+    <catalogsearch_result_index>
+        <update handle="aw_colorswatches_category_handle" />
+        <reference name="search_result_list">
+            <action method="addPriceBlockType"><type>configurable</type><block>awcolorswatches/catalog_category_configurable_price</block></action>
+        </reference>
+    </catalogsearch_result_index>
+    <catalogsearch_advanced_result>
+        <update handle="aw_colorswatches_category_handle" />
+        <reference name="search_result_list">
+            <action method="addPriceBlockType"><type>configurable</type><block>awcolorswatches/catalog_category_configurable_price</block></action>
+        </reference>
+    </catalogsearch_advanced_result>
+    <awadvancedsearch_result_index>
+        <update handle="aw_colorswatches_category_handle" />
+        <reference name="search_result_catalog">
+            <action method="addPriceBlockType"><type>configurable</type><block>awcolorswatches/catalog_category_configurable_price</block></action>
+        </reference>
+    </awadvancedsearch_result_index>
+</layout>

@@ -1,0 +1,32 @@
+<?php /** @var Mage_Catalog_Block_Product_View_Type_Configurable $this */?>
+<?php if (AW_Colorswatches_Helper_Config::isEnabled()):?>
+<?php
+$_product = $this->getProduct();
+$_helper = Mage::helper('awcolorswatches/swatch');
+$_configurableAttributeCollection = $_helper->getConfigurableAttributeCollectionForProduct($_product);
+$_swatchAttributeCollection = $_helper->getSwatchAttributeCollectionForProduct($_product);
+$_imgWidth = AW_Colorswatches_Helper_Config::getProductViewImageWidth();
+$_imgHeight = AW_Colorswatches_Helper_Config::getProductViewImageHeight();
+?>
+<?php if (count($_configurableAttributeCollection) && count($_swatchAttributeCollection)):?>
+    <script type="text/javascript">
+    <?php foreach($_configurableAttributeCollection as $_attribute):?>
+        <?php $_swatch = $_helper->getSwatchAttributeFromCollectionByAttributeId($_swatchAttributeCollection, $_attribute->getAttributeId());?>
+        new AWColorswatch({
+            sourceElSelector: '#attribute<?php echo $_attribute->getAttributeId() ?>',
+            productId: <?php echo Zend_Json::encode($_product->getId()) ?>,
+            attributeId: <?php echo Zend_Json::encode($_attribute->getAttributeId()) ?>,
+            isUseSwatch: <?php echo Zend_Json::encode(!!$_swatch);?>,
+            <?php if ($_swatch):?>
+            labelSelectFn: function(sourceEl){return sourceEl.up('dd').previous('dt').down('label');},
+            isShowPopup: <?php echo Zend_Json::encode(!!$_swatch->getIsDisplayPopup()) ?>,
+            size: [<?php echo Zend_Json::encode($_imgWidth) ?>, <?php echo Zend_Json::encode($_imgHeight) ?>],
+            optionData: <?php echo Zend_Json::encode($_helper->getOptionDataForSwatch($_swatch, $_product, $_imgWidth, $_imgHeight));?>
+            <?php else: ?>
+            optionData: <?php echo Zend_Json::encode($_helper->getOptionDataForAttribute($_attribute, $_product));?>
+            <?php endif;?>
+        });
+    <?php endforeach;?>
+    </script>
+<?php endif;?>
+<?php endif;?>

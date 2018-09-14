@@ -1,0 +1,132 @@
+.buttons-set {
+	@extend .clearfix;
+	margin-bottom: $m-spacing;
+}
+
+.button,
+input[type=submit] {
+	@extend .main-transition;
+	@include radius(0);
+	display: inline-block;
+	line-height: $m-font * 2;
+	padding: $xxs-spacing $xl-spacing;
+	border: 2px solid $l-grey;
+	background-color: $l-grey;
+	color: $white;
+	cursor: pointer;
+	font-size: $m-font;
+	margin-right: $m-spacing;
+	font-family: $main-font;
+
+	&:hover,
+	&:focus {
+		background-color: transparent;
+		color: $l-grey;
+		outline: none;
+	}
+
+	&.btn-cart,
+	&.btn-checkout {
+		background-color: $primary;
+		border-color: $primary;
+		font-size: $xl-font;
+
+		&:hover,
+		&:focus {
+			background-color: transparent;
+			color: $primary;
+		}
+	}
+
+	&.button-link {
+		background-color: transparent;
+		font-weight: $medium;
+		color: $primary;
+		border: none;
+		padding: 0;
+
+		&:before {
+			font-family: 'simple-line-icons';
+			content: "\e606";
+			margin-right: $xxs-spacing;
+		}
+
+		&:hover,
+		&:focus {
+			color: $xl-grey;
+		}
+
+		&.button-back {
+			&:before {
+				content: "\e605";
+			}
+		}
+	}
+
+	&.button-simple {
+		background-color: $l-grey;
+		border-color: $l-grey;
+
+		&:hover,
+		&:focus {
+			background-color: transparent;
+			color: $l-grey;
+		}
+	}
+
+	&.button-outline {
+		background-color: transparent;
+		border-color: $s-grey;
+		color: $l-grey;
+
+		&:hover,
+		&:hover {
+			border-color: $primary;
+			color: $primary;
+		}
+	}
+
+	&.button-sm {
+		padding: 0 $s-spacing;
+		font-size: $s-font;
+		min-height: 0;
+		line-height: $xxl-font;
+	}
+
+	&.button-block {
+		display: block;
+		width: 100%;
+		margin: 0;
+		text-align: center;
+		padding-left: $s-spacing;
+		padding-right: $s-spacing;
+	}
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+p.back-link {
+	display: inline-block;
+	margin-right: $xl-spacing;
+
+	a {
+		color: $primary;
+
+		&:before {
+			font-family: 'simple-line-icons';
+			content: "\e605";
+			margin-right: $xxs-spacing;
+		}
+
+		&:hover,
+		&:focus {
+			color: $xl-grey;
+		}
+	}
+
+	small {
+		display: none;
+	}
+}
