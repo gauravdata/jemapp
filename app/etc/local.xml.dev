@@ -41,7 +41,7 @@
             <default_setup>
                 <connection>
 		    <host><![CDATA[127.0.0.1]]></host>
-		    <dbname><![CDATA[jma-live]]></dbname>
+		    <dbname><![CDATA[notomatoes_shop]]></dbname>
 		    <username><![CDATA[root]]></username>
 		    <password><![CDATA[monkeytown]]></password>
                     <active>1</active>

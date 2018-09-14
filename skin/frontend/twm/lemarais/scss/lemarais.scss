@@ -1,0 +1,16 @@
+body {
+	background-color: red;
+}
+
+@import "../../default/scss/mixins";
+@import "../../default/scss/extends";
+@import "_partials/variables";
+
+@import "_partials/buttons";
+@import "_partials/fonts";
+@import "_partials/category";
+@import "_partials/cms";
+@import "_partials/header";
+@import "_partials/layout";
+@import "_partials/product";
+@import "_partials/typography";
