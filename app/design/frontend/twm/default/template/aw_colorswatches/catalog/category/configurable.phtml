@@ -1,0 +1,62 @@
+<?php
+$_product = $this->getProduct();
+$_helper = Mage::helper('awcolorswatches/swatch');
+
+$_containerId = "aw-colorswatches-category-" . $_product->getId();
+$_spConfigJSON = AW_Colorswatches_Helper_Product::getSPConfigAsJSON($_product, $_containerId);
+$_optionsPriceConfigJSON = AW_Colorswatches_Helper_Product::getOptionsPriceConfigAsJSON($_product);
+
+$_allowedAttributes = $_helper->getConfigurableAttributeCollectionForProduct($_product);
+$_swatchAttributeCollection = $_helper->getSwatchAttributeCollectionForProduct($_product);
+
+$_imgWidth = AW_Colorswatches_Helper_Config::getCategoryViewImageWidth();
+$_imgHeight = AW_Colorswatches_Helper_Config::getCategoryViewImageHeight();
+?>
+<?php if ($_product->isSaleable() && count($_allowedAttributes) && count($_swatchAttributeCollection)):?>
+<div class="aw-colorswatches-category" id="<?php echo $_containerId;?>">
+    <dl>
+        <?php foreach($_allowedAttributes as $_attribute): ?>
+            <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label></dt>
+            <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+                <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                    <option><?php echo $this->__('Choose an Option...') ?></option>
+                </select>
+            </dd>
+        <?php endforeach; ?>
+    </dl>
+    <script type="text/javascript">
+        var spConfig = new Product.Config(<?php echo $_spConfigJSON; ?>);
+        optionsPrice[<?php echo $_product->getId();?>] = new Product.OptionsPrice(<?php echo $_optionsPriceConfigJSON; ?>);
+    </script>
+</div>
+<script type="text/javascript">
+<?php foreach($_allowedAttributes as $_attribute):?>
+    <?php $_swatch = $_helper->getSwatchAttributeFromCollectionByAttributeId($_swatchAttributeCollection, $_attribute->getAttributeId());?>
+    new AWColorswatch({
+        sourceElSelector: '#<?php echo $_containerId;?> #attribute<?php echo $_attribute->getAttributeId() ?>',
+        productId: <?php echo Zend_Json::encode($_product->getId()) ?>,
+        attributeId: <?php echo Zend_Json::encode($_attribute->getAttributeId()) ?>,
+        isUseSwatch: <?php echo Zend_Json::encode(!!$_swatch);?>,
+        <?php if ($_swatch):?>
+        labelSelectFn: function(sourceEl){return sourceEl.up('dd').previous('dt').down('label');},
+        isShowPopup: <?php echo Zend_Json::encode(!!$_swatch->getIsDisplayPopup()) ?>,
+        size: [<?php echo Zend_Json::encode($_imgWidth) ?>, <?php echo Zend_Json::encode($_imgHeight) ?>],
+        optionData: <?php echo Zend_Json::encode($_helper->getOptionDataForSwatch($_swatch, $_product, $_imgWidth, $_imgHeight));?>
+        <?php else: ?>
+        optionData: <?php echo Zend_Json::encode($_helper->getOptionDataForAttribute($_attribute, $_product));?>
+        <?php endif;?>
+    });
+<?php endforeach;?>
+</script>
+<script type="text/javascript">
+new AWColorswatchCategoryProductAdder({
+    containerElSelector: "<?php echo "#" . $_containerId;?>",
+    productId: <?php echo Zend_Json::encode($_product->getId()) ?>,
+    addToCartUrl: <?php echo Zend_Json::encode(AW_Colorswatches_Helper_Product::getAddToCartUrl($_product));?>,
+    addToCartBtnSelectFn: function(containerEl){
+        var actionsEl = containerEl.next('.actions')||containerEl.next('p')
+        return actionsEl.down('button');
+    }
+});
+</script>
+<?php endif;?>
