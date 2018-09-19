@@ -4,12 +4,11 @@
 
 <?php
 
-$quote = $_order->getQuote();
-$storeCredits = Mage::helper('aw_storecredit/totals')->getQuoteStoreCredit($quote->getId());
+$quoteId = $_order->getQuoteId();
+$storeCredits = Mage::helper('aw_storecredit/totals')->getQuoteStoreCredit($quoteId);
 if (!is_array($storeCredits)) {
     $storeCredits = array();
 }
-
 ?>
 
 <table

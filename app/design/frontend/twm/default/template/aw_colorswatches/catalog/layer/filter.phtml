@@ -1,0 +1,34 @@
+<?php
+/**
+ * Template for filter items block
+ *
+ * @see Mage_Catalog_Block_Layer_Filter
+ */
+?>
+<ol>
+<?php foreach ($this->getItems() as $_item): ?>
+    <li>
+        <?php $swatch = Mage::getModel('awcolorswatches/swatch')->loadByOptionId($_item->getValue());?>
+        <?php $isCanShowSwatchImage = $swatch->getId() && $swatch->getImage();?>
+        <?php if($isCanShowSwatchImage):?>
+            <?php $_image = AW_Colorswatches_Helper_Image::resizeImage($swatch->getImage(), 16, 16);?>
+            <?php if ($_item->getCount() > 0): ?>
+                <a class="aw-colorswatches-layer-filter" href="<?php echo $this->urlEscape($_item->getUrl()) ?>">
+                    <img src="<?php echo $_image?>" height="16" width="16" alt="<?php echo $_item->getLabel() ?>" title="<?php echo $_item->getLabel() ?>"/>
+                </a>
+            <?php else: ?>
+                <img src="<?php echo $_image?>" height="16" width="16" alt="<?php echo $_item->getLabel() ?>" title="<?php echo $_item->getLabel() ?>"/>
+            <?php endif;?>
+        <?php endif;?>
+        <?php if (!$isCanShowSwatchImage || AW_Colorswatches_Helper_Config::isCanShowTextInLayer()):?>
+            <?php if ($_item->getCount() > 0): ?>
+                <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>"><?php echo $_item->getLabel() ?></a>
+            <?php else: echo $_item->getLabel() ?>
+            <?php endif; ?>
+        <?php endif;?>
+        <?php if (!method_exists($this,'shouldDisplayProductCount') || $this->shouldDisplayProductCount()): ?>
+            (<?php echo $_item->getCount() ?>)
+        <?php endif; ?>
+    </li>
+<?php endforeach ?>
+</ol>

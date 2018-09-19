@@ -32,7 +32,6 @@ html, body {
 
 	> ul {
 		@extend .unstyled;
-		margin-bottom: $xxl-spacing * 1.5;
 
 		> li {
 			border-bottom: 1px solid $s-grey;
@@ -123,6 +122,12 @@ html, body {
 				}
 			}
 		}
+	}
+
+	> .store-switcher {
+		display: flex;
+		justify-content: center;
+		padding: $m-spacing;
 	}
 }
 

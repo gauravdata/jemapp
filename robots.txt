@@ -1,5 +1,11 @@
-Sitemap: http://www.jemappelle.nl/sitemap.xml
+User-agent: SemrushBot
+Disallow: /
 
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
 
 User-agent: *
 Crawl-delay: 10
@@ -69,3 +75,6 @@ Disallow: /*.php$
 Disallow: /*?SID=
 Disallow: /rss*
 Disallow: /*PHPSESSID
+
+Sitemap: http://www.jemappelle.nl/sitemap.xml
+

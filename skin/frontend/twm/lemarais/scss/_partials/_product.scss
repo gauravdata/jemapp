@@ -1,0 +1,133 @@
+// PRICE AND DESCRIPTION BOX
+.product-image {
+	overflow: hidden;
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	padding-top: 150%;
+
+	img {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		color: white;
+		height: 100% !important;
+		transform: translateX(-50%);
+		margin-left: 50%;
+		max-width: none !important;
+
+	}
+}
+
+.product-name {
+	font-size: $xl-font !important;
+}
+
+.product-description {
+	font-size: $m-font;
+	margin-bottom: 0;
+	margin-top: 5px;
+	color: $black;
+}
+
+.price-box {
+	span {
+		&.price {
+			font-size: $xl-font;
+			color: $black;
+			font-weight: $bold;
+		}
+	}
+
+	.special-price {
+		.price {
+			&:first-of-type {
+				color: $m-grey;
+				text-decoration: line-through;
+			}
+			&:nth-of-type(2) {
+				margin-left: 5px;
+				color: $success;
+			}
+		}
+	}
+}
+
+// PRODUCT VISUALS ON DETAIL PAGE
+.product-visual-wrapper {
+
+	.more-views {
+		z-index: 1;
+	}
+
+	.product-visual {
+		height: auto;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		background-color: $white;
+
+		.constrain-4-3 {
+			margin-left: -31%;
+			overflow: hidden;
+			display: flex !important;
+			justify-content: center;
+			background-color: green;
+			align-items: center;
+			position: relative;
+			width: 75vh;
+			height: 100vh;
+			max-height: calc(100vh - 98px);
+
+			img {
+				height: 100vh !important;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				right: 0;
+				left: 0;
+				color: white;
+				transform: translateX(-50%);
+				margin-left: 50%;
+				max-width: none !important;
+
+			}
+		}
+	}
+}
+
+.onsale-product-container {
+	z-index: initial;
+}
+
+@media (max-width: 1080px){
+	.product-visual-wrapper {
+		.product-visual {
+			.constrain-4-3 {
+				margin-left: -45%;
+			}
+		}
+	}
+}
+
+@media (max-width: 810px){
+	.product-visual-wrapper {
+		.product-visual {
+			.constrain-4-3 {
+				margin-left: 0;
+				width: auto;
+				height: auto;
+				max-height: auto !important;
+				overflow: auto;
+				position: initial;
+				/* height: 100vh; */
+				/* max-height: calc(100vh - 98px); */
+			}
+		}
+	}
+	.product-options-wrapper {
+		padding: 15px;
+	}
+}

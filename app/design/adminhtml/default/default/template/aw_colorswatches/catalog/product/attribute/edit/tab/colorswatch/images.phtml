@@ -1,0 +1,48 @@
+<?php /** @var AW_Colorswatches_Block_Adminhtml_Catalog_Product_Attribute_Edit_Tab_Colorswatch_Images $this  */?>
+<div class="awcolorswatch-images-container">
+    <div class="awcolorswatch-images-box">
+        <div class="awcolorswatch-images-note">
+            <?php echo $this->__(
+                "Here you can upload swatches for attribute values. "
+                . "First upload images (you can select more than 1 file), "
+                . "then assign them to attribute values using drag'n'drop"
+            ); ?>
+        </div>
+        <div class="awcolorswatch-images-grid"></div>
+    </div>
+    <div class="awcolorswatch-upload-box">
+        <div class="awcolorswatch-upload-box-attachment-area">
+            <?php echo $this->__("Drop files here or click here to attach them");?>
+            <input type="file" multiple/>
+        </div>
+        <div class="awcolorswatch-upload-box-note"><?php echo $this->getUploadNoteText();?></div>
+        <div class="awcolorswatch-dd-list"></div>
+    </div>
+</div>
+<?php foreach($this->getImageRelations() as $optionId => $imgSrc): ?>
+    <input type="hidden" class="awcolorswatch-images-data" name="aw_csw[options][<?php echo $optionId;?>]" value="<?php echo urlencode($imgSrc);?>">
+<?php endforeach;?>
+<script type="text/javascript">
+    new AWColorswatchesImageUpload({
+        uploadUrl: <?php echo Zend_Json::encode($this->getFileUploadUrl());?>,
+        secureFormKey: <?php echo Zend_Json::encode($this->getFormKey());?>,
+        dataInputSelector: ".awcolorswatch-images-data",
+        dataInputNameTemplate: "aw_csw[options][%d]",
+        containerSelector: '.awcolorswatch-images-container',
+        gridSelector: '.awcolorswatch-images-grid',
+        attachmentAreaSelector: '.awcolorswatch-upload-box-attachment-area',
+        attachmentAreaDragoverCSSClass: 'awcolorswatch-upload-box-attachment-area__dragover',
+        ddListSelector: '.awcolorswatch-dd-list',
+        titles: {
+            undo: <?php echo Zend_Json::encode($this->__('Undo'));?>,
+            removeTitle: <?php echo Zend_Json::encode($this->__('Move image to right area'));?>,
+            completeDrop: <?php echo Zend_Json::encode($this->__('OK'));?>,
+            availableDrop: <?php echo Zend_Json::encode($this->__('You can drop it here'));?>,
+            progressBar: <?php echo Zend_Json::encode($this->__('Upload progress'));?>,
+            uploadResultSuccessMsg: <?php echo Zend_Json::encode($this->__("%d file(s) were successfully added"));?>,
+            uploadResultFailureMsg: <?php echo Zend_Json::encode($this->__("%d file(s) were skipped because they don't match upload conditions"));?>,
+            uploadResultBtn: <?php echo Zend_Json::encode($this->__('Okay'));?>
+        },
+        data: <?php echo Zend_Json::encode($this->getOptionsConfig());?>
+    });
+</script>

@@ -12,6 +12,36 @@
 	font-size: $l-font;
 	font-weight: $bold;
 
+	.website-switcher  {
+		position: fixed;
+		right: 0;
+		top: 0;
+		list-style: none;
+		display: flex;
+		padding: 0;
+		margin: 0;
+
+		li {
+			line-height: 35px;
+
+			a {
+				text-transform: uppercase;
+				font-size: $m-font;
+				padding: 0 $s-spacing;
+				color: $white !important;
+				line-height: 35px;
+				display: block;
+			}
+
+			&.active {
+				a {
+					background-color: $white;
+					color: $black !important;
+				}
+			}
+		}
+	}
+
 	a {
 		color: $xl-grey !important;
 
@@ -190,6 +220,14 @@
 					}
 				}
 			}
+		}
+	}
+}
+
+@media (max-width: 675px){
+	#header {
+		.website-switcher  {
+			display: none;
 		}
 	}
 }

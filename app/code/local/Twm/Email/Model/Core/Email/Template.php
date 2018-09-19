@@ -86,3 +86,4 @@ class Twm_Email_Model_Core_Email_Template extends Ebizmarts_Mandrill_Model_Email
         return $ids[$idx];
     }
 }
+

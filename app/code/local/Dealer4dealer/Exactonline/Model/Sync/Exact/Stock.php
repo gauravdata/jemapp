@@ -1,90 +1,192 @@
-<?php //004fb
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-HR+cPp4kYayCf0vWWkeVR6/Q5EGDmaRkfdLcwymLTo0aI8OtdyA56IlC65rxwy8Q/rz5/8+EW8zM
-Pfwg55BzN2MW6jlgTvuIS+tgaUo1T8zjoaCcPHwV2GaLm03F98gYvsgKJEsq8F7iH7IAOWK/GQAG
-0MP0wtwMMLee8V0Kzsf4fBlt6KHUsIu3f1rQiBkor6L3ljtQDQFTFT+parXH5+RcXFoAsI3KRHPR
-mjMA4jmuhrF/34aNiKQ0zAF6yO+hqEHG9RnDJS0pPYQG3XNHwB6gxW7XQjHPSajdT7tWcOqeMdbd
-8ZLAjsxUpAMiY3dEHAqEvNGvTKFei45dkL5HxSHc0dh+aies4tkkvKAQCh2O+LjNXk+Qys07fITT
-0MCJ6iBzTXuwtfznV9tPcJt9HXJhgZCZPEZyg76/BjxHomgumRUM0I5X1kfRWR2piOJrTccQsGOM
-E0H5al8QjuyLxnkp8yU3s4E2gxW65fWfWxda3hW1HCcBR6/L8rfr83wZ6gFnL5zmb5XMMP1lyYbp
-yGj2GAcJpua3Hp7lDglxa2QeD5b+UdJ7u85I0tuAftiD/WWijKQ8wmX1J4EG0cjic+OIKUOG7ah3
-RkeKK2hGZmf6o0FI9ss0YhnTD/JqptR6Q2Gg7J+sl8Jl7lLZXWhfqwSgowlT0qXAxGWEtaonDmYv
-UrODBk5u0c+30OD1d47ggbFiNeq/pp0sYd0mz/Xbyx2c2Ezki+p5ib57/rT8HIiSmglzWP6AL7/F
-EPBT/E+Pipt3YEgbSqvc+lqdn+Rj+Kez3sDKaXKpvwMr1etnNCq9x3uJxkgawEt8Z1oVXseXDSoz
-cWMRRMoFdBVXFbaZYlf84AD91Go24WZoZNPYKrQYWrGV0K2uua389khRDmQqhd2kfN0DPNeSitYW
-gj3nYMhVOWgxaCycMLbNpZlk+gBii+LZFH1HAKYcJ2ZQ+f2o435dOkQMPpr9ARgqstKadz8XfJsY
-U8sftGpyfjp9IJVYc6/fHxeLDemJaufGXWHG63/kPE4DaMxFHSYPkZg9tVelNE5ESH/+JKNqWjPq
-X6TqNxFmB3L0JMDLW5F/YoviznbiU2X2bVOOVHcE2YNItAkdP7iGz2DOFj5+2d9f2L9HofU4YOOu
-bH+a5bZ78Q2gCd0CvGhYTkxSxB37tY+O8DMF/otR8mD4jkREm6jhIV7kcxt+9B6/Mxq4FZeeYmRQ
-oMm439QJQ9os3Lfxb9zEyn+xE+Xg2AyOmYxJKCe29IpEMu/+gVn65ECL7giqOZeod+fMhZryioyt
-X9POVVR6rn7GmMZMh1kXVI9ikUJ1hnvgYtahJUfCZQMEkjeDGfsmoQDAXlPSdOR0HHnS8aa8daEs
-ed9RcJXt2jovCkewDpwBOSb8S0YwCbyPwwEiELQVUzjeglHIAdmExU5JSDpokNUTuAAFxtzw1GrM
-iGoC6KZfWBaI2HidkIhQ917d1KqjVfpWWOwIr2OTqpuOTs/dmNngQnyj0Q3c4qar57/LXBBpPv9u
-t1db89SblTQ1z34Rwusj5NGOpH1hZRReIiRHt5d2HxNLyaHxvNmVamGKK2IBLX3fe4w1mBxTcJxH
-q/r6yoQKuYWU8AxP8+xRTBFCFZty1AdALH5mitrLYXHeL3+TO5hA2T6ZrM54g45gvkNMW2Dy8cn0
-u4I8Sra5gSbiQyAdQlriuFQwHPbrPihfU6n6zAGmoz1ZCCVEaDTb8bjcWseQ3grOJL3VoW624VS5
-jYogXVSYbOFT8G1dD1vfTZLK/51mm72lBXyAiOy+8v2CW0ZmMt5ZFMkax3DBxckVVujFEqMHjhS5
-nsHehdsKLjPovFnGkANP+1IQiFCo6ByhNkPiYyqkuQ/RYVJQZ4p22uQ4hr7cRNzh+8xS199DWG1m
-8llRhxQhHrIcrzegw8cgrRfiUdQI2B9MLsLyFpiSciI4EBCeSyuXItQMpLrDRHLGH+OJ5jIwA+a5
-gHRLyVBGEcpqXKJgIWbS5S+r57Kwg+3ik+/DhAkoezTQCKXhj3clvKU6W9SipEP2hmJAEm45CJRp
-UOTgemR1ecWtUXkk2RDVH52IL488DknY8I6A3B7Vv0FZCmSD9uaZvubtAfJE7m8S4Jt+d4Qg8oY/
-sEX39cCrkbuS6KGdvUMdvaHsHWc9oZds+TD0CC9yqna74JKPHKW1EGsVqa78FqcbuX7cS2atOmVN
-ZdhFVezB0snYiuqkAKATQi4XdnM2R6hIcxoQxpcAwzeLouHTD4asgNHrSJqciEe5wUCPiy9GIY1s
-jbGdOGBqsM3PJlUI32atbSjhAa1ojexT0N+iabGWDBSPcmS/A32BX0+iUlLnrlZhNr5zfjEIxIy3
-eilVkejSXCi7+NFFbKlk81e0rMEaPzBMOedX9WW9BOfz/33OslmgGlwtTF9ahs3VoXFzH77q6UWH
-zTQxxmSOqvgt9sZUXFNX6sWCxAITPKOJtM8s4uRThXa7kqsVCcnZCNkCcuR/2aCGnyJcEaB2PV/h
-Tp55NKjFNEF0u09Wbqql69krsU9B//XICOPZiaN7+YXfrX5lah4Typ4s6feoFpl/j5u3N5sSmj51
-YhLo4Ez8OAxPhVWVQlHiPwAMf/UI6bMMkjuZPOs9eKT5ANe6GyxZfEPanFapuF3BbIbvxj1SlOZp
-/OxWcCoH1gOlqZKHTTMvXetNnNzJHEq7qPUbh7Be2c6X2T9yKB8d83u4hPjSlsCabgIwvhpt589W
-LXM12NI+RQfkd52yxs7lnuq34ko6PtiGvqX7/eOXn3vwShU4biukTUrji8GQkRsozScolfNuvnpy
-vFQnI5kdbkiRw/16X84NoB3PHgY5fYhAsHl5BLdTvkrQGqIVf8o8R4YNUSHStzKa37MVVKOu4UOF
-y4KGm9FFfs5zrlr9BT+ndqNeXR9XXEVrjnOZM49rXCsE8/OcpE+4Y4WIepPVC2QNArN1H6ifRdw/
-2tINCeNpOf39FdPT8qJLflqQxvDrwdLDtEoUZ5KaSYc4aJhyPbd2BjlEi61sk7AcvPHzqBzpEL7N
-CMNKMC++TdCPG8YWgqGt3o9iB1wUpraY+dDGFwEWeYLwbiuiZ5vXXuEzP8HklGk9oW+fFctT2bAV
-hpIt3LVPzn59e4hoefjpdD/TATfJwwRtlcEtb76oHRRdRlqFymcDyVNqu6plGGCJtm67mFlwdaRT
-qf055Kz8z8QLPJNB3XSUddt4hwrvRQn79GJy1J3f5pzVn7vdRKMuGEm1SmY2XzTaZhw4Qy+TQNSt
-CsU/ygJv6/zCuULkqCBajt87Qkg8WTAidvSrPrP8cFfevcUo7u6kJHS5bbbCIVRgqSW81KPyWNQk
-f0fSWaMCzmJ2O398wujFcBJNR2GgWvQ4W1LmePQveqlfcjrtwt5LhZ30MDu+wt4BOxR9bYA5cXb+
-boHPtX7W0YlUd2S0mh1uFi1cemIRj3jBE73XIB1HCODJ1SztiJw3rblziPXVOcPW4+1Zk8+xJ0lA
-kh1Wzo81v/ucO13oA2ZyMPDkWVjQGxT2MieGoAuxxP/8ws1ZKT9xxE8jpWb10blYR5bM66oqwhUu
-HL6Et3ltQ4GPI69/vbZB5z2kyRMXQA4uexIejhEM7e5BUs6jhgKV/embpgzThs5/KVUb1tDcU5q+
-+s8L9sjy3rbcm8aD0kNT2tLEs01cxU7rkOTWpBl8+2Xdugq9D8Fx8Z5wdH2XE/MHFgO7m0EoY3iU
-b3IGgG01TAZRCAP+JpDUTjoQMMtKsG/RElq0erT1XNHtc/AeufzhmpwQobBT5bumFXwyusdOd4M/
-qEyu9V6zagsVvbOKvRkaM9lR5tFwYjjuKbsGTmSC2nKhla2EqhrS0AI6Al/cTOjQfEJsPDA/jIUX
-BiHDKRcAlF7rM0nKLvnhql121I90zBJwNznZ2A2kWyTvs110vfGwQ2X2wwwy3oL7RM8U5hNfFQaZ
-UD7DaCx2cHHp3/zgpi/y5ctrB+h+ZFuhgzRy0ArBrplZUUTQXndb7Hy94U9exT/vcQrFEI+TkiCq
-7pXS98ESZ84VN3EBZCccAu7Be42DdnEDpdmBpdMeKWHOF+42dZSodQAJNShnEJjOUpBJV3/D+qWY
-6wxlp8JkbmSqZI1a/aSnNV+qSNnHXeU7ra/GjVGp/Ps6+gXBk86D2QkdkhbZ2dv02txre1OKMxF0
-FeUWcYU284ADmfYGQtz2/urKFk9CSKOrDrGWgmmGSVX07L1Llf7lv0pAXexqpbaocu9XzQgSh9nI
-PxQqfL1HT3MEH5QcaxQAGEdX/zkaw7hwz/rG+Rn9J7CaLY8vgdj5tnPrgyLytYFF0A41nRSVCRFf
-bRwAub8O2ID+RnbtfFJ9DRfF5BlL5V7PXpDrd9WLMnQNVKcdgyCgcjNCwkGOvKiWPbo2BAOgpfIz
-6CwwuBEMpiFNHEmNRKb0pwNOIyaY8MeD3vpvVR0/OpgcfPo7DrJI1rNAMMLA50EvY1pQV71QKgxW
-yr7X4F8iYG9R4MUDzVl9bBImnWsfFNBSb29Jes0iDFehUgGLksVh/l0Ej5W7bJkneCpeB9ZjIfSA
-Bu8sGzEzA/I24y7VB6MFadd18pvEXzfxAwjmmt5PQcYoctkxJfUMQxUngo2Q2mR/eUG/LyNz+Iby
-LANxQu0ly/VJr9EkKlvU4eMIwT0su4UduxgeS46FWGjqOgu5nUzShLlPkGT7n31RawAFeOedw75r
-8wYwKhLeQvTHsDBzsgih2eyCaDyxjxvfac2sVmuLGw1lA8jYYeKdNqudbTXqjqE071Nz9nwf4MKt
-vgM29Sd5Evl36depGhp8+SH0qePn2Y+MrzElt9fuek+mqD0Pq6EDR2+CPcaY57bu3MyD+oaTbtV5
-LJzxwo1qSwnT18G/0lR34LnP6PaJPFzXmna2owHImMlYMhh42/K8oDHv4VKD6zFthiLOR/Cl8MVA
-bgukegZ8w6wWoT07AcOUvG0/ke2GWRNep/Si912YGZjK9ByoItnw9MioDn0kLSs0+e0BNB7yu48x
-rKPsp8ak8B3xlKh7XzCKjHianrjexw7oziMuzB4hYR4TcXEOlvWkuqWO40FS1pL9rjSqteHy4f9U
-yvZIakhYgyZm3ICK5rA+dOtqnYnmlu1R3qUP938QqZX33Adw6JqB6cAaoewxOLy4vBnnpOFJiHE5
-0dXGtw4Oce/8qIyq6Zj8OfKzpgamQ0isvYgno1wMdeRr5oEAdnybiMFgN1O8+pgaJx0W2VDmE41r
-yttG/809JFLdcQXLWuXRhg0BI+y38Vck2q+io7ndiIiZ2SOfX8VeyOaGY1VgmQ2Kqt1Is4m9XCje
-1QXUqHfjPkfjVCQ3NdgxcCDB2C+faQynivqAP7BFHCacLCML1NL9UmwWD9ZBvV/YaN+tFSicUHS7
-lY4DZ4ZCOkLaSDZ3fgOTDPNVTJv4j3jlRgm0OYFxyk/jWFut6tHKz8TbjKTrczwoMnb6GsiOWXhu
-8jFWJmWL7f7ILcYAtmIBlJNB1qda0FrA0/nGWIovJseITQ1AwQ1GEXYqp6QuQb0ZSq90VAVQMqEN
-pYfaxgiZtWU5gVU7xvgbjaibXfd4fsn+807/+XthU4yPrdGz0cx23TRM4vKTIfjwPfLoH7R2t9mW
-J7CB4Nmf41oImc3AVFb+oYIqJ9zG89WaECrT1r8E37RnkGrQDgxy9CJY211Jn3gbaGK3yUJnacWj
-XIa52+k4uWTYCxvCxXQHR43TMmbczcGkD/DAps4ba846YZAhkhc9J54uJcsNDiiIsLMGZw8D5/k8
-llzyu2iKzPRdX7nDvOVe4KH77W+VkNkhS1owbmQ1Vzx8cO1cjP2RMQo65w/G86aBjlhnbvn/ynF+
-OWbOigjfa+fA9O/MGQOU14p2vxIk3Rsnh6FLcvvezYRNvDzhVvTR7Uk3gGmcbanu8i21ATGp6I5L
-qX81AiYb5oFMjqPghMMFpfBnsDgGmmzJKG0Eh6lH7ngPpXtT8Kg7lhsiXtsGNImMVG8mVv3ivI16
-XX6lhvMxpEr18a94dLQ93PshPSH+WRiOeNFbVkwUXL0U2WkOQKWV6+R/DDY105quHG5gFRq6+F64
-LbWSC7xRuSF4n9LONx4VCbD5rsPY5CqcwFtS0ufmi6i/1nA4CKzulIbjcJGYCQCBgDaRu+ZVSwk8
-OBRiGnQN2BYVFuIyQvkRSQUzI3/UPUzn4Puaw3D8R+BmG3c0c2aR97E/TBwY8lBbvz6E5qZfuxQP
-OoL8U7sf1GI6asm9LW14f3OQXAnvChaX7+CW8c0bJC8x+PR4lPeR9+BdQrr7jAtNw1+HY3whxPcr
-pVUGRnMJq8LAgKdOaAc3kmPWWRV5Lbrf5qI+i0H50fjW1oCZN4mT86gmA7f61UpLyY65moiVAAsD
-WV3dhe5rXr7eW79Ln+haxR54eUAAcuUKopR8D8kuV7HZ1d7UTrcgZi9Jnz3oy7tcAZcvmvfEqcVL
-TNxRWl+kjC/ue2FO2s6E8Txw5XSv9dgXgu7+WEK4fnZUcVvdzC+CgMrSYsM3Yct0Lay/IcolUPdM
-vMq4z9ozlVjdsYEBTOKGf/JlSZKhI3LKJPDvKalhd9+LeBQp+72z
+<?php
+/**
+ * @copyright   Dealer4Dealer
+ */
+class Dealer4dealer_Exactonline_Model_Sync_Exact_Stock extends Mage_Core_Model_Abstract
+{
+    private $log;
+    private $xmlTool;
+    private $exactConnector;
+    private $settings;
+
+    protected $_skuCache = array();
+    protected $_attributeCache = array();
+    protected $_warehouses = null;
+
+    public function __construct()
+    {
+        $this->log              = Mage::getSingleton('exactonline/tools_log');
+        $this->xmlTool          = Mage::getSingleton('exactonline/tools_xml_tool');
+        $this->exactConnector   = Mage::getSingleton('exactonline/tools_connector');
+        $this->settings         = Mage::getSingleton('exactonline/tools_settings');
+
+        parent::__construct();
+    }
+
+    /**
+     *  Download stock positions from Exact Online
+     *  and save the positions in Magento.
+     */
+    public function synchronizeStock()
+    {
+
+        $xml = $this->getStockXml();
+
+        $warehouses = explode(",", $this->settings->getSetting('product_warehouse_codes'));
+
+        if (isset($xml->StockPositions)) {
+
+            $stockPositions = array();
+
+            /**
+             *  Create array with all stock positions per warehouse
+             *  and save the position of each warehouse to a custom
+             *  attribute of the product.
+             */
+            foreach($xml->StockPositions->StockPosition as $stockPosition) {
+
+                $sku        = (string) $stockPosition->Item['code'];
+                $warehouse  = (string) $stockPosition->Warehouse['code'];
+
+                if(in_array($warehouse, $warehouses)) {
+                    $productId  = $this->_getProductId($sku);
+
+                    if($productId) {
+                        /**
+                         *  Calculate the quantity. Do not add planning in since
+                         *  we don't know the delivery time.
+                         *
+                         *  @todo Create setting to add planning in.
+                         */
+                        $currentQty = (int) $stockPosition->CurrentQuantity;
+                        $out        = (int) $stockPosition->{'Planning-Out'};
+                        $qty        = ($currentQty - $out);
+
+                        $this->log->writeLog('Product ' . $sku . ' in warehouse '.$warehouse . ': '.$qty);
+
+                        $stockItem = Mage::getModel('cataloginventory/stock_item')->loadByProduct($productId);
+                        $stockItem->setData('qty', $qty);
+
+                        if($qty > 0) {
+                            $stockItem->setData('is_in_stock', 1);
+                        }
+
+                        try {
+                            $stockItem->save();
+                            $this->log->writeLog('Saving product ID ' . $productId . ' with qty of ' .$qty);
+                        } catch (Exception $e) {
+
+                        }
+
+                    } else {
+                        $this->log->writeLog('Product '.$sku.' does not exists or is from the wrong warehouse.');
+                    }
+                } else {
+                    $this->log->writeLog('Stock Update '.$sku.' is from the wrong warehouse: '.$warehouse);
+                }
+
+            }
+        }
+
+        $this->log->writeLog('Stock sync completed');
+    }
+
+    /**
+     * Get a product id based on a SKU.
+     *
+     * @param string $sku
+     * @return int
+     */
+    protected function _getProductId($sku)
+    {
+        if(in_array($sku, $this->_skuCache)) {
+            return $this->_skuCache[$sku];
+        }
+
+        $productId  = Mage::getModel('catalog/product')->getIdBySku($sku);
+        $this->_skuCache[$sku] = $productId;
+
+        return $productId;
+    }
+
+    /**
+     * Get the magento warehouse code from
+     * the setting based on the warehouse code
+     * from Exact Online.
+     *
+     * @param string $warehouse
+     * @return string
+     */
+    protected function _getWarehouseCode($warehouse)
+    {
+        if(in_array($warehouse, $this->_attributeCache)) {
+            return $this->_attributeCache[$warehouse];
+        }
+
+        $warehouseCode = $this->settings->getSetting('warehouse_'.$warehouse);
+        $this->_attributeCache[$warehouse] = $warehouseCode;
+
+        return $warehouseCode;
+    }
+
+    /**
+     * Get the stock positions of all warehouses
+     * of the product.
+     *
+     * @param int $productId
+     * @return int
+     */
+    protected function _getStockValues($productId)
+    {
+        $collection = Mage::getModel('catalog/product')->getCollection();
+
+        foreach($this->_getWarehouses() as $warehouseAttribute) {
+            $collection->addAttributeToSelect($warehouseAttribute);
+            $collection->addAttributeToSelect('stock_correction');
+        }
+
+        $product = $collection
+            ->addAttributeToFilter('entity_id', $productId)
+            ->getFirstItem();
+
+        $qty = 0;
+        foreach($this->_getWarehouses() as $warehouseAttribute) {
+            $qty = $qty + (int) $product->getData($warehouseAttribute);
+        }
+
+        // Adjust stock position
+        $qty = $qty - (int) $product->getStockCorrection();
+
+        return $qty;
+    }
+
+    /**
+     * Get all available warehouse attributes.
+     *
+     * @return array
+     */
+    protected function _getWarehouses()
+    {
+        if(is_null($this->_warehouses)) {
+            $warehouses = $this->settings->getSetting('warehouse_codes');
+            $warehouses = explode(',', $warehouses);
+
+            $this->_warehouses = $warehouses;
+        }
+
+        return $this->_warehouses;
+    }
+
+    /**
+     * Download new Stock Positions from Exact using
+     * the build in paginator of Exact Online.
+     *
+     * @return SimpleXMLExtended
+     */
+    private function getStockXml()
+    {
+        $xmlResult = $this->xmlTool->strToXml($this->exactConnector->getStockXML());
+
+        return $xmlResult;
+    }
+}

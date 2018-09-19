@@ -1,0 +1,19 @@
+.toolbar {
+	background-color: $white;
+
+	&.fixed {
+		top: 90px;
+	}
+}
+
+.category-products {
+	ul {
+		&.products-grid {
+			li {
+				&.item {
+					text-align: center;
+				}
+			}
+		}
+	}
+}
