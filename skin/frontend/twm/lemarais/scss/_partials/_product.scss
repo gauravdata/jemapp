@@ -74,12 +74,11 @@
 			overflow: hidden;
 			display: flex !important;
 			justify-content: center;
-			background-color: green;
 			align-items: center;
 			position: relative;
 			width: 75vh;
 			height: 100vh;
-			max-height: calc(100vh - 98px);
+			max-height: calc(100vh - 0px);
 
 			img {
 				height: 100vh !important;
