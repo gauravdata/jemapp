@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss" ifconfig="awcolorswatches/global/enabled">
+                <stylesheet>aw_colorswatches/css/style.css</stylesheet>
+            </action>
+            <action method="addItem" ifconfig="awcolorswatches/global/enabled">
+                <type>skin_js</type><name>aw_colorswatches/js/colorswatches.js</name>
+            </action>
+        </reference>
+    </default>
+    <PRODUCT_TYPE_configurable>
+        <reference name="after_body_start">
+            <block type="core/template" name="awcs.js.init" template="aw_colorswatches/catalog/product/init.phtml"/>
+        </reference>
+        <reference name="product.info.options.wrapper">
+            <block type="catalog/product_view_type_configurable" name="awcs.product.info.options.configurable" after="-" template="aw_colorswatches/catalog/product/view/type/options/configurable.phtml"/>
+        </reference>
+    </PRODUCT_TYPE_configurable>
+</layout>

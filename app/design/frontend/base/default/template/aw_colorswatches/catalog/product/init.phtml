@@ -1,0 +1,14 @@
+<?php if (AW_Colorswatches_Helper_Config::isEnabled()):?>
+<script type="text/javascript">
+    var AWColorswatchManagerInstance = new AWColorswatchManager({
+        url: <?php echo Zend_Json::encode(Mage::helper('awcolorswatches/swatch')->getAjaxUpdateUrl());?>,
+        selectorFnList: {
+            title: function(el){return $$('.product-view .product-name h1').first();},
+            media: function(el){return $$('.product-view .product-img-box').first();},
+            shortDescription: function(el){return $$('.product-view .short-description .std').first();},
+            fullDescription: function(el){return $$('.product-view .box-description').first();},
+            boxAdditional: function(el){return $$('.product-view .box-additional').first();}
+        }
+    });
+</script>
+<?php endif;?>

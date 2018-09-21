@@ -1,0 +1,28 @@
+#side-nav {
+	top: 99px;
+
+	ul {
+		li {
+			a {
+				text-transform: none;
+			}
+			span {
+				text-transform: none;
+			}
+		}
+	}
+}
+
+#main-content {
+	padding-top: 98px;
+}
+
+#wrapper {
+	.block-cart {
+		z-index: 998;
+
+		&.show {
+			top: 95px !important
+		}
+	}
+}

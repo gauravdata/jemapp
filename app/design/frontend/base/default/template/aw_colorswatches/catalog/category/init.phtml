@@ -1,0 +1,11 @@
+<?php if (AW_Colorswatches_Helper_Config::isEnabled() && AW_Colorswatches_Helper_Config::isEnabledOnCategory()):?>
+<script type="text/javascript">
+    var AWColorswatchManagerInstance = new AWColorswatchManager({
+        url: <?php echo Zend_Json::encode(Mage::helper('awcolorswatches/swatch')->getAjaxUpdateUrl());?>,
+        selectorFnList: {
+            title: function(el){return el.up('li').select('.product-name a').first();},
+            categoryImage: function(el){return el.up('li').select('.product-image').first();}
+        }
+    });
+</script>
+<?php endif;?>
