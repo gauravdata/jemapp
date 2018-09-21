@@ -1,4 +1,5 @@
 // PRICE AND DESCRIPTION BOX
+.products-grid {
 .product-image {
 	overflow: hidden;
 	display: flex !important;
@@ -20,7 +21,7 @@
 
 	}
 }
-
+}
 .product-name {
 	font-size: $xl-font !important;
 }
