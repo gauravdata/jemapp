@@ -56,6 +56,9 @@
 	}
 }
 
+.product-options-wrapper {
+	z-index: 998;
+}
 // PRODUCT VISUALS ON DETAIL PAGE
 .product-visual-wrapper {
 
@@ -64,35 +67,40 @@
 	}
 
 	.product-visual {
-		height: auto;
-		position: relative;
-		display: flex;
-		justify-content: center;
-		background-color: $white;
+		background-color: #fbfaf9;
+	}
 
-		.constrain-4-3 {
-			margin-left: -31%;
-			overflow: hidden;
-			display: flex !important;
-			justify-content: center;
-			align-items: center;
+	@media (min-width: 768px){
+		.product-visual {
+			height: auto;
 			position: relative;
-			width: 75vh;
-			height: 100vh;
-			max-height: calc(100vh - 0px);
+			display: flex;
+			justify-content: center;
 
-			img {
-				height: 100vh !important;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				right: 0;
-				left: 0;
-				color: white;
-				transform: translateX(-50%);
-				margin-left: 50%;
-				max-width: none !important;
+			.constrain-4-3 {
+				margin-left: -31%;
+				overflow: hidden;
+				display: flex !important;
+				justify-content: center;
+				align-items: center;
+				position: relative;
+				width: 75vh;
+				height: 100vh;
+				max-height: calc(100vh - 0px);
 
+				img {
+					height: 100vh !important;
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					right: 0;
+					left: 0;
+					color: white;
+					transform: translateX(-50%);
+					margin-left: 50%;
+					max-width: none !important;
+
+				}
 			}
 		}
 	}
@@ -102,28 +110,42 @@
 	z-index: initial;
 }
 
-@media (max-width: 1080px){
+//@media (max-width: 1080px){
+//	.product-visual-wrapper {
+//		.product-visual {
+//			.constrain-4-3 {
+//				margin-left: -45%;
+//			}
+//		}
+//	}
+//}
+//
+//@media (max-width: 810px){
+//	.product-visual-wrapper {
+//		.product-visual {
+//			.constrain-4-3 {
+//				margin-left: 0;
+//				width: auto;
+//				height: auto;
+//				max-height: auto !important;
+//				overflow: auto;
+//				position: initial;
+//				/* height: 100vh; */
+//				/* max-height: calc(100vh - 98px); */
+//			}
+//		}
+//	}
+//	.product-options-wrapper {
+//		padding: 15px;
+//	}
+//}
+//
+@media (max-width: 675px){
 	.product-visual-wrapper {
 		.product-visual {
+			padding-bottom: 0 !important;
 			.constrain-4-3 {
-				margin-left: -45%;
-			}
-		}
-	}
-}
-
-@media (max-width: 810px){
-	.product-visual-wrapper {
-		.product-visual {
-			.constrain-4-3 {
-				margin-left: 0;
-				width: auto;
-				height: auto;
-				max-height: auto !important;
-				overflow: auto;
-				position: initial;
-				/* height: 100vh; */
-				/* max-height: calc(100vh - 98px); */
+				height: 125vw;
 			}
 		}
 	}
