@@ -16,3 +16,13 @@
 #main-content {
 	padding-top: 98px;
 }
+
+#wrapper {
+	.block-cart {
+		z-index: 998;
+
+		&.show {
+			top: 95px !important
+		}
+	}
+}

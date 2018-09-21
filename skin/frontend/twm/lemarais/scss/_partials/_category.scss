@@ -3,6 +3,10 @@
 
 	&.fixed {
 		top: 90px;
+
+		.hidden-header & {
+			top: 35px !important;
+		}
 	}
 }
 
