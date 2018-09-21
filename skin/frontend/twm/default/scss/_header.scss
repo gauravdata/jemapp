@@ -15,7 +15,7 @@
 	.website-switcher  {
 		position: fixed;
 		right: 0;
-		top: 0;
+		top: 55px;
 		list-style: none;
 		display: flex;
 		padding: 0;
@@ -29,13 +29,21 @@
 				font-size: $m-font;
 				padding: 0 $s-spacing;
 				color: $white !important;
-				line-height: 35px;
+				line-height: 40px;
 				display: block;
+				background-color: $black;
 			}
 
 			&.active {
 				a {
 					background-color: $white;
+					color: $black !important;
+				}
+			}
+
+			&:hover {
+				a {
+					background-color: $xxxs-grey;
 					color: $black !important;
 				}
 			}
