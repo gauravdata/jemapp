@@ -32,7 +32,6 @@ html, body {
 
 	> ul {
 		@extend .unstyled;
-		margin-bottom: $xxl-spacing * 1.5;
 
 		> li {
 			border-bottom: 1px solid $s-grey;
@@ -123,6 +122,12 @@ html, body {
 				}
 			}
 		}
+	}
+
+	> .store-switcher {
+		display: flex;
+		justify-content: center;
+		padding: $m-spacing;
 	}
 }
 
@@ -716,5 +721,29 @@ ul.social {
 
 	p:last-child {
 		margin: 0;
+	}
+}
+
+/*======================================================
+	SERVICE POINT
+======================================================*/
+@media screen and (max-width: 1600px) and (min-width: 770px) {
+	#wrapper {
+		.tss-ls-footer-controls {
+			width: 300px;
+			position: absolute;
+			right: 0;
+			bottom: 0;
+		}
+		#tss-ls-locations {
+			padding-bottom: 50px;
+		}
+	}
+}
+@media(min-width: 1200px) {
+	#wrapper {
+		.tss-ls-footer-controls {
+			min-width: 410px;
+		}
 	}
 }

@@ -1,0 +1,125 @@
+.aw-colorswatches-attribute{}
+.aw-colorswatches-attribute-source{
+    display: none!important;
+}
+.aw-colorswatches-attribute-label-text{
+    font-weight: normal;
+}
+.aw-colorswatches-attribute-option{
+    display: inline-block;
+    vertical-align: top;
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    margin: 0 4px 0 0;
+    background-color: white;
+    padding: 3px;
+}
+.aw-colorswatches-attribute-option:hover{
+    border: 3px solid #62bcf7;
+    padding: 0;
+}
+.aw-colorswatches-attribute-option__state-selected, .aw-colorswatches-attribute-option__state-selected:hover{
+    border: 3px solid #62bcf7;
+    padding: 0;
+}
+.aw-colorswatches-attribute-option__state-disabled{
+    cursor: default;
+}
+.aw-colorswatches-attribute-option__state-disabled:hover{
+    border:0;
+    padding: 3px;
+}
+.aw-colorswatches-attribute-option__state-disabled>div{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,.5);
+    background-image: url('../images/disabled-bkg.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.aw-colorswatches-tooltip{
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    background: #ededed;
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9999999;
+    width: auto;
+    overflow: visible;
+    display:none;
+}
+.aw-colorswatches-tooltip__show{
+    display:block;
+}
+.aw-colorswatches-tooltip-content{
+    padding: 3px 4px;
+    overflow: hidden;
+}
+.aw-colorswatches-tooltip-arrow{
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.aw-colorswatches-tooltip-arrow-border, .aw-colorswatches-tooltip-arrow-content{
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.aw-colorswatches-tooltip-arrow-border{
+    margin: 0 auto -1px auto;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 9px solid #ccc;
+    bottom: -7px;
+}
+.aw-colorswatches-tooltip-arrow__bottom .aw-colorswatches-tooltip-arrow-border{
+    border-top: 0;
+    border-bottom: 9px solid #ccc;
+    bottom: 0;
+    top: -8px;
+}
+.aw-colorswatches-tooltip-arrow-content{
+    margin: 0 auto;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #ededed;
+    bottom: -7px;
+}
+.aw-colorswatches-tooltip-arrow__bottom .aw-colorswatches-tooltip-arrow-content{
+    border-top: 0;
+    border-bottom: 8px solid #ededed;
+    bottom: 0;
+    top: -7px;
+}
+
+/** CATEGORY */
+.aw-colorswatches-category{
+    width: 100%;
+}
+.products-list .aw-colorswatches-category{
+    float: left;
+}
+.aw-colorswatches-category em{
+    color: red;
+}
+.aw-colorswatches-layer-filter{
+    text-decoration: none;
+}
+.block-layered-nav img{
+    display: inline-block;
+}

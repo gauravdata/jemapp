@@ -76,20 +76,21 @@ Default layout, loads most of the pages
 
             <block type="page/html_header" name="header" as="header">
                 <block type="page/template_links" name="top.links" as="topLinks"/>
-                <block type="page/template_links" name="top.account" as="topAccount" template="page/html/topAccount.phtml"/>
-                <block type="page/switch" name="store_language" as="store_language" template="page/switch/languages.phtml"/>
+                <block type="page/template_links" name="top.account" as="topAccount" template="page/html/topAccount.phtml" />
+                <block type="page/switch" name="store_language" as="store_language" template="page/switch/languages.phtml" />
+                <block type="page/switch" name="store_switcher" as="store_switcher" template="page/switch/stores.phtml" />
                 <block type="core/text_list" name="top.menu" as="topMenu" translate="label">
                     <label>Navigation Bar</label>
-                    <block type="page/html_topmenu" name="catalog.topnav" template="page/html/topmenu.phtml"/>
+                    <block type="page/html_topmenu" name="catalog.topnav" template="page/html/topmenu.phtml" />
                 </block>
                 <block type="page/html_wrapper" name="top.container" as="topContainer" translate="label">
                     <label>Page Header</label>
                     <action method="setElementClass"><value>top-container</value></action>
                 </block>
-                <block type="page/html_welcome" name="welcome" as="welcome"/>
+                <block type="page/html_welcome" name="welcome" as="welcome" />
             </block>
 
-            <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+            <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs" />
 
             <block type="core/text_list" name="left" as="left" translate="label">
                 <label>Left Column</label>
@@ -111,9 +112,9 @@ Default layout, loads most of the pages
                     <label>Page Footer</label>
                     <action method="setElementClass"><value>bottom-container</value></action>
                 </block>
-                <block type="page/switch" name="store_switcher" as="store_switcher" template="page/switch/stores.phtml"/>
-                <block type="page/template_links" name="footer_links" as="footer_links" template="page/template/links.phtml"/>
-                <block type="newsletter/subscribe" name="footer.newsletter" as="footer.newsletter" template="newsletter/subscribe.phtml"/>
+                <block type="page/switch" name="store_switcher" as="store_switcher" template="page/switch/stores.phtml" />
+                <block type="page/template_links" name="footer_links" as="footer_links" template="page/template/links.phtml" />
+                <block type="newsletter/subscribe" name="footer.newsletter" as="footer.newsletter" template="newsletter/subscribe.phtml" />
             </block>
 
             <block type="core/template" name="browser_notification" as="browser_notification" template="page/html/browser_notification.phtml" />

@@ -1,0 +1,14 @@
+.main-usps {
+	background-color: $primary;
+	color: $white;
+	height: 35px;
+	line-height: 35px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+
+	strong {
+		color: $white;
+	}
+}

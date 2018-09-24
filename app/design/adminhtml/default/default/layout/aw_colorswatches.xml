@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_catalog_product_attribute_edit>
+        <reference name="head">
+            <action method="addCss"><stylesheet>aw_colorswatches/css/style.css</stylesheet></action>
+            <action method="addItem"><type>skin_js</type><name>aw_colorswatches/js/imagesUpload.js</name></action>
+        </reference>
+        <reference name="attribute_edit_tabs">
+            <block type="awcolorswatches/adminhtml_catalog_product_attribute_edit_tab_colorswatch" name="tab_awcolorswatch"/>
+            <action method="addTab"><name>awcolorswatch</name><block>tab_awcolorswatch</block></action>
+        </reference>
+    </adminhtml_catalog_product_attribute_edit>
+</layout>
