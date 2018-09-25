@@ -60,7 +60,7 @@ class Transsmart_Shipping_Helper_Location extends Mage_Core_Helper_Abstract
     public function getGeoLocation($zipcode, $country, $city, $street, $housenr)
     {
         $address = urlencode($zipcode . ', ' . $country);
-        $url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' . $address . '&region=' . $country;
+        $url = 'http://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB6DycZMUUcl1_N_07kYChMT1tJBYOEdA4&address=' . $address . '&region=' . $country;
 
         $ch = curl_init($url);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
