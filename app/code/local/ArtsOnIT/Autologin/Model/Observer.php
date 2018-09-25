@@ -1,66 +1,130 @@
-<?php //00450
-// Licensed to jemappelle.nl - no-tomatoes.com - jemappelle.de - no-tomatoes.de - 148.251.47.148
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("No IonCube Loader is installed. Look to the interactive guide into ioncube folder. Please contact Mage<sup>ext</sup> support or look at your ISP FAQ.");exit(199);
-?>
-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
+<?php
+/**
+ * ArtsOnIT
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.pdf
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageext.com/respository/docs/License-SourceCode.pdf
+ *
+ * @category   ArtsOnIT
+ * @package    ArtsOnIT_Autologin
+ * @version    1.0.2
+ * @copyright  Copyright (c) 2010-2012 ArtsonIT di Calore (http://www.mageext.com)
+ * @license    http://www.mageext.com/respository/docs/License-SourceCode.pdf
+ */
+class ArtsOnIT_Autologin_Model_Observer extends Varien_Object {
+
+    public function updateMailChip($observer)
+    {
+        try
+        {
+            $customer = $observer->getCustomer();
+            if ($customer->getId() > 0)
+            {
+                if  (!$customer->hasData ( 'autologin_hash' ))
+                {
+                     $customer = Mage::getModel('cutomer/customer')->load($customer->getId());
+                }
+                $al = $customer->getData ( 'autologin_hash' );
+                
+                if ($al)
+                {
+                    
+                    $observer->getNewvars()->setData(Mage::getStoreConfig('customer/autologin/mailchimp_var'), $al);
+                }
+            }   
+    
+        }
+        catch(Excaption $e)
+        {
+            
+            Mage::Log( $e);
+        }
+        return $this;
+       
+        
+    }
+	public function saveCustomer( $observer)
+	{
+		try 
+		{
+			$customer = $observer->getCustomer();
+			if (($customer instanceof Mage_Customer_Model_Customer)) {
+				Mage::helper('autologin')->generateAutologin($customer);
+			}
+		}
+		catch(Excaption $e)
+		{
+			Mage::Log($e);
+		}
+        return $this;
+	}
+	public function doAutologin(Varien_Event_Observer $observer) {
+		if (! Mage::getStoreConfig ( 'customer/autologin/enabled' )) {
+ 
+			return;
+		}
+		
+		if (! Mage::helper ( 'customer' )->isLoggedIn ()) {
+			
+			$request = Mage::app ()->getFrontController ()->getRequest ();
+			$hashes = array ();
+			$paramscount = count ( $request->getParams () );
+			if ($paramscount == 0) {
+				$path = trim ( $request->getPathInfo (), '/' );
+				$p = explode ( '/', $path );
+				if (count ($p) < 3) {
+					$hashes = $p;
+					$withParam = false;
+				} else {
+					return $this;
+				}
+			}
+  
+			if ($paramscount > 0) {
+				$al = Mage::getStoreConfig ( 'customer/autologin/urlparam' );
+				$withParam = false;
+				
+				if ($hash = $request->getParam ( $al )) {
+					if ($hash == '') {
+						return $this;
+					}
+					$hashes = $hash;
+					$withParam = true;
+				} else {
+					foreach ( $request->getParams () as $k => $y ) {
+						if ($y == '') {
+							$hashes [] = $k;
+						}
+					}
+				}
+			}
+			if (count ( $hashes ) == 0) {
+				return $this;
+			}
+			if (Mage::helper ( 'autologin' )->tryLogin ( $hashes )) {
+				
+				$action = $observer->getControllerAction ();
+				$pathInfo = $request->getPathInfo ();
+				$hash = Mage::getSingleton ( 'customer/session' )->getCustomer ()->getData ( 'autologin_hash' );
+				$rpl = array ();
+				$rpl [] = $hash;
+				
+				if ($withParam) {
+					
+					$rpl [] = $al . '='; 
+				}
+				$pathInfo = str_replace ( '//', '/', str_replace ( $rpl, "", $pathInfo ) );
+				$response = Mage::app ()->getFrontController ()->getResponse ();
+				$response->setRedirect ( Mage::getBaseUrl () . $pathInfo, 301 );
+				$response->sendHeaders();
+				exit;
+			} 
+		}
+	
+	}
+
+}
