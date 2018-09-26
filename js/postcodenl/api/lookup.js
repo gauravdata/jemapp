@@ -330,7 +330,7 @@ document.observe("dom:loaded", PCNL_START_FUNCTION = function()
 				var map = '';
 				if (data.showcaseResponse.longitude && data.showcaseResponse.latitude)
 				{
-					map = '<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" class="map" src="http://maps.google.com/maps?t=h&amp;q='+ data.showcaseResponse.latitude +','+ data.showcaseResponse.longitude +'+(Location found)&amp;z=19&amp;output=embed&amp;iwloc=near"></iframe>';
+					map = '<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" class="map" src="http://maps.google.com/maps?key=AIzaSyB6DycZMUUcl1_N_07kYChMT1tJBYOEdA4&t=h&amp;q='+ data.showcaseResponse.latitude +','+ data.showcaseResponse.longitude +'+(Location found)&amp;z=19&amp;output=embed&amp;iwloc=near"></iframe>';
 				}
 
 				if ($(prefix + street1).up(this.parentElementType))

@@ -1,61 +1,86 @@
-<?php //00450
-// Licensed to jemappelle.nl - no-tomatoes.com - jemappelle.de - no-tomatoes.de - 148.251.47.148
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("No IonCube Loader is installed. Look to the interactive guide into ioncube folder. Please contact Mage<sup>ext</sup> support or look at your ISP FAQ.");exit(199);
-?>
-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
+<?php
+/**
+ * ArtsOnIT
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.pdf
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageext.com/respository/docs/License-SourceCode.pdf
+ *
+ * @category   ArtsOnIT
+ * @package    ArtsOnIT_Autologin
+ * @version    1.0.2
+ * @copyright  Copyright (c) 2010-2012 ArtsonIT di Calore (http://www.mageext.com)
+ * @license    http://www.mageext.com/respository/docs/License-SourceCode.pdf
+ */
+class ArtsOnIT_Autologin_Model_Api extends Mage_Api_Model_Resource_Abstract
+{
+	public function getHash($customerId)
+	{
+		$customer = Mage::getModel('customer/customer')->load($customerId);
+        if (!$customer->getId() || !$customer->getAutologinIsActive())
+        {
+            $this->_fault('not_exists');
+            // If customer not found.
+        }
+        return $customer->getData('autologin_hash');
+	}
+	
+	public function getUrl($customerId, $store_id=0, $store_url='')
+	{
+		$customer = Mage::getModel('customer/customer')->load($customerId);
+        if (!$customer->getId() || !$customer->getAutologinIsActive())
+        {
+            $this->_fault('not_exists');
+            // If customer not found.
+        }
+        $store_id = ($store_id == 0) ? $customer->getStoreId() : store_id;
+
+        return Mage::getUrl($store_url, array(
+			'_autologin'=> true,
+			'_autologin_customer'=> $customer,
+			'_store' => $store_id,
+			'_forced_secure' => true
+		));
+	}
+	
+	public function items()
+	{
+		$collection = Mage::getResourceModel('customer/customer_collection')
+            ->addNameToSelect()
+            ->addAttributeToSelect('autologin_hash')
+            ->addAttributeToSelect('autologin_is_active')
+            ->addAttributeToSelect('email');
+        
+		$result = array();
+        foreach ($collection as $customer) {
+        	$r = array();
+        	$r['customer_id'] = $customer->getId();
+        	$r['email'] = $customer->getEmail();
+        	$r['firstname'] = $customer->getFirstname();
+        	$r['lastname'] = $customer->getLastname();
+        	$r['website_id'] = $customer->getWebsiteId();
+        	$r['store_id'] = $customer->getStoreId();
+            $r['group_id'] = $customer->getGroupId();
+            $r['hash'] = $customer->getAutologinHash();
+            $r['is_enabled'] = $customer->getAutologinIsActive();
+            $result[] = $r;
+        } 
+        return $result;
+	
+	}
+	
+	public function renewHash($customerId)
+	{
+		$customer = Mage::getModel('customer/customer')->load($customerId);
+		if (!$customer->getId())
+        {
+            $this->_fault('not_exists');
+            // If customer not found.
+        }
+        Mage::helper('autologin')->generateAutologin($customer);
+        return true;
+	}
+}

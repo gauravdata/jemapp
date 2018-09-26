@@ -74,25 +74,5 @@
          * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
          */
         ?>
-        <?php
-        /**
-         * Store switcher template
-         *
-         * @see Mage_Core_Block_Store_Switcher
-         */
-        $store = Mage::app()->getStore()->getData();
-
-
-        if($store['code'] == 'jma_nl') {
-            $link = "https://lemarais.nl";
-            $logo_url = "skin/frontend/twm/lemarais/images/logo.png";
-        } else {
-            $link = "https://jemappelle.nl";
-            $logo_url = "skin/frontend/twm/default/images/logo.png";
-        }
-        ?>
-        <div class="store-switcher">
-            <a href="<?php echo $link; ?>"><img src="<?php echo $logo_url; ?>" /></a>
-        </div>
     </nav>
 <?php endif ?>

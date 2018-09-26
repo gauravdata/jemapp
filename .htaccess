@@ -303,7 +303,8 @@ SetEnvIf Host no\-tomatoes\.de MAGE_RUN_CODE=default_de
 SetEnvIf Host jemappelle\.nl MAGE_RUN_CODE=jma_nl
 SetEnvIf Host jemappelle\.be MAGE_RUN_CODE=jma_nl
 SetEnvIf Host jemappelle\.de MAGE_RUN_CODE=jma_de
+SetEnvIf Host le\-marais\.nl MAGE_RUN_CODE=lm_nl
 
 <IfDefine DEV>
-SetEnv MAGE_RUN_CODE jma_nl
+#SetEnv MAGE_RUN_CODE jma_nl
 </IfDefine>

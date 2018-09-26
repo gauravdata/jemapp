@@ -2,7 +2,7 @@
 <config>
 	<modules>
 		<ArtsOnIT_Autologin>
-			<version>0.1.2</version>
+			<version>0.1.4</version>
 			<codePool>local</codePool>
 		</ArtsOnIT_Autologin>
 	</modules>
@@ -83,6 +83,14 @@
 					</autologin>
 				</observers>
 			</customer_save_after>
+			<magemonkey_mergevars_after>
+				<observers>
+					<autologin>
+						<class>autologin/observer</class>
+						<method>updateMailChip</method>
+					</autologin>
+				</observers>
+			</magemonkey_mergevars_after>
 		</events>
 		<models>
 			<autologin>
@@ -130,6 +138,7 @@
 			<autologin>
 				<enabled>1</enabled>
 				<urlparam>al</urlparam>
+				<mailchimp_var>AUTOLOGIN</mailchimp_var>
 			</autologin>
 		</customer>
 	</default>
