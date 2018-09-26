@@ -1,42 +1,45 @@
-<?php //00450
-// Licensed to jemappelle.nl - no-tomatoes.com - jemappelle.de - no-tomatoes.de - 148.251.47.148
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("No IonCube Loader is installed. Look to the interactive guide into ioncube folder. Please contact Mage<sup>ext</sup> support or look at your ISP FAQ.");exit(199);
-?>
-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
-fQllnuBG3ycqcb0+Mb9Fa310pAhhmxAlXZL1
+<?php
+/**
+ * ArtsOnIT
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.pdf
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageext.com/respository/docs/License-SourceCode.pdf
+ *
+ * @category   ArtsOnIT
+ * @package    ArtsOnIT_Autologin
+ * @version    1.0.2
+ * @copyright  Copyright (c) 2010-2012 ArtsonIT di Calore (http://www.mageext.com)
+ * @license    http://www.mageext.com/respository/docs/License-SourceCode.pdf
+ */
+class ArtsOnIT_Autologin_Block_Adminhtml_Autologin_Actions extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
+{
+     public function __construct() {
+        
+    }
+ 
+    public function render(Varien_Object $row)
+    {
+        $edit = Mage::helper('adminhtml')->getUrl('adminhtml/customer/edit',array('id'=>$row->getId()));
+        $html = '<a href="'. $edit  .'">'. Mage::helper('autologin')->__('Edit') .'</a>';
+
+        if($row->getData('autologin_is_active'))
+		{
+			$customer = Mage::getModel('customer/customer')->load($row->getId());
+			$url = Mage::getUrl('customer/account', array(
+				'_autologin'=> true,
+				'_autologin_customer'=> $customer,
+				'_store' => $customer->getStoreId(),
+				'_forced_secure' => true
+			));
+         	$html .= ' - <a href="'. $url  .'" target="_blank">'. Mage::helper('autologin')->__('Log In') .'</a>';
+         
+		}
+        return $html;
+    }
+
+
+}
