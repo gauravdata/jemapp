@@ -1,103 +1,140 @@
-<?php //00450
-// Licensed to jemappelle.nl - no-tomatoes.com - jemappelle.de - no-tomatoes.de - 148.251.47.148
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("No IonCube Loader is installed. Look to the interactive guide into ioncube folder. Please contact Mage<sup>ext</sup> support or look at your ISP FAQ.");exit(199);
-?>
-HR+cPpQ1UEYPMq70caVjoyV6VGCDEr+KxIJzCVbr4YO9vKT0/n7Q82DJ5qzWUym8jZGk7SzP/DP6
-3C2euxKGqadyXIuPY8UKROKuPA9y93ZA/3TwX1ZP2ZaQrJvwW3u9P0YAmpqAuZDGfCn8uSOJm7f4
-EEsWoe4Pg1V0uOxKB0VGypWT8jmH/yMPaKR5qvRxxbRivbt9MggYY/e7CyUcaUDOx4RgNZt8KNCS
-YVJ+NZgjKxsPwEq5dzaYKB/wZ34QFjfkVcDnEWkI8KTJ9G9noeYNbklNwnd1o/9PS6RQFie4+NNH
-ApzE2ezJY2plOo1kDyoBSYz8mObJol1QfpgGqQI6qFoLrm4ZJKHpEiEScW+rHXTToFruffJzRPvG
-Kpuunm7rSPBxBIEVonTu2cZr66VqeeLIDIoy4hFJYXZn/cGes38Egd+jyJq9R3/vDv7N7MH5w45J
-ThBqWJU3RvcDifZR4FiXH7YkDV97e2IhwF9eGZ92FzWABHb8BWMZHwNa5s6csAWUPkk4LHnmyiOS
-SKvuUN4jVI+PsUxGwU9pTXA7GSwuK8hHSq0JQXSWSuSDEw8AazhTprBQMj1xNy0TIKdqEfu2t9rm
-conw+6I+yMnx+W74ZRNUaStIFj/24DmjEh874hK1FzfWapD4a9NgtILhbVYbbUbK2AzuZ/S+OlC9
-xWqhjvcUVxnTA+bFQNI6TffiqiuUkiORBeO/fFtlRc1rmm50Up/hDZ95ppbXDyYX6s+5IWUTyfuN
-f6T2RWvTNnagvmZau1S7exXl379TLu3cdka2b8Daxjxt0CazmwHyTj7lPcswSR+B85Ma3LrXOwlC
-YhTs0FHx2Mv7Odt/CfTtjxQDaotJmGqCjh8v1TWwRgoxugI9XIQl0k7mB5WGNk93YqHRjD53IWcS
-pHoCnD7uSbIgI4iGvqS0W9hxxbdqVVWR76U6Kg9XKlJ0+qFLTG4Lc+LWvbA+sa5/8BkpsXQ0WbwO
-BXaijvs+TavLMu96IA3aE+/qKtaBILxwZMvto0MZ7hbArWyfG+ylITAWjOdqq5KegI5uiBuAnN+M
-ZZQCFXGmSxN94jGiMV31TuzHHmLVj/3VlmKfwME57pL8IN06OCxiUrqeFyFfBa7LtCACDzDQp8hY
-qzh4w5XcixS/VyOvTn/Y97voimJc+ITGCiOflEWHR8qUdYh+rjcNDkaaQ9xXhbu9lhygjCM7C8dZ
-vj9BDzdHprhI0lyvEodTxSK66FDuiNXxtFAodUFYzwJHpoNxxVVGfs8fNQsWwMumeJWKX+Q7Qyen
-iQGhwVb3xfix3d8sXwqPtfdydsHPJOEsIs5ZkRZXEEpJPskwT78abOmZTgTQ8C/qsmI7QEUuzDOw
-fRBjg8IIH/47KT10jWRQR+dIklxNbbzPPFMrnKjxVRIy0RREAL1zGuN/lNQn4BBI0NR08+5C8hbQ
-yjTSZ0sOqIVONt04Egf/CJ8+nOcM57+ykD4wYK14DpvLNSiQtDwMlhu6DReXNPQ2In3nUUu2EKVJ
-vwbFHLMghj+tYsX814UIrGi7/ptYvfTDyPRLIwHoAjCT/MNWr/pYkh8s5dwDGjF/HlljySS0SBCi
-lFz8W7DhS088dvS73/gpTEf5himNcPD7a/bOyg6FBTP49v6fUSzxfB2hfRwQZbY8A6PWxDt1WGL/
-YapilXd00FYf+9Axgh4k2rdp2ATMkG1itXDpeGbrMlvVawqbLIXP58bA3X3kZ2yBEXNmngK7pcNU
-UzH9sFjKgJ158eLWyb8MAmmJYwdlZ18t7IHwPdOIu0M7iXKt4I1c7wLuV0N7OjKhq20uDTmDCpG2
-etdOKNN14kE1dXXDxRZ95hTrqt6rLSalZR8vFWrK9j1Hy/MnCgrBrXU/sEPjfmqXvZsncC5LpKXU
-ko75pY1Hk4A+B4GQGo6/gWIu8Z/moKh6ZOOnR892LeCPUur+lHnzYezn3Qr0Abu7vTVho+cclhwU
-idzXGoYI31gwYXRZY2JgDlag5Se3FgMgFlIwvHhiT/iGRZZEJHG8/p4uIlZwxdUXrysiuLE40o5N
-cNe8bED2sOlc8MJeLHI78va7basGPf5fL5r8DjS4BkPWqQw78OmVZYrlJt0+TO6bQYsqhjB1vlTB
-NIhWhbCGTpe94vs1SHmci9cajYWm5UjyuyTah7QrB975zV9Kaox6//S4oWcaULJDvnVDZKhFX6tJ
-5q8kc3cK/78ILNAWfxrtCjScLRIG8FPTPbuGIJkZXTZB2sl8MVZ1KYPyFd4FWphQNDD3yPhGOt+1
-b52vZ8TpMJ+H8lH3T+2N+1bBZgpumxaKdZHV6XRCsIS178Ta1iB+/LEmVeh3wQ3QHFklee2jqJYw
-WdjIRtnkQ7wytt+fVOhwZcOP3WefW7iV86STn2fM+NJHfLURoaXy6IgU+ZeG32fp0mwR/L75lFtX
-oNsQlATc3yN89c3hkQa3Q9DTDA3FZeQD+RqJvEqcU2APINKNXR+oGR3RjRMfQiT5rvfs8wDv1s1O
-Xxd+6OomaV6jXLbZyTUnPjxOr1UfadXcaA+nmXTP3bsn+vsVkH8U0UabtnnU26RC0nzbfiRUPY/r
-W/TxZoXFYXZnjJNkcW4YpDTNFUBCDJ0vyScuupbj8qzFXBBNUUpeYNGpIvboh37i9QBpbybQ2Uvs
-4ntejyxir9ZPstA4B1c7XafTQyJtVfi6mXArBeYG5QVGmyKqsHJNBNHU0b+6AWsjsGcRdfnaJCr5
-JsLGAz9n48Z1Hx7FmVS3NUS17A/p5XshGuLGt3KIUoeeJx6KSEMHhrjQDgxbM9qNHuImjkW1qlth
-HnAhPjuKTOQ9lY1zG4v3mmQPY0ZBPlYV5ndXtjIjM7ii3AAU8q5YL/Q9uFdzXNh/E0KzUQkb497l
-IlcwUjcspuP/0NKzwnWWCmMmrGgApun++u0AofLIOmT3kH+l5iKA8kUiYLKT+l7Ves274OsUW2Cv
-cfRcNH3z+EyGnH311Dqplt+qkhoemClHqjtMMqkWIHUR9IbT+yUFPvdt+V2vPdTsAYnWqWFxrGVs
-pFNdsOvHG+yNNTR0MiHh4k6smRrNlu+8WuErJp878yxzAKYw3wFbiD6gOmh1RZO8tOQKA0V1aVSS
-hi7Zf0ll9r2/oxraZ6wM85N9RxBB4Rcx3bgzyrY/aB+80TsfoWcNk6Pkh6FkG7VEDKn4Eg55ACLc
-uUPGZvt+qEtdKgPpU7SjXtH4t+vVNxsoIgznUCR3paAPedIZQpa3zM0cv9w2rZyNzmWQqbAO4iW/
-dod4Nx8Erm+w8COM+FHMkne85ex3Zne0ZCAHUKofxKrUhqAcYqXUPSVE8Wwl491F5WVGqtQIxMk7
-eKuLLhFsDb9Q+ArFPeAFWBRfFKhn/9l8UvH2BU6pyBZrr5btRIi6V1bAb4UQ2rVWxrG7NN8ORCvQ
-5OZtUvU8gq6SQ4NCOQgM8qrNVOG73CSU0ECvYoxZd1e9US2vkrAy524vcSqSEQtNfO1BPKZmDLwZ
-g+jlnL6EcFTYKpEX+bSYN0fr9yGB/IrTW6NcII9lkW+MHcD35lAS6tEcrD30pVASiw/gyVvITxkn
-BCqhijUm+A7ZkIcRgIZCklah3qR1EqUakxwgr056m5ph5gomGu8F3lGaH37NrsN/lUi1ZWUtp6YW
-kbUEDm9FhcdjQR39tX3/O5TJXwHSoA8nFpe4bRW5on7hYoQEi0WeCfvW8xgenPCbGqONxJTbD1sv
-reMQXIlN0r07LEE1/yDLxGPYUiN/KPpdihp1QWuo1YQ3W5fzYvefMagapenrROa+LpwTKt3b6TTC
-3ASjjY60acKRZSBeshOIu4BG3QkbwVhIwfnKaZUqCJsgY73kvgfoUoXy6Fy4TtwH42GggZuY5jTB
-UZjOTsOQQGkFZOosNziGxUUiWQl+MBqGisOUP6UG/XIjPrEo93xd41enDtIoD+rM97Es5IAzw1YG
-qaP+367g6UBRXjjmQ5zI1qY7NNwBUH2+aqme7uSmnZZtyT7Z5VvfIPgJIF/ntf2qq7lQqXY+1FOD
-PwUXElEB1I8BX52zemji9DJsBr/FJhO3B5ia18RY+8j6iM3fmMiVcdy+xM2JWk9TSPhweEtLy/xj
-WSnJHD/6UebkwAC/lbQVmCJGmqxfZjW3C4OREiVVq8IThYA0cMKi/aawZangtg3weA0SgpfkvO8T
-YYZyb2ikj16lbluKtmXEz1JCECk82I/+wP9zSWNOupkO/jaKRMlN7xCKLDYvTQd7I8oJiZHdZP4X
-s7P0K91vQeq1OF7U+DqT0J74nSop+XnRMlXrvEM01Klk4UrG1akdUt3jXCsx8JaYU91S/qeLa62+
-2sQ0cjDY9tzLzNMzDJ9w9R9f4cC9vMUbxoW1EyVPYERKx85gKnkbZHZrWPyjNsRRiC67ARH0Ud1z
-jLcVrm/hM5lH4Ny5yvkPNvIAVD1UAoOVkbiL3SgLHhFfYf8alURScvkmLSnkxsauhWwNm2+3f8OM
-rhrMqNcSCahnAvpTwSXpP1NenzdJ3fKwjO+Z5oEz9PkJNZrhplx6SCGzY7TxrrV58PNCjrNJkCEQ
-3im/xnmMNDFDr7U+MeX6QsGCov1rwSF/jzhDS6/qHtuVoveYYEGmU0hKI9xdMnivue1rnC9FuAQe
-swY6BFR6VH970GMSPyXizQZ7V20MvqQKRUPQHKBfk45/6GOq4Qr1Ur0Zgm4WLQ7EbXIOwOooIVcA
-yh89fZC3me5F/TZJ8E2ucJvV8rD/lDNCz2qpEJBq9exDaZ9GGYuMnNZVJewOTAfAklyuIpSxmbKY
-Gs8my4paletwga82Lsh+FXZNMcE0Gqpm6hMHetepsVuc/D8Yb+ivuthXqXCtQh8SzyBqDGWbQHBO
-AOQyKsftLaf9r8zWqjy45fWYTWzEJJLkBCDrOzji7A7bd4C2vZ8xr1BbIzLzs0UfFpBGibr2//3W
-OjOJduVH/jFMNJLfsxsJrFmc/TWf7Cz0riYymaMKsgoB1u1lmBmOnuE5JmWRnFdAubPp52t7PV+P
-EILLLH6Xab6POJdGahS0Gvq3DULh5/EkmKelAW6/krknc31BD4lUjfbaEfAIgCYwDJCRpSGbkhCH
-6Vrb1CdEs202F/dzbyZg4ILqdvC9PXFX6NHjT7Z1x+amQ7N9rOOxlFcaK+za5y60TEhjC19XF/7H
-DIPk0eMjdQlD9l6b41deE6VobdwReZES8ZiGHWBnw4arVk1RVT8r7Kh05PD8K4PGpdyIbJy58f38
-t4grQN+kCVXzBCJltHPiReXwbMYsl7a8oFPDdx4DZkeWbnJG7xbTDwvbmYbH9BfQadtl4GfXKzjS
-j9kl432ZK+KjOhuOnjXKhR7y4hJvQYA+6qeh/tiZMnXDuFMnjMaqN1I4saqmAmt2TeAsAWna9O3Y
-iSgWw7gqDO3Ov/Txm+VUpaT71pFwIW/vFlcU3ZTPnIfukphJ0Xq2vkOEklITJnN6wln7jibDrMiY
-PHGquN/7HiGm1Pq2JhJLXs0OxEby3jmXYF5hIo8s+cUqcBxiIr76HF5bU1bBNR+GD6X9uPGCqXAQ
-MSuJzlAbygR/MH1Q0k62HcYD8MDoPcujxIheJPyOTl2MCD40E5Yu93zVe4eH8v/yYirlNWRJmvmu
-rHdTjn0ekQ71ysBusIhy/RQMiVDbHh6HwSOngaxCU+iruK8OYG4HosQOa2uTnEK7gBWnBBM3DZNK
-Jz/4HJG5SsZm33RiDeXS6loHRgzzM3gr/WYFIbnz52QEaWQSVmMvFf0wx+tJ5KHmj9mWCU62olCA
-UdVgH7F/C5bKS5QuxlW2XVbC7RTM/cIGmaCw9tz2wZ7QfTxqnAyflXvBibUMHFVCO/9gb/SIvXRn
-om4ZxqppP4w2KY2FqBX4mCCJed+Ac6s3526VEL+9E/7LnyexwqFEX63QRMHIUNg1+z/tRqIbgk6T
-1hT18SXoI29xUk7q9kmCIcsCpwPzhJhzMQxQ1kLPuYjU5nWziLDnb3kLYMOgBY9pFMT2XF33I+S0
-s7r6wgZbnqdD71+90m77YRzcHMlE0q8ZLNxrRLzqC/zWL9luPzBUk8ZLh1V9Qi6AwL9uc0Dqxhoz
-FqcXP1G5EmUFkf2G5YfJQAS4qCDpCGbjKy3TplW3hOdF0+2XrjeGp0Oma9l1vfPFp01jaqBuPnHq
-8bNmodI8qnpJdeFNehHuHFxhSoRgRP4ReXExsRQIoPH/1OvuqAOPCNxgm3+YJf3ajIwMV6O7PtqR
-49IEYGDerN/yZ//gExZlmr5OYL91tlywdIbDCMLfspk1X19yIJWLYBC2Q8W3GfQtYNucUt23r4SH
-EjFKPWHEYtz53b+x+0j01D4LRPHI7qQpO4udJiPx8wxySqd1KK12EyoEBmfc388w6T+NJ0PHemVW
-aUvs1fNNcQTXx9OHAiSopfkHHFYXgWkcxg3bgbzUEr7G2ajEIgdTHldzcelggKn/msqnEGZgYaz+
-Bxd949cQEeUAyPoclcKWrc9lkQOFtqBCmDUnaKiUK1F4cj8AFKtABolDK1tBM3XKVoh2SOfcOp57
-XHKdz67a7toIxDq1E56uk1xIjA/Kpx29MpqLJmgHi4vmrPSMkhS6K+aNt+YJnWxiotzKGRxOB14Y
-LAoiKZyvp9lvY0KvctqXPlcEVUreCitZHr1Bec2rJIPX7V1wfNROw8mzYc8VC3jmxi6ym6YnFTzA
-I2YWNxS+UFM/spJGBpk4mbsIHwMiHJLj6bdiVFJI5NGbUFXwhIep6A07Bp3ARku2Q0w85GGzelox
-jM58lHS1wDWHTy3ccMx2jhSoCgkX4vSuC1l/vXFavsj1YiGCozzVujlD2GFaW53cKsyzL1nnNsVp
-vm3oZrx6sY3c13K3llfd3cKi4m5NbVkN78cCkEi6R988m+jYhPCU26ZRJvHgVc/BssQtqv2k7LRu
-6mtK+6KUPsARalV6rOePLKWjvXKV4zkGYFwZQpHHH0LNtIb7041YHDd9f06mOuCpnKn1+UVFYT6F
-huy9DhilA0iSre8wQZWJLsNtavRtdJ0bcxFc1zEb9si3awAWkQnwDSCxrr2X+GPCp/3QitfaBGBN
-rB9EgV44PZv2a63ROV+roTuePPcnmDBG9BAfXISIS0hZ6DlrGV5XwQDmmHDVoGTkZvntjndKOB/9
-bBYJ5HGdgWUcJP8ZVvMYMz3HuHFBRo/aMjZEp2ZjHbDnCdWaXoIfZ658wuZVS8eJb6xc3MHxCjfZ
-zMCEvjmm/1zzXGg32OvHGj8t+3Z7e75VopSH3C3VXzvHP+VlQSLd/iTZnPcMIRH4D9KC5J38zQkY
-o4QRQ0fuh4nontgDGk6NTw71Bubd9Am7YFttACCnEpJGK/1BxTLq3Cq9i91anuOZaV0A+2bt8k9x
-52ag0DH+c0GhEBSewVpIj1msK4w61mX6AtOkRQIjassdcQqfy9IjajzvDBUMqkBIcjkucPZP09q1
-7OSuy1ZmT7Dxb4yUmotJmzu43YWj42nfgdKS57xapWFbfFBUxUUhPpRbfG==
+<?php
+/**
+ * ArtsOnIT
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.pdf
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageext.com/respository/docs/License-SourceCode.pdf
+ *
+ * @category   ArtsOnIT
+ * @package    ArtsOnIT_Autologin
+ * @version    1.0.2
+ * @copyright  Copyright (c) 2010-2012 ArtsonIT di Calore (http://www.mageext.com)
+ * @license    http://www.mageext.com/respository/docs/License-SourceCode.pdf
+ */
+class ArtsOnIT_Autologin_Adminhtml_AutologinController extends Mage_Adminhtml_Controller_action
+{
+
+	protected function _initAction() {
+		$this->loadLayout()
+			->_setActiveMenu('autologin/items')
+			->_addBreadcrumb(Mage::helper('adminhtml')->__('Items Manager'), Mage::helper('adminhtml')->__('Item Manager'));
+		
+		return $this;
+	}   
+	public function sendAction() {
+
+	
+	$templ  = Mage::getModel('core/email_template')->load(2);									
+
+				$templ->setSenderEmail(Mage::getStoreConfig('trans_email/ident_sales/email'));
+				$templ->setSenderName('MageExt');
+				
+				
+				 if (!$templ->send( 'l.calore@gmail.com' , 'l.calore@gmail.com', 
+									  array('customer' => Mage::getModel('customer/customer')->load(4943)
+								) ))
+							{
+								echo 'ok';
+							}
+							 
+	}
+ 		
+	public function indexAction() {
+
+	
+		$this->_initAction()
+		 ->_addContent($this->getLayout()->createBlock('autologin/adminhtml_autologin'))
+			->renderLayout();
+	}
+    public function gridAction()
+    {
+        $this->loadLayout();
+        $this->getResponse()->setBody(
+            $this->getLayout()->createBlock('autologin/adminhtml_autologin_grid')->toHtml()
+        );
+    }
+    public function massChangehashAction() {
+        $customerIds = $this->getRequest()->getParam('customer');
+        if(!is_array($customerIds)) {
+			Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select customer(s)'));
+        } else {
+            try {
+                foreach ($customerIds as $customerId) {
+                   Mage::helper('autologin')->generateAutologin($customerId, false);
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('autologin')->__(
+                        'Total of %d customer(s) were successfully updated', count($customerIds)
+                    )
+                );
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            }
+        }
+        $this->_redirect('*/*/index');
+    }
+	
+    public function massEnabledAction()
+    {
+        $customerIds = $this->getRequest()->getParam('customer');
+        if(!is_array($customerIds)) {
+            Mage::getSingleton('adminhtml/session')->addError($this->__('Please select customer(s)'));
+        } else {
+            try {
+            	foreach ($customerIds as $customerId) {
+            	   $customer=  Mage::getModel('customer/customer')->load($customerId);
+                   $customer->setData('autologin_is_active', (bool)$this->getRequest()->getParam('status'));
+	    		   Mage::getResourceSingleton('customer/customer')->saveAttribute($customer, 'autologin_is_active');
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('autologin')->__(
+                        'Total of %d customer(s) were successfully updated', count($customerIds)
+                    )
+                );
+            } catch (Exception $e) {
+                $this->_getSession()->addError($e->getMessage());
+            }
+        }
+        $this->_redirect('*/*/index');
+    }
+  
+    public function exportCsvAction()
+    {
+        $fileName   = 'autologin.csv';
+        $content    = $this->getLayout()->createBlock('autologin/adminhtml_autologin_grid')
+        				->setIsWeb(false) 
+            			->getCsv();
+
+        $this->_sendUploadResponse($fileName, $content);
+    }
+
+    public function exportXmlAction()
+    {
+        $fileName   = 'autologin.xml';
+        $content    = $this->getLayout()->createBlock('autologin/adminhtml_autologin_grid')
+        				->setIsWeb(false) 
+           				->getXml();
+ 
+        $this->_sendUploadResponse($fileName, $content);
+    }
+
+    protected function _sendUploadResponse($fileName, $content, $contentType='application/octet-stream')
+    {
+        $response = $this->getResponse();
+        $response->setHeader('HTTP/1.1 200 OK','');
+        $response->setHeader('Pragma', 'public', true);
+        $response->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0', true);
+        $response->setHeader('Content-Disposition', 'attachment; filename='.$fileName);
+        $response->setHeader('Last-Modified', date('r'));
+        $response->setHeader('Accept-Ranges', 'bytes');
+        $response->setHeader('Content-Length', strlen($content));
+        $response->setHeader('Content-type', $contentType);
+        $response->setBody($content);
+        $response->sendResponse();
+        die;
+    }
+}

@@ -1,54 +1,93 @@
-<?php //00450
-// Licensed to jemappelle.nl - no-tomatoes.com - jemappelle.de - no-tomatoes.de - 148.251.47.148
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("No IonCube Loader is installed. Look to the interactive guide into ioncube folder. Please contact Mage<sup>ext</sup> support or look at your ISP FAQ.");exit(199);
-?>
-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
+<?php
+/**
+ * ArtsOnIT
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.pdf
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageext.com/respository/docs/License-SourceCode.pdf
+ *
+ * @category   ArtsOnIT
+ * @package    ArtsOnIT_Autologin
+ * @version    1.0.2
+ * @copyright  Copyright (c) 2010-2012 ArtsonIT di Calore (http://www.mageext.com)
+ * @license    http://www.mageext.com/respository/docs/License-SourceCode.pdf
+ */
+class ArtsOnIT_Autologin_Model_Url extends Mage_Core_Model_Url 
+{
+	public function setRouteParams(array $data, $unsetOldParams=true)
+    {
+		if (! Mage::getStoreConfig ( 'customer/autologin/enabled' )) {
+ 
+			return parent::setRouteParams($data, $unsetOldParams);
+		}
+		
+	
+		if (isset($data['_autologin']) && (bool)$data['_autologin']) {
+			$found = false;
+				$hash = '';
+			if (isset($data['_autologin_hash'])) {
+			 	$hash = $data['_autologin_hash']; 
+				$found = true; 
+				unset($data['_autologin_hash']); 
+			}
+			 
+			if (!$found && isset($data['_autologin_customer'])) {
+           		$customer = $data['_autologin_customer'];
+				 
+				if (!$customer instanceof Mage_Customer_Model_Customer)
+				{
+					if (preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/", $customer))
+					{
+					 
+						$customer = Mage::getModel('customer/customer')->setWebsiteId($this->getStore()->getWebsiteId())->loadByEmail($customer);
+					}
+					else
+					{
+						$customer = Mage::getModel('customer/customer')->load($customer);
+					}
+					if ($customer->getEntityId() > 0)
+					{
+						$found = true;
+					}
+				}
+				else
+				{
+				 
+					$found = true;
+				}
+				 
+				if ($found && $customer->getData('autologin_is_active'))
+				{
+				 
+					$hash = $customer->getData('autologin_hash');
+				}
+				unset($data['_autologin_customer']);
+				 
+			}
+			 
+			if(!$found && Mage::helper('customer')->isLoggedIn())
+			{
+				$hash = Mage::helper('customer')->getCustomer()->getData('autologin_hash');	
+				if ($hash != '')
+				{
+					$found = true;
+				}
+			}
+			 
+			if ($found)
+			{				 
+
+				$data['_forced_secure']= true; 
+				$param = Mage::getStoreConfig ( 'customer/autologin/urlparam', $this->getStore()->getStoreId());
+				 
+				$this->setQueryParam($param, $hash);
+			} 
+            unset($data['_autologin']);
+	 
+        }
+		 return parent::setRouteParams($data, $unsetOldParams);
+	}
+}
