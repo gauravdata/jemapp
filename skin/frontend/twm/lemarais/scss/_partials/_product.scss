@@ -1,28 +1,43 @@
 // PRICE AND DESCRIPTION BOX
 .products-grid {
-.product-image {
-	overflow: hidden;
-	display: flex !important;
-	justify-content: center;
-	align-items: center;
-	padding-top: 150%;
+	.product-image {
+		overflow: hidden;
+		display: flex !important;
+		justify-content: center;
+		align-items: center;
+		padding-top: 150%;
 
-	img {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
-		color: white;
-		height: 100% !important;
-		transform: translateX(-50%);
-		margin-left: 50%;
-		max-width: none !important;
-
+		img {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			color: white;
+			height: 100% !important;
+			transform: translateX(-50%);
+			margin-left: 50%;
+			max-width: none !important;
+		}
+	}
+	.op-voorraad {
+		display: none;
+	}
+	.price-box {
+		margin-bottom: 25px !important;
 	}
 }
-}
+
 .product-name {
+	font-size: $xl-font !important;
+}
+
+.product-header-title {
+	font-family: $sub-font !important;
+}
+
+.product-color {
+	font-size: $xl-font !important;
 	font-size: $xl-font !important;
 }
 
@@ -58,6 +73,19 @@
 
 .product-options-wrapper {
 	z-index: 998;
+	color: $black !important;
+
+	.product-options-bottom {
+		.product-description {
+			display: none;
+		}
+	}
+
+	.product-shop {
+		.op-voorraad {
+			display: none;
+		}
+	}
 }
 // PRODUCT VISUALS ON DETAIL PAGE
 .product-visual-wrapper {
@@ -85,11 +113,11 @@
 				align-items: center;
 				position: relative;
 				width: 75vh;
-				height: 100vh;
-				max-height: calc(100vh - 0px);
+				height: calc(100vh - 100px) !important;
+				max-height: calc(100vh - 100px) !important;
 
 				img {
-					height: 100vh !important;
+					height: calc(100vh - 100px) !important;
 					position: absolute;
 					top: 0;
 					bottom: 0;
@@ -108,6 +136,10 @@
 
 .onsale-product-container {
 	z-index: initial;
+}
+
+#product-attribute-specs-table .label {
+	padding-top: 13px !important;
 }
 
 //@media (max-width: 1080px){
