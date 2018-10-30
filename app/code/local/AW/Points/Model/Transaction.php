@@ -52,7 +52,7 @@ class AW_Points_Model_Transaction extends Mage_Core_Model_Abstract
 
     public function loadByOrder($order)
     {
-        $this->getResource()->loadByOrderIncrementId($this, $order->getIncrementId());
+        $this->getResource()->loadByOrderIncrementId($this, $this->getOrderId());
         return $this;
     }
 
