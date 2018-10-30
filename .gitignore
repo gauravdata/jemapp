@@ -26,3 +26,7 @@ retour-jma-de.pdf
 app/etc/modules/ArtsOnIT_Autologin.xml
 
 
+
+app/code/local/Mirasvit/MstCore/etc/mcore\.crc
+
+app/code/local/Mirasvit/MstCore/etc/rma\.crc
