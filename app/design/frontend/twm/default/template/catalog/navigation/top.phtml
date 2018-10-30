@@ -41,7 +41,7 @@
 ?>
 <script type="text/javascript">
     var sideNavSate = false;
-    if(Cookies.get('side-nav') !== undefined && Cookies.get('side-nav') == 'closed') {
+    if ((Cookies.get('side-nav') !== undefined && Cookies.get('side-nav') == 'closed') || (jQuery(window).width() <= 767)) {
         document.body.className = ' hidden-side-nav';
     } else {
         document.body.className = ' open-side-nav';

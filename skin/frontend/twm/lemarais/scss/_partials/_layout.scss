@@ -5,11 +5,22 @@
 		li {
 			a {
 				text-transform: none;
+				font-family: $sub-font !important;
 			}
 			span {
 				text-transform: none;
+				font-family: $sub-font !important;
 			}
 		}
+	}
+
+	.active:after {
+		content: none;
+	}
+
+	.store-switcher-head {
+		font-size: $xs-font;
+		text-align: center;
 	}
 }
 
@@ -25,4 +36,8 @@
 			top: 95px !important
 		}
 	}
+}
+
+h1, h2, #product-attribute-specs-table .label {
+	font-family: $sub-font !important;
 }

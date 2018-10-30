@@ -26,7 +26,9 @@ class ArtsOnIT_Autologin_Model_Observer extends Varien_Object {
             {
                 if  (!$customer->hasData ( 'autologin_hash' ))
                 {
-                     $customer = Mage::getModel('cutomer/customer')->load($customer->getId());
+                	if (is_bool($customer->getId())) {
+		                $customer = Mage::getModel( 'cutomer/customer' )->load( $customer->getId() );
+	                }
                 }
                 $al = $customer->getData ( 'autologin_hash' );
                 

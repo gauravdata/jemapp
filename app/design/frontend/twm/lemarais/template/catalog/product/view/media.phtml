@@ -53,7 +53,7 @@ $_helper = $this->helper('catalog/output');
             <div class="more-views<?php if(count($this->getGalleryImages()) > 4) { echo ' double-row'; } ?> clearfix">
                 <?php foreach ($this->getGalleryImages() as $_image): ?>
                     <a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->keepFrame(false)->resize(null,675); ?>">
-                        <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(80); ?>" />
+                        <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->constrainOnly(TRUE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(80); ?>" />
                     </a>
                 <?php endforeach; ?>
             </div>

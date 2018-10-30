@@ -62,7 +62,10 @@
         <div class="product-options-wrapper">
             <div class="product-shop">
                 <div class="product-name">
-                    <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?> - <?php if($_product->getColorProduct()) { echo $_product->getColorProduct(); } ?></h1>
+                    <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                </div>
+                <div class="product-color">
+	                <?php if($_product->getColorProduct()) { echo $_product->getColorProduct(); } ?>
                 </div>
 
                 <?php echo $this->getChildHtml('alert_urls') ?>

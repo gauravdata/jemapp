@@ -33,7 +33,7 @@
 ?>
 <script type="text/javascript">
     var sideNavSate = false;
-    if(Cookies.get('side-nav') !== undefined && Cookies.get('side-nav') == 'closed') {
+    if ((Cookies.get('side-nav') !== undefined && Cookies.get('side-nav') == 'closed') || (jQuery(window).width() <= 767)) {
         document.body.className += ' hidden-side-nav';
     } else {
         document.body.className += ' open-side-nav';
@@ -83,13 +83,16 @@
         $store = Mage::app()->getStore()->getData();
 
         if($store['code'] == 'jma_nl') {
-            $link = "https://le-marais.nl";
-            $logo_url = "skin/frontend/twm/lemarais/images/logo.png";
+	        $linktext = "Bekijk ook de collecties van";
+            $link = "https://www.le-marais.nl";
+            $logo_url = "/skin/frontend/twm/lemarais/images/le-marais.png";
         } else {
-            $link = "https://jemappelle.nl";
-            $logo_url = "skin/frontend/twm/default/images/logo.png";
+            $linktext = "Bekijk ook de collecties van";
+            $link = "https://www.jemappelle.nl";
+            $logo_url = "/skin/frontend/twm/default/images/je-mappelle.png";
         }
         ?>
+        <div class="store-switcher-head"><?php echo $linktext; ?></div>
         <div class="store-switcher">
             <a href="<?php echo $link; ?>"><img src="<?php echo $logo_url; ?>" /></a>
         </div>
