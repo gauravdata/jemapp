@@ -24,7 +24,7 @@ class Twm_ExtendAwPoints_Model_Observer
 
     public function salesOrderPaymentCancel(Varien_Event_Observer $observer)
     {
-        $order = $observer->getEvent()->getPayment()->getOrder();
+        $order = $observer->getEvent()->getOrder();
         $cancelledTransaction = Mage::getModel('points/transaction')->loadByOrder($order);
         $balanceChange = abs($cancelledTransaction->getData('balance_change'));
 
