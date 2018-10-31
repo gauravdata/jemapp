@@ -32,6 +32,10 @@
 	font-size: $xl-font !important;
 }
 
+.product-name a {
+	font-weight: $thin !important;
+}
+
 .product-header-title {
 	font-family: $sub-font !important;
 }
@@ -53,7 +57,7 @@
 		&.price {
 			font-size: $xl-font;
 			color: $black;
-			font-weight: $bold;
+			font-weight: $thin !important;
 		}
 	}
 
