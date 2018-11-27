@@ -39,6 +39,12 @@
 	display: none;
 }
 
+.products-grid {
+	.op-voorraad {
+		display: none;
+	}
+}
+
 .product-name {
 	a {
 		color: $xl-grey;
@@ -404,6 +410,12 @@
 		img {
 			width: 100px;
 			margin-left: auto;
+		}
+	}
+
+	.product-shop {
+		.op-voorraad {
+			display: none;
 		}
 	}
 }
