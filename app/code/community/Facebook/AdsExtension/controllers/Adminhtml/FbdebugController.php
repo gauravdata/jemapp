@@ -14,8 +14,8 @@ if (file_exists(__DIR__.'/../../lib/fb.php')) {
   include_once __DIR__.'/../../../../Facebook_AdsExtension_lib_fb.php';
 }
 
-if (file_exists(__DIR__.'/FBProductFeedSamples.php')) {
-  include_once 'FBProductFeedSamples.php';
+if (file_exists(__DIR__.'/../../Model/FBProductFeedSamples.php')) {
+  include_once __DIR__.'/../../Model/FBProductFeedSamples.php';
 } else {
   include_once 'Facebook_AdsExtension_Model_FBProductFeedSamples.php';
 }
@@ -53,7 +53,6 @@ class Facebook_AdsExtension_Adminhtml_FbdebugController
       $samples = new FBProductFeedSamples();
       try {
         $samples = $samples->generate();
-        $this->getResponse()->setBody($samples);
         FacebookAdsExtension::setDebugMode(false);
         $this->ajaxSend(array(
           'success' => true,
