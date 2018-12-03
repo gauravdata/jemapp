@@ -42,7 +42,7 @@
                 <?php $i = 0; foreach ($this->getGalleryImages() as $_image): $i++; ?>
                     <div class="item">
                         <div class="product-visual">
-                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->keepFrame(false)->resize(null,675); ?>" class="view-image" data-zoom-image="<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->keepFrame(false)->resize(2000,null); ?>" />
+                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->keepFrame(false)->resize(null,675)->setQuality(80); ?>" class="view-image" data-zoom-image="<?php echo $this->helper('catalog/image')->init($_product, 'image', $_image->getFile())->keepFrame(false)->resize(2000,null)->setQuality(80); ?>" />
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -50,8 +50,8 @@
             <div class="zoom-image"></div>
             <div class="more-views<?php if(count($this->getGalleryImages()) > 4) { echo ' double-row'; } ?> clearfix">
                 <?php foreach ($this->getGalleryImages() as $_image): ?>
-                    <a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->keepFrame(false)->resize(null,675); ?>">
-                        <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(80); ?>" />
+                    <a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->keepFrame(false)->resize(null,675)->setQuality(80); ?>">
+                        <img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile())->resize(80)->setQuality(80); ?>" />
                     </a>
                 <?php endforeach; ?>
             </div>
@@ -102,7 +102,7 @@
         </script>
     <?php else: ?>
         <div class="product-visual">
-            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(null,675); ?>" class="view-image" data-zoom-image="<?php echo $this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(2000,null); ?>" />
+            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(null,675)->setQuality(80); ?>" class="view-image" data-zoom-image="<?php echo $this->helper('catalog/image')->init($_product, 'image')->keepFrame(false)->resize(2000,null)->setQuality(80); ?>" />
         </div>
     <?php endif; ?>
 </div>
