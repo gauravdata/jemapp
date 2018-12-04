@@ -44,9 +44,6 @@ $_minimalPriceValue = $_product->getMinimalPrice();
 $_minimalPrice = $_taxHelper->getPrice($_product, $_minimalPriceValue, $_simplePricesTax);
 $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStoreLabel();
 ?>
-<p class="op-voorraad">
-	<?php echo $_product->getData('op_voorraad'); ?>
-</p>
 <?php if (!$_product->isGrouped()): ?>
 	<div class="price-box">
 		<?php $_price = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>

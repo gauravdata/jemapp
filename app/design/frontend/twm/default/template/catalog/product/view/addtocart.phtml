@@ -26,13 +26,12 @@
 ?>
 <?php $_product = $this->getProduct(); ?>
 <?php $buttonTitle = $this->__('Add to Cart'); ?>
-
 <?php if($_product->getFit()) { ?>
 <p class="fit">
     <?php echo $_product->getFit(); ?>
 </p>
 <?php } ?>
-
+<p class="op-voorraad"><?php echo $_product->getData('op_voorraad'); ?></p>
 <?php if($_product->isSaleable()): ?>
     <div class="add-to-cart">
         <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="button button-block btn-cart" onclick="productAddToCartForm.submit(this)">
