@@ -47,9 +47,6 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
 <p class="product-description">
 	<?php echo $_product->getData('modelbeschrijving_le_marais'); ?>
 </p>
-<p class="op-voorraad">
-	<?php echo $_product->getData('op_voorraad'); ?>
-</p>
 <?php if (!$_product->isGrouped()): ?>
 	<div class="price-box">
 		<?php $_price = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>
