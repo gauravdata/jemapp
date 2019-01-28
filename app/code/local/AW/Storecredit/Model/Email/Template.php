@@ -30,11 +30,10 @@ class AW_Storecredit_Model_Email_Template extends Mage_Core_Model_Email_Template
         }
 
         $customer = Mage::getModel('customer/customer')->load($customerId);
-        $template = Mage::helper('aw_storecredit/config')->getEmailTemplate();
+        $template = Mage::helper('aw_storecredit/config')->getEmailTemplate($customer->getStoreId());
         if (!$template) {
             $template = self::DEFAULT_EMAIL_TEMPLATE_PATH;
         }
-
         $this->emailTemplate->setDesignConfig(array('store' => $customer->getStoreId()));
         $templateData = $this->_getEmptyTemplateData();
         $templateData['store'] = $store;
@@ -91,7 +90,6 @@ class AW_Storecredit_Model_Email_Template extends Mage_Core_Model_Email_Template
         if (array_key_exists('store_credit_has_creditmemo', $variables)) {
             $templateData['store_credit_has_creditmemo'] = $variables['store_credit_has_creditmemo'];
         }
-
         $subject = Mage::helper('aw_storecredit')->__('Store Credit balance update - %s', $templateData['store_name']);
         $this->emailTemplate->setTemplateSubject($subject);
         return $this->emailTemplate->sendTransactional(
