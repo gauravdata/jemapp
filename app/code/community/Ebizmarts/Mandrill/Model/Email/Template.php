@@ -47,6 +47,7 @@ class Ebizmarts_Mandrill_Model_Email_Template extends Mage_Core_Model_Email_Temp
         //$email = array('subject' => $this->getProcessedTemplateSubject($variables), 'to' => array());
         $email = array('subject' => $subject, 'to' => array());
         $setReturnPath = Mage::getStoreConfig(self::XML_PATH_SENDING_SET_RETURN_PATH);
+        
         switch ($setReturnPath) {
             case 1:
                 $returnPathEmail = $this->getSenderEmail();
@@ -94,7 +95,11 @@ class Ebizmarts_Mandrill_Model_Email_Template extends Mage_Core_Model_Email_Temp
         }
         if(!$senderExists)
         {
-            $email['from_email'] = Mage::getStoreConfig('trans_email/ident_general/email');
+            if ($this->getSenderEmail()) {
+                $email['from_email'] = $this->getSenderEmail();
+            } else {
+                $email['from_email'] = Mage::getStoreConfig('trans_email/ident_general/email');
+            }
         }
         $headers = $mail->getHeaders();
         $headers[] = Mage::helper('ebizmarts_mandrill')->getUserAgent();

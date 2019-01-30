@@ -44,13 +44,12 @@ class AW_Productupdates_Helper_Notifications extends Mage_Core_Helper_Abstract
         /* back compatibility with PUN! */
         $product->setPrice($product->getFormatedPrice());
         $this->_addImageVars($product);
-        /* */
-       
+        /* */       
         Mage::getModel('productupdates/email_template')
             ->setDesignConfig(array('area' => 'frontend', 'store' => $data['queue']->getStoreId()))
             ->setQueue($data['queue'])
             ->sendTransactional(
-                Mage::getStoreConfig(self::NOTIFICATIONS_ROOT . $template),
+                Mage::getStoreConfig(self::NOTIFICATIONS_ROOT . $template, $data['queue']->getProductupdatesSchedule()->getData('store_ids')),
                 $this->_getSenderName($data['queue']->getStoreId()),
                 $data['queue']->getProductupdatesSubscribers()->getEmail(),
                 $data['queue']->getProductupdatesSubscribers()->getFullname(),
@@ -80,6 +79,7 @@ class AW_Productupdates_Helper_Notifications extends Mage_Core_Helper_Abstract
         $types = Mage::getSingleton('productupdates/source_subscriptionTypes')->getAllowedTypes();
         foreach ($types as $template => $type) {
             if ($type == $sendType) {
+                var_dump();
                 $this->send($template, $params);
                 return true;
             }
