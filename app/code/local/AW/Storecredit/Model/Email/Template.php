@@ -28,7 +28,6 @@ class AW_Storecredit_Model_Email_Template extends Mage_Core_Model_Email_Template
         if ($storeCredit->getSubscribeState() != AW_Storecredit_Model_Source_Storecredit_Subscribe_State::SUBSCRIBED_VALUE) {
             return false;
         }
-
         $customer = Mage::getModel('customer/customer')->load($customerId);
         $template = Mage::helper('aw_storecredit/config')->getEmailTemplate($customer->getStoreId());
         if (!$template) {
@@ -97,7 +96,8 @@ class AW_Storecredit_Model_Email_Template extends Mage_Core_Model_Email_Template
             Mage::helper('aw_storecredit/config')->getEmailSender($store),
             $templateData['customer_email'],
             $templateData['customer_name'],
-            $templateData
+            $templateData,
+            $customer->getStoreId()
         );
     }
 
