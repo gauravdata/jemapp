@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Apptrian
+ * @package   Apptrian_FacebookCatalog
+ * @author    Apptrian
+ * @copyright Copyright (c) Apptrian (http://www.apptrian.com)
+ * @license   http://www.apptrian.com/license Proprietary Software License EULA
+ */
+-->
+<config>
+    <modules>
+        <Apptrian_FacebookCatalog>
+            <version>1.4.3</version>
+        </Apptrian_FacebookCatalog>
+    </modules>
+    <global>
+        <models>
+            <apptrian_facebookcatalog>
+                <class>Apptrian_FacebookCatalog_Model</class>
+            </apptrian_facebookcatalog>
+        </models>
+        <resources>
+            <apptrian_facebookcatalog_setup>
+                <setup>
+                    <module>Apptrian_FacebookCatalog</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </apptrian_facebookcatalog_setup>
+        </resources>
+        <blocks>
+            <apptrian_facebookcatalog>
+                <class>Apptrian_FacebookCatalog_Block</class>
+            </apptrian_facebookcatalog>
+        </blocks>
+        <helpers>
+            <apptrian_facebookcatalog>
+                <class>Apptrian_FacebookCatalog_Helper</class>
+            </apptrian_facebookcatalog>
+        </helpers>
+    </global>
+    <default>
+        <apptrian_facebookcatalog>
+            <general>
+                <feed_enabled>1</feed_enabled>
+                <filename></filename>
+                <format>csv</format>
+                <pnvi_allowed>1</pnvi_allowed>
+            </general>
+            <field_options>
+                <id_attr>sku</id_attr>
+                <availability_attr></availability_attr>
+                <availability_map>In Stock,Out of Stock,Preorder,Available for Order,Discontinued</availability_map>
+                <condition_attr>condition</condition_attr>
+                <condition_map>New,Refurbished,Used</condition_map>
+                <description_attr>meta_description</description_attr>
+                <title_attr>name</title_attr>
+                <gtin_attr></gtin_attr>
+                <mpn_attr></mpn_attr>
+                <brand_attr>brand</brand_attr>
+                <default_brand></default_brand>
+                <identifier_exists>0</identifier_exists>
+                <override>0</override>
+                <additional_image_link></additional_image_link>
+                <age_group_attr></age_group_attr>
+                <age_group_map>Newborn,Infant,Toddler,Kids,Adult</age_group_map>
+                <expiration_date_attr></expiration_date_attr>
+                <gender_attr></gender_attr>
+                <gender_map>Male,Female,Male or Female</gender_map>
+                <item_group_id_attr>sku</item_group_id_attr>
+                <gpc_attr>google_product_category</gpc_attr>
+                <default_gpc></default_gpc>
+                <sale_price>0</sale_price>
+                <sale_price_effect_date>0</sale_price_effect_date>
+                <additional_mapping>color=color|material=material|pattern=pattern</additional_mapping>
+            </field_options>
+            <cron>
+                <enabled>0</enabled>
+                <expression>15 2 * * *</expression>
+            </cron>
+        </apptrian_facebookcatalog>
+    </default>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <apptrian_facebookcatalog after="Mage_Adminhtml">Apptrian_FacebookCatalog_Adminhtml</apptrian_facebookcatalog>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <apptrian_info>
+                                            <title>Info</title>
+                                        </apptrian_info>
+                                        <apptrian_facebookcatalog>
+                                            <title>Facebook Catalog Product Feed</title>
+                                        </apptrian_facebookcatalog>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+            <modules>
+                <Apptrian_FacebookCatalog>
+                    <files>
+                        <default>Apptrian_FacebookCatalog.csv</default>
+                    </files>
+                </Apptrian_FacebookCatalog>
+            </modules>
+        </translate>
+    </adminhtml>
+    <crontab>
+        <jobs>
+            <apptrian_facebookcatalog_generate>
+                <run>
+                    <model>apptrian_facebookcatalog/cron::generate</model>
+                </run>
+            </apptrian_facebookcatalog_generate>
+        </jobs>
+    </crontab>
+</config>
