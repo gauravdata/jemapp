@@ -52,10 +52,8 @@ class AW_Points_Model_Transaction extends Mage_Core_Model_Abstract
 
     public function loadByOrder($order)
     {
-    	$order_id = $order->getIncrementId();
-    	var_dump($order_id);
-	    $this->getResource()->loadByOrderIncrementId($this, $order_id);
-	    return $this;
+        $this->getResource()->loadByOrderIncrementId($this, $order->getIncrementId());
+        return $this;
     }
 
     public function calculatePointsFor($order, $type = AW_Points_Helper_Config::MONEY_SPENT)

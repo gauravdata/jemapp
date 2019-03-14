@@ -39,7 +39,7 @@
         <models>
             <sales>
                 <rewrite>
-                    <order>AW_Points_Model_Sales_Order</order>
+                    <!--<order>AW_Points_Model_Sales_Order</order>-->
                     <order_invoice_item>AW_Points_Model_Sales_Order_Invoice_Item</order_invoice_item>
                 </rewrite>
             </sales>
