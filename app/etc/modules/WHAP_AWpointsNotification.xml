@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <WHAP_AWpointsNotification>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <AW_Points />
+            </depends>
+        </WHAP_AWpointsNotification>
+    </modules>
+</config>

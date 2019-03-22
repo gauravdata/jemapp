@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+<modules>
+    <WHAP_AWpointsNotification>
+        <version>0.0.1</version>
+    </WHAP_AWpointsNotification>
+</modules>
+<global>
+    <models>
+        <AW_Points>
+            <rewrite>
+                <notification>WHAP_AWpointsNotification_Model_Notification</notification>
+            </rewrite>
+        </AW_Points>
+    </models>
+</global>
+</config>
