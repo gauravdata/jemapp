@@ -93,6 +93,27 @@
                     </pointsandrewards>
                 </observers>
             </controller_action_postdispatch_customer_account_editPost>
+
+
+            <controller_action_predispatch_checkout_onepage_success>
+                <observers>
+                    <pointsandrewards>
+                        <type>singleton</type>
+                        <class>pointsandrewards/observer</class>
+                        <method>customerSaveBefore</method>
+                    </pointsandrewards>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_success>
+            <controller_action_predispatch_checkout_onepage_success>
+                <observers>
+                    <pointsandrewards>
+                        <type>singleton</type>
+                        <class>pointsandrewards/observer</class>
+                        <method>updatePointsNotificationFromCustomerEdit</method>
+                    </pointsandrewards>
+                </observers>
+            </controller_action_predispatch_checkout_onepage_success>
+
         </events>
     </global>
     <default>

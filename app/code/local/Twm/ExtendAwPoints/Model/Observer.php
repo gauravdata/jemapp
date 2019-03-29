@@ -45,4 +45,21 @@ class Twm_ExtendAwPoints_Model_Observer
 
         $a = false;
     }
+
+	// function observes customer save on frontend
+	public function customerSaveBefore($observer)
+	{
+		/** @var Mage_Customer_Model_Customer $customer */
+		$customer = $observer->getEvent()->getCustomer();
+		if ($customer->isObjectNew() && !Mage::registry('aw_points_current_customer')) {
+			Mage::register('aw_points_current_customer', $customer);
+		}
+
+		Mage::helper('pointsandrewards')->toggleAllFlags(1);
+	}
+
+	public function updatePointsNotificationFromCustomerEdit($observer)
+	{
+		Mage::helper('pointsandrewards')->toggleAllFlags(1);
+	}
 }
