@@ -55,11 +55,11 @@ class Twm_ExtendAwPoints_Model_Observer
 			Mage::register('aw_points_current_customer', $customer);
 		}
 
-		Mage::helper('pointsandrewards')->toggleAllFlags(1);
+		Mage::helper('pointsandrewards')->toggleAllFlags(true);
 	}
 
 	public function updatePointsNotificationFromCustomerEdit($observer)
 	{
-		Mage::helper('pointsandrewards')->toggleAllFlags(1);
+		Mage::helper('pointsandrewards')->toggleAllFlags(true);
 	}
 }
