@@ -32,7 +32,6 @@ html, body {
 
 	> ul {
 		list-style: none;
-		padding: 0 0 300px 0 !important;
 
 		> li {
 			border-bottom: 1px solid $s-grey;
@@ -745,6 +744,14 @@ ul.social {
 	#wrapper {
 		.tss-ls-footer-controls {
 			min-width: 410px;
+		}
+	}
+}
+
+@media(max-width: 768px) {
+	#side-nav {
+		> ul {
+			padding: 0 0 300px 0 !important;
 		}
 	}
 }

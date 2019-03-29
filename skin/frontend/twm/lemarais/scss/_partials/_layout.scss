@@ -2,7 +2,6 @@
 	top: 99px;
 
 	ul {
-		padding: 0 0 300px 0 !important;
 		li {
 			a {
 				text-transform: none;
@@ -22,6 +21,14 @@
 	.store-switcher-head {
 		font-size: $xs-font;
 		text-align: center;
+	}
+}
+
+@media(max-width: 768px) {
+	#side-nav {
+		> ul {
+			padding: 0 0 300px 0 !important;
+		}
 	}
 }
 
