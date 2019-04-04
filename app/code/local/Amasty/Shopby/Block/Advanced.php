@@ -1,28 +1,67 @@
 <?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+
+
+/**
+ * @method string getToggleClasses()
+ * @method Amasty_Shopby_Block_Advanced setToggleClasses(string $value)
+ *
+ * Class Amasty_Shopby_Block_Advanced
+ */
 class Amasty_Shopby_Block_Advanced extends Mage_Catalog_Block_Navigation
 {
+    /** @var  Amasty_Shopby_Model_Url_Builder */
+    protected $urlBuilder;
+
+    /** @var  int */
+    protected $maxOptions;
+    /** @var int */
+    protected $renderedItemsCount = 0;
+
+    /** @var  Amasty_Shopby_Helper_Data */
+    private $dataHelper;
+
+    protected function _construct()
+    {
+        parent::_construct();
+        $this->dataHelper = Mage::helper('amshopby');
+        $this->maxOptions = max(0, Mage::getStoreConfig('amshopby/category_filter/categories_max_options'));
+    }
+
+    public function getHtml()
+    {
+        return $this->_toHtml();
+    }
+
+    /**
+     * @param Mage_Catalog_Model_Category $category
+     * @param int $level
+     * @return string
+     */
     public function drawOpenCategoryItem($category, $level = 0)
     {
-        if(!$category->getIsActive() || !$category->getIncludeInMenu() || $category->getProductCount() == 0) {
+        if ($this->_isExcluded($category->getId()) || !$category->getIsActive()) {
             return '';
         }
-        
 
         $cssClass = array(
             'amshopby-cat',
             'level' . $level
         );
-        
-        if ($this->_isCurrentCategory($category)) {
+        $cssClass = $this->_addToggleCss($cssClass, $category);
+
+        $currentCategory = $this->dataHelper->getCurrentCategory();
+
+        if ($currentCategory->getId() == $category->getId()) {
             $cssClass[] = 'active';
         }
-        
+
         if ($this->isCategoryActive($category)) {
             $cssClass[] = 'parent';
-        }
-
-        if($category->hasChildren()) {
-            $cssClass[] = 'has-child';
         }
 
 
@@ -30,43 +69,42 @@ class Amasty_Shopby_Block_Advanced extends Mage_Catalog_Block_Navigation
         if ($this->showProductCount()) {
             $productCount = $category->getProductCount();
             if ($productCount > 0) {
-                $productCount = '(' . $productCount . ')';
+                $productCount = '&nbsp;<span class="count">(' . $productCount . ')</span>';
             } else {
                 $productCount = '';
             }
         }
-        
+
         $html = array();
-        $html[1] = '<a href="' . $this->getCategoryUrl($category) . '">' . $this->htmlEscape($category->getName()) . '</a>' . $productCount;
-        
-        $showAll   = Mage::getStoreConfig('amshopby/advanced_categories/show_all_categories');
-        $showDepth = Mage::getStoreConfig('amshopby/advanced_categories/show_all_categories_depth');
+        $label = $this->htmlEscape($category->getName()) . $productCount;
+        $html[1] = '<a href="' . $this->getCategoryUrl($category) . '">' . $label . '</a>';
 
-        if (in_array($category->getId(), $this->getCurrentCategoryPath()) || ($showAll && $showDepth == 0) || ($showAll && $showDepth > $level + 1)) {
-                
-            $children = $this->_getCategoryCollection()->addIdFilter($category->getChildren());
-            Mage::getSingleton('catalog/layer')->getProductCollection()
-                ->addCountToCategories($children);
-            $children = $this->asArray($children);
-            
-            $hasChild = false;
-            
-            if ($children && count($children) > 0) {
-                $hasChild = true;
-                $childCount = count($children);
-            }
-            if ($hasChild) {
-                
+        $showAll   = Mage::getStoreConfig('amshopby/category_filter/show_all_categories');
+        $showDepth = Mage::getStoreConfig('amshopby/category_filter/tree_depth');
+
+        $hasChild = false;
+
+        $inPath = in_array($category->getId(), $currentCategory->getPathIds());
+        $showAsAll = $showAll && ($showDepth == 0 || $showDepth > $level + 1);
+        if (($inPath || $showAsAll) && $category->getData('children_count')) {
+            $childrenIds = $this->dataHelper->getCategoryChildrenIds($category->getId());
+            if ($childrenIds) {
+                $children = $this->_getCategoryCollection()->addIdFilter($childrenIds);
+                $this->_getFilterModel()->addCounts($children);
                 $children = $this->asArray($children);
-                
-                $htmlChildren = '';                
-                foreach($children as $i => $child) {
-                    $htmlChildren .= $this->drawOpenCategoryItem($child, $level + 1);
-                }
 
-                if($htmlChildren != '') {
-                    $cssClass[] = 'expanded';
-                    $html[2] = '<ul>' . $htmlChildren . '</ul>';
+                if ($children) {
+                    $hasChild = true;
+                    $htmlChildren = '';
+                    foreach($children as $child) {
+                        $htmlChildren .= $this->drawOpenCategoryItem($child, $level + 1);
+                    }
+
+                    if($htmlChildren != '') {
+                        $cssClass[] = 'has-child';
+                        $cssClass[] = 'expanded';
+                        $html[2] = '<ol>' . $htmlChildren . '</ol>';
+                    }
                 }
             }
         }
@@ -75,7 +113,41 @@ class Amasty_Shopby_Block_Advanced extends Mage_Catalog_Block_Navigation
         $html[3] = '</li>';
 
         ksort($html);
-        return implode('', $html);
+
+        if ($category->getProductCount() || ($hasChild && $htmlChildren)) {
+            $result = implode('', $html);
+        } else {
+            $result = '';
+            $this->renderedItemsCount--;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param array $cssClass
+     * @param Mage_Catalog_Model_Category $category
+     * @return array
+     */
+    protected function _addToggleCss($cssClass, $category)
+    {
+        $this->renderedItemsCount++;
+        if ($this->getMaxOptions() && $this->getRenderedItemsCount() > $this->getMaxOptions()) {
+            $cssClass[] = $this->getToggleClasses();
+        }
+        return $cssClass;
+    }
+
+    /**
+     * @param Mage_Catalog_Model_Category $category
+     * @return string
+     */
+    public function getCategoryUrl($category)
+    {
+        $this->urlBuilder->category = $category;
+        $this->urlBuilder->changeQuery(array('cat' => $category->getId()));
+        $url = $this->urlBuilder->getUrl();
+        return $url;
     }
 
     /**
@@ -95,102 +167,101 @@ class Amasty_Shopby_Block_Advanced extends Mage_Catalog_Block_Navigation
         return $array;
     }
 
-
-    protected function _isCurrentCategory($category)
-    {
-        $cat = $this->getCurrentCategory();
-        if ($cat) {
-            return ($cat->getId() == $category->getId());
-        }
-        return false;
-    }
-
-
     /**
-     * Get catagories of current store, using the max depth setting for the vertical navigation
+     * Get categories of current store, using the max depth setting for the vertical navigation
      * @return Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection
      */
     public function getCategories()
     {
-        /* @var $category Mage_Catalog_Model_Category */
-        $category = Mage::getModel('catalog/category');
-        $parent = Mage::registry('current_category');
-        
-        $startFrom = Mage::getStoreConfig('amshopby/advanced_categories/start_category');
-        
-        switch($startFrom) {            
-            case Amasty_Shopby_Model_Source_Category_Start::START_CHILDREN:
-                break;
-            case Amasty_Shopby_Model_Source_Category_Start::START_CURRENT:
-                if ($parent) {
-                    $parent = $parent->getParentCategory();
-                }
-                break;
-            case Amasty_Shopby_Model_Source_Category_Start::START_ROOT:
-                $parent = $category->load(Mage::app()->getStore()->getRootCategoryId());
-                break;
-            default:
-                $parent = $category->load(Mage::app()->getStore()->getRootCategoryId());
-        }
-        
-        if (!$parent) {
-            $parent = $category->load(Mage::app()->getStore()->getRootCategoryId());
-        }
-        $storeCategories = $this->_getCategoryCollection()->addIdFilter($parent->getChildren());
-        return $storeCategories;
+        return $this->_getFilterModel()->getAdvancedCollection();
     }
 
     protected function _getCategoryCollection()
     {
+        /** @var Mage_Catalog_Model_Resource_Category_Collection $collection */
         $collection = Mage::getResourceModel('catalog/category_collection');
-        
+
         $collection
             ->addAttributeToSelect('url_key')
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('all_children')
+            ->addAttributeToSelect('is_anchor')
             ->addAttributeToFilter('is_active', 1)
-            ->addAttributeToFilter('include_in_menu', 1)
             ->setOrder('position', 'asc')
             ->joinUrlRewrite();
-        
-        if( $this->showProductCount() ) {
-            $collection->setLoadProductCount(true);
-        }
-        
+
         return $collection;
     }
 
     public function showProductCount()
     {
-        return Mage::getStoreConfigFlag('amshopby/advanced_categories/display_product_count');
+        return Mage::getStoreConfigFlag('amshopby/category_filter/display_product_count');
     }
-    
+
     protected function _toHtml()
     {
+        $urlBuilder = Mage::getModel('amshopby/url_builder');
+        /** @var Amasty_Shopby_Model_Url_Builder $urlBuilder */
+        $urlBuilder->reset();
+        $urlBuilder->clearPagination();
+        $this->urlBuilder = $urlBuilder;
+
         $html = '';
-        
+
         $cats = $this->getCategories();
-        Mage::getSingleton('catalog/layer')->getProductCollection()
-            ->addCountToCategories($cats);
-        
-        
+
         $storeCategories = $this->asArray($cats);
-        
-        $exclude = Mage::getStoreConfig('amshopby/general/exclude_cat');
-        if ($exclude){
-            $exclude = explode(',', preg_replace('/[^\d,]+/','', $exclude));
-             } 
-        else {
-            $exclude = array();
-        }
-        
+
         if (count($storeCategories) > 0) {
-             foreach ($storeCategories as $c) {  
-                 if (!in_array($c->getId(), $exclude)){
+             foreach ($storeCategories as $c) {
+                 if (!$this->_isExcluded($c->getId())) {
                     $html .= $this->drawOpenCategoryItem($c, 0);
                  }
-             } 
+             }
         }
         return $html;
+    }
+
+    /**
+     * @return Amasty_Shopby_Model_Catalog_Layer_Filter_Category
+     */
+    protected function _getFilterModel()
+    {
+        return Mage::registry('amshopby_category_filter_model');
+    }
+
+    protected function _isExcluded($categoryId)
+    {
+        if (!$this->hasData('exclude_ids')) {
+            $excludeIds = preg_replace('/[^\d,]+/', '', Mage::getStoreConfig('amshopby/category_filter/exclude_cat'));
+            $excludeIds = $excludeIds ? explode(',', $excludeIds) : array();
+            $this->setData('exclude_ids', $excludeIds);
+        }
+        $excludeIds = $this->getData('exclude_ids');
+        if (in_array($categoryId, $excludeIds)) {
+            return true;
+        };
+
+        if (!$this->hasData('include_ids')) {
+            $includeIds = preg_replace('/[^\d,]+/', '', Mage::getStoreConfig('amshopby/category_filter/include_cat'));
+            $includeIds = $includeIds ? explode(',', $includeIds) : array();
+            $this->setData('include_ids', $includeIds);
+        }
+        $includeIds = $this->getData('include_ids');
+        if ($includeIds && !in_array($categoryId, $includeIds)) {
+            return true;
+        };
+
+        return false;
+    }
+
+    public function getRenderedItemsCount()
+    {
+        return $this->renderedItemsCount;
+    }
+
+    public function getMaxOptions()
+    {
+        return $this->maxOptions;
     }
 }

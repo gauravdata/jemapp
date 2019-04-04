@@ -1,9 +1,26 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2008-2012 Amasty (http://www.amasty.com)
-* @package Amasty_Shopby
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+
+/**
+ * @method Amasty_Shopby_Model_Page setCond($serializedCond)
+ * @method string getCond()
+ * @method Amasty_Shopby_Model_Page setCats($cats)
+ * @method string getCats()
+ * @method int getCmsBlockId()
+ * @method int getBottomCmsBlockId()
+ * @method string getMetaDescr()
+ * @method string getMetaKw()
+ * @method string getMetaTitle()
+ * @method Amasty_Shopby_Model_Page setUrl(string $url)
+ * @method string getTitle()
+ * @method string getDescription()
+ * @method string getUrl()
+ * @method boolean getUseCat()
+ */
 class Amasty_Shopby_Model_Page extends Mage_Core_Model_Abstract
 {
     public function _construct()
@@ -11,7 +28,19 @@ class Amasty_Shopby_Model_Page extends Mage_Core_Model_Abstract
         parent::_construct();
         $this->_init('amshopby/page');
     }
-    
+
+    public function getData($key = '', $index = null)
+    {
+        $result =  parent::getData($key, $index);
+        if (in_array($key, array('meta_title', 'meta_descr', 'meta_kw', 'title', 'description'))) {
+            $result = Mage::helper('amshopby')->buildTemplate($result);
+        }
+
+        return $result;
+    }
+
+
+
     public function getAllFilters($addEmpty=false)
     {
         $collection = Mage::getModel('amshopby/filter')->getResourceCollection()
@@ -26,62 +55,75 @@ class Amasty_Shopby_Model_Page extends Mage_Core_Model_Abstract
         } 
         return $values;
     }
-    
-    public function match()
+
+    public function matchCurrentFilters()
     {
-        if (intval($this->getStoreId()) > 0 && 
-                Mage::app()->getStore()->getId() != $this->getStoreId()) {
-            return false; 
-        }
-        
-        $cond = $this->getCond();
-        
-        if (!$cond) {
-            return false;            
-        }
-        
-        $cats = $this->getCats();
-        if ($cats) {
-            $cat = Mage::registry('current_category');
-            if (!$cat){
+        $strict = Mage::getStoreConfig('amshopby/seo/page_match_strict');
+
+        /** @var Amasty_Shopby_Helper_Attributes $attributesHelper */
+        $attributesHelper = Mage::helper('amshopby/attributes');
+        $requestedExtraFilters = $strict ? $attributesHelper->getRequestedFilterCodes() : null;
+
+        /** @var Amasty_Shopby_Helper_Data $helper */
+        $helper = Mage::helper('amshopby');
+        $conditions = $this->_getConditions();
+
+        foreach ($conditions as $code => $expected) {
+            $actual = $helper->getRequestValues($code);
+
+            if ($strict) {
+                unset($requestedExtraFilters[$code]);
+
+                if (array_diff($actual, $expected)) {
+                    return false;
+                }
+            }
+
+            if (array_diff($expected, $actual)) {
                 return false;
             }
-            
-            if (!in_array($cat->getId(), explode(',', $cats))) {
-                return false;
-            }
         }
-        
-        $cond = unserialize($cond);
-        if (!is_array($cond)) {
-          return false;
-        }          
-        foreach ($cond as $k => $v) {
+
+        if ($strict && $requestedExtraFilters) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function _getConditions()
+    {
+        $conditions = Mage::helper('amshopby')->unserialize($this->getCond());
+        if (!is_array($conditions)) {
+            return array();
+        }
+
+        $result = array();
+
+        foreach ($conditions as $k => $v) {
             if (!$v){ // multiselect can be empty
                 continue;
             }
-            
-            /*
-             * Multiple attributes fix
-             */
+
             if (is_array($v) && is_numeric($k)) {
-                $k = $v['attribute_code'];
-                $v = $v['attribute_value'];
+                /* Multiple attributes fix */
+                $code = $v['attribute_code'];
+                $value = $v['attribute_value'];
+            } else {
+                $code = $k;
+                $value = $v;
             }
-            
-            $vals = Mage::helper('amshopby')->getRequestValues($k);
-            if (is_array($v)) {
-                if (array_diff($v, $vals)) {
-                    return false;
-                }
-            } 
-            elseif (!in_array($v, $vals)) {
-                return false;
+
+            if (!is_array($value)) {
+                $value = array($value);
             }
+            $existValue = isset($result[$code]) ? $result[$code] : array();
+            $result[$code] = array_merge($existValue, $value);
         }
-        return true;
+
+        return $result;
     }
-    
+
     public function getFrontendInput($attributeCode)
     {
         $attributes = Mage::getModel('amshopby/filter')->getResourceCollection()->addFrontendInput($attributeCode);
@@ -90,22 +132,29 @@ class Amasty_Shopby_Model_Page extends Mage_Core_Model_Abstract
         
     public function getOptionsForFilter($attributeCode, $frontendInput)
     {
-        $filters = Mage::getModel('amshopby/filter')->getResourceCollection()->addFrontendInput($attributeCode);
-        $filterId = $filters->getFirstItem()->getFilterId();
-        
-        $options = Mage::getModel('amshopby/value')->getResourceCollection()->addFilter('filter_id', $filterId);
-            
+        $attribute = Mage::getSingleton('eav/config')->getAttribute('catalog_product', $attributeCode);
+        if ($attribute->usesSource()) {
+            $options = $attribute->getSource()->getAllOptions(false);
+            $optionCollection = Mage::getModel('amshopby/value')->getParentCollection();
+            $options = array_merge($options, $optionCollection->getMappedOptionsForPageConditions($options));
+        }
+
         $values = array();
         foreach ($options as $option) {
             if ('select' == $frontendInput) {
-                $values[$option->getOptionId()] = $option->getTitle();
+                $values[$option['value']] = $option['label'];
             } elseif ('multiselect' == $frontendInput) {
                 $values[] = array(
-                    'value' => $option->getOptionId(),
-                    'label' => $option->getTitle(),
+                    'value' => $option['value'],
+                    'label' => $option['label'],
                 );
             }
         } 
         return $values;
+    }
+
+    public function getConditions()
+    {
+        return $this->_getConditions();
     }
 }

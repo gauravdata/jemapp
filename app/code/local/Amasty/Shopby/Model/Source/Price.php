@@ -1,8 +1,10 @@
 <?php
 /**
- * @copyright  Copyright (c) 2010 Amasty (http://www.amasty.com)
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
  */  
-class Amasty_Shopby_Model_Source_Price extends Varien_Object
+class Amasty_Shopby_Model_Source_Price extends Amasty_Shopby_Model_Source_Abstract
 {
     public function toOptionArray()
     {
@@ -14,5 +16,4 @@ class Amasty_Shopby_Model_Source_Price extends Varien_Object
             array('value' => Amasty_Shopby_Model_Catalog_Layer_Filter_Price::DT_SLIDER,     'label' => $hlp->__('Slider')),
         );
     }
-    
 }

@@ -1,24 +1,33 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2008-2012 Amasty (http://www.amasty.com)
-* @package Amasty_Shopby
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
 class Amasty_Shopby_Block_Adminhtml_Page_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
+    protected function _prepareLayout()
+    {
+        parent::_prepareLayout();
+        if (Mage::getSingleton('cms/wysiwyg_config')->isEnabled()) {
+            $this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
+        }
+    }
+
     protected function _prepareForm()
     {
+        $saveId = $this->getRequest()->getParam('duplicate') ? null : $this->getRequest()->getParam('id');
         $form = new Varien_Data_Form(array(
             'id' => 'edit_form',
-            'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'))),
+            'action' => $this->getUrl('*/*/save', array('id' => $saveId)),
             'method' => 'post'));
         
         $form->setUseContainer(true);
         $this->setForm($form);
         $hlp = Mage::helper('amshopby');
-        
+
         $model = Mage::registry('amshopby_page');
-        
+
         if (!$model->getId()){
             $fldInfo = $form->addFieldset('setup', array('legend'=> $hlp->__('Page Setup')));
 
@@ -33,7 +42,7 @@ class Amasty_Shopby_Block_Adminhtml_Page_Edit_Form extends Mage_Adminhtml_Block_
             $fldMeta = $form->addFieldset('tags', array('legend'=> $hlp->__('Meta Tags')));
             $fldMeta->addField('num', 'hidden', array(
               'name'      => 'num',
-            )); 
+            ));
             $fldMeta->addField('use_cat', 'select', array(
               'label'     => $hlp->__('Add to Category Metas'),
               'name'      => 'use_cat',
@@ -56,45 +65,64 @@ class Amasty_Shopby_Block_Adminhtml_Page_Edit_Form extends Mage_Adminhtml_Block_
               'label'     => $hlp->__('Canonical Url'),
               'name'      => 'url',
               'note'      => $hlp->__("It's not the page URL. It's HTML tag as per https://support.google.com/webmasters/answer/139394") 
-            )); 
-            
-            $cmsBlocks = Mage::getModel('cms/block')->getCollection();
-            $values = array(array(
-                'value' => '',
-                'label' => '',
             ));
-            foreach ($cmsBlocks as $block) {
-                $values[] = array(
-                    'value' => $block->getIdentifier(),
-                    'label' => $block->getTitle(),
-                );
-            }
 
+            $cmsBlocks = Mage::getResourceModel('cms/block_collection')->load()->toOptionArray();
+            array_unshift($cmsBlocks, array('value' => null, 'label' => $this->__('Please select a static block ...')));
             $fldInfo = $form->addFieldset('info', array('legend'=> $hlp->__('Page Text')));
-            $fldInfo->addField('title', 'text', array(
+            $fldInfo->addField(
+                'title', 'text', array(
                 'label'     => $hlp->__('Title'),
-                'name'      => 'title',
-            ));
-            $fldInfo->addField('cms_block', 'select', array(
-                'name'      => 'cms_block',
-                'label'     => $hlp->__('CMS block'),
-                'title'     => $hlp->__('CMS block'),
-                'values'    => $values,
-            ));
+                'name'      => 'title')
+            );
+            $fldInfo->addField(
+                'description', 'editor', array(
+                'label'     => $hlp->__('Description'),
+                'name'      => 'description',
+                'config'    => Mage::getSingleton('cms/wysiwyg_config')->getConfig())
+            );
+            $fldInfo->addField(
+                'cms_block_id', 'select', array(
+                'label'     => $hlp->__('Top CMS block'),
+                'name'      => 'cms_block_id',
+                'values'    => $cmsBlocks)
+            );
+            $fldInfo->addField(
+                'bottom_cms_block_id', 'select', array(
+                'label'     => $hlp->__('Bottom CMS block'),
+                'name'      => 'bottom_cms_block_id',
+                'values'    => $cmsBlocks)
+            );
 
             $fldCats = $form->addFieldset('categories', array('legend' => $hlp->__('Page Categories')));
 
-            $fldCats->addField('store_id', 'select', array(
-                'label'     => $hlp->__('Store View'),
-                'name'      => 'store_id',
-                'values'    => Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm(true),
-            ));
+            $fldCats->addField(
+                'stores', 'multiselect', array(
+                'label'     => $hlp->__('Store Views'),
+                'name'      => 'stores',
+                'values'    => Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm(true))
+            );
 
-            $fldCats->addField('cats', 'multiselect', array(
+            $fldCats->addField(
+                'cats', 'multiselect', array(
                 'label'     => $hlp->__('Categories'),
                 'name'      => 'cats',
-                'values'    => $this->getTree(),
-            ));
+                'values'    => $this->getTree())
+            );
+
+            $designFieldset = $form->addFieldset(
+                'design_fieldset', array(
+                'legend' => Mage::helper('cms')->__('Custom Design'),
+                'class'  => 'fieldset-wide')
+            );
+
+            $designFieldset->addField(
+                'custom_layout_update_xml', 'textarea', array(
+                'name'      => 'custom_layout_update_xml',
+                'label'     => Mage::helper('cms')->__('Custom Layout Update XML'),
+                'style'     => 'height:24em;',
+                'note'      => Mage::helper('cms')->__('Does not work with Ajax'))
+            );
 
             $filters = $model->getAllFilters(true);
 
@@ -148,7 +176,7 @@ class Amasty_Shopby_Block_Adminhtml_Page_Edit_Form extends Mage_Adminhtml_Block_
         }
         elseif ($model) {
             $form->setValues($model->getData());
-        } 
+        }
 
         return parent::_prepareForm();
     }

@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+
 // todo merge with 14? 
 class Amasty_Shopby_Model_Mysql4_Price13 extends Mage_CatalogIndex_Model_Mysql4_Price
 {
@@ -56,19 +62,21 @@ class Amasty_Shopby_Model_Mysql4_Price13 extends Mage_CatalogIndex_Model_Mysql4_
     {
         // it already contains all necessary joins
         $select = $this->_prepareSelect($filter, true);
+        if (count($ranges)) {
+            $countExpr = new Zend_Db_Expr('COUNT(DISTINCT price_table_amshopby.entity_id)');
 
-        $countExpr  = new Zend_Db_Expr('COUNT(DISTINCT price_table_amshopby.entity_id)');
-        
-        $rangeExpr  = "CASE ";
-        $price    =  $this->_price;
-        
-        
-        foreach ($ranges as $n => $r){
-            $rangeExpr .= "WHEN ($price >= {$r[0]} AND $price < {$r[1]}) THEN $n ";
+            $rangeExpr = "CASE ";
+            $price = $this->_price;
+
+
+            foreach ($ranges as $n => $r) {
+                $rangeExpr .= "WHEN ($price >= {$r[0]} AND $price < {$r[1]}) THEN $n ";
+            }
+            $rangeExpr .= " END";
+            $rangeExpr = new Zend_Db_Expr($rangeExpr);
+        } else {
+            $rangeExpr = new Zend_Db_Expr("NULL");
         }
-        $rangeExpr .= " END";
-        $rangeExpr = new Zend_Db_Expr($rangeExpr);
-
         $select->from('', array('range' => $rangeExpr, 'count' => $countExpr))->group('range');
         
         $counts = $this->_getReadAdapter()->fetchPairs($select);

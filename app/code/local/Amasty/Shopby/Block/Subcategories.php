@@ -1,11 +1,29 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2008-2012 Amasty (http://www.amasty.com)
-* @package Amasty_Shopby
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+
+
 class Amasty_Shopby_Block_Subcategories extends Mage_Core_Block_Template
 {
+    const CATALOG_CATEGORY_PATH = 'catalog/category/';
+
+    const SUBCATEGORY_COLUMN_COUNT = 3;
+
+    protected function _construct()
+    {
+        /* if thumbnale caching
+        $this->setCacheTags(array(time()));
+        $this->setCacheKey(time());
+        */
+        $this->setCacheLifetime(null);
+    }
+
+    /**
+     * @return Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Category_Flat_Collection
+     */
     public function getSubcategories()
     {
         $orders = array('position', 'name');
@@ -14,48 +32,64 @@ class Amasty_Shopby_Block_Subcategories extends Mage_Core_Block_Template
             $order = current($orders);
         }
         
-        $layer = Mage::getSingleton('catalog/layer');
+        $collection = $this->getCategoryCollection();
+        $collection->setOrder($order, Varien_Db_Select::SQL_ASC);
         
+        foreach ($collection as $category) {
+            $image = $category->getThumbnail() ?: $category->getImage();
+            if ($image) {
+                $imageUrl = Mage::getBaseUrl('media') . '' . self::CATALOG_CATEGORY_PATH . '' . $image;
+                $category->setThumbnailUrl($imageUrl);
+            }
+        }
+
+        return $collection;
+    }
+
+    /**
+     * @return Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Category_Flat_Collection
+     */
+    protected function getCategoryCollection()
+    {
+        $layer = Mage::getSingleton('catalog/layer');
         /* @var $category Mage_Catalog_Model_Category */
         $category = $layer->getCurrentCategory();
-        
         $collection = $category->getCollection();
         $collection->addAttributeToSelect('url_key')
             ->addAttributeToSelect('name')
-            ->addAttributeToSelect('thumbnail')
             ->addAttributeToSelect('image')
-            ->addAttributeToFilter('is_active', 1)
-            ->addIdFilter($category->getChildren())
-            ->setOrder($order, Varien_Db_Select::SQL_ASC);
-        /* @var $collection Mage_Catalog_Model_Resource_Category_Collection */
+            ->addAttributeToFilter('is_active', 1);
+        $this->addParentFilter($collection, $category->getId());
         if ($collection instanceof Mage_Catalog_Model_Resource_Category_Collection) {
+            /* @var $collection Mage_Catalog_Model_Resource_Category_Collection */
             $collection->joinUrlRewrite();
-        } else { /* @var $collection Mage_Catalog_Model_Resource_Category_Flat_Collection */
+            $collection->addAttributeToSelect('thumbnail');
+        } else {
+            /* @var $collection Mage_Catalog_Model_Resource_Category_Flat_Collection */
             $collection->addUrlRewriteToResult();
-        }
-        $collection->load();
-        
-        foreach ($collection as $cat) {
-            if ($cat->getThumbnail()) {
-                $image = Mage::getBaseUrl('media') . 'catalog/category/' . $cat->getThumbnail();
-                $cat->setImage($image);
-            } else if ($cat->getImage()) {
-                $image = Mage::getBaseUrl('media') . 'catalog/category/' . $cat->getImage();
-                $cat->setImage($image);
+            $tableName = $collection->getResource()->getMainTable();
+            if ($collection->getConnection()->tableColumnExists($tableName, 'thumbnail')) {
+                $collection->addAttributeToSelect('thumbnail');
             }
         }
-        
+
         return $collection;
+    }
+
+    /**
+     * @param Mage_Catalog_Model_Resource_Category_Collection|Mage_Catalog_Model_Resource_Category_Flat_Collection $collection
+     * @param $categoryId
+     */
+    protected function addParentFilter($collection, $categoryId)
+    {
+        $collection->addFieldToFilter('parent_id', $categoryId);
     }
     
     public function getDivWidth()
     {
-        if ($this->getColumns()) {
-            $columns = $this->getColumns();
-        } else {
-            $columns = 3;
-        }
-        $result = round(100 / (int)$columns, 0);
+        $columns = $this->getColumns() ? $this->getColumns() : self::SUBCATEGORY_COLUMN_COUNT;
+        $result = sprintf("%.4f", 100 / $columns);
+
         return $result;
     }
 }

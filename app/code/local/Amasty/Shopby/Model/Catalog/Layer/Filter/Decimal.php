@@ -1,21 +1,33 @@
 <?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
 
-class Amasty_Shopby_Model_Catalog_Layer_Filter_Decimal extends Mage_Catalog_Model_Layer_Filter_Decimal
+
+class Amasty_Shopby_Model_Catalog_Layer_Filter_Decimal extends Amasty_Shopby_Model_Catalog_Layer_Filter_Decimal_Pure
 {
     private $_rangeSeparator = ',';
     private $_fromToSeparator = '-';
-    
+
     protected $settings = null;
 
-    /**
-     * Initialize filter and define request variable
-     *
-     */
-    public function __construct()
+    public function getItemsCount()
     {
-        parent::__construct();
+        $cnt = parent::getItemsCount();
+
+        if ($this->calculateRanges()) {
+            $hide = Mage::getStoreConfig('amshopby/general/hide_one_value') && $cnt == 1;
+        } else {
+            $min = $this->getMinValue();
+            $max = $this->getMaxValue();
+            $hide = $min == $max;
+        }
+
+        return $hide ? 0 : $cnt;
     }
-    
+
     public function getSettings()
     {
         if (is_null($this->settings)){
@@ -47,103 +59,122 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Decimal extends Mage_Catalog_Mode
      */
     public function apply(Zend_Controller_Request_Abstract $request, $filterBlock)
     {
-        
         if (!$this->calculateRanges()){
             $this->_items = array($this->_createItem('', 0, 0));
         }         
-        
+
         $filterBlock->setValueFrom(Mage::helper('amshopby')->__('From'));
         $filterBlock->setValueTo(Mage::helper('amshopby')->__('To'));
-       
-        /**
-         * Filter must be string: $index, $range
-         */
-        $filter = $request->getParam($this->getRequestVar());
-        if (!$filter) {
+
+        $input = $request->getParam($this->getRequestVar());
+        $fromTo = $this->_parseRequestedValue($input);
+        if (is_null($fromTo)) {
             return $this;
         }
-        
-        $isFromTo = false;
-        $range  = array();
-        
-        /*
-         * Try range
-         */
-        $range = explode($this->_rangeSeparator, $filter);
-        if (count($range) != 2) {
-             /*
-              * Try from to
-              */
-             $range = explode($this->_fromToSeparator, $filter);             
-             if (count($range) == 2) {
-                 $isFromTo = true;
-             } else {
-                 return $this;
-             }
-        } 
+        list($from, $to) = $fromTo;
 
-        list ($from, $to) = $range;
-        $from  = floatval($from);
-        $to    = floatval($to);
-
-        if ($from || $to) {
-            if (!$isFromTo) {
-                $range = $from;
-                $index = $to;
-                $from  = ($index-1) * $range;
-                $to    = $index * $range;
-            }   
-            
+        $attributeCode = $this->getAttributeModel()->getAttributeCode();
+        /** @var Amasty_Shopby_Helper_Attributes $attributeHelper */
+        $attributeHelper = Mage::helper('amshopby/attributes');
+        if ($attributeHelper->lockApplyFilter($attributeCode, 'attr')) {
             $this->_getResource()->applyFilterToCollection($this, $from, $to);
-            
-            $filterBlock->setValueFrom($from);
-            
-            if ($to > 0) {
-                $filterBlock->setValueTo($to);
-            } else {
-                $filterBlock->setValueTo('');    
-            }
-            
+
             $this->getLayer()->getState()->addFilter(
-                $this->_createItem($this->_renderItemLabel($from, $to, true), $filter)
+                $this->_createItem($this->_renderItemLabel($from, $to, true), $input)
             );
-            
-            if ($this->hideAfterSelection()){
-                 $this->_items = array();
-            } 
-            elseif ($this->calculateRanges()){
-                $this->_items = array($this->_createItem('', 0, 0));
-            }      
         }
-        
+
+        $filterBlock->setValueFrom(($from > 0) ? $from : '');
+        $filterBlock->setValueTo(($to > 0) ? $to : '');
+
+        if ($this->hideAfterSelection()){
+            $this->_items = array();
+        }
+        elseif ($this->calculateRanges()){
+            $this->_items = array($this->_createItem('', 0, 0));
+        }
+
+        if (!$this->calculateRanges()) {
+            /** @var Amasty_Shopby_Helper_Layer_Cache $cache */
+            $cache = Mage::helper('amshopby/layer_cache');
+            $cache->limitLifetime(Amasty_Shopby_Helper_Layer_Cache::LIFETIME_SESSION);
+        }
+
         return $this;
         
     }
 
-    /**
-     * Prepare text of item label
-     *
-     * @param   int $range
-     * @param   float $value
-     * @param   bool $flatValues set to true, if range and value are flat from - to values, not multiplier and start. 
-     * @return  string
-     */
-    protected function _renderItemLabel($range, $value, $flatValues = false)
+    protected function _parseRequestedValue($input)
     {
-        if ($flatValues) {
-            $from = $range;
-            $to = $value;
+        if (!$input) {
+            return null;
+        }
+
+        /* Try $index, $range */
+        $inputVals = explode($this->_rangeSeparator, $input);
+        if (count($inputVals) == 2) {
+            list($index, $range) = $inputVals;
+            $from  = ($index-1) * $range;
+            $to    = $index * $range;
+            return array($from, $to);
+        }
+
+        /* Try from to */
+        $inputVals = explode($this->_fromToSeparator, $input);
+        if (count($inputVals) == 2) {
+            list ($from, $to) = $inputVals;
+            $from  = floatval($from);
+            $to    = floatval($to);
+            if ($from < 0.01 && $to < 0.01) {
+                return null;
+            }
+            return array($from, $to);
+        }
+
+        return null;
+    }
+
+    protected function _renderItemLabel($range, $index, $isFromTo = false)
+    {
+		if(!$isFromTo) {
+			$from  = ($index-1) * $range;
+			$to    = $index * $range;
+		} else {
+			$from = $range;
+			$to = $index;
+		}
+		if(!$from) {
+			$minMax = $this->_getResource()->getMinMax($this);
+			$from = floatval($minMax[0]);
+		}
+        if ($to > 0) {
+            $result = Mage::helper('catalog')->__('%s - %s', $from, $to);
         } else {
-               $from   = ($value - 1) * $range;
-              $to     = $value * $range;
-        } 
-            
+            $result = Mage::helper('catalog')->__('%s and above', $from);
+        }
+
         $settings = $this->getSettings();
         if (!empty($settings['value_label'])) {
-            return Mage::helper('catalog')->__('%s - %s %s', $from, $to, $settings['value_label']);    
-        } else {
-            return Mage::helper('catalog')->__('%s - %s', $from, $to);
+            $result.= Mage::helper('catalog')->__(' %s', $settings['value_label']);
         }
+
+        return $result;
+    }
+
+    public function addFacetCondition()
+    {
+        if (!$this->calculateRanges()) {
+            return false;
+        }
+
+        $code = $this->getAttributeModel()->getAttributeCode();
+        $key = 'amshopby_facet_added_' . $code;
+        if (Mage::registry($key)) {
+            return;
+        }
+
+        parent::addFacetCondition();
+        Mage::register($key, true);
     }
     
     public function getRange()
@@ -159,7 +190,8 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Decimal extends Mage_Catalog_Mode
     public function calculateRanges()
     {
         $settings = $this->getSettings();
-        return ($settings['display_type'] == 0 || $settings['display_type'] == 1);     
+        return $settings['display_type'] == Amasty_Shopby_Model_Catalog_Layer_Filter_Price::DT_DEFAULT
+        || $settings['display_type'] == Amasty_Shopby_Model_Catalog_Layer_Filter_Price::DT_DROPDOWN;
     } 
     
     public function hideAfterSelection()
@@ -168,10 +200,9 @@ class Amasty_Shopby_Model_Catalog_Layer_Filter_Decimal extends Mage_Catalog_Mode
         if ($settings['from_to_widget']){
             return false;
         }
-        if ($settings['display_type'] == 3){
+        if ($settings['display_type'] == Amasty_Shopby_Model_Catalog_Layer_Filter_Price::DT_SLIDER){
             return false;
         }
         return true;
     }
-     
 }

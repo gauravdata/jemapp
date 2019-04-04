@@ -1,17 +1,20 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2008-2012 Amasty (http://www.amasty.com)
-* @package Amasty_Shopby
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
 $this->startSetup();
 
-$this->run("
-
-ALTER TABLE `{$this->getTable('amshopby/filter')}` ADD `show_search` TINYINT( 1 ) NOT NULL ,
-ADD `slider_decimal` TINYINT( 1 ) NOT NULL ;
-
-
-");
+/**
+ * @Migration field_exist:amshopby/filter|show_search:1
+ */
+$tableName = $this->getTable('amshopby/filter');
+if (!$this->getConnection()->tableColumnExists($tableName, 'show_search')) {
+    $this->run("
+        ALTER TABLE `{$tableName}` ADD `show_search` TINYINT( 1 ) NOT NULL ,
+        ADD `slider_decimal` TINYINT( 1 ) NOT NULL ;
+    ");
+}
  
 $this->endSetup();

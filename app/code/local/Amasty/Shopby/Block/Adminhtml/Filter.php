@@ -1,7 +1,9 @@
 <?php
 /**
-* @copyright Amasty.
-*/ 
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */ 
 class Amasty_Shopby_Block_Adminhtml_Filter extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
     public function __construct()

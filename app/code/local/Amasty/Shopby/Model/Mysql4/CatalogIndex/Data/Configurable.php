@@ -1,6 +1,8 @@
 <?php
 /**
- * @copyright   Copyright (c) 2010 Amasty (http://www.amasty.com)
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
  */ 
 class Amasty_Shopby_Model_Mysql4_CatalogIndex_Data_Configurable extends Mage_CatalogIndex_Model_Mysql4_Data_Configurable 
 {

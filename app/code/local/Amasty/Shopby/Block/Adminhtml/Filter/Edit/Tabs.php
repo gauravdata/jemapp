@@ -1,7 +1,9 @@
 <?php
 /**
-* @copyright Amasty.
-*/  
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */  
 class Amasty_Shopby_Block_Adminhtml_Filter_Edit_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
 {
     public function __construct()
@@ -28,6 +30,12 @@ class Amasty_Shopby_Block_Adminhtml_Filter_Edit_Tabs extends Mage_Adminhtml_Bloc
                 'class'     => 'ajax',
                 'url'       => $this->getUrl('*/*/values', array('_current' => true)),
             ));
+
+            $this->addTab('mapped', array(
+                'label'     => Mage::helper('amshopby')->__('Mapping'),
+                'class'     => 'ajax',
+                'url'       => $this->getUrl('*/*/valuesmapped', array('_current' => true)),
+            ));
         }
 
         $this->_updateActiveTab();
@@ -44,7 +52,7 @@ class Amasty_Shopby_Block_Adminhtml_Filter_Edit_Tabs extends Mage_Adminhtml_Bloc
             }
         }
         else {
-           $this->setActiveTab('general'); 
+           $this->setActiveTab('general');
         }
     }
 }

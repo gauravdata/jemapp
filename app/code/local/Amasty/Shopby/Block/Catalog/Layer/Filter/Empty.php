@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+
 
 class Amasty_Shopby_Block_Catalog_Layer_Filter_Empty extends Mage_Catalog_Block_Layer_Filter_Abstract
 {
@@ -49,4 +55,9 @@ class Amasty_Shopby_Block_Catalog_Layer_Filter_Empty extends Mage_Catalog_Block_
     {
         return 0;
     }
+
+    /**
+     * For Enterprise Solr compatibility
+     */
+    public function addFacetCondition() {}
 } 

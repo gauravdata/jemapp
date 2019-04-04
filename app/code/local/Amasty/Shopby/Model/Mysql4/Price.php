@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+
 
 class Amasty_Shopby_Model_Mysql4_Price extends Mage_Catalog_Model_Resource_Eav_Mysql4_Layer_Filter_Price
 {
@@ -59,14 +65,17 @@ class Amasty_Shopby_Model_Mysql4_Price extends Mage_Catalog_Model_Resource_Eav_M
         $select = $this->_prepareSelect($filter, true);
         
         $countExpr  = new Zend_Db_Expr("COUNT(*)"); // may be add distinct ???
-        
-        $rangeExpr  = "CASE ";
-        $price = $this->_price;
-        foreach($ranges as $n=>$r)
-            $rangeExpr .= "WHEN ($price >= {$r[0]} AND $price < {$r[1]}) THEN $n ";
-        $rangeExpr .= " END";
-        $rangeExpr = new Zend_Db_Expr($rangeExpr);
-
+        if (count($ranges)) {
+            $rangeExpr = "CASE ";
+            $price = $this->_price;
+            foreach ($ranges as $n => $r) {
+                $rangeExpr .= "WHEN ($price >= {$r[0]} AND $price < {$r[1]}) THEN $n ";
+            }
+            $rangeExpr .= " END";
+            $rangeExpr = new Zend_Db_Expr($rangeExpr);
+        } else {
+            $rangeExpr = new Zend_Db_Expr("NULL");
+        }
         $select->columns(array(
             'range' => $rangeExpr,
             'count' => $countExpr

@@ -1,13 +1,23 @@
 <?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+
 
 class Amasty_Shopby_Model_Mysql4_Price17 extends Mage_Catalog_Model_Resource_Layer_Filter_Price
 {
 
     public $_maxMinPrice = null;
-    
-    protected  function _construct()
+
+    /** @var Amasty_Shopby_Helper_Data */
+    protected $_dataHelper;
+
+    protected function _construct()
     {
         parent::_construct();
+        $this->_dataHelper = Mage::helper('amshopby');
     }
     
     /**
@@ -18,7 +28,7 @@ class Amasty_Shopby_Model_Mysql4_Price17 extends Mage_Catalog_Model_Resource_Lay
      */
     protected function _getSelect($filter)
     {
-        if (!Mage::helper('amshopby')->landingNewFilter()) {
+        if (!$this->_dataHelper->isOnLandingPage()) {
             return parent::_getSelect($filter);
         }
         
@@ -53,7 +63,7 @@ class Amasty_Shopby_Model_Mysql4_Price17 extends Mage_Catalog_Model_Resource_Lay
     
     protected function _getPriceExpression($filter, $select, $replaceAlias = true)
     {
-        if (Mage::helper('amshopby')->landingNewFilter()) {
+        if ($this->_dataHelper->isOnLandingPage()) {
             $replaceAlias = false;
         }
         return parent::_getPriceExpression($filter, $select, $replaceAlias);
@@ -69,28 +79,88 @@ class Amasty_Shopby_Model_Mysql4_Price17 extends Mage_Catalog_Model_Resource_Lay
     public function _getMaxMinPrice($filter)
     {
         if (!$this->_maxMinPrice) {
-            $select = clone $filter->getLayer()->getProductCollection()->getSelect();
-    
-            $select->reset(Zend_Db_Select::LIMIT_OFFSET);
-            $select->reset(Zend_Db_Select::COLUMNS);
-            $select->reset(Zend_Db_Select::LIMIT_COUNT);
-            $select->reset(Zend_Db_Select::ORDER);
-            
-            /* @var $collection Mage_Catalog_Model_Resource_Product_Collection */
-            $collection = Mage::getResourceModel('catalog/product_collection');
-                  
-            $priceExpression = $collection->getPriceExpression($select) . ' ' . $collection->getAdditionalPriceExpression($select);
-            
-            $select = $this->_removePriceFromSelect($select, $priceExpression);
-            
-            $sqlEndPart = ') * ' . $collection->getCurrencyRate() . ')';
-            $select->columns('CEIL(MAX(' . $priceExpression . $sqlEndPart . ' as max_price');
-            $select->columns('FLOOR(MIN(' . $priceExpression . $sqlEndPart . ' as min_price');
-            $select->where($collection->getPriceExpression($select) . ' IS NOT NULL');
-            
-            $this->_maxMinPrice = $collection->getConnection()->fetchRow($select, array(), Zend_Db::FETCH_NUM); 
+            if ($this->_dataHelper->useSolr()) {
+                $this->_computeMinMaxPriceFromSolr($filter);
+            } else {
+                $this->_computeMinMaxPriceFromDb($filter);
+            }
         }
         return $this->_maxMinPrice;
+    }
+
+    /**
+     * @param Mage_Catalog_Model_Layer_Filter_Price $filter
+     */
+    protected function _computeMinMaxPriceFromSolr($filter)
+    {
+        /** @var Enterprise_Search_Model_Resource_Engine $engine */
+        $engine = Mage::getModel('enterprise_search/resource_engine');
+
+        /** @var Enterprise_Search_Model_Resource_Collection $productCollection */
+        $productCollection = $filter->getLayer()->getProductCollection();
+        $filters = $productCollection->getExtendedSearchParams();
+
+        $queryText = $filters['query_text'];
+        $query = $queryText ? $queryText : array('*' => '*');
+        unset($filters['query_text']);
+
+        $paramName = $engine->getSearchEngineFieldName('price');
+        unset($filters[$paramName]);
+
+        $store  = Mage::app()->getStore();
+        $params = array(
+            'store_id'          => $store->getId(),
+            'locale_code'       => $store->getConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_LOCALE),
+            'filters'           => $filters,
+            'limit'             => 0,
+            'ignore_handler'    => empty($queryText),
+            'solr_params'       => array(
+                'stats'             => 'true',
+                'stats.field'       => array($paramName),
+            ),
+        );
+
+        $stats = $engine->getStats($query, $params);
+        $this->_maxMinPrice = array($stats[$paramName]['max'], $stats[$paramName]['min']);
+    }
+
+    /**
+     * @param Mage_Catalog_Model_Layer_Filter_Price $filter
+     */
+    protected function _computeMinMaxPriceFromDb($filter)
+    {
+        $collection = $filter->getLayer()->getProductCollection();
+        if (method_exists($filter->getLayer()->getProductCollection(), '_applySearchFilters')) {
+            //trigger applying search filter in catalogsearch fulltext collection on magento 1.9.x
+            $collection->getSize();
+        }
+        if (!is_null($collection->getCatalogPreparedSelect())) {
+            $select = clone $collection->getCatalogPreparedSelect();
+        } else {
+            $select = clone $collection->getSelect();
+        }
+
+        $select->reset(Zend_Db_Select::LIMIT_OFFSET);
+        $select->reset(Zend_Db_Select::COLUMNS);
+        $select->reset(Zend_Db_Select::LIMIT_COUNT);
+        $select->reset(Zend_Db_Select::ORDER);
+
+        /* @var $collection Mage_Catalog_Model_Resource_Product_Collection */
+        //$collection = Mage::getResourceModel('catalog/product_collection'); // weee module fatal: same fields multiply joins in an observer.
+        $priceExpression = $collection->getPriceExpression($select) . ' ' . $collection->getAdditionalPriceExpression($select);
+
+        $select = $this->_removePriceFromSelect($select, $priceExpression);
+
+        $sqlEndPart = ') * ' . $collection->getCurrencyRate() . ')';
+        $select->columns('CEIL(MAX(' . str_replace('min', 'max', $priceExpression) . $sqlEndPart . ' as max_price');
+        $select->columns('FLOOR(MIN(' . $priceExpression . $sqlEndPart . ' as min_price');
+        $select->where($collection->getPriceExpression($select) . ' IS NOT NULL');
+
+        $select->reset(Zend_Db_Select::GROUP);
+
+        $this->_maxMinPrice = $collection->getConnection()->fetchRow($select, array(), Zend_Db::FETCH_NUM);
+
+        $select->group('e.entity_id');
     }
     
 
@@ -130,7 +200,7 @@ class Amasty_Shopby_Model_Mysql4_Price17 extends Mage_Catalog_Model_Resource_Lay
         $oldWhere = $select->getPart(Varien_Db_Select::WHERE);        
         $newWhere = array();
         foreach ($oldWhere as $cond) {
-            if (false === strpos($cond, $priceExpression)) {
+            if (false === strpos($cond, $priceExpression) && false === strpos($cond, str_replace('min', 'max', $priceExpression))) {
                    $newWhere[] = $cond;
             }
         }
@@ -165,26 +235,60 @@ class Amasty_Shopby_Model_Mysql4_Price17 extends Mage_Catalog_Model_Resource_Lay
         $select = $this->_getSelect($filter);
         $countExpr  = new Zend_Db_Expr("COUNT(*)"); // may be add distinct ???
         $collection = Mage::getResourceModel('catalog/product_collection');
-      
-        $priceExpression = $this->getPriceExpression($select);
-        
-        $rangeExpr  = "CASE ";
-        $price = $priceExpression;
-        
-        foreach($ranges as $n => $r) {
-            $rangeExpr .= "WHEN ($price >= {$r[0]} AND $price < {$r[1]}) THEN $n ";
-        }
-        
-        $rangeExpr .= " END";
-        $rangeExpr = new Zend_Db_Expr($rangeExpr);
+        if (count($ranges)) {
+            $priceExpression = $this->getPriceExpression($select);
 
+            $rangeExpr = "CASE ";
+            $price = $priceExpression;
+
+            foreach ($ranges as $n => $r) {
+                $rangeExpr .= "WHEN ($price >= {$r[0]} AND $price < {$r[1]}) THEN $n ";
+            }
+
+            $rangeExpr .= " END";
+            $rangeExpr = new Zend_Db_Expr($rangeExpr);
+        } else {
+            $rangeExpr = new Zend_Db_Expr("NULL");
+        }
         $select->columns(array(
             'range' => $rangeExpr,
             'count' => $countExpr
         ));
 
         $select->group('range');
-        
+
         return $this->_getReadAdapter()->fetchPairs($select);
+    }
+
+    public function applyPriceRange($filter)
+    {
+        $interval = $filter->getInterval();
+        if (!$interval) {
+            return $this;
+        }
+
+        list($from, $to) = $interval;
+        if ($from === '' && $to === '') {
+            return $this;
+        }
+
+        $select = $filter->getLayer()->getProductCollection()->getSelect();
+        $priceExpr = $this->_getPriceExpression($filter, $select, false);
+
+        if ($to !== '') {
+            $to = (float)$to;
+            if ($from == $to) {
+                $to += self::MIN_POSSIBLE_PRICE;
+            }
+        }
+        if ($from !== '') {
+            $select->where(str_replace('min', 'max', $priceExpr) . ' >= ' . $this->_getComparingValue($from, $filter));
+        }
+        if ($to !== '') {
+            $select->where($priceExpr . ' < ' . $this->_getComparingValue($to, $filter));
+        }
+
+        return $this;
+
     }
 }

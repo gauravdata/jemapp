@@ -1,44 +1,47 @@
 <?php
 /**
-* @copyright Amasty.
-*/  
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
 class Amasty_Shopby_Block_Featured extends Mage_Core_Block_Template
 {
     public function getItems()
     {
         $items = array();
-        // get filter ID by attribute code 
+        // get filter ID by attribute code
         $id = Mage::getResourceModel('amshopby/filter')
             ->getIdByCode($this->getAttributeCode());
         if ($id){
+            //don't use getCollection() because of is_parent!=1 filter this method applies
             $items = Mage::getResourceModel('amshopby/value_collection')
                 ->addFieldToFilter('is_featured', 1)
                 ->addFieldToFilter('filter_id', $id)
-                ->addValue();  
-                
+                ->addValue();
+
             if ($this->getRandom()){
                 $items->setOrder('rand()');
-            } 
+            }
             else {
-            	$items->setOrder('featured_order', 'asc');
-                $items->setOrder('value', 'asc');    
-                $items->setOrder('title', 'asc');    
-            }  
-             
+                $items->setOrder('featured_order', 'asc');
+                $items->setOrder('value', 'asc');
+                $items->setOrder('title', 'asc');
+            }
+
             if ($this->getLimit()){
                 $items->setPageSize(intVal($this->getLimit()));
-            }   
-                
-            $hlp = Mage::helper('amshopby/url');
+            }
+
+            /** @var Amasty_Shopby_Helper_Url $urlHelper */
+            $urlHelper = Mage::helper('amshopby/url');
             $base = Mage::getBaseUrl('media') . 'amshopby/';
             foreach ($items as $item){
+                /** @var Amasty_Shopby_Model_Value $item */
+
                 if ($item->getImgBig())
-                    $item->setImgBig($base . $item->getImgBig());   
-                
-                $attrCode = $this->getAttributeCode();
-                $optLabel = $item->getValue() ? $item->getValue() : $item->getTitle();
-                $optId    = $item->getOptionId();
-                $item->setUrl($hlp->getOptionUrl($attrCode, $optLabel, $optId));   
+                    $item->setImgBig($base . $item->getImgBig());
+
+                $item->setUrl($urlHelper->getOptionUrl($this->getAttributeCode(), $item->getOptionId()));
             }
         }
         return $items;

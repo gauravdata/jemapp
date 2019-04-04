@@ -1,6 +1,8 @@
 <?php
 /**
- * @copyright   Copyright (c) 2009-2012 Amasty (http://www.amasty.com)
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
  */
 class Amasty_Shopby_Block_Search_Layer extends Amasty_Shopby_Block_Catalog_Layer_View
 {
@@ -36,32 +38,15 @@ class Amasty_Shopby_Block_Search_Layer extends Amasty_Shopby_Block_Catalog_Layer
     
     public function canShowBlock()
     {
-        if (version_compare(Mage::getVersion(), '1.4.2', '>=')){
-            $allowed = true;
-            
-            $engine = Mage::helper('catalogsearch')->getEngine();
-            // deprecated function name
-            if (method_exists($engine, 'isLeyeredNavigationAllowed')){
-                $allowed = $engine->isLeyeredNavigationAllowed();
-            } 
-            // modern version 
-            else { 
-                $allowed = $engine->isLayeredNavigationAllowed();
-            }  
-               
-            if (!$allowed) {
-                return false;
-            }
-        }
-        
-        $availableResCount = (int) Mage::app()->getStore()
-            ->getConfig(Mage_CatalogSearch_Model_Layer::XML_PATH_DISPLAY_LAYER_COUNT);
+        /** @var Enterprise_Search_Model_Resource_Engine $engine */
+        $engine = Mage::helper('catalogsearch')->getEngine();
 
-        if (!$availableResCount
-            || ($availableResCount >= $this->getLayer()->getProductCollection()->getSize())) {
-            return parent::canShowBlock();
+        if (method_exists($engine, 'isLayeredNavigationAllowed')){
+            $allowed = $engine->isLayeredNavigationAllowed();
+        } else {
+            $allowed = $engine->isLeyeredNavigationAllowed();
         }
-        
-        return false;
-    } 
+
+        return $allowed && parent::canShowBlock();
+    }
 }
