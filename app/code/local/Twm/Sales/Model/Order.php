@@ -131,7 +131,12 @@ class Twm_Sales_Model_Order extends Mage_Sales_Model_Order {
         if (!$this->canReceiveRma()) {
             Mage::throwException(Mage::helper('sales')->__('ReceiveRma action is not available.'));
         }
-        $this->setStatus(self::STATUS_RETURNED, true);
+        
+        $this->addStatusHistoryComment('Retour ontvangen', self::STATUS_RETURNED)
+                    ->setIsVisibleOnFront(true)
+                    ->setIsCustomerNotified(false);
+	    $this->sendNewOrderEmail();
+        
         return $this;
     }
 } 
