@@ -19,6 +19,8 @@ if (!$this->getConnection()->tableColumnExists($table, 'use_mapping')) {
 }
 
 $this->run("
+ALTER TABLE `{$table}` CHANGE `depend_on` `depend_on` TEXT NOT NULL;
+ALTER TABLE `{$table}` CHANGE `depend_on_attribute` `depend_on_attribute` TEXT NOT NULL;
 ALTER TABLE `{$table}` CHANGE `exclude_from` `exclude_from` TEXT NOT NULL;
 ALTER TABLE `{$table}` CHANGE `include_in` `include_in` TEXT NOT NULL;
 ");
