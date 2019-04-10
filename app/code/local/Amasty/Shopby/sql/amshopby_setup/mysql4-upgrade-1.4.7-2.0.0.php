@@ -12,8 +12,12 @@ $this->startSetup();
  */
 $tableName = $this->getTable('amshopby/filter');
 if (!$this->getConnection()->tableColumnExists($tableName, 'comment')) {
-    $this->run("
+	$this->run("
       ALTER TABLE `{$tableName}` ADD `comment` TEXT NOT NULL;
+    ");
+}
+if (!$this->getConnection()->tableColumnExists($tableName, 'block_pos')) {
+	$this->run("      
       ALTER TABLE `{$tableName}` ADD `block_pos` VARCHAR(255) NOT NULL;
     ");
 }
