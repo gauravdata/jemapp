@@ -1,14 +1,19 @@
 <?php
 /**
- * @copyright   Copyright (c) 2010 Amasty (http://www.amasty.com)
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
  */
 class Amasty_Shopby_Block_Catalog_Layer_Filter_Stock extends Mage_Catalog_Block_Layer_Filter_Abstract
 {
+    private $itemsArray;
+
     public function __construct()
     {
         parent::__construct();
-        $this->setTemplate('amshopby/attribute.phtml');
+        $this->setTemplate('amasty/amshopby/attribute.phtml');
         $this->_filterModelName = 'amshopby/catalog_layer_filter_stock';
+        $this->setSingleChoice(1);
     }
     
     /**
@@ -17,7 +22,11 @@ class Amasty_Shopby_Block_Catalog_Layer_Filter_Stock extends Mage_Catalog_Block_
      */
     public function getPosition()
     {
-    	return Mage::getStoreConfig('amshopby/general/stock_filter_pos');
+        if (count($this->getItemsAsArray()) == 0) {
+            return -1;
+        }
+
+    	return parent::getPosition();
     }
     
     public function getDisplayType()
@@ -27,41 +36,66 @@ class Amasty_Shopby_Block_Catalog_Layer_Filter_Stock extends Mage_Catalog_Block_
     
 	public function getItemsAsArray()
     {
-        $items = array(); 
-        foreach (parent::getItems() as $itemObject){
-        	
-            $item = array();
-            $item['url']   = $this->htmlEscape($itemObject->getUrl());
-            $item['label'] = $itemObject->getLabel();
-            $item['count'] = '';
-         	$item['countValue']  = $itemObject->getCount();
-            if (!$this->getHideCounts()) {
-                $item['count']  = ' (' . $itemObject->getCount() . ')';
+        if (is_null($this->itemsArray)) {
+            $items = array();
+            foreach (parent::getItems() as $itemObject) {
+
+                $item = array();
+                $item['url'] = $this->htmlEscape($itemObject->getUrl());
+                $item['label'] = $itemObject->getLabel();
+                $item['count'] = '';
+                $item['countValue'] = $itemObject->getCount();
+
+                /** @todo Fix item counts */
+                if (!$this->getHideCounts()) {
+                    $item['count'] = ' (' . $itemObject->getCount() . ')';
+                }
+
+
+                $item['css'] = 'amshopby-attr';
+                if (in_array($this->getDisplayType(), array(1, 3))) //dropdown and images
+                    $item['css'] = '';
+
+                if ($itemObject->getOptionId() == $this->getRequestValue()) {
+                    $item['css'] .= '-selected';
+                    if (3 == $this->getDisplayType()) //dropdown
+                        $item['css'] = 'selected';
+                }
+
+                $item['rel'] = $this->getSeoRel() ? ' rel="nofollow" ' : '';
+                $item['data-config'] = $itemObject->getUrlAttributeOptionConfigAsJson();
+
+                if ($item['countValue']) {
+                    $items[] = $item;
+                }
             }
-            
-
-            $item['css'] = 'amshopby-attr';
-            if (in_array($this->getDisplayType(), array(1,3))) //dropdown and images
-                $item['css'] = '';
-
-            if ($itemObject->getValue() == $this->getRequestValue()){
-                $item['css'] .= '-selected';
-                if (3 == $this->getDisplayType()) //dropdown
-                    $item['css'] = 'selected';
-            }
-
-            if ($this->getSeoRel()){ 
-                $item['css'] .= '" rel="nofollow';  
-            }            
-            
-            $items[] = $item;
+            $this->itemsArray = $items;
         }
-        
-        return $items;
+        return $this->itemsArray;
     }
-    
+
 	public function getRequestValue()
     {
         return Mage::app()->getRequest()->getParam('stock');
+    }
+
+    protected function _prepareFilter()
+    {
+        parent::_prepareFilter();
+        if (Mage::helper('amshopby')->useSolr()) {
+            $this->addFacetCondition();
+        }
+    }
+
+    public function addFacetCondition()
+    {
+        $this->_filter->addFacetCondition();
+        return $this;
+    }
+
+
+    public function getItemsCount()
+    {
+        return count($this->getItemsAsArray());
     }
 }

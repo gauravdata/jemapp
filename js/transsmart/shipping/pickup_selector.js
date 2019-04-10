@@ -180,69 +180,33 @@ Transsmart.Shipping.Pickup = Class.create({
         searchField.addClassName('disabled');
         searchButton.disabled = true;
         searchButton.addClassName('disabled');
-        var self = this;
 
-        this.googleGeocoder.geocode( { 'address': searchValue}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                //console.log(results[0].formatted_address);
-                searchValue = results[0].formatted_address;
-                self.retrieveLocation(searchValue, function (bounds) {
-                        searchField.disabled = false;
-                        searchField.removeClassName('disabled');
-                        searchButton.disabled = false;
-                        searchButton.removeClassName('disabled');
+        this.retrieveLocation(searchValue, function (bounds) {
+            searchField.disabled = false;
+            searchField.removeClassName('disabled');
+            searchButton.disabled = false;
+            searchButton.removeClassName('disabled');
 
-                        this.updateMapMarkers();
+            this.updateMapMarkers();
 
-                        google.maps.event.trigger(this.googleMaps, 'resize');
-                        this.googleMaps.setCenter(bounds.getCenter());
-                        this.googleMaps.fitBounds(bounds);
+            google.maps.event.trigger(this.googleMaps, 'resize');
+            this.googleMaps.setCenter(bounds.getCenter());
+            this.googleMaps.fitBounds(bounds);
 
-                    }.bind(self),
-                    function (error) {
-                        searchField.disabled = false;
-                        searchField.removeClassName('disabled');
-                        searchButton.disabled = false;
-                        searchButton.removeClassName('disabled');
+        }.bind(this),
+        function (error) {
+            searchField.disabled = false;
+            searchField.removeClassName('disabled');
+            searchButton.disabled = false;
+            searchButton.removeClassName('disabled');
 
-                        if (this.isClosing) {
-                            return;
-                        }
-                        Transsmart.Logger.log('Transsmart_Shipping error: ' + error);
-                        alert(Translator.translate('Search did not succeed. Please try again.'));
-
-                    }.bind(self));
-            } else {
-                alert("Geocode was not successful for the following reason: " + status);
+            if (this.isClosing) {
+                return;
             }
-        });
+            Transsmart.Logger.log('Transsmart_Shipping error: ' + error);
+            alert(Translator.translate('Search did not succeed. Please try again.'));
 
-        // this.retrieveLocation(searchValue, function (bounds) {
-        //     searchField.disabled = false;
-        //     searchField.removeClassName('disabled');
-        //     searchButton.disabled = false;
-        //     searchButton.removeClassName('disabled');
-        //
-        //     this.updateMapMarkers();
-        //
-        //     google.maps.event.trigger(this.googleMaps, 'resize');
-        //     this.googleMaps.setCenter(bounds.getCenter());
-        //     this.googleMaps.fitBounds(bounds);
-        //
-        // }.bind(this),
-        // function (error) {
-        //     searchField.disabled = false;
-        //     searchField.removeClassName('disabled');
-        //     searchButton.disabled = false;
-        //     searchButton.removeClassName('disabled');
-        //
-        //     if (this.isClosing) {
-        //         return;
-        //     }
-        //     Transsmart.Logger.log('Transsmart_Shipping error: ' + error);
-        //     alert(Translator.translate('Search did not succeed. Please try again.'));
-        //
-        // }.bind(this));
+        }.bind(this));
     },
 
     /**
@@ -822,9 +786,6 @@ Transsmart.Shipping.Pickup = Class.create({
             var containerHeight = container.offsetHeight;
             var selector = container.select('.tss-selector')[0];
             var headerHeight = container.select('.tss-ls-header')[0].offsetHeight;
-
-            var jmaHeaderHeight = document.getElementById('header').offsetHeight;
-
             var footerHeight = container.select('.tss-ls-footer-controls')[0].offsetHeight;
             var padding = 20;
             var contentHeight = containerHeight - headerHeight - footerHeight - (padding * 2);
@@ -844,7 +805,7 @@ Transsmart.Shipping.Pickup = Class.create({
                 headerHeight = 0;
                 footerHeight = 0;
             }
-            var marginTop = Math.round(((containerHeight - contentHeight - headerHeight - footerHeight) - (jmaHeaderHeight / 2)) / 2);
+            var marginTop = Math.round((containerHeight - contentHeight - headerHeight - footerHeight) / 2);
             if (marginTop < padding) {
                 marginTop = padding;
             }

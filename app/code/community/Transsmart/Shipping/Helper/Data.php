@@ -10,6 +10,7 @@ class Transsmart_Shipping_Helper_Data extends Mage_Core_Helper_Abstract
     const XML_PATH_CONNECTION_USERNAME      = 'transsmart_shipping/connection/username';
     const XML_PATH_CONNECTION_PASSWORD      = 'transsmart_shipping/connection/password';
     const XML_PATH_CONNECTION_ENVIRONMENT   = 'transsmart_shipping/connection/environment';
+    const XML_PATH_CONNECTION_GOOGLE_MAPS_API_KEY   = 'transsmart_shipping/connection/google_maps_api_key';
 
     const XML_PATH_PRINT_QZHOST             = 'transsmart_shipping/print/qzhost';
     const XML_PATH_PRINT_SELECTEDPRINTER    = 'transsmart_shipping/print/selectedprinter';
@@ -290,5 +291,15 @@ class Transsmart_Shipping_Helper_Data extends Mage_Core_Helper_Abstract
             }
         }
         return $code;
+    }
+
+    /**
+     * Get configured Google Maps Api Key
+     *
+     * @return mixed
+     */
+    public function getGoogleMapsApiKey()
+    {
+        return Mage::getStoreConfig(self::XML_PATH_CONNECTION_GOOGLE_MAPS_API_KEY, 0);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2008-2012 Amasty (http://www.amasty.com)
-* @package Amasty_Shopby
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
 class Amasty_Shopby_Block_Adminhtml_Page_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     public function __construct()
@@ -19,6 +19,15 @@ class Amasty_Shopby_Block_Adminhtml_Page_Edit extends Mage_Adminhtml_Block_Widge
                 'onclick'   => 'saveAndContinueEdit()',
                 'class' => 'save'
             ), 10);
+
+        if (!$this->getRequest()->getParam('duplicate')) {
+            $this->_addButton('duplicate', array(
+                'label' => Mage::helper('amshopby')->__('Duplicate'),
+                'onclick' => 'duplicate()'
+            ), -1, 25);
+        }
+
+       $this->_formScripts[] = "function duplicate(){ editForm.submit($('edit_form').action + 'duplicate/1') }";
        $this->_formScripts[] = " function saveAndContinueEdit(){ editForm.submit($('edit_form').action + 'continue/edit') } ";        
        $this->_formScripts[] = " function showOptions(sel) {
             if (!sel.value)

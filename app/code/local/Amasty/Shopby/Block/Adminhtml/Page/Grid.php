@@ -1,5 +1,11 @@
 <?php
 /**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+
+/**
  * @author Amasty
  */  
 class Amasty_Shopby_Block_Adminhtml_Page_Grid extends Mage_Adminhtml_Block_Widget_Grid
@@ -45,6 +51,28 @@ class Amasty_Shopby_Block_Adminhtml_Page_Grid extends Mage_Adminhtml_Block_Widge
         'index'     => 'meta_descr',
     ));
 
+    $this->addColumn('action',
+      array(
+          'width'     => '50px',
+          'type'      => 'action',
+          'getter'     => 'getId',
+          'actions'   => array(
+              array(
+                  'caption' => $hlp->__('Duplicate'),
+                  'url'     => array(
+                      'base'=>'*/*/edit',
+                      'params'=>array(
+                          'duplicate' => 1
+                      )
+                  ),
+                  'field'   => 'id'
+              )
+          ),
+          'filter'    => false,
+          'sortable'  => false,
+          'index'     => 'duplicate',
+      ));
+
 
     return parent::_prepareColumns();
   }
@@ -68,4 +96,10 @@ class Amasty_Shopby_Block_Adminhtml_Page_Grid extends Mage_Adminhtml_Block_Widge
     return $this; 
   }
 
+  protected function _toHtml()
+  {
+      return Mage::helper('amshopby')
+              ->getGuideHint('custom_meta_tags_for_pages_with_selected_attributes')
+          . parent::_toHtml();
+  }
 }

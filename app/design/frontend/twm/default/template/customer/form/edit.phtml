@@ -68,10 +68,6 @@ $twmHelper = Mage::helper('pointsandrewards');
             <li class="control">
                 <input type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Change Password')) ?>"<?php if($this->getCustomer()->getChangePassword()==1): ?> checked="checked"<?php endif; ?> class="checkbox" /><label for="change_password"><?php echo $this->__('Change Password') ?></label>
             </li>
-            <li class="control">
-                <input id="club_jma" type="checkbox" name="club_jma" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Sign up for Club Je m\'appelle')); ?>" value="1" class="checkbox" <?php if ($twmHelper->isClubJmaMember()) echo 'checked="checked"'; ?> />
-                <label for="club_jma"><?php echo $this->__('Sign up for Club Je m\'appelle'); ?></label>
-            </li>
         </ul>
     </div>
     <div class="fieldset" style="display:none;">

@@ -40,9 +40,15 @@
     <tr>
         <td colspan="2"><div id="adjustment_positive_adv"></div></td>
     </tr>
+    <?php
+    $baseAdjustmentFee = $_source->getBaseAdjustmentFeeNegative()*1;
+    if ($baseAdjustmentFee == 0) {
+	    $baseAdjustmentFee = '2.99';
+    }
+    ?>
     <tr>
         <td class="label"><?php echo $this->helper('sales')->__('Adjustment Fee') ?></td>
-        <td><input type="text" name="creditmemo[adjustment_negative]" value="<?php echo $_source->getBaseAdjustmentFeeNegative()*1 ?>" class="input-text not-negative-amount" style="width:60px;text-align:right" id="adjustment_negative"/></td>
+        <td><input type="text" name="creditmemo[adjustment_negative]" value="<?php echo $baseAdjustmentFee; ?>" class="input-text not-negative-amount" style="width:60px;text-align:right" id="adjustment_negative"/></td>
     </tr>
     <?php if ($this->helper('customercredit')->isEnabledCreditMemoReturn() && $_source->getCustomerId()>0) { ?>
         <tr>

@@ -59,8 +59,11 @@ class Transsmart_Shipping_Helper_Location extends Mage_Core_Helper_Abstract
      */
     public function getGeoLocation($zipcode, $country, $city, $street, $housenr)
     {
+        /** @var Transsmart_Shipping_Helper_Data $helper */
+        $helper = Mage::helper('transsmart_shipping');
+
         $address = urlencode($zipcode . ', ' . $country);
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB6DycZMUUcl1_N_07kYChMT1tJBYOEdA4&address=' . $address . '&region=' . $country;
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?key=' . $helper->getGoogleMapsApiKey() . '&address=' . $address . '&region=' . $country;
 
         $ch = curl_init($url);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
@@ -142,7 +145,6 @@ class Transsmart_Shipping_Helper_Location extends Mage_Core_Helper_Abstract
                 $city = $shippingAddress->getCity();
                 $country = $shippingAddress->getCountryId();
                 $street = $shippingAddress->getStreet(1);
-                $housenr = $shippingAddress->getStreet(2);
 
                 if (!empty($street) && strlen($street) > 0) {
                     preg_match('#^([^\d]*[^\d\s]) *(\d.*)$#', $street, $match);

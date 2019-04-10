@@ -1,471 +1,800 @@
 <?php
-class Amasty_Shopby_Block_Catalog_Layer_View extends Mage_Catalog_Block_Layer_View
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+
+class Amasty_Shopby_Block_Catalog_Layer_View extends Amasty_Shopby_Block_Catalog_Layer_View_Pure
 {
     protected $_filterBlocks = null;
     protected $_blockPos     = 'left';
-    
+
+    protected $attributeOptionsData;
+
+    /**
+     * @return array
+     */
     public function getFilters()
     {
-        if (!is_null($this->_filterBlocks)){
+        if ($this->_filterBlocks !== null){
             return $this->_filterBlocks;
         }
-        
-        $filters = parent::getFilters();
-        
-        
-        $f = $this->getChild('stock_filter');
-    	if ($f->getPosition() > -1 && $this->_blockPos == Mage::getStoreConfig('amshopby/block/stock_filter_pos')) {
-        	$filters[] = $f;
+
+        if ($this->_isCurrentUserAgentExcluded()) {
+            return array();
         }
-        // remove some filtes for the home page
+
+        $filters = parent::getFilters();
+
+        $filters = $this->getChildFilters($filters);
+
+        $filters = $this->_excludeCurrentLandingFilters($filters);
+
+        // append stock filter
+        $filter = $this->getChild('stock_filter');
+        if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_Stock
+            && !$this->_notInBlock(Mage::getStoreConfig('amshopby/stock_filter/block_pos'))
+        ) {
+            $filters[] = $filter;
+        }
+
+        /** @var Amasty_Shopby_Block_Catalog_Layer_Filter_Rating $filter */
+        $filter = $this->getChild('rating_filter');
+        if ($filter && !Mage::helper('amshopby')->useSolr()
+            && !$this->_notInBlock(Mage::getStoreConfig('amshopby/rating_filter/block_pos'))
+        ) {
+            $filters[] = $filter;
+        }
+
+        $filter = $this->getChild('new_filter');
+        if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_New
+            && !$this->_notInBlock(Mage::getStoreConfig('amshopby/new_filter/block_pos'))) {
+            $filters[] = $filter;
+        }
+
+        $filter = $this->getChild('on_sale_filter');
+        if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_OnSale
+            && !$this->_notInBlock(Mage::getStoreConfig('amshopby/on_sale_filter/block_pos'))) {
+            $filters[] = $filter;
+        }
+
+        // remove some filters from the home page
         $exclude = Mage::getStoreConfig('amshopby/general/exclude');
-        if ('/' == Mage::app()->getRequest()->getRequestString() && $exclude){
-            $exclude = explode(',', preg_replace('/[^a-zA-Z0-9_\-,]+/','', $exclude));
+        if ('/' == Mage::app()->getRequest()->getRequestString() && $exclude) {
+            $exclude = explode(',', preg_replace('/[^a-zA-Z0-9_\-,]+/', '', $exclude));
             $filters = $this->excludeFilters($filters, $exclude);
         } else {
             $exclude = array();
         }
-        
-        $categoriesOrder = Mage::getStoreConfig('amshopby/general/categories_order');
-        
-        /*
-         * Hide categories block from layered navigation
-         */
-        if ($categoriesOrder < 0) {
-            $exclude[] = 'category';
-        }
-        
-        // option ids
-        $ids = array();        
-        foreach ($filters as $f){
-        	if ($f instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_Stock) {        		
-        	} else if ($f instanceof Mage_Catalog_Block_Layer_Filter_Category) {
-        		$f->setPosition($categoriesOrder);	
-        		
-        	} else if ($f->getItemsCount()) {
-        		$items = $f->getItems();
-        		if (isset($items[0])) {
-        			$f->setPosition($items[0]->getFilter()->getAttributeModel()->getPosition());
-        		}
-        	} else {
-        		$f->setPosition(0);
-        	}
-            if ($f->getItemsCount() && ($f instanceof Mage_Catalog_Block_Layer_Filter_Attribute)){
-                $items = $f->getItems();
-                foreach ($items as $item){  
-                    $vals = array_merge( explode(',', $item->getValue()), array($item->getOptionId())); 
-                    foreach ($vals as $v) {
-                        $ids[] = $v;
-                    }
-                }
-            }
-        }
-        
-        // images of filter values 
-        $optionsCollection = Mage::getResourceModel('amshopby/value_collection')
-            ->addFieldToFilter('option_id', array('in' => $ids)) 
-            ->load();
-                
-        $options = array();        
-        foreach ($optionsCollection as $row){
-            $options[$row->getOptionId()] = array(
-                'img' => $row->getImgSmall(),
-                'img_hover' => $row->getImgSmallHover(), 
-                'descr' => $row->getDescr()
-            );
-        }
 
-        $catId = $this->getLayer()->getCurrentCategory()->getId();
-        
+        $filters = $this->excludeSplashProPageFilters($filters);
+
+        $this->computeAttributeOptionsData($filters);
+
+        $filtersPositions = Mage::helper('amshopby/attributes')->getPositionsAttributes();
+
         // update filters with new properties
         $allSelected = array();
-        $attributes = $this->_getAttributesSettings();
-        foreach ($filters as $f){
-            if ($f->getItemsCount() && $f instanceof Mage_Catalog_Block_Layer_Filter_Attribute){
-                $items = $f->getItems();
-               
-                //add selected and image properties for all items                
-                $attributeCode = $items[0]->getFilter()->getAttributeModel()->getAttributeCode();
-                $selectedValues = Mage::app()->getRequest()->getParam($attributeCode);
-                if ($selectedValues){
-                    $selectedValues = explode(',', $selectedValues);
-                    $f->setHasSelection(true);
-                    $allSelected = array_merge($allSelected, $selectedValues);
-                }
-                else {
-                    $selectedValues = array();
-                }
-                    
-                foreach ($items as $item){ 
-                    $optId = $item->getOptionId();
-                    if (!empty($options[$optId]['img'])){
-                        $item->setImage($options[$optId]['img']);
+        foreach ($filters as $filter) {
+            $strategy = $this->_getFilterStrategy($filter);
+
+            if (is_object($strategy)) {
+                // initiate all filter-specific logic
+                $strategy->prepare();
+                $filter->setIsExcluded($strategy->getIsExcluded());
+
+                // remember selected options for dependent excluding
+                if ($strategy instanceof Amasty_Shopby_Helper_Layer_View_Strategy_Attribute) {
+                    $selectedValues = $strategy->getSelectedValues();
+                    if ($selectedValues){
+                        $allSelected = array_merge($allSelected, $selectedValues);
                     }
-                    if (!empty($options[$optId]['img_hover'])){
-                        $item->setImageHover($options[$optId]['img_hover']);
-                    }
-                    if (!empty($options[$optId]['descr'])){
-                        $item->setDescr($options[$optId]['descr']);
-                    }
-                    
-                    
-                    $item->setIsSelected(in_array($optId, $selectedValues));
-                }                    
-                
-                $attributeId  = $items[0]->getFilter()->getAttributeModel()->getId();
-                if (isset($attributes[$attributeId])){
-                    $a = $attributes[$attributeId];
-                    $f->setMaxOptions($a->getMaxOptions());
-                    $f->setHideCounts($a->getHideCounts());
-                    $f->setSortBy($a->getSortBy());
-                    $f->setDisplayType($a->getDisplayType());
-                    $f->setSingleChoice($a->getSingleChoice());
-                    $f->setSeoRel($a->getSeoRel());
-                    // sinse version 1.4.7
-                    $f->setDependOn($a->getDependOn());
-                    $f->setDependOnAttribute($a->getDependOnAttribute());
-                    $f->setAttributeCode($attributeCode);
-                    // sinse version 2.0
-                    $f->setCollapsed($a->getCollapsed());
-                    $f->setComment($a->getComment());
-                    // since version 2.3.3
-                    $f->setShowSearch($a->getShowSearch());
-                    
-                    $cats = trim(str_replace(' ', '', $a->getExcludeFrom()));
-                    if ($cats){
-                        if (in_array($catId, explode(',', $cats))){
-                            $exclude[] = $attributeCode;
-                        }
-                    }
-                } //if attibute
-                
-            }// if count items and attribute
-            elseif ($f instanceof Mage_Catalog_Block_Layer_Filter_Category){
-                $f->setDisplayType(Mage::getStoreConfig('amshopby/general/categories_type'));
-                $f->setTemplate('amshopby/category.phtml'); 
-                $f->setHasSelection($catId != $this->getLayer()->getCurrentStore()->getRootCategoryId());
-                $f->setCollapsed(Mage::getStoreConfig('amshopby/general/categories_collapsed'));
-            }
-            elseif ($f instanceof Mage_Catalog_Block_Layer_Filter_Price){
-                $attrCode = $f->getAttributeModel()->getAttributeCode();
-                if ('price' == $attrCode){
-                    $f->setDisplayType(Mage::getStoreConfig('amshopby/general/price_type'));
-                    $f->setTemplate('amshopby/price.phtml');
-                    $f->setSliderType(Mage::getStoreConfig('amshopby/general/slider_type'));
-                    $f->setHasSelection(Mage::app()->getRequest()->getParam($attrCode));
-                    
-                    $currencySign = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();                
-                    $f->setValueLabel($currencySign);
-                    
-                    $f->setValuePlacement('before');
-                    $f->setFromToWidget(Mage::getStoreConfig('amshopby/general/price_from_to'));
-                    $f->setAttributeCode($attrCode);
-                    $f->setCollapsed(Mage::getStoreConfig('amshopby/general/price_collapsed'));
-                    $f->setSeoRel(Mage::helper('amshopby')->getSeoPriceRelNofollow());
                 }
             }
-            elseif ($f instanceof Mage_Catalog_Block_Layer_Filter_Decimal){
-                if ($f->getItemsCount()) {
-                    $items = $f->getItems();
-                    
-                    $attributeId  = $items[0]->getFilter()->getAttributeModel()->getId();
-                    $attributeCode = $items[0]->getFilter()->getAttributeModel()->getAttributeCode();
-                    
-                    if (isset($attributes[$attributeId])){
-                                        
-                        $a = $attributes[$attributeId];
-                        $cats = trim(str_replace(' ', '', $a->getExcludeFrom()));
-                        
-                        $excluded = false;
-                        
-                        if ($cats){
-                            if (in_array($catId, explode(',', $cats))){
-                                $exclude[] = $attributeCode;
-                                $excluded = true;
-                            }
-                        }
-                        
-                        if (!$excluded) {
-                            
-                            $f->setHideCounts($a->getHideCounts());
-                            $f->setDisplayType($a->getDisplayType());
-                            $f->setSeoRel($a->getSeoRel());
-                            // sinse version 1.4.7
-                            $f->setDependOn($a->getDependOn());
-                            $f->setDependOnAttribute($a->getDependOnAttribute());
-                            // sinse version 2.0
-                            $f->setCollapsed($a->getCollapsed());
-                            $f->setComment($a->getComment());
-                            
-                            $f->setFromToWidget($a->getFromToWidget());
-                            $f->setSliderType($a->getSliderType());
-                            $f->setValueLabel($a->getValueLabel());
-                            $f->setValuePlacement($a->getValuePlacement());
-                            $f->setSliderDecimal($a->getSliderDecimal());  
-                            $f->setAttributeCode($attributeCode);        
-                            
-                            $f->setHasSelection(Mage::app()->getRequest()->getParam($attributeCode));
-                        }
-                    }
-                }
-                $f->setTemplate('amshopby/price.phtml');
+
+            if (is_object($filter->getAttributeModel())
+                && isset($filtersPositions[$filter->getAttributeModel()->getAttributeCode()])) {
+                $filter->setPosition($filtersPositions[$filter->getAttributeModel()->getAttributeCode()]);
+            }
+            if ($filter instanceof Mage_Catalog_Block_Layer_Filter_Category
+                || $filter instanceof Enterprise_Search_Block_Catalog_Layer_Filter_Category) {
+                $filter->setPosition($filtersPositions['ama_category_filter']);
+            }
+            if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_Rating) {
+                $filter->setPosition($filtersPositions['ama_rating_filter']);
+            }
+            if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_New) {
+                $filter->setPosition($filtersPositions['ama_new_filter']);
+            }
+            if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_Stock) {
+                $filter->setPosition($filtersPositions['ama_stock_filter']);
+            }
+            if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_OnSale) {
+                $filter->setPosition($filtersPositions['ama_on_sale_filter']);
             }
         }
-        
-        $attributePresent = false;
-        //exclude dependant, sinse 1.4.7
-        foreach ($filters as $f){
-            $ids = trim(str_replace(' ', '', $f->getDependOn()));
-            $parentAttributes = trim(str_replace(' ', '', $f->getDependOnAttribute()));
-            
-            if (!$ids && !$parentAttributes){
+
+        //exclude dependant, since 1.4.7
+        foreach ($filters as $filter) {
+            $parentAttributes = trim(str_replace(' ', '', $filter->getDependOnAttribute()));
+
+            if (!$parentAttributes) {
                 continue;
             }
-            if (!empty($ids)) {
-                $ids = explode(',', $ids);
-                if (!array_intersect($allSelected, $ids)){
-                    $exclude[] = $f->getAttributeCode();
-                }
-            }
+
             if (!empty($parentAttributes)) {
+                $attributePresent = false;
                 $parentAttributes = explode(',', $parentAttributes);
                 foreach ($parentAttributes as $parentAttribute) {
                     if (Mage::app()->getRequest()->getParam($parentAttribute)) {
-                        $attributePresent = true;                           
+                        $attributePresent = true;
+                        break;
                     }
                 }
                 if (!$attributePresent) {
-                    $exclude[] = $f->getAttributeCode();
+                    $exclude[] = $filter->getAttributeModel()->getAttributeCode();
                 }
             }
         }
-        
-        
+
         // 1.2.7 exclude some filters from the selected categories
         $filters = $this->excludeFilters($filters, $exclude);
-        
-        usort($filters, array($this, 'sortFiltersByOrder'));
+
+        usort($filters, array(Mage::helper('amshopby/attributes'), 'sortFiltersByOrder'));
 
         $this->_filterBlocks = $filters;
-        return $filters;       
+        return $filters;
     }
-    
-    public function sortFiltersByOrder($filter1, $filter2) 
+
+    /**
+     * @return Mage_Catalog_Model_Layer|Mage_Core_Model_Abstract
+     */
+    public function getLayer()
     {
-        if ($filter1->getPosition() == $filter2->getPosition()) {
-            return 0;
-        } 
-        return $filter1->getPosition() > $filter2->getPosition() ? 1 : -1;
+        if (Mage::app()->getRequest()->getModuleName() === Amasty_Shopby_Model_Url_Builder::SPLASHPRO) {
+            return Mage::getSingleton('splash/layer');
+        }
+
+        return parent::getLayer();
     }
-    
+
+    /**
+     * @param array $filters
+     * @return array
+     */
+    protected function excludeSplashProPageFilters(array $filters)
+    {
+        $splashPage = Mage::registry('splash_page');
+        $result = $splashPage ? array() : $filters;
+        if ($splashPage !== null) {
+            $excludeCodes = array_keys($splashPage->getOptionFilters());
+            foreach ($filters as $filter) {
+                $attribute = $filter->getAttributeModel();
+                if ($attribute) {
+                    if ($attribute->getAttributeCode() === 'price'
+                        || $attribute->getBackendType() === 'decimal'
+                        || in_array($attribute->getAttributeCode(), $excludeCodes, true)
+                    ) {
+                        continue;
+                    }
+                }
+
+                $result[] = $filter;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param array $filters
+     * @return array
+     */
+    protected function getChildFilters(array $filters)
+    {
+        foreach ($filters as $f) {
+            if ($alias = $f->getChildAlias()) {
+                $child = $this->getChild($alias);
+                if ($child) {
+                    $filters[] = $child;
+                }
+            }
+        }
+        return $filters;
+    }
+
+    /**
+     * @param Mage_Catalog_Block_Layer_Filter_Abstract $filter
+     * @return Amasty_Shopby_Helper_Layer_View_Strategy_Abstract|null
+     */
+    protected function _getFilterStrategy(Mage_Catalog_Block_Layer_Filter_Abstract $filter)
+    {
+        $strategyCode = null;
+        if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_Stock) {
+            $strategyCode = 'stock';
+        }
+        else if ($filter instanceof Mage_Catalog_Block_Layer_Filter_Attribute || $filter instanceof Enterprise_Search_Block_Catalog_Layer_Filter_Attribute) {
+            $strategyCode = 'attribute';
+        }
+        else if ($filter instanceof Mage_Catalog_Block_Layer_Filter_Category || $filter instanceof Enterprise_Search_Block_Catalog_Layer_Filter_Category) {
+            $strategyCode = 'category';
+        }
+        else if ($filter instanceof Mage_Catalog_Block_Layer_Filter_Price || $filter instanceof Enterprise_Search_Block_Catalog_Layer_Filter_Price) {
+            $strategyCode = 'price';
+        }
+        else if ($filter instanceof Mage_Catalog_Block_Layer_Filter_Decimal || $filter instanceof Enterprise_Search_Block_Catalog_Layer_Filter_Decimal) {
+            $strategyCode = 'decimal';
+        }
+        else if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_Rating) {
+            $strategyCode = 'rating';
+        }
+        else if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_OnSale) {
+            $strategyCode = 'onSale';
+        }
+        else if ($filter instanceof Amasty_Shopby_Block_Catalog_Layer_Filter_New) {
+            $strategyCode = 'new';
+        }
+
+        /** @var Amasty_Shopby_Helper_Layer_View_Strategy_Abstract|null $strategy */
+        if ($strategyCode) {
+            $strategy = Mage::helper('amshopby/layer_view_strategy_' . $strategyCode);
+            $strategy->setLayer($this);
+            $strategy->setFilter($filter);
+        } else {
+            $strategy = null;
+        }
+
+        return $strategy;
+    }
+
+    /**
+     * @param $filters
+     */
+    protected function computeAttributeOptionsData($filters)
+    {
+        $ids = array();
+        foreach ($filters as $f){
+            if ($f->getItemsCount() && ($f instanceof Mage_Catalog_Block_Layer_Filter_Attribute || $f instanceof Enterprise_Search_Block_Catalog_Layer_Filter_Attribute)){
+                $items = $f->getItems();
+                foreach ($items as $item) {
+                    $ids[] = $item->getOptionId();
+                }
+            }
+        }
+
+        // images of filter values
+        $optionsCollection = Mage::getModel('amshopby/value')
+            ->getCollectionByMixedIds($ids)->load();
+
+        $this->attributeOptionsData = array();
+        foreach ($optionsCollection as $row){
+            $this->attributeOptionsData[$row->getOptionId()] = array(
+                'img' => $row->getImgSmall(),
+                'img_hover' => $row->getImgSmallHover(),
+                'descr' => $row->getDescr()
+            );
+        }
+    }
+
+    /**
+     * @return mixed
+     * @throws Exception
+     */
+    public function getAttributeOptionsData()
+    {
+        if (is_null($this->attributeOptionsData)) {
+            throw new Exception('AttributeOptionsData not initialized');
+        }
+
+        return $this->attributeOptionsData;
+    }
+
+    /**
+     * @param array $filters
+     * @return array
+     */
+    protected function _excludeCurrentLandingFilters(array $filters)
+    {
+        /** @var Amasty_Xlanding_Model_Page $landingPage */
+        $landingPage = Mage::registry('amlanding_page');
+        if (is_null($landingPage)) {
+            return $filters;
+        };
+
+        if(method_exists($landingPage, 'isHideConditionFilters') && $landingPage->isHideConditionFilters() === false) {
+            return $filters;
+        }
+
+        $conditions = $landingPage->getConditions();
+        $excludeCodes = array();
+        foreach ($conditions['conditions'] as $condition) {
+            /** @var Amasty_Xlanding_Model_Filter_Condition_Abstract $condition */
+
+            if (!is_object($condition)) {
+                continue;
+            }
+            if ($condition instanceof Amasty_Xlanding_Model_Filter_Condition_Product) {
+                $excludeCodes[] = $condition->getAttribute();
+            }
+        }
+
+        $result = array();
+        foreach ($filters as $f) {
+            if ($f->getAttributeModel()){
+                $code = $f->getAttributeModel()->getAttributeCode();
+                if (in_array($code, $excludeCodes)) {
+                    continue;
+                }
+            }
+
+            if ($f instanceof Mage_Catalog_Block_Layer_Filter_Category) {
+                if ($landingPage->getCategory()) {
+                    continue;
+                }
+            }
+
+            $result[] = $f;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return mixed
+     */
     protected function _getFilterableAttributes()
     {
         $attributes = $this->getData('_filterable_attributes');
         if (is_null($attributes)) {
-            $settings   = $this->_getAttributesSettings();
-            $attributes = clone Mage::helper('amshopby/attributes')->getFilterableAttributes();
-            foreach ($attributes as $k => $v){
+            $setIds = $this->getLayer()->getProductCollection()->getSetIds();
+
+            $settings   = $this->_getDataHelper()->getAttributesSettings();
+            $attributes = Mage::helper('amshopby/attributes')->getFilterableAttributesBySets($setIds);
+
+            foreach ($attributes as $k => $v) {
                 $pos = 'left';
-                if (isset($settings[$v->getId()])){
+                if (isset($settings[$v->getId()])) {
                     $pos = $settings[$v->getId()]->getBlockPos();
+                } elseif ($v->getAttributeCode() == 'price') {
+                    $pos = Mage::getStoreConfig('amshopby/price_filter/block_pos');
                 }
-                elseif($v->getAttributeCode() == 'price'){
-                    $pos = Mage::getStoreConfig('amshopby/block/price_pos');                    
+                if ($this->_notInBlock($pos)) {
+                    unset($attributes[$k]);
                 }
-                if ($this->_notInBlock($pos)){
-                    $attributes->removeItemByKey($k);
-                }
-            } 
-            
+            }
+
             $this->setData('_filterable_attributes', $attributes);
         }
 
         return $attributes;
-    }    
-    
+    }
+
+    /**
+     * @return string
+     */
     public function getStateHtml()
     {
-        $pos = Mage::getStoreConfig('amshopby/block/state_pos'); 
-        if ($this->_notInBlock($pos)){
+        $pos = Mage::getStoreConfig('amshopby/general/state_pos');
+        if ($this->_notInBlock($pos)) {
             return '';
         }
-        $this->getChild('layer_state')->setTemplate('amshopby/state.phtml');
+        $this->getChild('layer_state')->setTemplate('amasty/amshopby/state.phtml');
         return $this->getChildHtml('layer_state');
-    } 
-    
+    }
+
+    /**
+     * @return bool|int
+     */
     public function canShowBlock()
     {
-        if ($this->canShowOptions()){
+        if ($this->canShowOptions()) {
             return true;
         }
-        
+
         $cnt = 0;
-        $pos = Mage::getStoreConfig('amshopby/block/state_pos'); 
-        if (!$this->_notInBlock($pos)){
+        $pos = Mage::getStoreConfig('amshopby/general/state_pos');
+        if (!$this->_notInBlock($pos)) {
             $cnt = count($this->getLayer()->getState()->getFilters());
-        }        
+        }
         return $cnt;
-    }  
-      
+    }
+
+    /**
+     * @return string
+     */
     public function getBlockId()
     {
         return 'amshopby-filters-' . $this->_blockPos;
-    }       
-    
+    }
+
+    /**
+     * @param $filters
+     * @param $exclude
+     * @return array
+     */
     protected function excludeFilters($filters, $exclude)
     {
         $new = array();
-        foreach ($filters as $f){
+        foreach ($filters as $f) {
             $code = substr($f->getData('type'), 1+strrpos($f->getData('type'), '_'));
-            if ($f->getAttributeModel()){
+            if ($f->getAttributeModel()) {
                 $code = $f->getAttributeModel()->getAttributeCode();
             }
-            
-            if (in_array($code, $exclude)){
+
+            if (in_array($code, $exclude) || $f->getIsExcluded()) {
                  continue;
-            } 
-             
-            $new[] = $f;          
+            }
+
+            $new[] = $f;
         }
         return $new;
     }
-    
+
+    /**
+     * @param string $html
+     * @return mixed|string
+     */
     protected function _afterToHtml($html)
     {
         $html = parent::_afterToHtml($html);
-        
+
         $queldorei = false;
-        if (!$html){
+        if (!$html) {
             // compatibility with "shopper" theme
             // @see catalog/layer/view.phtml
-            $queldorei_blocks = Mage::registry('queldorei_blocks');
-            if ($queldorei_blocks AND !empty($queldorei_blocks['block_layered_nav'])) {
-                $html = $queldorei_blocks['block_layered_nav'];
+            $queldoreiBlocks = Mage::registry('queldorei_blocks');
+            if ($queldoreiBlocks && !empty($queldoreiBlocks['block_layered_nav'])) {
+                $html = $queldoreiBlocks['block_layered_nav'];
             }
-            if (!$html){
+            if (!$html) {
                 return '';
             }
             $queldorei = true;
         }
-        
+
         $pos = strrpos($html, '</div>');
         if ($pos !== false) {
+            $needInsertApplyButton = Mage::helper('amshopby')->getIsApplyButtonEnabled()
+                && !$this->_notInBlock(Mage::getStoreConfig('amshopby/general/submit_position'));
+            if ($needInsertApplyButton) {
+                $html = substr($html, 0, strrpos($html, '</div>'))
+                    .$this->getLayout()
+                            ->createBlock('amshopby/catalog_layer_filter_apply')
+                            ->toHtml()
+                    . substr($html, strrpos($html, '</div>'));
+            }
+
             //add an overlay before closing tag
-            $html = substr($html, 0, strrpos($html, '</div>')) 
-                  . '<div style="display:none" class="amshopby-overlay"></div>'
-                  . '</div>';
+            $html = substr($html, 0, strrpos($html, '</div>'))
+                . '<div style="display:none" class="amshopby-overlay"></div>'
+                . substr($html, strrpos($html, '</div>'));
         }
 
-        
+
         // to make js and css work for 1.3 also
         $html = str_replace('class="narrow-by', 'class="block-layered-nav narrow-by', $html);
         // add selector for ajax
         $html = str_replace('block-layered-nav', 'block-layered-nav ' . $this->getBlockId(), $html);
-        
-        // we don't want to move this into the template are different in custom themes
-        foreach ($this->getFilters() as $f){
-            $name = $this->__($f->getName());
-            if ($f->getCollapsed() && !$f->getHasSelection()){
-                $html = str_replace('<dt>'.$name, '<dt class="amshopby-collapsed">'.$name, $html);
-            }
-            $comment = $f->getComment();
-            if ($comment){
-                $img = Mage::getDesign()->getSkinUrl('images/amshopby-tooltip.png');
-                $img = '<img class="amshopby-tooltip-img" src="'.$img.'" width="9" height="9" alt="'.htmlspecialchars($comment).'" id="amshopby-img-'.$f->getAttributeCode().'"/>';
-                $html = str_replace($name.'</dt>', $name . $img . '</dt>', $html);    
-            }
-            
+
+        if (Mage::getStoreConfig('amshopby/general/enable_collapsing')) {
+            $html = str_replace('block-layered-nav', 'block-layered-nav amshopby-collapse-enabled', $html);
         }
-        
-        if ($queldorei AND !empty($queldorei_blocks['block_layered_nav'])) {
+
+        $scrollEnableSize = (int) Mage::getStoreConfig('amshopby/general/enable_overflow_scroll');
+        if ($scrollEnableSize) {
+            $html = $this->generateOverflowScroll($html, $scrollEnableSize);
+        }
+
+        // we don't want to move this into the template are different in custom themes
+        $html = $this->generateTooltip($html);
+
+        if ($queldorei AND !empty($queldoreiBlocks['block_layered_nav'])) {
             // compatibility with "shopper" theme
             // @see catalog/layer/view.phtml
             Mage::unregister('queldorei_blocks');
-            $queldorei_blocks['block_layered_nav'] = $html;
-            Mage::register('queldorei_blocks', $queldorei_blocks);
+            $queldoreiBlocks['block_layered_nav'] = $html;
+            Mage::register('queldorei_blocks', $queldoreiBlocks);
             return '';
         }
-        
-        return $html;
-    }    
 
+        $this->saveLayerCache();
+
+        return $html;
+    }
+
+    /**
+     * @param $html
+     * @param $enableOverflowScroll
+     * @return mixed|string
+     */
+    protected function generateOverflowScroll($html, $enableOverflowScroll)
+    {
+        if (strpos($html, 'block-layered-nav') !== false) {
+            $html = str_replace('block-layered-nav', 'block-layered-nav amshopby-overflow-scroll-enabled', $html);
+            $html .= '<style>'
+                . 'div.amshopby-overflow-scroll-enabled div.block-content dl dd > ol:first-of-type {'
+                . 'max-height: ' . $enableOverflowScroll . 'px;}'
+                . '</style>';
+        }
+
+        return $html;
+    }
+
+    /**
+     * @param $html
+     * @return mixed
+     */
+    protected function generateTooltip($html)
+    {
+        $storeId = Mage::app()->getStore()->getStoreId();
+
+        foreach ($this->getFilters() as $filter) {
+            $name = $this->__($filter->getName());
+            if ($filter->getCollapsed() && !$filter->getHasSelection()) {
+                $html = preg_replace(
+                    '|(<dt[^>]*)(>'. preg_quote($name, '|') .')|iu', '$1 class="amshopby-collapsed"$2',
+                    $html
+                );
+            }
+
+            $comment = $this->getStoreComment($filter, $storeId);
+
+            if ($comment) {
+                $img = Mage::getDesign()->getSkinUrl('images/amshopby-tooltip.png');
+                $img = ' <img class="amshopby-tooltip-img" src="' . $img . '" 
+                        width="9" height="9" alt="' . $comment . '" />';
+
+                $pattern = '@(<dt[^>]*>\s*' . preg_quote($name, '@') . ')\s*(</dt>)@ui';
+                $replacement = '$1 ' . $img . '$2';
+                $html = preg_replace($pattern, $replacement, $html);
+            }
+        }
+
+        return $html;
+    }
+
+    /**
+     * @param $filter
+     * @param $storeId
+     * @return string
+     */
+    protected function getStoreComment($filter, $storeId)
+    {
+        if ($comment = $filter->getComment()) {
+            if (preg_match('^([adObis]:|N;)^', $comment)) {
+                try {
+                    $comment = Mage::helper('amshopby')->unserialize($comment);
+                } catch (Exception $e) {
+                    Mage::log($e->getMessage());
+                }
+
+                if (is_array($comment)) {
+                    $comment = isset($comment[$storeId])
+                        ? $comment[$storeId]
+                        : $comment[0];
+                }
+            }
+            $comment = htmlspecialchars($comment);
+        }
+
+        return $comment;
+    }
+
+    /**
+     *
+     */
+    protected function saveLayerCache()
+    {
+        /** @var Amasty_Shopby_Helper_Layer_Cache $cache */
+        $cache = Mage::helper('amshopby/layer_cache');
+        $cache->saveLayerCache();
+    }
+
+    /**
+     * @return $this
+     */
     protected function _prepareLayout()
     {
-        $pos = Mage::getStoreConfig('amshopby/block/categories_pos');
-        if ($this->_notInBlock($pos)){
-            $this->_categoryBlockName = 'amshopby/catalog_layer_filter_empty';   
-        }        
-        if (Mage::getStoreConfig('amshopby/block/stock_filter') >= 0) {
-        	$stockBlock = $this->getLayout()->createBlock('amshopby/catalog_layer_filter_stock')
-            	->setLayer($this->getLayer())
-            	->init();
-            	
+        if ($productsBlock = Mage::app()->getLayout()->getBlock('category.products')) {
+            $currentCategory = $productsBlock->getCurrentCategory();
+            $id = $currentCategory ? $currentCategory->getLandingPage() : null;
+            if ($id) {
+                $cms = Mage::getModel('cms/block')->load($id);
+                if (strpos($cms->getContent(), 'amfinder') !== false) {
+                    $productsBlock->getCmsBlockHtml();
+                }
+            }
+        }
+
+        $pos = Mage::getStoreConfig('amshopby/category_filter/block_pos');
+        if ($this->_notInBlock($pos)) {
+            $this->_categoryBlockName = 'amshopby/catalog_layer_filter_empty';
+        }
+        if (Mage::getStoreConfigFlag('amshopby/stock_filter/enable')) {
+            $stockBlock = $this->getLayout()->createBlock('amshopby/catalog_layer_filter_stock')
+                ->setLayer($this->getLayer())
+                ->init();
+
             $this->setChild('stock_filter', $stockBlock);
         }
 
+        if (Mage::getStoreConfigFlag('amshopby/rating_filter/enable')) {
+            $ratingBlock = $this->getLayout()->createBlock('amshopby/catalog_layer_filter_rating')
+                                ->setLayer($this->getLayer())
+                                ->init();
+            $this->setChild('rating_filter', $ratingBlock);
+        }
+
+        if (Mage::getStoreConfigFlag('amshopby/new_filter/enable')) {
+            $newBlock = $this->getLayout()->createBlock('amshopby/catalog_layer_filter_new')
+                ->setLayer($this->getLayer())
+                ->init();
+            $this->setChild('new_filter', $newBlock);
+        }
+
+        if (Mage::getStoreConfigFlag('amshopby/on_sale_filter/enable')) {
+            $onSaleBlock = $this->getLayout()->createBlock('amshopby/catalog_layer_filter_onSale')
+                ->setLayer($this->getLayer())
+                ->init();
+            $this->setChild('on_sale_filter', $onSaleBlock);
+        }
+
         if (Mage::registry('amshopby_layout_prepared')){
-            return parent::_prepareLayout();
+            parent::_prepareLayout();
+            $this->appendChildFilters();
+            return $this;
         }
         else {
             Mage::register('amshopby_layout_prepared', true);
         }
         
         if (!Mage::getStoreConfigFlag('customer/startup/redirect_dashboard')) { 
-            $url = Mage::helper('amshopby/url')->getFullUrl($_GET);
+            $url = Mage::helper('amshopby/url')->getFullUrl(Mage::app()->getRequest()->getParams());
             Mage::getSingleton('customer/session')
                 ->setBeforeAuthUrl($url);           
-        }       
+        }
         
         $head = $this->getLayout()->getBlock('head');
-        if ($head){
-            $head->addJs('amasty/amshopby/amshopby.js');     
-             
-            if (Mage::getStoreConfigFlag('amshopby/block/ajax') && !$this->getIsProductPage()){
-                $head->addJs('amasty/amshopby/amshopby-ajax.js');                 
+        if ($head) {
+            $head->addJs('amasty/amshopby/amshopby.js');
+            if (Mage::getStoreConfig('amshopby/general/slider_use_ui')) {
+                $this->addJQuery($head);
+            }
+
+            if (Mage::helper('amshopby')->isNeedAjax()) {
+                $head->addJs('amasty/amshopby/amshopby-ajax.js');
+            }
+
+            if (Mage::helper('amshopby')->getIsApplyButtonEnabled()) {
+                $head->addJs('amasty/amshopby/amshopby-apply.js');
             }
         }
-        
-        return parent::_prepareLayout();
-    } 
-    
+
+        parent::_prepareLayout();
+
+        $this->appendChildFilters();
+
+        return $this;
+    }
+
+    private function addJQuery($head)
+    {
+        $head->addJs('amasty/amshopby/jquery.min.js');
+        $head->addJs('amasty/amshopby/jquery.noconflict.js');
+        $head->addJs('amasty/amshopby/jquery-ui.min.js');
+        $head->addJs('amasty/amshopby/jquery.ui.touch-punch.min.js');
+        $head->addJs('amasty/amshopby/amshopby-jquery.js');
+    }
+
+    /**
+     *
+     */
+    protected function appendChildFilters()
+    {
+        $filterableAttributes = $this->_getFilterableAttributes();
+        foreach ($filterableAttributes as $attribute) {
+            if ($attribute->getAttributeCode() == 'price' || $attribute->getBackendType() == 'decimal') {
+                continue;
+            }
+
+            $block = $this->getChild($attribute->getAttributeCode() . '_filter');
+            if (!$block) {
+                continue;
+            }
+            $isShowChild = $block->getFilter() ? $block->getFilter()->getIsShowChildFilter() : false;
+            if ($isShowChild) {
+                $this->setChild($attribute->getAttributeCode() . '_filter_child',
+                    $this->getLayout()->createBlock('amshopby/catalog_layer_filter_attribute_child')
+                        ->setLayer($this->getLayer())
+                        ->setAttributeModel($attribute)
+                        ->init());
+            }
+        }
+    }
+
+    /**
+     * @param $filters
+     */
+    protected function assertRequiredFilters($filters)
+    {
+        $requiredFilters = Mage::registry('amshopby_required_seo_filters');
+        if (is_array($requiredFilters)) {
+            foreach ($requiredFilters as &$requiredFilter) {
+                $requiredFilter .= '_filter';
+            }
+
+            $actualAliases = array();
+            foreach ($filters as $filter) {
+                /** @var Mage_Catalog_Block_Layer_Filter_Abstract $filter */
+                $actualAliases[] = $filter->getBlockAlias();
+            }
+
+            $diff = array_diff($requiredFilters, $actualAliases);
+            if ($diff) {
+                $this->_getDataHelper()->error404();
+            }
+        }
+    }
+
+
+    /**
+     * @param $pos
+     * @return bool
+     */
     protected function _notInBlock($pos)
     {
-        if (!in_array($pos, array('left', 'right', 'top'))){
+        if (!in_array($pos, array('left', 'right', 'top','both'))){
             $pos = 'left';
         }
-        return ($pos != $this->_blockPos);
+        return (!in_array($pos, array($this->_blockPos, Amasty_Shopby_Model_Source_Position::BOTH)));
     }
-      
-    protected function _getAttributesSettings()
+
+    /**
+     * @return bool
+     */
+    protected function _isCurrentUserAgentExcluded()
     {
-        $attributes = Mage::registry('amshopby_attributes');
-        if (!$attributes){
-            //additional filter properties
-            $attrCollection = Mage::getResourceModel('amshopby/filter_collection')
-                ->load();
-                    
-            $attributes = array();
-            foreach ($attrCollection as $row){
-                $attributes[$row->getAttributeId()] = $row;
+        /** @var Mage_Core_Helper_Http $helper */
+        $helper = Mage::helper('core/http');
+        $currentAgent = $helper->getHttpUserAgent();
+
+        $excludeAgents = explode(',', Mage::getStoreConfig('amshopby/seo/exclude_user_agent'));
+        foreach ($excludeAgents as $agent) {
+            if (stripos($currentAgent, trim($agent)) !== false) {
+                return true;
             }
-            
         }
-        return $attributes;        
+
+        return false;
     }
-    
-    protected function _getCategoryFilter()
+
+    /**
+     * @return mixed|string
+     */
+    public function getClearUrl()
     {
-        if (Mage::helper('amshopby')->isVersionLessThan(1, 4, 2)){
-            $pos = Mage::getStoreConfig('amshopby/block/categories_pos');
-            if ($this->_notInBlock($pos)){
-                $this->_categoryBlockName = 'amshopby/catalog_layer_filter_empty';
-                $categryBlock = $this->getLayout()->createBlock($this->_categoryBlockName)
-                    ->setLayer($this->getLayer())
-                    ->init(); 
-                return  $categryBlock;              
-            }  
+        /** @var Amasty_Shopby_Helper_Url $helper */
+        $helper = Mage::helper('amshopby/url');
+        $query = array();
+        if ($helper->isOnBrandPage()) {
+            $brandAttr = trim(Mage::getStoreConfig('amshopby/brands/attr'));
+            $brandId = $this->getRequest()->getParam($brandAttr);
+            if ($brandId) {
+                $query[$brandAttr] = (int) $brandId;
+            }
         }
-        return parent::_getCategoryFilter();
-    }    
-    
+		return $helper->getFullUrl($query, true);
+	}
+
+    /**
+     * @return Amasty_Shopby_Helper_Data
+     */
+    protected function _getDataHelper()
+    {
+        /** @var Amasty_Shopby_Helper_Data $helper */
+        $helper = Mage::helper('amshopby');
+        return $helper;
+    }
+
 }

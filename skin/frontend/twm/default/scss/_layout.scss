@@ -31,7 +31,7 @@ html, body {
 	width: calc(#{$side-nav-width});
 
 	> ul {
-		@extend .unstyled;
+		list-style: none;
 
 		> li {
 			border-bottom: 1px solid $s-grey;
@@ -51,7 +51,7 @@ html, body {
 			}
 
 			> ul {
-				@extend .unstyled;
+				list-style: none;
 				display: none;
 
 				> li {
@@ -744,6 +744,14 @@ ul.social {
 	#wrapper {
 		.tss-ls-footer-controls {
 			min-width: 410px;
+		}
+	}
+}
+
+@media(max-width: 768px) {
+	#side-nav {
+		> ul {
+			padding: 0 0 300px 0 !important;
 		}
 	}
 }

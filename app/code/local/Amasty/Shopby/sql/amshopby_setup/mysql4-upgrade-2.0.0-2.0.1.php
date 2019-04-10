@@ -1,11 +1,17 @@
 <?php
 /**
-* @copyright Amasty.
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
 $this->startSetup();
 
+/**
+ * @Migration table_exist:amshopby/page:1
+ */
+
 $this->run("
-CREATE TABLE `{$this->getTable('amshopby/page')}` (
+CREATE TABLE IF NOT EXISTS `{$this->getTable('amshopby/page')}` (
   `page_id`    mediumint(8) unsigned NOT NULL auto_increment,
   `num`        tinyint(4) unsigned NOT NULL,
   `use_cat`    tinyint(1) NOT NULL,

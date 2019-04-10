@@ -1,5 +1,11 @@
 <?php
 /**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2019 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+
+/**
  * @author Amasty
  */  
 class Amasty_Shopby_Block_Adminhtml_Range_Grid extends Mage_Adminhtml_Block_Widget_Grid
