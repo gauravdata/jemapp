@@ -50,13 +50,11 @@ class AW_Points_Model_Transaction extends Mage_Core_Model_Abstract
         return Mage::getModel('points/summary')->load($this->getSummaryId())->getCustomer();
     }
 
-    public function loadByOrder($order)
-    {
-    	$order_id = $order->getIncrementId();
-    	var_dump($order_id);
-	    $this->getResource()->loadByOrderIncrementId($this, $order_id);
-	    return $this;
-    }
+	public function loadByOrder($order)
+	{
+		$this->getResource()->loadByOrderIncrementId($this, $order->getIncrementId());
+		return $this;
+	}
 
     public function calculatePointsFor($order, $type = AW_Points_Helper_Config::MONEY_SPENT)
     {
