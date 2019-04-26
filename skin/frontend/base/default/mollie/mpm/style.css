@@ -51,12 +51,11 @@
     margin-right: auto;
 }
 
-.sp-methods .payment-issuer-icon {
+.payment-issuer-icon {
     width: 27px;
     vertical-align: middle;
     display: inline-block;
     margin: 5px 3px 5px 3px;
-    float: none;
 }
 
 @keyframes spin {

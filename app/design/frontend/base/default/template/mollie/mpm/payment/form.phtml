@@ -54,11 +54,9 @@ $method = $this->getMethodByCode($code);
                     <ul>
                     <?php foreach ($method->issuers() as $issuer): ?>
                         <li>
-                            <label>
-                                <input type="radio" name="<?php echo $code; ?>_issuer" value="<?php echo htmlspecialchars($issuer->id); ?>" id="issuer_<?php echo htmlspecialchars($issuer->id); ?>" class="radio">
-                                <img src="<?php echo $issuer->image->size2x; ?>" class="payment-issuer-icon"/>
-                                <?php echo htmlspecialchars($issuer->name); ?>
-                            </label>
+                            <input type="radio" name="<?php echo $code; ?>_issuer" value="<?php echo htmlspecialchars($issuer->id); ?>" id="issuer_<?php echo htmlspecialchars($issuer->id); ?>" class="radio">
+                            <img src="<?php echo $issuer->image->size2x; ?>" class="payment-issuer-icon"/>
+                            <?php echo htmlspecialchars($issuer->name); ?>
                         </li>
                     <?php endforeach; ?>
                     </ul>
