@@ -238,7 +238,7 @@ function modify_request(RequestInterface $request, array $changes)
     }
 
     if ($request instanceof ServerRequestInterface) {
-        return new ServerRequest(
+        return (new ServerRequest(
             isset($changes['method']) ? $changes['method'] : $request->getMethod(),
             $uri,
             $headers,
@@ -247,7 +247,11 @@ function modify_request(RequestInterface $request, array $changes)
                 ? $changes['version']
                 : $request->getProtocolVersion(),
             $request->getServerParams()
-        );
+        ))
+        ->withParsedBody($request->getParsedBody())
+        ->withQueryParams($request->getQueryParams())
+        ->withCookieParams($request->getCookieParams())
+        ->withUploadedFiles($request->getUploadedFiles());
     }
 
     return new Request(
@@ -516,8 +520,8 @@ function parse_response($message)
  * PHP style arrays into an associative array (e.g., foo[a]=1&foo[b]=2 will
  * be parsed into ['foo[a]' => '1', 'foo[b]' => '2']).
  *
- * @param string      $str         Query string to parse
- * @param bool|string $urlEncoding How the query string is encoded
+ * @param string   $str         Query string to parse
+ * @param int|bool $urlEncoding How the query string is encoded
  *
  * @return array
  */
@@ -533,9 +537,9 @@ function parse_query($str, $urlEncoding = true)
         $decoder = function ($value) {
             return rawurldecode(str_replace('+', ' ', $value));
         };
-    } elseif ($urlEncoding == PHP_QUERY_RFC3986) {
+    } elseif ($urlEncoding === PHP_QUERY_RFC3986) {
         $decoder = 'rawurldecode';
-    } elseif ($urlEncoding == PHP_QUERY_RFC1738) {
+    } elseif ($urlEncoding === PHP_QUERY_RFC1738) {
         $decoder = 'urldecode';
     } else {
         $decoder = function ($str) { return $str; };
@@ -633,6 +637,7 @@ function mimetype_from_filename($filename)
 function mimetype_from_extension($extension)
 {
     static $mimetypes = [
+        '3gp' => 'video/3gpp',
         '7z' => 'application/x-7z-compressed',
         'aac' => 'audio/x-aac',
         'ai' => 'application/postscript',
