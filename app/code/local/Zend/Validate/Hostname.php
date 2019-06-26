@@ -1460,24 +1460,24 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                     foreach ($domainParts as $domainPart) {
                         // If some domain part is empty (i.e. zend..com), it's invalid
                         if (empty($domainPart) && $domainPart !== '0') {
-                            /*$this->_error(self::INVALID_HOSTNAME);
-                            return false;*/
+                            $this->_error(self::INVALID_HOSTNAME);
+                            return false;
                         }
 
                         // Decode Punycode domainnames to IDN
                         if (strpos($domainPart, 'xn--') === 0) {
                             $domainPart = $this->decodePunycode(substr($domainPart, 4));
-                            /*if ($domainPart === false) {
+                            if ($domainPart === false) {
                                 return false;
-                            }*/
+                            }
                         }
 
                         // Check dash (-) does not start, end or appear in 3rd and 4th positions
                         if ((strpos($domainPart, '-') === 0)
                             || ((strlen($domainPart) > 2) && (strpos($domainPart, '-', 2) == 2) && (strpos($domainPart, '-', 3) == 3))
                             || (strpos($domainPart, '-') === (strlen($domainPart) - 1))) {
-                               /* $this->_error(self::INVALID_DASH);
-                            $status = false;*/
+                                $this->_error(self::INVALID_DASH);
+                            $status = false;
                             break 2;
                         }
 
@@ -1508,8 +1508,8 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
 
                     // If one of the labels doesn't match, the hostname is invalid
                     if ($check !== count($domainParts)) {
-                        /*$this->_error(self::INVALID_HOSTNAME_SCHEMA);
-                        $status = false;*/
+                        $this->_error(self::INVALID_HOSTNAME_SCHEMA);
+                        $status = false;
                     }
                 } else {
                     // Hostname not long enough
