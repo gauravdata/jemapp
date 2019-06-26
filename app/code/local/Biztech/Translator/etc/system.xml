@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <biztech translate="label" module="translator">
+            <label>Appjetty Extensions</label>
+            <sort_order>250</sort_order>
+        </biztech>
+    </tabs>
+    <sections>
+        <translator translate="label" module="translator">
+            <label>Appjetty Translator</label>
+            <tab>biztech</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>20</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <activation translate="label">
+                    <label>Translator Activation</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <key translate="label">
+                            <label>Activation Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </key>
+                        <websites translate="label">
+                            <label>Select Websites</label>
+                            <frontend_type>checkbox</frontend_type>
+                            <source_model>adminhtml/system_config_source_website</source_model>
+                            <frontend_model>translator/adminhtml_config_form_renderer_website</frontend_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </websites>
+                    </fields>
+                </activation>
+                <translator_general translate="label">
+                    <label>Translate Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>translator/system_config_enabledisable</source_model>
+                            <frontend_model>translator/adminhtml_enabledisable</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select Yes to enable this feature.</comment>
+                        </enabled>
+                        <google_api translate="label">
+                            <label>Enter Google Api Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <comment>Enter google api key for translate data.</comment>
+                        </google_api>
+
+                        <!-- <google_refer_restriction translate="label">
+                            <label>Using Referer Restriction</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Select specified refer restriction</comment>
+                        </google_refer_restriction> -->
+
+                        <google_daily_limit translate="label">
+                            <label>Enter Daily Quota</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry validate-digits validate-greater-than-zero</validate>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <comment>Enter daily quota (limit) sepecified in Google Billing Account.</comment>
+                        </google_daily_limit>
+
+                        <google_daily_cut_before_limit translate="label">
+                            <label>Enter Safe Limit</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <validate>required-entry validate-digits validate-greater-than-zero</validate>
+                            <comment>Enter daily safe limit (must be less than daily limit above)</comment>
+                        </google_daily_cut_before_limit>
+
+                        <languages translate="label">
+                            <label>Language you want to translate your website to</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>translator/config_source_language</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <comment>Choose language which you want to translate your website</comment>
+                        </languages>
+                        <from_lang translate="label">
+                            <label>Translate from</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>translator/config_source_fromlanguage</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </from_lang>
+                        <translate_btntext translate="label">
+                            <label>Translate Button Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Enter text which would be displayed on Translate Button. Default Label:Translate
+                                To
+                            </comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </translate_btntext>
+                        <massaction_translate_fields translate="label">
+                            <label>Product Translate Fields</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>translator/config_source_attributes</source_model>
+                            <sort_order>220</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select Product attribute(s) to be translated.</comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </massaction_translate_fields>
+                        <massaction_cmspagetranslate_fields translate="label">
+                            <label>CMS Page Translate Fields</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>translator/config_source_cmspageattributes</source_model>
+                            <sort_order>230</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select CMS Page attribute(s) to be translated.</comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </massaction_cmspagetranslate_fields>
+                        <massaction_categorytranslate_fields translate="label">
+                            <label>Category Translate Fields</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>translator/config_source_categoryattributes</source_model>
+                            <sort_order>240</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select Category attribute(s) to be translated.</comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </massaction_categorytranslate_fields>
+
+                        <translate_all translate="label">
+                            <label>Do you want to translate all product's again?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If yes then it will translate all products again.</comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </translate_all>
+
+                        <product_batch_size translate="label">
+                            <label>Batch Size to Translate</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>260</sort_order>
+                            <validate>validate-digits-range digits-range-20-100 validate-zero-or-greater required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <comment>Batch Size to Translate Products (range start from 20 to 100)</comment>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                        </product_batch_size>
+
+                        <calculatechar translate="label">
+                            <comment><![CDATA[Calculate estimated characters to be translated
+                                <div id="charcount" style="display: none;"></div>
+                            ]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <frontend_model>Biztech_Translator_Block_Adminhtml_Calculate</frontend_model>
+                            <sort_order>280</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </calculatechar>
+
+                        <!-- <storeWise translate="label">
+                            <label>Select Store</label>
+                            <comment>Start Cron For this Store's only</comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>translator/config_source_stores</source_model>
+                            <sort_order>270</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </storeWise>
+
+                        <startcrontranslation translate="label">
+                            <comment>Start Cron Translation for Batch Wise Product Translation</comment>
+                            <frontend_type>select</frontend_type>
+                            <frontend_model>Biztech_Translator_Block_Adminhtml_Startcron</frontend_model>
+                            <sort_order>280</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </startcrontranslation> -->
+                    </fields>
+                </translator_general>
+            </groups>
+        </translator>
+    </sections>
+</config>

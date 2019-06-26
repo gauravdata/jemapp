@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addJs"><script>prototype/window.js</script></action>
+            <!-- <action method="addCss">
+                <stylesheet>prototype/windows/themes/default.css</stylesheet>
+            </action> -->
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addJs">
+                <script type="text/javascript">biztech/translator/translator.js</script>
+            </action>
+        </reference>
+    </default>
+    <translator_adminhtml_translator_index>
+        <reference name="head">
+            <action method="setTitle" translator="title">
+                <title>Manage Translations</title>
+            </action>
+            <action method="addJs" ifconfig="translator/translator_general/enabled">
+                <script type="text/javascript">biztech/translator/translator.js</script>
+            </action>
+            <action method="addCss" ifconfig="translator/translator_general/enabled">
+                <stylesheet>biztech/translator/gridfix.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="left">
+            <block  type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" before="-">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+        </reference>
+    </translator_adminhtml_translator_index>
+
+    <translator_adminhtml_translator_edit>
+        <reference name="head">
+            <action method="setTitle" translator="title">
+                <title>Manage Translations</title>
+            </action>
+            <action method="addJs" ifconfig="translator/translator_general/enabled">
+                <script type="text/javascript">biztech/translator/translator.js</script>
+            </action>
+        </reference>
+        <reference name="content">
+            <block  type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" before="-">
+                <action method="setUseConfirm">
+                    <params>0</params>
+                </action>
+            </block>
+        </reference>
+    </translator_adminhtml_translator_edit>
+
+    <adminhtml_catalog_product_index>
+        <reference name="head">
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/grid_translator.js</file></action>
+        </reference>
+    </adminhtml_catalog_product_index>
+
+    <adminhtml_catalog_product_edit>
+        <reference name="head">
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/popup_window.js</file></action>
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/biztech_translator.js</file></action>
+            <action method="addCss" ifconfig="translator/translator_general/enabled"><name>biztech/translator/style.css</name></action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+
+    <adminhtml_catalog_product_new>
+        <reference name="head">
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/popup_window.js</file></action>
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/biztech_translator.js</file></action>
+            <action method="addCss" ifconfig="translator/translator_general/enabled"><name>biztech/translator/style.css</name></action>
+        </reference>
+    </adminhtml_catalog_product_new>
+
+    <adminhtml_catalog_category_edit>
+        <reference name="head">
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/popup_window.js</file></action>
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/biztech_translator.js</file></action>
+            <action method="addCss" ifconfig="translator/translator_general/enabled"><name>biztech/translator/style.css</name></action>
+        </reference>
+
+    </adminhtml_catalog_category_edit>
+
+
+    <adminhtml_cms_page_edit>
+        <reference name="head">
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/popup_window.js</file></action>
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/biztech_translator.js</file></action>
+            <action method="addCss" ifconfig="translator/translator_general/enabled"><name>biztech/translator/style.css</name></action>
+        </reference>
+        <reference name="cms_page_edit_tabs">
+            <block type="translator/adminhtml_cms_page_edit_tab_content" name="adminhtml_cms_page_edit_tab_content" />
+            <action method="addTab"><name>content_section</name><block>adminhtml_cms_page_edit_tab_content</block></action>
+        </reference>
+    </adminhtml_cms_page_edit>
+
+    <adminhtml_cms_page_new>
+        <reference name="head">
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/popup_window.js</file></action>
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/biztech_translator.js</file></action>
+            <action method="addCss" ifconfig="translator/translator_general/enabled"><name>biztech/translator/style.css</name></action>
+        </reference>
+    </adminhtml_cms_page_new>
+
+
+    <adminhtml_cms_block_new>
+        <reference name="head">
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/popup_window.js</file></action>
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/biztech_translator.js</file></action>
+            <action method="addCss" ifconfig="translator/translator_general/enabled"><name>biztech/translator/style.css</name></action>
+        </reference>
+    </adminhtml_cms_block_new>
+
+    <adminhtml_cms_block_edit>
+        <reference name="head">
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/popup_window.js</file></action>
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/biztech_translator.js</file></action>
+            <action method="addCss" ifconfig="translator/translator_general/enabled"><name>biztech/translator/style.css</name></action>
+        </reference>
+    </adminhtml_cms_block_edit>
+    <translator_adminhtml_translator_index>
+        <reference name="head">
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/popup_window.js</file></action>
+            <action method="addJs" ifconfig="translator/translator_general/enabled"><file>biztech/translator/biztech_translator.js</file></action>
+            <action method="addCss" ifconfig="translator/translator_general/enabled"><name>biztech/translator/category.css</name></action>
+        </reference>
+    </translator_adminhtml_translator_index>
+</layout>

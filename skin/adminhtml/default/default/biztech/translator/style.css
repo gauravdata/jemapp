@@ -1,0 +1,53 @@
+.popup-div {
+    margin: -200px 0 0 -400px;
+    border: 1px solid #CCC;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    width: 800px;
+    display: none;
+    z-index: 1011;
+}
+
+.table_window {
+    height: 30px;
+    padding-left: 10px;
+}
+
+.magento_content {
+    height: 400px;
+    padding: 10px;
+}
+
+.popup-content {
+    width: 377px;
+    float: left;
+}
+
+.popup-content-right {
+    width: 350px;
+    float: left;
+}
+
+.translated-textarea {
+    padding: 5px;
+    float: right;
+    height: 340px !important;
+}
+
+.old-text {
+    float: left;
+    border: 1px solid #aaa;
+    padding: 5px;
+    height: 340px !important;
+}
+
+.btn-apply-translate {
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+    float: right;
+    margin: 5px 10px;
+}
+
+  

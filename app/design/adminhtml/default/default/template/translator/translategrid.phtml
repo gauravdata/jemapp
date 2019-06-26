@@ -1,0 +1,43 @@
+<?php
+$count = 1;
+$string = (Mage::getSingleton('core/session')->getTranslateSearchCache()) ? Mage::getModel('core/cache')->load('translate_search_string') : $this->getRequest()->getParam('searchString');
+?>
+<div class="grid">
+    <div class="content-header">
+        <h3><?php echo $this->__('Search results for: &quot;') . $string . '&quot;' ?></h3>
+    </div>
+    <table class="data">
+        <colgroup>
+            <col width="30" />
+            <col/>
+            <col width="60" />
+            <col/>
+            <col width="100" />
+        </colgroup>
+        <thead>
+            <tr class="headings">
+                <th><?php echo $this->__('Sr.No.') ?></th>
+                <th><?php echo $this->__('Translated string') ?></th>
+                <th><?php echo $this->__('Origin string') ?></th>
+                <th><?php echo $this->__('Source') ?></th>
+                <th><?php echo $this->__('Locale') ?></th>
+                <th><?php echo $this->__('Edit') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $searchResults = $this->getResults(); ?>
+            <?php foreach ($searchResults as $skey => $_result){ ?>
+                <tr class="pointer <?php if($count % 2 == 0) { echo 'even'; } ?>" onclick="editStringUrl(this)">
+                    <td><?php echo $count ?></td>
+                    <td><?php echo htmlspecialchars($_result['translation']['translate']); ?></td>
+                    <td><?php echo htmlspecialchars($_result['translation']['key']); ?></td>
+                    <td><?php echo htmlspecialchars($_result['translation']['source']); ?></td>
+                    <td><?php echo $_result['locale'] ?></td>
+                  
+                    <td><a href="<?php echo $this->getUrl('*/*/edit', $this->getRequestParams(array('source' => base64_encode($_result['translation']['source']), 'translation' => base64_encode(htmlspecialchars($_result['translation']['translate'])), 'locale' => $_result['locale'], 'original' => base64_encode(htmlspecialchars($_result['translation']['key']))))) ?>"><?php echo $this->__('Edit') ?></a></td>
+                </tr>
+                <?php $count++; ?>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>

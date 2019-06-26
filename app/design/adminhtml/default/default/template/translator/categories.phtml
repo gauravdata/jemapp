@@ -1,0 +1,173 @@
+<?php
+    /**
+    * Magento
+    *
+    * NOTICE OF LICENSE
+    *
+    * This source file is subject to the Academic Free License (AFL 3.0)
+    * that is bundled with this package in the file LICENSE_AFL.txt.
+    * It is also available through the world-wide-web at this URL:
+    * http://opensource.org/licenses/afl-3.0.php
+    * If you did not receive a copy of the license and are unable to
+    * obtain it through the world-wide-web, please send an email
+    * to license@magentocommerce.com so we can send you a copy immediately.
+    *
+    * DISCLAIMER
+    *
+    * Do not edit or add to this file if you wish to upgrade Magento to newer
+    * versions in the future. If you wish to customize Magento for your
+    * needs please refer to http://www.magentocommerce.com for more information.
+    *
+    * @category    design
+    * @package     default_default
+    * @copyright   Copyright (c) 2009 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+    * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+    */
+?>
+<?php
+    $storeId           =   Mage::app()->getRequest()->getParam('store', 0);
+    $configLang         =   Mage::getStoreConfig('translator/translator_general/languages', $storeId);
+    $language           =   Mage::helper('translator')->getLanguage($storeId);
+    $localeCode         =   Mage::getStoreConfig('general/locale/code', $storeId);
+    $lang               =   '';
+    $arr                =   explode('_',$localeCode);
+    $language           =   $arr[0];
+
+    if(in_array($language, array_keys(Mage::helper('translator/languages')->getLanguages()))){
+        $lang           =   $language;
+    }
+    else{
+        $lang['message'] = Mage::helper('translator')->__('Select language for this store in System->Configuration->Translator');
+    }
+    $fullNameLanguage   =   Mage::helper('translator')->getLanguageFullNameByCode($language, $storeId);
+    $languages          =   Mage::helper('translator/languages')->getLanguages(true);
+    if($fullNameLanguage){
+        $languages      =   array($lang => $fullNameLanguage) + $languages;
+    }
+    else{
+        $languages      =   array('' => Mage::helper('translator')->__('Select language or adjust in config')) + $languages;
+    }
+?>
+
+<script type="text/javascript">
+    function OpenMe(el) {
+        itemID = el.id;
+        itemID = itemID.replace("opener", "");
+        itemHandle = document.getElementById("ToOpen" + itemID);
+
+        if(itemHandle.style.display == "none") {
+            itemHandle.style.display = "";
+            el.style.backgroundImage = "url('<?php  echo $this->getSkinUrl('biztech/translator/images/minus.gif'); ?>')";
+        }
+        else
+        {
+            el.style.backgroundImage = "url('<?php  echo $this->getSkinUrl('biztech/translator/images/plus.gif'); ?>')";
+            itemHandle.style.display = "none";
+        }        
+    }
+
+    function Decide(el) {        
+        var category_ids = '';
+        $$('.inputcb').each(function(e){
+                if(e.checked == true)
+                    category_ids = category_ids + e.id.replace("inputcb", "") + ',';
+        });
+        $('product_categories').value = category_ids;        
+    }
+
+
+    function ChangeCats(cb) {  
+        if(cb.checked == true) {
+            document.getElementById('product-categories').style.display = '';
+        }
+        else {
+            document.getElementById('product-categories').style.display = 'none';
+        }
+    }
+</script>  
+<div name="messages" id="messages-cat" style="display: none;"><ul class="messages"><li class="success-msg"><ul><li><span></span></li></ul></li></ul></div>
+<div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend">Category Settings</h4>
+    <div class="form-buttons"></div>
+    <label class="control-label" for="Country">Select To Translate Language:</label>
+    <select id="language" name="language">
+        <?php foreach ($languages as $key => $language): ?>
+            <option value="<?php  echo $key; ?>"><?php echo $language; ?></option>
+            <?php endforeach; ?>
+    </select>
+    <input type="hidden" name="country_hidden" id="country_hidden">
+    <button  class="scalable save" type="button" title="Bulk Category Translate" id="cat_trans" name="cat_trans"><span>Bulk Category Translate</span></button>
+
+</div>
+
+<div class="entry-edit">    
+    <fieldset id="group_fields">    	
+        <input  type="hidden" name="category_ids" id="product_categories" class="required-entry input-text required-entry" value="<?php echo $this->getCategories() ?>">
+        <?php
+
+        ?>
+        <div class="website-switcher">
+            <label for="select-website"><?php echo $this->__('Select Store:') ?></label>
+            <select class="select-website" id="select-website" name="select-website" title="<?php echo $this->__('Select Store') ?>">
+                <?php
+
+
+                    foreach (Mage::app()->getWebsites() as $website) { ?>
+                    <optgroup label="<?php echo $website->getData('name');?>">
+                        <?php foreach ($website->getGroups() as $group) {
+                            $stores = $group->getStores();
+                            foreach ($stores as $store) { ?>
+                            <?php $_selected = $store->getData('store_id') == $store->getData('store_id') ? ' selected="selected"' : '' ?>
+                            
+                                <option value="<?php echo $store->getData('store_id')?>"<?php echo $_selected ?>><?php echo $this->htmlEscape($store->getName()) ?></option>
+                           
+                            <?php }
+                        } ?>
+                         </optgroup>
+                    <?php }
+                ?> 
+
+
+            </select>
+        </div>
+
+
+        <div id="product-categories" class="tree">
+            <?php echo $this->getTree(); ?>
+        </div>
+    </fieldset>
+</div>
+<script type="text/javascript">
+
+    $('cat_trans').observe('click', function() {
+
+            if($('product_categories').value == ""){
+                alert("Please select Category");
+            }else{
+                url = '<?php echo  Mage::helper("adminhtml")->getUrl('adminhtml/translator/massTranslateCategory'); ?>';
+                new Ajax.Request(url,{
+                        method: 'post',
+                        parameters: {category_ids: $('product_categories').value,country:$('language').value,store_id:$('select-website').value},
+                        onSuccess: function(transport) {
+                            var data = transport.responseText.evalJSON();
+                            if (data.success){
+
+                                $('messages-cat').show();
+                                $('messages-cat').down(2).removeClassName = "error-msg";
+                                $('messages-cat').down(2).removeClassName = "success-msg";
+                                $('messages-cat').down(2).addClassName = "success-msg";
+                                $('messages-cat').down(4).innerHTML = "";
+                                $('messages-cat').down(4).innerHTML = data.success;
+                            }else{
+                                $('messages-cat').show();
+                                $('messages-cat').down(2).removeClassName = "error-msg";
+                                $('messages-cat').down(2).removeClassName = "success-msg";
+                                $('messages-cat').down(2).addClassName = "error-msg";
+                                $('messages-cat').down(4).innerHTML = "";
+                                $('messages-cat').down(4).innerHTML = data.error;
+                            } 
+                        }
+                });
+            }
+    });
+</script>
