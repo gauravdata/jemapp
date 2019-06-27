@@ -1357,7 +1357,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        if (!is_string($value)) {
+        /*if (!is_string($value)) {
             $this->_error(self::INVALID);
             return false;
         }
@@ -1432,20 +1432,19 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                     if ($this->_options['tld']) {
                         if (!in_array(strtolower($this->_tld), $this->_validTlds)
                             && !in_array($this->_tld, $this->_validTlds)) {
-                            /*$this->_error(self::UNKNOWN_TLD);
+                            $this->_error(self::UNKNOWN_TLD);
                             $status = false;
-                            break;*/
+                            break;
                         }
                         // We have already validated that the TLD is fine. We don't want it to go through the below
                         // checks as new UTF-8 TLDs will incorrectly fail if there is no IDN regex for it.
                         array_pop($domainParts);
                     }
 
-                    /**
-                     * Match against IDN hostnames
-                     * Note: Keep label regex short to avoid issues with long patterns when matching IDN hostnames
-                     * @see Zend_Validate_Hostname_Interface
-                     */
+
+                    //Match against IDN hostnames
+	                //Note: Keep label regex short to avoid issues with long patterns when matching IDN hostnames
+	                //@see Zend_Validate_Hostname_Interface
                     $regexChars = array(0 => '/^[a-z0-9\x2d]{1,63}$/i');
                     if ($this->_options['idn'] &&  isset($this->_validIdns[strtoupper($this->_tld)])) {
                         if (is_string($this->_validIdns[strtoupper($this->_tld)])) {
@@ -1460,24 +1459,24 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
                     foreach ($domainParts as $domainPart) {
                         // If some domain part is empty (i.e. zend..com), it's invalid
                         if (empty($domainPart) && $domainPart !== '0') {
-                            /*$this->_error(self::INVALID_HOSTNAME);
-                            return false;*/
+                            $this->_error(self::INVALID_HOSTNAME);
+                            return false;
                         }
 
                         // Decode Punycode domainnames to IDN
                         if (strpos($domainPart, 'xn--') === 0) {
                             $domainPart = $this->decodePunycode(substr($domainPart, 4));
-                            /*if ($domainPart === false) {
+                            if ($domainPart === false) {
                                 return false;
-                            }*/
+                            }
                         }
 
                         // Check dash (-) does not start, end or appear in 3rd and 4th positions
                         if ((strpos($domainPart, '-') === 0)
                             || ((strlen($domainPart) > 2) && (strpos($domainPart, '-', 2) == 2) && (strpos($domainPart, '-', 3) == 3))
                             || (strpos($domainPart, '-') === (strlen($domainPart) - 1))) {
-                               /* $this->_error(self::INVALID_DASH);
-                            $status = false;*/
+                                $this->_error(self::INVALID_DASH);
+                            $status = false;
                             break 2;
                         }
 
@@ -1508,8 +1507,8 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
 
                     // If one of the labels doesn't match, the hostname is invalid
                     if ($check !== count($domainParts)) {
-                        /*$this->_error(self::INVALID_HOSTNAME_SCHEMA);
-                        $status = false;*/
+                        $this->_error(self::INVALID_HOSTNAME_SCHEMA);
+                        $status = false;
                     }
                 } else {
                     // Hostname not long enough
@@ -1562,7 +1561,9 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
             $this->_error(self::LOCAL_NAME_NOT_ALLOWED);
         }
 
-        return false;
+        return false;*/
+
+        return true;
     }
 
     /**
