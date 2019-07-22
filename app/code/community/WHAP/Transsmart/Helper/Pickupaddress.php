@@ -35,7 +35,7 @@ class WHAP_Transsmart_Helper_Pickupaddress extends Transsmart_Shipping_Helper_Pi
 		                ->setPostcode($pickupAddress->getPostcode())
 		                ->setCity($pickupAddress->getCity())
 		                ->setCountryId($pickupAddress->getCountryId())
-		                ->setStreetFull($pickupAddress->getStreetFull());
+		                ->setStreetFull(array($pickupAddress->getStreetFull(),$pickupAddress->getCompany(),$pickupAddress->getTranssmartServicepointId()));
 
 		return $this;
 	}

@@ -701,7 +701,10 @@ ul.social {
 		left: 0;
 	}
 	#header .nav-btn .icon-close:before {
-		content: "\e067";
+		content: url('../../images/menu.png');
+		position: absolute;
+		left: 15px;
+		top: 15px;
 	}
 }
 

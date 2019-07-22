@@ -12,16 +12,16 @@
 class Amasty_Base_Helper_String
 {
     /**
-     * UnSerialize string
-     *
      * @param $str
-     *
-     * @return mixed|false
+     * @param bool $useOurUnserialize
+     * @return bool|mixed|null
      */
-    public static function unserialize($str)
+    public static function unserialize($str, $useOurUnserialize = false)
     {
         try {
-            if (@class_exists('Unserialize_Reader_ArrValue')) {
+            if (!$useOurUnserialize
+                && @class_exists('Unserialize_Reader_ArrValue')
+            ) {
                 $reader = new Unserialize_Reader_ArrValue('data');
             } else {
                 $reader = new Amasty_Unserialize_Reader_ArrValue('data');

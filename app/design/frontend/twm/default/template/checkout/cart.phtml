@@ -142,7 +142,6 @@
                     </div>
                 </div>
             </div>
-            <hr class="hr-xl" />
             <div class="cart-proceed clearfix">
                 <?php if($this->getContinueShoppingUrl()): ?>
                     <p>
@@ -159,6 +158,7 @@
                     </ul>
                 <?php endif; ?>
             </div>
-        </div>
+        </div><br /><br />
+	    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('shopping_cart')->toHtml(); ?>
     </div>
 </div>
