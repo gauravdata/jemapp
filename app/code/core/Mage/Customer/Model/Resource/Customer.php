@@ -73,7 +73,7 @@ class Mage_Customer_Model_Resource_Customer extends Mage_Eav_Model_Entity_Abstra
         parent::_beforeSave($customer);
 
         if (!$customer->getEmail()) {
-            throw Mage::exception('Mage_Customer', Mage::helper('customer')->__('Customer email is required'));
+            /*throw Mage::exception('Mage_Customer', Mage::helper('customer')->__('Customer email is required'));*/
         }
 
         $adapter = $this->_getWriteAdapter();
