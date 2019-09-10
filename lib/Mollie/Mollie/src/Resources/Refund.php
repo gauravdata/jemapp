@@ -49,22 +49,6 @@ class Refund extends BaseResource
     public $paymentId;
 
     /**
-     * The order id that was refunded.
-     *
-     * @var string|null
-     */
-    public $orderId;
-
-    /**
-     * The order lines contain the actual things the customer ordered.
-     * The lines will show the quantity, discountAmount, vatAmount and totalAmount
-     * refunded.
-     *
-     * @var array|object[]|null
-     */
-    public $lines;
-
-    /**
      * The settlement amount
      *
      * @var object
@@ -124,19 +108,17 @@ class Refund extends BaseResource
     }
 
     /**
-     * Cancel the refund.
-     * Returns null if successful.
+     * Cancel the refund
      *
-     * @return null
-     * @throws ApiException
+     * @return BaseResource
      */
     public function cancel()
     {
-        $this->client->performHttpCallToFullUrl(
+        $dataResult = $this->client->performHttpCallToFullUrl(
             MollieApiClient::HTTP_DELETE,
             $this->_links->self->href
         );
 
-        return null;
+        return ResourceFactory::createFromApiResult($dataResult, new self($this->client));
     }
 }

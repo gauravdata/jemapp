@@ -34,7 +34,7 @@
 <?php $_helper = $this->helper('catalog/output'); ?>
 <?php $_product = $this->getProduct(); ?>
 <script type="text/javascript">
-    var optionsPrice = new Product.OptionsPrice(<?php echo str_replace('"requiredPrecision":2','"requiredPrecision":0',$this->getJsonConfig()); ?>);
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
 <div class="product-view">

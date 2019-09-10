@@ -15,7 +15,7 @@ class CurlMultiHandlerTest extends TestCase
         $a = new CurlMultiHandler();
         $request = new Request('GET', Server::$url);
         $response = $a($request, [])->wait();
-        $this->assertSame(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     /**
@@ -46,10 +46,6 @@ class CurlMultiHandlerTest extends TestCase
             $response->cancel();
             $responses[] = $response;
         }
-
-        foreach($responses as $r) {
-            $this->assertSame('rejected', $response->getState());
-        }
     }
 
     public function testCannotCancelFinished()
@@ -60,7 +56,6 @@ class CurlMultiHandlerTest extends TestCase
         $response = $a(new Request('GET', Server::$url), []);
         $response->wait();
         $response->cancel();
-        $this->assertSame('fulfilled', $response->getState());
     }
 
     public function testDelaysConcurrently()

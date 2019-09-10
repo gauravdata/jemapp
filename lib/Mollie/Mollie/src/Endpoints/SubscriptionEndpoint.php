@@ -15,11 +15,11 @@ class SubscriptionEndpoint extends EndpointAbstract
     /**
      * Get the object that is used by this API endpoint. Every API endpoint uses one type of object.
      *
-     * @return Subscription
+     * @return BaseResource
      */
     protected function getResourceObject()
     {
-        return new Subscription($this->client);
+        return new Subscription($this->api);
     }
 
     /**
@@ -28,11 +28,11 @@ class SubscriptionEndpoint extends EndpointAbstract
      * @param int $count
      * @param object[] $_links
      *
-     * @return SubscriptionCollection
+     * @return BaseCollection
      */
     protected function getResourceCollectionObject($count, $_links)
     {
-        return new SubscriptionCollection($this->client, $count, $_links);
+        return new SubscriptionCollection($this->api, $count, $_links);
     }
 
     /**
@@ -42,13 +42,13 @@ class SubscriptionEndpoint extends EndpointAbstract
      * @param array $options
      * @param array $filters
      *
-     * @return Subscription
+     * @return object
      */
     public function createFor(Customer $customer, array $options = [], array $filters = [])
     {
         $this->parentId = $customer->id;
 
-        return parent::rest_create($options, $filters);
+        return parent::create($options, $filters);
     }
 
     /**
@@ -56,13 +56,13 @@ class SubscriptionEndpoint extends EndpointAbstract
      * @param string $subscriptionId
      * @param array $parameters
      *
-     * @return Subscription
+     * @return object
      */
     public function getFor(Customer $customer, $subscriptionId, array $parameters = [])
     {
         $this->parentId = $customer->id;
 
-        return parent::rest_read($subscriptionId, $parameters);
+        return parent::get($subscriptionId, $parameters);
     }
 
     /**
@@ -71,27 +71,25 @@ class SubscriptionEndpoint extends EndpointAbstract
      * @param int $limit
      * @param array $parameters
      *
-     * @return SubscriptionCollection
+     * @return BaseCollection
      */
     public function listFor(Customer $customer, $from = null, $limit = null, array $parameters = [])
     {
         $this->parentId = $customer->id;
 
-        return parent::rest_list($from, $limit, $parameters);
+        return parent::page($from, $limit, $parameters);
     }
 
     /**
      * @param Customer $customer
      * @param string $subscriptionId
      *
-     * @param array $data
-     * @return null
-     * @throws \Mollie\Api\Exceptions\ApiException
+     * @return object
      */
-    public function cancelFor(Customer $customer, $subscriptionId, array $data = [])
+    public function cancelFor(Customer $customer, $subscriptionId)
     {
         $this->parentId = $customer->id;
 
-        return parent::rest_delete($subscriptionId, $data);
+        return parent::delete($subscriptionId);
     }
 }

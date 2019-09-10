@@ -13,7 +13,7 @@ class Str implements StreamInterface
 /**
  * @covers GuzzleHttp\Psr7\StreamDecoratorTrait
  */
-class StreamDecoratorTraitTest extends BaseTest
+class StreamDecoratorTraitTest extends \PHPUnit_Framework_TestCase
 {
     /** @var StreamInterface */
     private $a;

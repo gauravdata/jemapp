@@ -61,7 +61,7 @@ class Customer extends BaseResource
     public $_links;
 
     /**
-     * @return Customer
+     * @return BaseResource
      */
     public function update()
     {
@@ -76,7 +76,7 @@ class Customer extends BaseResource
             "metadata" => $this->metadata,
         ));
 
-        $result = $this->client->performHttpCallToFullUrl(MollieApiClient::HTTP_PATCH, $this->_links->self->href, $body);
+        $result = $this->client->performHttpCallToFullUrl(MollieApiClient::HTTP_POST, $this->_links->self->href, $body);
 
         return ResourceFactory::createFromApiResult($result, new Customer($this->client));
     }
@@ -85,7 +85,7 @@ class Customer extends BaseResource
      * @param array $options
      * @param array $filters
      *
-     * @return Payment
+     * @return object
      */
     public function createPayment(array $options = [], array $filters = [])
     {
@@ -94,19 +94,17 @@ class Customer extends BaseResource
 
     /**
      * Get all payments for this customer
-     *
-     * @return PaymentCollection
      */
     public function payments()
     {
-        return $this->client->customerPayments->listFor($this, null, null, $this->getPresetOptions());
+        return $this->client->customerPayments->listFor($this);
     }
 
     /**
      * @param array $options
      * @param array $filters
      *
-     * @return Subscription
+     * @return object
      */
     public function createSubscription(array $options = [], array $filters = [])
     {
@@ -117,7 +115,7 @@ class Customer extends BaseResource
      * @param string $subscriptionId
      * @param array $parameters
      *
-     * @return Subscription
+     * @return object
      */
     public function getSubscription($subscriptionId, array $parameters = [])
     {
@@ -127,28 +125,26 @@ class Customer extends BaseResource
     /**
      * @param string $subscriptionId
      *
-     * @return null
+     * @return object
      */
     public function cancelSubscription($subscriptionId)
     {
-        return $this->client->subscriptions->cancelFor($this, $subscriptionId, $this->getPresetOptions());
+        return $this->client->subscriptions->cancelFor($this, $subscriptionId);
     }
 
     /**
      * Get all subscriptions for this customer
-     *
-     * @return SubscriptionCollection
      */
     public function subscriptions()
     {
-        return $this->client->subscriptions->listFor($this, null, null, $this->getPresetOptions());
+        return $this->client->subscriptions->listFor($this);
     }
 
     /**
      * @param array $options
      * @param array $filters
      *
-     * @return Mandate
+     * @return object
      */
     public function createMandate(array $options = [], array $filters = [])
     {
@@ -159,7 +155,7 @@ class Customer extends BaseResource
      * @param string $mandateId
      * @param array $parameters
      *
-     * @return Mandate
+     * @return object
      */
     public function getMandate($mandateId, array $parameters = [])
     {
@@ -169,69 +165,18 @@ class Customer extends BaseResource
     /**
      * @param string $mandateId
      *
-     * @return null
+     * @return object
      */
     public function revokeMandate($mandateId)
     {
-        return $this->client->mandates->revokeFor($this, $mandateId, $this->getPresetOptions());
+        return $this->client->mandates->revokeFor($this, $mandateId);
     }
 
     /**
      * Get all mandates for this customer
-     *
-     * @return MandateCollection
      */
     public function mandates()
     {
-        return $this->client->mandates->listFor($this, null, null, $this->getPresetOptions());
-    }
-
-    /**
-     * Helper function to check for mandate with status valid
-     *
-     * @return bool
-     */
-    public function hasValidMandate()
-    {
-        $mandates = $this->mandates();
-        foreach ($mandates as $mandate) {
-            if ($mandate->isValid()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Helper function to check for specific payment method mandate with status valid
-     *
-     * @return bool
-     */
-    public function hasValidMandateForMethod($method)
-    {
-        $mandates = $this->mandates();
-        foreach ($mandates as $mandate) {
-            if ($mandate->method === $method && $mandate->isValid()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * When accessed by oAuth we want to pass the testmode by default
-     *
-     * @return array
-     */
-    private function getPresetOptions()
-    {
-        $options = [];
-        if($this->client->usesOAuth()) {
-            $options["testmode"] = $this->mode === "test" ? true : false;
-        }
-
-        return $options;
+        return $this->client->mandates->listFor($this);
     }
 }

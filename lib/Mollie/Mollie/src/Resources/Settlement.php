@@ -2,8 +2,6 @@
 
 namespace Mollie\Api\Resources;
 
-use Mollie\Api\Exceptions\ApiException;
-use Mollie\Api\MollieApiClient;
 use Mollie\Api\Types\SettlementStatus;
 
 class Settlement extends BaseResource
@@ -36,14 +34,6 @@ class Settlement extends BaseResource
     public $createdAt;
 
     /**
-     * The date on which the settlement was settled, in ISO 8601 format. When requesting the open settlement or next settlement the return value is null.
-     *
-     * @example "2013-12-25T10:30:54+00:00"
-     * @var string|null
-     */
-    public $settledAt;
-
-    /**
      * Status of the settlement.
      *
      * @var string
@@ -63,13 +53,6 @@ class Settlement extends BaseResource
      * @var object
      */
     public $periods;
-
-    /**
-     * The ID of the invoice on which this settlement is invoiced, if it has been invoiced.
-     *
-     * @var string|null
-     */
-    public $invoiceId;
 
     /**
      * @var object[]
@@ -115,92 +98,4 @@ class Settlement extends BaseResource
     {
         return $this->status === SettlementStatus::STATUS_FAILED;
     }
-
-    /**
-     * Retrieves all payments associated with this settlement
-     *
-     * @return PaymentCollection
-     * @throws ApiException
-     */
-    public function payments()
-    {
-        if (!isset($this->_links->payments->href)) {
-            return new PaymentCollection($this->client, 0, null);
-        }
-
-        $result = $this->client->performHttpCallToFullUrl(MollieApiClient::HTTP_GET, $this->_links->payments->href);
-
-        $resourceCollection = new PaymentCollection($this->client, $result->count, $result->_links);
-        foreach ($result->_embedded->payments as $dataResult) {
-            $resourceCollection[] = ResourceFactory::createFromApiResult($dataResult, new Payment($this->client));
-        }
-
-        return $resourceCollection;
-    }
-
-    /**
-     * Retrieves all refunds associated with this settlement
-     *
-     * @return RefundCollection
-     * @throws ApiException
-     */
-    public function refunds()
-    {
-        if (!isset($this->_links->refunds->href)) {
-            return new RefundCollection($this->client, 0, null);
-        }
-
-        $result = $this->client->performHttpCallToFullUrl(MollieApiClient::HTTP_GET, $this->_links->refunds->href);
-
-        $resourceCollection = new RefundCollection($this->client, $result->count, $result->_links);
-        foreach ($result->_embedded->refunds as $dataResult) {
-            $resourceCollection[] = ResourceFactory::createFromApiResult($dataResult, new Refund($this->client));
-        }
-
-        return $resourceCollection;
-    }
-
-    /**
-     * Retrieves all chargebacks associated with this settlement
-     *
-     * @return ChargebackCollection
-     * @throws ApiException
-     */
-    public function chargebacks()
-    {
-        if (!isset($this->_links->chargebacks->href)) {
-            return new ChargebackCollection($this->client, 0, null);
-        }
-
-        $result = $this->client->performHttpCallToFullUrl(MollieApiClient::HTTP_GET, $this->_links->chargebacks->href);
-
-        $resourceCollection = new ChargebackCollection($this->client, $result->count, $result->_links);
-        foreach ($result->_embedded->chargebacks as $dataResult) {
-            $resourceCollection[] = ResourceFactory::createFromApiResult($dataResult, new Chargeback($this->client));
-        }
-
-        return $resourceCollection;
-    }
-
-	/**
-	 * Retrieves all captures associated with this settlement
-	 *
-	 * @return CaptureCollection
-	 * @throws ApiException
-	 */
-	public function captures()
-	{
-		if (!isset($this->_links->captures->href)) {
-			return new CaptureCollection($this->client, 0, null);
-		}
-
-		$result = $this->client->performHttpCallToFullUrl(MollieApiClient::HTTP_GET, $this->_links->captures->href);
-
-		$resourceCollection = new CaptureCollection($this->client, $result->count, $result->_links);
-		foreach ($result->_embedded->captures as $dataResult) {
-			$resourceCollection[] = ResourceFactory::createFromApiResult($dataResult, new Capture($this->client));
-		}
-
-		return $resourceCollection;
-	}
 }

@@ -33,12 +33,12 @@ class SessionCookieJarTest extends TestCase
     public function testLoadsFromSession()
     {
         $jar = new SessionCookieJar($this->sessionVar);
-        $this->assertSame([], $jar->getIterator()->getArrayCopy());
+        $this->assertEquals([], $jar->getIterator()->getArrayCopy());
         unset($_SESSION[$this->sessionVar]);
     }
 
     /**
-     * @dataProvider providerPersistsToSessionParameters
+     * @dataProvider testPersistsToSessionParameters
      */
     public function testPersistsToSession($testSaveSessionCookie = false)
     {
@@ -82,7 +82,7 @@ class SessionCookieJarTest extends TestCase
         unset($_SESSION[$this->sessionVar]);
     }
 
-    public function providerPersistsToSessionParameters()
+    public function testPersistsToSessionParameters()
     {
         return array(
             array(false),

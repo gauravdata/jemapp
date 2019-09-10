@@ -125,7 +125,7 @@ class PaymentEndpointTest extends BaseEndpointTest
         $this->mockApiCall(
             new Request(
                 "GET",
-                "/v2/payments/tr_44aKxzEbr8?testmode=true",
+                "/v2/payments/tr_44aKxzEbr8",
                 [],
                 ''
             ),
@@ -185,7 +185,7 @@ class PaymentEndpointTest extends BaseEndpointTest
             )
         );
 
-        $payment = $this->apiClient->payments->get("tr_44aKxzEbr8", ["testmode" => true]);
+        $payment = $this->apiClient->payments->get("tr_44aKxzEbr8");
 
         $this->assertInstanceOf(Payment::class, $payment);
         $this->assertEquals('tr_44aKxzEbr8', $payment->id);

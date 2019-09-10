@@ -34,11 +34,11 @@ a response or exception by shifting return values off of a queue.
     $mock = new MockHandler([
         new Response(200, ['X-Foo' => 'Bar']),
         new Response(202, ['Content-Length' => 0]),
-        new RequestException('Error Communicating with Server', new Request('GET', 'test'))
+        new RequestException("Error Communicating with Server", new Request('GET', 'test'))
     ]);
 
-    $handlerStack = HandlerStack::create($mock);
-    $client = new Client(['handler' => $handlerStack]);
+    $handler = HandlerStack::create($mock);
+    $client = new Client(['handler' => $handler]);
 
     // The first request is intercepted with the first response.
     echo $client->request('GET', '/')->getStatusCode();
@@ -68,13 +68,11 @@ history of the requests that were sent by a client.
     $container = [];
     $history = Middleware::history($container);
 
-    $handlerStack = HandlerStack::create(); 
-    // or $handlerStack = HandlerStack::create($mock); if using the Mock handler.
-    
+    $stack = HandlerStack::create();
     // Add the history middleware to the handler stack.
-    $handlerStack->push($history);
+    $stack->push($history);
 
-    $client = new Client(['handler' => $handlerStack]);
+    $client = new Client(['handler' => $stack]);
 
     $client->request('GET', 'http://httpbin.org/get');
     $client->request('HEAD', 'http://httpbin.org/get');

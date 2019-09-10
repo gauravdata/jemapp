@@ -8,7 +8,7 @@ class FunctionsTest extends TestCase
 {
     public function testExpandsTemplate()
     {
-        $this->assertSame(
+        $this->assertEquals(
             'foo/123',
             GuzzleHttp\uri_template('foo/{bar}', ['bar' => '123'])
         );
@@ -41,13 +41,13 @@ class FunctionsTest extends TestCase
      */
     public function testDescribesType($input, $output)
     {
-        $this->assertSame($output, GuzzleHttp\describe_type($input));
+        $this->assertEquals($output, GuzzleHttp\describe_type($input));
     }
 
     public function testParsesHeadersFromLines()
     {
         $lines = ['Foo: bar', 'Foo: baz', 'Abc: 123', 'Def: a, b'];
-        $this->assertSame([
+        $this->assertEquals([
             'Foo' => ['bar', 'baz'],
             'Abc' => ['123'],
             'Def' => ['a, b'],
@@ -57,7 +57,7 @@ class FunctionsTest extends TestCase
     public function testParsesHeadersFromLinesWithMultipleLines()
     {
         $lines = ['Foo: bar', 'Foo: baz', 'Foo: 123'];
-        $this->assertSame([
+        $this->assertEquals([
             'Foo' => ['bar', 'baz', '123'],
         ], GuzzleHttp\headers_from_lines($lines));
     }
@@ -105,7 +105,7 @@ class FunctionsTest extends TestCase
 
     public function testEncodesJson()
     {
-        $this->assertSame('true', \GuzzleHttp\json_encode(true));
+        $this->assertEquals('true', \GuzzleHttp\json_encode(true));
     }
 
     /**

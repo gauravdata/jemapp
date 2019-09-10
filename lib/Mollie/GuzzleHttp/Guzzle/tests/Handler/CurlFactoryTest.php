@@ -48,19 +48,19 @@ class CurlFactoryTest extends TestCase
         $this->assertInternalType('array', $result->headers);
         $this->assertSame($stream, $result->sink);
         curl_close($result->handle);
-        $this->assertSame('PUT', $_SERVER['_curl'][CURLOPT_CUSTOMREQUEST]);
-        $this->assertSame(
+        $this->assertEquals('PUT', $_SERVER['_curl'][CURLOPT_CUSTOMREQUEST]);
+        $this->assertEquals(
             'http://127.0.0.1:8126/',
             $_SERVER['_curl'][CURLOPT_URL]
         );
         // Sends via post fields when the request is small enough
-        $this->assertSame('testing', $_SERVER['_curl'][CURLOPT_POSTFIELDS]);
+        $this->assertEquals('testing', $_SERVER['_curl'][CURLOPT_POSTFIELDS]);
         $this->assertEquals(0, $_SERVER['_curl'][CURLOPT_RETURNTRANSFER]);
         $this->assertEquals(0, $_SERVER['_curl'][CURLOPT_HEADER]);
-        $this->assertSame(150, $_SERVER['_curl'][CURLOPT_CONNECTTIMEOUT]);
+        $this->assertEquals(150, $_SERVER['_curl'][CURLOPT_CONNECTTIMEOUT]);
         $this->assertInstanceOf('Closure', $_SERVER['_curl'][CURLOPT_HEADERFUNCTION]);
         if (defined('CURLOPT_PROTOCOLS')) {
-            $this->assertSame(
+            $this->assertEquals(
                 CURLPROTO_HTTP | CURLPROTO_HTTPS,
                 $_SERVER['_curl'][CURLOPT_PROTOCOLS]
             );
@@ -512,11 +512,11 @@ class CurlFactoryTest extends TestCase
         ], 'test');
         $handler = new Handler\CurlMultiHandler();
         $response = $handler($request, [])->wait();
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('OK', $response->getReasonPhrase());
-        $this->assertSame('Hello', $response->getHeaderLine('Test'));
-        $this->assertSame('4', $response->getHeaderLine('Content-Length'));
-        $this->assertSame('test', (string) $response->getBody());
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('OK', $response->getReasonPhrase());
+        $this->assertEquals('Hello', $response->getHeaderLine('Test'));
+        $this->assertEquals('4', $response->getHeaderLine('Content-Length'));
+        $this->assertEquals('test', (string) $response->getBody());
     }
 
     /**
@@ -656,9 +656,9 @@ class CurlFactoryTest extends TestCase
         ]);
 
         $response = $promise->wait();
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame('bar', $response->getHeaderLine('X-Foo'));
-        $this->assertSame('abc 123', (string) $response->getBody());
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('bar', $response->getHeaderLine('X-Foo'));
+        $this->assertEquals('abc 123', (string) $response->getBody());
     }
 
     public function testInvokesOnStatsOnSuccess()
@@ -674,13 +674,13 @@ class CurlFactoryTest extends TestCase
             }
         ]);
         $response = $promise->wait();
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertSame(200, $gotStats->getResponse()->getStatusCode());
-        $this->assertSame(
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $gotStats->getResponse()->getStatusCode());
+        $this->assertEquals(
             Server::$url,
             (string) $gotStats->getEffectiveUri()
         );
-        $this->assertSame(
+        $this->assertEquals(
             Server::$url,
             (string) $gotStats->getRequest()->getUri()
         );
@@ -701,13 +701,13 @@ class CurlFactoryTest extends TestCase
         ]);
         $promise->wait(false);
         $this->assertFalse($gotStats->hasResponse());
-        $this->assertSame(
+        $this->assertEquals(
             'http://127.0.0.1:123',
-            (string) $gotStats->getEffectiveUri()
+            $gotStats->getEffectiveUri()
         );
-        $this->assertSame(
+        $this->assertEquals(
             'http://127.0.0.1:123',
-            (string) $gotStats->getRequest()->getUri()
+            $gotStats->getRequest()->getUri()
         );
         $this->assertInternalType('float', $gotStats->getTransferTime());
         $this->assertInternalType('int', $gotStats->getHandlerErrorData());

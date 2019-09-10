@@ -18,9 +18,6 @@ class HandlerStackTest extends TestCase
         $this->assertTrue($h->hasHandler());
     }
 
-    /**
-     * @doesNotPerformAssertions
-     */
     public function testCanSetDifferentHandlerAfterConstruction()
     {
         $f = function () {};
@@ -47,8 +44,8 @@ class HandlerStackTest extends TestCase
         $builder->push($meths[3]);
         $builder->push($meths[4]);
         $composed = $builder->resolve();
-        $this->assertSame('Hello - test123', $composed('test'));
-        $this->assertSame(
+        $this->assertEquals('Hello - test123', $composed('test'));
+        $this->assertEquals(
             [['a', 'test'], ['b', 'test1'], ['c', 'test12']],
             $meths[0]
         );
@@ -63,8 +60,8 @@ class HandlerStackTest extends TestCase
         $builder->unshift($meths[3]);
         $builder->unshift($meths[4]);
         $composed = $builder->resolve();
-        $this->assertSame('Hello - test321', $composed('test'));
-        $this->assertSame(
+        $this->assertEquals('Hello - test321', $composed('test'));
+        $this->assertEquals(
             [['c', 'test'], ['b', 'test3'], ['a', 'test32']],
             $meths[0]
         );
@@ -82,7 +79,7 @@ class HandlerStackTest extends TestCase
         $builder->push($meths[2]);
         $builder->remove($meths[3]);
         $composed = $builder->resolve();
-        $this->assertSame('Hello - test1131', $composed('test'));
+        $this->assertEquals('Hello - test1131', $composed('test'));
     }
 
     public function testCanPrintMiddleware()
@@ -163,10 +160,10 @@ class HandlerStackTest extends TestCase
             'allow_redirects' => true,
             'cookies' => $jar
         ])->wait();
-        $this->assertSame(200, $response->getStatusCode());
+        $this->assertEquals(200, $response->getStatusCode());
         $lastRequest = $mock->getLastRequest();
-        $this->assertSame('http://foo.com/baz', (string) $lastRequest->getUri());
-        $this->assertSame('foo=bar', $lastRequest->getHeaderLine('Cookie'));
+        $this->assertEquals('http://foo.com/baz', (string) $lastRequest->getUri());
+        $this->assertEquals('foo=bar', $lastRequest->getHeaderLine('Cookie'));
     }
 
     private function getFunctions()

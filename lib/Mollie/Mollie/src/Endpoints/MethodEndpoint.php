@@ -3,6 +3,7 @@
 namespace Mollie\Api\Endpoints;
 
 use Mollie\Api\Exceptions\ApiException;
+use Mollie\Api\Resources\BaseCollection;
 use Mollie\Api\Resources\Method;
 use Mollie\Api\Resources\MethodCollection;
 
@@ -15,7 +16,7 @@ class MethodEndpoint extends EndpointAbstract
      */
     protected function getResourceObject()
     {
-        return new Method($this->client);
+        return new Method($this->api);
     }
 
     /**
@@ -24,7 +25,7 @@ class MethodEndpoint extends EndpointAbstract
      * @param int $count
      * @param object[] $_links
      *
-     * @return MethodCollection
+     * @return BaseCollection
      */
     protected function getResourceCollectionObject($count, $_links)
     {
@@ -47,7 +48,7 @@ class MethodEndpoint extends EndpointAbstract
             throw new ApiException("Method ID is empty.");
         }
 
-        return parent::rest_read($methodId, $parameters);
+        return parent::get($methodId, $parameters);
     }
 
     /**
@@ -60,6 +61,6 @@ class MethodEndpoint extends EndpointAbstract
      */
     public function all(array $parameters = [])
     {
-        return parent::rest_list(null, null, $parameters);
+        return parent::page(null, null, $parameters);
     }
 }
