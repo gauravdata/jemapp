@@ -1,4 +1,6 @@
 <?php
+//ini_set("soap.wsdl_cache_enabled", "0");
+//ini_set('soap.wsdl_cache_ttl', '0');
 
 $opts = array(
 	'http'=>array(
@@ -14,9 +16,23 @@ $opts = array(
 //
 $context = stream_context_create($opts);
 try{
-	$c = new SoapClient('http://no-tomatoes.mirjana.seth.twm.eu/api/v2_soap?wsdl=1', array('stream_context' => $context, 'trace' => 1));
-	//$c = new SoapClient('https://www.jemappelle.nl/api/v2_soap?wsdl=1', array('trace' => 1));
-	$s = $c->login('webmen', '751f45817cfc4229a97a863c401dd6eb');
+	//$c = new SoapClient('http://no-tomatoes.mirjana.seth.twm.eu/api/v2_soap?wsdl=1', array('stream_context' => $context, 'trace' => 1));
+	$c = new SoapClient('https://www.jemappelle.nl/api/v2_soap?wsdl=1',  array('stream_context' => $context,'trace' => 1));
+	$params = [
+        'username' =>'bizbloqs',
+        'apiKey' => '595bf013d860449d9b055e583df40aa5'
+    ];
+	//$s = $c->login($params);
+	$s = $c->login('bizbloqs','595bf013d860449d9b055e583df40aa5');
+	var_dump($s);
+    //$sessionId = $s->result;
+//    $rmaParams = [
+//        'sessionId'=>$sessionId,
+//        'orderIncrementId'=>'500174852'
+//    ];
+//    $l = $c->salesOrderReceiveRma($rmaParams);
+    $l = $c->salesOrderReceiveRma($s,'500097978');
+//    var_dump($l);
 
 } catch (SoapFault $soapFault) {
 	var_dump($soapFault);
@@ -28,13 +44,14 @@ try{
 //$l = $c->salesOrderList();
 //var_dump($s);
 try {
-    //$fs = $c->__getFunctions();
-  //  foreach ($fs as $f){
-   //     var_dump($fs[150]);
-   // }
+    $fs = $c->__getFunctions();
+    var_dump(count($fs));
+    foreach ($fs as $f){
+        if (strpos($f, 'salesOrder') !==false)
+            var_dump($f);
+    }
    // $l = $c->salesOrderInfo($s,'500229060');
-   // $l = $c->salesOrderReceiveRma($s,'500229057');
- //   var_dump($l);
+
 
 
 } catch (SoapFault $soapFault) {

@@ -10,7 +10,7 @@
 <config>
     <modules>
         <Biztech_Translator>
-            <active>true</active>
+            <active>false</active>
             <codePool>local</codePool>
         </Biztech_Translator>
     </modules>

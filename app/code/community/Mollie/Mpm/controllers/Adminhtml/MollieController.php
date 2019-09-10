@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2012-2019, Mollie B.V.
+ * Copyright (c) 2012-2018, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,7 +27,7 @@
  * @category    Mollie
  * @package     Mollie_Mpm
  * @author      Mollie B.V. (info@mollie.nl)
- * @copyright   Copyright (c) 2012-2019 Mollie B.V. (https://www.mollie.nl)
+ * @copyright   Copyright (c) 2012-2018 Mollie B.V. (https://www.mollie.nl)
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD-License 2
  */
 
@@ -35,25 +35,25 @@ class Mollie_Mpm_Adminhtml_MollieController extends Mage_Adminhtml_Controller_Ac
 {
 
     /**
-     * Mollie Test Helper.
+     * Mollie API Helper.
      *
-     * @var Mollie_Mpm_Helper_Test
+     * @var Mollie_Mpm_Helper_Api
      */
-    public $testsHelper;
+    public $mollieHelper;
     /**
      * Mollie API Model.
      *
-     * @var Mollie_Mpm_Helper_Data
+     * @var Mollie_Mpm_Model_Api
      */
-    public $mollieHelper;
+    public $mollieApiModel;
 
     /**
      * Construct.
      */
     public function _construct()
     {
-        $this->testsHelper = Mage::helper('mpm/test');
-        $this->mollieHelper = Mage::helper('mpm');
+        $this->mollieHelper = Mage::helper('mpm/api');
+        $this->mollieApiModel = Mage::getModel('mpm/api');
         parent::_construct();
     }
 
@@ -68,13 +68,31 @@ class Mollie_Mpm_Adminhtml_MollieController extends Mage_Adminhtml_Controller_Ac
             return Mage::app()->getResponse()->setBody($msg);
         }
 
-        /** @var Mage_Core_Controller_Request_Http $request */
-        $request = Mage::app()->getRequest();
-        $testKey = $request->getParam('test_key');
-        $liveKey = $request->getParam('live_key');
-        $results = $this->testsHelper->getMethods($testKey, $liveKey);
+        $results = array();
+        $apiKey = Mage::app()->getRequest()->getParam('apikey');
 
-        return Mage::app()->getResponse()->setBody(implode('<br/>', $results));
+        if (empty($apiKey)) {
+            $msg = $this->mollieHelper->__('API Key: Empty value');
+            $results[] = sprintf('<span class="mollie-error">%s</span>', $msg);
+        } else {
+            if (!preg_match('/^(live|test)_\w{30,}$/', $apiKey)) {
+                $msg = $this->mollieHelper->__('API Key: Should start with "test_" or "live_"');
+                $results[] = sprintf('<span class="mollie-error">%s</span>', $msg);
+            } else {
+                try {
+                    $mollieApi = $this->mollieHelper->getMollieAPI($apiKey);
+                    $mollieApi->methods->all();
+                    $msg = $this->mollieHelper->__('API Key: Success!');
+                    $results[] = sprintf('<span class="mollie-success">%s</span>', $msg);
+                } catch (\Exception $e) {
+                    $msg = $this->mollieHelper->__('API Key: %s', $e->getMessage());
+                    $results[] = sprintf('<span class="mollie-error">%s</span>', $msg);
+                }
+            }
+        }
+
+        $msg = implode('<br/>', $results);
+        Mage::app()->getResponse()->setBody($msg);
     }
 
     /**
@@ -88,9 +106,28 @@ class Mollie_Mpm_Adminhtml_MollieController extends Mage_Adminhtml_Controller_Ac
             return Mage::app()->getResponse()->setBody($msg);
         }
 
-        $results = $this->testsHelper->compatibilityChecker();
+        $results = array();
+        $compatibilityChecker = $this->mollieHelper->getMollieCompatibilityChecker();
 
-        return Mage::app()->getResponse()->setBody(implode('<br/>', $results));
+        if (!$compatibilityChecker->satisfiesPhpVersion()) {
+            $minPhpVersion = $compatibilityChecker::MIN_PHP_VERSION;
+            $msg = $this->mollieHelper->__('Error: The client requires PHP version >= %s, you have %s.', $minPhpVersion, PHP_VERSION);
+            $results[] = sprintf('<span class="mollie-error">%s</span>', $msg);
+        } else {
+            $msg = $this->mollieHelper->__('Success: PHP version: %s.', PHP_VERSION);
+            $results[] = sprintf('<span class="mollie-success">%s</span>', $msg);
+        }
+
+        if (!$compatibilityChecker->satisfiesJsonExtension()) {
+            $msg = $this->mollieHelper->__('Error: PHP extension JSON is not enabled, please enable.');
+            $results[] = sprintf('<span class="mollie-error">%s</span>', $msg);
+        } else {
+            $msg = $this->mollieHelper->__('Success: JSON is enabled.');
+            $results[] = sprintf('<span class="mollie-success">%s</span>', $msg);
+        }
+
+        $msg = implode('<br/>', $results);
+        Mage::app()->getResponse()->setBody($msg);
     }
 
     /**

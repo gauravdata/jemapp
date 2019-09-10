@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2012-2019, Mollie B.V.
+ * Copyright (c) 2012-2018, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,7 +27,7 @@
  * @category    Mollie
  * @package     Mollie_Mpm
  * @author      Mollie B.V. (info@mollie.nl)
- * @copyright   Copyright (c) 2012-2019 Mollie B.V. (https://www.mollie.nl)
+ * @copyright   Copyright (c) 2012-2018 Mollie B.V. (https://www.mollie.nl)
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD-License 2
  */
 
@@ -46,7 +46,6 @@ class Mollie_Mpm_ApiController extends Mage_Core_Controller_Front_Action
      * Visible error message for cancelled transaction.
      */
     const RETURN_CANCEL_MSG = 'Payment cancelled, please try again.';
-
     /**
      * Mollie API Helper.
      *
@@ -54,20 +53,26 @@ class Mollie_Mpm_ApiController extends Mage_Core_Controller_Front_Action
      */
     public $mollieHelper;
     /**
-     * Mollie Model.
+     * Mollie API Model.
      *
-     * @var Mollie_Mpm_Model_Mollie
+     * @var Mollie_Mpm_Model_Api
      */
-    public $mollieModel;
-
+    public $mollieApiModel;
+    /**
+     * Mollie Payments Model.
+     *
+     * @var Mollie_Mpm_Model_Payments
+     */
+    public $molliePaymentsModel;
 
     /**
      * Constructor.
      */
     public function _construct()
     {
-        $this->mollieHelper = Mage::helper('mpm');
-        $this->mollieModel = Mage::getModel('mpm/mollie');
+        $this->mollieHelper = Mage::helper('mpm/api');
+        $this->mollieApiModel = Mage::getModel('mpm/api');
+        $this->molliePaymentsModel = Mage::getModel('mpm/payments');
         parent::_construct();
     }
 
@@ -82,68 +87,25 @@ class Mollie_Mpm_ApiController extends Mage_Core_Controller_Front_Action
 
             if (!$order) {
                 $this->mollieHelper->setError(self::REDIRECT_ERR_MSG);
-                $this->mollieHelper->addToLog('error', 'Order not found in session.');
+                $this->mollieHelper->addLog('paymentAction [ERR]', 'Order not found in session.');
                 $this->_redirect('checkout/cart');
-                return;
             }
 
             $methodInstance = $order->getPayment()->getMethodInstance();
             $redirectUrl = $methodInstance->startTransaction($order);
             if (!empty($redirectUrl)) {
                 $this->_redirectUrl($redirectUrl);
-                return;
             } else {
                 $this->mollieHelper->setError(self::REDIRECT_ERR_MSG);
-                $this->mollieHelper->addToLog('error', 'Missing Redirect Url');
+                $this->mollieHelper->addLog('paymentAction [ERR]', 'Missing Redirect Url');
                 $this->mollieHelper->restoreCart();
-                $this->_cancelUnprocessedOrder($order, 'Missing Redirect Url');
                 $this->_redirect('checkout/cart');
-                return;
             }
         } catch (\Exception $e) {
             $this->mollieHelper->setError(self::REDIRECT_ERR_MSG);
-            $this->mollieHelper->addToLog('error', $e->getMessage());
+            $this->mollieHelper->addLog('paymentAction [ERR]', $e->getMessage());
             $this->mollieHelper->restoreCart();
-            $this->_cancelUnprocessedOrder($order, $e->getMessage());
             $this->_redirect('checkout/cart');
-            return;
-        }
-    }
-
-    /**
-     * Cancel an order that has been sent to Mollie but somehow did not get a transaction id
-     *
-     * @param Mage_Sales_Model_Order $order
-     * @param string $message  If provided, add this message to the order status history comment
-     * @return void
-     */
-    protected function _cancelUnprocessedOrder($order, $message = null)
-    {
-        if (empty($order) || empty($order->getMollieTransactionId())) {
-            return;
-        }
-
-        $cancelFailedOrders = Mage::helper('mpm')->getStoreConfig(
-            \Mollie_Mpm_Helper_Data::XPATH_CANCEL_FAILED_ORDERS,
-            $order->getStoreId()
-        );
-
-        if (!$cancelFailedOrders) {
-            return;
-        }
-
-        try {
-            $historyMessage = Mage::helper('mpm')->__('Canceled because an error occurred while redirecting the customer to Mollie');
-            if ($message) {
-                $historyMessage .= ":<br>\n" . Mage::helper('core')->escapeHtml($message);
-            }
-            $order->cancel();
-            $order->addStatusHistoryComment($historyMessage);
-            $order->save();
-            $this->mollieHelper->addToLog('info', sprintf('Canceled order %s', $order->getIncrementId()));
-        } catch (Exception $e) {
-            $this->mollieHelper->addToLog('error', sprintf('Cannot cancel order %s: %s', $order->getIncrementId(), $e->getMessage()));
-            Mage::logException($e);
         }
     }
 
@@ -160,14 +122,12 @@ class Mollie_Mpm_ApiController extends Mage_Core_Controller_Front_Action
 
         if (!empty($params['id'])) {
             try {
-                $orderId = $this->mollieModel->getOrderIdByTransactionId($params['id']);
+                $orderId = $this->molliePaymentsModel->getOrderIdByTransactionId($params['id']);
                 if ($orderId) {
-                    $this->mollieModel->processTransaction($orderId, 'webhook');
+                    $this->mollieApiModel->processTransaction($orderId, 'webhook');
                 }
             } catch (\Exception $e) {
-                $this->mollieHelper->addToLog('error', $e->getMessage());
-                Mage::logException($e);
-                $this->getResponse()->setHttpResponseCode(503);
+                $this->mollieHelper->addLog('webhookAction [ERR]', $e->getMessage());
             }
         }
     }
@@ -177,38 +137,33 @@ class Mollie_Mpm_ApiController extends Mage_Core_Controller_Front_Action
      */
     public function returnAction()
     {
-        $orderId = $this->getRequest()->getParam('order_id', null);
-        $paymentToken = $this->getRequest()->getParam('payment_token', null);
+        $params = $this->getRequest()->getParams();
 
-        if ($orderId === null) {
+        if (!isset($params['order_id'])) {
             $this->mollieHelper->setError(self::RETURN_ERR_MSG);
-            $this->mollieHelper->addToLog('error', 'Invalid return, missing order_id param.');
+            $this->mollieHelper->addLog('returnAction [ERR]', 'Invalid return, missing order_id param.');
             $this->_redirect('checkout/cart');
         }
 
         try {
-            $status = $this->mollieModel->processTransaction($orderId, 'success', $paymentToken);
+            $status = $this->mollieApiModel->processTransaction($params['order_id'], 'success');
         } catch (\Exception $e) {
             $this->mollieHelper->setError(self::RETURN_ERR_MSG);
-            $this->mollieHelper->addToLog('error', $e->getMessage());
+            $this->mollieHelper->addLog('returnAction [ERR]', $e->getMessage());
             $this->mollieHelper->restoreCart();
             $this->_redirect('checkout/cart');
-            return;
         }
 
         if (!empty($status['success'])) {
             $this->_redirect('checkout/onepage/success?utm_nooverride=1');
-            return;
         } else {
-            if (isset($status['status']) && $status['status'] == 'canceled') {
+            if (isset($status['status']) && $status['status'] == 'cancel') {
                 $this->mollieHelper->setError(self::RETURN_CANCEL_MSG);
             } else {
                 $this->mollieHelper->setError(self::RETURN_ERR_MSG);
             }
-
             $this->mollieHelper->restoreCart();
             $this->_redirect('checkout/cart');
-            return;
         }
     }
 

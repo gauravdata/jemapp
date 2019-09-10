@@ -5,7 +5,7 @@
  * Date: 29.06.15
  * Time: 17:25
  */
-class IWD_Productvideo_Helper_CatalogImage extends Amasty_Shopby_Helper_Image
+class IWD_Productvideo_Helper_CatalogImage extends Mage_Catalog_Helper_Image
 {
     public function resize($width, $height = null)
     {

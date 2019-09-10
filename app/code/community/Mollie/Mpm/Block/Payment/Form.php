@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2012-2019, Mollie B.V.
+ * Copyright (c) 2012-2018, Mollie B.V.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,7 +27,7 @@
  * @category    Mollie
  * @package     Mollie_Mpm
  * @author      Mollie B.V. (info@mollie.nl)
- * @copyright   Copyright (c) 2012-2019 Mollie B.V. (https://www.mollie.nl)
+ * @copyright   Copyright (c) 2012-2018 Mollie B.V. (https://www.mollie.nl)
  * @license     http://www.opensource.org/licenses/bsd-license.php  BSD-License 2
  */
 
@@ -35,7 +35,7 @@ class Mollie_Mpm_Block_Payment_Form extends Mage_Payment_Block_Form
 {
 
     /**
-     * @var Mollie_Mpm_Helper_Data
+     * @var Mollie_Mpm_Helper_Api
      */
     public $mollieHelper;
 
@@ -46,7 +46,7 @@ class Mollie_Mpm_Block_Payment_Form extends Mage_Payment_Block_Form
     {
         parent::_construct();
         $this->setTemplate('mollie/mpm/payment/form.phtml');
-        $this->mollieHelper = Mage::helper('mpm');
+        $this->mollieHelper = Mage::helper('mpm/api');
     }
 
     /**
@@ -56,22 +56,23 @@ class Mollie_Mpm_Block_Payment_Form extends Mage_Payment_Block_Form
     {
         $code = $this->getMethod()->getCode();
         $method = $this->getMethodByCode($code);
-        if (isset($method) && !$this->hasData('_method_label_html')) {
-            if (!$this->mollieHelper->useImage()) {
+
+        if (!$this->hasData('_method_label_html')) {
+            $code = $this->getMethod()->getCode();
+            $title = $this->mollieHelper->getMethodTitle($code) ?: $method['description'];
+
+            if (!$this->mollieHelper->showImages()) {
                 return '';
             }
 
-            $labelBlock = Mage::app()->getLayout()->createBlock(
-                'core/template', null, array(
-                    'template'             => 'mollie/mpm/payment/label.phtml',
-                    'payment_method_icon'  => isset($method->image->size2x) ? $method->image->size2x : '',
-                    'payment_method_label' => $this->getMethod()->getTitle(),
-                    'payment_method_class' => $this->getMethod()->getCode()
-                )
-            );
+            $labelBlock = Mage::app()->getLayout()->createBlock('core/template', null, array(
+                'template'             => 'mollie/mpm/payment/label.phtml',
+                'payment_method_icon'  => $method['image']->size2x,
+                'payment_method_label' => $title,
+                'payment_method_class' => $code
+            ));
             $this->setData('_method_label_html', $labelBlock->toHtml());
         }
-
         return $this->getData('_method_label_html');
     }
 
@@ -84,33 +85,4 @@ class Mollie_Mpm_Block_Payment_Form extends Mage_Payment_Block_Form
     {
         return $this->mollieHelper->getMethodByCode($code);
     }
-
-    /**
-     * @param $code
-     *
-     * @return mixed
-     */
-    public function getIssuerListType($code)
-    {
-        return $this->mollieHelper->getIssuerListType($code);
-    }
-
-    /**
-     * @param $code
-     *
-     * @return string
-     */
-    public function getIssuerTitle($code)
-    {
-        if ($code == 'mollie_ideal' || $code == 'mollie_kbc') {
-            return $this->__('Select Bank');
-        }
-
-        if ($code == 'mollie_giftcard') {
-            return $this->__('Select Giftcard');
-        }
-
-        return $this->__('Select Issuer');
-    }
-
 }

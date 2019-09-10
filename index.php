@@ -89,3 +89,12 @@ $mageRunCode = isset($_SERVER['MAGE_RUN_CODE']) ? $_SERVER['MAGE_RUN_CODE'] : ''
 $mageRunType = isset($_SERVER['MAGE_RUN_TYPE']) ? $_SERVER['MAGE_RUN_TYPE'] : 'store';
 
 Mage::run($mageRunCode, $mageRunType);
+
+/*switch($_SERVER['HTTP_HOST']) {
+	case 'www.jemappelle.be' :
+		Mage::run('jma_be', 'store');
+		break;
+
+	default:
+		Mage::run();
+}*/

@@ -62,7 +62,7 @@
         <helpers>
             <catalog>
                 <rewrite>
-                    <!--<image>IWD_Productvideo_Helper_CatalogImage</image>-->
+                    <image>IWD_Productvideo_Helper_CatalogImage</image>
                 </rewrite>
             </catalog>
             <iwd_productvideo>

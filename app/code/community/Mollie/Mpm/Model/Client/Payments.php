@@ -75,7 +75,7 @@ class Mollie_Mpm_Model_Client_Payments extends Mage_Payment_Model_Method_Abstrac
         $method = $this->mollieHelper->getMethodCode($order);
         $paymentData = array(
             'amount'         => $this->mollieHelper->getOrderAmountByOrder($order),
-            'description'    => $this->mollieHelper->getPaymentDescription($method, $order->getIncrementId(), $storeId),
+            'description'    => $order->getIncrementId(),
             'billingAddress' => $this->getAddressLine($order->getBillingAddress()),
             'redirectUrl'    => $this->mollieHelper->getReturnUrl($orderId, $paymentToken, $storeId),
             'webhookUrl'     => $this->mollieHelper->getWebhookUrl($storeId),
@@ -92,10 +92,6 @@ class Mollie_Mpm_Model_Client_Payments extends Mage_Payment_Model_Method_Abstrac
         if ($method == 'banktransfer') {
             $paymentData['billingEmail'] = $order->getCustomerEmail();
             $paymentData['dueDate'] = $this->mollieHelper->getBanktransferDueDate($storeId);
-        }
-
-        if ($method == 'przelewy24') {
-            $paymentData['billingEmail'] = $order->getCustomerEmail();
         }
 
         if (!$order->getIsVirtual() && $order->hasData('shipping_address_id')) {

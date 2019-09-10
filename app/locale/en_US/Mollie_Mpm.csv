@@ -67,6 +67,7 @@
 "Bank transfer","Bank transfer"
 "PayPal","PayPal"
 "paysafecard","paysafecard"
+"Bitcoin","Bitcoin"
 "KBC/CBC Payment Button","KBC/CBC Payment Button"
 "Please select","Please select"
 "Please Wait.<br>If you are not redirected shortly, click here.","Please Wait.<br>If you are not redirected shortly, click here."
@@ -118,5 +119,3 @@
 "Debugging","Debugging"
 "API Details","API Details"
 "Api Test","Api Test"
-"An error occured while processing your payment request, please try again later.","An error occured while processing your payment request, please try again later."
-"An error occured while processing your payment, please try again with other method.","An error occured while processing your payment, please try again with other method."

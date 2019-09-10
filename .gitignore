@@ -21,7 +21,6 @@ retour-jma.pdf
 retour-jma-de.pdf
 /node_modules/
 .well-known/*
-app/code/local/Mirasvit/MstCore/etc/mcore.crc
 
 #ignore this config. We use a different live and dev version. Use symlink to point to the correct version
 app/etc/modules/ArtsOnIT_Autologin.xml
